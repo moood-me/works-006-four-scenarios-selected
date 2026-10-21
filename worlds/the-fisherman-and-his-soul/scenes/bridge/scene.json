@@ -364,6 +364,30 @@
           "scale": 1.02,
           "flip": true,
           "tint": "#fff2e2"
+        },
+        {
+          "across": 2.6,
+          "distance": 36,
+          "facing": 248,
+          "scale": 1,
+          "tint": "#fff2e2",
+          "flip": true
+        },
+        {
+          "across": 2.2,
+          "distance": 59,
+          "facing": 240,
+          "scale": 1,
+          "tint": "#f6e6d0",
+          "flip": true
+        },
+        {
+          "across": 3,
+          "distance": 90,
+          "facing": 256,
+          "scale": 1,
+          "tint": "#ece6f0",
+          "flip": true
         }
       ]
     },
@@ -428,6 +452,21 @@
           "facing": 189,
           "scale": 1.14,
           "tint": "#e8e2e0"
+        },
+        {
+          "across": 1.4,
+          "distance": 73,
+          "facing": 248,
+          "scale": 1,
+          "tint": "#fff2e2"
+        },
+        {
+          "across": 2.8,
+          "distance": 132,
+          "facing": 248,
+          "scale": 1,
+          "tint": "#fff2e2",
+          "flip": true
         }
       ]
     },
@@ -539,6 +578,27 @@
           "scale": 1.03,
           "flip": true,
           "tint": "#f1ead8"
+        },
+        {
+          "across": 1.2,
+          "distance": 27,
+          "facing": 240,
+          "scale": 1,
+          "tint": "#f6e6d0"
+        },
+        {
+          "across": 1,
+          "distance": 47,
+          "facing": 256,
+          "scale": 1,
+          "tint": "#ece6f0"
+        },
+        {
+          "across": 1.6,
+          "distance": 110,
+          "facing": 240,
+          "scale": 1,
+          "tint": "#f6e6d0"
         }
       ]
     },
@@ -636,8 +696,7 @@
         -0.95,
         0.8,
         0.02
-      ],
-      "shadow": true
+      ]
     },
     {
       "id": "fisherman",
