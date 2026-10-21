@@ -1,0 +1,26 @@
+// The kettle on the hotplate (x −0.17…0.2, 0.25 m high): an aluminium kettle, its spout to the right, a black handle;
+// the point `spout` — the steam rises from it (`steam`).
+g.fillStyle = "#b9bcbf";
+g.beginPath();
+g.moveTo(-0.15, 0);
+g.lineTo(-0.13, -0.15);
+g.quadraticCurveTo(0, -0.2, 0.13, -0.15);
+g.lineTo(0.15, 0);
+g.closePath();
+g.fill();
+g.fillStyle = "#9da0a3";
+g.fillRect(-0.15, -0.025, 0.3, 0.025);
+g.beginPath();
+g.moveTo(0.12, -0.08);
+g.lineTo(0.2, -0.17);
+g.lineTo(0.185, -0.18);
+g.lineTo(0.1, -0.12);
+g.closePath();
+g.fill();
+g.strokeStyle = "#1f1e1d";
+g.lineWidth = 0.018;
+g.beginPath();
+g.moveTo(-0.08, -0.17);
+g.quadraticCurveTo(0, -0.27, 0.08, -0.17);
+g.stroke();
+e.at(0.195, -0.18, "spout");

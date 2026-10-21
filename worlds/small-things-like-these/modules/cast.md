@@ -15,6 +15,15 @@ Bill's mustard coat is one.
 
 - `bill` — Bill Furlong, 39, the coal merchant: a mustard overcoat to the knee (`overcoat`), a tweed cap, a dark green
   scarf, hands black with coal (`coal_hands`).
+- `bill_home` — Bill at home: the coat on its hook and the cap off — a shirt and a brown waistcoat (`waistcoat`); the
+  hands as black. A scene that has him come in puts it on him with `bill_wear` (the look's object:
+  `scene.kit.cast.characters.bill_home`).
+- `eileen` — Eileen Furlong, his wife: a wine-coloured dress to mid-calf under a washed-blue wraparound pinafore
+  (`pinafore`), her hair pinned up in a bun, flour on her hands (`floury_hands`).
+- `sheila` — Sheila, twelve, the daughter who sings in the nuns' choir: the convent school's navy pleated skirt, a grey
+  jumper, light socks, a dark ponytail.
+- `grace` — Grace, about eight, who steals raisins from the cake: a muted green frock to the knee (`frock`), white
+  socks, an auburn bob.
 - `sara` — Sara Redmond, seventeen, of the laundry: a thin nightgown greyed with coal dust (`nightgown`), long dark
   hair, barefoot, red hands (`red_hands`).
 - `mother` — the Mother Superior: a black habit to the ankles (`habit`), a white coif round the face under a black veil
