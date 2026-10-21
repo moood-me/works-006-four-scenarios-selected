@@ -10,8 +10,8 @@ g.fillStyle = "#8a8474";
 g.fillRect(-0.09, -0.12, 0.18, 0.03);
 // the globe: pale glass, warmer at its heart
 const glass = g.createRadialGradient(0, -0.2, 0.01, 0, -0.2, 0.09);
-glass.addColorStop(0, "rgba(255, 236, 196, 0.95)");
-glass.addColorStop(1, "rgba(222, 214, 196, 0.75)");
+glass.addColorStop(0, "rgba(255, 214, 140, 0.95)");
+glass.addColorStop(1, "rgba(226, 184, 118, 0.8)");
 g.fillStyle = glass;
 g.beginPath();
 g.moveTo(-0.05, -0.12);

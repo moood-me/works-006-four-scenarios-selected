@@ -82,13 +82,13 @@ spec = {
          "particles": {"kind": "dust", "source": [1.6, 1.6, 1.4]}},
         {"id": "papa", "name": "Moominpappa", "person": {"cast": "cast", "who": "papa", "does": "hands_behind"}, "across": -2.15, "distance": 5.15, "inside": True},
         {"id": "mama", "name": "Moominmamma", "person": {"cast": "cast", "who": "mama", "does": "seated"}, "across": -1.05, "distance": 4.25, "inside": True},
-        {"id": "my", "name": "Little My", "person": {"cast": "cast", "who": "my", "does": "seated"}, "across": 0.55, "distance": 4.25, "inside": True},
+        {"id": "my", "name": "Little My", "person": {"cast": "cast", "who": "my", "does": "seated"}, "across": 0.6, "distance": 4.1, "inside": True},
         {"id": "troll", "name": "Moomintroll", "person": {"cast": "cast", "who": "troll"}, "across": at(WIN["mid"], 3.2)[0], "distance": at(WIN["mid"], 3.2)[1], "inside": True},
     ],
     "state": {
         "papa_turn": 145, "papa_look": "lantern#flame", "papa_mood": "thinking",
         "mama_on": [-1.05, 4.25, 0.45], "mama_turn": 115, "mama_look": "lantern#flame", "mama_mood": "smile",
-        "my_on": [0.55, 4.25, 0.72], "my_turn": 230, "my_look": "papa", "my_mood": "smile",
+        "my_on": [0.6, 4.1, 0.72], "my_turn": 230, "my_look": "papa", "my_mood": "smile",
         "troll_turn": WIN["mid"], "troll_look": at(WIN["mid"], 12) + [0.4], "troll_mood": "thinking"},
     "music": music,
 }
