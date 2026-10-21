@@ -4,6 +4,8 @@
 // A part's lengths are a man's metres times F.fit.h (the person's height as a share of a man's 1.76 m).
 const V = () => MooodShapes.V;
 const HAT = [0.13, 0.12, 0.13, 1], BAND = [0.2, 0.19, 0.2, 1], TUFT = [0.86, 0.85, 0.82, 1];
+// the Fisherman's net in his hands: its tarred cord, its cork floats
+const CORD = [0.33, 0.29, 0.24, 1], CORK = [0.72, 0.5, 0.3, 1], UP = [0, 1, 0];
 // a face's expressions (the names <id>_mood takes), as the Moomin face shows them: its brows' inner and outer ends up
 // (+) or down, its eyes opened (1 at rest) or narrowed, its mouth's half-width, its corners up (+) or down, how open
 // (shares of the head's radius)
@@ -31,6 +33,9 @@ const snoutAt = (F, d, o) => {
 // Little My's: her topknot's egg (shares of the head's radius); her face's — the simple face's expressions, her eyes
 // rounder and darker
 const KNOT = F => ({ crown: F.head.egg.map(e => e * F.head.r * F.head.out * 1.03), knot: [0.36, 0.5, 0.36].map(v => v * F.head.r) });
+// the Fisherman's net: the bundle in his hands, the fall of it down to the stone, the floats along it
+const NETLOAD = F => ({ fall: [null, null, null, null], profile: [[0, 0.05 * F.fit.h], [1.5, 0.06 * F.fit.h], [3, 0.09 * F.fit.h]], colors: [[0, CORD]],
+  bundle: [0.09, 0.045, 0.07].map(v => v * F.fit.h), cork: [0.022, 0.016, 0.022].map(v => v * F.fit.h) });
 const TAIL = F => ({ profile: [[0, 0.03 * F.fit.h], [1, 0.022 * F.fit.h], [2, 0.016 * F.fit.h]], colors: [[0, F.colors.skin]],
   tuft: [0.045 * F.fit.h, 0.06 * F.fit.h, 0.045 * F.fit.h] });
 return {
@@ -49,6 +54,11 @@ return {
     my: { kind: 'shapes', style: 'my', who: 'child', garment: 'bell', hair: 'topknot', face: 'my',
       body: { height: 0.4, head: 1, shoulders: 0.82, arms: 0.9, hips: 0.92, thick: 0.9 },
       colors: { skin: '#f2d4bf', top: '#f2d4bf', bottom: '#f2d4bf', shoes: '#f2d4bf', hair: '#d46f2a', garment: '#c23c32' } },
+    // the Fisherman: thin and long, taller than Papa, a long narrow head with a drooping nose, a faded oilskin coat
+    // ragged at the hem, a sou'wester pulled down; his net in his hands
+    fisher: { kind: 'shapes', style: 'fisher', who: 'old', garment: 'oilcoat', hair: 'none', hat: 'souwester', face: 'fisher', parts: ['netload'],
+      body: { height: 0.8, head: 1, shoulders: 0.9, arms: 0.95, hips: 0.95, thick: 1.05 },
+      colors: { skin: '#e2dace', top: '#9a917c', bottom: '#625c55', shoes: '#3d3833', hat: '#c9a85c', garment: '#9a9178' } },
     troll: { kind: 'shapes', style: 'moomin', who: 'child', garment: 'none', hair: 'none', face: 'moomin', parts: ['tail'],
       body: { height: 0.6, head: 0.9, shoulders: 0.9, arms: 0.8, hips: 1.18, thick: 1.22 },
       colors: { skin: '#f6f3ed', top: '#f6f3ed', bottom: '#f6f3ed', shoes: '#f6f3ed' } },
@@ -62,10 +72,15 @@ return {
       // Little My's: the same soft line, a big round head, thin limbs, a slight body under her dress
       my: { from: 'moomin', name: 'Little My', head: 2.05, egg: [1, 1, 0.98], neck: 0.25, legs: 0.9, limb: 0.95,
         trunk: { w: [0.92, 0.94, 0.9, 0.9, 0.84], d: [0.96, 0.98, 0.96, 0.92, 0.88] }, face: 'my' },
+      // the Fisherman's: the same soft line, a smaller long head on a thin neck, long thin limbs, a narrow body
+      fisher: { from: 'moomin', name: 'Fisherman', head: 1.9, egg: [0.86, 1.14, 0.96], neck: 0.5, legs: 0.95, limb: 0.8,
+        trunk: { w: [0.86, 0.88, 0.82, 0.86, 0.8], d: [0.9, 0.9, 0.86, 0.84, 0.8] }, face: 'fisher' },
     },
     garments: {
       // Little My's dress: a red bell from the shoulders to above the knees, her arms and legs bare
       bell: { name: 'bell dress', hang: [{ to: 0.85, from: 'shoulders', flare: 0.55 }], bare: true },
+      // the Fisherman's oilskin: from the shoulders to below the knees, a little wide, ragged at the hem
+      oilcoat: { name: 'oilskin coat', hang: [{ to: 1.25, from: 'shoulders', flare: 0.22, ragged: true }], sleeves: 'garment' },
     },
     hair: {
       // Little My's topknot: her hair drawn tight over the crown into a tall knot on top
@@ -90,6 +105,24 @@ return {
         F.ball(on([0, y - x.open / 2, 0.95], 0.975), axes, [r * w * 0.75, r * Math.max(x.open, 0.001), r * 0.03], dark, 10);
         F.tube([on([-w, y + x.corners * 0.9, 0.93], 0.995), on([0, y, 0.94], 1.0), on([w, y + x.corners * 1.3, 0.93], 0.995)], [[0, r * 0.018], [2, r * 0.018]], [[0, lips]], 6, hu);
       } },
+      // the Fisherman's face: small dark eyes set close under heavy grey brows, a long nose drooping over a thin
+      // mouth, grey stubble under the jaw — grey and weathered
+      fisher: { name: 'Fisherman', draw: F => {
+        const { axes, r, on } = F.head, [, hu, hf] = axes, x = MOODS[F.look.expression] ?? MOODS.neutral, { add, mul } = V();
+        const dark = [0.12, 0.1, 0.1, 1], brow = [0.62, 0.6, 0.56, 1], skin = F.colors.skin, lips = [skin[0] * 0.7, skin[1] * 0.66, skin[2] * 0.64, 1];
+        for (const sx of [-1, 1]) {
+          F.ball(on([sx * 0.27, 0.12, 0.95], 0.985), axes, [r * 0.065, r * 0.075 * x.eye, r * 0.04], dark, 10);
+          F.tube([on([sx * 0.1, 0.3 + x.inner, 0.96], 1.0), on([sx * 0.26, 0.32 + (x.inner + x.outer) / 2, 0.92], 1.012), on([sx * 0.42, 0.27 + x.outer, 0.86], 1.0)],
+            [[0, r * 0.045], [1, r * 0.05], [2, r * 0.03]], [[0, brow]], 6, hu);
+        }
+        const root = on([0, 0.02, 1], 0.96), tip = add(root, add(mul(hf, r * 0.3), mul(hu, -r * 0.2)));
+        F.tube([root, add(root, add(mul(hf, r * 0.2), mul(hu, -r * 0.05))), tip], [[0, r * 0.12], [1, r * 0.11], [2, r * 0.09]], [[0, skin]], 10, F.head.axes[0]);
+        F.ball(tip, axes, [r * 0.1, r * 0.1, r * 0.1], skin, 10);
+        const w = x.wide * 0.7, y = -0.42;
+        F.ball(on([0, y - x.open / 2, 0.95], 0.975), axes, [r * w * 0.75, r * Math.max(x.open, 0.001), r * 0.03], dark, 10);
+        F.tube([on([-w, y + x.corners, 0.93], 0.995), on([0, y, 0.94], 1.0), on([w, y + x.corners, 0.93], 0.995)], [[0, r * 0.018], [2, r * 0.018]], [[0, lips]], 6, hu);
+        F.cap(F.head.at, axes, F.head.egg.map(e => e * r * F.head.out * 1.01), [0, -1, 0], 0.55, brow, F.head.sides, F.head.square);
+      } },
       // the Moomin face: a long round snout, small dark eyes close together high on it, fine brows, a mouth under
       // the snout's end, small ears on the crown (none under a hat) — the same solids for every expression
       moomin: { name: 'Moomin', draw: F => {
@@ -109,6 +142,14 @@ return {
       } },
     },
     hats: {
+      // the Fisherman's sou'wester: a soft dome pulled down to the brows, its brim narrow before and broad behind,
+      // drooping over the nape
+      souwester: { name: "sou'wester", draw: F => {
+        const { add, mul, unit, cross } = V(), { at, axes: [hs, hu, hf], egg, r, out, sides, square } = F.head;
+        F.cap(at, [hs, hu, hf], egg.map(e => e * r * out * 1.08), [0, 0.95, -0.25], 0.22, F.colors.hat, sides, square);
+        const tilt = unit(add(hu, mul(hf, 0.32))), ax = [hs, tilt, cross(hs, tilt)];
+        F.ball(add(at, add(mul(hu, r * 0.18), mul(hf, -r * 0.22))), ax, [r * 1.18, r * 0.05, r * 1.32], F.colors.hat, F.sides * 2);
+      } },
       // Moominpappa's top hat: a narrow brim, a tall crown, a darker band, sat a little back on the crown
       tophat: { name: 'top hat', draw: F => {
         const { add, mul, unit, cross } = V(), { at, axes: [hs, hu, hf], r } = F.head, tilt = unit(add(hu, mul(hf, -0.14))), ax = [hs, tilt, cross(hs, tilt)];
@@ -118,6 +159,20 @@ return {
       } },
     },
     parts: {
+      // the Fisherman's net: a bundle of it in his hands, between them, the rest falling from his lap to the stone at
+      // his feet, cork floats along it
+      netload: { name: 'net', draw: F => {
+        const { add, mul, mix } = V(), m = F.fit.h, K = F.keep(NETLOAD), hands = mix(F.P('LeftHand'), F.P('RightHand'), 0.5);
+        const ax = [F.side('Hips'), F.up('Hips'), F.fwd('Hips')], feet = mix(F.P('LeftFoot'), F.P('RightFoot'), 0.5);
+        const low = add(feet, add(mul(ax[2], 0.16 * m), mul(UP, -0.02 * m)));
+        F.ball(add(hands, mul(UP, -0.03 * m)), ax, K.bundle, CORD, 12);
+        K.fall[0] = add(hands, mul(UP, -0.05 * m));
+        K.fall[1] = F.swing('net1', add(mix(hands, low, 0.4), mul(ax[2], 0.1 * m)), 140);
+        K.fall[2] = F.swing('net2', add(mix(hands, low, 0.75), mul(ax[2], 0.08 * m)), 90);
+        K.fall[3] = low;
+        F.tube(K.fall, K.profile, K.colors, 10, ax[0], 0.45);
+        for (const u of [0.3, 0.62, 0.9]) F.ball(mix(K.fall[1], K.fall[3], u), ax, K.cork, CORK, 8);
+      } },
       // the tail: out of the back of the seat, hanging and swinging a little late, a tuft at its end
       tail: { name: 'tail', draw: F => {
         const { add, mul } = V(), m = F.fit.h, k = F.k, back = F.fwd('Hips'), K = F.keep(TAIL);
