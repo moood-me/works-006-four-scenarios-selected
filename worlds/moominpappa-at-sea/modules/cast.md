@@ -1,7 +1,7 @@
 # cast — the people of “Moominpappa at Sea”
 
 A module for scenes with people (elements with `person`: `{"cast": "cast", "who": …}`). In the scene's `modules`.
-3 looks, 3 motions. A part's lengths are a man's metres times `F.fit.h` (the height as a share of 1.76 m).
+4 looks, 3 motions. A part's lengths are a man's metres times `F.fit.h` (the height as a share of 1.76 m).
 
 ## Style
 
@@ -17,8 +17,11 @@ angry, surprised, afraid, disgusted, thinking, tired).
 - `mama` — Moominmamma: a little shorter and rounder, her apron (one quiet red; Jansson's is striped), a tail. Her
   handbag is the scene's own thing, beside her.
 - `troll` — Moomintroll, the son: smaller (0.6), slighter, a tail.
+- `my` — Little My: tiny (0.4), in her own style `my` (from `moomin`: a big round head, thin limbs), her own face `my`
+  (round dark eyes set wide, sharp brows, a mouth that smirks to one side — it takes `<id>_mood` as the Moomins'),
+  orange hair in a tall `topknot`, a red `bell` dress from the shoulders, bare arms and legs.
 
-Little My, the Fisherman and the Groke are not here yet.
+The Fisherman and the Groke are not here yet.
 
 ## Parts
 
