@@ -1,7 +1,7 @@
 # cast — the people of “Moominpappa at Sea”
 
 A module for scenes with people (elements with `person`: `{"cast": "cast", "who": …}`). In the scene's `modules`.
-4 looks, 3 motions. A part's lengths are a man's metres times `F.fit.h` (the height as a share of 1.76 m).
+5 looks, 3 motions. A part's lengths are a man's metres times `F.fit.h` (the height as a share of 1.76 m).
 
 ## Style
 
@@ -21,11 +21,18 @@ angry, surprised, afraid, disgusted, thinking, tired).
   (round dark eyes set wide, sharp brows, a mouth that smirks to one side — it takes `<id>_mood` as the Moomins'),
   orange hair in a tall `topknot`, a red `bell` dress from the shoulders, bare arms and legs.
 
-The Fisherman and the Groke are not here yet.
+- `fisher` — the Fisherman: thin and long, taller than Papa (0.8 of a man), in his own style `fisher` (from `moomin`:
+  a smaller long head on a thin neck, long thin limbs, a narrow body), his own face `fisher` (small dark eyes under
+  heavy grey brows, a long drooping nose, a thin mouth, grey stubble under the jaw — it takes `<id>_mood`), a faded
+  oilskin to below the knees, ragged at the hem (`oilcoat`), an ochre sou'wester (`souwester`), his net (`netload`).
+
+The Groke is not here yet.
 
 ## Parts
 
 `tail` — out of the back of the seat, hanging, swinging a little late, a tuft at its end (every Moomin's look has it).
+`netload` — the Fisherman's net: a bundle of it between his hands, the rest falling to the ground before his feet,
+cork floats along it.
 
 ## Motions (Kimodo's, taken from the Scarlet Sails cast)
 
