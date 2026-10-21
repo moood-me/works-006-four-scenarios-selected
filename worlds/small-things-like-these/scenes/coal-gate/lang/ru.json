@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Coal Gate","translation":"Угольная калитка","where":"scenes/coal-gate/scene.json title"},
+  {"text":"Sunday, before light. The bolt had been drawn from the outside.","translation":"Воскресенье, ещё затемно. Засов был задвинут снаружи.","where":"scenes/coal-gate/scene.json caption"}
+]}
