@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Mother Superior's Parlour","translation":"Приёмная настоятельницы","where":"scenes/parlour/scene.json title"},
+  {"text":"Sunday, before light. In the parlour the laundry cannot be heard.","translation":"Воскресенье, ещё темно. В приёмной прачечной не слышно.","where":"scenes/parlour/scene.json caption"}
+]}
