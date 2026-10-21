@@ -17,7 +17,10 @@ the water's glow), a fine line, a simple face (eyes, brows, a mouth) that reads 
 - `mermaid` — the Mermaid: small and slight, pearl-pale, wet-gold hair to the waist, bare shoulders. Always in the
   water to the chest or the shoulders: the scene stands her lower (`elevation`) so the water plane hides the rest.
 - `witch` — the Witch of the well: tall, a long loose fall of red hair, a plain moss-green dress, barefoot.
-- `velvet` — the man in black velvet: tall, thin, a pale still face, black hair, all in black (a frock coat).
+- `velvet` — the man in black velvet: tall, thin, a pale still face, black hair, all in black (the cast's garment
+  `frockcoat`: skirts to the knees).
+- `potter` — the potter by the bridge: a widower, broad, greying brown hair, a clay-brown apron over a pale shirt.
+- `daughter` — his daughter, six or so: small, a madder-red dress, brown hair to the shoulders.
 
 ## Things (the cast's parts: `<id>_with`)
 

@@ -1,0 +1,721 @@
+{
+  "engine": 3,
+  "title": "The Bridge",
+  "caption": "Night at the bridge. The lights of the town over the dark river.",
+  "horizon": 0.45,
+  "camera": {
+    "mode": "walk",
+    "area": [
+      1.5,
+      1.5,
+      0,
+      3
+    ]
+  },
+  "modules": [
+    "cast"
+  ],
+  "light": {
+    "ambient": 0.6,
+    "ambientColor": "#8fa6d8",
+    "saturation": 1,
+    "bounce": 0.4,
+    "haze": 0.14,
+    "hazeColor": "#22325a",
+    "hazeGlow": 1.3,
+    "shafts": 0.4,
+    "vignette": 0.32,
+    "grain": 0.08,
+    "wind": [
+      1,
+      0.2,
+      0.3
+    ]
+  },
+  "lights": [
+    {
+      "id": "moon",
+      "from": "sky#disc",
+      "color": "#c3d2f2",
+      "strength": 0.9
+    },
+    {
+      "id": "lantern",
+      "at": "fisherman#flame",
+      "color": "#ffbf72",
+      "strength": 1.8,
+      "reach": 6,
+      "flicker": 0.12,
+      "glow": 0.3
+    },
+    {
+      "id": "hearth",
+      "across": 2.3,
+      "distance": 6,
+      "elevation": 1.1,
+      "color": "#ffa860",
+      "strength": 1.5,
+      "reach": 5,
+      "flicker": 0.18
+    },
+    {
+      "id": "lamp_head",
+      "across": -1.42,
+      "distance": 13.95,
+      "elevation": 2.55,
+      "color": "#ffbf72",
+      "strength": 1.2,
+      "reach": 7,
+      "flicker": 0.06,
+      "glow": 0.25
+    },
+    {
+      "id": "lamp_near",
+      "across": -8.7,
+      "distance": 10.15,
+      "elevation": 5.75,
+      "color": "#ffbf72",
+      "strength": 1.2,
+      "reach": 7,
+      "flicker": 0.06,
+      "glow": 0.25
+    },
+    {
+      "id": "lamp_far",
+      "across": -16.4,
+      "distance": 13.95,
+      "elevation": 5.75,
+      "color": "#ffbf72",
+      "strength": 1.2,
+      "reach": 7,
+      "flicker": 0.06,
+      "glow": 0.25
+    }
+  ],
+  "state": {
+    "fisherman_with": [
+      "lantern"
+    ],
+    "fisherman_look": "potter",
+    "potter_look": "fisherman",
+    "potter_reach": {
+      "l": "daughter#hand_r"
+    },
+    "daughter_look": "fisherman",
+    "daughter_reach": {
+      "r": "potter#hand_l"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Night sky and the moon",
+      "sky": true
+    },
+    {
+      "id": "clouds",
+      "name": "Thin clouds",
+      "sky": true
+    },
+    {
+      "id": "far_hills",
+      "name": "Far hills",
+      "across": 60,
+      "distance": 700,
+      "height": 70,
+      "box": [
+        -760,
+        -70,
+        760,
+        4
+      ],
+      "elevation": -22
+    },
+    {
+      "id": "ground",
+      "name": "The banks",
+      "plane": true,
+      "drape": true,
+      "across": 20,
+      "distance": 110,
+      "width": 200,
+      "depth": 240
+    },
+    {
+      "id": "water",
+      "name": "The river",
+      "plane": true,
+      "across": -12.8,
+      "distance": 195,
+      "elevation": -2,
+      "width": 23.4,
+      "depth": 410,
+      "reflect": {
+        "strength": 0.55,
+        "fade": 0,
+        "rough": 0.3,
+        "ripple": 0.45
+      }
+    },
+    {
+      "id": "far_bank",
+      "name": "The far bank",
+      "across": -25,
+      "distance": 80,
+      "facing": 90,
+      "height": 16,
+      "box": [
+        -72,
+        -16,
+        102,
+        0.5
+      ]
+    },
+    {
+      "id": "mist",
+      "name": "Mist on the river",
+      "height": 2.5,
+      "box": [
+        -20,
+        -2.5,
+        20,
+        0.5
+      ],
+      "copies": [
+        {
+          "across": -9,
+          "distance": 7,
+          "elevation": 1.5
+        },
+        {
+          "across": -14,
+          "distance": 26,
+          "elevation": 1.5,
+          "scale": 1.3
+        },
+        {
+          "across": -8,
+          "distance": 44,
+          "elevation": 1.5,
+          "scale": 1.6
+        }
+      ]
+    },
+    {
+      "id": "lane",
+      "name": "The quay lane",
+      "plane": true,
+      "across": 0.5,
+      "distance": 6.5,
+      "elevation": 0.01,
+      "width": 4.2,
+      "depth": 19
+    },
+    {
+      "id": "deck",
+      "name": "The bridge's road",
+      "plane": true,
+      "across": -12.85,
+      "distance": 12,
+      "elevation": 0.02,
+      "width": 23.4,
+      "depth": 4,
+      "walk": true
+    },
+    {
+      "id": "bridge_face",
+      "name": "The bridge",
+      "across": -12.85,
+      "distance": 10,
+      "height": 4.7,
+      "box": [
+        -11.7,
+        -4.7,
+        11.8,
+        0.2
+      ],
+      "shadow": true
+    },
+    {
+      "id": "bridge_far",
+      "name": "The bridge's far parapet",
+      "across": -12.85,
+      "distance": 14,
+      "elevation": 3.5,
+      "height": 1.2,
+      "box": [
+        -11.7,
+        -1.2,
+        11.8,
+        0.05
+      ]
+    },
+    {
+      "id": "bridge_lamp",
+      "name": "Lamps on the bridge",
+      "height": 1.75,
+      "box": [
+        -0.3,
+        -1.8,
+        0.3,
+        0.02
+      ],
+      "copies": [
+        {
+          "across": -1.42,
+          "distance": 13.95,
+          "elevation": 1.1
+        },
+        {
+          "across": -8.7,
+          "distance": 10.15,
+          "elevation": 4.3
+        },
+        {
+          "across": -16.4,
+          "distance": 13.95,
+          "elevation": 4.3
+        }
+      ]
+    },
+    {
+      "id": "house_a",
+      "name": "Town houses",
+      "height": 7.6,
+      "box": [
+        -3.3,
+        -7.7,
+        3.3,
+        0.1
+      ],
+      "copies": [
+        {
+          "across": 24.65,
+          "distance": 39.94,
+          "facing": 196,
+          "scale": 0.95,
+          "tint": "#ece6f0"
+        },
+        {
+          "across": 31.79,
+          "distance": 50.5,
+          "facing": 209,
+          "scale": 1.05,
+          "flip": true,
+          "tint": "#e8e2e0"
+        },
+        {
+          "across": 3.74,
+          "distance": 66.23,
+          "facing": 207,
+          "scale": 1.11,
+          "flip": true,
+          "tint": "#f1ead8"
+        },
+        {
+          "across": 25.01,
+          "distance": 64.78,
+          "facing": 210,
+          "scale": 0.92,
+          "flip": true,
+          "tint": "#e8e2e0"
+        },
+        {
+          "across": 35.74,
+          "distance": 83.14,
+          "facing": 190,
+          "scale": 0.93,
+          "tint": "#e8e2e0"
+        },
+        {
+          "across": 28.74,
+          "distance": 101.33,
+          "facing": 189,
+          "scale": 0.93,
+          "flip": true,
+          "tint": "#f1ead8"
+        },
+        {
+          "across": 42.07,
+          "distance": 101.17,
+          "facing": 194,
+          "scale": 0.99,
+          "tint": "#f6e6d0"
+        },
+        {
+          "across": 16.31,
+          "distance": 121.39,
+          "facing": 198,
+          "scale": 1.09,
+          "tint": "#f6e6d0"
+        },
+        {
+          "across": 27.92,
+          "distance": 121.55,
+          "facing": 202,
+          "scale": 1.02,
+          "flip": true,
+          "tint": "#fff2e2"
+        },
+        {
+          "across": 39.55,
+          "distance": 121.86,
+          "facing": 205,
+          "scale": 1.02,
+          "flip": true,
+          "tint": "#fff2e2"
+        },
+        {
+          "across": 66.76,
+          "distance": 146.97,
+          "facing": 203,
+          "scale": 0.98,
+          "flip": true,
+          "tint": "#fff2e2"
+        }
+      ]
+    },
+    {
+      "id": "house_b",
+      "name": "Tall town houses",
+      "height": 9.6,
+      "box": [
+        -4.3,
+        -9.7,
+        4.3,
+        0.1
+      ],
+      "copies": [
+        {
+          "across": 4.93,
+          "distance": 15.47,
+          "facing": 199,
+          "scale": 0.95,
+          "flip": true,
+          "tint": "#ece6f0"
+        },
+        {
+          "across": 13.97,
+          "distance": 20.67,
+          "facing": 196,
+          "scale": 0.91,
+          "flip": true,
+          "tint": "#ece6f0"
+        },
+        {
+          "across": 12.26,
+          "distance": 30.49,
+          "facing": 211,
+          "scale": 0.91,
+          "tint": "#f6e6d0"
+        },
+        {
+          "across": 4.02,
+          "distance": 39.75,
+          "facing": 206,
+          "scale": 1.13,
+          "flip": true,
+          "tint": "#ece6f0"
+        },
+        {
+          "across": 11.95,
+          "distance": 53.48,
+          "facing": 204,
+          "scale": 0.94,
+          "tint": "#f1ead8"
+        },
+        {
+          "across": 16.04,
+          "distance": 66.65,
+          "facing": 205,
+          "scale": 0.98,
+          "tint": "#f1ead8"
+        },
+        {
+          "across": 33.45,
+          "distance": 66.37,
+          "facing": 198,
+          "scale": 1.02,
+          "tint": "#f1ead8"
+        },
+        {
+          "across": 13.07,
+          "distance": 83.34,
+          "facing": 200,
+          "scale": 0.93,
+          "flip": true,
+          "tint": "#ece6f0"
+        },
+        {
+          "across": 2,
+          "distance": 101.09,
+          "facing": 197,
+          "scale": 1.03,
+          "tint": "#ece6f0"
+        },
+        {
+          "across": 17.32,
+          "distance": 99.55,
+          "facing": 189,
+          "scale": 1.14,
+          "tint": "#e8e2e0"
+        },
+        {
+          "across": 6.63,
+          "distance": 147.73,
+          "facing": 208,
+          "scale": 1.08,
+          "tint": "#fff2e2"
+        },
+        {
+          "across": 19.63,
+          "distance": 149.05,
+          "facing": 208,
+          "scale": 1.09,
+          "flip": true,
+          "tint": "#fff2e2"
+        },
+        {
+          "across": 35.17,
+          "distance": 148.31,
+          "facing": 194,
+          "scale": 1.09,
+          "flip": true,
+          "tint": "#ece6f0"
+        },
+        {
+          "across": 53.77,
+          "distance": 147.63,
+          "facing": 198,
+          "scale": 0.91,
+          "tint": "#f1ead8"
+        }
+      ]
+    },
+    {
+      "id": "house_c",
+      "name": "Small town houses",
+      "height": 6.2,
+      "box": [
+        -2.5,
+        -6.3,
+        2.5,
+        0.1
+      ],
+      "copies": [
+        {
+          "across": 10.57,
+          "distance": 16.77,
+          "facing": 190,
+          "scale": 1.04,
+          "tint": "#f6e6d0"
+        },
+        {
+          "across": 6.12,
+          "distance": 22.03,
+          "facing": 198,
+          "scale": 1.05,
+          "tint": "#f1ead8"
+        },
+        {
+          "across": 4.04,
+          "distance": 28.82,
+          "facing": 204,
+          "scale": 0.93,
+          "flip": true,
+          "tint": "#ece6f0"
+        },
+        {
+          "across": 22.07,
+          "distance": 29.41,
+          "facing": 189,
+          "scale": 0.95,
+          "flip": true,
+          "tint": "#fff2e2"
+        },
+        {
+          "across": 14.07,
+          "distance": 40.36,
+          "facing": 208,
+          "scale": 0.99,
+          "tint": "#e8e2e0"
+        },
+        {
+          "across": 1.67,
+          "distance": 51.54,
+          "facing": 210,
+          "scale": 0.96,
+          "flip": true,
+          "tint": "#f1ead8"
+        },
+        {
+          "across": 20.2,
+          "distance": 53.11,
+          "facing": 194,
+          "scale": 1.03,
+          "flip": true,
+          "tint": "#f1ead8"
+        },
+        {
+          "across": 2.96,
+          "distance": 82.43,
+          "facing": 198,
+          "scale": 0.94,
+          "tint": "#f6e6d0"
+        },
+        {
+          "across": 26.15,
+          "distance": 82.8,
+          "facing": 193,
+          "scale": 1.01,
+          "tint": "#f1ead8"
+        },
+        {
+          "across": 1.64,
+          "distance": 122.46,
+          "facing": 205,
+          "scale": 1.03,
+          "flip": true,
+          "tint": "#f1ead8"
+        },
+        {
+          "across": 52.83,
+          "distance": 123.25,
+          "facing": 199,
+          "scale": 1.1,
+          "tint": "#f6e6d0"
+        }
+      ]
+    },
+    {
+      "id": "tower",
+      "name": "The tower on the hill",
+      "across": 22,
+      "distance": 132,
+      "height": 26,
+      "box": [
+        -3.2,
+        -26,
+        3.2,
+        0.1
+      ]
+    },
+    {
+      "id": "cottage",
+      "name": "The potter's house",
+      "across": 2.6,
+      "distance": 6,
+      "facing": 270,
+      "height": 2.7,
+      "box": [
+        -2.7,
+        -2.7,
+        2.7,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "cottage_glow",
+      "name": "The potter's lit door and windows",
+      "across": 2.58,
+      "distance": 6,
+      "facing": 270,
+      "height": 2,
+      "box": [
+        -2.3,
+        -2,
+        2.3,
+        0.02
+      ],
+      "glows": true
+    },
+    {
+      "id": "roof",
+      "name": "The potter's roof",
+      "plane": true,
+      "across": 3.12,
+      "distance": 6,
+      "elevation": 3.28,
+      "width": 5.8,
+      "depth": 2.2,
+      "rotation": -90,
+      "tilt": 43
+    },
+    {
+      "id": "chimney",
+      "name": "The chimney",
+      "across": 3.55,
+      "distance": 7.4,
+      "height": 4.8,
+      "box": [
+        -0.3,
+        -4.8,
+        0.3,
+        0
+      ]
+    },
+    {
+      "id": "smoke",
+      "name": "Smoke from the chimney",
+      "particles": {
+        "kind": "smoke",
+        "at": [
+          3.55,
+          7.4,
+          4.75
+        ],
+        "amount": 0.5,
+        "color": "#9ea6b6"
+      }
+    },
+    {
+      "id": "wares",
+      "name": "The potter's bench of pots",
+      "across": 2.3,
+      "distance": 4.3,
+      "facing": 270,
+      "height": 0.9,
+      "box": [
+        -1.2,
+        -0.95,
+        1.2,
+        0.02
+      ],
+      "shadow": true
+    },
+    {
+      "id": "fisherman",
+      "name": "The Fisherman",
+      "person": {
+        "cast": "cast",
+        "who": "fisherman",
+        "turn": 125
+      },
+      "across": -0.7,
+      "distance": 9
+    },
+    {
+      "id": "potter",
+      "name": "The potter",
+      "person": {
+        "cast": "cast",
+        "who": "potter",
+        "turn": 250
+      },
+      "across": 1.75,
+      "distance": 6.3
+    },
+    {
+      "id": "daughter",
+      "name": "The potter's daughter",
+      "person": {
+        "cast": "cast",
+        "who": "daughter",
+        "turn": 235
+      },
+      "across": 2.1,
+      "distance": 5.6
+    }
+  ]
+}

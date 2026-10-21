@@ -70,11 +70,22 @@ return {
     velvet: { kind: 'shapes', style: 'bay', who: 'man', garment: 'frockcoat', hair: 'short',
       body: { height: 1.04, thick: 0.82, shoulders: 0.98, neck: 1.1 },
       colors: { skin: '#ebe5df', hair: '#121016', top: '#1c1922', garment: '#1f1a27', bottom: '#16131b', shoes: '#0e0c10' } },
+    // the potter by the bridge in the town: a widower, broad and heavy-handed, greying brown hair, a clay-brown apron
+    // over a pale work shirt
+    potter: { kind: 'shapes', style: 'bay', who: 'man', garment: 'apron', hair: 'short',
+      body: { height: 0.98, thick: 1.12, shoulders: 1.08, neck: 1.0 },
+      colors: { skin: '#d6a882', hair: '#6b5a4a', top: '#cfc2a4', garment: '#8c6648', bottom: '#4b4038', shoes: '#2e2622' } },
+    // his little daughter, six or so: a plain madder-red dress, brown hair loose to the shoulders
+    daughter: { kind: 'shapes', style: 'bay', who: 'child', garment: 'dress', hair: 'long',
+      body: { height: 0.66, head: 1.18, legs: 0.94, arms: 0.95, shoulders: 0.86, thick: 0.8 },
+      colors: { skin: '#efd3b9', hair: '#7a5534', top: '#a5524a', garment: '#a5524a', bottom: '#a5524a', shoes: '#3a2a24' } },
   },
   shapes: {
     // the world's style: the engine's flat geometry — straight edges, clean colours under the scene's light — with a
     // simple face (eyes, brows, a mouth) so that faces read
     styles: { bay: { from: 'flat', name: 'The Bay', line: 0.8, face: 'simple' } },
+    // a frock coat: fitted, its skirts to the knees, the sleeves of its cloth
+    garments: { frockcoat: { name: 'frock coat', hang: [{ to: 0.95, from: 'shoulders', flare: 0.12 }], sleeves: 'garment' } },
     parts: {
       lantern: { name: 'lantern', draw: F => lantern(F, 'RightHand') },
       tambourine: { name: 'tambourine', draw: F => tambourine(F) },
