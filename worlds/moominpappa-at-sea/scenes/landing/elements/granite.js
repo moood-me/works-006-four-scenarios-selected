@@ -1,9 +1,9 @@
 // The island's granite from above (the plane's metres: x across, y toward the viewer; its centre at across 2,
-// distance 15): pink, with greyer and warmer drifts through it, rusty and grey-green lichen, the long joints and
+// distance 16): pink, with greyer and warmer drifts through it, rusty and grey-green lichen, the long joints and
 // cracks the ice left, a few rain pools in its hollows, and the dark wet rim where the sea washes it.
-const CA = 2, CD = 15, land = e.lib, at = (a, d) => [a - CA, CD - d];
+const CA = 2, CD = 16, land = e.lib, at = (a, d) => [a - CA, CD - d];
 g.fillStyle = "#d6a79c";
-g.fillRect(-30, -30, 60, 60);
+g.fillRect(-31, -31, 62, 62);
 const blot = (x, y, r, color, alpha) => {
   const s = g.createRadialGradient(x, y, 0, x, y, r);
   s.addColorStop(0, `rgba(${color}, ${alpha})`);

@@ -2,7 +2,7 @@
 // lighter green-grey over the shallows round the rocks; two layers its shader shows by turns — the white crests the
 // wind raises all over it (they come and go), the foam washing round the rocks at the waterline.
 const D = 1450, land = e.lib;
-g.fillStyle = "#5b7f99";
+g.fillStyle = "#4f7896";
 g.fillRect(-1200, -1500, 2400, 3000);
 // the shallows: where the granite runs on under the water
 land.shore(-1.4, 0, 0.8, (a, d, h) => {

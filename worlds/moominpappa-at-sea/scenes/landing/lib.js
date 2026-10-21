@@ -15,11 +15,11 @@ function ridge(a, d, a0, d0, a1, d1, h0, h1, w) {
 }
 function raw(a, d) {
   return -2.2
-    + ridge(a, d, -1, -4, 9, 27, 2.8, 4, 10.5)
+    + ridge(a, d, -1, -4, 9.5, 30, 2.8, 4, 10.5)
     + 0.6 * bump(a, d, 0.5, 5.5, 3.5, 2)
-    + 1.6 * bump(a, d, 9, 27, 4.5, 4)
+    + 1.6 * bump(a, d, 9.5, 30, 4.5, 4)
     + 2.3 * bump(a, d, -15, 19, 6, 3)
-    + 1.4 * bump(a, d, 22, 31, 7, 3)
+    + 1.4 * bump(a, d, 22, 34, 7, 3)
     - 2.6 * bump(a, d, -8.5, 10, 3.6, 4.5);
 }
 const H0 = raw(0, 0);
@@ -30,7 +30,7 @@ function land(a, d) {
 // within [lo, hi] of the sea's
 function shore(lo, hi, step, fn) {
   for (let a = -26; a <= 32; a += step) {
-    for (let d = -8; d <= 40; d += step) {
+    for (let d = -8; d <= 44; d += step) {
       const h = land(a, d) - SEA;
       if (h >= lo && h <= hi) fn(a, d, h);
     }

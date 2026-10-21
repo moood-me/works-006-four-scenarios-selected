@@ -21,7 +21,7 @@ const MOODS = {
 };
 // the snout: an egg out of the front of the head, a little low — its centre, half-widths (across, up, forward) as
 // shares of the head's radius; a point on it where it faces d (out of it by o)
-const SNOUT = { fwd: 0.66, down: 0.24, radii: [0.56, 0.52, 0.86] };
+const SNOUT = { fwd: 0.66, down: 0.05, radii: [0.7, 0.68, 0.95] };
 const snoutAt = (F, d, o) => {
   const { add, mul, unit } = V(), { at, axes: [hs, hu, hf], r } = F.head, u = unit(d), s = SNOUT.radii;
   const c = add(at, add(mul(hf, SNOUT.fwd * r), mul(hu, -SNOUT.down * r)));
@@ -61,14 +61,14 @@ return {
         const skin = F.colors.skin, dark = [0.1, 0.09, 0.1, 1], brow = [skin[0] * 0.55, skin[1] * 0.55, skin[2] * 0.58, 1];
         F.ball(snoutAt(F, [0, 0, 0], 0), axes, SNOUT.radii.map(v => v * r), skin, F.sides);
         for (const sx of [-1, 1]) {
-          F.ball(on([sx * 0.2, 0.2, 0.97], 0.99), axes, [r * 0.09, r * 0.17 * x.eye, r * 0.05], dark, 10);
-          F.tube([on([sx * 0.09, 0.42 + x.inner, 0.92], 1.0), on([sx * 0.2, 0.46 + (x.inner + x.outer) / 2, 0.88], 1.005), on([sx * 0.31, 0.42 + x.outer, 0.84], 1.0)],
+          F.ball(snoutAt(F, [sx * 0.28, 0.75, 0.35], 0.995), axes, [r * 0.085, r * 0.16 * x.eye, r * 0.05], dark, 10);
+          F.tube([on([sx * 0.1, 0.76 + x.inner, 0.62], 1.0), on([sx * 0.22, 0.8 + (x.inner + x.outer) / 2, 0.56], 1.005), on([sx * 0.34, 0.76 + x.outer, 0.5], 1.0)],
             [[0, r * 0.016], [1, r * 0.02], [2, r * 0.014]], [[0, brow]], 6, hu);
           if (F.look.hat === 'none') F.ball(on([sx * 0.3, 0.93, -0.08], 0.94), axes, [r * 0.1, r * 0.22, r * 0.08], skin, 12);
         }
-        const w = x.wide, y = -0.66;
-        F.ball(snoutAt(F, [0, y - x.open, 0.74], 0.985), axes, [r * w * 0.6, r * Math.max(x.open, 0.001), r * 0.04], dark, 10);
-        F.tube([snoutAt(F, [-w * 1.6, y + x.corners, 0.7], 1.01), snoutAt(F, [0, y, 0.74], 1.01), snoutAt(F, [w * 1.6, y + x.corners, 0.7], 1.01)],
+        const w = x.wide, y = -0.55;
+        F.ball(snoutAt(F, [0, y - x.open, 0.8], 0.985), axes, [r * w * 0.6, r * Math.max(x.open, 0.001), r * 0.04], dark, 10);
+        F.tube([snoutAt(F, [-w * 1.4, y + x.corners, 0.76], 1.01), snoutAt(F, [0, y, 0.8], 1.01), snoutAt(F, [w * 1.4, y + x.corners, 0.76], 1.01)],
           [[0, r * 0.016], [2, r * 0.016]], [[0, brow]], 6, hu);
       } },
     },

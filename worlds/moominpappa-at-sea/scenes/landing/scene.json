@@ -2,7 +2,7 @@
   "engine": 3,
   "title": "The Landing Rocks",
   "caption": "Dawn on the island. The lighthouse is dark, and the door is locked.",
-  "horizon": 0.6,
+  "horizon": 0.55,
   "camera": {
     "mode": "picture"
   },
@@ -55,7 +55,7 @@
       "width": 2400,
       "depth": 3000,
       "reflect": {
-        "strength": 0.28,
+        "strength": 0.18,
         "fade": 0,
         "rough": 0.55,
         "ripple": 0.4
@@ -81,15 +81,15 @@
       "plane": true,
       "drape": true,
       "across": 2,
-      "distance": 15,
-      "width": 60,
-      "depth": 60
+      "distance": 16,
+      "width": 62,
+      "depth": 62
     },
     {
       "id": "lighthouse",
       "name": "The lighthouse",
-      "across": 9,
-      "distance": 27,
+      "across": 9.5,
+      "distance": 30,
       "elevation": -0.45,
       "box": [
         -5.03,
@@ -102,8 +102,8 @@
     {
       "id": "steps",
       "name": "Steps to the lighthouse door",
-      "across": 9,
-      "distance": 24.3,
+      "across": 9.5,
+      "distance": 27.3,
       "box": [
         -0.8,
         -0.55,
@@ -114,8 +114,8 @@
     {
       "id": "arrow_stone",
       "name": "The stone with the arrow",
-      "across": 6.8,
-      "distance": 22.5,
+      "across": 7.2,
+      "distance": 25.5,
       "box": [
         -0.45,
         -0.45,
@@ -136,28 +136,28 @@
       "shadow": true,
       "copies": [
         {
-          "across": 5.6,
-          "distance": 21.5
+          "across": 6,
+          "distance": 24.5
         },
         {
-          "across": 12.6,
-          "distance": 24,
+          "across": 13.1,
+          "distance": 27,
           "scale": 0.85,
           "flip": true
         },
         {
-          "across": 3.6,
-          "distance": 16.5,
+          "across": 4,
+          "distance": 19.5,
           "scale": 0.7
         },
         {
-          "across": 13.6,
-          "distance": 29.5,
+          "across": 14,
+          "distance": 32.5,
           "scale": 1.1
         },
         {
-          "across": 6.2,
-          "distance": 30.5,
+          "across": 6.6,
+          "distance": 33.5,
           "scale": 0.9,
           "flip": true
         },
@@ -168,8 +168,8 @@
           "flip": true
         }
       ],
-      "across": 5.6,
-      "distance": 21.5
+      "across": 6,
+      "distance": 24.5
     },
     {
       "id": "boat",
@@ -201,8 +201,8 @@
     {
       "id": "boulder",
       "name": "Boulder",
-      "across": -2.9,
-      "distance": 5.2,
+      "across": -2.7,
+      "distance": 4.6,
       "box": [
         -1.6,
         -0.74,
@@ -214,8 +214,8 @@
     {
       "id": "bundle",
       "name": "Bundle of blankets",
-      "across": -1.5,
-      "distance": 3.95,
+      "across": -1.4,
+      "distance": 3.45,
       "box": [
         -1.15,
         -0.56,
@@ -227,8 +227,8 @@
     {
       "id": "handbag",
       "name": "Moominmamma's handbag",
-      "across": -0.75,
-      "distance": 3.5,
+      "across": -0.65,
+      "distance": 3.0,
       "facing": 200,
       "box": [
         -0.25,
@@ -241,8 +241,8 @@
     {
       "id": "can",
       "name": "The paraffin can",
-      "across": 1.4,
-      "distance": 3.7,
+      "across": 1.25,
+      "distance": 3.2,
       "facing": 165,
       "box": [
         -0.2,
@@ -260,8 +260,8 @@
         "who": "papa",
         "does": "hands_behind"
       },
-      "across": 0.6,
-      "distance": 4.1
+      "across": 0.5,
+      "distance": 3.6
     },
     {
       "id": "mama",
@@ -271,8 +271,8 @@
         "who": "mama",
         "does": "seated"
       },
-      "across": -1.5,
-      "distance": 3.9
+      "across": -1.4,
+      "distance": 3.4
     },
     {
       "id": "troll",
@@ -282,8 +282,8 @@
         "who": "troll",
         "does": "seated"
       },
-      "across": -2.9,
-      "distance": 5.2
+      "across": -2.7,
+      "distance": 4.6
     }
   ],
   "state": {
@@ -294,8 +294,8 @@
     ],
     "papa_mood": "smile",
     "mama_on": [
-      -1.5,
-      3.95,
+      -1.4,
+      3.45,
       0.4
     ],
     "mama_look": [
@@ -305,8 +305,8 @@
     ],
     "mama_mood": "smile",
     "troll_on": [
-      -2.9,
-      5.2,
+      -2.7,
+      4.6,
       0.5
     ],
     "troll_look": [
