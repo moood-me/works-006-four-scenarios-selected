@@ -188,20 +188,6 @@
       ]
     },
     {
-      "id": "box",
-      "name": "The fish box",
-      "across": -2.2,
-      "distance": 4.3,
-      "facing": 200,
-      "shadow": true,
-      "box": [
-        -0.4,
-        -0.36,
-        0.4,
-        0.04
-      ]
-    },
-    {
       "id": "driftwood",
       "name": "A driftwood trunk",
       "across": 2.9,

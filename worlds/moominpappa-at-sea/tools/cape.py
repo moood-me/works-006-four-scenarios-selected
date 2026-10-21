@@ -40,7 +40,6 @@ objects = [
     el("rack", "The net drying on its poles", -5.0, 4.9, [-1.75, -2.05, 1.75, 0.06], facing=150, translucent=0.45, shadow=True),
     el("seat", "The Fisherman's stone", SEAT[0], SEAT[1], [-1, -0.42, 1, 0], shadow=True),
     el("heap", "The net at his feet", r3(feet[0] - 0.35), r3(feet[1] + 0.05), [-0.7, -0.3, 0.7, 0.06], shadow=True),
-    el("box", "The fish box", -2.2, 4.3, [-0.4, -0.36, 0.4, 0.04], facing=200, shadow=True),
     el("driftwood", "A driftwood trunk", 2.9, 2.3, [-2.5, -0.55, 2.55, 0.08], facing=165, shadow=True),
     {"id": "grass", "name": "Dry sea grass", "box": [-0.32, -0.6, 0.32, 0.05], "across": -2.0, "distance": 2.6,
      "copies": [{"across": -2.0, "distance": 2.6}, {"across": 0.1, "distance": 2.4, "scale": 0.8, "flip": True},
