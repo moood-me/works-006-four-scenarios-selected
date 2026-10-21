@@ -23,7 +23,7 @@ function rubble(g, seed, x, y, w, h, mortar, tones, course = 0.3) {
   g.fillStyle = mortar;
   g.fillRect(x, y, w, h);
   const paths = tones.map(() => new Path2D());
-  const joint = 0.018;
+  const joint = 0.014;
   const j = () => (r() - 0.5) * 0.028;
   let cy = y + h;
   while (cy > y + 0.02) {
@@ -31,7 +31,7 @@ function rubble(g, seed, x, y, w, h, mortar, tones, course = 0.3) {
     if (ch < 0.1) break;
     let cx = x - r() * 0.4;
     while (cx < x + w) {
-      const sw = course * (0.95 + r() * 1.4);
+      const sw = course * (0.9 + r() * 1.0);
       const p = paths[Math.floor(r() * tones.length)];
       const l = cx + joint;
       const rt = cx + sw - joint;
@@ -116,7 +116,7 @@ function coal(g, seed, cx, base, halfW, top, n) {
     p.lineTo(px + s, py + s * 0.25);
     p.lineTo(px + s * 0.1, py + s * 0.6);
     p.closePath();
-    if (r() < 0.6) {
+    if (r() < 0.4) {
       glints.moveTo(px - s * 0.4, py - s * 0.75);
       glints.lineTo(px + s * 0.7, py - s * 0.6 - tilt * s);
     }
@@ -125,8 +125,8 @@ function coal(g, seed, cx, base, halfW, top, n) {
     g.fillStyle = t;
     g.fill(lumps[i]);
   });
-  g.strokeStyle = "#8a8e98";
-  g.lineWidth = 0.014;
+  g.strokeStyle = "#5c5f67";
+  g.lineWidth = 0.01;
   g.lineCap = "round";
   g.stroke(glints);
 }
@@ -166,22 +166,28 @@ function lamp(g, e, arm) {
   e.light(0, -0.29, 0.22, "#ffd08a", 1, "flame");
 }
 
-// low white mist lying over the ground (the element's box [-12, -1.6, 12, 1.2]): thick at the foot and thinning up to
-// 1.6 m, soft banks in it; it runs on below the foot, where the painting lies on the ground toward the eye, so it meets
-// the ground with no edge. On a layer that drifts and wraps (`mist`): its banks keep clear of the box's ends.
-function mist(e, seed, strength) {
-  e.layer("mist", { drift: [0.07, 0], box: [-12, -1.6, 12, 1.2] }, (c) => {
+// low white mist lying over the ground from x0 to x1 (the element's box [-12, -1.6, 12, 1.2]): thick at the foot and
+// thinning up to 1.6 m, soft banks in it, fading out toward its two ends; it runs on below the foot, where the painting
+// lies on the ground toward the eye, so it meets the ground with no edge. On a layer (`mist`) its animate sways slowly
+// to and fro (lib `mistSway`) — its ends fade, so it never shows an edge.
+function mist(e, seed, strength, x0, x1) {
+  e.layer("mist", {}, (c) => {
     const a = (k) => `rgba(236, 240, 244, ${(k * strength).toFixed(3)})`;
+    c.save();
+    c.beginPath();
+    c.rect(x0, -1.6, x1 - x0, 2.8);
+    c.clip();
     const low = c.createLinearGradient(0, 1.2, 0, -1.6);
     low.addColorStop(0, a(0));
     low.addColorStop(0.43, a(0.55));
     low.addColorStop(0.62, a(0.32));
     low.addColorStop(1, a(0));
     c.fillStyle = low;
-    c.fillRect(-12, -1.6, 24, 2.8);
+    c.fillRect(x0, -1.6, x1 - x0, 2.8);
     const r = stream(seed);
-    for (let i = 0; i < 7; i++) {
-      const x = -9.5 + i * 3.0 + r() * 1.2;
+    const n = Math.max(2, Math.round((x1 - x0) / 3));
+    for (let i = 0; i < n; i++) {
+      const x = x0 + 1.5 + ((x1 - x0 - 3) * i) / (n - 1) + (r() - 0.5) * 0.8;
       const y = -0.35 - r() * 0.5;
       const rx = 1.2 + r() * 0.8;
       const bank = c.createRadialGradient(x, y, 0, x, y, rx);
@@ -192,7 +198,22 @@ function mist(e, seed, strength) {
       c.ellipse(x, y, rx, rx * 0.32, 0, 0, 6.3);
       c.fill();
     }
+    // its ends fade out: the paint taken away toward each end
+    c.globalCompositeOperation = "destination-out";
+    for (const [from, to] of [[x0, x0 + 2], [x1, x1 - 2]]) {
+      const fade = c.createLinearGradient(from, 0, to, 0);
+      fade.addColorStop(0, "rgba(0, 0, 0, 1)");
+      fade.addColorStop(1, "rgba(0, 0, 0, 0)");
+      c.fillStyle = fade;
+      c.fillRect(Math.min(from, to), -1.6, 2, 2.8);
+    }
+    c.restore();
   });
+}
+
+// the mist's slow sway (in its animate): its layer to and fro by `reach` metres, once in about a minute and a half
+function mistSway(e, reach) {
+  e.layer("mist").x = reach * e.anim.drift(e.t * 0.012, e.id.length);
 }
 
 // a bare winter tree: a trunk and branches forking up to the twigs, from (0, 0) up `height` metres
@@ -218,4 +239,4 @@ function tree(g, seed, height, colour) {
   limb(0, 0, (r() - 0.5) * 0.1, height * 0.3, height * 0.045, 6);
 }
 
-return { stream, rubble, cobbles, coal, lamp, mist, tree };
+return { stream, rubble, cobbles, coal, lamp, mist, mistSway, tree };

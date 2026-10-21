@@ -1,7 +1,7 @@
 // The coal shed's front (on `shed`; x −1.7…1.5): whitewashed rubble gone grey with coal dust, darker toward the foot
 // and round the door; a slate eave along its top; the doorway at x 0…0.95, 1.9 m high, open (the leaf is `shed_door`);
 // on the frame to the right of it the bolt's iron staple, where the bolt goes when it is drawn from outside.
-e.lib.rubble(g, 41, -1.7, -2.5, 3.2, 2.55, "#827d74", ["#c6c1b4", "#bcb7aa", "#cdc8bc", "#b3aea1"], 0.26);
+e.lib.rubble(g, 41, -1.7, -2.5, 3.2, 2.55, "#9a958b", ["#c6c1b4", "#bcb7aa", "#cdc8bc", "#b3aea1"], 0.26);
 const grime = g.createLinearGradient(0, 0, 0, -2.5);
 grime.addColorStop(0, "rgba(58, 56, 54, 0.5)");
 grime.addColorStop(0.5, "rgba(58, 56, 54, 0.15)");

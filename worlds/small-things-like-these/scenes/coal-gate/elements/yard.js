@@ -33,15 +33,22 @@ g.stroke();
 // lumps spilt before the shed's door
 const r = e.lib.stream(52);
 const lumps = new Path2D();
-for (let i = 0; i < 26; i++) {
-  const x = -1.65 + (r() - 0.5) * 1.3;
-  const y = D - 4.3 + (r() - 0.3) * 0.9;
-  const s = 0.025 + r() * 0.04;
-  lumps.moveTo(x - s, y);
-  lumps.lineTo(x - s * 0.2, y - s * 0.8);
-  lumps.lineTo(x + s, y - s * 0.3);
-  lumps.lineTo(x + s * 0.4, y + s * 0.7);
+for (let i = 0; i < 18; i++) {
+  const x = -1.65 + (r() - 0.5) * 1.1 * (0.4 + r() * 0.6);
+  const y = D - 4.35 + r() * r() * 0.8;
+  const s = 0.015 + r() * r() * 0.05;
+  lumps.moveTo(x - s, y + s * (r() - 0.5) * 0.6);
+  lumps.lineTo(x - s * 0.3, y - s * (0.5 + r() * 0.4));
+  lumps.lineTo(x + s * (0.6 + r() * 0.4), y - s * 0.4);
+  lumps.lineTo(x + s * 0.8, y + s * 0.4);
+  lumps.lineTo(x - s * 0.1, y + s * (0.4 + r() * 0.3));
   lumps.closePath();
 }
+// the dust trodden out over the threshold
+const dust = g.createRadialGradient(-1.6, D - 4.3, 0.05, -1.6, D - 4.3, 0.7);
+dust.addColorStop(0, "rgba(30, 29, 30, 0.5)");
+dust.addColorStop(1, "rgba(30, 29, 30, 0)");
+g.fillStyle = dust;
+g.fillRect(-2.3, D - 5.0, 1.4, 1.4);
 g.fillStyle = "#1b1a1c";
 g.fill(lumps);

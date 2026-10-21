@@ -3,7 +3,7 @@
 // 2.25 m high) with dressed jambs and a lintel; to its right the iron hatch of the coal chute, black dust smeared
 // under it; damp darker toward the foot.
 const L = e.lib;
-L.rubble(g, 21, -9.5, -3.25, 17.4, 3.3, "#6f6c66", ["#a6a39b", "#9c9991", "#b0ada5", "#94918a"]);
+L.rubble(g, 21, -9.5, -3.25, 17.4, 3.3, "#827f78", ["#a6a39b", "#9c9991", "#b0ada5", "#94918a"]);
 // damp at the foot
 const damp = g.createLinearGradient(0, 0, 0, -1.2);
 damp.addColorStop(0, "rgba(60, 62, 60, 0.45)");

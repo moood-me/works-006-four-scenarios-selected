@@ -79,15 +79,15 @@ return {
       const iris = [0.12, 0.09, 0.08, 1], white = [0.94, 0.92, 0.88, 1], brow = tone(F.colors.hair, [0.6, 0.6, 0.6]);
       const lips = tone(F.colors.skin, [0.66, 0.46, 0.44]), nose = tone(F.colors.skin, [0.95, 0.93, 0.92]);
       for (const sx of [-1, 1]) {
-        F.ball(on([sx * 0.34, 0.07, 0.93], 0.975), axes, [rh * 0.12, rh * 0.088 * x.eye, rh * 0.04], white, 10);
-        F.ball(on([sx * 0.33, 0.065, 0.95], 0.99), axes, [rh * 0.07, rh * Math.min(0.075, 0.084 * x.eye), rh * 0.035], iris, 10);
+        F.ball(on([sx * 0.34, 0.07, 0.93], 0.975), axes, [rh * 0.14, rh * 0.1 * x.eye, rh * 0.04], white, 10);
+        F.ball(on([sx * 0.33, 0.065, 0.95], 0.99), axes, [rh * 0.082, rh * Math.min(0.088, 0.096 * x.eye), rh * 0.035], iris, 10);
         F.tube([on([sx * 0.14, 0.32 + x.inner, 0.94], 0.995), on([sx * 0.32, 0.35 + (x.inner + x.outer) / 2, 0.9], 1.0), on([sx * 0.5, 0.3 + x.outer, 0.82], 0.995)],
-          [[0, rh * 0.052], [1, rh * 0.056], [2, rh * 0.036]], [[0, brow]], 6, hu);
+          [[0, rh * 0.06], [1, rh * 0.065], [2, rh * 0.042]], [[0, brow]], 6, hu);
       }
       F.ball(on([0, -0.1, 1], 0.97), axes, [rh * 0.09, rh * 0.13, rh * 0.12], nose, 10);
       const w = x.wide, y = -0.4;
       F.ball(on([0, y - x.open / 2, 0.95], 0.975), axes, [rh * w * 0.75, rh * x.open, rh * 0.03], iris, 10);
-      F.tube([on([-w, y + x.corners, 0.93], 0.995), on([0, y, 0.94], 1.0), on([w, y + x.corners, 0.93], 0.995)], [[0, rh * 0.036], [1, rh * 0.042], [2, rh * 0.036]], [[0, lips]], 6, hu);
+      F.tube([on([-w, y + x.corners, 0.93], 0.995), on([0, y, 0.94], 1.0), on([w, y + x.corners, 0.93], 0.995)], [[0, rh * 0.042], [1, rh * 0.05], [2, rh * 0.042]], [[0, lips]], 6, hu);
     } } },
     garments: {
       // a man's overcoat: from the shoulders to the knee, long sleeves, a plain hem

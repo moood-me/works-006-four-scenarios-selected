@@ -31,7 +31,7 @@ the day's colours; the morning is the scene's light (`light`, `lights`).
 | `sky` | the sky | a gradient before light; soft cloud streaks drifting (layer `clouds`) |
 | `tree` | copies at (−10.5, 15), (−15.5, 19) | bare ash trees over the road beyond the wall, a wind layer about the foot; kept left, so the title and the caption lie on clear sky |
 | `road`, `fog_bank` | 9–19 m, 16 m | the frosted road beyond the wall; fog banks drifting (layer `fog`, wraps) |
-| `mist_gate`, `mist_yard` | (1, 10.2), (0, 6.9) | low white mist (lib `mist`, layer `mist` drifting): at the gate and over the road; over the yard behind the people, its foot running on along the ground toward the eye so it meets the cobbles with no edge |
+| `mist_gate`, `mist_yard` | (1, 10.2), (0, 6.9) | low white mist (lib `mist`, layer `mist` swaying slowly by its animate, lib `mistSway`; its ends fade): at the gate and over the road; over the yard behind the people from the shed's side to short of the laundry, its foot running on along the ground toward the eye so it meets the cobbles with no edge |
 | `lorry` | (1.3, 11.6) | Bill's lorry with coal sacks — seen only through the gate |
 | `wall` | (−5, 9), x −9.6…8 | the convent wall: rubble, frosted coping; the gate's opening x 5.5…6.7 (across 0.5…1.7), the chute's hatch at across 2.2…2.7 |
 | `gate`, `gate_lamp` | the opening | the grille leaf standing open into the yard (hinge at across 0.5, facing 240); the lamp over it (`gate_lamp#flame` → light `gate_light`) |
@@ -42,18 +42,18 @@ the day's colours; the morning is the scene's light (`light`, `lights`).
 | `yard` | plane, −1.5…9.3 m | cobbles under rime; the frost worn black along the coal's ways (gate → shed door, gate → chute) and before the kitchen door |
 | `shed` + `shed_front`, `shed_side`, `shed_back`, `shed_floor`, `coal_heap`, `sacks`, `shed_door` | anchor (−2.05, 4.2), facing 160 | the coal shed built on an unseen anchor: its front with the doorway (x 0…0.95), the right side, inside (`inside`) the back wall (grey-brown, lighter than the coal), the floor, the heap and two full sacks and an empty one just inside the door; the door swung out (facing 275 within the shed), the bolt on it |
 | `cart` | (1.9, 8.4) | Bill's hand cart with two sacks, by the chute's hatch |
-| `bill` | (−0.1, 4.5), turn 222 | Bill Furlong, the lantern in his left hand raised toward her face (`bill_reach.l`, 1.42 m), looking at her, `tired` |
-| `sara` | (−1.51, 4.08), turn 155 | Sara in the shed's doorway, barefoot in her nightgown, both hands clutching the nightgown at her breast (`sara_reach`), looking at Bill, `afraid` |
-| `mother` | (3.16, 5.84), turn 215 | the Mother Superior before the kitchen door, hands folded at the waist (`mother_reach`), looking at Bill, `thinking` — cool |
+| `bill` | (−0.1, 4.5), turn 222 | Bill Furlong, the lantern in his left hand raised toward her face (`bill_reach.l`, 1.42 m), looking toward her (cheated a little toward the eye — `bill_look` a point before her — so his face is seen three-quarter, not in profile), `tired` |
+| `sara` | (−1.51, 4.08), turn 155 | Sara in the shed's doorway, barefoot in her nightgown, both hands clutching the nightgown at her breast (`sara_reach`), looking toward Bill (cheated toward the eye as his look is), `afraid` |
+| `mother` | (3.16, 5.84), turn 215 | the Mother Superior before the kitchen door, hands folded at the waist (`mother_reach`), looking toward Bill (a point before him), `thinking` — cool |
 
 The people are the world's cast (`modules/cast.js`, style `keegan`: cast.md). The lantern is the cast's part
 `lantern` (`bill_with`), its light `lantern` at `bill#flame`.
 
 ## Light
 
-`ambient` 0.6 of a cool blue-white — the morning's own, so faces read; `haze` 0.6 of a white fog with `hazeGlow` 1
+`ambient` 0.6 of a cool blue-white — the morning's own, so faces read; `haze` 0.6 of a white fog with `hazeGlow` 0.8
 round the lamps; a weak cold far light `dawn` from behind the wall (rims); the warm point lights: `gate_light`,
-`lantern` (2.6, reach 6: her face, her hands, the coal), `kitchen`, `door_light`; the windows' glows. The shed's inside takes 0.55 of it (`inside`) and Bill's lantern.
+`lantern` (2.2, reach 5.5: her face, her hands, the coal), `kitchen`, `door_light`; the windows' glows. The shed's inside takes 0.55 of it (`inside`) and Bill's lantern.
 
 ## The frame in 4:3
 
