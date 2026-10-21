@@ -27,10 +27,10 @@ g.fillRect(1.05, -1.09, 0.1, 0.12);
 const r = e.lib.stream(43);
 for (let i = 0; i < 9; i++) {
   const x = -1.6 + r() * 1.5;
-  const w = 0.04 + r() * 0.1;
+  const w = 0.03 + r() * 0.05;
   const top = -2.45 + r() * 0.5;
   const streak = g.createLinearGradient(0, top, 0, 0);
-  streak.addColorStop(0, "rgba(36, 34, 34, 0.32)");
+  streak.addColorStop(0, "rgba(36, 34, 34, 0.18)");
   streak.addColorStop(1, "rgba(36, 34, 34, 0)");
   g.fillStyle = streak;
   g.fillRect(x, top, w, -top * (0.4 + r() * 0.5));
@@ -60,9 +60,9 @@ function hand(x, y, a, k) {
   g.fill();
   g.restore();
 }
-hand(1.12, -1.32, 0.15, 0.6);
-hand(1.2, -1.45, 0.3, 0.35);
-hand(-0.16, -1.25, -0.1, 0.55);
+hand(1.12, -1.32, 0.15, 0.45);
+hand(1.2, -1.45, 0.3, 0.22);
+hand(-0.16, -1.25, -0.1, 0.4);
 hand(-0.2, -1.05, -0.2, 0.3);
 // the shovel and the riddle hung on their nails left of the door
 g.strokeStyle = "#6b5440";

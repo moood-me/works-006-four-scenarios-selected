@@ -39,8 +39,8 @@
       "id": "lantern",
       "at": "bill#flame",
       "color": "#ffc277",
-      "strength": 1.8,
-      "reach": 3.6,
+      "strength": 2,
+      "reach": 4.2,
       "flicker": 0.12,
       "glow": 0.3
     },
