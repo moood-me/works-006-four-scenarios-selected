@@ -24,7 +24,7 @@
   ],
   "state": {
     "fisherman_look": [2.4, 4.2, 2.4],
-    "soul_look": [1.5, 2.6, 1.05],
+    "soul_look": [1.0, 1.0, 2.05],
     "mermaid_look": [1.4, 4.4, 3.6]
   },
   "objects": [
@@ -33,12 +33,12 @@
     { "id": "far_ridge", "name": "Far ridge", "across": -800, "distance": 2500, "elevation": 1.92, "height": 60, "box": [-2620, -62, 920, 4] },
     { "id": "far_shore", "name": "Far shore with the fir wood", "across": -300, "distance": 600, "elevation": 1.92, "height": 40, "box": [-770, -40, 480, 4] },
     { "id": "town", "name": "The town of lights", "across": 700, "distance": 1500, "elevation": 1.92, "height": 20, "box": [-270, -22, 270, 4] },
-    { "id": "water", "name": "The bay", "plane": true, "across": 0, "distance": 3000, "elevation": 1.92, "width": 8000, "depth": 6000,
+    { "id": "water", "name": "The bay", "plane": true, "across": 0, "distance": 3000, "elevation": -0.48, "width": 8000, "depth": 6000,
       "reflect": { "strength": 0.6, "fade": 0, "rough": 0.35, "ripple": 0.25 } },
     { "id": "mist", "name": "Mist on the water", "across": 0, "distance": 45, "elevation": 1.92, "height": 7, "box": [-90, -7, 90, 1] },
     { "id": "rock", "name": "The stone", "across": 3.7, "distance": 7, "height": 3, "box": [-3.9, -3, 3.9, 0], "shadow": true },
     { "id": "fin", "name": "Her tail", "across": 5, "distance": 7.7, "elevation": 1.92, "height": 0.8, "box": [-0.62, -0.78, 0.38, 0.06] },
-    { "id": "pier_deck", "name": "The pier", "plane": true, "across": -2.79, "distance": 2, "elevation": 1.05, "width": 1.5, "depth": 11.37,
+    { "id": "pier_deck", "name": "The pier", "plane": true, "across": -2.79, "distance": 2, "elevation": 0.15, "width": 1.5, "depth": 11.37,
       "rotation": -44.7, "walk": true },
     { "id": "pier_beam", "name": "The pier's side beam", "across": -2.26, "distance": 1.47, "elevation": 0.39, "facing": 135, "height": 0.3,
       "box": [-5.7, -0.3, 5.7, 0.02] },
@@ -53,7 +53,7 @@
         { "across": -2.61, "distance": 3.19, "elevation": -0.81 }
       ] },
     { "id": "lantern_post", "name": "Lantern post", "across": 1.85, "distance": 5.55, "height": 4.8, "box": [-0.62, -4.8, 0.12, 0.02], "shadow": true },
-    { "id": "rings", "name": "Rings on the water", "plane": true, "across": 2.6, "distance": 5, "elevation": 1.93, "width": 1.6, "depth": 1.6 },
+    { "id": "rings", "name": "Rings on the water", "plane": true, "across": 2.6, "distance": 5, "elevation": -0.47, "width": 1.6, "depth": 1.6 },
     { "id": "reeds", "name": "Reeds", "height": 2.4, "box": [-0.6, -2.45, 0.6, 0.05],
       "copies": [
         { "across": 2.45, "distance": 3.3, "scale": 1.4 },

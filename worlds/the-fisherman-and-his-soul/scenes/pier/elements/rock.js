@@ -14,19 +14,19 @@ wet.addColorStop(1, 'rgba(32, 38, 44, 0.9)');
 g.fillStyle = wet;
 g.fillRect(-W / 2, -H, W, H);
 for (let i = 0; i < 70; i++) {
-  const x = -W / 2 + W * anim.hash(i, 1);
-  const y = -H + 0.95 * anim.hash(i, 2);
-  const r = 0.05 + 0.18 * anim.hash(i, 3);
-  g.fillStyle = anim.hash(i, 4) > 0.5 ? 'rgba(126, 140, 112, 0.55)' : 'rgba(84, 88, 96, 0.5)';
+  const x = -W / 2 + W * e.anim.hash(i, 1);
+  const y = -H + 0.95 * e.anim.hash(i, 2);
+  const r = 0.05 + 0.18 * e.anim.hash(i, 3);
+  g.fillStyle = e.anim.hash(i, 4) > 0.5 ? 'rgba(126, 140, 112, 0.55)' : 'rgba(84, 88, 96, 0.5)';
   g.beginPath();
   g.ellipse(x, y, r * 1.6, r, 0, 0, Math.PI * 2);
   g.fill();
 }
 g.fillStyle = 'rgba(70, 92, 70, 0.8)';
 for (let i = 0; i < 60; i++) {
-  const x = -W / 2 + W * anim.hash(i, 11);
-  const y = -H + 1.0 + 0.08 * anim.hash(i, 12);
-  g.fillRect(x, y, 0.04 + 0.05 * anim.hash(i, 13), 0.15 + 0.3 * anim.hash(i, 14));
+  const x = -W / 2 + W * e.anim.hash(i, 11);
+  const y = -H + 1.0 + 0.08 * e.anim.hash(i, 12);
+  g.fillRect(x, y, 0.04 + 0.05 * e.anim.hash(i, 13), 0.15 + 0.3 * e.anim.hash(i, 14));
 }
 // its rim on the floor, counter-clockwise from above (x right, z toward the viewer)
 const rim = [];

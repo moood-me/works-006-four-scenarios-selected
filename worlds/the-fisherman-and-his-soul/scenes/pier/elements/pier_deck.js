@@ -6,11 +6,11 @@ g.fillRect(-0.75, -L, 1.5, 2 * L);
 let y = -L;
 let i = 0;
 while (y < L) {
-  const w = 0.17 + 0.03 * anim.hash(i, 1);
-  const tone = 112 + Math.round(26 * anim.hash(i, 2));
+  const w = 0.17 + 0.03 * e.anim.hash(i, 1);
+  const tone = 112 + Math.round(26 * e.anim.hash(i, 2));
   g.fillStyle = `rgb(${tone + 10}, ${tone - 2}, ${tone - 18})`;
-  const x0 = -0.75 + 0.02 * anim.hash(i, 3);
-  const x1 = 0.75 - 0.02 * anim.hash(i, 4);
+  const x0 = -0.75 + 0.02 * e.anim.hash(i, 3);
+  const x1 = 0.75 - 0.02 * e.anim.hash(i, 4);
   g.fillRect(x0, y, x1 - x0, w - 0.016);
   g.fillStyle = 'rgba(60, 48, 38, 0.6)';
   for (const nx of [-0.62, 0.62]) g.fillRect(nx - 0.01, y + w / 2 - 0.01, 0.02, 0.02);

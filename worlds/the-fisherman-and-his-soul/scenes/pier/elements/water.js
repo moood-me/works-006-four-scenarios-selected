@@ -10,10 +10,10 @@ g.fillRect(-4000, -3000, 8000, 6000);
 e.layer('ripple', { box: [-4000, -3000, 4000, 3000], drift: [0.25, 0] }, g => {
   // long lines far out (near, the mirror's own ripple breaks the water)
   for (let i = 0; i < 2400; i++) {
-    const x = -4000 + 8000 * anim.hash(i, 1);
-    const y = -3000 + 5800 * anim.hash(i, 2);
-    const len = 10 + 40 * anim.hash(i, 3);
-    g.fillStyle = `rgba(190, 210, 228, ${(0.12 + 0.2 * anim.hash(i, 4)).toFixed(3)})`;
+    const x = -4000 + 8000 * e.anim.hash(i, 1);
+    const y = -3000 + 5800 * e.anim.hash(i, 2);
+    const len = 10 + 40 * e.anim.hash(i, 3);
+    g.fillStyle = `rgba(190, 210, 228, ${(0.12 + 0.2 * e.anim.hash(i, 4)).toFixed(3)})`;
     for (const k of x + len > 4000 ? [0, -8000] : [0]) g.fillRect(x + k, y, len, 1.6);
   }
 });

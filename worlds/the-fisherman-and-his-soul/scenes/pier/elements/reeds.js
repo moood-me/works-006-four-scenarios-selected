@@ -2,11 +2,11 @@
 // cattails, two long leaves bending over — a layer that bends in the wind from its foot
 e.layer('clump', { pivot: [0, 0], wind: { strength: 0.35, gust: 0.4 } }, g => {
   for (let i = 0; i < 14; i++) {
-    const x = -0.35 + 0.7 * anim.hash(i, 1);
-    const h = 1.6 + 0.75 * anim.hash(i, 2);
-    const lean = (anim.hash(i, 3) - 0.5) * 0.5;
-    g.strokeStyle = anim.hash(i, 4) > 0.5 ? '#5d6a45' : '#4c5a3c';
-    g.lineWidth = 0.02 + 0.015 * anim.hash(i, 5);
+    const x = -0.35 + 0.7 * e.anim.hash(i, 1);
+    const h = 1.6 + 0.75 * e.anim.hash(i, 2);
+    const lean = (e.anim.hash(i, 3) - 0.5) * 0.5;
+    g.strokeStyle = e.anim.hash(i, 4) > 0.5 ? '#5d6a45' : '#4c5a3c';
+    g.lineWidth = 0.02 + 0.015 * e.anim.hash(i, 5);
     g.beginPath();
     g.moveTo(x, 0);
     g.quadraticCurveTo(x + lean * 0.3, -h * 0.6, x + lean, -h);
