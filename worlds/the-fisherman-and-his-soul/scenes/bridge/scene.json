@@ -559,13 +559,13 @@
       "id": "cottage",
       "name": "The potter's house",
       "across": 2.6,
-      "distance": 7.4,
+      "distance": 6.3,
       "facing": 270,
       "height": 2.7,
       "box": [
+        -3.8,
         -2.7,
-        -2.7,
-        2.7,
+        3.8,
         0.05
       ],
       "shadow": true
@@ -574,13 +574,13 @@
       "id": "cottage_glow",
       "name": "The potter's lit door and windows",
       "across": 2.58,
-      "distance": 7.4,
+      "distance": 6.3,
       "facing": 270,
       "height": 2,
       "box": [
-        -2.3,
+        -3.4,
         -2,
-        2.3,
+        1.8,
         0.02
       ],
       "glows": true
@@ -590,9 +590,9 @@
       "name": "The potter's roof",
       "plane": true,
       "across": 3.12,
-      "distance": 7.4,
+      "distance": 6.3,
       "elevation": 3.28,
-      "width": 5.8,
+      "width": 7.9,
       "depth": 2.2,
       "rotation": -90,
       "tilt": 43
@@ -628,7 +628,7 @@
       "id": "wares",
       "name": "The potter's bench of pots",
       "across": 2.3,
-      "distance": 5,
+      "distance": 3.7,
       "facing": 270,
       "height": 0.9,
       "box": [
