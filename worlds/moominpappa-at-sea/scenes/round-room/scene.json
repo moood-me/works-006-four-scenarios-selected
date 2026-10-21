@@ -13,7 +13,7 @@
     "bounce": 0.55,
     "haze": 0.025,
     "hazeColor": "#26304a",
-    "hazeGlow": 0.12,
+    "hazeGlow": 0.25,
     "shafts": 0.5,
     "vignette": 0.3,
     "grain": 0.08,
@@ -322,6 +322,7 @@
       "across": 0.12,
       "distance": 4.4,
       "elevation": 0.72,
+      "glows": true,
       "box": [
         -0.16,
         -0.48,
@@ -440,8 +441,8 @@
       4.25,
       0.72
     ],
-    "my_turn": 165,
-    "my_look": "troll",
+    "my_turn": 230,
+    "my_look": "papa",
     "my_mood": "smile",
     "troll_turn": 32,
     "troll_look": [

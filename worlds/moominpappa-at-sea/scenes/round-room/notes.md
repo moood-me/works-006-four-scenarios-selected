@@ -3,7 +3,7 @@
 The room at the lighthouse's foot on the first evening (2.6, the supper): the storm lantern in the middle of the table,
 Moominmamma on a stool at its end and Little My sitting on its corner, Moominpappa standing by the stair to the hatch,
 Moomintroll at the window with his back to them all; the night sea with its white crests through the window, the
-moon's light coming in at it. Everyone looks at the lantern but the boy (My looks at him).
+moon's light coming in at it. Everyone looks at the lantern but the boy, who looks out, and My, who looks at Moominpappa and smirks.
 
 - The room is a circle (`lib.js`: `C`, `R`, `H`; `at(angle, r)` — an angle is a bearing from `C`). Its wall is bent
   sheets of that circle (forms, `kit.bend` with a negative angle: concave toward the room): `wall_a` from −150° round

@@ -43,7 +43,7 @@ spec = {
     "horizon": 0.4,
     "camera": {"mode": "picture"},
     "light": {"ambient": 0.55, "ambientColor": "#6a80c4", "inside": 0.65, "bounce": 0.55, "haze": 0.025, "hazeColor": "#26304a",
-              "hazeGlow": 0.12, "shafts": 0.5, "vignette": 0.3, "grain": 0.08,
+              "hazeGlow": 0.25, "shafts": 0.5, "vignette": 0.3, "grain": 0.08,
               "wind": [1, 0.2, 1.1], "saturation": 1.05},
     "lights": [
         {"id": "lamp", "of": "lantern#flame", "color": "#ffd08c", "strength": 1.2, "reach": 6, "flicker": 0.1, "glow": 0.2},
@@ -75,7 +75,7 @@ spec = {
         {"id": "table", "name": "The table", "plane": True, "across": 0, "distance": 4.45, "elevation": 0.72, "width": 1.5, "depth": 0.8,
          "inside": True},
         card("table_legs", "The table's legs", 0, 4.45, [-0.85, -0.76, 0.85, 0.05], facing=180, shadow=True),
-        card("lantern", "The storm lantern", 0.12, 4.4, [-0.16, -0.48, 0.16, 0.03], elevation=0.72),
+        card("lantern", "The storm lantern", 0.12, 4.4, [-0.16, -0.48, 0.16, 0.03], elevation=0.72, glows=True),
         card("stool", "Moominmamma's stool", -1.05, 4.25, [-0.22, -0.5, 0.22, 0.03], shadow=True),
         card("handbag", "Moominmamma's handbag", -1.45, 4.0, [-0.25, -0.4, 0.25, 0.03], facing=200, shadow=True),
         {"id": "motes", "name": "Dust in the moonlight", "across": 1.4, "distance": 6.1, "elevation": 0.9, "inside": True,
@@ -88,7 +88,7 @@ spec = {
     "state": {
         "papa_turn": 145, "papa_look": "lantern#flame", "papa_mood": "thinking",
         "mama_on": [-1.05, 4.25, 0.45], "mama_turn": 115, "mama_look": "lantern#flame", "mama_mood": "smile",
-        "my_on": [0.55, 4.25, 0.72], "my_turn": 165, "my_look": "troll", "my_mood": "smile",
+        "my_on": [0.55, 4.25, 0.72], "my_turn": 230, "my_look": "papa", "my_mood": "smile",
         "troll_turn": WIN["mid"], "troll_look": at(WIN["mid"], 12) + [0.4], "troll_mood": "thinking"},
     "music": music,
 }

@@ -1,5 +1,6 @@
 // The storm lantern on the table, the only light: a tin font, a glass globe in its wire guard, a cap and a bail
-// handle; inside, the flame (its glow and its light are the engine's — e.light, "flame").
+// handle; inside, the flame (its glow and its light are the engine's — e.light, "flame"). It glows: the scene's light
+// does not darken it, its tin is as painted.
 g.fillStyle = "#6f6a5e";
 g.beginPath();
 g.ellipse(0, -0.03, 0.11, 0.03, 0, 0, Math.PI * 2);
@@ -48,5 +49,5 @@ g.moveTo(-0.1, -0.1);
 g.quadraticCurveTo(-0.13, -0.44, 0, -0.45);
 g.quadraticCurveTo(0.13, -0.44, 0.1, -0.1);
 g.stroke();
-e.light(0, -0.21, 0.09, "#ffc874", 1, "flame");
+e.light(0, -0.21, 0.14, "#ffc874", 1.2, "flame");
 e.at(0, -0.21, "flame");
