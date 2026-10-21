@@ -1,4 +1,4 @@
-// The houses across the street, seen out of the window (12 m off; x −5…5, x 0 at 3.6 m right of the start's line):
+// The houses across the street, seen out of the window (11 m off; x −5…5, x 0 at 3.6 m right of the start's line):
 // two-storey terraced fronts — a pale pink one with a dark blue door under a fanlight and a wide window, a cream one
 // beyond — the kerb and the pavement at their foot, frost white on the window sills and the slates; a street lamp's
 // post before them. What is lit in their windows and the lamp are `street_lit`.

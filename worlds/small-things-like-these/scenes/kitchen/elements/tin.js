@@ -1,24 +1,46 @@
-// The biscuit tin the household's money is kept in, open (x −0.14…0.14): a tartan tin, its lid leaning on it behind,
-// coins and a folded note inside; the point `tin` — what Eileen counts.
-g.fillStyle = "#2f4a3a";
-g.beginPath();
-g.ellipse(0.02, -0.12, 0.12, 0.08, 0, 0, 6.3);
-g.fill();
+// The biscuit tin the household's money is kept in, open before Eileen (x −0.16…0.16, 0.24 m with its lid): a red
+// tartan tin, its lid standing open behind it on its hinge, inside it the week's coins and a green pound note folded
+// over its rim — it must read at a glance as the money tin; the point `tin` — what Eileen counts.
+// the lid standing up behind, its inside a plain tin colour with a printed thistle
 g.fillStyle = "#8a2f2c";
-g.fillRect(-0.12, -0.09, 0.24, 0.09);
-g.fillStyle = "#2f4a3a";
-for (let x = -0.1; x < 0.12; x += 0.05) g.fillRect(x, -0.09, 0.015, 0.09);
-g.fillRect(-0.12, -0.055, 0.24, 0.012);
-g.fillStyle = "#c9b98c";
+g.fillRect(-0.15, -0.24, 0.3, 0.13);
+g.fillStyle = "#c9c3b4";
+g.fillRect(-0.135, -0.228, 0.27, 0.106);
+g.fillStyle = "#6a4a7a";
 g.beginPath();
-g.ellipse(0, -0.09, 0.12, 0.022, 0, 0, 6.3);
+g.arc(0, -0.19, 0.022, 0, 6.3);
 g.fill();
-g.fillStyle = "#a9a59c";
-for (const [x, y] of [[-0.05, -0.092], [0.02, -0.088], [0.06, -0.094]]) {
+g.fillStyle = "#4f6a45";
+g.fillRect(-0.004, -0.17, 0.008, 0.04);
+// the body: red tartan, a dark green band and lines
+g.fillStyle = "#9a3430";
+g.fillRect(-0.16, -0.1, 0.32, 0.1);
+g.fillStyle = "#2f4a3a";
+for (let x = -0.15; x < 0.16; x += 0.06) g.fillRect(x, -0.1, 0.018, 0.1);
+g.fillRect(-0.16, -0.062, 0.32, 0.014);
+g.fillStyle = "#e0c46a";
+for (let x = -0.12; x < 0.16; x += 0.06) g.fillRect(x, -0.1, 0.004, 0.1);
+// its open top seen from above: the inside, full of coins
+g.fillStyle = "#b9b2a2";
+g.beginPath();
+g.ellipse(0, -0.1, 0.16, 0.035, 0, 0, 6.3);
+g.fill();
+const r = e.lib.stream(92);
+for (let i = 0; i < 16; i++) {
+  g.fillStyle = r() < 0.35 ? "#b58a45" : "#cfccc4";
   g.beginPath();
-  g.ellipse(x, y, 0.016, 0.006, 0, 0, 6.3);
+  g.ellipse((r() - 0.5) * 0.24, -0.1 + (r() - 0.5) * 0.04, 0.019, 0.007, 0, 0, 6.3);
   g.fill();
 }
-g.fillStyle = "#9fb08a";
-g.fillRect(-0.02, -0.1, 0.05, 0.012);
-e.at(0, -0.09, "tin");
+// the pound note folded over the rim
+g.fillStyle = "#7f9c78";
+g.beginPath();
+g.moveTo(0.03, -0.115);
+g.lineTo(0.12, -0.11);
+g.lineTo(0.125, -0.06);
+g.lineTo(0.04, -0.065);
+g.closePath();
+g.fill();
+g.fillStyle = "#5f7a5a";
+g.fillRect(0.06, -0.1, 0.035, 0.02);
+e.at(0, -0.1, "tin");

@@ -5,7 +5,7 @@
 // the person's: "bill#flame".
 const V = () => MooodShapes.V;
 const IRON = [0.19, 0.19, 0.2, 1], GLASS = [1, 0.8, 0.52, 2], LINEN = [0.95, 0.94, 0.91, 1], VEIL = [0.1, 0.1, 0.12, 1];
-const COAL_HANDS = [0.16, 0.15, 0.15, 1], RED_HANDS = [0.86, 0.29, 0.24, 1], SILVER = [0.72, 0.72, 0.74, 1];
+const COAL_HANDS = [0.16, 0.15, 0.15, 1], RED_HANDS = [0.84, 0.4, 0.36, 1], SILVER = [0.72, 0.72, 0.74, 1];
 const FLOUR_HANDS = [0.92, 0.88, 0.8, 1];
 // the world's face's expressions (the engine's names): brows' inner and outer ends, the eye's opening, the mouth's
 // half-width, its corners, how open — 'thinking' a cool, measuring look (the Mother Superior's), 'tired' heavy lids
@@ -38,11 +38,12 @@ return {
     // scarf, black hands
     bill: { kind: 'shapes', style: 'keegan', who: 'man', garment: 'overcoat', hair: 'short', hat: 'cap', scarf: true, parts: ['coal_hands'],
       body: { height: 1.0, shoulders: 1.06, thick: 1.04 },
-      colors: { skin: '#d9a98e', hair: '#3a2c24', top: '#cfc7b6', garment: '#b5862c', bottom: '#5a534a', hat: '#4d4a42', shoes: '#2a2521', accent: '#3f4b3c' } },
-    // Bill at home: the coat on its hook, the cap off — his shirt and a brown waistcoat; the hands as black
+      colors: { skin: '#d9a98e', hair: '#5e4636', top: '#cfc7b6', garment: '#b5862c', bottom: '#5a534a', hat: '#4d4a42', shoes: '#2a2521', accent: '#3f4b3c' } },
+    // Bill at home: the coat on its hook, the cap off — his white shirt and a bottle-green waistcoat (his scarf's
+    // green: he reads against the cream walls and the brown of the range); the hands as black
     bill_home: { kind: 'shapes', style: 'keegan', who: 'man', garment: 'waistcoat', hair: 'short', parts: ['coal_hands'],
       body: { height: 1.0, shoulders: 1.06, thick: 1.04 },
-      colors: { skin: '#d9a98e', hair: '#3a2c24', top: '#d8d1c2', garment: '#4f4338', bottom: '#5a534a', shoes: '#2a2521' } },
+      colors: { skin: '#d9a98e', hair: '#5e4636', top: '#ebe7de', garment: '#2f4a3b', bottom: '#4e4a44', shoes: '#2a2521' } },
     // Eileen Furlong, his wife: a wine-coloured dress under a washed-blue wraparound pinafore, her hair pinned up,
     // flour on her hands
     eileen: { kind: 'shapes', style: 'keegan', who: 'woman', garment: 'pinafore', hair: 'bun', parts: ['floury_hands'],
@@ -131,7 +132,7 @@ return {
       // Bill's hands, black with coal
       coal_hands: { name: 'coal-black hands', draw: F => hands(F, COAL_HANDS) },
       // Sara's hands, red from the laundry
-      red_hands: { name: 'red hands', draw: F => hands(F, RED_HANDS, 0.058) },
+      red_hands: { name: 'red hands', draw: F => hands(F, RED_HANDS, 0.05) },
       // Eileen's hands, white with flour
       floury_hands: { name: 'floury hands', draw: F => hands(F, FLOUR_HANDS) },
       // a white guimpe over the breast and the shoulders, under the chin

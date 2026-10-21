@@ -58,14 +58,14 @@ function rubble(g, seed, x, y, w, h, mortar, tones, course = 0.3) {
 // fewer where `bare(x, y)` says the coal dust and the feet have worn it (0 rimed … 1 bare)
 function cobbles(g, seed, x, y, w, h, tones, bare) {
   const r = stream(seed);
-  g.fillStyle = "#6e7175";
+  g.fillStyle = "#585c62";
   g.fillRect(x, y, w, h);
   const paths = tones.map(() => new Path2D());
-  for (let cy = y; cy < y + h; cy += 0.34) {
+  for (let cy = y; cy < y + h; cy += 0.22) {
     let cx = x - r() * 0.3;
     while (cx < x + w) {
-      const sw = 0.32 + r() * 0.18;
-      paths[Math.floor(r() * tones.length)].roundRect(cx + 0.025, cy + 0.025, sw - 0.05, 0.29, 0.08);
+      const sw = 0.22 + r() * 0.12;
+      paths[Math.floor(r() * tones.length)].roundRect(cx + 0.02, cy + 0.02, sw - 0.04, 0.18, 0.05);
       cx += sw;
     }
   }
@@ -166,37 +166,43 @@ function lamp(g, e, arm) {
   e.light(0, -0.29, 0.22, "#ffd08a", 1, "flame");
 }
 
-// low white mist lying over the ground from x0 to x1 (the element's box [-12, -1.6, 12, 1.2]): thick at the foot and
-// thinning up to 1.6 m, soft banks in it, fading out toward its two ends; it runs on below the foot, where the painting
-// lies on the ground toward the eye, so it meets the ground with no edge. On a layer (`mist`) its animate sways slowly
-// to and fro (lib `mistSway`) — its ends fade, so it never shows an edge.
+// low white mist standing over the ground from x0 to x1 (the element's box [-12, -1.6, 12, 0.05]): nothing at its foot,
+// thickest a quarter of a metre up and thinning to nothing at 1.6 m, soft banks in it, fading out toward its two ends —
+// so it shows no edge anywhere: not at the ground (it never reaches it with any strength), not at its banks (each a
+// round soft glow squashed whole, its gradient with it), not at its ends. On a layer (`mist`) its animate sways slowly
+// to and fro (lib `mistSway`).
 function mist(e, seed, strength, x0, x1) {
   e.layer("mist", {}, (c) => {
     const a = (k) => `rgba(236, 240, 244, ${(k * strength).toFixed(3)})`;
     c.save();
     c.beginPath();
-    c.rect(x0, -1.6, x1 - x0, 2.8);
+    c.rect(x0, -1.6, x1 - x0, 1.6);
     c.clip();
-    const low = c.createLinearGradient(0, 1.2, 0, -1.6);
+    const low = c.createLinearGradient(0, 0, 0, -1.6);
     low.addColorStop(0, a(0));
-    low.addColorStop(0.43, a(0.55));
-    low.addColorStop(0.62, a(0.32));
+    low.addColorStop(0.15, a(0.5));
+    low.addColorStop(0.45, a(0.3));
     low.addColorStop(1, a(0));
     c.fillStyle = low;
-    c.fillRect(x0, -1.6, x1 - x0, 2.8);
+    c.fillRect(x0, -1.6, x1 - x0, 1.6);
     const r = stream(seed);
     const n = Math.max(2, Math.round((x1 - x0) / 3));
     for (let i = 0; i < n; i++) {
       const x = x0 + 1.5 + ((x1 - x0 - 3) * i) / (n - 1) + (r() - 0.5) * 0.8;
-      const y = -0.35 - r() * 0.5;
+      const y = -0.65 - r() * 0.3;
       const rx = 1.2 + r() * 0.8;
-      const bank = c.createRadialGradient(x, y, 0, x, y, rx);
+      // a round glow drawn in a squashed frame: the gradient is squashed with the shape, so it ends at its rim
+      c.save();
+      c.translate(x, y);
+      c.scale(1, 0.3);
+      const bank = c.createRadialGradient(0, 0, 0, 0, 0, rx);
       bank.addColorStop(0, a(0.35));
       bank.addColorStop(1, a(0));
       c.fillStyle = bank;
       c.beginPath();
-      c.ellipse(x, y, rx, rx * 0.32, 0, 0, 6.3);
+      c.arc(0, 0, rx, 0, 6.3);
       c.fill();
+      c.restore();
     }
     // its ends fade out: the paint taken away toward each end
     c.globalCompositeOperation = "destination-out";
@@ -205,7 +211,7 @@ function mist(e, seed, strength, x0, x1) {
       fade.addColorStop(0, "rgba(0, 0, 0, 1)");
       fade.addColorStop(1, "rgba(0, 0, 0, 0)");
       c.fillStyle = fade;
-      c.fillRect(Math.min(from, to), -1.6, 2, 2.8);
+      c.fillRect(Math.min(from, to), -1.6, 2, 1.6);
     }
     c.restore();
   });

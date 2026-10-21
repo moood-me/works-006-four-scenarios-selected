@@ -1,5 +1,5 @@
 // The dresser against the left wall, seen face on (x −0.65…0.65, 2.1 m high): a painted cupboard below with two doors,
-// its worktop at 0.9 m with the wireless set on it — a brown box with a cloth grille and a dial — open shelves above
+// its worktop at 0.9 m with a brown jug and the bread crock on it, open shelves above
 // with blue-and-white plates standing on their edges, cups hanging from hooks under the shelves.
 const L = e.lib;
 g.fillStyle = "#c9c2a6";
@@ -15,18 +15,13 @@ g.fillRect(-0.07, -0.5, 0.025, 0.06);
 g.fillRect(0.045, -0.5, 0.025, 0.06);
 g.fillStyle = "#6c5642";
 g.fillRect(-0.68, -0.92, 1.36, 0.06);
-// the wireless
-g.fillStyle = "#6a4a32";
-g.fillRect(0.12, -1.2, 0.4, 0.28);
-g.fillStyle = "#c9b48a";
-g.fillRect(0.15, -1.17, 0.2, 0.22);
-g.fillStyle = "#ece2c4";
-g.fillRect(0.38, -1.15, 0.11, 0.06);
-g.fillStyle = "#3a2a1e";
-g.beginPath();
-g.arc(0.405, -1.0, 0.022, 0, 6.3);
-g.arc(0.465, -1.0, 0.022, 0, 6.3);
-g.fill();
+// a brown jug and the bread crock on the worktop
+g.fillStyle = "#8a5a3a";
+g.fillRect(0.18, -1.12, 0.14, 0.2);
+g.fillStyle = "#d9cfb8";
+g.fillRect(-0.45, -1.16, 0.3, 0.24);
+g.fillStyle = "#3f5f93";
+g.fillRect(-0.45, -1.1, 0.3, 0.025);
 // the shelves, the plates, the cups
 g.fillStyle = "#b0a888";
 g.fillRect(-0.6, -2.02, 1.2, 1.1);
