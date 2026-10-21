@@ -18,11 +18,11 @@
   "light": {
     "ambient": 0.62,
     "ambientColor": "#93a8d8",
-    "saturation": 0.85,
+    "saturation": 1.0,
     "bounce": 0.4,
     "haze": 0.1,
     "hazeColor": "#25365a",
-    "hazeGlow": 0.7,
+    "hazeGlow": 1.0,
     "shafts": 0.35,
     "vignette": 0.32,
     "grain": 0.08,
@@ -130,8 +130,8 @@
       "depth": 6000,
       "reflect": {
         "strength": 0.6,
-        "fade": 0,
-        "rough": 0.5,
+        "fade": 40,
+        "rough": 0.35,
         "ripple": 0.25
       }
     },
@@ -306,7 +306,8 @@
         "turn": 160
       },
       "across": -0.9,
-      "distance": 4.1
+      "distance": 4.1,
+      "shadow": false
     },
     {
       "id": "mermaid",
