@@ -23,7 +23,7 @@ the mist on the water, the chimney's smoke, the lamps' and the hearth's flicker,
 - The potter's house: `cottage` — its front (facing 270: x runs toward the viewer) at across 2.6, 2.5–10.1 m out,
   the door at 7.4 (x −1.1), the windows at 5.0 and 9.2; `cottage_glow` — the lit room through the door and windows (`glows`; its points `#door`, `#window`,
   `#far_window`, `#cup` — the silver cup on the shelf); `roof` — the tiled slope; `chimney` and its `smoke`; `wares` —
-  the bench of pots beyond the door. The scene's light `hearth` stands in the doorway (the room's fire).
+  the bench of pots under the near window. The scene's light `hearth` stands in the doorway (the room's fire).
 - The town: `house_a`, `house_b`, `house_c` — three kinds of house (`lib.house`), copies in rows up the hill and a row along our bank up the river, their lit
   windows glowing; `tower` on the top; `far_hills` beyond; `far_bank` — the bay's side across the river: reeds,
   willows, poplars.
