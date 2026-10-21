@@ -2,7 +2,7 @@
 // edge (0.77 m) falling straight to its lace hem at 0.5 m, the table's dark underside, the mahogany pedestal and its
 // spread foot. Its painting is the way round (u, about 2.9 m) by the profile's length (v): bands at the profile's own
 // lengths — the cloth, its lace border at the hem, the underside, the wood. The top is `table_top`.
-const P = [[0.44, 0.768], [0.46, 0.75], [0.465, 0.52], [0.44, 0.5], [0.075, 0.49], [0.055, 0.16], [0.27, 0.05], [0.27, 0]];
+const P = [[0.44, 0.768], [0.46, 0.75], [0.465, 0.52], [0.44, 0.5], [0.075, 0.49], [0.05, 0.2], [0.06, 0.12], [0.22, 0.04], [0.22, 0]];
 const len = [0];
 for (let i = 1; i < P.length; i++) len.push(len[i - 1] + Math.hypot(P[i][0] - P[i - 1][0], P[i][1] - P[i - 1][1]));
 const [l, t, rr, b] = e.area;
@@ -38,5 +38,5 @@ g.fillRect(l, yAt(3), w, yAt(4) - yAt(3));
 g.fillStyle = e.lib.MAHOGANY;
 g.fillRect(l, yAt(4), w, b - yAt(4));
 g.fillStyle = "#7a4630";
-g.fillRect(l, yAt(5) - 0.015, w, 0.03);
+g.fillRect(l, yAt(6) - 0.015, w, 0.03);
 e.form(e.kit.revolve(P), { closed: "u" });

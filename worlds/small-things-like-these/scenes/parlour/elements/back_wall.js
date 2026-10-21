@@ -85,29 +85,28 @@ for (const x of [-1.5, -0.5]) {
   g.fillStyle = "#f1ece0";
   g.fillRect(x - 0.018, -1.62, 0.036, 0.18);
 }
-g.fillStyle = "#f0ede6";
-g.beginPath();
-g.moveTo(-1.06, -1.2);
-g.lineTo(-1.04, -1.44);
-g.lineTo(-0.96, -1.44);
-g.lineTo(-0.94, -1.2);
-g.closePath();
-g.fill();
-g.fillStyle = "#7f9cc4";
+// Our Lady: a blue mantle from her veiled head to the shelf, her white robe down its front, her pale face, hands joined
+g.fillStyle = "#6f8fbf";
 g.beginPath();
 g.moveTo(-1.075, -1.2);
-g.quadraticCurveTo(-1.07, -1.42, -1.0, -1.5);
-g.quadraticCurveTo(-0.93, -1.42, -0.925, -1.2);
-g.lineTo(-0.96, -1.2);
-g.lineTo(-0.975, -1.42);
-g.lineTo(-1.025, -1.42);
-g.lineTo(-1.04, -1.2);
+g.lineTo(-1.045, -1.42);
+g.quadraticCurveTo(-1.0, -1.52, -0.955, -1.42);
+g.lineTo(-0.925, -1.2);
+g.closePath();
+g.fill();
+g.fillStyle = "#f0ede6";
+g.beginPath();
+g.moveTo(-1.025, -1.2);
+g.lineTo(-1.015, -1.4);
+g.lineTo(-0.985, -1.4);
+g.lineTo(-0.975, -1.2);
 g.closePath();
 g.fill();
 g.fillStyle = "#ead7c4";
 g.beginPath();
-g.arc(-1.0, -1.475, 0.022, 0, 6.3);
+g.ellipse(-1.0, -1.445, 0.017, 0.022, 0, 0, 6.3);
 g.fill();
+g.fillRect(-1.008, -1.36, 0.016, 0.03);
 // the crucifix over the mantel: dark wood, the ivory figure
 g.fillStyle = "#3a2618";
 g.fillRect(-1.025, -2.5, 0.05, 0.78);

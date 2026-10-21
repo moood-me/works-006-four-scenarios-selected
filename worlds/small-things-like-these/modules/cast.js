@@ -68,7 +68,7 @@ return {
     // cap off and held in his right hand; the hands as black
     bill_work: { kind: 'shapes', style: 'keegan', who: 'man', garment: 'jacket', hair: 'short', scarf: true, parts: ['coal_hands', 'cap_in_hand'],
       body: { height: 1.0, shoulders: 1.06, thick: 1.04 },
-      colors: { skin: '#d9a98e', hair: '#3a2c24', top: '#cfc7b6', garment: '#6b604f', bottom: '#5a534a', hat: '#4d4a42', shoes: '#2a2521', accent: '#3f4b3c' } },
+      colors: { skin: '#d9a98e', hair: '#3a2c24', top: '#cfc7b6', garment: '#86785f', bottom: '#6a6258', hat: '#7a705f', shoes: '#2a2521', accent: '#3f4b3c' } },
     // Sara in Bill's mustard coat over her nightgown, still barefoot: the coat to below her knees, the nightgown under it
     sara_coat: { kind: 'shapes', style: 'keegan', who: 'woman', garment: 'bills_coat', hair: 'straight', barefoot: 'both', parts: ['red_hands'],
       body: { height: 0.9, thick: 0.74, shoulders: 0.84, neck: 1.05 },
