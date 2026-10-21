@@ -10,8 +10,8 @@ moon's light coming in at it. Everyone looks at the lantern but the boy (My look
   to the window, `wall_b` from the window to 150°, `win_low` and `win_top` the window's column under and over the
   opening. The near part of the circle (behind the viewer) is not built: the room is seen from its open side.
 - The window (`WIN`): an opening 1.2 m wide, sill 0.65, top 2.3, in a wall 0.6 thick — its cheeks (`reveal`, two
-  copies), the deep sill (a plane; Moominmamma's first painted flowers on it), the casement out at the glass and the
-  glass (a pane: the room mirrored faintly in it).
+  copies), the deep sill (a plane; Moominmamma's first painted flowers on it), and the casement out at the glass
+  (no pane of "glass": the room mirrored in it read as a second boy at the window).
 - The ceiling is a plane turned face down (`tilt` 180): its painting's y runs away from the viewer; the hatch is over
   the stair's top.
 - Light: the lantern's flame (`lantern#flame`, light `lamp`), the moon from the right only through the window's

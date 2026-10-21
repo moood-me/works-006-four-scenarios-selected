@@ -45,7 +45,7 @@ g.fillRect(-R, -R, 2 * R, 2 * R);
 g.restore();
 // the rag rug: an oval of plaited stripes, red, ochre, blue, cream
 const rx = 0.02, ry = 3.8 - 4.45;
-const stripes = ["#b5503f", "#d8b46a", "#6e8aa6", "#e8dcc6", "#b5503f", "#8f6a4a", "#d8b46a", "#6e8aa6"];
+const stripes = ["#9a5a4c", "#bfa477", "#71869a", "#d6ccb8", "#9a5a4c", "#85705c", "#bfa477", "#71869a"];
 for (let i = 0; i < stripes.length; i++) {
   const k = 1 - i / stripes.length;
   g.fillStyle = stripes[i];
