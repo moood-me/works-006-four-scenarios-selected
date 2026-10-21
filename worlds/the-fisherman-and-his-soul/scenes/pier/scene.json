@@ -129,10 +129,10 @@
       "width": 8000,
       "depth": 6000,
       "reflect": {
-        "strength": 0.6,
-        "fade": 40,
-        "rough": 0.35,
-        "ripple": 0.25
+        "strength": 0.5,
+        "fade": 0,
+        "rough": 0.45,
+        "ripple": 0.5
       }
     },
     {
