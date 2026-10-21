@@ -65,6 +65,15 @@ return {
     mother: { kind: 'shapes', style: 'keegan', who: 'woman', garment: 'habit', hair: 'none', hat: 'veil', parts: ['guimpe', 'cross'],
       body: { height: 0.96, thick: 0.98, shoulders: 0.92 },
       colors: { skin: '#efdcd0', hair: '#5e534d', top: '#29272e', garment: '#29272e', bottom: '#29272e', shoes: '#18171a' } },
+    // Bill in a house not his own, his coat given away: the old tweed jacket he works in under it, the green scarf, the
+    // cap off and held in his right hand; the hands as black
+    bill_work: { kind: 'shapes', style: 'keegan', who: 'man', garment: 'jacket', hair: 'short', scarf: true, parts: ['coal_hands', 'cap_in_hand'],
+      body: { height: 1.0, shoulders: 1.06, thick: 1.04 },
+      colors: { skin: '#d9a98e', hair: '#3a2c24', top: '#cfc7b6', garment: '#86785f', bottom: '#6a6258', hat: '#7a705f', shoes: '#2a2521', accent: '#3f4b3c' } },
+    // Sara in Bill's mustard coat over her nightgown, still barefoot: the coat to below her knees, the nightgown under it
+    sara_coat: { kind: 'shapes', style: 'keegan', who: 'woman', garment: 'bills_coat', hair: 'straight', barefoot: 'both', parts: ['red_hands'],
+      body: { height: 0.9, thick: 0.74, shoulders: 0.84, neck: 1.05 },
+      colors: { skin: '#e6c6b0', hair: '#3b2b22', top: '#cdc9bf', garment: '#b5862c' } },
   },
   shapes: {
     // the world's style: the engine's flat geometry with the world's own face (`keegan`, below), the head a little larger
@@ -103,6 +112,9 @@ return {
       pinafore: { name: 'pinafore', hang: [{ to: 1.75, from: 'waist', flare: 0.28, color: 'top', off: 0.94 }, { to: 1.3, from: 'shoulders', flare: 0.2 }] },
       // a child's frock from the shoulders to the knee, long sleeves, the legs bare under it (the socks the look's)
       frock: { name: 'frock', hang: [{ to: 1.0, from: 'shoulders', flare: 0.32 }], sleeves: 'garment', bare: true },
+      // a man's overcoat on a girl: from the shoulders to below her knees, its sleeves; under it her nightgown to the ankle
+      // (the top's colour)
+      bills_coat: { name: "Bill's coat over a nightgown", hang: [{ to: 1.95, from: 'shoulders', flare: 0.22, color: 'top', off: 0.94 }, { to: 1.45, from: 'shoulders', flare: 0.26 }], sleeves: 'garment' },
     },
     hats: {
       // a white coif round all the head but the face, a black veil over it from the brow back, hanging down the back
@@ -146,6 +158,15 @@ return {
         F.ball(mid, axes, [0.042 * m, 0.068 * m, 0.042 * m], GLASS, 12);
         F.ball(add(mid, mul(up, -0.085 * m)), axes, [0.058 * m, 0.026 * m, 0.058 * m], IRON, 10);
         F.point('flame', mid);
+      } },
+      // a tweed cap held by its peak in the right hand, hanging down beside the thigh (swinging a little late as the hand
+      // moves): its crown a flat round, the peak in the fingers
+      cap_in_hand: { name: 'cap in hand', draw: F => {
+        const { add, mul, sub, unit, cross, level } = V(), m = F.fit.h, k = F.k, h = F.P('RightHand');
+        const out = unit(level(sub(h, F.P('Hips')))), mid = F.swing('cap', add(h, add([0, -0.11 * m, 0], mul(out, 0.025 * k))), 110);
+        const up = unit(sub(h, mid)), fw = unit(cross(out, up)), axes = [out, up, fw];
+        F.ball(mid, axes, [0.022 * k, 0.11 * m, 0.12 * m], F.colors.hat, 14);
+        F.ball(add(h, mul(up, -0.015 * m)), axes, [0.02 * k, 0.03 * m, 0.075 * m], F.colors.hat, 10);
       } },
     },
   },

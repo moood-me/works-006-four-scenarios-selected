@@ -29,9 +29,15 @@ Bill's mustard coat is one.
   hair, barefoot, red hands (`red_hands`: raw red, a little bigger — the frame's one red).
 - `mother` — the Mother Superior: a black habit to the ankles (`habit`), a white coif close round the face under a
   black veil set back from the brow (`veil`), a broad white guimpe (`guimpe`), a small cross (`cross`), pale hands.
+- `bill_work` — Bill in someone else's house with his coat given away: the old grey-brown tweed jacket he works in
+  (`jacket`), the green scarf, the cap off and held by its peak in his right hand (`cap_in_hand`), the hands as black.
+- `sara_coat` — Sara in Bill's mustard coat over her nightgown (`bills_coat`: the coat to below her knees, the
+  nightgown to the ankle under it), barefoot, red hands.
 
 ## Things (`<id>_with`, or a look's `parts`)
 
 `lantern` — a hurricane lantern hanging from the left hand by its bail (it swings a little late as the hand moves); its
 glass glows by itself, the light is the scene's: `{"at": "<id>#flame"}`. The point `#flame` is there while the
 person has it.
+
+`cap_in_hand` — a tweed cap held by its peak in the right hand, hanging beside the thigh (in `bill_work`'s parts).

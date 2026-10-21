@@ -1,0 +1,743 @@
+{
+  "engine": 3,
+  "title": "The Mother Superior's Parlour",
+  "caption": "Sunday, before light. In the parlour the laundry cannot be heard.",
+  "horizon": 0.34,
+  "camera": {
+    "mode": "picture"
+  },
+  "light": {
+    "ambient": 0.62,
+    "ambientColor": "#9aa3bf",
+    "inside": 0.55,
+    "bounce": 0.6,
+    "haze": 0.05,
+    "hazeColor": "#cfc3ad",
+    "hazeGlow": 0.5,
+    "vignette": 0.25,
+    "grain": 0.05,
+    "tint": "#ffeacc",
+    "tintStrength": 0.03,
+    "brightness": 1.05,
+    "saturation": 0.95
+  },
+  "lights": [
+    {
+      "id": "fire",
+      "of": "fire#coals",
+      "color": "#ff9a4a",
+      "strength": 1.3,
+      "reach": 4.5,
+      "flicker": 0.3
+    },
+    {
+      "id": "lamp",
+      "of": "lamp_shade#bulb",
+      "color": "#ffd59c",
+      "strength": 1.6,
+      "reach": 4
+    },
+    {
+      "id": "sconce",
+      "of": "sconce#bulb",
+      "color": "#ffd8a0",
+      "strength": 0.9,
+      "reach": 3
+    },
+    {
+      "id": "window_light",
+      "of": "opening",
+      "daylight": 0.8,
+      "reach": 3.5
+    }
+  ],
+  "modules": [
+    "cast"
+  ],
+  "state": {
+    "envelope": true,
+    "bill_look": [
+      0.6,
+      2.4,
+      1.6
+    ],
+    "bill_reach": {
+      "l": [
+        0.15,
+        3.12,
+        0.8
+      ]
+    },
+    "bill_mood": "tired",
+    "sara_look": [
+      -0.2,
+      2.9,
+      1.5
+    ],
+    "sara_reach": {
+      "r": [
+        -1.961,
+        3.855,
+        1.15
+      ],
+      "l": [
+        -1.961,
+        3.855,
+        1.15
+      ]
+    },
+    "sara_mood": "afraid",
+    "mother_look": [
+      0.0,
+      2.6,
+      1.6
+    ],
+    "mother_reach": {
+      "r": [
+        0.909,
+        3.681,
+        1.0
+      ],
+      "l": [
+        0.909,
+        3.681,
+        1.0
+      ]
+    },
+    "mother_mood": "thinking"
+  },
+  "states": {
+    "envelope": {
+      "type": "boolean",
+      "means": "the Mother's envelope with a Christmas card lies on the tea table (II.3); false — not yet laid there, or taken"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Sky before dawn",
+      "sky": true
+    },
+    {
+      "id": "yard",
+      "name": "Convent yard under frost",
+      "plane": true,
+      "across": 6.5,
+      "distance": 12,
+      "width": 9,
+      "depth": 8.5
+    },
+    {
+      "id": "laundry",
+      "name": "The laundry across the yard",
+      "across": 7,
+      "distance": 16,
+      "facing": 180,
+      "height": 4.7,
+      "box": [
+        -6,
+        -4.7,
+        6,
+        0.05
+      ]
+    },
+    {
+      "id": "laundry_lit",
+      "name": "Lit laundry windows",
+      "across": 7,
+      "distance": 15.97,
+      "facing": 180,
+      "height": 3.1,
+      "box": [
+        -3,
+        -3.1,
+        3,
+        -0.8
+      ],
+      "glows": true
+    },
+    {
+      "id": "steam_a",
+      "name": "Steam from a laundry window",
+      "particles": {
+        "kind": "smoke",
+        "at": [
+          6.2,
+          15.85,
+          2.7
+        ],
+        "direction": [
+          0,
+          -0.6,
+          1
+        ],
+        "spread": 25,
+        "speed": [
+          0.15,
+          0.35
+        ],
+        "rate": 6,
+        "life": [
+          5,
+          9
+        ],
+        "gravity": -0.3,
+        "size": [
+          0.3,
+          1.5
+        ],
+        "color": "#eef0f2",
+        "opacity": 0.65,
+        "wind": 0.3,
+        "sheer": 0.5
+      }
+    },
+    {
+      "id": "steam_b",
+      "name": "Steam from another laundry window",
+      "particles": {
+        "kind": "smoke",
+        "at": [
+          7.8,
+          15.85,
+          2.7
+        ],
+        "direction": [
+          0.2,
+          -0.6,
+          1
+        ],
+        "spread": 25,
+        "speed": [
+          0.15,
+          0.35
+        ],
+        "rate": 6,
+        "life": [
+          5,
+          9
+        ],
+        "gravity": -0.3,
+        "size": [
+          0.3,
+          1.5
+        ],
+        "color": "#eef0f2",
+        "opacity": 0.65,
+        "wind": 0.3,
+        "sheer": 0.5
+      }
+    },
+    {
+      "id": "mist_out",
+      "name": "Low mist over the yard",
+      "across": 7,
+      "distance": 13.5,
+      "facing": 180,
+      "height": 2.2,
+      "box": [
+        -6,
+        -2.2,
+        6,
+        0.05
+      ]
+    },
+    {
+      "id": "back_wall",
+      "name": "Back wall with the fireplace, the door and the window",
+      "across": 0,
+      "distance": 4.4,
+      "facing": 180,
+      "height": 3.6,
+      "box": [
+        -2.65,
+        -3.6,
+        2.65,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "wall_left",
+      "name": "Left wall",
+      "across": -2.6,
+      "distance": 0.55,
+      "facing": 90,
+      "height": 3.6,
+      "box": [
+        -0.05,
+        -3.6,
+        3.95,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "wall_right",
+      "name": "Right wall with the bookcase",
+      "across": 2.6,
+      "distance": 4.4,
+      "facing": 270,
+      "height": 3.6,
+      "box": [
+        -0.05,
+        -3.6,
+        3.95,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "floor",
+      "name": "Polished floor",
+      "plane": true,
+      "across": 0,
+      "distance": 2.5,
+      "width": 5.3,
+      "depth": 3.9,
+      "reflect": {
+        "strength": 0.18,
+        "fade": 2.2,
+        "rough": 0.35
+      },
+      "inside": true
+    },
+    {
+      "id": "rug",
+      "name": "Rug",
+      "plane": true,
+      "across": 0.2,
+      "distance": 3.3,
+      "elevation": 0.006,
+      "width": 2.9,
+      "depth": 1.75,
+      "inside": true
+    },
+    {
+      "id": "ceiling",
+      "name": "Ceiling",
+      "plane": true,
+      "across": 0,
+      "distance": 2.5,
+      "elevation": 3.6,
+      "width": 5.3,
+      "depth": 3.9,
+      "inside": true
+    },
+    {
+      "id": "window",
+      "name": "Window onto the yard",
+      "across": 1.95,
+      "distance": 4.37,
+      "facing": 180,
+      "height": 2.3,
+      "box": [
+        -0.68,
+        -2.92,
+        0.68,
+        -0.68
+      ],
+      "inside": true
+    },
+    {
+      "id": "window_glass",
+      "name": "Window panes",
+      "across": 1.95,
+      "distance": 4.385,
+      "facing": 180,
+      "height": 1.9,
+      "box": [
+        -0.45,
+        -2.7,
+        0.45,
+        -0.8
+      ],
+      "glass": {
+        "strength": 0.2
+      },
+      "behind": [
+        "window"
+      ],
+      "inside": true
+    },
+    {
+      "id": "opening",
+      "name": "Window opening",
+      "unseen": true,
+      "across": 1.95,
+      "distance": 4.4,
+      "facing": 180,
+      "height": 1.9,
+      "box": [
+        -0.45,
+        -2.7,
+        0.45,
+        -0.8
+      ]
+    },
+    {
+      "id": "sill",
+      "name": "Window sill",
+      "plane": true,
+      "across": 1.95,
+      "distance": 4.32,
+      "elevation": 0.8,
+      "width": 1.04,
+      "depth": 0.14,
+      "inside": true
+    },
+    {
+      "id": "clock",
+      "name": "Wall clock",
+      "across": 0.35,
+      "distance": 4.37,
+      "facing": 180,
+      "height": 2.62,
+      "box": [
+        -0.2,
+        -2.62,
+        0.2,
+        -1.42
+      ],
+      "inside": true
+    },
+    {
+      "id": "fire",
+      "name": "Fire in the grate",
+      "across": -1.0,
+      "distance": 4.36,
+      "facing": 180,
+      "height": 0.36,
+      "box": [
+        -0.23,
+        -0.36,
+        0.23,
+        0.01
+      ],
+      "glows": true,
+      "flicker": 0.3
+    },
+    {
+      "id": "flames",
+      "name": "Flames",
+      "inside": true,
+      "particles": {
+        "kind": "fire",
+        "at": "fire#coals",
+        "source": [
+          0.3,
+          0.05,
+          0.04
+        ],
+        "size": [
+          0.15,
+          0.04
+        ],
+        "speed": [
+          0.1,
+          0.25
+        ],
+        "life": [
+          0.5,
+          1.0
+        ]
+      }
+    },
+    {
+      "id": "hearth",
+      "name": "Hearth",
+      "plane": true,
+      "across": -1.0,
+      "distance": 4.2,
+      "elevation": 0.012,
+      "width": 1.4,
+      "depth": 0.4,
+      "inside": true
+    },
+    {
+      "id": "fender",
+      "name": "Brass fender",
+      "across": -1.0,
+      "distance": 4.03,
+      "facing": 180,
+      "height": 0.14,
+      "box": [
+        -0.66,
+        -0.14,
+        0.66,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "sconce",
+      "name": "Wall light by the door",
+      "across": -2.57,
+      "distance": 3.2,
+      "elevation": 1.6,
+      "facing": 90,
+      "height": 0.3,
+      "box": [
+        -0.08,
+        -0.3,
+        0.08,
+        0.02
+      ],
+      "glows": true
+    },
+    {
+      "id": "side_chair",
+      "name": "Hard chair by the door",
+      "across": -2.38,
+      "distance": 3.4,
+      "facing": 180,
+      "height": 0.98,
+      "box": [
+        -0.24,
+        -0.98,
+        0.24,
+        0.02
+      ],
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "armchair",
+      "name": "Low armchair",
+      "across": -0.05,
+      "distance": 3.45,
+      "facing": 165,
+      "height": 0.97,
+      "box": [
+        -0.46,
+        -0.97,
+        0.46,
+        0.02
+      ],
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "table",
+      "name": "Tea table under its cloth",
+      "across": 0.55,
+      "distance": 3.2,
+      "height": 1.25,
+      "box": [
+        -1.46,
+        -1.25,
+        1.46,
+        0
+      ],
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "table_top",
+      "name": "Tea table top",
+      "plane": true,
+      "across": 0.55,
+      "distance": 3.2,
+      "elevation": 0.772,
+      "width": 0.94,
+      "depth": 0.94,
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "lamp",
+      "name": "Table lamp",
+      "across": 0.35,
+      "distance": 3.05,
+      "elevation": 0.772,
+      "facing": 180,
+      "height": 0.26,
+      "box": [
+        -0.08,
+        -0.26,
+        0.08,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "lamp_shade",
+      "name": "Lamp shade",
+      "across": 0.35,
+      "distance": 3.05,
+      "elevation": 1.02,
+      "facing": 180,
+      "height": 0.29,
+      "box": [
+        -0.19,
+        -0.29,
+        0.19,
+        0.01
+      ],
+      "glows": true
+    },
+    {
+      "id": "tea",
+      "name": "Tea things",
+      "across": 0.62,
+      "distance": 3.06,
+      "elevation": 0.772,
+      "facing": 180,
+      "height": 0.24,
+      "box": [
+        -0.56,
+        -0.24,
+        0.4,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "steam_tea",
+      "name": "Steam from the teapot",
+      "inside": true,
+      "particles": {
+        "kind": "smoke",
+        "at": "tea#spout",
+        "direction": [
+          -0.4,
+          0,
+          1
+        ],
+        "spread": 15,
+        "speed": [
+          0.04,
+          0.1
+        ],
+        "rate": 2,
+        "life": [
+          1.5,
+          3
+        ],
+        "gravity": -0.15,
+        "size": [
+          0.02,
+          0.14
+        ],
+        "color": "#f4f2ee",
+        "opacity": 0.22,
+        "wind": 0
+      }
+    },
+    {
+      "id": "sara",
+      "name": "Sara Redmond",
+      "person": {
+        "cast": "cast",
+        "who": "sara_coat",
+        "turn": 165
+      },
+      "across": -2.0,
+      "distance": 4.0,
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "bill",
+      "name": "Bill Furlong",
+      "person": {
+        "cast": "cast",
+        "who": "bill_work",
+        "turn": 120
+      },
+      "across": -0.2,
+      "distance": 2.9,
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "mother",
+      "name": "The Mother Superior",
+      "person": {
+        "cast": "cast",
+        "who": "mother",
+        "turn": 220
+      },
+      "across": 1.05,
+      "distance": 3.85,
+      "shadow": true,
+      "inside": true
+    }
+  ],
+  "music": {
+    "prompts": [
+      {
+        "text": "Solo cello, slow and low, a held open fifth under a plain modal melody, cold stone, December before dawn",
+        "weight": 0.5
+      },
+      {
+        "text": "Sparse felt piano, single notes with long silences, frost, a small Irish town asleep",
+        "weight": 0.4
+      },
+      {
+        "text": "Uilleann pipes very far off, a slow air, mist over a river",
+        "weight": 0
+      },
+      {
+        "text": "Low string drone, almost still, the hiss of steam behind a wall",
+        "weight": 0.6
+      },
+      {
+        "text": "Harmonium chord held like breath, a convent chapel, restrained",
+        "weight": 0.9
+      },
+      {
+        "text": "Solo violin, a slow air in the Irish style, plaintive, no ornament",
+        "weight": 0
+      },
+      {
+        "text": "Distant church bell partials blended into soft pads, cold air",
+        "weight": 0.3
+      },
+      {
+        "text": "Fingerpicked nylon guitar, tender and hesitant, a man who says little",
+        "weight": 0
+      },
+      {
+        "text": "Clarinet low register, slow, warm against cold, quiet kindness",
+        "weight": 0
+      },
+      {
+        "text": "Choir humming a carol very softly from far away, Christmas, heavy",
+        "weight": 0
+      },
+      {
+        "text": "Tin whistle, a few notes, wistful, like breath on frost",
+        "weight": 0
+      },
+      {
+        "text": "Bowed vibraphone shimmer, ice, stillness, glass",
+        "weight": 0
+      },
+      {
+        "text": "Muted brass chorale, slow, solemn, small town grief",
+        "weight": 0
+      },
+      {
+        "text": "Ambient field-like texture of water and wind, river at night, minimal",
+        "weight": 0
+      },
+      {
+        "text": "Neo-classical piano and string quartet, restrained, Max Richter-like, compassion",
+        "weight": 0
+      },
+      {
+        "text": "Bodhran heartbeat very soft under a drone, tension held",
+        "weight": 0
+      },
+      {
+        "text": "A clock ticking in a quiet room, a soft low pulse under held strings, polite and cold",
+        "weight": 0.7
+      }
+    ],
+    "bpm": 60,
+    "density": 0.25,
+    "brightness": 0.35,
+    "scale": "D_MAJOR_B_MINOR"
+  }
+}
