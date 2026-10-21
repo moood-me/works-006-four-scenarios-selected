@@ -28,6 +28,9 @@ const snoutAt = (F, d, o) => {
   return add(c, add(add(mul(hs, u[0] * s[0] * r * o), mul(hu, u[1] * s[1] * r * o)), mul(hf, u[2] * s[2] * r * o)));
 };
 // the tail's: its profile and colours (F.keep: made once a figure)
+// Little My's: her topknot's egg (shares of the head's radius); her face's — the simple face's expressions, her eyes
+// rounder and darker
+const KNOT = F => ({ crown: F.head.egg.map(e => e * F.head.r * F.head.out * 1.03), knot: [0.36, 0.5, 0.36].map(v => v * F.head.r) });
 const TAIL = F => ({ profile: [[0, 0.03 * F.fit.h], [1, 0.022 * F.fit.h], [2, 0.016 * F.fit.h]], colors: [[0, F.colors.skin]],
   tuft: [0.045 * F.fit.h, 0.06 * F.fit.h, 0.045 * F.fit.h] });
 return {
@@ -42,6 +45,10 @@ return {
       body: { height: 0.69, head: 1.02, shoulders: 0.92, arms: 0.74, hips: 1.32, thick: 1.42 },
       colors: { skin: '#f4f1ea', top: '#f4f1ea', bottom: '#f4f1ea', shoes: '#f4f1ea', garment: '#c45a4d' } },
     // Moomintroll, the son: smaller and slighter, nothing on
+    // Little My: tiny, a girl's round face, her orange hair in a tight topknot, a red bell of a dress, bare arms and legs
+    my: { kind: 'shapes', style: 'my', who: 'child', garment: 'bell', hair: 'topknot', face: 'my',
+      body: { height: 0.4, head: 1, shoulders: 0.82, arms: 0.9, hips: 0.92, thick: 0.9 },
+      colors: { skin: '#f2d4bf', top: '#f2d4bf', bottom: '#f2d4bf', shoes: '#f2d4bf', hair: '#d46f2a', garment: '#c23c32' } },
     troll: { kind: 'shapes', style: 'moomin', who: 'child', garment: 'none', hair: 'none', face: 'moomin', parts: ['tail'],
       body: { height: 0.6, head: 0.9, shoulders: 0.9, arms: 0.8, hips: 1.18, thick: 1.22 },
       colors: { skin: '#f6f3ed', top: '#f6f3ed', bottom: '#f6f3ed', shoes: '#f6f3ed' } },
@@ -52,8 +59,37 @@ return {
     styles: {
       moomin: { from: 'soft', name: 'Moomin', head: 2.45, egg: [1.02, 0.97, 1], neck: 0.15, legs: 0.7, limb: 1.45, line: 1.7,
         trunk: { w: [1.3, 1.34, 1.26, 1.04, 0.82], d: [1.4, 1.42, 1.38, 1.18, 0.95] }, face: 'moomin' },
+      // Little My's: the same soft line, a big round head, thin limbs, a slight body under her dress
+      my: { from: 'moomin', name: 'Little My', head: 2.05, egg: [1, 1, 0.98], neck: 0.25, legs: 0.9, limb: 0.95,
+        trunk: { w: [0.92, 0.94, 0.9, 0.9, 0.84], d: [0.96, 0.98, 0.96, 0.92, 0.88] }, face: 'my' },
+    },
+    garments: {
+      // Little My's dress: a red bell from the shoulders to above the knees, her arms and legs bare
+      bell: { name: 'bell dress', hang: [{ to: 0.85, from: 'shoulders', flare: 0.55 }], bare: true },
+    },
+    hair: {
+      // Little My's topknot: her hair drawn tight over the crown into a tall knot on top
+      topknot: { name: 'topknot', draw: F => {
+        const { add, mul } = V(), { at, axes, r, sides, square } = F.head, K = F.keep(KNOT);
+        F.cap(at, axes, K.crown, [0, 0.82, -0.45], -0.02, F.colors.hair, sides, square);
+        F.ball(add(at, add(mul(axes[1], r * 1.22), mul(axes[2], -r * 0.06))), axes, K.knot, F.colors.hair, F.sides);
+      } },
     },
     faces: {
+      // Little My's face: round dark eyes set wide, sharp brows, a small nose, a mouth that knows better
+      my: { name: 'Little My', draw: F => {
+        const { axes, r, on } = F.head, [, hu] = axes, x = MOODS[F.look.expression] ?? MOODS.neutral;
+        const dark = [0.1, 0.08, 0.08, 1], brow = [0.55, 0.26, 0.1, 1], lips = [0.62, 0.36, 0.32, 1];
+        for (const sx of [-1, 1]) {
+          F.ball(on([sx * 0.34, 0.06, 0.94], 0.985), axes, [r * 0.1, r * 0.13 * x.eye, r * 0.05], dark, 10);
+          F.tube([on([sx * 0.15, 0.3 + x.inner, 0.94], 0.998), on([sx * 0.3, 0.33 + (x.inner + x.outer) / 2, 0.9], 1.003), on([sx * 0.47, 0.3 + x.outer, 0.83], 0.998)],
+            [[0, r * 0.03], [1, r * 0.034], [2, r * 0.02]], [[0, brow]], 6, hu);
+        }
+        F.ball(on([0, -0.12, 1], 0.975), axes, [r * 0.06, r * 0.07, r * 0.06], F.colors.skin, 8);
+        const w = x.wide * 0.7, y = -0.36;
+        F.ball(on([0, y - x.open / 2, 0.95], 0.975), axes, [r * w * 0.75, r * Math.max(x.open, 0.001), r * 0.03], dark, 10);
+        F.tube([on([-w, y + x.corners * 0.9, 0.93], 0.995), on([0, y, 0.94], 1.0), on([w, y + x.corners * 1.3, 0.93], 0.995)], [[0, r * 0.018], [2, r * 0.018]], [[0, lips]], 6, hu);
+      } },
       // the Moomin face: a long round snout, small dark eyes close together high on it, fine brows, a mouth under
       // the snout's end, small ears on the crown (none under a hat) — the same solids for every expression
       moomin: { name: 'Moomin', draw: F => {

@@ -1,0 +1,9 @@
+{"strings": [
+  {"text":"Wind south-west. Nobody again.","translation":"Ветер зюйд-вест. Опять никто.","where":"scenes/round-room/elements/wall_a.js"},
+  {"text":"Fog. Heard a ship. It did not come.","translation":"Туман. Слышал судно. Не подошло.","where":"scenes/round-room/elements/wall_a.js"},
+  {"text":"Ice on the steps. Wind north.","translation":"На ступенях лёд. Ветер норд.","where":"scenes/round-room/elements/wall_a.js"},
+  {"text":"Calm. The sea is good today.","translation":"Штиль. Море сегодня хорошее.","where":"scenes/round-room/elements/wall_a.js"},
+  {"text":"23 August. Arrived.","translation":"23 августа. Прибыли.","where":"scenes/round-room/elements/wall_a.js"},
+  {"text":"The Round Room","translation":"Круглая комната","where":"scenes/round-room/scene.json title"},
+  {"text":"Evening in the round room. One lantern, and everyone looking at it.","translation":"Вечер в круглой комнате. Один фонарь, и все смотрят на него.","where":"scenes/round-room/scene.json caption"}
+]}
