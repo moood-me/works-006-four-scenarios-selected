@@ -28,11 +28,11 @@ function lantern(F, hand) {
   F.point('flame', mid);
 }
 // the Witch's tambourine lying on her lap, between her hands: a wooden hoop, a pale skin, a few brass jingles in its rim;
-// its middle is her point `tambourine`
+// held up off the dress a little; its middle is her point `tambourine`
 function tambourine(F) {
   const { add, sub, mix, mul, cross, unit } = V();
   const m = F.fit.h;
-  const c = add(mix(F.P('LeftHand'), F.P('RightHand'), 0.5), [0, 0.03 * m, 0]);
+  const c = add(add(mix(F.P('LeftHand'), F.P('RightHand'), 0.5), [0, 0.1 * m, 0]), mul(F.fwd('Hips'), 0.04 * m));
   const across = unit(sub(F.P('RightHand'), F.P('LeftHand')));
   const n = unit(add([0, 1, 0], mul(F.fwd('Hips'), 0.5)));
   const y = unit(cross(n, across));
