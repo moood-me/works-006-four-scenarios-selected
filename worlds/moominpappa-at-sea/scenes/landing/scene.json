@@ -55,7 +55,7 @@
       "width": 2400,
       "depth": 3000,
       "reflect": {
-        "strength": 0.45,
+        "strength": 0.28,
         "fade": 0,
         "rough": 0.55,
         "ripple": 0.4
@@ -288,9 +288,9 @@
   ],
   "state": {
     "papa_look": [
-      -12,
-      0,
-      1.4
+      -3,
+      -2,
+      1.6
     ],
     "papa_mood": "smile",
     "mama_on": [
@@ -298,7 +298,11 @@
       3.95,
       0.4
     ],
-    "mama_look": "papa",
+    "mama_look": [
+      1.5,
+      -1,
+      1.4
+    ],
     "mama_mood": "smile",
     "troll_on": [
       -2.9,
@@ -306,9 +310,9 @@
       0.5
     ],
     "troll_look": [
-      -25,
-      7,
-      0
+      -8,
+      1,
+      0.6
     ],
     "troll_mood": "thinking",
     "papa_turn": 215,

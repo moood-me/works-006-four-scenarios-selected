@@ -61,7 +61,7 @@ return {
         const skin = F.colors.skin, dark = [0.1, 0.09, 0.1, 1], brow = [skin[0] * 0.55, skin[1] * 0.55, skin[2] * 0.58, 1];
         F.ball(snoutAt(F, [0, 0, 0], 0), axes, SNOUT.radii.map(v => v * r), skin, F.sides);
         for (const sx of [-1, 1]) {
-          F.ball(on([sx * 0.2, 0.2, 0.97], 0.99), axes, [r * 0.075, r * 0.145 * x.eye, r * 0.045], dark, 10);
+          F.ball(on([sx * 0.2, 0.2, 0.97], 0.99), axes, [r * 0.09, r * 0.17 * x.eye, r * 0.05], dark, 10);
           F.tube([on([sx * 0.09, 0.42 + x.inner, 0.92], 1.0), on([sx * 0.2, 0.46 + (x.inner + x.outer) / 2, 0.88], 1.005), on([sx * 0.31, 0.42 + x.outer, 0.84], 1.0)],
             [[0, r * 0.016], [1, r * 0.02], [2, r * 0.014]], [[0, brow]], 6, hu);
           if (F.look.hat === 'none') F.ball(on([sx * 0.3, 0.93, -0.08], 0.94), axes, [r * 0.1, r * 0.22, r * 0.08], skin, 12);
