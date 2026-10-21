@@ -64,7 +64,7 @@ spec = {
     "modules": ["cast"],
     "objects": objects,
     "state": {
-        "fisher_on": [SEAT[0], SEAT[1], 0.38], "fisher_turn": FT,
+        "fisher_on": [SEAT[0], SEAT[1], 0.3], "fisher_turn": FT,
         "fisher_look": [-40, 8, 1.2], "fisher_mood": "neutral",
         "papa_turn": 215, "papa_look": [-40, 24, 1], "papa_mood": "thinking",
         "mama_on": [TOWER[0] - 0.8, TOWER[1] - 2.9, 0.35], "mama_turn": 200, "mama_look": [0, 5, 1], "mama_mood": "tired",
