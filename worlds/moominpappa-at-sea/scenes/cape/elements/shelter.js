@@ -1,0 +1,43 @@
+// The Fisherman's rock: a big rounded granite block on the cape, his corner in its lee — pink stone gone grey on the
+// weather side, lichen, a long crack, the dark wet line at its foot (a form: the block unrolled, the way round by the
+// slope, top down).
+const W = 7.2, S = 2.1;
+g.fillStyle = "#cf9f94";
+g.fillRect(-W / 2, -S, W, S);
+const grey = g.createLinearGradient(-W / 2, 0, W / 2, 0);
+grey.addColorStop(0, "rgba(160, 150, 154, 0.55)");
+grey.addColorStop(0.35, "rgba(160, 150, 154, 0)");
+grey.addColorStop(0.8, "rgba(160, 150, 154, 0)");
+grey.addColorStop(1, "rgba(160, 150, 154, 0.5)");
+g.fillStyle = grey;
+g.fillRect(-W / 2, -S, W, S);
+for (let i = 0; i < 160; i++) {
+  const x = (e.rnd() - 0.5) * W, y = -e.rnd() * S, r = 0.01 + e.rnd() * 0.03;
+  g.fillStyle = e.rnd() < 0.5 ? "rgba(120, 92, 90, 0.3)" : "rgba(248, 228, 218, 0.35)";
+  g.beginPath();
+  g.arc(x, y, r, 0, Math.PI * 2);
+  g.fill();
+}
+for (let i = 0; i < 14; i++) {
+  const x = (e.rnd() - 0.5) * W, y = -S * (0.5 + e.rnd() * 0.5), r = 0.12 + e.rnd() * 0.25;
+  const s = g.createRadialGradient(x, y, 0, x, y, r);
+  const c = e.rnd() < 0.5 ? "206, 146, 72" : "158, 164, 132";
+  s.addColorStop(0, `rgba(${c}, 0.75)`);
+  s.addColorStop(1, `rgba(${c}, 0)`);
+  g.fillStyle = s;
+  g.fillRect(x - r, y - r, r * 2, r * 2);
+}
+g.strokeStyle = "rgba(104, 72, 70, 0.7)";
+g.lineWidth = 0.035;
+g.beginPath();
+g.moveTo(-0.6, -S);
+g.quadraticCurveTo(-0.2, -1.2, -0.7, 0);
+g.moveTo(1.9, -S * 0.8);
+g.quadraticCurveTo(2.2, -0.9, 1.8, -0.2);
+g.stroke();
+const wet = g.createLinearGradient(0, -0.35, 0, 0);
+wet.addColorStop(0, "rgba(110, 84, 82, 0)");
+wet.addColorStop(1, "rgba(110, 84, 82, 0.45)");
+g.fillStyle = wet;
+g.fillRect(-W / 2, -0.35, W, 0.35);
+e.form(e.kit.lump([[1.45, 0.1], [1.1, -0.7], [0.2, -1.05], [-0.9, -0.8], [-1.4, 0.05], [-1.0, 0.75], [0.1, 0.95], [1.1, 0.7]], 1.75, 5), { closed: "u", ground: "#cf9f94" });
