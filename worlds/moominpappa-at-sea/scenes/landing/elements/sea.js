@@ -2,7 +2,7 @@
 // lighter green-grey over the shallows round the rocks; two layers its shader shows by turns — the white crests the
 // wind raises all over it (they come and go), the foam washing round the rocks at the waterline.
 const D = 1450, land = e.lib;
-g.fillStyle = "#6a879c";
+g.fillStyle = "#5b7f99";
 g.fillRect(-1200, -1500, 2400, 3000);
 // the shallows: where the granite runs on under the water
 land.shore(-1.4, 0, 0.8, (a, d, h) => {
@@ -15,11 +15,11 @@ land.shore(-1.4, 0, 0.8, (a, d, h) => {
 e.layer("crests", {}, c => {
   c.strokeStyle = "rgba(244, 246, 246, 0.85)";
   c.lineCap = "round";
-  for (let i = 0; i < 1500; i++) {
-    const d = 4 + 420 * e.rnd() ** 2, a = (e.rnd() - 0.5) * (40 + d * 2.4);
+  for (let i = 0; i < 2600; i++) {
+    const d = 4 + 520 * e.rnd() ** 2, a = (e.rnd() - 0.5) * (40 + d * 2.4);
     if (land.land(a, d) > land.SEA - 0.6) continue;
-    const len = 0.5 + e.rnd() * 1.6 + d * 0.004;
-    c.lineWidth = 0.08 + e.rnd() * 0.1 + d * 0.0008;
+    const len = 0.8 + e.rnd() * 2.2 + d * 0.012;
+    c.lineWidth = 0.14 + e.rnd() * 0.16 + d * 0.0025;
     c.beginPath();
     c.moveTo(a - len / 2, D - d);
     c.quadraticCurveTo(a, D - d - len * 0.12, a + len / 2, D - d + len * 0.05);

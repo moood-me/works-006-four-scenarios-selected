@@ -14,7 +14,7 @@ const blot = (x, y, r, color, alpha) => {
 // drifts of colour in the stone: grey, warmer rose, pale
 for (let i = 0; i < 60; i++) {
   const x = (e.rnd() - 0.5) * 56, y = (e.rnd() - 0.5) * 56, r = 2 + e.rnd() * 6, k = e.rnd();
-  blot(x, y, r, k < 0.4 ? "176, 164, 166" : k < 0.75 ? "222, 160, 142" : "236, 206, 192", 0.35 + e.rnd() * 0.25);
+  blot(x, y, r, k < 0.4 ? "168, 154, 158" : k < 0.75 ? "214, 146, 128" : "238, 210, 196", 0.45 + e.rnd() * 0.3);
 }
 // the speckle of the grain: small dots, dark and light
 for (let i = 0; i < 900; i++) {
@@ -23,19 +23,19 @@ for (let i = 0; i < 900; i++) {
   g.fillRect(x - r, y - r, r * 2, r * 2);
 }
 // lichen: rusty orange and grey-green rosettes on the higher, drier stone
-for (let i = 0; i < 160; i++) {
+for (let i = 0; i < 260; i++) {
   const a = CA + (e.rnd() - 0.5) * 56, d = CD + (e.rnd() - 0.5) * 56;
   if (land.land(a, d) - land.SEA < 0.9) continue;
-  const [x, y] = at(a, d), r = 0.15 + e.rnd() * 0.45;
+  const [x, y] = at(a, d), r = 0.2 + e.rnd() * 0.6;
   blot(x, y, r, e.rnd() < 0.55 ? "206, 146, 72" : "158, 164, 132", 0.55 + e.rnd() * 0.25);
 }
 // the joints and cracks: long gently wandering lines, a few short ones across them
 g.lineCap = "round";
-for (let i = 0; i < 46; i++) {
+for (let i = 0; i < 110; i++) {
   let x = (e.rnd() - 0.5) * 54, y = (e.rnd() - 0.5) * 54, ang = e.rnd() < 0.6 ? -1.1 + e.rnd() * 0.4 : 0.3 + e.rnd() * 0.5;
   const n = 3 + Math.floor(e.rnd() * 6);
-  g.strokeStyle = "rgba(116, 82, 80, 0.55)";
-  g.lineWidth = 0.03 + e.rnd() * 0.05;
+  g.strokeStyle = e.rnd() < 0.75 ? "rgba(104, 70, 68, 0.75)" : "rgba(246, 232, 224, 0.7)";
+  g.lineWidth = 0.035 + e.rnd() * 0.06;
   g.beginPath();
   g.moveTo(x, y);
   for (let s = 0; s < n; s++) {

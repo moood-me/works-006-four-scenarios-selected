@@ -2,17 +2,17 @@
   "engine": 3,
   "title": "The Landing Rocks",
   "caption": "Dawn on the island. The lighthouse is dark, and the door is locked.",
-  "horizon": 0.64,
+  "horizon": 0.6,
   "camera": {
     "mode": "picture"
   },
   "light": {
-    "ambient": 0.8,
+    "ambient": 0.68,
     "ambientColor": "#dfe6ef",
     "bounce": 0.55,
-    "haze": 0.09,
+    "haze": 0.035,
     "hazeColor": "#e3e1e0",
-    "hazeGlow": 0.3,
+    "hazeGlow": 0.2,
     "shafts": 0.15,
     "tint": "#f6dccb",
     "tintStrength": 0.05,
@@ -22,7 +22,8 @@
       0.6,
       -1,
       0.9
-    ]
+    ],
+    "saturation": 1.08
   },
   "lights": [
     {
@@ -32,7 +33,7 @@
         15
       ],
       "color": "#ffe0c2",
-      "strength": 1.15
+      "strength": 1.35
     }
   ],
   "modules": [
@@ -127,9 +128,9 @@
       "id": "pines",
       "name": "Island pines",
       "box": [
-        -1.7,
-        -3.5,
-        1.4,
+        -1.9,
+        -3.75,
+        1.75,
         0.1
       ],
       "shadow": true,
@@ -185,10 +186,23 @@
       "shadow": true
     },
     {
+      "id": "stones",
+      "name": "Loose stones",
+      "across": 0,
+      "distance": 0,
+      "box": [
+        -0.5,
+        -0.3,
+        0.5,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
       "id": "boulder",
       "name": "Boulder",
-      "across": -3.1,
-      "distance": 6.9,
+      "across": -2.9,
+      "distance": 5.2,
       "box": [
         -1.6,
         -0.74,
@@ -200,8 +214,8 @@
     {
       "id": "bundle",
       "name": "Bundle of blankets",
-      "across": -1.7,
-      "distance": 5.55,
+      "across": -1.5,
+      "distance": 3.95,
       "box": [
         -1.15,
         -0.56,
@@ -213,8 +227,8 @@
     {
       "id": "handbag",
       "name": "Moominmamma's handbag",
-      "across": -1.05,
-      "distance": 5.1,
+      "across": -0.75,
+      "distance": 3.5,
       "facing": 200,
       "box": [
         -0.25,
@@ -227,8 +241,8 @@
     {
       "id": "can",
       "name": "The paraffin can",
-      "across": 1.45,
-      "distance": 5.2,
+      "across": 1.4,
+      "distance": 3.7,
       "facing": 165,
       "box": [
         -0.2,
@@ -244,11 +258,10 @@
       "person": {
         "cast": "cast",
         "who": "papa",
-        "turn": 205,
         "does": "hands_behind"
       },
-      "across": 0.7,
-      "distance": 5.6
+      "across": 0.6,
+      "distance": 4.1
     },
     {
       "id": "mama",
@@ -256,11 +269,10 @@
       "person": {
         "cast": "cast",
         "who": "mama",
-        "turn": 195,
         "does": "seated"
       },
-      "across": -1.7,
-      "distance": 5.5
+      "across": -1.5,
+      "distance": 3.9
     },
     {
       "id": "troll",
@@ -268,38 +280,40 @@
       "person": {
         "cast": "cast",
         "who": "troll",
-        "turn": 235,
         "does": "seated"
       },
-      "across": -3.1,
-      "distance": 6.9
+      "across": -2.9,
+      "distance": 5.2
     }
   ],
   "state": {
     "papa_look": [
-      -14,
-      2,
-      1.2
+      -12,
+      0,
+      1.4
     ],
     "papa_mood": "smile",
     "mama_on": [
-      -1.7,
-      5.55,
+      -1.5,
+      3.95,
       0.4
     ],
     "mama_look": "papa",
     "mama_mood": "smile",
     "troll_on": [
-      -3.1,
-      6.9,
+      -2.9,
+      5.2,
       0.5
     ],
     "troll_look": [
-      -30,
-      9,
+      -25,
+      7,
       0
     ],
-    "troll_mood": "thinking"
+    "troll_mood": "thinking",
+    "papa_turn": 215,
+    "mama_turn": 150,
+    "troll_turn": 240
   },
   "music": {
     "prompts": [
