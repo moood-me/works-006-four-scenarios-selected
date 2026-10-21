@@ -1,4 +1,4 @@
-// The potter's bench by his door with what he made: a plank on two trestles, on it jugs and bowls of fired clay in
+// The potter's bench beyond his door with what he made: a plank on two trestles, on it jugs and bowls of fired clay in
 // their earthy reds and ochres. As cottage's front, x toward the viewer; its
 // foot at the origin
 g.fillStyle = '#5c4636';
