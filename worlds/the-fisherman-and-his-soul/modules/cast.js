@@ -13,6 +13,7 @@ return {
       colors: { skin: '#c99872', hair: '#33251c', top: '#e2d8c4', bottom: '#4f6372' } },
     // his Soul — his shadow standing up: the same man, the same face, all in the slate and ink of a shadow at night
     soul: { kind: 'shapes', style: 'bay', who: 'man', garment: 'tunic', hair: 'short', barefoot: 'both',
+      paint: 'rim',
       body: FISHER_BODY,
       colors: { skin: '#6a7590', hair: '#1a1e2b', top: '#3f4860', bottom: '#2a3042' } },
     // the Mermaid: small and slight, pearl-pale, her hair wet gold to the waist; in the water to the shoulders or the
