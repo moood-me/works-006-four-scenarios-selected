@@ -1,7 +1,7 @@
 // The Fisherman's cape and the island behind it, shared by the relief, the granite's painting and the sea's (its
 // shallows, the foam at the waterline): the viewer's rock and the low tongue of the cape running out to the left, his
 // stone shelter on it, a cove of water ahead, the long back of the island on the right rising to the lighthouse's
-// knoll, a hundred steps off. Metres: across (right +), distance (ahead), the height over the viewer's rock.
+// knoll, some sixty metres off. Metres: across (right +), distance (ahead), the height over the viewer's rock.
 const SEA = -1.6;
 function bump(a, d, ca, cd, ra, rd) {
   const x = (a - ca) / ra, z = (d - cd) / rd;
@@ -15,11 +15,11 @@ function ridge(a, d, a0, d0, a1, d1, h0, h1, w) {
 }
 function raw(a, d) {
   return -2.6
-    + ridge(a, d, 3, -6, -22, 36, 3.1, 1.6, 8.5)
-    + ridge(a, d, 14, -10, 34, 64, 3.0, 3.6, 13)
-    + 2.6 * bump(a, d, 34, 64, 8, 7)
-    + 1.1 * bump(a, d, -3.6, 8.6, 2.0, 1.6)
-    - 1.6 * bump(a, d, 8, 24, 5, 10);
+    + ridge(a, d, 3, -6, -22, 34, 3.1, 1.6, 8.5)
+    + ridge(a, d, 14, -10, 28, 54, 3.0, 3.6, 12)
+    + 2.6 * bump(a, d, 28, 54, 7, 6)
+    + 0.8 * bump(a, d, -3.4, 6.6, 1.8, 1.5)
+    - 1.6 * bump(a, d, 6, 20, 4.5, 8);
 }
 const H0 = raw(0, 0);
 function land(a, d) {

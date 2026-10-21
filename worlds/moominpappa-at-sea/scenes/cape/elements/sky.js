@@ -1,8 +1,7 @@
 // A late August afternoon over the open sea, in watercolour: a clear washed blue high up, going to pale gold and
-// warm apricot round the low sun on the left, a band of haze on the sea's line; long torn clouds the wind drives
-// (a layer that drifts), their undersides gilded nearer the sun. The sun itself: a small white-gold disc with its glow
-// (its e.light — the path of light on the sea; the scene's sun shines from it: "sky#sun").
-const H = 0.56, A = e.aspect, L = -0.3, R = A + 0.3, W = R - L, SX = 0.32, SY = 0.37;
+// warm apricot on the left, where the low sun is (out of the picture, behind the viewer's left shoulder), a band of
+// haze on the sea's line; long torn clouds the wind drives (a layer that drifts), gilded on the sun's side.
+const H = 0.56, A = e.aspect, L = -0.3, R = A + 0.3, W = R - L, SX = -0.35, SY = 0.42;
 const air = g.createLinearGradient(0, -0.35, 0, H);
 air.addColorStop(0, "#6f97bd");
 air.addColorStop(0.4, "#9dbbd2");
@@ -14,9 +13,9 @@ g.fillRect(L, -0.35, W, H + 0.36);
 g.fillStyle = "#a6b6b8";
 g.fillRect(L, H, W, 1.25 - H);
 // the warmth round the sun, wide and soft
-const warm = g.createRadialGradient(SX, SY, 0, SX, SY, 1.25);
-warm.addColorStop(0, "rgba(255, 236, 196, 0.95)");
-warm.addColorStop(0.18, "rgba(252, 214, 160, 0.6)");
+const warm = g.createRadialGradient(SX, SY, 0, SX, SY, 1.5);
+warm.addColorStop(0, "rgba(255, 228, 184, 0.9)");
+warm.addColorStop(0.25, "rgba(252, 214, 160, 0.55)");
 warm.addColorStop(0.5, "rgba(244, 200, 160, 0.22)");
 warm.addColorStop(1, "rgba(244, 200, 160, 0)");
 g.fillStyle = warm;
@@ -28,14 +27,7 @@ band.addColorStop(0.7, "rgba(246, 228, 204, 0.6)");
 band.addColorStop(1, "rgba(246, 228, 204, 0.35)");
 g.fillStyle = band;
 g.fillRect(L, H - 0.09, W, 0.09);
-// the sun
-g.fillStyle = "#fff6e2";
-g.beginPath();
-g.arc(SX, SY, 0.022, 0, Math.PI * 2);
-g.fill();
-e.light(SX, SY, 0.09, "#ffe2a8", 1.4, "sun");
-e.at(SX, SY, "sun");
-// clouds: long torn lumps, blue-grey above, gold beneath where the sun is near; each painted three times a width
+// clouds: long torn lumps, blue-grey, gold on the sun's side; each painted three times a width
 // apart so the drift wraps round
 const clouds = [];
 for (let i = 0; i < 12; i++) {
@@ -45,7 +37,7 @@ for (let i = 0; i < 12; i++) {
 e.layer("clouds", { drift: [0.003, 0], box: [L, -0.35, R, H] }, c => {
   for (const cl of clouds) {
     for (const off of [-W, 0, W]) {
-      const near = Math.max(0, 1 - Math.hypot(cl.x - SX, (cl.y - SY) * 2) / 1.2);
+      const near = Math.max(0, 1 - Math.hypot(cl.x - SX, (cl.y - SY) * 2) / 1.6);
       for (let j = 0; j < 5; j++) {
         const cx = cl.x + off + (j - 2) * cl.w * 0.26, cy = cl.y + ((j * 7) % 3 - 1) * cl.h * 0.35, rx = cl.w * (0.42 - Math.abs(j - 2) * 0.07);
         const s = c.createRadialGradient(cx, cy, 0, cx, cy, rx);

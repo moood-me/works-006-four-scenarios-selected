@@ -57,8 +57,8 @@ return {
     // the Fisherman: thin and long, taller than Papa, a long narrow head with a drooping nose, a faded oilskin coat
     // ragged at the hem, a sou'wester pulled down; his net in his hands
     fisher: { kind: 'shapes', style: 'fisher', who: 'old', garment: 'oilcoat', hair: 'none', hat: 'souwester', face: 'fisher', parts: ['netload'],
-      body: { height: 0.8, head: 1, shoulders: 0.86, arms: 0.95, hips: 0.9, thick: 0.86 },
-      colors: { skin: '#d9d1c2', top: '#857d6c', bottom: '#5c5751', shoes: '#3d3833', hat: '#b99a55', garment: '#80796a' } },
+      body: { height: 0.8, head: 1, shoulders: 0.9, arms: 0.95, hips: 0.95, thick: 1.05 },
+      colors: { skin: '#e2dace', top: '#9a917c', bottom: '#625c55', shoes: '#3d3833', hat: '#c9a85c', garment: '#9a9178' } },
     troll: { kind: 'shapes', style: 'moomin', who: 'child', garment: 'none', hair: 'none', face: 'moomin', parts: ['tail'],
       body: { height: 0.6, head: 0.9, shoulders: 0.9, arms: 0.8, hips: 1.18, thick: 1.22 },
       colors: { skin: '#f6f3ed', top: '#f6f3ed', bottom: '#f6f3ed', shoes: '#f6f3ed' } },
@@ -73,7 +73,7 @@ return {
       my: { from: 'moomin', name: 'Little My', head: 2.05, egg: [1, 1, 0.98], neck: 0.25, legs: 0.9, limb: 0.95,
         trunk: { w: [0.92, 0.94, 0.9, 0.9, 0.84], d: [0.96, 0.98, 0.96, 0.92, 0.88] }, face: 'my' },
       // the Fisherman's: the same soft line, a smaller long head on a thin neck, long thin limbs, a narrow body
-      fisher: { from: 'moomin', name: 'Fisherman', head: 1.6, egg: [0.86, 1.14, 0.96], neck: 0.5, legs: 0.95, limb: 0.8,
+      fisher: { from: 'moomin', name: 'Fisherman', head: 1.9, egg: [0.86, 1.14, 0.96], neck: 0.5, legs: 0.95, limb: 0.8,
         trunk: { w: [0.86, 0.88, 0.82, 0.86, 0.8], d: [0.9, 0.9, 0.86, 0.84, 0.8] }, face: 'fisher' },
     },
     garments: {

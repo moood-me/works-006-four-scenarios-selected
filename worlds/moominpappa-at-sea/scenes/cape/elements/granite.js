@@ -36,8 +36,8 @@ for (let i = 0; i < 140; i++) {
   const [a, d] = spot(0.4);
   let [x, y] = at(a, d), ang = e.rnd() < 0.6 ? -0.9 + e.rnd() * 0.4 : 0.4 + e.rnd() * 0.5;
   const n = 3 + Math.floor(e.rnd() * 6);
-  g.strokeStyle = e.rnd() < 0.75 ? "rgba(104, 70, 68, 0.75)" : "rgba(246, 232, 224, 0.7)";
-  g.lineWidth = 0.035 + e.rnd() * 0.06;
+  g.strokeStyle = e.rnd() < 0.75 ? "rgba(112, 78, 74, 0.5)" : "rgba(246, 232, 224, 0.55)";
+  g.lineWidth = 0.018 + e.rnd() * 0.03;
   g.beginPath();
   g.moveTo(x, y);
   for (let s = 0; s < n; s++) {

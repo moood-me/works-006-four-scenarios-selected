@@ -3,7 +3,7 @@
 The cape on a windy late afternoon, the low sun over the sea on the left (1.7, «sit beside him in silence»): the
 Fisherman on his low stone in the lee of his rock, his net in his hands and heaped at his feet, the rest of it drying
 on two driftwood poles; Moominpappa sitting on the granite beside him, both looking out to sea; across the cove the
-island's long back rising to the dark lighthouse a hundred steps off, Moominmamma small on its steps, alone with the
+island's long back rising to the dark lighthouse some sixty metres off, Moominmamma small on its steps, alone with the
 bundles.
 
 - The land is one function (`lib.js` `land`): the viewer's rock and the cape running out to the left, the
@@ -11,11 +11,11 @@ bundles.
   `SEA` is the sea's height. `granite` is one draped plane; `sea` one reflecting plane with the landing's shader
   (crests coming and going, foam washing the waterline).
 - The lighthouse, its steps and the pines are the landing's paintings (the tower's profile is in `lib.js` `TOWER`, as
-  there). Points: `lighthouse#door`, `lighthouse#lantern`, `rack#net`, `sky#sun`.
+  there). Points: `lighthouse#door`, `lighthouse#lantern`, `rack#net`.
 - `lib.net` draws a net's diamond mesh (the rack's hanging net — a layer the wind sways, translucent to the sun —
   and the heap at his feet).
-- The sun is painted in the sky (`sky#sun`, with its glow — its path on the sea) and the scene's only light shines
-  from it.
+- The low sun is out of the picture behind the viewer's left shoulder (the light `sun`, `from` [-115, 16]): it lights
+  the faces turned to the sea and lays the long shadows ahead; the sky is warm on that side.
 - People (the world's cast): the Fisherman came into the cast with this scene (`fisher`: thin, long-headed, a
   drooping nose, an oilskin, a sou'wester; his part `netload` — the net bundled in his hands, falling to his feet).
   He sits (`seated`, `fisher_on` the stone's top), his hands reaching into his lap (`fisher_reach`), his head bowed
