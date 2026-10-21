@@ -1,0 +1,600 @@
+{
+  "engine": 3,
+  "title": "The Well",
+  "caption": "Midnight in the fir wood. The full moon over the well.",
+  "horizon": 0.45,
+  "camera": {
+    "mode": "walk",
+    "area": [
+      1.5,
+      1.5,
+      0,
+      3
+    ]
+  },
+  "modules": [
+    "cast"
+  ],
+  "light": {
+    "ambient": 0.6,
+    "ambientColor": "#8fa6d8",
+    "saturation": 1.0,
+    "bounce": 0.4,
+    "haze": 0.16,
+    "hazeColor": "#22325a",
+    "hazeGlow": 1.2,
+    "shafts": 0.45,
+    "vignette": 0.34,
+    "grain": 0.08,
+    "wind": [
+      1,
+      0.2,
+      0.3
+    ]
+  },
+  "lights": [
+    {
+      "id": "moon",
+      "from": "sky#disc",
+      "color": "#c3d2f2",
+      "strength": 0.9
+    },
+    {
+      "id": "lantern",
+      "at": "fisherman#flame",
+      "color": "#ffbf72",
+      "strength": 1.8,
+      "reach": 6,
+      "flicker": 0.12,
+      "glow": 0.3
+    }
+  ],
+  "state": {
+    "fisherman_with": [
+      "lantern"
+    ],
+    "fisherman_look": "witch",
+    "witch_on": [
+      0.49,
+      7.06,
+      0.8
+    ],
+    "witch_with": [
+      "tambourine"
+    ],
+    "witch_look": "fisherman",
+    "witch_mood": "smile",
+    "velvet_look": "fisherman"
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Night sky and the full moon",
+      "sky": true
+    },
+    {
+      "id": "clouds",
+      "name": "Thin clouds",
+      "sky": true
+    },
+    {
+      "id": "far_wood",
+      "name": "The wood beyond",
+      "across": 0,
+      "distance": 160,
+      "height": 24,
+      "box": [
+        -420,
+        -24,
+        420,
+        3
+      ]
+    },
+    {
+      "id": "ground",
+      "name": "The glade",
+      "plane": true,
+      "drape": true,
+      "across": 0,
+      "distance": 25,
+      "width": 90,
+      "depth": 70
+    },
+    {
+      "id": "mist",
+      "name": "Mist among the firs",
+      "height": 3,
+      "box": [
+        -40,
+        -3,
+        40,
+        0.5
+      ],
+      "copies": [
+        {
+          "across": 0,
+          "distance": 20
+        },
+        {
+          "across": -6,
+          "distance": 34,
+          "scale": 1.4
+        }
+      ]
+    },
+    {
+      "id": "fir",
+      "name": "Firs",
+      "height": 12,
+      "box": [
+        -4.8,
+        -12.8,
+        4.8,
+        0.1
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": -4.6,
+          "distance": 4.4,
+          "scale": 1.15
+        },
+        {
+          "across": 5.3,
+          "distance": 13.6,
+          "scale": 0.95,
+          "flip": true
+        },
+        {
+          "across": -10.14,
+          "distance": 8.27,
+          "scale": 1.0,
+          "flip": true,
+          "tint": "#deeaf8"
+        },
+        {
+          "across": -8.58,
+          "distance": 14.32,
+          "scale": 0.93,
+          "flip": true,
+          "tint": "#dfe6f8"
+        },
+        {
+          "across": -10.74,
+          "distance": 18.36,
+          "scale": 0.99,
+          "flip": true,
+          "tint": "#f0ebe6"
+        },
+        {
+          "across": -12.43,
+          "distance": 23.36,
+          "scale": 0.85,
+          "flip": true,
+          "tint": "#f6e0ec"
+        },
+        {
+          "across": 9.47,
+          "distance": 9.16,
+          "scale": 0.96,
+          "flip": false,
+          "tint": "#fdecf3"
+        },
+        {
+          "across": 10.84,
+          "distance": 12.85,
+          "scale": 0.96,
+          "flip": true,
+          "tint": "#dfddf6"
+        },
+        {
+          "across": 12.92,
+          "distance": 19.24,
+          "scale": 1.14,
+          "flip": true,
+          "tint": "#eae8fa"
+        },
+        {
+          "across": 10.81,
+          "distance": 22.41,
+          "scale": 0.94,
+          "flip": true,
+          "tint": "#effdf3"
+        },
+        {
+          "across": -19.2,
+          "distance": 27.37,
+          "scale": 0.97,
+          "flip": true,
+          "tint": "#dbe0de"
+        },
+        {
+          "across": -15.5,
+          "distance": 28.15,
+          "scale": 1.24,
+          "flip": false,
+          "tint": "#e0e4e7"
+        },
+        {
+          "across": -9.26,
+          "distance": 34.29,
+          "scale": 0.93,
+          "flip": false,
+          "tint": "#e1dcfd"
+        },
+        {
+          "across": -5.02,
+          "distance": 35.65,
+          "scale": 1.07,
+          "flip": true,
+          "tint": "#eefefa"
+        },
+        {
+          "across": 1.35,
+          "distance": 37.25,
+          "scale": 1.21,
+          "flip": false,
+          "tint": "#f9f8f8"
+        },
+        {
+          "across": 5.56,
+          "distance": 35.87,
+          "scale": 1.06,
+          "flip": true,
+          "tint": "#dcdce5"
+        },
+        {
+          "across": 11.58,
+          "distance": 31.91,
+          "scale": 0.91,
+          "flip": true,
+          "tint": "#e2f1fb"
+        },
+        {
+          "across": 15.91,
+          "distance": 30.65,
+          "scale": 1.13,
+          "flip": false,
+          "tint": "#def2fb"
+        },
+        {
+          "across": 22.94,
+          "distance": 28.42,
+          "scale": 1.0,
+          "flip": false,
+          "tint": "#f5e1df"
+        },
+        {
+          "across": -31.05,
+          "distance": 54.67,
+          "scale": 1.3,
+          "flip": true,
+          "tint": "#f8fef2"
+        },
+        {
+          "across": -17.79,
+          "distance": 48.07,
+          "scale": 1.34,
+          "flip": false,
+          "tint": "#e2e4e5"
+        },
+        {
+          "across": -8.31,
+          "distance": 50.17,
+          "scale": 1.35,
+          "flip": true,
+          "tint": "#fcedee"
+        },
+        {
+          "across": 2.65,
+          "distance": 52.15,
+          "scale": 1.18,
+          "flip": true,
+          "tint": "#edeff7"
+        },
+        {
+          "across": 14.42,
+          "distance": 54.77,
+          "scale": 1.12,
+          "flip": false,
+          "tint": "#ededf4"
+        },
+        {
+          "across": 23.82,
+          "distance": 49.83,
+          "scale": 1.37,
+          "flip": false,
+          "tint": "#e0dfeb"
+        }
+      ]
+    },
+    {
+      "id": "fir_slim",
+      "name": "Slim firs",
+      "height": 14,
+      "box": [
+        -4.1,
+        -14.8,
+        4.1,
+        0.1
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": -8.44,
+          "distance": 6.3,
+          "scale": 1.09,
+          "flip": true,
+          "tint": "#eee8dd"
+        },
+        {
+          "across": -8.44,
+          "distance": 10.85,
+          "scale": 1.08,
+          "flip": false,
+          "tint": "#efe9fe"
+        },
+        {
+          "across": -9.98,
+          "distance": 15.96,
+          "scale": 1.09,
+          "flip": true,
+          "tint": "#eedddd"
+        },
+        {
+          "across": -14.87,
+          "distance": 20.6,
+          "scale": 0.91,
+          "flip": false,
+          "tint": "#eefaf5"
+        },
+        {
+          "across": -11.54,
+          "distance": 24.94,
+          "scale": 1.14,
+          "flip": false,
+          "tint": "#fae6f4"
+        },
+        {
+          "across": 7.3,
+          "distance": 11.8,
+          "scale": 1.04,
+          "flip": false,
+          "tint": "#f8e5e9"
+        },
+        {
+          "across": 8.65,
+          "distance": 15.7,
+          "scale": 0.93,
+          "flip": false,
+          "tint": "#deebee"
+        },
+        {
+          "across": 13.79,
+          "distance": 20.3,
+          "scale": 0.83,
+          "flip": true,
+          "tint": "#e3ecf0"
+        },
+        {
+          "across": 12.58,
+          "distance": 26.04,
+          "scale": 1.05,
+          "flip": true,
+          "tint": "#fbf7fa"
+        },
+        {
+          "across": -21.4,
+          "distance": 28.37,
+          "scale": 1.0,
+          "flip": true,
+          "tint": "#f1dddd"
+        },
+        {
+          "across": -12.12,
+          "distance": 30.94,
+          "scale": 1.22,
+          "flip": false,
+          "tint": "#ebecde"
+        },
+        {
+          "across": -1.3,
+          "distance": 37.48,
+          "scale": 0.98,
+          "flip": true,
+          "tint": "#f6eef7"
+        },
+        {
+          "across": 7.98,
+          "distance": 37.25,
+          "scale": 1.28,
+          "flip": true,
+          "tint": "#fcfefd"
+        },
+        {
+          "across": 19.18,
+          "distance": 30.9,
+          "scale": 1.04,
+          "flip": true,
+          "tint": "#f7e7f7"
+        },
+        {
+          "across": -24.99,
+          "distance": 49.68,
+          "scale": 0.97,
+          "flip": true,
+          "tint": "#fdf2ee"
+        },
+        {
+          "across": -14.41,
+          "distance": 50.21,
+          "scale": 1.03,
+          "flip": true,
+          "tint": "#dffbe7"
+        },
+        {
+          "across": -2.66,
+          "distance": 42.26,
+          "scale": 1.12,
+          "flip": true,
+          "tint": "#dbf7e1"
+        },
+        {
+          "across": 7.0,
+          "distance": 49.84,
+          "scale": 1.02,
+          "flip": true,
+          "tint": "#f6edef"
+        },
+        {
+          "across": 18.95,
+          "distance": 49.47,
+          "scale": 1.14,
+          "flip": false,
+          "tint": "#f4fafc"
+        },
+        {
+          "across": 28.72,
+          "distance": 45.37,
+          "scale": 0.94,
+          "flip": false,
+          "tint": "#f7fbe0"
+        }
+      ]
+    },
+    {
+      "id": "well",
+      "name": "The well",
+      "across": 0.9,
+      "distance": 7.5,
+      "height": 0.8,
+      "box": [
+        -2.2,
+        -1.748,
+        2.2,
+        0
+      ],
+      "shadow": true
+    },
+    {
+      "id": "well_frame",
+      "name": "The well's posts and bucket",
+      "across": 0.9,
+      "distance": 7.5,
+      "height": 2.3,
+      "box": [
+        -1.05,
+        -2.3,
+        1.08,
+        0.02
+      ],
+      "shadow": true
+    },
+    {
+      "id": "grass",
+      "name": "Tall grass",
+      "height": 0.9,
+      "box": [
+        -0.55,
+        -0.95,
+        0.55,
+        0.05
+      ],
+      "copies": [
+        {
+          "across": -2.3,
+          "distance": 1.7
+        },
+        {
+          "across": -1.5,
+          "distance": 2.6,
+          "scale": 0.8,
+          "flip": true
+        },
+        {
+          "across": -3.2,
+          "distance": 3.4,
+          "scale": 1.2
+        },
+        {
+          "across": 2.5,
+          "distance": 1.9,
+          "flip": true
+        },
+        {
+          "across": 3.3,
+          "distance": 2.9,
+          "scale": 1.1
+        },
+        {
+          "across": 1.8,
+          "distance": 3.6,
+          "scale": 0.7
+        },
+        {
+          "across": -2.8,
+          "distance": 6.5,
+          "scale": 1.1
+        },
+        {
+          "across": 3.6,
+          "distance": 7.8,
+          "scale": 1.2,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "fireflies",
+      "name": "Fireflies",
+      "across": 0.5,
+      "distance": 13,
+      "elevation": 0.8,
+      "particles": {
+        "kind": "fireflies",
+        "source": [
+          18,
+          8,
+          1.2
+        ],
+        "rate": 2,
+        "color": "#e6f39a"
+      }
+    },
+    {
+      "id": "fisherman",
+      "name": "The Fisherman",
+      "person": {
+        "cast": "cast",
+        "who": "fisherman",
+        "turn": 110
+      },
+      "across": -1.1,
+      "distance": 6.0
+    },
+    {
+      "id": "witch",
+      "name": "The Witch",
+      "person": {
+        "cast": "cast",
+        "who": "witch",
+        "turn": 223,
+        "does": "seated"
+      },
+      "across": 0.49,
+      "distance": 7.06
+    },
+    {
+      "id": "velvet",
+      "name": "The man in black velvet",
+      "person": {
+        "cast": "cast",
+        "who": "velvet",
+        "turn": 235,
+        "does": "hands_behind"
+      },
+      "across": 4.2,
+      "distance": 12.6
+    }
+  ]
+}
