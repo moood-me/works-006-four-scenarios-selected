@@ -18,4 +18,4 @@ e.layer('ripple', { box: [-4000, -3000, 4000, 3000], drift: [0.25, 0] }, g => {
   }
 });
 // the glow round the stone (the stone stands 2.9 m right, 6.2 m ahead)
-e.light(2.9, 3000 - 6.2, 1.7, '#78e4d2', 0.9, 'glow');
+e.light(2.9, 3000 - 6.2, 2.1, '#78e4d2', 1.4, 'glow');
