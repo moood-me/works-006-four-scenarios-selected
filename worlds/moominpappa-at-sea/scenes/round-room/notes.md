@@ -9,7 +9,7 @@ moon's light coming in at it. Everyone looks at the lantern but the boy (My look
   sheets of that circle (forms, `kit.bend` with a negative angle: concave toward the room): `wall_a` from −150° round
   to the window, `wall_b` from the window to 150°, `win_low` and `win_top` the window's column under and over the
   opening. The near part of the circle (behind the viewer) is not built: the room is seen from its open side.
-- The window (`WIN`): an opening 1 m wide, sill 0.65, top 2.1, in a wall 0.6 thick — its cheeks (`reveal`, two
+- The window (`WIN`): an opening 1.2 m wide, sill 0.65, top 2.3, in a wall 0.6 thick — its cheeks (`reveal`, two
   copies), the deep sill (a plane; Moominmamma's first painted flowers on it), the casement out at the glass and the
   glass (a pane: the room mirrored faintly in it).
 - The ceiling is a plane turned face down (`tilt` 180): its painting's y runs away from the viewer; the hatch is over
@@ -23,8 +23,8 @@ moon's light coming in at it. Everyone looks at the lantern but the boy (My look
   `casement#window`, `stove#stove`, `lantern#flame`.
 - People (the world's cast): papa stands (`hands_behind`), mama and My sit (`seated`, `<id>_on` — the stool's top,
   the table's), troll stands at the window. Little My came into the cast with this scene.
-- The numbers of `scene.json` come from the circle: a wall from angle a to b stands at `at((a + b) / 2)`, facing
-  `(a + b) / 2 + 180`, `R · (b − a)` metres wide, bent `−(b − a)`; the window's half-angle is `0.5 / R` radians
-  (7.958°); its cheeks at `at(32 ∓ 7.958, R + deep / 2)`; the moon's polygon at `R + deep`. Change `C`, `R` or `WIN`
-  and these change with them.
+- The numbers of `scene.json` come from the circle: `tools/round_room.py` writes the file (a wall from angle a to b
+  stands at `at((a + b) / 2)`, facing `(a + b) / 2 + 180`, `R · (b − a)` metres wide, bent `−(b − a)` — `lib.js`
+  `WALLS` the same for the paintings; the window's cheeks, sill, glass and the moon's polygon from `WIN`). Change
+  `C`, `R` or `WIN` in both and run it.
 - Stage 2 (the look) only: people stand or sit and breathe; no motions, no camera moves, no showcase yet.

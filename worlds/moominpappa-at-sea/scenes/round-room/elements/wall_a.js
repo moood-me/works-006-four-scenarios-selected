@@ -2,7 +2,7 @@
 // unrolled, left to right as seen from inside): whitewash over a blue-grey dado; behind the table the keeper's wall —
 // years of his pencil lines, each signed with a small knot, the lowest by the floor faint under dust — and across one
 // of them Moominpappa's own first line, big and new.
-const L = e.lib, MID = -62.979, W = 10.935, H = L.H, x = t => L.wallX(t, MID);
+const L = e.lib, { mid: MID, width: W, bend } = L.WALLS.a, H = L.H, x = t => L.wallX(t, MID);
 L.whitewash(g, e, -W / 2, W / 2, 0, H);
 // the keeper's lines: [angle, height, legible text or null (a scribble of so many metres)]
 const pencil = "rgba(70, 66, 70, 0.85)";
@@ -66,8 +66,8 @@ for (let i = 0; i < 9; i++) {
   g.globalAlpha = 1;
 }
 // Moominpappa's first line of his log, written standing, high and big, straight across "Nobody again"
-write(tr("23 August. Arrived."), x(-24.5), -1.58, 0.11, "rgba(30, 30, 40, 0.95)", -0.04);
+write(tr("23 August. Arrived."), x(-25), -1.56, 0.15, "rgba(24, 24, 34, 1)", -0.04);
 e.at(x(-23), -1.55, "nobody");
 e.at(x(-20), -1.62, "log");
 e.at(x(-12), -2.1, "keeper");
-e.form(e.kit.bend(W, H, -174.042), { ground: "#ece6d9" });
+e.form(e.kit.bend(W, H, bend), { ground: "#ece6d9" });

@@ -4,7 +4,12 @@
 // right.
 const C = [0, 3.8], R = 3.6, H = 3.6, DEG = Math.PI / 180;
 // the window: its middle's angle, its half-width (metres along the wall), its sill and its top, how thick the wall is
-const WIN = { mid: 32, half: 0.5, sill: 0.65, top: 2.1, deep: 0.6 };
+// (tools/round_room.py works out the walls' places in scene.json from the same numbers)
+const WIN = { mid: 32, half: 0.6, sill: 0.65, top: 2.3, deep: 0.6 };
+// the walls (bent sheets of the circle): each from angle a to b — its middle, its width along the wall, its bend
+const HALF = WIN.half / R / DEG;
+const wall = (a, b) => ({ mid: (a + b) / 2, width: R * (b - a) * DEG, bend: a - b });
+const WALLS = { a: wall(-150, WIN.mid - HALF), b: wall(WIN.mid + HALF, 150), win: wall(WIN.mid - HALF, WIN.mid + HALF) };
 // where an angle of the room is at r from C: [across, distance]
 const at = (theta, r = R) => [C[0] + r * Math.sin(theta * DEG), C[1] + r * Math.cos(theta * DEG)];
 // x on a wall's painting (metres along the wall from its middle) of an angle, its middle at `mid`
@@ -86,4 +91,4 @@ function flower(g, x, y, h, lean, petal, heart) {
   g.arc(tx, ty, r * 0.6, 0, Math.PI * 2);
   g.fill();
 }
-return { C, R, H, DEG, WIN, at, wallX, whitewash, knot, flower };
+return { C, R, H, DEG, WIN, WALLS, at, wallX, whitewash, knot, flower };

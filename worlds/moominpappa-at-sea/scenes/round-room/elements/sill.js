@@ -1,7 +1,7 @@
 // The deep stone sill of the window, seen from above (x across the window, y toward the room): whitewashed, worn grey
 // where elbows lean, and on it Moominmamma's first painted garden — a stem, then a few flowers in her own greens —,
 // her brush and a little pot of paint by them.
-const L = e.lib, w = 1, d = L.WIN.deep;
+const L = e.lib, w = 2 * L.WIN.half, d = L.WIN.deep;
 g.fillStyle = "#e2dccf";
 g.fillRect(-w / 2, -d / 2, w, d);
 const worn = g.createLinearGradient(0, d / 2, 0, -d / 2);

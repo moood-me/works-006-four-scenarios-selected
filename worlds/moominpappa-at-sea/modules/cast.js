@@ -47,7 +47,7 @@ return {
     // Moomintroll, the son: smaller and slighter, nothing on
     // Little My: tiny, a girl's round face, her orange hair in a tight topknot, a red bell of a dress, bare arms and legs
     my: { kind: 'shapes', style: 'my', who: 'child', garment: 'bell', hair: 'topknot', face: 'my',
-      body: { height: 0.34, head: 1, shoulders: 0.82, arms: 0.9, hips: 0.92, thick: 0.9 },
+      body: { height: 0.4, head: 1, shoulders: 0.82, arms: 0.9, hips: 0.92, thick: 0.9 },
       colors: { skin: '#f2d4bf', top: '#f2d4bf', bottom: '#f2d4bf', shoes: '#f2d4bf', hair: '#d46f2a', garment: '#c23c32' } },
     troll: { kind: 'shapes', style: 'moomin', who: 'child', garment: 'none', hair: 'none', face: 'moomin', parts: ['tail'],
       body: { height: 0.6, head: 0.9, shoulders: 0.9, arms: 0.8, hips: 1.18, thick: 1.22 },

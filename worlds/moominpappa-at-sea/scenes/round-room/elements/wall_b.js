@@ -1,7 +1,7 @@
 // The round wall from the window round to the near right (a bent sheet of the room's circle, unrolled): whitewash over
 // the blue-grey dado, a few iron hooks the keeper left — his yellow oilskin and sou'wester still on one —, a coil of
 // rope on a nail.
-const L = e.lib, MID = 94.979, W = 6.914, H = L.H, x = t => L.wallX(t, MID);
+const L = e.lib, { mid: MID, width: W, bend } = L.WALLS.b, H = L.H, x = t => L.wallX(t, MID);
 L.whitewash(g, e, -W / 2, W / 2, 0, H);
 const hook = (hx, hy) => {
   g.fillStyle = "#3a3634";
@@ -53,4 +53,4 @@ for (let i = 0; i < 4; i++) {
 }
 hook(x(68), -1.9);
 hook(x(73), -1.9);
-e.form(e.kit.bend(W, H, -110.042), { ground: "#ece6d9" });
+e.form(e.kit.bend(W, H, bend), { ground: "#ece6d9" });
