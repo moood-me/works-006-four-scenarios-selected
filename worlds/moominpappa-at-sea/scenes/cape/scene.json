@@ -2,7 +2,7 @@
   "engine": 3,
   "title": "The Fisherman's Cape",
   "caption": "The Fisherman mends his net with his back to the lighthouse. Papa sits beside him and says nothing.",
-  "horizon": 0.5,
+  "horizon": 0.38,
   "camera": {
     "mode": "picture"
   },
@@ -140,9 +140,9 @@
       "distance": 7.0,
       "shadow": true,
       "box": [
-        -3.6,
-        -2.1,
-        3.6,
+        -4,
+        -1.7,
+        4,
         0
       ]
     },
