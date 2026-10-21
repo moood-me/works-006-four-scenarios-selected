@@ -5,12 +5,12 @@ function fir(g, h, seed, colors) {
   const hash = (n, s) => anim.hash(n, seed * 31 + s);
   const tiers = 8 + Math.floor(4 * hash(0, 1));
   g.fillStyle = colors.trunk;
-  g.fillRect(-0.035 * h, -0.2 * h, 0.07 * h, 0.2 * h);
+  g.fillRect(-0.016 * h, -0.2 * h, 0.032 * h, 0.2 * h);
   for (let i = 0; i < tiers; i++) {
     const u = i / tiers;
     const top = -h * (0.16 + 0.84 * (i + 1) / tiers) - 0.06 * h;
     const foot = -h * (0.1 + 0.84 * u);
-    const half = h * (0.3 * (1 - u) + 0.035) * (0.85 + 0.3 * hash(i, 2));
+    const half = h * (0.22 * (1 - u) + 0.03) * (0.85 + 0.3 * hash(i, 2));
     const lean = h * 0.03 * (hash(i, 3) - 0.5);
     g.fillStyle = colors.under;
     g.beginPath();
