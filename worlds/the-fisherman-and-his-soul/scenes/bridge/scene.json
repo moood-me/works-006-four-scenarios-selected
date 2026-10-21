@@ -51,7 +51,7 @@
     {
       "id": "hearth",
       "across": 2.3,
-      "distance": 6,
+      "distance": 7.4,
       "elevation": 1.1,
       "color": "#ffa860",
       "strength": 1.5,
@@ -290,86 +290,78 @@
       ],
       "copies": [
         {
-          "across": 24.65,
-          "distance": 39.94,
+          "across": 4.31,
+          "distance": 65.94,
           "facing": 196,
           "scale": 0.95,
           "tint": "#ece6f0"
         },
         {
-          "across": 31.79,
-          "distance": 50.5,
+          "across": 7.44,
+          "distance": 80.5,
           "facing": 209,
           "scale": 1.05,
           "flip": true,
           "tint": "#e8e2e0"
         },
         {
-          "across": 3.74,
-          "distance": 66.23,
+          "across": 17.11,
+          "distance": 82.23,
           "facing": 207,
           "scale": 1.11,
           "flip": true,
           "tint": "#f1ead8"
         },
         {
-          "across": 25.01,
-          "distance": 64.78,
+          "across": 40.74,
+          "distance": 80.78,
           "facing": 210,
           "scale": 0.92,
           "flip": true,
           "tint": "#e8e2e0"
         },
         {
-          "across": 35.74,
-          "distance": 83.14,
+          "across": 7.03,
+          "distance": 123.14,
           "facing": 190,
           "scale": 0.93,
           "tint": "#e8e2e0"
         },
         {
-          "across": 28.74,
-          "distance": 101.33,
+          "across": 51.05,
+          "distance": 123.33,
           "facing": 189,
           "scale": 0.93,
           "flip": true,
           "tint": "#f1ead8"
         },
         {
-          "across": 42.07,
-          "distance": 101.17,
+          "across": 8.71,
+          "distance": 149.17,
           "facing": 194,
           "scale": 0.99,
           "tint": "#f6e6d0"
         },
         {
-          "across": 16.31,
-          "distance": 121.39,
+          "across": 42.59,
+          "distance": 147.39,
           "facing": 198,
           "scale": 1.09,
           "tint": "#f6e6d0"
         },
         {
-          "across": 27.92,
-          "distance": 121.55,
+          "across": 55.71,
+          "distance": 147.55,
           "facing": 202,
           "scale": 1.02,
           "flip": true,
           "tint": "#fff2e2"
         },
         {
-          "across": 39.55,
-          "distance": 121.86,
+          "across": 68.85,
+          "distance": 147.86,
           "facing": 205,
           "scale": 1.02,
-          "flip": true,
-          "tint": "#fff2e2"
-        },
-        {
-          "across": 66.76,
-          "distance": 146.97,
-          "facing": 203,
-          "scale": 0.98,
           "flip": true,
           "tint": "#fff2e2"
         }
@@ -387,108 +379,55 @@
       ],
       "copies": [
         {
-          "across": 4.93,
-          "distance": 15.47,
-          "facing": 199,
-          "scale": 0.95,
-          "flip": true,
-          "tint": "#ece6f0"
-        },
-        {
-          "across": 13.97,
-          "distance": 20.67,
-          "facing": 196,
-          "scale": 0.91,
-          "flip": true,
-          "tint": "#ece6f0"
-        },
-        {
-          "across": 12.26,
-          "distance": 30.49,
-          "facing": 211,
-          "scale": 0.91,
-          "tint": "#f6e6d0"
-        },
-        {
-          "across": 4.02,
-          "distance": 39.75,
+          "across": 13.09,
+          "distance": 51.75,
           "facing": 206,
           "scale": 1.13,
           "flip": true,
           "tint": "#ece6f0"
         },
         {
-          "across": 11.95,
-          "distance": 53.48,
+          "across": 27.58,
+          "distance": 67.48,
           "facing": 204,
           "scale": 0.94,
           "tint": "#f1ead8"
         },
         {
-          "across": 16.04,
-          "distance": 66.65,
+          "across": 30.77,
+          "distance": 82.65,
           "facing": 205,
           "scale": 0.98,
           "tint": "#f1ead8"
         },
         {
-          "across": 33.45,
-          "distance": 66.37,
+          "across": 4.77,
+          "distance": 100.37,
           "facing": 198,
           "scale": 1.02,
           "tint": "#f1ead8"
         },
         {
-          "across": 13.07,
-          "distance": 83.34,
+          "across": 31.92,
+          "distance": 101.34,
           "facing": 200,
           "scale": 0.93,
           "flip": true,
           "tint": "#ece6f0"
         },
         {
-          "across": 2,
-          "distance": 101.09,
+          "across": 21.02,
+          "distance": 123.09,
           "facing": 197,
           "scale": 1.03,
           "tint": "#ece6f0"
         },
         {
-          "across": 17.32,
-          "distance": 99.55,
+          "across": 38.22,
+          "distance": 121.55,
           "facing": 189,
           "scale": 1.14,
           "tint": "#e8e2e0"
-        },
-        {
-          "across": 6.63,
-          "distance": 147.73,
-          "facing": 208,
-          "scale": 1.08,
-          "tint": "#fff2e2"
-        },
-        {
-          "across": 19.63,
-          "distance": 149.05,
-          "facing": 208,
-          "scale": 1.09,
-          "flip": true,
-          "tint": "#fff2e2"
-        },
-        {
-          "across": 35.17,
-          "distance": 148.31,
-          "facing": 194,
-          "scale": 1.09,
-          "flip": true,
-          "tint": "#ece6f0"
-        },
-        {
-          "across": 53.77,
-          "distance": 147.63,
-          "facing": 198,
-          "scale": 0.91,
-          "tint": "#f1ead8"
         }
       ]
     },
@@ -504,86 +443,102 @@
       ],
       "copies": [
         {
-          "across": 10.57,
-          "distance": 16.77,
+          "across": 2.06,
+          "distance": 29.47,
+          "facing": 199,
+          "scale": 0.95,
+          "flip": true,
+          "tint": "#ece6f0"
+        },
+        {
+          "across": 8.54,
+          "distance": 30.77,
           "facing": 190,
           "scale": 1.04,
           "tint": "#f6e6d0"
         },
         {
-          "across": 6.12,
-          "distance": 22.03,
+          "across": 17.66,
+          "distance": 30.03,
           "facing": 198,
           "scale": 1.05,
           "tint": "#f1ead8"
         },
         {
-          "across": 4.04,
-          "distance": 28.82,
+          "across": 1.84,
+          "distance": 38.67,
+          "facing": 196,
+          "scale": 0.91,
+          "flip": true,
+          "tint": "#ece6f0"
+        },
+        {
+          "across": 11.71,
+          "distance": 38.82,
           "facing": 204,
           "scale": 0.93,
           "flip": true,
           "tint": "#ece6f0"
         },
         {
-          "across": 22.07,
-          "distance": 29.41,
+          "across": 20.68,
+          "distance": 40.49,
+          "facing": 211,
+          "scale": 0.91,
+          "tint": "#f6e6d0"
+        },
+        {
+          "across": 1.59,
+          "distance": 51.41,
           "facing": 189,
           "scale": 0.95,
           "flip": true,
           "tint": "#fff2e2"
         },
         {
-          "across": 14.07,
-          "distance": 40.36,
+          "across": 24.16,
+          "distance": 52.36,
           "facing": 208,
           "scale": 0.99,
           "tint": "#e8e2e0"
         },
         {
-          "across": 1.67,
-          "distance": 51.54,
+          "across": 16.2,
+          "distance": 65.54,
           "facing": 210,
           "scale": 0.96,
           "flip": true,
           "tint": "#f1ead8"
         },
         {
-          "across": 20.2,
-          "distance": 53.11,
+          "across": 36.72,
+          "distance": 67.11,
           "facing": 194,
           "scale": 1.03,
           "flip": true,
           "tint": "#f1ead8"
         },
         {
-          "across": 2.96,
-          "distance": 82.43,
+          "across": 20.68,
+          "distance": 100.43,
           "facing": 198,
           "scale": 0.94,
           "tint": "#f6e6d0"
         },
         {
-          "across": 26.15,
-          "distance": 82.8,
+          "across": 46.47,
+          "distance": 100.8,
           "facing": 193,
           "scale": 1.01,
           "tint": "#f1ead8"
         },
         {
-          "across": 1.64,
-          "distance": 122.46,
+          "across": 26.02,
+          "distance": 148.46,
           "facing": 205,
           "scale": 1.03,
           "flip": true,
           "tint": "#f1ead8"
-        },
-        {
-          "across": 52.83,
-          "distance": 123.25,
-          "facing": 199,
-          "scale": 1.1,
-          "tint": "#f6e6d0"
         }
       ]
     },
@@ -604,7 +559,7 @@
       "id": "cottage",
       "name": "The potter's house",
       "across": 2.6,
-      "distance": 6,
+      "distance": 7.4,
       "facing": 270,
       "height": 2.7,
       "box": [
@@ -619,7 +574,7 @@
       "id": "cottage_glow",
       "name": "The potter's lit door and windows",
       "across": 2.58,
-      "distance": 6,
+      "distance": 7.4,
       "facing": 270,
       "height": 2,
       "box": [
@@ -635,7 +590,7 @@
       "name": "The potter's roof",
       "plane": true,
       "across": 3.12,
-      "distance": 6,
+      "distance": 7.4,
       "elevation": 3.28,
       "width": 5.8,
       "depth": 2.2,
@@ -646,7 +601,7 @@
       "id": "chimney",
       "name": "The chimney",
       "across": 3.55,
-      "distance": 7.4,
+      "distance": 8.8,
       "height": 4.8,
       "box": [
         -0.3,
@@ -662,7 +617,7 @@
         "kind": "smoke",
         "at": [
           3.55,
-          7.4,
+          8.8,
           4.75
         ],
         "amount": 0.5,
@@ -673,13 +628,13 @@
       "id": "wares",
       "name": "The potter's bench of pots",
       "across": 2.3,
-      "distance": 4.3,
+      "distance": 5,
       "facing": 270,
       "height": 0.9,
       "box": [
-        -1.2,
+        -0.8,
         -0.95,
-        1.2,
+        0.8,
         0.02
       ],
       "shadow": true
@@ -690,10 +645,10 @@
       "person": {
         "cast": "cast",
         "who": "fisherman",
-        "turn": 125
+        "turn": 110
       },
-      "across": -0.7,
-      "distance": 9
+      "across": -0.5,
+      "distance": 8.4
     },
     {
       "id": "potter",
@@ -701,10 +656,10 @@
       "person": {
         "cast": "cast",
         "who": "potter",
-        "turn": 250
+        "turn": 235
       },
-      "across": 1.75,
-      "distance": 6.3
+      "across": 1.8,
+      "distance": 7.6
     },
     {
       "id": "daughter",
@@ -712,10 +667,10 @@
       "person": {
         "cast": "cast",
         "who": "daughter",
-        "turn": 235
+        "turn": 230
       },
-      "across": 2.1,
-      "distance": 5.6
+      "across": 2.15,
+      "distance": 7
     }
   ]
 }

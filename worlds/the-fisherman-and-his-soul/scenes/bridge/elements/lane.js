@@ -1,19 +1,19 @@
 // The lane along the quay from above (4.2 m across, from 3 m behind the viewer to the bridge's head 16 m out; y toward
 // the viewer): rounded cobbles in rows, each its own grey-brown, and on the river's side (x −2.1) a kerb of long
 // pale coping slabs — the quay's edge
-g.fillStyle = '#4c453c';
+g.fillStyle = '#5e564b';
 g.fillRect(-2.1, -9.5, 4.2, 19);
 let row = 0;
-for (let y = -9.5; y < 9.5; y += 0.27) {
+for (let y = -9.5; y < 9.5; y += 0.25) {
   let x = -1.62 + (row % 2 ? 0.15 : 0);
   let i = 0;
   while (x < 2.1) {
     const n = row * 31 + i;
-    const w = 0.24 + 0.08 * e.anim.hash(n, 1);
-    const tone = 104 + Math.round(30 * e.anim.hash(n, 2));
+    const w = 0.2 + 0.08 * e.anim.hash(n, 1);
+    const tone = 112 + Math.round(20 * e.anim.hash(n, 2));
     g.fillStyle = `rgb(${tone + 6}, ${tone}, ${tone - 12})`;
     g.beginPath();
-    g.ellipse(x + w / 2, y + 0.13, w / 2 - 0.02, 0.11, 0, 0, Math.PI * 2);
+    g.ellipse(x + w / 2, y + 0.125, w / 2 - 0.012, 0.115, 0, 0, Math.PI * 2);
     g.fill();
     x += w;
     i++;

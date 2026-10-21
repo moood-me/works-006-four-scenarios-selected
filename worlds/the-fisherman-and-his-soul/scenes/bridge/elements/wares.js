@@ -1,5 +1,5 @@
 // The potter's bench by his door with what he made: a plank on two trestles, on it jugs and bowls of fired clay in
-// their earthy reds and ochres, two big pots on the ground beside it. As cottage's front, x toward the viewer; its
+// their earthy reds and ochres. As cottage's front, x toward the viewer; its
 // foot at the origin
 g.fillStyle = '#5c4636';
 g.fillRect(-0.75, -0.46, 1.5, 0.06);
@@ -11,10 +11,4 @@ for (const [x, r, h, c] of pots) {
   g.ellipse(x, -0.46 - h / 2, r, h / 2, 0, 0, Math.PI * 2);
   g.fill();
   g.fillRect(x - r * 0.45, -0.46 - h - 0.04, r * 0.9, 0.06);
-}
-for (const [x, r, h, c] of [[0.95, 0.2, 0.42, '#8f5a3e'], [-0.95, 0.17, 0.34, '#a8683f']]) {
-  g.fillStyle = c;
-  g.beginPath();
-  g.ellipse(x, -h / 2, r, h / 2, 0, 0, Math.PI * 2);
-  g.fill();
 }

@@ -18,7 +18,7 @@ for (let i = 0; i < 420; i++) {
 for (let i = 0; i < 70; i++) {
   const x = -72 + 174 * e.anim.hash(i, 4);
   const r = 2 + 2.5 * e.anim.hash(i, 5);
-  g.fillStyle = e.anim.hash(i, 6) > 0.5 ? '#2f4036' : '#36483a';
+  g.fillStyle = e.anim.hash(i, 6) > 0.5 ? '#3a4c42' : '#425446';
   g.beginPath();
   g.ellipse(x, -0.8 - r * 0.8, r * 1.3, r, 0, 0, Math.PI * 2);
   g.fill();
@@ -27,7 +27,7 @@ for (let i = 0; i < 70; i++) {
 for (let i = 0; i < 26; i++) {
   const x = -60 + 160 * e.anim.hash(i, 7);
   const h = 9 + 6 * e.anim.hash(i, 8);
-  g.fillStyle = '#2a3a32';
+  g.fillStyle = '#34463c';
   g.beginPath();
   g.ellipse(x, -0.8 - h / 2, 1.1 + 0.4 * e.anim.hash(i, 9), h / 2, 0, 0, Math.PI * 2);
   g.fill();

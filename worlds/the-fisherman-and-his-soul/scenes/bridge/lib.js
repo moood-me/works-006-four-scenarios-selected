@@ -48,7 +48,7 @@ function house(g, e, k) {
       g.fillStyle = '#4a3c32';
       g.fillRect(x + 0.33, y, 0.04, 1.15);
       g.fillRect(x, y + 0.52, 0.7, 0.04);
-      if (lit) e.light(x + 0.35, y + 0.6, 0.55, '#ffc070', 0.9 + 0.4 * hash(n, 2), `w${n}`);
+      if (lit) e.light(x + 0.35, y + 0.6, 0.8, '#ffc070', 1.6 + 0.6 * hash(n, 2), `w${n}`);
     }
   }
 }
