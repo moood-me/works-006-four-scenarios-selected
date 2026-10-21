@@ -36,8 +36,8 @@ the day's colours; the morning is the scene's light (`light`, `lights`).
 | `yard` | plane, −1.5…9.3 m | cobbles under rime; the frost worn black along the coal's ways (gate → shed door, gate → chute) and before the kitchen door |
 | `shed` + `shed_front`, `shed_side`, `shed_back`, `shed_floor`, `coal_heap`, `shed_door` | anchor (−2.6, 4.2), facing 160 | the coal shed built on an unseen anchor: its front with the doorway (x 0…0.95), the right side, inside (`inside`) the black back wall, the floor and the heap; the door swung out (facing 275 within the shed), the bolt on it |
 | `cart` | (1.9, 8.4) | Bill's hand cart with two sacks, by the chute's hatch |
-| `bill` | (−0.35, 4.7), turn 235 | Bill Furlong, the lantern in his left hand raised toward her (`bill_reach.l`), looking at her, `sad` |
-| `sara` | (−2.06, 4.08), turn 145 | Sara in the shed's doorway, barefoot in her nightgown, arms crossed against the cold (`sara_reach`), looking at Bill, `afraid` |
+| `bill` | (−0.35, 4.7), turn 222 | Bill Furlong, the lantern in his left hand raised toward her (`bill_reach.l`), looking at her, `sad` |
+| `sara` | (−2.06, 4.08), turn 155 | Sara in the shed's doorway, barefoot in her nightgown, both hands clutching the nightgown at her breast (`sara_reach`), looking at Bill, `afraid` |
 | `mother` | (3.16, 5.84), turn 215 | the Mother Superior before the kitchen door, hands folded at the waist (`mother_reach`), looking at Bill, a polite `smile` |
 
 The people are the world's cast (`modules/cast.js`, style `keegan`: cast.md). The lantern is the cast's part

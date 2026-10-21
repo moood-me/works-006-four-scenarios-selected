@@ -39,7 +39,7 @@
       "id": "lantern",
       "at": "bill#flame",
       "color": "#ffc277",
-      "strength": 2.2,
+      "strength": 1.8,
       "reach": 5,
       "flicker": 0.12,
       "glow": 0.3
@@ -71,8 +71,8 @@
     "bill_look": "sara",
     "bill_reach": {
       "l": [
-        -0.546,
-        4.318,
+        -0.454,
+        4.284,
         1.25
       ]
     },
@@ -80,14 +80,14 @@
     "sara_look": "bill",
     "sara_reach": {
       "r": [
-        -1.876,
-        4.062,
-        1.12
+        -1.997,
+        3.944,
+        1.15
       ],
       "l": [
-        -2.095,
-        3.885,
-        1.08
+        -1.997,
+        3.944,
+        1.15
       ]
     },
     "sara_mood": "afraid",
@@ -442,7 +442,7 @@
       "person": {
         "cast": "cast",
         "who": "bill",
-        "turn": 235
+        "turn": 222
       },
       "across": -0.35,
       "distance": 4.7,
@@ -454,7 +454,7 @@
       "person": {
         "cast": "cast",
         "who": "sara",
-        "turn": 145
+        "turn": 155
       },
       "across": -2.06,
       "distance": 4.08,

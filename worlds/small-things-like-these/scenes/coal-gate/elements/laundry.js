@@ -13,7 +13,7 @@ for (let i = 0; i < 14; i++) {
   streak.addColorStop(0, "rgba(120, 116, 108, 0.35)");
   streak.addColorStop(1, "rgba(120, 116, 108, 0)");
   g.fillStyle = streak;
-  g.fillRect(x, top, 0.15 + r() * 0.3, 2.5);
+  g.fillRect(x, top, Math.min(0.15 + r() * 0.3, 2.8 - x), 2.5);
 }
 // the plinth and the string course
 e.lib.rubble(g, 32, -2.8, -0.55, 5.6, 0.6, "#8e8a83", ["#7c7973", "#86827b", "#77746f"], 0.28);
