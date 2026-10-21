@@ -1,4 +1,4 @@
-// The table seen from the front (its near edge 4.175 m ahead; x −0.82…0.82): the oilcloth's hanging edge, the apron
+// The table seen from the front (its near edge 3.375 m ahead; x −0.82…0.82): the oilcloth's hanging edge, the apron
 // rail, two front legs; the two back legs a part 0.85 m farther.
 const legs = (c) => {
   c.fillStyle = "#5a4330";

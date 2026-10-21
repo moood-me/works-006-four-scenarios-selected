@@ -1,4 +1,4 @@
-// The right wall, seen along its length (x from the back wall at 6 m, running toward the start): the panelling and the
+// The right wall, seen along its length (x from the back wall at 5.2 m, running toward the start): the panelling and the
 // distemper as the back wall's; the door to the hall at x 1.15…2.0, shut — brown-grained, four panels, a brass knob;
 // a light switch beside it.
 e.lib.wall(g, 64, -0.05, 3.75, -2.92);

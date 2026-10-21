@@ -33,7 +33,7 @@ return {
     // flour on her hands
     eileen: { kind: 'shapes', style: 'keegan', who: 'woman', garment: 'pinafore', hair: 'bun', parts: ['floury_hands'],
       body: { height: 0.94, thick: 0.96, shoulders: 0.9 },
-      colors: { skin: '#e6c2a8', hair: '#5a3a29', top: '#7a4a4e', garment: '#a7b6c2', bottom: '#8c7666', shoes: '#2b2420' } },
+      colors: { skin: '#e6c2a8', hair: '#5a3a29', top: '#6e3c44', garment: '#7f98b0', bottom: '#8c7666', shoes: '#2b2420' } },
     // Sheila, twelve, who sings in the nuns' choir: the convent school's navy pleated skirt, a grey jumper, a ponytail
     sheila: { kind: 'shapes', style: 'keegan', who: 'school', garment: 'skirt', hair: 'ponytail', socks: true,
       colors: { skin: '#eccbb2', hair: '#3d2b22', top: '#8a8e95', garment: '#2e3550', shoes: '#2f2520', socks: '#d6d2ca' } },

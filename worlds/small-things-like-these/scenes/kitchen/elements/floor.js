@@ -1,5 +1,5 @@
-// The floor from above (x across, y toward the viewer; its centre 4.2 m ahead): red quarry tiles, worn paler along the
-// way from the range to the table and the door; a rag rug before the range (across −2.5, 5.2 m ahead).
+// The floor from above (x across, y toward the viewer; its centre 3.4 m ahead): red quarry tiles, worn paler along the
+// way from the range to the table and the door; a rag rug before the range (across −2.45, 4.4 m ahead).
 const r = e.lib.stream(71);
 g.fillStyle = "#6d4a3c";
 g.fillRect(-3.25, -1.85, 6.5, 3.7);

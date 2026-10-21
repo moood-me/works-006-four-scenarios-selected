@@ -1,4 +1,4 @@
-// The kitchen's back wall, seen straight on (x across from the start's line; the wall 6 m ahead, the ceiling at
+// The kitchen's back wall, seen straight on (x across from the start's line; the wall 5.2 m ahead, the ceiling at
 // 2.9 m): the painted panelling to the dado rail, cream distemper above; on the left the chimney breast with the
 // range's recess (cream tiles, sooted at the top) and the mantel shelf — a clock, a tea caddy, a brass candlestick;
 // a calendar to the left of the window; the peg board by the right corner where the coats hang (`coats`). The window's
