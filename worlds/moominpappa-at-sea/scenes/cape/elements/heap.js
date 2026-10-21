@@ -10,8 +10,8 @@ g.closePath();
 g.fill();
 L.net(g, -0.55, 0.55, x => -0.21 + 0.3 * (x / 0.6) ** 2, () => 0.01, 0.06, "rgba(150, 132, 108, 0.7)");
 for (const [x, y] of [[-0.35, -0.1], [0.12, -0.18], [0.42, -0.06], [-0.05, -0.04]]) {
-  g.fillStyle = "#c08a4e";
+  g.fillStyle = "#a9804f";
   g.beginPath();
-  g.ellipse(x, y, 0.055, 0.035, 0.3, 0, Math.PI * 2);
+  g.ellipse(x, y, 0.045, 0.028, 0.3, 0, Math.PI * 2);
   g.fill();
 }

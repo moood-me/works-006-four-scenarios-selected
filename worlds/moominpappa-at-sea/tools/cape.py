@@ -39,7 +39,7 @@ objects = [
     el("shelter", "The Fisherman's rock", -3.5, 7.0, [-4, -1.7, 4, 0], shadow=True),
     el("rack", "The net drying on its poles", -5.0, 4.9, [-1.75, -2.05, 1.75, 0.06], facing=150, translucent=0.45, shadow=True),
     el("seat", "The Fisherman's stone", SEAT[0], SEAT[1], [-1, -0.42, 1, 0], shadow=True),
-    el("heap", "The net at his feet", r3(feet[0] - 0.05), r3(feet[1] - 0.15), [-0.7, -0.3, 0.7, 0.06], shadow=True),
+    el("heap", "The net at his feet", r3(feet[0] - 0.35), r3(feet[1] + 0.05), [-0.7, -0.3, 0.7, 0.06], shadow=True),
     el("box", "The fish box", -2.2, 4.3, [-0.4, -0.36, 0.4, 0.04], facing=200, shadow=True),
     el("driftwood", "A driftwood trunk", 2.9, 2.3, [-2.5, -0.55, 2.55, 0.08], facing=165, shadow=True),
     {"id": "grass", "name": "Dry sea grass", "box": [-0.32, -0.6, 0.32, 0.05], "across": -2.0, "distance": 2.6,
@@ -54,7 +54,7 @@ objects = [
 spec = {
     "engine": 3,
     "title": "The Fisherman's Cape",
-    "caption": "The Fisherman mends his net with his back to the lighthouse. Papa sits beside him and says nothing.",
+    "caption": "The Fisherman sits with his net, his side to the lighthouse. Papa sits down beside him and says nothing.",
     "horizon": 0.38,
     "camera": {"mode": "picture"},
     "light": {"ambient": 0.62, "ambientColor": "#c9d2e4", "bounce": 0.55, "haze": 0.04, "hazeColor": "#eadcc6", "hazeGlow": 0,
@@ -66,7 +66,7 @@ spec = {
     "state": {
         "fisher_on": [SEAT[0], SEAT[1], 0.38], "fisher_turn": FT,
         "fisher_look": [-40, 8, 1.2], "fisher_mood": "neutral",
-        "papa_turn": 65, "papa_look": [-40, 24, 1], "papa_mood": "thinking",
+        "papa_turn": 215, "papa_look": [-40, 24, 1], "papa_mood": "thinking",
         "mama_on": [TOWER[0] - 0.8, TOWER[1] - 2.9, 0.35], "mama_turn": 200, "mama_look": [0, 5, 1], "mama_mood": "tired",
     },
     "music": music,

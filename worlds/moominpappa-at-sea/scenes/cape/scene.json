@@ -1,7 +1,7 @@
 {
   "engine": 3,
   "title": "The Fisherman's Cape",
-  "caption": "The Fisherman mends his net with his back to the lighthouse. Papa sits beside him and says nothing.",
+  "caption": "The Fisherman sits with his net, his side to the lighthouse. Papa sits down beside him and says nothing.",
   "horizon": 0.38,
   "camera": {
     "mode": "picture"
@@ -177,8 +177,8 @@
     {
       "id": "heap",
       "name": "The net at his feet",
-      "across": -1.42,
-      "distance": 3.279,
+      "across": -1.72,
+      "distance": 3.479,
       "shadow": true,
       "box": [
         -0.7,
@@ -313,7 +313,7 @@
       1.2
     ],
     "fisher_mood": "neutral",
-    "papa_turn": 65,
+    "papa_turn": 215,
     "papa_look": [
       -40,
       24,

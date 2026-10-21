@@ -12,7 +12,7 @@ grey.addColorStop(1, "rgba(160, 150, 154, 0.5)");
 g.fillStyle = grey;
 g.fillRect(-W / 2, -S, W, S);
 for (let i = 0; i < 160; i++) {
-  const x = (e.rnd() - 0.5) * W, y = -e.rnd() * S, r = 0.01 + e.rnd() * 0.03;
+  const x = (e.rnd() - 0.5) * W, y = -e.rnd() * S * 0.75, r = 0.01 + e.rnd() * 0.03;
   g.fillStyle = e.rnd() < 0.5 ? "rgba(120, 92, 90, 0.3)" : "rgba(248, 228, 218, 0.35)";
   g.beginPath();
   g.arc(x, y, r, 0, Math.PI * 2);
