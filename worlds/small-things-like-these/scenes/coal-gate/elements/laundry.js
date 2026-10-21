@@ -3,21 +3,21 @@
 // back door at x 0.2…1.0 with a worn stone step; a string course between the floors, a drainpipe, frost on the sills.
 // The openings are painted dark here: what is lit in them is the other card's.
 const r = e.lib.stream(31);
-g.fillStyle = "#aca69c";
+g.fillStyle = "#a4a49f";
 g.fillRect(-2.8, -8.4, 5.6, 8.45);
 // stains of damp and steam down the render
 for (let i = 0; i < 14; i++) {
   const x = -2.7 + r() * 5.4;
   const top = -8 + r() * 5;
   const streak = g.createLinearGradient(0, top, 0, top + 2.5);
-  streak.addColorStop(0, "rgba(120, 116, 108, 0.35)");
-  streak.addColorStop(1, "rgba(120, 116, 108, 0)");
+  streak.addColorStop(0, "rgba(104, 106, 104, 0.35)");
+  streak.addColorStop(1, "rgba(104, 106, 104, 0)");
   g.fillStyle = streak;
   g.fillRect(x, top, Math.min(0.15 + r() * 0.3, 2.8 - x), 2.5);
 }
 // the plinth and the string course
 e.lib.rubble(g, 32, -2.8, -0.55, 5.6, 0.6, "#6a6762", ["#94908a", "#8a8680", "#9d9992"], 0.28);
-g.fillStyle = "#bdb8ae";
+g.fillStyle = "#b6b6b0";
 g.fillRect(-2.8, -3.55, 5.6, 0.14);
 // the openings, their frames and sills
 // (each [x, y, w, h, a door — no sill])

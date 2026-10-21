@@ -58,14 +58,14 @@ function rubble(g, seed, x, y, w, h, mortar, tones, course = 0.3) {
 // fewer where `bare(x, y)` says the coal dust and the feet have worn it (0 rimed … 1 bare)
 function cobbles(g, seed, x, y, w, h, tones, bare) {
   const r = stream(seed);
-  g.fillStyle = "#6e7175";
+  g.fillStyle = "#585c62";
   g.fillRect(x, y, w, h);
   const paths = tones.map(() => new Path2D());
-  for (let cy = y; cy < y + h; cy += 0.34) {
+  for (let cy = y; cy < y + h; cy += 0.22) {
     let cx = x - r() * 0.3;
     while (cx < x + w) {
-      const sw = 0.32 + r() * 0.18;
-      paths[Math.floor(r() * tones.length)].roundRect(cx + 0.025, cy + 0.025, sw - 0.05, 0.29, 0.08);
+      const sw = 0.22 + r() * 0.12;
+      paths[Math.floor(r() * tones.length)].roundRect(cx + 0.02, cy + 0.02, sw - 0.04, 0.18, 0.05);
       cx += sw;
     }
   }

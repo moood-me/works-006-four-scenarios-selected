@@ -7,19 +7,19 @@
     "mode": "picture"
   },
   "light": {
-    "ambient": 0.6,
-    "ambientColor": "#aebbd0",
+    "ambient": 0.62,
+    "ambientColor": "#93a6c8",
     "bounce": 0.5,
-    "haze": 0.6,
-    "hazeColor": "#d2d9df",
-    "hazeGlow": 0.8,
+    "haze": 0.48,
+    "hazeColor": "#a9b8cc",
+    "hazeGlow": 0.6,
     "inside": 0.55,
     "vignette": 0.28,
     "grain": 0.06,
-    "tint": "#dde5ef",
-    "tintStrength": 0.06,
+    "tint": "#c8d4e8",
+    "tintStrength": 0.1,
     "brightness": 1.05,
-    "saturation": 0.9,
+    "saturation": 0.88,
     "wind": [
       1,
       0,
@@ -31,16 +31,16 @@
       "id": "gate_light",
       "of": "gate_lamp#flame",
       "color": "#ffcf8a",
-      "strength": 1.3,
-      "reach": 7,
+      "strength": 1,
+      "reach": 4,
       "flicker": 0.04
     },
     {
       "id": "lantern",
       "at": "bill#flame",
       "color": "#ffc277",
-      "strength": 2.2,
-      "reach": 5.5,
+      "strength": 1.8,
+      "reach": 3.6,
       "flicker": 0.12,
       "glow": 0.3
     },
@@ -48,15 +48,15 @@
       "id": "kitchen",
       "of": "laundry_lit#door",
       "color": "#ffcf94",
-      "strength": 1.2,
-      "reach": 4
+      "strength": 1.1,
+      "reach": 3
     },
     {
       "id": "door_light",
       "of": "door_lamp#flame",
       "color": "#ffcf8a",
-      "strength": 1.4,
-      "reach": 4.5,
+      "strength": 1.2,
+      "reach": 3.2,
       "flicker": 0.04
     },
     {
@@ -65,8 +65,8 @@
         10,
         14
       ],
-      "color": "#c3cfe4",
-      "strength": 0.35
+      "color": "#b4c4e2",
+      "strength": 0.5
     }
   ],
   "modules": [
@@ -96,14 +96,14 @@
     ],
     "sara_reach": {
       "r": [
-        -1.447,
-        3.944,
-        1.15
+        -1.43,
+        3.97,
+        1.12
       ],
       "l": [
-        -1.447,
-        3.944,
-        1.15
+        -1.5,
+        3.93,
+        1.3
       ]
     },
     "sara_mood": "afraid",

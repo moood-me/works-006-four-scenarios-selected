@@ -3,7 +3,7 @@
 // shovel and the riddle on their nails, the week's sacks chalked in five-bar gates; a slate eave along its top; the
 // doorway at x 0…0.95, 1.9 m high, open (the leaf is `shed_door`); on the frame to the right of it the bolt's iron
 // staple, where the bolt goes when it is drawn from outside.
-e.lib.rubble(g, 41, -1.7, -2.5, 3.2, 2.55, "#9a958b", ["#c6c1b4", "#bcb7aa", "#cdc8bc", "#b3aea1"], 0.26);
+e.lib.rubble(g, 41, -1.7, -2.5, 3.2, 2.55, "#a9a8a3", ["#bdbcb6", "#b6b5af", "#c3c2bc", "#b0afa9"], 0.19);
 const grime = g.createLinearGradient(0, 0, 0, -2.5);
 grime.addColorStop(0, "rgba(58, 56, 54, 0.5)");
 grime.addColorStop(0.5, "rgba(58, 56, 54, 0.15)");

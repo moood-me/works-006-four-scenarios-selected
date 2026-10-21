@@ -5,7 +5,7 @@
 // the person's: "bill#flame".
 const V = () => MooodShapes.V;
 const IRON = [0.19, 0.19, 0.2, 1], GLASS = [1, 0.8, 0.52, 2], LINEN = [0.95, 0.94, 0.91, 1], VEIL = [0.1, 0.1, 0.12, 1];
-const COAL_HANDS = [0.16, 0.15, 0.15, 1], RED_HANDS = [0.86, 0.29, 0.24, 1], SILVER = [0.72, 0.72, 0.74, 1];
+const COAL_HANDS = [0.16, 0.15, 0.15, 1], RED_HANDS = [0.84, 0.4, 0.36, 1], SILVER = [0.72, 0.72, 0.74, 1];
 const FLOUR_HANDS = [0.92, 0.88, 0.8, 1];
 // the world's face's expressions (the engine's names): brows' inner and outer ends, the eye's opening, the mouth's
 // half-width, its corners, how open — 'thinking' a cool, measuring look (the Mother Superior's), 'tired' heavy lids
@@ -132,7 +132,7 @@ return {
       // Bill's hands, black with coal
       coal_hands: { name: 'coal-black hands', draw: F => hands(F, COAL_HANDS) },
       // Sara's hands, red from the laundry
-      red_hands: { name: 'red hands', draw: F => hands(F, RED_HANDS, 0.058) },
+      red_hands: { name: 'red hands', draw: F => hands(F, RED_HANDS, 0.05) },
       // Eileen's hands, white with flour
       floury_hands: { name: 'floury hands', draw: F => hands(F, FLOUR_HANDS) },
       // a white guimpe over the breast and the shoulders, under the chin
