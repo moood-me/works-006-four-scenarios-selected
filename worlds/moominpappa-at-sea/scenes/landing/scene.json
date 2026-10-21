@@ -1,0 +1,376 @@
+{
+  "engine": 3,
+  "title": "The Landing Rocks",
+  "caption": "Dawn on the island. The lighthouse is dark, and the door is locked.",
+  "horizon": 0.64,
+  "camera": {
+    "mode": "picture"
+  },
+  "light": {
+    "ambient": 0.8,
+    "ambientColor": "#dfe6ef",
+    "bounce": 0.55,
+    "haze": 0.09,
+    "hazeColor": "#e3e1e0",
+    "hazeGlow": 0.3,
+    "shafts": 0.15,
+    "tint": "#f6dccb",
+    "tintStrength": 0.05,
+    "vignette": 0.22,
+    "grain": 0.08,
+    "wind": [
+      0.6,
+      -1,
+      0.9
+    ]
+  },
+  "lights": [
+    {
+      "id": "sun",
+      "from": [
+        -125,
+        15
+      ],
+      "color": "#ffe0c2",
+      "strength": 1.15
+    }
+  ],
+  "modules": [
+    "cast"
+  ],
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Dawn sky",
+      "sky": true
+    },
+    {
+      "id": "sea",
+      "name": "The sea",
+      "plane": true,
+      "across": 0,
+      "distance": 1450,
+      "elevation": -1.3,
+      "width": 2400,
+      "depth": 3000,
+      "reflect": {
+        "strength": 0.45,
+        "fade": 0,
+        "rough": 0.55,
+        "ripple": 0.4
+      }
+    },
+    {
+      "id": "cape",
+      "name": "The Fisherman's cape",
+      "across": -95,
+      "distance": 230,
+      "elevation": -1.35,
+      "onLand": false,
+      "box": [
+        -61,
+        -5,
+        31,
+        0.5
+      ]
+    },
+    {
+      "id": "granite",
+      "name": "The island's granite",
+      "plane": true,
+      "drape": true,
+      "across": 2,
+      "distance": 15,
+      "width": 60,
+      "depth": 60
+    },
+    {
+      "id": "lighthouse",
+      "name": "The lighthouse",
+      "across": 9,
+      "distance": 27,
+      "elevation": -0.45,
+      "box": [
+        -5.03,
+        -15.8,
+        5.03,
+        0
+      ],
+      "shadow": true
+    },
+    {
+      "id": "steps",
+      "name": "Steps to the lighthouse door",
+      "across": 9,
+      "distance": 24.3,
+      "box": [
+        -0.8,
+        -0.55,
+        0.8,
+        0.05
+      ]
+    },
+    {
+      "id": "arrow_stone",
+      "name": "The stone with the arrow",
+      "across": 6.8,
+      "distance": 22.5,
+      "box": [
+        -0.45,
+        -0.45,
+        0.45,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "pines",
+      "name": "Island pines",
+      "box": [
+        -1.7,
+        -3.5,
+        1.4,
+        0.1
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": 5.6,
+          "distance": 21.5
+        },
+        {
+          "across": 12.6,
+          "distance": 24,
+          "scale": 0.85,
+          "flip": true
+        },
+        {
+          "across": 3.6,
+          "distance": 16.5,
+          "scale": 0.7
+        },
+        {
+          "across": 13.6,
+          "distance": 29.5,
+          "scale": 1.1
+        },
+        {
+          "across": 6.2,
+          "distance": 30.5,
+          "scale": 0.9,
+          "flip": true
+        },
+        {
+          "across": -12.5,
+          "distance": 19,
+          "scale": 0.75,
+          "flip": true
+        }
+      ],
+      "across": 5.6,
+      "distance": 21.5
+    },
+    {
+      "id": "boat",
+      "name": "The boat Adventure",
+      "across": -3.9,
+      "distance": 8.6,
+      "facing": 195,
+      "box": [
+        -1.95,
+        -2.85,
+        2.45,
+        0.2
+      ],
+      "shadow": true
+    },
+    {
+      "id": "boulder",
+      "name": "Boulder",
+      "across": -3.1,
+      "distance": 6.9,
+      "box": [
+        -1.6,
+        -0.74,
+        1.6,
+        0
+      ],
+      "shadow": true
+    },
+    {
+      "id": "bundle",
+      "name": "Bundle of blankets",
+      "across": -1.7,
+      "distance": 5.55,
+      "box": [
+        -1.15,
+        -0.56,
+        1.15,
+        0
+      ],
+      "shadow": true
+    },
+    {
+      "id": "handbag",
+      "name": "Moominmamma's handbag",
+      "across": -1.05,
+      "distance": 5.1,
+      "facing": 200,
+      "box": [
+        -0.25,
+        -0.4,
+        0.25,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "can",
+      "name": "The paraffin can",
+      "across": 1.45,
+      "distance": 5.2,
+      "facing": 165,
+      "box": [
+        -0.2,
+        -0.55,
+        0.2,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "papa",
+      "name": "Moominpappa",
+      "person": {
+        "cast": "cast",
+        "who": "papa",
+        "turn": 205,
+        "does": "hands_behind"
+      },
+      "across": 0.7,
+      "distance": 5.6
+    },
+    {
+      "id": "mama",
+      "name": "Moominmamma",
+      "person": {
+        "cast": "cast",
+        "who": "mama",
+        "turn": 195,
+        "does": "seated"
+      },
+      "across": -1.7,
+      "distance": 5.5
+    },
+    {
+      "id": "troll",
+      "name": "Moomintroll",
+      "person": {
+        "cast": "cast",
+        "who": "troll",
+        "turn": 235,
+        "does": "seated"
+      },
+      "across": -3.1,
+      "distance": 6.9
+    }
+  ],
+  "state": {
+    "papa_look": [
+      -14,
+      2,
+      1.2
+    ],
+    "papa_mood": "smile",
+    "mama_on": [
+      -1.7,
+      5.55,
+      0.4
+    ],
+    "mama_look": "papa",
+    "mama_mood": "smile",
+    "troll_on": [
+      -3.1,
+      6.9,
+      0.5
+    ],
+    "troll_look": [
+      -30,
+      9,
+      0
+    ],
+    "troll_mood": "thinking"
+  },
+  "music": {
+    "prompts": [
+      {
+        "text": "Solo nylon-string guitar picking a slow, plain northern folk tune, close and intimate, sea wind behind it",
+        "weight": 1.1
+      },
+      {
+        "text": "Soft accordion holding long quiet chords, a little out of breath, a Finnish summer evening by the shore",
+        "weight": 0.8
+      },
+      {
+        "text": "Sparse felt piano, three notes and a long pause, cold clear morning air, gentle melancholy",
+        "weight": 0.9
+      },
+      {
+        "text": "A small clarinet melody, wistful and a little comic, like a story told to a child, over a bowed double bass",
+        "weight": 0.5
+      },
+      {
+        "text": "Glassy harmonium drones with the hiss of waves on granite, slow and wide, almost still",
+        "weight": 0.4
+      },
+      {
+        "text": "Music box playing a lullaby slightly out of tune, far away, nostalgic",
+        "weight": 0
+      },
+      {
+        "text": "Solo cello, long low phrases, lonely lighthouse at dawn, restrained and warm",
+        "weight": 0
+      },
+      {
+        "text": "Kantele plucked softly, open fifths, Nordic folk, bright and bare",
+        "weight": 0
+      },
+      {
+        "text": "Brushed snare and upright bass, a slow cheerful waltz, a family on a boat trip",
+        "weight": 0
+      },
+      {
+        "text": "Whistled melody over a ukulele, light-hearted, a proud father setting out on an adventure",
+        "weight": 0
+      },
+      {
+        "text": "Strings swelling slowly into a wide open chord, the sea and the sky, hopeful and sad at once",
+        "weight": 0
+      },
+      {
+        "text": "Wind chimes and low synth pad, the bare island at night, the moon on the water",
+        "weight": 0
+      },
+      {
+        "text": "Tin whistle and frame drum, a storm coming up over the sea, restless",
+        "weight": 0
+      },
+      {
+        "text": "A celesta and a flute, an imaginary garden painted on a wall, bees and summer warmth",
+        "weight": 0
+      },
+      {
+        "text": "Low drone of a foghorn-like brass note under thin high violins, a dark lighthouse, waiting",
+        "weight": 0
+      },
+      {
+        "text": "Children's choir humming wordlessly, very far off, a memory of a valley",
+        "weight": 0
+      }
+    ],
+    "bpm": 72,
+    "density": 0.3,
+    "brightness": 0.45,
+    "scale": "D_MAJOR_B_MINOR"
+  }
+}
