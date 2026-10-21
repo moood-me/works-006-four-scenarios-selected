@@ -1,4 +1,4 @@
-// The Mermaid's tail beyond the stone: a silver-green fluke risen out of the water, curving over — a layer that rocks
+// The Mermaid's tail behind her, against the stone: a silver-green fluke risen out of the water, curving over — a layer that rocks
 // slowly on its root (animate). Origin at the water where it comes out
 e.layer('fluke', { pivot: [0, 0], box: [-0.6, -0.75, 0.35, 0.04] }, g => {
   g.fillStyle = '#8fb9b2';

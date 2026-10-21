@@ -108,8 +108,8 @@
     {
       "id": "town",
       "name": "The town of lights",
-      "across": 700,
-      "distance": 1500,
+      "across": 420,
+      "distance": 900,
       "elevation": 1.92,
       "height": 20,
       "box": [
@@ -166,8 +166,8 @@
     {
       "id": "fin",
       "name": "Her tail",
-      "across": 4.1,
-      "distance": 6.9,
+      "across": 2.05,
+      "distance": 5.6,
       "elevation": 1.92,
       "height": 0.8,
       "box": [

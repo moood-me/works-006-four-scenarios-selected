@@ -2,24 +2,28 @@
 
 The first scene of «The Fisherman and His Soul» (stage 2 of the game stages: the look). A moonlit night in the bay:
 the pier runs from the bottom left out into the water; at its end the lantern post, the Fisherman by it; his Soul
-— his shadow, risen — behind him on the boards; the Mermaid in the water by the pier's end, to the shoulders, the
-stone glowing in the water behind her, her tail out beyond it. People stand (the engine's `stand`), nothing moves
+— his shadow, risen — beside him on the boards; the Mermaid in the water by the pier's end, to the chest, her tail
+out of the water behind her, the stone glowing in the water beyond. People stand (the engine's `stand`), nothing moves
 but the water, the lantern, the reeds, the mist, the stars.
 
 ## Where things are (metres; the viewer at 0, the water's surface at -0.48)
 
 - `relief.js`: the floor drops from 0 at 0.8 m to -2.4 at 4 m out, and stays there. Elements standing on it give
   `elevation` over that floor: the water plane and the far cards 1.92 (at the surface).
-- `pier_deck`: a plane from 2 m behind the viewer to (1.25, 6.0), turned -44.7°, its top at 0.15 — people stand on
-  it (`walk`). `pier_beam` its near side; `pier_posts` copies, each copy's elevation putting its foot at -2.6.
-- `lantern_post` at the deck's right edge by its end; its lantern a layer swinging on the hook; the light `lantern`
-  is its `#flame`.
-- `rock` — a form (`kit.lump`) at (3.7, 7.0), top ~1 m out of the water; `water` glows teal round it (`#glow`, a
-  light that reaches the Mermaid).
-- People: `fisherman` (0.78, 5.5) on the deck, `soul` (-0.75, 4.25) on the deck, `mermaid` (2.6, 5.0) stood 0.8 m
-  over the floor so that the water hides her from the chest down. Their looks (`<id>_look`) cheat their faces
-  toward the viewer: each looks a little nearer the camera than at the other.
-- Far: `far_shore` (the fir wood, where the well is), `far_ridge`, `town` (the town of lights, glows only), `mist`.
+- `pier_deck`: a plane from 2 m behind the viewer to (0.24, 5.0), turned -44.7°, its top at 0.15 (a plane's
+  elevation is absolute, not over the floor) — people stand on it (`walk`). `pier_beam` its near side;
+  `pier_posts` copies, each copy's elevation putting its foot at -2.6.
+- `lantern_post` at the deck's right corner by its end (0.75, 4.49); its lantern a layer swinging on the hook; the
+  light `lantern` is its `#flame`, just before the Fisherman's face.
+- `rock` — a form (`kit.lump`) at (2.9, 6.2), top ~1 m out of the water; `water` glows teal round it (`#glow`, a
+  light that reaches the Mermaid). `fin` — her tail's fluke out of the water behind her (2.05, 5.6), rocking.
+- People: `fisherman` (-0.15, 4.75) on the deck by the lantern; `soul` (-0.9, 4.1) on the deck beside him, no shadow
+  of its own (`"shadow": false`); `mermaid` (1.3, 4.4) by the pier's end, stood 0.8 m over the floor so that the
+  water hides her from the chest down; `rings` round her. Their looks (`<id>_look`) cheat their faces toward the
+  viewer: the Fisherman looks down toward her, a little nearer the camera; she up toward him; the Soul out at us.
+- Far: `far_shore` (the fir wood, where the well is), `far_ridge`, `town` (the town of lights at 900 m on the right,
+  glows only), `mist`.
+- The water mirrors the sky (`fade` 0): the moon's path and the stars broken by `ripple` into wavering glints.
 
 ## Wanted from the engine
 

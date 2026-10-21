@@ -10,5 +10,5 @@ g.fill();
 for (let i = 0; i < 16; i++) {
   const x = -120 + 230 * e.anim.hash(i, 21);
   const y = -2 - 10 * Math.cos(x / 260 * Math.PI / 2) ** 2 * e.anim.hash(i, 22);
-  e.light(x, y, 2.2 + 1.6 * e.anim.hash(i, 23), '#ffc477', 0.7 + 0.5 * e.anim.hash(i, 24), `w${i}`);
+  e.light(x, y, 3.5 + 2.5 * e.anim.hash(i, 23), '#ffc477', 0.8 + 0.5 * e.anim.hash(i, 24), `w${i}`);
 }
