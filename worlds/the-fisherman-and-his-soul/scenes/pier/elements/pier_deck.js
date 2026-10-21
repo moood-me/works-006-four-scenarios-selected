@@ -1,6 +1,6 @@
 // The pier's deck from above: weathered planks laid across it (x across its 1.5 m, y along its length toward the
 // viewer), each its own grey-brown, nail heads at their ends; darker where the spray wets its edges
-const L = 11.37 / 2;
+const L = 9.95 / 2;
 g.fillStyle = '#5a4c40';
 g.fillRect(-0.75, -L, 1.5, 2 * L);
 let y = -L;

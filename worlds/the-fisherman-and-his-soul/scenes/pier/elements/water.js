@@ -17,5 +17,5 @@ e.layer('ripple', { box: [-4000, -3000, 4000, 3000], drift: [0.25, 0] }, g => {
     for (const k of x + len > 4000 ? [0, -8000] : [0]) g.fillRect(x + k, y, len, 1.6);
   }
 });
-// the glow round the stone (the stone stands 3.7 m right, 7 m ahead)
-e.light(3.7, 3000 - 7, 1.7, '#78e4d2', 0.9, 'glow');
+// the glow round the stone (the stone stands 2.9 m right, 6.2 m ahead)
+e.light(2.9, 3000 - 6.2, 1.7, '#78e4d2', 0.9, 'glow');
