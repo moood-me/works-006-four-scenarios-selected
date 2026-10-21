@@ -51,9 +51,13 @@ The people are the world's cast (`modules/cast.js`, style `keegan`: cast.md). Th
 
 ## Light
 
-`ambient` 0.6 of a cool blue-white — the morning's own, so faces read; `haze` 0.6 of a white fog with `hazeGlow` 0.8
-round the lamps; a weak cold far light `dawn` from behind the wall (rims); the warm point lights: `gate_light`,
-`lantern` (2.2, reach 5.5: her face, her hands, the coal), `kitchen`, `door_light`; the windows' glows. The shed's inside takes 0.55 of it (`inside`) and Bill's lantern.
+A cold blue morning before light, the warmth only in small pools. `ambient` 0.62 of a blue `#93a6c8` — the morning's
+own, so faces read; `haze` 0.48 of a blue-grey fog with `hazeGlow` 0.6 round the lamps; a cold far light `dawn` from
+behind the wall (rims, 0.5); the warm point lights short, as such lamps are: `lantern` (2.0, reach 4.2: Sara's face,
+her hands, into the shed onto the coal), `gate_light` (reach 4), `kitchen` (3), `door_light` (3.2: the Mother's face);
+the windows' glows. The shed's inside takes 0.55 of it (`inside`) and Bill's lantern. The shed's stone is whitewashed
+gone grey (low contrast between stone and joint, small stones), the laundry's render a cool grey, the yard small
+setts — so the warm light is the lamps' alone, never the walls' own colour.
 
 ## The frame in 4:3
 
