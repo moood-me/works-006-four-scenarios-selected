@@ -2,7 +2,7 @@
   "engine": 3,
   "title": "The Landing Rocks",
   "caption": "Dawn on the island. The lighthouse is dark, and the door is locked.",
-  "horizon": 0.55,
+  "horizon": 0.52,
   "camera": {
     "mode": "picture"
   },
@@ -81,15 +81,15 @@
       "plane": true,
       "drape": true,
       "across": 2,
-      "distance": 16,
-      "width": 62,
-      "depth": 62
+      "distance": 17.5,
+      "width": 64,
+      "depth": 66
     },
     {
       "id": "lighthouse",
       "name": "The lighthouse",
-      "across": 9.5,
-      "distance": 30,
+      "across": 10,
+      "distance": 33,
       "elevation": -0.45,
       "box": [
         -5.03,
@@ -102,8 +102,8 @@
     {
       "id": "steps",
       "name": "Steps to the lighthouse door",
-      "across": 9.5,
-      "distance": 27.3,
+      "across": 10,
+      "distance": 30.3,
       "box": [
         -0.8,
         -0.55,
@@ -114,8 +114,8 @@
     {
       "id": "arrow_stone",
       "name": "The stone with the arrow",
-      "across": 7.2,
-      "distance": 25.5,
+      "across": 7.7,
+      "distance": 28.5,
       "box": [
         -0.45,
         -0.45,
@@ -136,28 +136,28 @@
       "shadow": true,
       "copies": [
         {
-          "across": 6,
-          "distance": 24.5
+          "across": 6.5,
+          "distance": 27.5
         },
         {
-          "across": 13.1,
-          "distance": 27,
+          "across": 13.6,
+          "distance": 30,
           "scale": 0.85,
           "flip": true
         },
         {
-          "across": 4,
-          "distance": 19.5,
+          "across": 4.5,
+          "distance": 22.5,
           "scale": 0.7
         },
         {
-          "across": 14,
-          "distance": 32.5,
+          "across": 14.5,
+          "distance": 35.5,
           "scale": 1.1
         },
         {
-          "across": 6.6,
-          "distance": 33.5,
+          "across": 7.1,
+          "distance": 36.5,
           "scale": 0.9,
           "flip": true
         },
@@ -168,8 +168,8 @@
           "flip": true
         }
       ],
-      "across": 6,
-      "distance": 24.5
+      "across": 6.5,
+      "distance": 27.5
     },
     {
       "id": "boat",
@@ -201,8 +201,8 @@
     {
       "id": "boulder",
       "name": "Boulder",
-      "across": -2.75,
-      "distance": 5.0,
+      "across": -2.65,
+      "distance": 4.4,
       "box": [
         -1.6,
         -0.74,
@@ -214,8 +214,8 @@
     {
       "id": "bundle",
       "name": "Bundle of blankets",
-      "across": -1.35,
-      "distance": 4.0,
+      "across": -1.3,
+      "distance": 3.4,
       "box": [
         -1.15,
         -0.56,
@@ -227,8 +227,8 @@
     {
       "id": "handbag",
       "name": "Moominmamma's handbag",
-      "across": -0.55,
-      "distance": 3.75,
+      "across": -0.5,
+      "distance": 3.15,
       "facing": 200,
       "box": [
         -0.25,
@@ -241,8 +241,8 @@
     {
       "id": "can",
       "name": "The paraffin can",
-      "across": 1.3,
-      "distance": 3.7,
+      "across": 1.25,
+      "distance": 3.15,
       "facing": 165,
       "box": [
         -0.2,
@@ -260,8 +260,8 @@
         "who": "papa",
         "does": "hands_behind"
       },
-      "across": 0.5,
-      "distance": 4.0
+      "across": 0.45,
+      "distance": 3.4
     },
     {
       "id": "mama",
@@ -271,8 +271,8 @@
         "who": "mama",
         "does": "seated"
       },
-      "across": -1.35,
-      "distance": 3.95
+      "across": -1.3,
+      "distance": 3.35
     },
     {
       "id": "troll",
@@ -282,8 +282,8 @@
         "who": "troll",
         "does": "seated"
       },
-      "across": -2.75,
-      "distance": 5.0
+      "across": -2.65,
+      "distance": 4.4
     }
   ],
   "state": {
@@ -294,8 +294,8 @@
     ],
     "papa_mood": "smile",
     "mama_on": [
-      -1.35,
-      4.0,
+      -1.3,
+      3.4,
       0.4
     ],
     "mama_look": [
@@ -305,8 +305,8 @@
     ],
     "mama_mood": "smile",
     "troll_on": [
-      -2.75,
-      5.0,
+      -2.65,
+      4.4,
       0.5
     ],
     "troll_look": [
