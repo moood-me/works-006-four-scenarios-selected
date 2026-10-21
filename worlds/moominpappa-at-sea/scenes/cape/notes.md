@@ -18,8 +18,7 @@ bundles.
   the faces turned to the sea and lays the long shadows ahead; the sky is warm on that side.
 - People (the world's cast): the Fisherman came into the cast with this scene (`fisher`: thin, long-headed, a
   drooping nose, an oilskin, a sou'wester; his part `netload` — the net bundled in his hands, falling to his feet).
-  He sits (`seated`, `fisher_on` the stone's top), his hands reaching into his lap (`fisher_reach`), his head bowed
-  over the net; papa sits on the ground (`sit_look`); mama sits on the lighthouse steps (`seated`). No mending motion
+  He sits (`seated`, `fisher_on` the stone's top), the net in his hands on his knees, looking out to sea; papa sits on the ground (`sit_look`); mama sits on the lighthouse steps (`seated`). No mending motion
   yet: the motion model was paused when this was made.
-- `tools/cape.py` writes `scene.json` (the Fisherman's seat, his hands and the heap worked out from his turn).
+- `tools/cape.py` writes `scene.json` (the heap at the Fisherman's feet worked out from his seat and turn).
 - Stage 2 (the look) only: people sit and breathe; no motions, no camera, no showcase yet.

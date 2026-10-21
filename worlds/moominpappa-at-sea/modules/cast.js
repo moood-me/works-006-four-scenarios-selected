@@ -115,9 +115,9 @@ return {
           F.tube([on([sx * 0.1, 0.3 + x.inner, 0.96], 1.0), on([sx * 0.26, 0.32 + (x.inner + x.outer) / 2, 0.92], 1.012), on([sx * 0.42, 0.27 + x.outer, 0.86], 1.0)],
             [[0, r * 0.045], [1, r * 0.05], [2, r * 0.03]], [[0, brow]], 6, hu);
         }
-        const root = on([0, 0.02, 1], 0.97), tip = add(root, add(mul(hf, r * 0.42), mul(hu, -r * 0.3)));
-        F.tube([root, add(root, add(mul(hf, r * 0.26), mul(hu, -r * 0.08))), tip], [[0, r * 0.11], [1, r * 0.1], [2, r * 0.08]], [[0, skin]], 10, F.head.axes[0]);
-        F.ball(tip, axes, [r * 0.09, r * 0.09, r * 0.09], skin, 10);
+        const root = on([0, 0.02, 1], 0.96), tip = add(root, add(mul(hf, r * 0.3), mul(hu, -r * 0.2)));
+        F.tube([root, add(root, add(mul(hf, r * 0.2), mul(hu, -r * 0.05))), tip], [[0, r * 0.12], [1, r * 0.11], [2, r * 0.09]], [[0, skin]], 10, F.head.axes[0]);
+        F.ball(tip, axes, [r * 0.1, r * 0.1, r * 0.1], skin, 10);
         const w = x.wide * 0.7, y = -0.42;
         F.ball(on([0, y - x.open / 2, 0.95], 0.975), axes, [r * w * 0.75, r * Math.max(x.open, 0.001), r * 0.03], dark, 10);
         F.tube([on([-w, y + x.corners, 0.93], 0.995), on([0, y, 0.94], 1.0), on([w, y + x.corners, 0.93], 0.995)], [[0, r * 0.018], [2, r * 0.018]], [[0, lips]], 6, hu);

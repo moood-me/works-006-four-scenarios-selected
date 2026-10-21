@@ -13,13 +13,10 @@ w = {"Solo nylon-string guitar picking a slow, plain northern folk tune, close a
 music = {**land['music'], "prompts": [{"text": p["text"], "weight": w.get(p["text"], 0)} for p in land['music']["prompts"]],
          "bpm": 64, "density": 0.25, "brightness": 0.5}
 
-# the Fisherman on his stone, facing the sea on the left, his net in his lap
+# the Fisherman on his stone, facing the sea on the left, his net in his hands on his knees
 SEAT = (-0.9, 3.6)
 FT = 250
 fwd = (math.sin(FT * D), math.cos(FT * D))
-right = (math.cos(FT * D), -math.sin(FT * D))
-lap = (SEAT[0] + fwd[0] * 0.3, SEAT[1] + fwd[1] * 0.3)
-hand = lambda s: [r3(lap[0] + right[0] * 0.1 * s), r3(lap[1] + right[1] * 0.1 * s), 0.5]
 feet = (SEAT[0] + fwd[0] * 0.5, SEAT[1] + fwd[1] * 0.5)
 TOWER = (28, 54)
 
@@ -67,8 +64,8 @@ spec = {
     "modules": ["cast"],
     "objects": objects,
     "state": {
-        "fisher_on": [SEAT[0], SEAT[1], 0.38], "fisher_turn": FT, "fisher_reach": {"r": hand(1), "l": hand(-1)},
-        "fisher_look": [r3(lap[0]), r3(lap[1]), 0.35], "fisher_mood": "neutral",
+        "fisher_on": [SEAT[0], SEAT[1], 0.38], "fisher_turn": FT,
+        "fisher_look": [-40, 8, 1.2], "fisher_mood": "neutral",
         "papa_turn": 65, "papa_look": [-40, 24, 1], "papa_mood": "thinking",
         "mama_on": [TOWER[0] - 0.8, TOWER[1] - 2.9, 0.35], "mama_turn": 200, "mama_look": [0, 5, 1], "mama_mood": "tired",
     },
