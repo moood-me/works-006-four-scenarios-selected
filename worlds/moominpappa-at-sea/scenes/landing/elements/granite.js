@@ -18,9 +18,11 @@ for (let i = 0; i < 60; i++) {
 }
 // the speckle of the grain: small dots, dark and light
 for (let i = 0; i < 900; i++) {
-  const x = (e.rnd() - 0.5) * 56, y = (e.rnd() - 0.5) * 56, r = 0.03 + e.rnd() * 0.07;
-  g.fillStyle = e.rnd() < 0.5 ? "rgba(120, 92, 90, 0.35)" : "rgba(248, 228, 218, 0.45)";
-  g.fillRect(x - r, y - r, r * 2, r * 2);
+  const x = (e.rnd() - 0.5) * 60, y = (e.rnd() - 0.5) * 60, r = 0.012 + e.rnd() * 0.03;
+  g.fillStyle = e.rnd() < 0.5 ? "rgba(120, 92, 90, 0.3)" : "rgba(248, 228, 218, 0.35)";
+  g.beginPath();
+  g.arc(x, y, r, 0, Math.PI * 2);
+  g.fill();
 }
 // lichen: rusty orange and grey-green rosettes on the higher, drier stone
 for (let i = 0; i < 260; i++) {

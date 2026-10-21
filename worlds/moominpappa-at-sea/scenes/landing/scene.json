@@ -12,8 +12,8 @@
     "bounce": 0.55,
     "haze": 0.035,
     "hazeColor": "#e3e1e0",
-    "hazeGlow": 0.2,
-    "shafts": 0.15,
+    "hazeGlow": 0,
+    "shafts": 0,
     "tint": "#f6dccb",
     "tintStrength": 0.05,
     "vignette": 0.22,
@@ -201,8 +201,8 @@
     {
       "id": "boulder",
       "name": "Boulder",
-      "across": -2.7,
-      "distance": 4.6,
+      "across": -2.75,
+      "distance": 5.0,
       "box": [
         -1.6,
         -0.74,
@@ -214,8 +214,8 @@
     {
       "id": "bundle",
       "name": "Bundle of blankets",
-      "across": -1.4,
-      "distance": 3.45,
+      "across": -1.35,
+      "distance": 4.0,
       "box": [
         -1.15,
         -0.56,
@@ -227,8 +227,8 @@
     {
       "id": "handbag",
       "name": "Moominmamma's handbag",
-      "across": -0.65,
-      "distance": 3.0,
+      "across": -0.55,
+      "distance": 3.75,
       "facing": 200,
       "box": [
         -0.25,
@@ -241,8 +241,8 @@
     {
       "id": "can",
       "name": "The paraffin can",
-      "across": 1.25,
-      "distance": 3.2,
+      "across": 1.3,
+      "distance": 3.7,
       "facing": 165,
       "box": [
         -0.2,
@@ -261,7 +261,7 @@
         "does": "hands_behind"
       },
       "across": 0.5,
-      "distance": 3.6
+      "distance": 4.0
     },
     {
       "id": "mama",
@@ -271,8 +271,8 @@
         "who": "mama",
         "does": "seated"
       },
-      "across": -1.4,
-      "distance": 3.4
+      "across": -1.35,
+      "distance": 3.95
     },
     {
       "id": "troll",
@@ -282,8 +282,8 @@
         "who": "troll",
         "does": "seated"
       },
-      "across": -2.7,
-      "distance": 4.6
+      "across": -2.75,
+      "distance": 5.0
     }
   ],
   "state": {
@@ -294,8 +294,8 @@
     ],
     "papa_mood": "smile",
     "mama_on": [
-      -1.4,
-      3.45,
+      -1.35,
+      4.0,
       0.4
     ],
     "mama_look": [
@@ -305,8 +305,8 @@
     ],
     "mama_mood": "smile",
     "troll_on": [
-      -2.7,
-      4.6,
+      -2.75,
+      5.0,
       0.5
     ],
     "troll_look": [

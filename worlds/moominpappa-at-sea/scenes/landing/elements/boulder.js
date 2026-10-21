@@ -4,9 +4,11 @@ const W = 3.2, S = 0.74;
 g.fillStyle = "#d1a196";
 g.fillRect(-W / 2, -S, W, S);
 for (let i = 0; i < 40; i++) {
-  const x = (e.rnd() - 0.5) * W, y = -e.rnd() * S, r = 0.03 + e.rnd() * 0.06;
-  g.fillStyle = e.rnd() < 0.5 ? "rgba(120, 92, 90, 0.35)" : "rgba(248, 228, 218, 0.45)";
-  g.fillRect(x - r, y - r, r * 2, r * 2);
+  const x = (e.rnd() - 0.5) * W, y = -e.rnd() * S, r = 0.01 + e.rnd() * 0.025;
+  g.fillStyle = e.rnd() < 0.5 ? "rgba(120, 92, 90, 0.3)" : "rgba(248, 228, 218, 0.35)";
+  g.beginPath();
+  g.arc(x, y, r, 0, Math.PI * 2);
+  g.fill();
 }
 const moss = g.createRadialGradient(0.5, -0.45, 0, 0.5, -0.45, 0.22);
 moss.addColorStop(0, "rgba(158, 164, 132, 0.8)");
