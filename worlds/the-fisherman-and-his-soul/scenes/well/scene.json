@@ -55,8 +55,8 @@
     ],
     "fisherman_look": "witch",
     "witch_on": [
-      0.49,
-      7.06,
+      0.34,
+      7.29,
       0.8
     ],
     "witch_with": [
@@ -567,10 +567,10 @@
       "person": {
         "cast": "cast",
         "who": "fisherman",
-        "turn": 125
+        "turn": 110
       },
-      "across": -1.1,
-      "distance": 6.0
+      "across": -0.98,
+      "distance": 6.81
     },
     {
       "id": "witch",
@@ -578,11 +578,11 @@
       "person": {
         "cast": "cast",
         "who": "witch",
-        "turn": 223,
+        "turn": 250,
         "does": "seated"
       },
-      "across": 0.49,
-      "distance": 7.06
+      "across": 0.34,
+      "distance": 7.29
     },
     {
       "id": "velvet",
