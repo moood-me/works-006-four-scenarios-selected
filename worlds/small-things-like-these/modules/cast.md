@@ -7,14 +7,15 @@ lengths are a man's metres times `F.fit.h` (the height as a share of 1.76 m) or 
 ## Style
 
 `keegan` — the engine's flat geometry (`flat`): straight edges, plain colours lit by the scene's light (`paint: lit`),
-a fine line; the face `simple` (eyes, brows, nose, a mouth — `<id>_mood` shows on it), the head a little larger
-(1.16), so faces read at 6–8 m. The palette is the world's: greys, frost white, coal black; the warm colours are few —
+a fine line; the world's own face `keegan` (the cast's `shapes.faces`): a white eye with a dark iris, thick dark brows,
+a nose, a full line of darker lips — bold enough to read at 6–9 m; `<id>_mood` shows on it (the engine's expressions;
+`thinking` here is a cool, measuring look, `tired` heavy lids). The head a little larger (1.22). The palette is the world's: greys, frost white, coal black; the warm colours are few —
 Bill's mustard coat is one.
 
 ## Who
 
 - `bill` — Bill Furlong, 39, the coal merchant: a mustard overcoat to the knee (`overcoat`), a tweed cap, a dark green
-  scarf, hands black with coal (`coal_hands`).
+  scarf, grey-brown work trousers, hands black with coal (`coal_hands`).
 - `bill_home` — Bill at home: the coat on its hook and the cap off — a shirt and a brown waistcoat (`waistcoat`); the
   hands as black. A scene that has him come in puts it on him with `bill_wear` (the look's object:
   `scene.kit.cast.characters.bill_home`).
@@ -25,9 +26,9 @@ Bill's mustard coat is one.
 - `grace` — Grace, about eight, who steals raisins from the cake: a muted green frock to the knee (`frock`), white
   socks, an auburn bob.
 - `sara` — Sara Redmond, seventeen, of the laundry: a thin nightgown greyed with coal dust (`nightgown`), long dark
-  hair, barefoot, red hands (`red_hands`).
-- `mother` — the Mother Superior: a black habit to the ankles (`habit`), a white coif round the face under a black veil
-  (`veil`), a white guimpe (`guimpe`), a small cross (`cross`), pale hands.
+  hair, barefoot, red hands (`red_hands`: raw red, a little bigger — the frame's one red).
+- `mother` — the Mother Superior: a black habit to the ankles (`habit`), a white coif close round the face under a
+  black veil set back from the brow (`veil`), a broad white guimpe (`guimpe`), a small cross (`cross`), pale hands.
 
 ## Things (`<id>_with`, or a look's `parts`)
 

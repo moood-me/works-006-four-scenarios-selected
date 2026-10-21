@@ -5,14 +5,28 @@
 // the person's: "bill#flame".
 const V = () => MooodShapes.V;
 const IRON = [0.19, 0.19, 0.2, 1], GLASS = [1, 0.8, 0.52, 2], LINEN = [0.95, 0.94, 0.91, 1], VEIL = [0.1, 0.1, 0.12, 1];
-const COAL_HANDS = [0.16, 0.15, 0.15, 1], RED_HANDS = [0.8, 0.43, 0.38, 1], SILVER = [0.72, 0.72, 0.74, 1];
+const COAL_HANDS = [0.16, 0.15, 0.15, 1], RED_HANDS = [0.86, 0.29, 0.24, 1], SILVER = [0.72, 0.72, 0.74, 1];
 const FLOUR_HANDS = [0.92, 0.88, 0.8, 1];
+// the world's face's expressions (the engine's names): brows' inner and outer ends, the eye's opening, the mouth's
+// half-width, its corners, how open — 'thinking' a cool, measuring look (the Mother Superior's), 'tired' heavy lids
+const KEEGAN_MOODS = {
+  neutral: { inner: 0, outer: 0, eye: 1, wide: 0.17, corners: 0, open: 0 },
+  smile: { inner: 0.01, outer: 0.01, eye: 0.85, wide: 0.2, corners: 0.06, open: 0 },
+  laugh: { inner: 0.03, outer: 0.02, eye: 0.5, wide: 0.2, corners: 0.07, open: 0.08 },
+  sad: { inner: 0.08, outer: -0.06, eye: 0.85, wide: 0.15, corners: -0.05, open: 0 },
+  angry: { inner: -0.09, outer: 0.03, eye: 0.8, wide: 0.14, corners: -0.03, open: 0 },
+  surprised: { inner: 0.09, outer: 0.09, eye: 1.35, wide: 0.09, corners: 0, open: 0.09 },
+  afraid: { inner: 0.1, outer: 0, eye: 1.35, wide: 0.15, corners: -0.035, open: 0.05 },
+  disgusted: { inner: -0.06, outer: -0.01, eye: 0.75, wide: 0.15, corners: -0.04, open: 0 },
+  thinking: { inner: -0.05, outer: 0.02, eye: 0.7, wide: 0.13, corners: -0.012, open: 0 },
+  tired: { inner: 0.03, outer: -0.06, eye: 0.55, wide: 0.15, corners: -0.025, open: 0 },
+};
 // the hand's axes: across the palm, up the hand, out of the fist
 const axesOf = (F, h) => [F.side(h), F.up(h), F.fwd(h)];
 // both hands in a colour of their own: over each the engine's hand, a ball a little bigger — Bill's black with coal
-// that never washes off, Sara's red from the laundry's water
-function hands(F, colour) {
-  const { mix } = V(), r = 0.05 * F.k;
+// that never washes off, Sara's red from the laundry's water (a little bigger: the frame's one red)
+function hands(F, colour, size = 0.05) {
+  const { mix } = V(), r = size * F.k;
   for (const s of ['Left', 'Right']) {
     F.ball(mix(F.P(s + 'Hand'), F.P(s + 'HandMiddle1'), 0.45), axesOf(F, s + 'Hand'), [r, r, r * 0.88], colour, 10);
   }
@@ -24,11 +38,11 @@ return {
     // scarf, black hands
     bill: { kind: 'shapes', style: 'keegan', who: 'man', garment: 'overcoat', hair: 'short', hat: 'cap', scarf: true, parts: ['coal_hands'],
       body: { height: 1.0, shoulders: 1.06, thick: 1.04 },
-      colors: { skin: '#d9a98e', hair: '#3a2c24', top: '#cfc7b6', garment: '#b5862c', bottom: '#34312d', hat: '#4d4a42', shoes: '#211e1b', accent: '#3f4b3c' } },
+      colors: { skin: '#d9a98e', hair: '#3a2c24', top: '#cfc7b6', garment: '#b5862c', bottom: '#5a534a', hat: '#4d4a42', shoes: '#2a2521', accent: '#3f4b3c' } },
     // Bill at home: the coat on its hook, the cap off — his shirt and a brown waistcoat; the hands as black
     bill_home: { kind: 'shapes', style: 'keegan', who: 'man', garment: 'waistcoat', hair: 'short', parts: ['coal_hands'],
       body: { height: 1.0, shoulders: 1.06, thick: 1.04 },
-      colors: { skin: '#d9a98e', hair: '#3a2c24', top: '#d8d1c2', garment: '#4f4338', bottom: '#34312d', shoes: '#211e1b' } },
+      colors: { skin: '#d9a98e', hair: '#3a2c24', top: '#d8d1c2', garment: '#4f4338', bottom: '#5a534a', shoes: '#2a2521' } },
     // Eileen Furlong, his wife: a wine-coloured dress under a washed-blue wraparound pinafore, her hair pinned up,
     // flour on her hands
     eileen: { kind: 'shapes', style: 'keegan', who: 'woman', garment: 'pinafore', hair: 'bun', parts: ['floury_hands'],
@@ -49,11 +63,32 @@ return {
     // guimpe on the breast, a small cross; pale hands
     mother: { kind: 'shapes', style: 'keegan', who: 'woman', garment: 'habit', hair: 'none', hat: 'veil', parts: ['guimpe', 'cross'],
       body: { height: 0.96, thick: 0.98, shoulders: 0.92 },
-      colors: { skin: '#ecd9cc', hair: '#6b5f58', top: '#1f1d23', garment: '#1f1d23', bottom: '#1f1d23', shoes: '#141316' } },
+      colors: { skin: '#efdcd0', hair: '#5e534d', top: '#29272e', garment: '#29272e', bottom: '#29272e', shoes: '#18171a' } },
   },
   shapes: {
-    // the world's style: the engine's flat geometry with a face that reads (eyes, brows, a mouth), the head a little larger
-    styles: { keegan: { from: 'flat', name: 'Small Things', face: 'simple', head: 1.16, line: 0.9 } },
+    // the world's style: the engine's flat geometry with the world's own face (`keegan`, below), the head a little larger
+    styles: { keegan: { from: 'flat', name: 'Small Things', face: 'keegan', head: 1.22, line: 0.9 } },
+    // the world's face: eyes, brows, a nose and a mouth drawn bold enough to read at six to nine metres — the eye a white
+    // with a dark iris in it (a wide eye shows its white: fear), brows thick and dark, the mouth a full line of darker
+    // lips. Drawn for each expression the engine knows (`<id>_mood`), the same solids every time (the face goes over
+    // from one to another on the GPU): brows' inner and outer ends raised (+) or lowered, the eye's opening, the mouth's
+    // half-width, its corners up (+) or down, how open
+    faces: { keegan: { name: 'Small Things', draw: F => {
+      const X = KEEGAN_MOODS, x = X[F.look.expression] ?? X.neutral, { axes, r: rh, on } = F.head, [, hu] = axes;
+      const tone = (c, k) => [c[0] * k[0], c[1] * k[1], c[2] * k[2], c[3] ?? 1];
+      const iris = [0.12, 0.09, 0.08, 1], white = [0.94, 0.92, 0.88, 1], brow = tone(F.colors.hair, [0.6, 0.6, 0.6]);
+      const lips = tone(F.colors.skin, [0.66, 0.46, 0.44]), nose = tone(F.colors.skin, [0.95, 0.93, 0.92]);
+      for (const sx of [-1, 1]) {
+        F.ball(on([sx * 0.34, 0.07, 0.93], 0.975), axes, [rh * 0.14, rh * 0.1 * x.eye, rh * 0.04], white, 10);
+        F.ball(on([sx * 0.33, 0.065, 0.95], 0.99), axes, [rh * 0.082, rh * Math.min(0.088, 0.096 * x.eye), rh * 0.035], iris, 10);
+        F.tube([on([sx * 0.14, 0.32 + x.inner, 0.94], 0.995), on([sx * 0.32, 0.35 + (x.inner + x.outer) / 2, 0.9], 1.0), on([sx * 0.5, 0.3 + x.outer, 0.82], 0.995)],
+          [[0, rh * 0.06], [1, rh * 0.065], [2, rh * 0.042]], [[0, brow]], 6, hu);
+      }
+      F.ball(on([0, -0.1, 1], 0.97), axes, [rh * 0.09, rh * 0.13, rh * 0.12], nose, 10);
+      const w = x.wide, y = -0.4;
+      F.ball(on([0, y - x.open / 2, 0.95], 0.975), axes, [rh * w * 0.75, rh * x.open, rh * 0.03], iris, 10);
+      F.tube([on([-w, y + x.corners, 0.93], 0.995), on([0, y, 0.94], 1.0), on([w, y + x.corners, 0.93], 0.995)], [[0, rh * 0.042], [1, rh * 0.05], [2, rh * 0.042]], [[0, lips]], 6, hu);
+    } } },
     garments: {
       // a man's overcoat: from the shoulders to the knee, long sleeves, a plain hem
       overcoat: { name: 'overcoat', hang: [{ to: 1.1, from: 'shoulders', flare: 0.14 }], sleeves: 'garment' },
@@ -72,8 +107,8 @@ return {
       // a white coif round all the head but the face, a black veil over it from the brow back, hanging down the back
       veil: { name: 'veil', draw: F => {
         const { add, mul } = V(), { at, axes, egg, r, out, sides, square } = F.head, [hs, hu, hf] = axes, m = F.fit.h;
-        F.cap(at, axes, egg.map(e => e * r * out * 1.1), [0, 0.05, -1], -0.5, LINEN, sides, square);
-        F.cap(at, axes, egg.map(e => e * r * out * 1.2), [0, 0.75, -0.66], -0.12, VEIL, sides, square);
+        F.cap(at, axes, egg.map(e => e * r * out * 1.1), [0, 0.05, -1], -0.72, LINEN, sides, square);
+        F.cap(at, axes, egg.map(e => e * r * out * 1.2), [0, 0.75, -0.66], 0.02, VEIL, sides, square);
         const top = add(at, add(mul(hu, r * 0.25), mul(hf, -r * 0.85)));
         const mid = F.swing('veil1', add(top, add([0, -0.17 * m, 0], mul(F.fwd('Chest'), -0.05 * F.k))), 150);
         const end = F.swing('veil2', add(mid, add([0, -0.2 * m, 0], mul(F.fwd('Chest'), -0.03 * F.k))), 90);
@@ -84,13 +119,13 @@ return {
       // Bill's hands, black with coal
       coal_hands: { name: 'coal-black hands', draw: F => hands(F, COAL_HANDS) },
       // Sara's hands, red from the laundry
-      red_hands: { name: 'red hands', draw: F => hands(F, RED_HANDS) },
+      red_hands: { name: 'red hands', draw: F => hands(F, RED_HANDS, 0.058) },
       // Eileen's hands, white with flour
       floury_hands: { name: 'floury hands', draw: F => hands(F, FLOUR_HANDS) },
       // a white guimpe over the breast and the shoulders, under the chin
       guimpe: { name: 'guimpe', draw: F => {
         const { add, mul } = V(), m = F.fit.h, k = F.k, fc = F.fwd('Chest'), uc = F.up('Chest');
-        F.ball(add(F.P('Neck1'), add(mul(fc, 0.035 * k), mul(uc, -0.07 * m))), [F.side('Chest'), uc, fc], [0.17 * k, 0.09 * m, 0.1 * k], LINEN, 16);
+        F.ball(add(F.P('Neck1'), add(mul(fc, 0.04 * k), mul(uc, -0.08 * m))), [F.side('Chest'), uc, fc], [0.2 * k, 0.12 * m, 0.11 * k], LINEN, 16);
       } },
       // a small dark cross on a cord on the breast
       cross: { name: 'cross', draw: F => {

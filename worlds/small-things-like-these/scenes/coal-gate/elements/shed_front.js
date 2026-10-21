@@ -1,15 +1,15 @@
 // The coal shed's front (on `shed`; x −1.7…1.5): whitewashed rubble gone grey with coal dust, darker toward the foot
 // and round the door; a slate eave along its top; the doorway at x 0…0.95, 1.9 m high, open (the leaf is `shed_door`);
 // on the frame to the right of it the bolt's iron staple, where the bolt goes when it is drawn from outside.
-e.lib.rubble(g, 41, -1.7, -2.5, 3.2, 2.55, "#cfcabd", ["#c3beb1", "#bab5a8", "#c8c3b7"], 0.26);
+e.lib.rubble(g, 41, -1.7, -2.5, 3.2, 2.55, "#9a958b", ["#c6c1b4", "#bcb7aa", "#cdc8bc", "#b3aea1"], 0.26);
 const grime = g.createLinearGradient(0, 0, 0, -2.5);
-grime.addColorStop(0, "rgba(58, 56, 54, 0.55)");
+grime.addColorStop(0, "rgba(58, 56, 54, 0.5)");
 grime.addColorStop(0.5, "rgba(58, 56, 54, 0.15)");
 grime.addColorStop(1, "rgba(58, 56, 54, 0)");
 g.fillStyle = grime;
 g.fillRect(-1.7, -2.5, 3.2, 2.55);
 const sooty = g.createRadialGradient(0.47, -0.9, 0.3, 0.47, -0.9, 1.3);
-sooty.addColorStop(0, "rgba(40, 38, 38, 0.5)");
+sooty.addColorStop(0, "rgba(40, 38, 38, 0.42)");
 sooty.addColorStop(1, "rgba(40, 38, 38, 0)");
 g.fillStyle = sooty;
 g.fillRect(-0.9, -2.3, 2.4, 2.35);
