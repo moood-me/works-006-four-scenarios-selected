@@ -8,7 +8,7 @@ g.lineTo(2.6, -2.15);
 g.lineTo(2.6, 0.05);
 g.closePath();
 g.clip();
-e.lib.rubble(g, 42, 0, -2.5, 2.6, 2.55, "#c9c4b7", ["#bdb8ab", "#b4afa2", "#c2bdb1"], 0.26);
+e.lib.rubble(g, 42, 0, -2.5, 2.6, 2.55, "#7d786f", ["#c0bbae", "#b6b1a4", "#c7c2b6", "#aea99c"], 0.26);
 const grime = g.createLinearGradient(0, 0, 0, -2.5);
 grime.addColorStop(0, "rgba(58, 56, 54, 0.5)");
 grime.addColorStop(1, "rgba(58, 56, 54, 0)");

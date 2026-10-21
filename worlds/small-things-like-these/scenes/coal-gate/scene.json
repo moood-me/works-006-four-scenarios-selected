@@ -7,13 +7,13 @@
     "mode": "picture"
   },
   "light": {
-    "ambient": 0.56,
+    "ambient": 0.6,
     "ambientColor": "#aebbd0",
     "bounce": 0.5,
-    "haze": 0.45,
+    "haze": 0.6,
     "hazeColor": "#d2d9df",
-    "hazeGlow": 0.8,
-    "inside": 0.4,
+    "hazeGlow": 1,
+    "inside": 0.55,
     "vignette": 0.28,
     "grain": 0.06,
     "tint": "#dde5ef",
@@ -39,8 +39,8 @@
       "id": "lantern",
       "at": "bill#flame",
       "color": "#ffc277",
-      "strength": 1.8,
-      "reach": 5,
+      "strength": 2.6,
+      "reach": 6,
       "flicker": 0.12,
       "glow": 0.3
     },
@@ -50,6 +50,14 @@
       "color": "#ffcf94",
       "strength": 1.2,
       "reach": 4
+    },
+    {
+      "id": "door_light",
+      "of": "door_lamp#flame",
+      "color": "#ffcf8a",
+      "strength": 1.4,
+      "reach": 4.5,
+      "flicker": 0.04
     },
     {
       "id": "dawn",
@@ -71,21 +79,21 @@
     "bill_look": "sara",
     "bill_reach": {
       "l": [
-        -0.454,
-        4.284,
-        1.25
+        -0.36,
+        4.22,
+        1.42
       ]
     },
-    "bill_mood": "sad",
+    "bill_mood": "tired",
     "sara_look": "bill",
     "sara_reach": {
       "r": [
-        -1.997,
+        -1.447,
         3.944,
         1.15
       ],
       "l": [
-        -1.997,
+        -1.447,
         3.944,
         1.15
       ]
@@ -96,15 +104,15 @@
       "r": [
         3.03,
         5.66,
-        1.0
+        1
       ],
       "l": [
         3.03,
         5.66,
-        1.0
+        1
       ]
     },
-    "mother_mood": "smile"
+    "mother_mood": "thinking"
   },
   "objects": [
     {
@@ -115,8 +123,8 @@
     {
       "id": "tree",
       "name": "Bare ash trees over the road",
-      "across": -6.5,
-      "distance": 15.0,
+      "across": -10.5,
+      "distance": 15,
       "height": 10,
       "box": [
         -5.5,
@@ -126,12 +134,12 @@
       ],
       "copies": [
         {
-          "across": -6.5,
-          "distance": 15.0
+          "across": -10.5,
+          "distance": 15
         },
         {
-          "across": -12.5,
-          "distance": 19.0,
+          "across": -15.5,
+          "distance": 19,
           "scale": 0.85,
           "flip": true
         }
@@ -142,7 +150,7 @@
       "name": "Road outside the wall",
       "plane": true,
       "across": 0,
-      "distance": 14.0,
+      "distance": 14,
       "elevation": -0.01,
       "width": 40,
       "depth": 9.6
@@ -151,13 +159,26 @@
       "id": "fog_bank",
       "name": "Fog beyond the wall",
       "across": 0,
-      "distance": 16.0,
+      "distance": 16,
       "height": 7,
       "box": [
         -30,
         -7,
         30,
         0.2
+      ]
+    },
+    {
+      "id": "mist_gate",
+      "name": "Mist at the gate",
+      "across": 1,
+      "distance": 10.2,
+      "height": 1.6,
+      "box": [
+        -12,
+        -1.6,
+        12,
+        1.2
       ]
     },
     {
@@ -178,13 +199,13 @@
       "id": "wall",
       "name": "Convent wall with the coal gate",
       "across": -5,
-      "distance": 9.0,
+      "distance": 9,
       "facing": 180,
       "height": 3.5,
       "box": [
         -9.6,
         -3.55,
-        8.0,
+        8,
         0.05
       ]
     },
@@ -248,6 +269,20 @@
       "glows": true
     },
     {
+      "id": "door_lamp",
+      "name": "Lamp by the kitchen door",
+      "across": 3.34,
+      "distance": 5.12,
+      "elevation": 2.2,
+      "height": 0.8,
+      "box": [
+        -0.2,
+        -0.8,
+        0.35,
+        0
+      ]
+    },
+    {
       "id": "steam_near",
       "name": "Steam from the near window",
       "particles": {
@@ -262,24 +297,25 @@
           0.15,
           0.35
         ],
-        "rate": 4,
+        "rate": 7,
         "life": [
-          4,
-          7
+          5,
+          9
         ],
         "gravity": -0.3,
         "size": [
-          0.2,
-          1.2
+          0.3,
+          1.6
         ],
         "color": "#eef0f2",
-        "opacity": 0.5,
+        "opacity": 0.7,
         "wind": 0.5,
         "at": [
           3.62,
           4.54,
           2.9
-        ]
+        ],
+        "sheer": 0.5
       }
     },
     {
@@ -297,24 +333,61 @@
           0.15,
           0.35
         ],
-        "rate": 4,
+        "rate": 7,
         "life": [
-          4,
-          7
+          5,
+          9
         ],
         "gravity": -0.3,
         "size": [
-          0.2,
-          1.2
+          0.3,
+          1.6
         ],
         "color": "#eef0f2",
-        "opacity": 0.5,
+        "opacity": 0.7,
         "wind": 0.5,
         "at": [
           2.96,
           8.27,
           2.9
-        ]
+        ],
+        "sheer": 0.5
+      }
+    },
+    {
+      "id": "steam_door",
+      "name": "Steam out of the kitchen door",
+      "particles": {
+        "kind": "smoke",
+        "at": [
+          3.42,
+          5.9,
+          2
+        ],
+        "direction": [
+          -0.9,
+          -0.2,
+          0.45
+        ],
+        "spread": 30,
+        "speed": [
+          0.12,
+          0.3
+        ],
+        "rate": 5,
+        "life": [
+          4,
+          7
+        ],
+        "gravity": -0.25,
+        "size": [
+          0.25,
+          1.2
+        ],
+        "color": "#f1f2f3",
+        "opacity": 0.55,
+        "wind": 0.5,
+        "sheer": 0.6
       }
     },
     {
@@ -327,10 +400,23 @@
       "depth": 10.8
     },
     {
+      "id": "mist_yard",
+      "name": "Mist over the yard",
+      "across": 0,
+      "distance": 6.9,
+      "height": 1.6,
+      "box": [
+        -12,
+        -1.6,
+        12,
+        1.2
+      ]
+    },
+    {
       "id": "shed",
       "name": "Coal shed",
       "unseen": true,
-      "across": -2.6,
+      "across": -2.05,
       "distance": 4.2,
       "facing": 160
     },
@@ -397,14 +483,31 @@
       "across": 0.45,
       "distance": 1.9,
       "facing": 180,
-      "height": 1.0,
+      "height": 1,
       "box": [
         -1.3,
-        -1.0,
+        -1,
         1.3,
         0.05
       ],
       "inside": true
+    },
+    {
+      "id": "sacks",
+      "name": "Coal sacks",
+      "on": "shed",
+      "across": 0.15,
+      "distance": 0.75,
+      "facing": 180,
+      "height": 0.95,
+      "box": [
+        -0.7,
+        -0.95,
+        0.6,
+        0.05
+      ],
+      "inside": true,
+      "shadow": true
     },
     {
       "id": "shed_door",
@@ -444,8 +547,8 @@
         "who": "bill",
         "turn": 222
       },
-      "across": -0.35,
-      "distance": 4.7,
+      "across": -0.1,
+      "distance": 4.5,
       "shadow": true
     },
     {
@@ -456,7 +559,7 @@
         "who": "sara",
         "turn": 155
       },
-      "across": -2.06,
+      "across": -1.51,
       "distance": 4.08,
       "shadow": true
     },
@@ -471,6 +574,117 @@
       "across": 3.16,
       "distance": 5.84,
       "shadow": true
+    },
+    {
+      "id": "breath_bill",
+      "name": "bill's breath",
+      "particles": {
+        "kind": "smoke",
+        "at": "bill#head",
+        "rate": 0,
+        "direction": [
+          -0.95,
+          -0.3,
+          0.1
+        ],
+        "spread": 18,
+        "speed": [
+          0.3,
+          0.5
+        ],
+        "life": [
+          1,
+          1.8
+        ],
+        "gravity": -0.08,
+        "drag": 1.5,
+        "size": [
+          0.05,
+          0.3
+        ],
+        "color": "#f1f3f5",
+        "opacity": 0.42,
+        "wind": 0.2,
+        "turbulence": 0.04,
+        "fade": [
+          0.1,
+          0.7
+        ]
+      }
+    },
+    {
+      "id": "breath_sara",
+      "name": "sara's breath",
+      "particles": {
+        "kind": "smoke",
+        "at": "sara#head",
+        "rate": 0,
+        "direction": [
+          0.95,
+          0.3,
+          0.1
+        ],
+        "spread": 18,
+        "speed": [
+          0.3,
+          0.5
+        ],
+        "life": [
+          1,
+          1.8
+        ],
+        "gravity": -0.08,
+        "drag": 1.5,
+        "size": [
+          0.05,
+          0.3
+        ],
+        "color": "#f1f3f5",
+        "opacity": 0.42,
+        "wind": 0.2,
+        "turbulence": 0.04,
+        "fade": [
+          0.1,
+          0.7
+        ]
+      }
+    },
+    {
+      "id": "breath_mother",
+      "name": "mother's breath",
+      "particles": {
+        "kind": "smoke",
+        "at": "mother#head",
+        "rate": 0,
+        "direction": [
+          -0.92,
+          -0.38,
+          0.1
+        ],
+        "spread": 18,
+        "speed": [
+          0.3,
+          0.5
+        ],
+        "life": [
+          1,
+          1.8
+        ],
+        "gravity": -0.08,
+        "drag": 1.5,
+        "size": [
+          0.05,
+          0.3
+        ],
+        "color": "#f1f3f5",
+        "opacity": 0.42,
+        "wind": 0.2,
+        "turbulence": 0.04,
+        "fade": [
+          0.1,
+          0.7
+        ]
+      }
     }
   ],
   "music": {
@@ -481,7 +695,7 @@
       },
       {
         "text": "Sparse felt piano, single notes with long silences, frost, a small Irish town asleep",
-        "weight": 1.0
+        "weight": 1
       },
       {
         "text": "Uilleann pipes very far off, a slow air, mist over a river",

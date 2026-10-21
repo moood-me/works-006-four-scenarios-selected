@@ -16,7 +16,7 @@ for (let i = 0; i < 14; i++) {
   g.fillRect(x, top, Math.min(0.15 + r() * 0.3, 2.8 - x), 2.5);
 }
 // the plinth and the string course
-e.lib.rubble(g, 32, -2.8, -0.55, 5.6, 0.6, "#8e8a83", ["#7c7973", "#86827b", "#77746f"], 0.28);
+e.lib.rubble(g, 32, -2.8, -0.55, 5.6, 0.6, "#6a6762", ["#94908a", "#8a8680", "#9d9992"], 0.28);
 g.fillStyle = "#bdb8ae";
 g.fillRect(-2.8, -3.55, 5.6, 0.14);
 // the openings, their frames and sills
