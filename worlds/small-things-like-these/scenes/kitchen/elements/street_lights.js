@@ -1,4 +1,4 @@
-// The Christmas lights strung across the street (9 m off; x 0 at 3.4 m right of the start's line): a wire sagging
+// The Christmas lights strung across the street (8 m off; x 0 at 3.4 m right of the start's line): a wire sagging
 // from house to house, coloured bulbs along it — red, green, amber, blue — each its own small glow.
 const sag = (x) => -3.2 + 1.0 * (1 - (x / 5) * (x / 5));
 g.strokeStyle = "#2a2a2c";

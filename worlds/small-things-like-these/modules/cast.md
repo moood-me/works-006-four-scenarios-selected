@@ -16,7 +16,7 @@ Bill's mustard coat is one.
 
 - `bill` — Bill Furlong, 39, the coal merchant: a mustard overcoat to the knee (`overcoat`), a tweed cap, a dark green
   scarf, grey-brown work trousers, hands black with coal (`coal_hands`).
-- `bill_home` — Bill at home: the coat on its hook and the cap off — a shirt and a brown waistcoat (`waistcoat`); the
+- `bill_home` — Bill at home: the coat on its hook and the cap off — a white shirt and a bottle-green waistcoat (`waistcoat`); the
   hands as black. A scene that has him come in puts it on him with `bill_wear` (the look's object:
   `scene.kit.cast.characters.bill_home`).
 - `eileen` — Eileen Furlong, his wife: a wine-coloured dress to mid-calf under a washed-blue wraparound pinafore

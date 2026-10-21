@@ -1,5 +1,5 @@
 // The table's top from above (0.76 m up; x across, y toward the viewer — the world's (across, distance) is
-// (−0.35 + x, 3.8 − y)): an oilcloth of a small faded red check on cream; on it, flat: flour spilt round the mixing
+// (−0.2 + x, 2.8 − y)): an oilcloth of a small faded red check on cream; on it, flat: flour spilt round the mixing
 // bowl (at x −0.6, y 0.18), a saucer of glacé cherries and the wooden spoon beside it; raisins scattered from the
 // basin (x 0, y −0.25) toward Grace; three little stacks of coins and a few loose ones by the tin (x 0.45, y −0.3).
 const r = e.lib.stream(91);

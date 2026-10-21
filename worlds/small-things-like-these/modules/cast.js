@@ -38,11 +38,12 @@ return {
     // scarf, black hands
     bill: { kind: 'shapes', style: 'keegan', who: 'man', garment: 'overcoat', hair: 'short', hat: 'cap', scarf: true, parts: ['coal_hands'],
       body: { height: 1.0, shoulders: 1.06, thick: 1.04 },
-      colors: { skin: '#d9a98e', hair: '#3a2c24', top: '#cfc7b6', garment: '#b5862c', bottom: '#5a534a', hat: '#4d4a42', shoes: '#2a2521', accent: '#3f4b3c' } },
-    // Bill at home: the coat on its hook, the cap off — his shirt and a brown waistcoat; the hands as black
+      colors: { skin: '#d9a98e', hair: '#5e4636', top: '#cfc7b6', garment: '#b5862c', bottom: '#5a534a', hat: '#4d4a42', shoes: '#2a2521', accent: '#3f4b3c' } },
+    // Bill at home: the coat on its hook, the cap off — his white shirt and a bottle-green waistcoat (his scarf's
+    // green: he reads against the cream walls and the brown of the range); the hands as black
     bill_home: { kind: 'shapes', style: 'keegan', who: 'man', garment: 'waistcoat', hair: 'short', parts: ['coal_hands'],
       body: { height: 1.0, shoulders: 1.06, thick: 1.04 },
-      colors: { skin: '#d9a98e', hair: '#3a2c24', top: '#d8d1c2', garment: '#4f4338', bottom: '#5a534a', shoes: '#2a2521' } },
+      colors: { skin: '#d9a98e', hair: '#5e4636', top: '#ebe7de', garment: '#2f4a3b', bottom: '#4e4a44', shoes: '#2a2521' } },
     // Eileen Furlong, his wife: a wine-coloured dress under a washed-blue wraparound pinafore, her hair pinned up,
     // flour on her hands
     eileen: { kind: 'shapes', style: 'keegan', who: 'woman', garment: 'pinafore', hair: 'bun', parts: ['floury_hands'],
