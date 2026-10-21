@@ -14,6 +14,10 @@ function stream(seed) {
 // block in one of the tones, a little uneven
 function rubble(g, seed, x, y, w, h, base, tones, course = 0.3) {
   const r = stream(seed);
+  g.save();
+  g.beginPath();
+  g.rect(x, y, w, h);
+  g.clip();
   g.fillStyle = base;
   g.fillRect(x, y, w, h);
   const paths = tones.map(() => new Path2D());
@@ -33,10 +37,11 @@ function rubble(g, seed, x, y, w, h, base, tones, course = 0.3) {
     g.fillStyle = t;
     g.fill(paths[i]);
   });
+  g.restore();
 }
 
-// cobbles seen from above over the rect x, y, w, h, in rows; then frost — fine white rime over them, thinner where
-// `bare(x, y)` says the coal dust and the feet have worn it (0 rimed … 1 bare)
+// cobbles seen from above over the rect x, y, w, h, in rows; then frost — a pale veil of rime and fine white specks,
+// fewer where `bare(x, y)` says the coal dust and the feet have worn it (0 rimed … 1 bare)
 function cobbles(g, seed, x, y, w, h, tones, bare) {
   const r = stream(seed);
   g.fillStyle = "#6e7175";
@@ -54,15 +59,18 @@ function cobbles(g, seed, x, y, w, h, tones, bare) {
     g.fillStyle = t;
     g.fill(paths[i]);
   });
+  g.fillStyle = "rgba(226, 232, 238, 0.3)";
+  g.fillRect(x, y, w, h);
   const rime = new Path2D();
   for (let i = 0; i < w * h * 5; i++) {
     const px = x + r() * w;
     const py = y + r() * h;
     if (r() < bare(px, py)) continue;
-    rime.moveTo(px + 0.05, py);
-    rime.ellipse(px, py, 0.05 + r() * 0.07, 0.03 + r() * 0.04, r() * 3, 0, 6.3);
+    const s = 0.012 + r() * 0.025;
+    rime.moveTo(px + s, py);
+    rime.ellipse(px, py, s, s * 0.7, 0, 0, 6.3);
   }
-  g.fillStyle = "rgba(232, 238, 243, 0.62)";
+  g.fillStyle = "rgba(240, 244, 248, 0.75)";
   g.fill(rime);
 }
 
