@@ -58,12 +58,12 @@ return {
       // the snout's end, small ears on the crown (none under a hat) — the same solids for every expression
       moomin: { name: 'Moomin', draw: F => {
         const { at, axes, r, on } = F.head, [, hu] = axes, x = MOODS[F.look.expression] ?? MOODS.neutral;
-        const skin = F.colors.skin, dark = [0.1, 0.09, 0.1, 1], brow = [skin[0] * 0.55, skin[1] * 0.55, skin[2] * 0.58, 1];
+        const skin = F.colors.skin, dark = [0.1, 0.09, 0.1, 1], brow = [skin[0] * 0.62, skin[1] * 0.62, skin[2] * 0.65, 1];
         F.ball(snoutAt(F, [0, 0, 0], 0), axes, SNOUT.radii.map(v => v * r), skin, F.sides);
         for (const sx of [-1, 1]) {
           F.ball(snoutAt(F, [sx * 0.28, 0.75, 0.35], 0.995), axes, [r * 0.085, r * 0.16 * x.eye, r * 0.05], dark, 10);
-          F.tube([on([sx * 0.1, 0.76 + x.inner, 0.62], 1.0), on([sx * 0.22, 0.8 + (x.inner + x.outer) / 2, 0.56], 1.005), on([sx * 0.34, 0.76 + x.outer, 0.5], 1.0)],
-            [[0, r * 0.016], [1, r * 0.02], [2, r * 0.014]], [[0, brow]], 6, hu);
+          F.tube([on([sx * 0.1, 0.8 + x.inner, 0.6], 1.0), on([sx * 0.22, 0.83 + (x.inner + x.outer) / 2, 0.54], 1.005), on([sx * 0.34, 0.75 + x.outer, 0.5], 1.0)],
+            [[0, r * 0.012], [1, r * 0.016], [2, r * 0.01]], [[0, brow]], 6, hu);
           if (F.look.hat === 'none') F.ball(on([sx * 0.3, 0.93, -0.08], 0.94), axes, [r * 0.1, r * 0.22, r * 0.08], skin, 12);
         }
         const w = x.wide, y = -0.55;

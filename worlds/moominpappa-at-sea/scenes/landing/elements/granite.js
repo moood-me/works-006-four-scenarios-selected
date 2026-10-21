@@ -49,7 +49,7 @@ for (let i = 0; i < 110; i++) {
   g.stroke();
 }
 // rain pools in the hollows of the higher stone: grey-blue, a pale rim
-for (const [a, d, rx, ry, t] of [[-0.6, 3.2, 0.5, 0.3, 0.3], [3.4, 11.5, 0.7, 0.35, -0.2], [6.2, 18.5, 0.45, 0.25, 0.5], [-2.3, 9.8, 0.35, 0.22, 0]]) {
+for (const [a, d, rx, ry, t] of [[2.6, 7.5, 0.5, 0.3, 0.3], [3.4, 11.5, 0.7, 0.35, -0.2], [6.2, 18.5, 0.45, 0.25, 0.5], [-2.3, 9.8, 0.35, 0.22, 0]]) {
   const [x, y] = at(a, d);
   g.fillStyle = "rgba(236, 222, 214, 0.8)";
   g.beginPath();
