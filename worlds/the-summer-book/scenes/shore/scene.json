@@ -1,0 +1,690 @@
+{
+  "engine": 3,
+  "title": "The Shore by the House",
+  "caption": "June on the island. The sea lies still as glass.",
+  "horizon": 0.42,
+  "camera": {
+    "mode": "picture"
+  },
+  "light": {
+    "ambient": 0.68,
+    "ambientColor": "#e4e7ea",
+    "bounce": 0.5,
+    "haze": 0.12,
+    "hazeColor": "#d8dbda",
+    "vignette": 0.2,
+    "grain": 0.06,
+    "wind": [
+      1,
+      0.3,
+      0.4
+    ],
+    "saturation": 1.1
+  },
+  "lights": [
+    {
+      "id": "sun",
+      "color": "#ffeedd",
+      "strength": 1.0,
+      "from": "sky#sun"
+    }
+  ],
+  "modules": [
+    "cast"
+  ],
+  "state": {
+    "grandma_look": [
+      8,
+      5,
+      0.2
+    ],
+    "sophia_look": "grandma",
+    "sophia_reach": {
+      "r": "grandma#hand_l"
+    },
+    "papa_look": "grandma",
+    "papa_with": [
+      "mug"
+    ],
+    "papa_reach": {
+      "r": [
+        -2.893,
+        7.715,
+        1.15
+      ],
+      "l": [
+        -2.807,
+        7.765,
+        1.15
+      ]
+    },
+    "grandma_reach": {
+      "l": "sophia#hand_r"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Sky",
+      "sky": true
+    },
+    {
+      "id": "sea",
+      "name": "Sea",
+      "plane": true,
+      "across": 0,
+      "distance": 2000,
+      "elevation": -0.55,
+      "width": 6000,
+      "depth": 4000,
+      "reflect": {
+        "strength": 0.5,
+        "fade": 0,
+        "rough": 0.1,
+        "ripple": 0.1
+      }
+    },
+    {
+      "id": "islet",
+      "name": "Wooded islet",
+      "across": 320,
+      "distance": 700,
+      "onLand": false,
+      "elevation": -0.55,
+      "height": 14,
+      "box": [
+        -46,
+        -15,
+        46,
+        0.7
+      ],
+      "copies": [
+        {
+          "across": 320,
+          "distance": 700
+        },
+        {
+          "across": -260,
+          "distance": 950,
+          "scale": 1.3,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "skerry",
+      "name": "Skerry",
+      "across": -40,
+      "distance": 260,
+      "onLand": false,
+      "elevation": -0.55,
+      "height": 5,
+      "box": [
+        -20.5,
+        -5.4,
+        20.5,
+        0.7
+      ],
+      "copies": [
+        {
+          "across": -40,
+          "distance": 260
+        },
+        {
+          "across": 95,
+          "distance": 430,
+          "scale": 1.4,
+          "flip": true
+        },
+        {
+          "across": 210,
+          "distance": 320,
+          "scale": 0.7
+        },
+        {
+          "across": 30,
+          "distance": 150,
+          "scale": 0.5,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "mist",
+      "name": "Mist on the horizon",
+      "across": 120,
+      "distance": 650,
+      "onLand": false,
+      "elevation": -0.55,
+      "height": 18,
+      "box": [
+        -800,
+        -16,
+        800,
+        2
+      ]
+    },
+    {
+      "id": "rock",
+      "name": "The island rock",
+      "plane": true,
+      "drape": true,
+      "across": -24,
+      "distance": 32,
+      "width": 66,
+      "depth": 76
+    },
+    {
+      "id": "pine",
+      "name": "Pines",
+      "across": -12,
+      "distance": 24,
+      "height": 9,
+      "box": [
+        -2.2,
+        -9.3,
+        3.6,
+        0.3
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": -12,
+          "distance": 24,
+          "scale": 1.1
+        },
+        {
+          "across": -9.5,
+          "distance": 26.5,
+          "scale": 0.9,
+          "flip": true
+        },
+        {
+          "across": -15,
+          "distance": 21,
+          "scale": 1.2
+        },
+        {
+          "across": -6.5,
+          "distance": 31,
+          "scale": 0.8
+        },
+        {
+          "across": -18,
+          "distance": 28
+        },
+        {
+          "across": -11,
+          "distance": 33,
+          "scale": 1.1,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "house",
+      "name": "House",
+      "unseen": true,
+      "across": -7.5,
+      "distance": 15.5,
+      "facing": 200
+    },
+    {
+      "id": "house_front",
+      "name": "House, the gable end",
+      "on": "house",
+      "facing": 180,
+      "height": 4.8,
+      "box": [
+        -2.95,
+        -5.0,
+        2.95,
+        0.4
+      ],
+      "shadow": true
+    },
+    {
+      "id": "house_side",
+      "name": "House, the side",
+      "on": "house",
+      "across": 2.5,
+      "facing": 90,
+      "height": 3,
+      "box": [
+        -0.1,
+        -3.1,
+        6.45,
+        0.4
+      ],
+      "shadow": true
+    },
+    {
+      "id": "roof_r",
+      "name": "Roof, the near slope",
+      "plane": true,
+      "on": "house",
+      "across": 1.375,
+      "distance": 3,
+      "elevation": 3.81,
+      "width": 6.5,
+      "depth": 3.39,
+      "rotation": 90,
+      "tilt": 35.8,
+      "shadow": true
+    },
+    {
+      "id": "roof_l",
+      "name": "Roof, the far slope",
+      "plane": true,
+      "on": "house",
+      "across": -1.375,
+      "distance": 3,
+      "elevation": 3.81,
+      "width": 6.5,
+      "depth": 3.39,
+      "rotation": 90,
+      "tilt": -35.8
+    },
+    {
+      "id": "chimney",
+      "name": "Chimney",
+      "on": "house",
+      "across": -0.8,
+      "distance": 2.5,
+      "height": 5.8,
+      "box": [
+        -0.4,
+        -5.9,
+        0.4,
+        0.05
+      ]
+    },
+    {
+      "id": "porch",
+      "name": "Porch",
+      "on": "house",
+      "across": 1.6,
+      "distance": -0.7,
+      "facing": 180,
+      "height": 1.5,
+      "box": [
+        -0.75,
+        -1.5,
+        0.75,
+        0.05
+      ]
+    },
+    {
+      "id": "cat",
+      "name": "Mappe, the cat",
+      "on": "house",
+      "across": 1.85,
+      "distance": -0.95,
+      "elevation": 0.55,
+      "height": 0.45,
+      "box": [
+        -0.3,
+        -0.48,
+        0.3,
+        0.03
+      ]
+    },
+    {
+      "id": "peony",
+      "name": "Peonies",
+      "across": -9.56,
+      "distance": 15.4,
+      "height": 0.85,
+      "box": [
+        -0.75,
+        -1.0,
+        0.75,
+        0.05
+      ],
+      "copies": [
+        {
+          "across": -9.56,
+          "distance": 15.4
+        },
+        {
+          "across": -7.21,
+          "distance": 14.54,
+          "scale": 0.9,
+          "flip": true
+        },
+        {
+          "across": -5.58,
+          "distance": 13.9,
+          "scale": 1.05
+        }
+      ]
+    },
+    {
+      "id": "pier",
+      "name": "Pier",
+      "plane": true,
+      "walk": true,
+      "across": 3.6,
+      "distance": 16,
+      "elevation": -0.15,
+      "width": 10,
+      "depth": 1.3,
+      "shadow": true
+    },
+    {
+      "id": "pier_side",
+      "name": "Pier, the near edge",
+      "across": 3.6,
+      "distance": 15.35,
+      "onLand": false,
+      "elevation": -0.15,
+      "height": 0.2,
+      "box": [
+        -5,
+        -0.02,
+        5,
+        0.22
+      ]
+    },
+    {
+      "id": "post",
+      "name": "Pier posts",
+      "across": -0.2,
+      "distance": 15.4,
+      "onLand": false,
+      "elevation": -0.15,
+      "height": 1.4,
+      "box": [
+        -0.1,
+        -0.02,
+        0.1,
+        1.42
+      ],
+      "copies": [
+        {
+          "across": -0.2,
+          "distance": 15.4
+        },
+        {
+          "across": -0.2,
+          "distance": 16.6
+        },
+        {
+          "across": 2.3,
+          "distance": 15.4
+        },
+        {
+          "across": 2.3,
+          "distance": 16.6
+        },
+        {
+          "across": 4.8,
+          "distance": 15.4
+        },
+        {
+          "across": 4.8,
+          "distance": 16.6
+        },
+        {
+          "across": 7.3,
+          "distance": 15.4
+        },
+        {
+          "across": 7.3,
+          "distance": 16.6
+        },
+        {
+          "across": 8.5,
+          "distance": 15.4
+        },
+        {
+          "across": 8.5,
+          "distance": 16.6
+        }
+      ]
+    },
+    {
+      "id": "boat",
+      "name": "Rowing boat",
+      "across": 7.2,
+      "distance": 17.2,
+      "onLand": false,
+      "elevation": -0.55,
+      "height": 0.8,
+      "box": [
+        -2.4,
+        -0.95,
+        2.0,
+        0.2
+      ]
+    },
+    {
+      "id": "juniper",
+      "name": "Junipers",
+      "across": -2.9,
+      "distance": 3.4,
+      "height": 0.9,
+      "box": [
+        -1.0,
+        -1.0,
+        1.0,
+        0.1
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": -2.9,
+          "distance": 3.4,
+          "scale": 1.2
+        },
+        {
+          "across": -2.2,
+          "distance": 11.5,
+          "flip": true
+        },
+        {
+          "across": -10.5,
+          "distance": 12,
+          "scale": 1.3
+        },
+        {
+          "across": -5.0,
+          "distance": 9.5,
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "id": "tuft",
+      "name": "Grass in the cracks",
+      "across": -1.8,
+      "distance": 3.3,
+      "height": 0.4,
+      "box": [
+        -0.25,
+        -0.5,
+        0.25,
+        0.05
+      ],
+      "copies": [
+        {
+          "across": -1.8,
+          "distance": 3.3,
+          "scale": 0.8,
+          "flip": false
+        },
+        {
+          "across": 0.4,
+          "distance": 3.2,
+          "scale": 0.9,
+          "flip": true
+        },
+        {
+          "across": -2.6,
+          "distance": 5.2,
+          "scale": 1.0,
+          "flip": false
+        },
+        {
+          "across": 0.3,
+          "distance": 6.3,
+          "scale": 1.1,
+          "flip": true
+        },
+        {
+          "across": -1.3,
+          "distance": 7.0,
+          "scale": 0.8,
+          "flip": false
+        },
+        {
+          "across": -0.6,
+          "distance": 9.5,
+          "scale": 0.9,
+          "flip": true
+        },
+        {
+          "across": -2.0,
+          "distance": 10.8,
+          "scale": 1.0,
+          "flip": false
+        },
+        {
+          "across": 0.0,
+          "distance": 12.6,
+          "scale": 1.1,
+          "flip": true
+        },
+        {
+          "across": -1.6,
+          "distance": 13.4,
+          "scale": 0.8,
+          "flip": false
+        },
+        {
+          "across": -0.9,
+          "distance": 2.8,
+          "scale": 0.9,
+          "flip": true
+        },
+        {
+          "across": -3.0,
+          "distance": 6.6,
+          "scale": 1.0,
+          "flip": false
+        },
+        {
+          "across": -2.4,
+          "distance": 8.3,
+          "scale": 1.1,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "grandma",
+      "name": "Grandmother",
+      "person": {
+        "cast": "cast",
+        "who": "grandma",
+        "turn": 150
+      },
+      "across": 0.2,
+      "distance": 4.0
+    },
+    {
+      "id": "sophia",
+      "name": "Sophia",
+      "person": {
+        "cast": "cast",
+        "who": "sophia",
+        "turn": 150
+      },
+      "across": 0.68,
+      "distance": 4.27
+    },
+    {
+      "id": "papa",
+      "name": "Papa",
+      "person": {
+        "cast": "cast",
+        "who": "papa",
+        "turn": 150
+      },
+      "across": -3,
+      "distance": 8
+    }
+  ],
+  "music": {
+    "prompts": [
+      {
+        "text": "Sparse solo piano, slow and unhurried, with long silences, like light on still water",
+        "weight": 1.2
+      },
+      {
+        "text": "Nordic folk melody on a single wooden flute, distant and breathy, over a soft drone",
+        "weight": 0.8
+      },
+      {
+        "text": "Gentle nylon-string guitar picking, quiet and intimate, a summer morning by the sea",
+        "weight": 0.6
+      },
+      {
+        "text": "Warm ambient pads with slow swells, pearl-grey and calm, barely moving",
+        "weight": 0.5
+      },
+      {
+        "text": "Celesta and music box notes, childlike and a little sad",
+        "weight": 0
+      },
+      {
+        "text": "Low cello long tones, tender and grave, an old woman remembering",
+        "weight": 0
+      },
+      {
+        "text": "Kantele plucked softly, Finnish archipelago, open fifths, airy",
+        "weight": 0
+      },
+      {
+        "text": "Solo accordion, slow waltz, faded and wistful, far away across the water",
+        "weight": 0
+      },
+      {
+        "text": "Soft string quartet, chamber music, restrained and bittersweet",
+        "weight": 0
+      },
+      {
+        "text": "Glass harmonica shimmer, cold clear air, high and fragile",
+        "weight": 0
+      },
+      {
+        "text": "Minimalist marimba patterns, gentle and repeating, like small waves",
+        "weight": 0
+      },
+      {
+        "text": "Harmonium chords breathing slowly, a quiet chapel by the sea",
+        "weight": 0
+      },
+      {
+        "text": "Clarinet in its low register, dry and humorous, a little crooked tune",
+        "weight": 0
+      },
+      {
+        "text": "Felt piano with tape hiss, close and soft, lullaby feel",
+        "weight": 0
+      },
+      {
+        "text": "Distant church bell and sea wind textures, sparse, mostly silence",
+        "weight": 0
+      },
+      {
+        "text": "Harp arpeggios, slow, luminous, early summer dawn",
+        "weight": 0
+      }
+    ],
+    "bpm": 66,
+    "density": 0.25,
+    "brightness": 0.45,
+    "scale": "G_MAJOR_E_MINOR"
+  }
+}
