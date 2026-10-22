@@ -26,7 +26,7 @@ export const lead = stub({ title: tr('The Lead'), gesture: PULL, at: 'papa',
 export const armful = stub({ title: tr('The Armful'), gesture: BALANCE, at: 'papa',
   about: tr('An armful of seaweed higher than his head, carried without seeing his feet. Spilt — Mama laughs. Together.'),
   phrase: tr('Seaweed higher than his head.') });
-export const knot = stub({ title: tr('The Knot'), gesture: PULL, at: 'rack#net',
+export const knot = stub({ title: tr('The Knot'), gesture: PULL, at: 'fisher',
   about: tr('A thread drawn slowly out of the knot in the net. Silently, beside him.'),
   phrase: tr('A net pulled into a knot.') });
 export const steady = stub({ title: tr('Steady'), gesture: HOLD, at: 'wall_a#keeper',

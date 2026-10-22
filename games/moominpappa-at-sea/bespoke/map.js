@@ -62,7 +62,7 @@ export function trees(b, chapters, { grow = null, author = false } = {}) {
   });
   if (author) strip.append(hit('author', 'author', tr('the author’s map')));
   // (the chapter the play is at, in view)
-  requestAnimationFrame(() => root.querySelector('.leaf.here, .leaf.next')?.scrollIntoView({ inline: 'center', block: 'nearest' }));
+  requestAnimationFrame(() => root.querySelector('.leaf.here, .leaf.next, .leaf.end')?.scrollIntoView({ inline: 'center', block: 'nearest' }));
 
   return {
     at: ref => () => {

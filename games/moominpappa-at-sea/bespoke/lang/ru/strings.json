@@ -576,6 +576,7 @@
   {"text":"start\nthe game","translation":"начать\nигру","where":"bespoke/game.js"},
   {"text":"Finale","translation":"Финал","where":"bespoke/game.js"},
   {"text":"decided late","translation":"решил поздно","where":"bespoke/game.js"},
+  {"text":"in full","translation":"решил вовремя","where":"bespoke/game.js"},
   {"text":"Replay","translation":"Переигровка","where":"bespoke/map.js"},
   {"text":"continue\nthe replay","translation":"продолжить\nпереигровку","where":"bespoke/map.js"},
   {"text":"the author’s map","translation":"карта автора","where":"bespoke/map.js"},

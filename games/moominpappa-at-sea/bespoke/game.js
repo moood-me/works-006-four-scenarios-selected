@@ -226,7 +226,7 @@ export default async function (b) {
         add(`knot:${c}`, 'drop', tr('Drop the replay'));
       }
     }
-    if (kept.chapter < END) add(`go:${kept.chapter}`, 'main', replay ? tr('Drop the replay') : kept.step ? tr('Continue') : tr('Start'));
+    if (kept.chapter < END) add(`go:${kept.chapter}`, 'main', replay ? tr('Drop the replay') : kept.step || kept.chapter ? tr('Continue') : tr('Start'));
     for (let i = 0; i < Math.min(kept.chapter, END); i++) {
       if (kept.steps[i]?.[0]) add(`knot:${i}`, `chapter:${i}`, tr('Replay the chapter'));
       CHAPTERS[i].choices.forEach((c, k) => {
@@ -255,7 +255,7 @@ export default async function (b) {
       const kind = i === (re ? re.chapter : kept.chapter) ? 'here' : i < kept.chapter ? 'played' : i === kept.chapter ? 'next' : 'future';
       const all = rows(c, reached ? kept.choices : {}, tried ? re.choices : {});
       return { number: c.number, title: c.title, kind, rows: i < kept.chapter && !tried ? all : all.filter(r => r.options.some(o => o.state !== 'unseen')),
-        go: i === kept.chapter ? (kept.step ? tr('continue\nthe game') : tr('start\nthe game')) : null, replay: tried && !replay.done, badge: tried };
+        go: i === kept.chapter ? (kept.step || kept.chapter ? tr('continue\nthe game') : tr('start\nthe game')) : null, replay: tried && !replay.done, badge: tried };
     }).concat(finale());
   }
   // after the epilogue: how the play ended — its endings, the one it came to chosen
@@ -263,7 +263,7 @@ export default async function (b) {
     const title = tr('Finale');
     if (kept.chapter < END) return { number: title, title, kind: 'future', rows: [], go: null };
     const f = facts(kept);
-    return { number: '', title, kind: 'end', rows: [{ title: f.form === 'late' ? tr('decided late') : '', weight: '⚑',
+    return { number: '', title, kind: 'end', rows: [{ title: f.form === 'late' ? tr('decided late') : tr('in full'), weight: '⚑',
       options: ENDINGS.map(e => ({ label: e.label, state: e.id === f.ending ? 'chosen' : 'open' })) }], go: null };
   }
 }
