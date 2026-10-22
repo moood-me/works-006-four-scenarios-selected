@@ -40,7 +40,7 @@ return {
         name: 'dress and shawl',
         hang: [
           { to: 1.9, from: 'waist', flare: 0.4, off: 0.94 },
-          { to: 0.4, from: 'shoulders', flare: 0.22, color: 'accent', folds: false },
+          { to: 0.45, from: 'shoulders', flare: 0.32, color: 'accent', folds: false },
         ],
         sleeves: 'garment', bare: true, bodice: true,
       },
