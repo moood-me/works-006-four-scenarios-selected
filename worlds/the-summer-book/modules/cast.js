@@ -27,7 +27,7 @@ return {
     // Papa: tall and lean, dark hair, a dark green-grey knitted sweater, grey trousers
     papa: {
       kind: 'shapes', style: 'summer', who: 'man', garment: 'none', hair: 'short',
-      body: { height: 1.04, thick: 0.86, shoulders: 1.0 },
+      body: { height: 1.02, thick: 1.0, shoulders: 1.0 },
       colors: { skin: '#d2ab8f', hair: '#4a3a2e', top: '#56635b', bottom: '#5b5e63', shoes: '#2b2826' },
     },
   },

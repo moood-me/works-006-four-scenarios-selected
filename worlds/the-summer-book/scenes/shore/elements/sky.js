@@ -37,12 +37,12 @@ glow(SX, SY, 0.8, 0.3, '#f6ece0', 0.85);
 glow(SX, SY, 0.2, 0.11, '#fbf3e6', 0.9);
 glow(A * 0.5, HZ, 1.6, 0.06, '#f3eee6', 0.8);
 g.globalAlpha = 0.85;
-g.fillStyle = '#fff8ee';
+g.fillStyle = '#fffaf0';
 g.beginPath();
-g.arc(SX, SY, 0.028, 0, 6.2832);
+g.arc(SX, SY, 0.032, 0, 6.2832);
 g.fill();
 g.globalAlpha = 1;
-e.light(SX, SY, 0.05, '#fff3e2', 0.8, 'disc');
+e.light(SX, SY, 0.07, '#ffe9c8', 1.6, 'disc');
 e.at(SX, SY, 'sun');
 // the clouds: long thin streaks, drifting slowly to the right (wrapping round the layer's box: kept inside it)
 e.layer('clouds', { drift: [0.0025, 0], box: [X0, -0.35, X1, HZ] }, c => {

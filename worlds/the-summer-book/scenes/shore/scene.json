@@ -18,7 +18,8 @@
       1,
       0.3,
       0.4
-    ]
+    ],
+    "saturation": 1.1
   },
   "lights": [
     {
@@ -34,7 +35,7 @@
   "state": {
     "grandma_look": [
       8,
-      7,
+      5,
       0.2
     ],
     "sophia_look": "grandma",
@@ -586,10 +587,10 @@
       "person": {
         "cast": "cast",
         "who": "grandma",
-        "turn": 120
+        "turn": 150
       },
-      "across": 0.0,
-      "distance": 4.6
+      "across": 0.2,
+      "distance": 4.0
     },
     {
       "id": "sophia",
@@ -597,10 +598,10 @@
       "person": {
         "cast": "cast",
         "who": "sophia",
-        "turn": 125
+        "turn": 150
       },
-      "across": 0.3,
-      "distance": 5.1
+      "across": 0.68,
+      "distance": 4.27
     },
     {
       "id": "papa",
