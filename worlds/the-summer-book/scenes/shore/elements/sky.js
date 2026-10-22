@@ -29,10 +29,21 @@ g.fillRect(X0, -0.35, X1 - X0, HZ + 0.35);
 g.fillStyle = '#d3d6d4';
 g.fillRect(X0, HZ, X1 - X0, 1.25 - HZ);
 // the veiled sun's brightness, low on the right, and the pale band along the horizon
-glow(A * 0.78, 0.2, 0.75, 0.32, '#f6efe2', 0.85);
-glow(A * 0.78, 0.2, 0.18, 0.12, '#fbf6ec', 0.9);
+// (the June sun just up, low on the right, a pale disc through the veil: its glow is what lights the island, and
+// its e.light draws its path on the still sea)
+const SX = A * 0.78;
+const SY = 0.3;
+glow(SX, SY, 0.8, 0.3, '#f6ece0', 0.85);
+glow(SX, SY, 0.2, 0.11, '#fbf3e6', 0.9);
 glow(A * 0.5, HZ, 1.6, 0.06, '#f3eee6', 0.8);
-e.at(A * 0.78, 0.2, 'sun');
+g.globalAlpha = 0.85;
+g.fillStyle = '#fff8ee';
+g.beginPath();
+g.arc(SX, SY, 0.028, 0, 6.2832);
+g.fill();
+g.globalAlpha = 1;
+e.light(SX, SY, 0.05, '#fff3e2', 0.8, 'disc');
+e.at(SX, SY, 'sun');
 // the clouds: long thin streaks, drifting slowly to the right (wrapping round the layer's box: kept inside it)
 e.layer('clouds', { drift: [0.0025, 0], box: [X0, -0.35, X1, HZ] }, c => {
   const W = X1 - X0;

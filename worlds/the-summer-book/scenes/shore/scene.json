@@ -23,12 +23,9 @@
   "lights": [
     {
       "id": "sun",
-      "from": [
-        130,
-        35
-      ],
       "color": "#ffeedd",
-      "strength": 1.0
+      "strength": 1.0,
+      "from": "sky#sun"
     }
   ],
   "modules": [
@@ -37,12 +34,12 @@
   "state": {
     "grandma_look": [
       8,
-      2.5,
-      0.3
+      7,
+      0.2
     ],
     "sophia_look": "grandma",
     "sophia_reach": {
-      "r": "grandma#shoulder_l"
+      "r": "grandma#hand_l"
     },
     "papa_look": "grandma",
     "papa_with": [
@@ -60,11 +57,9 @@
         1.15
       ]
     },
-    "grandma_on": [
-      -0.6,
-      4.25,
-      0.42
-    ]
+    "grandma_reach": {
+      "l": "sophia#hand_r"
+    }
   },
   "objects": [
     {
@@ -82,10 +77,10 @@
       "width": 6000,
       "depth": 4000,
       "reflect": {
-        "strength": 0.55,
+        "strength": 0.5,
         "fade": 0,
-        "rough": 0.22,
-        "ripple": 0.15
+        "rough": 0.1,
+        "ripple": 0.1
       }
     },
     {
@@ -586,30 +581,15 @@
       ]
     },
     {
-      "id": "stone",
-      "name": "Grandmother's stone",
-      "across": -0.6,
-      "distance": 4.25,
-      "height": 0.45,
-      "box": [
-        -1.6,
-        -0.75,
-        1.6,
-        0
-      ],
-      "shadow": true
-    },
-    {
       "id": "grandma",
       "name": "Grandmother",
       "person": {
         "cast": "cast",
         "who": "grandma",
-        "turn": 120,
-        "does": "seated"
+        "turn": 120
       },
-      "across": -0.6,
-      "distance": 4.25
+      "across": 0.0,
+      "distance": 4.6
     },
     {
       "id": "sophia",
@@ -617,10 +597,10 @@
       "person": {
         "cast": "cast",
         "who": "sophia",
-        "turn": 221
+        "turn": 125
       },
-      "across": -0.1,
-      "distance": 4.7
+      "across": 0.3,
+      "distance": 5.1
     },
     {
       "id": "papa",
