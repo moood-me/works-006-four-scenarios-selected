@@ -41,7 +41,7 @@ export function trees(b, chapters, { grow = null, author = false } = {}) {
     strip.append(leaf);
     if (c.badge) leaf.append(hit(`badge:${i}`, 'badge', tr('Replay')));
     const head = hit(`knot:${i}`, 'head');
-    head.append(el('span', 'num', c.number || ''), el('span', 'title', c.kind === 'future' ? '' : c.title));
+    head.append(el('span', 'num', c.number || (c.kind === 'future' ? c.title : '')), el('span', 'title', c.kind === 'future' ? '' : c.title));
     leaf.append(head);
     if (c.kind === 'future') return;
     const rows = el('ol', 'rows');
