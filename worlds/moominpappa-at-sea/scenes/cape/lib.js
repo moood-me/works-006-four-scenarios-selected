@@ -85,8 +85,14 @@ function at(id, place, more = {}) {
 }
 const CAM0 = { camera_target: null, camera_shot: 'full', camera_frame: null, camera_glide: 1.5, camera_x: 0, camera_z: 0, camera_h: 0, camera_yaw: 0, camera_look: 0, camera_pitch: 0 };
 const cam = (target, shot, frame, more = {}) => ({ ...CAM0, camera_target: target, camera_shot: shot, camera_frame: frame ?? null, ...more });
+const ready = (s, values) => s.shot(values);
 function setAll(s, values) {
   for (const k in values) s.set(k, values[k]);
+}
+// the operator framing a target, the camera's own offsets (left by a hand-set shot before) brought back to none
+function frame(s, o) {
+  for (const k of ['camera_x', 'camera_z', 'camera_h', 'camera_yaw', 'camera_look']) s.move(k, 0, { over: o.glide ?? 1.5, ease: 'inOut' });
+  return s.camera(o);
 }
 async function cutTo(s, shot) {
   await s.until(() => shot.ready);
@@ -99,6 +105,8 @@ const WAY = [[4.6, 5.0], ...HOLDS.map(([a, d]) => [a + 0.15, d - 0.55]), [0.3, 4
 WAY.forEach(([a, d], k) => { PLACES.papa[`way${k}`] = { at: [a, d], turn: 280, do: stand, look: 'fisher' }; });
 // where the beam points from the lighthouse at the Fisherman (degrees, as `beam_turn` goes)
 const BEAM_AT_HIM = ((Math.atan2(-0.9 - 28, 3.6 - 54) * 180) / Math.PI + 360) % 360;
+// the beam's tilt from the lantern down to the Fisherman's chest (degrees, `beam_tilt`)
+const TILT_AT_HIM = (Math.atan2(land(-0.9, 3.6) + 0.9 - (land(28, 54) - 0.45 + 12.6), Math.hypot(28.9, 50.4)) * 180) / Math.PI;
 const turnNear = (s, b) => () => {
   const t = (((s.get('beam_turn') ?? 0) % 360) + 360) % 360;
   return Math.abs(((t - b + 540) % 360) - 180) < 8;
@@ -116,6 +124,14 @@ function glideTo(s, values, over = 1.8) {
 }
 // the knot close after the knot is undone: the knot itself — the Fisherman's sign, the same as under the keeper's
 // lines on the wall (the scenario's «the same knot») —, not the tangle's thread
+// a wave coming in over the rocks (the key `wave`, the surge's): up, held a moment at its peak (`peak` — its moment
+// told there), back
+async function wave(s, peak) {
+  await s.move('wave', 1, { over: 1.4, ease: 'in' });
+  if (peak) s.tell(peak);
+  await s.wait(0.8);
+  await s.move('wave', 0, { over: 2.2, ease: 'out' });
+}
 async function knotClose(s, paws = 1) {
   s.set('knot_paws', paws);
   s.set('knot_pull', 0);
@@ -150,7 +166,7 @@ const FILM = {
       fisher.look([-40, 2, 1.2]);
       s.set('papa_mood', 'smile');
       await s.wait(1);
-      s.camera({ target: 'fisher', shot: 'wide', frame: [0.4, 0.5], glide: 2 });
+      frame(s, { target: 'fisher', shot: 'wide', frame: [0.4, 0.5], glide: 2 });
       await papa.walk([[4.6, 3.4], [7.5, 3.0]]);
       fisher.look('lighthouse#lantern');
       s.tell('keeper:gone');
@@ -168,7 +184,7 @@ const FILM = {
       await fisher.do('rise');
       s.set('fisher_on', null);
       s.tell('invite:up');
-      s.camera({ target: 'papa', shot: 'wide', frame: [0.55, 0.5], glide: 2 });
+      frame(s, { target: 'papa', shot: 'wide', frame: [0.55, 0.5], glide: 2 });
       await fisher.walk([[-2.6, 6.2], [-1.2, 10.5]]);
       s.set('papa_mood', 'sad');
       s.tell('invite:gone');
@@ -213,7 +229,7 @@ const FILM = {
     from: () => ({ ...at('fisher', 'seat'), ...at('papa', 'net', { papa_do: loop('mend_net') }), ...cam('net#knot', 'wide', [0.5, 0.55]) }),
     run: async s => {
       await s.wait(2);
-      s.camera({ target: 'net#knot', shot: 'full', frame: [0.5, 0.5], glide: 2 });
+      frame(s, { target: 'net#knot', shot: 'full', frame: [0.5, 0.5], glide: 2 });
       await s.wait(2);
       s.tell('net_sit:ready');
       await s.wait(1);
@@ -256,7 +272,7 @@ const FILM = {
       await papa.do('sit_floor');
       papa.do('mend_net', { loop: true });
       papa.look('net#knot');
-      s.camera({ target: 'net#knot', shot: 'full', frame: [0.5, 0.5], glide: 2 });
+      frame(s, { target: 'net#knot', shot: 'full', frame: [0.5, 0.5], glide: 2 });
       await s.wait(1.5);
       s.tell('net_left:ready');
     },
@@ -267,7 +283,7 @@ const FILM = {
     from: () => ({ ...at('fisher', 'away'), ...at('papa', 'net', { papa_do: loop('mend_net') }), ...cam('papa', 'wide', [0.5, 0.5]) }),
     run: async s => {
       const fisher = s.person('fisher'), papa = s.person('papa');
-      s.camera({ target: 'papa', shot: 'wide', frame: [0.5, 0.5], glide: 1.5 });
+      frame(s, { target: 'papa', shot: 'wide', frame: [0.5, 0.5], glide: 1.5 });
       await fisher.walk([[-0.2, 4.6]]);
       fisher.reach({ r: 'net#knot' });
       await s.wait(1);
@@ -286,9 +302,9 @@ const FILM = {
   under_wave: {
     from: () => ({ ...at('fisher', 'seat'), ...FACES }),
     run: async s => {
-      await s.wait(2.5);
-      s.tell('under_wave:wave');
-      await s.wait(4);
+      await s.wait(1.5);
+      await wave(s, 'under_wave:wave');
+      await s.wait(1);
     },
   },
   // 4.4 «cape» — Papa with the lantern over the rocks (the rocks minigame: granite#hold1…3)
@@ -333,9 +349,9 @@ const FILM = {
       await papa.do('sit_floor');
       papa.do('sit_look', { loop: true });
       papa.look([-40, 8, 1]);
-      await s.wait(3.5);
-      s.tell('sleeve:wave');
-      await s.wait(2);
+      await s.wait(1.2);
+      await wave(s, 'sleeve:wave');
+      await s.wait(1);
     },
   },
   // 4.4 — lightning: both faces close; the knot on his knees close
@@ -391,11 +407,13 @@ const FILM = {
   beam_cape: {
     from: () => ({ ...at('fisher', 'seat'), ...FACES }),
     run: async s => {
+      s.move('beam_tilt', TILT_AT_HIM, { over: 2, ease: 'inOut' });
       await s.until(turnNear(s, BEAM_AT_HIM - 20));
       s.person('fisher').look('lighthouse#lantern');
       await s.until(turnNear(s, BEAM_AT_HIM));
       s.tell('beam_cape:face');
       await s.wait(3);
+      s.move('beam_tilt', -1, { over: 2, ease: 'inOut' });
     },
   },
   // «Pie» — Papa sets out over the stones with the pie (the carry minigame)
@@ -453,7 +471,7 @@ const FILM = {
     after: ['pie', 'bread_take'],
     from: () => ({ ...at('fisher', 'seat'), ...at('papa', 'beside'), ...cam('seat', 'full', [0.45, 0.55]) }),
     run: async s => {
-      s.camera({ target: 'seat', shot: 'full', frame: [0.45, 0.55], glide: 1.5 });
+      frame(s, { target: 'seat', shot: 'full', frame: [0.45, 0.55], glide: 1.5 });
       s.person('papa').reach({ r: 'box#box' });
       await s.wait(1.2);
       s.set('matchbox', 'stone');
@@ -468,7 +486,7 @@ const FILM = {
     from: () => ({ ...at('fisher', 'seat'), ...at('papa', 'beside'), ...cam(null, 'full', null) }),
     run: async s => {
       const mama = s.person('mama');
-      s.camera({ target: 'papa', shot: 'wide', frame: [0.5, 0.5], glide: 2 });
+      frame(s, { target: 'papa', shot: 'wide', frame: [0.5, 0.5], glide: 2 });
       await mama.do('rise_floor');
       s.tell('pie_leave:up');
       await s.wait(2.5);
@@ -489,7 +507,8 @@ const FILM = {
     after: 'pie_leave',
     from: () => ({ ...at('papa', 'leaving'), ...cam('seat', 'wide', [0.4, 0.55]) }),
     run: async s => {
-      s.set('matchbox', 'none');
+      // (it follows `pie_leave`: a cut to Papa on the path looking back, the stone in the frame)
+      await cutTo(s, ready(s, { ...at('papa', 'leaving'), matchbox: 'none', ...cam('seat', 'wide', [0.4, 0.55]) }));
       s.person('papa').look('seat');
       await s.wait(1.5);
       s.tell('stone_empty:empty');
@@ -543,9 +562,11 @@ const FILM = {
   beam_pass: {
     from: () => ({ ...at('fisher', 'seat'), ...cam('fisher', 'full', [0.45, 0.5]) }),
     run: async s => {
+      s.move('beam_tilt', TILT_AT_HIM, { over: 2, ease: 'inOut' });
       await s.until(turnNear(s, BEAM_AT_HIM));
       s.tell('beam_pass:fisher');
       await s.wait(2.5);
+      s.move('beam_tilt', -1, { over: 2, ease: 'inOut' });
     },
   },
   // common shots — the Fisherman by his mark, his net by «Net»

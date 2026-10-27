@@ -3,7 +3,7 @@
 The cape (1.6–1.7, 2.4, the storm, the Pie): the Fisherman on his low stone in the lee of his rock, his net in his
 hands and heaped at his feet, the rest of it drying on two driftwood poles; Moominpappa sitting on the granite beside
 him; across the cove the island's long back rising to the lighthouse some sixty metres off, Moominmamma small on its
-steps (stage 4: people stand or sit and breathe; no motions, no camera, no showcase yet).
+steps; and its pieces (stage 5: below).
 
 - `tools/cape.py` writes `scene.json`; it reads the lib's `PLACES` for the starting state. The land is one function
   (`lib.js` `land`): the viewer's rock and the cape running out to the left, the Fisherman's knob of rock on it, a
@@ -88,5 +88,5 @@ are told as `<piece>:<moment>` — the game speaks its lines there. Where the pe
  "points": ["lighthouse#door", "lighthouse#lantern", "rack#net", "net#knot", "bread#stone", "pie#pie", "granite#hold1", "granite#hold2", "granite#hold3", "seat", "box#box", "matchbox#box", "matchbox#palm", "sky#moon", "knot#thread", "fisher", "papa", "mama", "my", "troll", "fisher#chest", "papa#chest", "mama#chest", "my#chest", "troll#chest"],
  "offers": ["fisher#chest", "papa#chest", "mama#chest", "my#chest", "troll#chest", "net#knot", "bread#stone", "granite#hold1", "granite#hold2", "granite#hold3", "knot#thread", "matchbox#box", "pie#pie", "seat"],
  "party": {"dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "lighthouse_lit": 0, "beam": 0, "net": "dry", "bread": false, "pie": false, "matchbox": "none", "mama_at": "steps", "fisher_mark": "keeper"},
- "acts": {"knot": {"values": [], "tells": ["knot:loose"]}, "knot_open": {"values": [], "tells": []}, "matchbox_open": {"values": [], "tells": []}, "matchbox_give": {"values": [], "tells": []}, "carry_tilt": {"values": [], "tells": []}, "cross": {"values": [0, 1, 2, 3], "tells": ["cross:hold1", "cross:hold2", "cross:hold3"]}, "carry": {"values": [], "tells": ["carry:there"]}, "matchbox": {"values": ["none", "stone", "palm"], "tells": []}, "flash": {"values": [], "tells": []}}}
+ "acts": {"knot": {"values": [], "tells": []}, "knot_open": {"values": [], "tells": []}, "matchbox_open": {"values": [], "tells": []}, "matchbox_give": {"values": [], "tells": []}, "carry_tilt": {"values": [], "tells": []}, "cross": {"values": [0, 1, 2, 3], "tells": []}, "carry": {"values": [], "tells": []}, "matchbox": {"values": ["none", "stone", "palm"], "tells": []}, "flash": {"values": [], "tells": ["flash:strike"]}}}
 ```

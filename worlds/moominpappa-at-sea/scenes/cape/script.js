@@ -11,17 +11,15 @@ function net() {
 scene.on('change', 'net', net);
 net();
 scene.kit.island.places(scene, L.PLACES);
-// Papa along the way: `u` 0…4 (way0 before the first hold … way4 by him), only while a piece of the way plays
+// Papa along the way, walking at his gait (lantern_walk, carry_walk — the piece's): `u` 0…4 (way0 before the first
+// hold … way4 by him), to where the minigame's key goes, only while a piece of the way plays
 const along = u => {
   const k = Math.max(0, Math.min(L.WAY.length - 2, Math.floor(u))), f = Math.max(0, Math.min(1, u - k)), [a0, d0] = L.WAY[k], [a1, d1] = L.WAY[k + 1];
-  scene.set('papa_a', a0 + (a1 - a0) * f);
-  scene.set('papa_d', d0 + (d1 - d0) * f);
+  scene.person('papa').walk([[a0 + (a1 - a0) * f, d0 + (d1 - d0) * f]]);
 };
 const onWay = () => ['crossing', 'pie_way', 'bread_way'].includes(scene.get('beat'));
 scene.on('change', 'cross', v => onWay() && along(+v || 0));
-const carry = () => onWay() && along(4 * (scene.get('carry') ?? 0));
-scene.on('change', 'carry', carry);
-scene.on('move', 'carry', carry);
+scene.on('change', 'carry', v => onWay() && along(4 * (+v || 0)));
 // the knot minigame's pull shown in the close-up while Papa works the knot (net_sit, net_left)
 const pull = () => ['net_sit', 'net_left'].includes(scene.get('beat')) && scene.set('knot_pull', scene.get('knot') ?? 0);
 scene.on('change', 'knot', pull);

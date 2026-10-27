@@ -233,12 +233,19 @@ const ready = (s, values) => s.shot(values);
 function setAll(s, values) {
   for (const k in values) s.set(k, values[k]);
 }
+// the operator framing a target, the camera's own offsets (left by a hand-set shot before) brought back to none
+function frame(s, o) {
+  for (const k of ['camera_x', 'camera_z', 'camera_h', 'camera_yaw', 'camera_look']) s.move(k, 0, { over: o.glide ?? 1.5, ease: 'inOut' });
+  return s.camera(o);
+}
 async function cutTo(s, shot) {
   await s.until(() => shot.ready);
   shot.cut();
 }
 // where the beam points from the lighthouse at a place (degrees, as `beam_turn` goes: 0 the far side, 90 the right)
 const bearingTo = (a, d) => ((Math.atan2(a - 10, d - 33) * 180) / Math.PI + 360) % 360;
+// the beam's tilt from the lantern down to someone's chest (degrees, `beam_tilt`)
+const tiltTo = (a, d) => (Math.atan2(land(a, d) + 0.9 - (land(10, 33) - 0.45 + 12.6), Math.hypot(a - 10, d - 33)) * 180) / Math.PI;
 const turnNear = (s, b) => () => {
   const t = (((s.get('beam_turn') ?? 0) % 360) + 360) % 360;
   return Math.abs(((t - b + 540) % 360) - 180) < 8;
@@ -246,6 +253,12 @@ const turnNear = (s, b) => () => {
 
 // the door seen between the pines that crept up to it, from just below the steps
 const DOOR_CAM = { ...CAM0, camera_x: 9.7, camera_z: 26.2, camera_h: 0.75, camera_yaw: 3, camera_look: 0.04 };
+
+// the family in the boat, leaving
+const IN_BOAT = () => ({ ...at('papa', 'in_boat'), ...at('mama', 'in_boat'), ...at('troll', 'in_boat'), ...at('my', 'in_boat') });
+
+// the lighthouse seen from the water off the cove, as from the boat going (low over the sea, out past the cove)
+const FROM_WATER = { ...CAM0, camera_x: -8.5, camera_z: 19.5, camera_h: -0.6, camera_yaw: 60, camera_look: 0.03 };
 
 const FILM = {
   // 1.4 — the door locked; My by the arrow stone; the key
@@ -278,7 +291,7 @@ const FILM = {
     after: 'arrive',
     from: () => ({ ...at('papa', 'patch'), ...at('mama', 'patch'), ...at('troll', 'boulder'), ...cam('mama', 'wide', [0.35, 0.5]) }),
     run: async s => {
-      s.camera({ target: 'mama', shot: 'wide', frame: [0.35, 0.5], glide: 1.5 });
+      frame(s, { target: 'mama', shot: 'wide', frame: [0.35, 0.5], glide: 1.5 });
       s.person('mama').look(PATCH_AT);
       await s.wait(1.6);
       s.person('papa').look(PATCH_AT);
@@ -293,7 +306,7 @@ const FILM = {
     after: 'arrive',
     from: () => ({ ...at('mama', 'slab'), ...at('troll', 'boulder'), ...cam('mama', 'medium', [0.45, 0.45]) }),
     run: async s => {
-      s.camera({ target: 'mama', shot: 'medium', frame: [0.45, 0.45], glide: 1.6 });
+      frame(s, { target: 'mama', shot: 'medium', frame: [0.45, 0.45], glide: 1.6 });
       s.set('mama_mood', 'tired');
       await s.wait(2);
       s.person('mama').look([-1.3, 3.6, 0.2]);
@@ -413,7 +426,7 @@ const FILM = {
       await papa.turn(250);
       papa.look('boat#boat');
       s.set('papa_do', loop('pull_rope'));
-      s.camera({ target: 'boat', shot: 'wide', frame: [0.5, 0.5], glide: 1.5 });
+      frame(s, { target: 'boat', shot: 'wide', frame: [0.5, 0.5], glide: 1.5 });
       await s.wait(1.5);
     },
   },
@@ -435,7 +448,7 @@ const FILM = {
   },
   // 4.4 «cape» — Papa out of the door into the storm with the lantern, toward the cape
   out_storm: {
-    from: () => ({ ...at('papa', 'door', { papa_with: ['lantern'], papa_gait: 'lantern_walk', papa_turn: 180, papa_reach: null, papa_look: null }), papa_lantern: 1, ...cam('papa', 'wide', [0.45, 0.55]) }),
+    from: () => ({ ...at('papa', 'door', { papa_with: ['lantern'], papa_gait: 'lantern_walk', papa_turn: 180, papa_reach: null, papa_look: null }), door: 1, papa_lantern: 1, ...cam('papa', 'wide', [0.45, 0.55]) }),
     run: async s => {
       const papa = s.person('papa');
       await papa.walk([[8.4, 28.4], [6.6, 26.4]]);
@@ -455,7 +468,7 @@ const FILM = {
         await s.wait(4);
         return;
       }
-      s.camera({ target: 'papa', shot: 'wide', frame: [0.5, 0.5], glide: 2 });
+      frame(s, { target: 'papa', shot: 'wide', frame: [0.5, 0.5], glide: 2 });
       await papa.walk([[-1.6, 10.6], [-3.4, 12.2]]);
       await papa.turn(255);
       papa.look([-20, 14, 0.2]);
@@ -480,7 +493,7 @@ const FILM = {
     from: () => ({ ...at('papa', 'boat', { papa_do: loop('crouched') }), ...cam('boat', 'wide', [0.5, 0.5]) }),
     run: async s => {
       const tarred = ready(s, { boat: 'tarred', ...at('papa', 'boat', { papa_do: loop('crouched') }), ...cam('boat', 'full', [0.5, 0.5]) });
-      s.camera({ target: 'boat', shot: 'wide', frame: [0.5, 0.5], glide: 1.5 });
+      frame(s, { target: 'boat', shot: 'wide', frame: [0.5, 0.5], glide: 1.5 });
       if (s.get('papa_at') !== 'boat') await s.person('papa').walk([[-1.7, 6.3]]);
       s.set('papa_do', loop('crouched'));
       await s.wait(2.5);
@@ -508,9 +521,11 @@ const FILM = {
   // «Boat» — the mooring let go (act mooring): the boat slides off with them in her
   cast_off: {
     after: 'leave',
-    from: () => ({ ...at('papa', 'in_boat'), ...at('mama', 'in_boat'), ...at('troll', 'in_boat'), ...at('my', 'in_boat'), ...cam('boat', 'wide', [0.5, 0.5]) }),
+    from: () => ({ ...IN_BOAT(), ...cam('boat', 'wide', [0.5, 0.5]) }),
     run: async s => {
-      s.camera({ target: 'boat', shot: 'wide', frame: [0.5, 0.5], glide: 2 });
+      // (it follows `leave`: the family sits down in her on a cut, then she goes)
+      await cutTo(s, ready(s, { ...IN_BOAT(), ...cam('boat', 'wide', [0.5, 0.5]) }));
+      frame(s, { target: 'boat', shot: 'wide', frame: [0.5, 0.5], glide: 2 });
       await s.move('boat_off', 1, { over: 8, ease: 'inOut' });
       s.tell('cast_off:off');
       await s.wait(1);
@@ -519,9 +534,9 @@ const FILM = {
   // «Boat» — as the boat goes: the Fisherman with his net at the stone and the locked door, seen between the pines; close
   // as he lifts his hand after her
   fisher_door: {
-    from: () => ({ ...at('fisher', 'path', { fisher_with: ['net_shoulder'], fisher_wear: { parts: [] } }), ...cam('fisher', 'wide', [0.5, 0.55]) }),
+    from: () => ({ ...at('fisher', 'path', { fisher_with: ['net_shoulder'], fisher_wear: { parts: [] } }), ...FROM_WATER }),
     run: async s => {
-      const fisher = s.person('fisher');
+      const fisher = s.person('fisher'), atDoor = ready(s, { ...cam('fisher', 'medium', [0.5, 0.5]) });
       await fisher.walk([[8.2, 28.2]]);
       fisher.look('arrow_stone#stone');
       await fisher.do('crouch');
@@ -531,10 +546,11 @@ const FILM = {
       await fisher.walk([[10.25, 30.9]]);
       await fisher.turn(0);
       fisher.reach({ r: 'door#door' });
+      // (at the door the pines that crept up hide him from the water: a cut to him between them)
+      await cutTo(s, atDoor);
       s.tell('fisher_door:palm');
       await s.wait(2.5);
       if (s.get('fisher_hand')) {
-        s.camera({ target: 'fisher', shot: 'medium', frame: [0.5, 0.5], glide: 2 });
         fisher.reach(null);
         await fisher.turn(200);
         fisher.look([-30, -20, 1]);
@@ -570,9 +586,20 @@ const FILM = {
   beam_pass: {
     from: () => ({ ...at('my', 'rock'), ...cam('my', 'wide', [0.5, 0.55]) }),
     run: async s => {
+      s.move('beam_tilt', tiltTo(3.2, 5.9), { over: 2, ease: 'inOut' });
       await s.until(turnNear(s, bearingTo(3.2, 5.9)));
       s.tell('beam_pass:my');
       await s.wait(2.5);
+      s.move('beam_tilt', -1, { over: 2, ease: 'inOut' });
+    },
+  },
+  // «Beam», the last shot — the beam goes out to sea past the lighthouse, the round room's window lit under it
+  beam_window: {
+    from: () => ({ ...FROM_WATER, camera_yaw: 52, camera_look: -0.2 }),
+    run: async s => {
+      await s.until(turnNear(s, 265));
+      s.tell('beam_window:out');
+      await s.wait(3);
     },
   },
   // «Stair» — each morning Papa down to the tarred boat, a paw on the mooring, a look up at the dark lantern, back
@@ -627,6 +654,7 @@ const SHOW = {
   fisher_door: { boat: 'away', boat_off: 0, fisher_here: true, fisher_hand: true },
   threshold: { night: 0.7, dusk: 0.3 },
   beam_pass: { night: 1, dusk: 0, lighthouse_lit: 1, beam: 1, my_here: true },
+  beam_window: { room_lit: 1, my_here: false },
   mooring_touch: { night: 0, lighthouse_lit: 0, beam: 0, boat: 'tarred' },
   look_marks: { cleft: 'sprout' },
 };
