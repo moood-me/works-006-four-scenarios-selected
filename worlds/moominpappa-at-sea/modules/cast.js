@@ -62,6 +62,11 @@ return {
     troll: { kind: 'shapes', style: 'moomin', who: 'child', garment: 'none', hair: 'none', face: 'moomin', parts: ['tail'],
       body: { height: 0.6, head: 0.9, shoulders: 0.9, arms: 0.8, hips: 1.18, thick: 1.22 },
       colors: { skin: '#f6f3ed', top: '#f6f3ed', bottom: '#f6f3ed', shoes: '#f6f3ed' } },
+    // the Groke: big and round, a grey-blue mound with no neck and no feet to be seen — her cloak falls to the ground
+    // over a hem white with frost; a broad face, pale round eyes, a heavy nose, a wide mouth turned down
+    groke: { kind: 'shapes', style: 'groke', who: 'old', garment: 'groke', hair: 'none', hat: 'none', face: 'groke', parts: [],
+      body: { height: 1.1, head: 1.3, shoulders: 1.1, arms: 0.75, hips: 1.2, thick: 1.4 },
+      colors: { skin: '#a2b0bf', top: '#eef3f6', bottom: '#8494a8', shoes: '#8494a8', garment: '#8494a8' } },
   },
   shapes: {
     // the world's style: soft round shapes (the engine's soft), a head as big as a Moomin's, hardly a neck, short
@@ -75,12 +80,20 @@ return {
       // the Fisherman's: the same soft line, a smaller long head on a thin neck, long thin limbs, a narrow body
       fisher: { from: 'moomin', name: 'Fisherman', head: 1.9, egg: [0.86, 1.14, 0.96], neck: 0.5, legs: 0.95, limb: 0.8,
         trunk: { w: [0.86, 0.88, 0.82, 0.86, 0.8], d: [0.9, 0.9, 0.86, 0.84, 0.8] }, face: 'fisher' },
+      // the Groke's: the same soft line, a big wide head sunk into the shoulders, short legs, thick arms, a body
+      // widening down to a mound; her cloak's hem a little ragged
+      groke: { from: 'moomin', name: 'Groke', head: 2.5, egg: [1.12, 0.94, 1.02], neck: 0.02, legs: 0.62, limb: 1.7, ragged: 0.1,
+        trunk: { w: [1.75, 1.75, 1.7, 1.65, 1.55], d: [1.7, 1.7, 1.65, 1.6, 1.5] }, face: 'groke' },
     },
     garments: {
       // Little My's dress: a red bell from the shoulders to above the knees, her arms and legs bare
       bell: { name: 'bell dress', hang: [{ to: 0.85, from: 'shoulders', flare: 0.55 }], bare: true },
       // the Fisherman's oilskin: from the shoulders to below the knees, a little wide, ragged at the hem
       oilcoat: { name: 'oilskin coat', hang: [{ to: 1.25, from: 'shoulders', flare: 0.22, ragged: true }], sleeves: 'garment' },
+      // the Groke's cloak: from the shoulders, wide, to just above the ground — under it, from the waist, a frost-white
+      // layer to the ground: its edge showing at the hem and between the tatters
+      groke: { name: "the Groke's cloak", hang: [{ to: 3, from: 'waist', flare: 0.36, color: 'top', folds: false },
+        { to: 2.0, from: 'shoulders', flare: 0.3, ragged: true }], sleeves: 'garment' },
     },
     hair: {
       // Little My's topknot: her hair drawn tight over the crown into a tall knot on top
@@ -122,6 +135,24 @@ return {
         F.ball(on([0, y - x.open / 2, 0.95], 0.975), axes, [r * w * 0.75, r * Math.max(x.open, 0.001), r * 0.03], dark, 10);
         F.tube([on([-w, y + x.corners, 0.93], 0.995), on([0, y, 0.94], 1.0), on([w, y + x.corners, 0.93], 0.995)], [[0, r * 0.018], [2, r * 0.018]], [[0, lips]], 6, hu);
         F.cap(F.head.at, axes, F.head.egg.map(e => e * r * F.head.out * 1.01), [0, -1, 0], 0.55, brow, F.head.sides, F.head.square);
+      } },
+      // the Groke's face: big pale round eyes bulging out of it, a small dark pupil in each, heavy sagging brows, a
+      // broad round nose, a wide mouth drawn down at its corners — the face reads from afar; it takes <id>_mood
+      groke: { name: 'Groke', draw: F => {
+        const { axes, r, on } = F.head, [, hu, hf] = axes, x = MOODS[F.look.expression] ?? MOODS.neutral, { add, mul } = V();
+        const pale = [0.9, 0.93, 0.94, 1], dark = [0.09, 0.1, 0.13, 1], skin = F.colors.skin, brow = [skin[0] * 0.48, skin[1] * 0.5, skin[2] * 0.56, 1];
+        const nose = [skin[0] * 0.86, skin[1] * 0.87, skin[2] * 0.9, 1];
+        for (const sx of [-1, 1]) {
+          const eye = on([sx * 0.3, 0.14, 0.92], 1.06);
+          F.ball(eye, axes, [r * 0.2, r * 0.22 * x.eye, r * 0.13], pale, 14);
+          F.ball(add(eye, add(mul(hf, r * 0.125), mul(hu, -r * 0.035 * x.eye))), axes, [r * 0.06, r * 0.07 * x.eye, r * 0.03], dark, 10);
+          F.tube([on([sx * 0.1, 0.4 + x.inner, 0.92], 1.05), on([sx * 0.28, 0.44 + (x.inner + x.outer) / 2, 0.88], 1.07), on([sx * 0.48, 0.33 + x.outer, 0.8], 1.05)],
+            [[0, r * 0.05], [1, r * 0.06], [2, r * 0.035]], [[0, brow]], 6, hu);
+        }
+        F.ball(on([0, -0.1, 1], 1.02), axes, [r * 0.2, r * 0.17, r * 0.16], nose, 14);
+        const w = x.wide * 1.8, y = -0.46;
+        F.ball(on([0, y - x.open / 2, 0.93], 0.99), axes, [r * w * 0.75, r * Math.max(x.open, 0.001), r * 0.03], dark, 10);
+        F.tube([on([-w, y - 0.05 + x.corners, 0.88], 1.03), on([0, y, 0.93], 1.035), on([w, y - 0.05 + x.corners, 0.88], 1.03)], [[0, r * 0.022], [2, r * 0.022]], [[0, brow]], 6, hu);
       } },
       // the Moomin face: a long round snout, small dark eyes close together high on it, fine brows, a mouth under
       // the snout's end, small ears on the crown (none under a hat) — the same solids for every expression
