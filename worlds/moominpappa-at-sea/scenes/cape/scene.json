@@ -175,11 +175,21 @@
       "place": {
         "bearing": "beam_turn"
       }
+    },
+    {
+      "id": "papa_lantern",
+      "at": "papa#flame",
+      "on": "papa_lantern",
+      "color": "#ffcf86",
+      "strength": 1.4,
+      "reach": 9
     }
   ],
   "modules": [
     "cast",
-    "island"
+    "island",
+    "beats",
+    "closeups"
   ],
   "objects": [
     {
@@ -491,6 +501,11 @@
       }
     },
     {
+      "id": "knot",
+      "name": "The knot close",
+      "insert": "knot_open"
+    },
+    {
       "id": "fisher",
       "name": "The Fisherman",
       "person": {
@@ -581,6 +596,15 @@
     "bread": false,
     "pie": false,
     "matchbox": "none",
+    "fisher_mark": "keeper",
+    "cross": 0,
+    "carry": 0,
+    "knot": 0,
+    "knot_open": 0,
+    "knot_paws": 1,
+    "papa_lantern": 0,
+    "beat": null,
+    "beat_next": null,
     "my_here": false,
     "troll_here": false,
     "fisher_at": "seat",
@@ -731,6 +755,70 @@
       ],
       "means": "the Fisherman's net: drying on the poles and heaped at his feet, in his hands; a snarl of a knot in the heap; drawn out of the heap up into his paws as Papa sits by it, the knot before him; a pale mended patch where Papa untangled it; folded into a roll beside him, his hands empty, the poles bare"
     },
+    "cross": {
+      "values": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "means": "the rocks minigame: how many holds Papa has reached on his way to the Fisherman (granite#hold1…3)"
+    },
+    "carry": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the carry minigame: how far Papa has come over the stones with the pie or the bread"
+    },
+    "knot": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the knot minigame: the thread drawn out of the knot (the close-up knot's pull)"
+    },
+    "knot_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up of the knot open (the people package's closeups shot knot)"
+    },
+    "knot_paws": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the knot close: Papa's paws at the knot (1), or the net alone on the Fisherman's knees (0)"
+    },
+    "papa_lantern": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lantern in Papa's paw lit (its light at papa#flame)"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (the module beats; the game names it)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game goes to next (its cut made ready)"
+    },
+    "fisher_mark": {
+      "values": [
+        "keeper",
+        "invited",
+        "sat"
+      ],
+      "means": "how the Fisherman met Papa (the play's mark): turned away (keeper), went off — later lifts his hand after Mama (invited), sat with him (sat); the common shots show him so"
+    },
     "bread": {
       "type": "boolean",
       "means": "Moominmamma's bread on the flat stone by the path (bread#stone)"
@@ -760,7 +848,14 @@
         "behind",
         "net",
         "under",
-        "stand"
+        "stand",
+        "from_island",
+        "leaving",
+        "way0",
+        "way1",
+        "way2",
+        "way3",
+        "way4"
       ],
       "means": "where papa is (the script puts them there: lib.PLACES.papa): beside — sitting beside him looking out to sea; behind — standing at the Fisherman's back; net — sitting at the net, looking at its knot; under — sitting close by him, under the waves; stand — standing near him"
     },
@@ -768,7 +863,8 @@
       "values": [
         "steps",
         "beside",
-        "apart"
+        "apart",
+        "path_in"
       ],
       "means": "where mama is (the script puts them there: lib.PLACES.mama): steps — far off on the lighthouse steps; beside — sitting at Papa's side; apart — sitting apart, facing the shore"
     },
