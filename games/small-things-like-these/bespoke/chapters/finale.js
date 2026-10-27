@@ -98,7 +98,7 @@ async function crown(g, f) {
     await g.say('eileen', 'Again?');
     await g.plate(tr('— and counts on her fingers what they’ll live on in January.'));
   }
-  await g.scene(SCENES.parlour, { here: ['sara', 'bill'], moods: { sara: 'neutral', bill: 'tired' },
+  await g.scene(SCENES.parlour, { keys: { envelope: false }, here: ['sara', 'bill'], moods: { sara: 'neutral', bill: 'tired' },
     where: tr('In truth: the same Christmas table in the Furlongs’ kitchen.') });
   await g.plate(tr('Loretta pushes a cracker at Sara and nods at her father.'));
   await g.play(cracker);

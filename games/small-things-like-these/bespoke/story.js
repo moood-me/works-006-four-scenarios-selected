@@ -7,10 +7,12 @@
 // a place the world has not got yet — the people in one of its scenes and a label saying where it really is.
 //   g.state — what the play carries: {scales, shown, marks, choices} (game.js); what follows from it: facts(g.state)
 //   g.signal — aborts when the step is left
-//   g.scene(folder, {here, moods, where}, {cut}) — that scene of the world, full-screen: of its people only `here`
-//     (ids) are there (`<id>_here`, the engine's key), their faces as `moods` say ({id: mood}); `where` — a label in
-//     the corner, where this really happens (none: the place is the scene's own). Always opened anew
-//   g.here(id, on) — someone of the shown scene comes or goes (in one cut); g.mood(id, mood) — their face
+//   g.scene(folder, {here, moods, keys, where}, {cut}) — that scene of the world, full-screen: of its people only
+//     `here` (ids) are there (`<id>_here`, the engine's key), their faces as `moods` say ({id: mood}); `keys` — the
+//     scene's own keys (its spec.states: the parlour's `envelope`); `where` — a label in the corner, where this really
+//     happens (none: the place is the scene's own). Always opened anew
+//   g.here(id, on) — someone of the shown scene comes or goes (in one cut); g.mood(id, mood) — their face;
+//     g.set(key, value) — one of the shown scene's own keys
 //   g.wait(ms) — time of the game's own (a pause)
 //   g.say(who, text, at) — someone of the game's people (people.json) says it over `at` (default: over themselves if
 //     they are in the scene, else low in the middle, as the narrator), in their voice; → a breath after it is heard
@@ -129,6 +131,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
   }));
   const put = (key, value) => (unseen() ? j.did([key, value]) : b.set(key, value));
   let people = new Set(), present = new Set(); // the shown scene's people; those of them there now
+  let own = new Set(); // the shown scene's own keys (spec.states)
   let playing = null; // the minigame played now: {signal, end, skippable}
   // the page's ⏭ as the step stands now: none while a choice or a plate waits or the step is still unseen; in a
   // minigame — its skip, where it may be skipped; else, where the step is seen, on to the next interaction
@@ -174,13 +177,15 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
   const g = {
     state,
     signal: left.signal,
-    async scene(folder, { here = [], moods = {}, where = null } = {}, { cut = false } = {}) {
+    async scene(folder, { here = [], moods = {}, keys = {}, where = null } = {}, { cut = false } = {}) {
       if (gone()) return never;
       const spec = await alive(unseen() ? j.real(b.specOf(folder)) : b.specOf(folder));
       people = new Set((spec.objects ?? []).filter(o => o.person).map(o => o.id));
+      own = new Set(Object.keys(spec.states ?? {}));
       for (const id of here) if (!people.has(id)) throw new Error(`the scene “${folder}” has no “${id}”`);
+      for (const key of Object.keys(keys)) if (!own.has(key)) throw new Error(`the scene “${folder}” has no key “${key}”`);
       present = new Set(here);
-      const st = {};
+      const st = { ...keys };
       for (const id of people) st[`${id}_here`] = present.has(id);
       for (const [id, mood] of Object.entries(moods)) st[`${id}_mood`] = mood;
       if (unseen()) { j.scene(folder, st, where); return; }
@@ -203,6 +208,11 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       if (gone()) return;
       if (!people.has(id)) throw new Error(`the scene has no “${id}”`);
       put(`${id}_mood`, mood);
+    },
+    set(key, value) {
+      if (gone()) return;
+      if (!own.has(key)) throw new Error(`the scene has no key “${key}”`);
+      put(key, value);
     },
     wait: sleep,
     async say(who, text, at = present.has(who) ? who : 'narrator') {

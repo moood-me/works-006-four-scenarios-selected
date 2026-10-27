@@ -65,7 +65,7 @@ export default {
     },
     // II.2: the parlour, the cup, the lie
     async g => {
-      await g.scene(SCENES.parlour, { here: ['mother', 'bill', 'sara'], moods: { mother: 'thinking', bill: 'tired', sara: 'afraid' } });
+      await g.scene(SCENES.parlour, { keys: { envelope: false }, here: ['mother', 'bill', 'sara'], moods: { mother: 'thinking', bill: 'tired', sara: 'afraid' } });
       await g.plate(tr('A fire, a ticking clock; the laundry can’t be heard here. The Mother at the window; Bill in the low armchair with a cup of tea; Sara by the door, barefoot, in his coat.'));
       if (g.state.marks.aloud) await g.say('mother', 'You took an interest in our girls in the chapel, Mr Furlong');
       await g.plate(tr('She asks after his daughters, each by name; she knows Sheila wants the solo.'));
@@ -79,7 +79,7 @@ export default {
     },
     // II.2: the interruption — “The bolt was drawn from the outside”
     async g => {
-      await g.scene(SCENES.parlour, { here: ['mother', 'bill', 'sara'], moods: { mother: 'thinking', bill: 'tired', sara: 'neutral' } }, { cut: true });
+      await g.scene(SCENES.parlour, { keys: { envelope: false }, here: ['mother', 'bill', 'sara'], moods: { mother: 'thinking', bill: 'tired', sara: 'neutral' } }, { cut: true });
       await g.sheet(tr('An interruption, to be'), [
         tr('On “by mistake” a sign shows at the top of the screen for three seconds: a bolt, and under it his words, “The bolt was outside.”'),
         tr('Tapped — the words break out of Bill. Not tapped — the sign goes. For now: the choice.'),
@@ -102,7 +102,7 @@ export default {
     // II.2: ⚑ the shoes — the sign has passed
     async g => {
       if (g.state.choices.bolt === 'out') return;
-      await g.scene(SCENES.parlour, { here: ['mother', 'bill', 'sara'], moods: { mother: 'thinking', bill: 'tired', sara: 'neutral' } }, { cut: true });
+      await g.scene(SCENES.parlour, { keys: { envelope: false }, here: ['mother', 'bill', 'sara'], moods: { mother: 'thinking', bill: 'tired', sara: 'neutral' } }, { cut: true });
       const plea = await g.choose('plea', { 'mother#chest': [
         { id: 'silent', label: tr('Say nothing') },
         { id: 'shoes', label: tr('“She could do with some kind of shoes, Mother”') },
@@ -123,9 +123,10 @@ export default {
     },
     // II.3: Ш the envelope
     async g => {
-      await g.scene(SCENES.parlour, { here: ['mother', 'bill'], moods: { mother: 'smile', bill: 'tired' } }, { cut: true });
+      await g.scene(SCENES.parlour, { keys: { envelope: false }, here: ['mother', 'bill'], moods: { mother: 'smile', bill: 'tired' } }, { cut: true });
       await g.plate(tr('Cut: the coat lies on the chair by the door; Sara is gone. Bill gets up to leave. The Mother at the window; behind her, steam over the laundry.'));
       await g.say('mother', 'The town brings them to us itself, Mr Furlong. Where would they be, if not here?');
+      g.set('envelope', true);
       await g.plate(tr('The clock. She comes from the window and lays on the table an envelope with a Christmas card; there is money inside.'));
       await g.say('mother', 'For your girls');
       await g.wait(1200);
@@ -138,9 +139,11 @@ export default {
       ] });
       if (envelope === 'girls') {
         await g.say('bill', 'Thank you, Mother');
+        g.set('envelope', false);
         await g.plate(tr('From now on the envelope lies on the dashboard.'));
       } else if (envelope === 'boots') {
         await g.say('bill', 'Thank you, Mother');
+        g.set('envelope', false);
         await g.plate(tr('Aloud, the same thanks: she does not know what the money will go on. On Monday — a box from the shoe shop on the lorry’s seat.'));
       } else {
         await g.say('bill', 'The girls have all they need, Mother');

@@ -160,8 +160,8 @@ export default {
         await g.say('sara', 'I won’t go to Dublin');
       }
       await g.plate(tr('The yard is empty: the sisters at vespers or in the lodge, the girls locked in the house at this hour. Close: his hand on the bolt. His hands remember it.'));
-      const options = [{ id: 'chute', label: tr('Wrap what you have in your scarf, and put it down the chute') }];
-      if (f.eileen === 'house') options.push({ id: 'deal', label: tr('Go down to the main gates and ask them to give Sara to your house') });
+      const options = [{ id: 'chute', label: tr('The bundle down the chute') }];
+      if (f.eileen === 'house') options.push({ id: 'deal', label: tr('Ask for her at the main gates') });
       options.push({ id: 'open', label: tr('Open the shed') }, { id: 'home', label: tr('Go home') });
       const gate = await g.choose('gate', { shed_door: options });
       g.apply('gate');
@@ -206,7 +206,7 @@ export default {
       await g.scene(SCENES.gate, { here: ['bill'], moods: { bill: 'tired' } }, { cut: true });
       await g.plate(tr('The coal gate again. From the shed, a cough. His hand on the bolt.'));
       const again = await g.choose('again', { shed_door: [
-        { id: 'chute', label: tr('Wrap what you have in your scarf, and put it down the chute') },
+        { id: 'chute', label: tr('The bundle down the chute') },
         { id: 'open', label: tr('Open the shed') },
         { id: 'home', label: tr('Go home') },
       ] });

@@ -82,10 +82,10 @@ export default {
       await g.say('eileen', 'I always said Maggie Reilly thought too much of herself. And now her daughter’s gone “to an aunt”');
       await g.plate(tr('He can’t go to the priest or the guards: the sisters and the town are one.'));
       const eileen = await g.choose('eileen', { 'bill#chest': [
-        { id: 'all', label: tr('Tell her everything: the bare feet, the bolt, the boy — “I can’t leave it so”') },
-        { id: 'house', label: tr('“We’ll take her in, the way Mrs Wilson took Mammy. If the sisters give her up”') },
-        { id: 'bundle', label: tr('Explain no more; ask her for a bundle — socks, a cardigan, “for a girl”') },
-        { id: 'none', label: tr('“It’s not our business. You’re right”') },
+        { id: 'all', label: tr('Tell her everything') },
+        { id: 'house', label: tr('“We’ll take her in”') },
+        { id: 'bundle', label: tr('Ask for a bundle') },
+        { id: 'none', label: tr('“It’s not our business”') },
       ] });
       if (eileen === 'all') {
         await g.say('bill', 'Her feet were bare. The bolt was on the outside. They took her boy. I can’t leave it so');
