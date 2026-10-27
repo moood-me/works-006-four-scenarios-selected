@@ -95,7 +95,7 @@ const PLACES = {
     in_boat: { at: [-3.9, 8.6], on: 'boat#seat_c', turn: 195, do: 'seated', look: [-30, 10, 1] },
   },
   my: {
-    stone: { at: [7.15, 28.0], turn: 200, do: 'sit_look', look: 'arrow_stone#stone' },
+    stone: { at: [7.05, 28.75], turn: 175, do: 'sit_look', look: 'arrow_stone#stone' },
     rock: { at: [3.2, 5.9], turn: 215, do: 'sit_look', look: [0, 0, 1] },
     below_door: { at: [8.6, 29.0], turn: 30, do: stand, look: 'door#door' },
     in_boat: { at: [-3.9, 8.6], on: 'boat#bow', turn: 195, do: 'sit_look', look: [-30, 20, 1] },
@@ -242,13 +242,16 @@ const turnNear = (s, b) => () => {
   return Math.abs(((t - b + 540) % 360) - 180) < 8;
 };
 
+// the door seen between the pines that crept up to it, from just below the steps
+const DOOR_CAM = { ...CAM0, camera_x: 9.7, camera_z: 26.2, camera_h: 0.75, camera_yaw: 3, camera_look: 0.04 };
+
 const FILM = {
   // 1.4 — the door locked; My by the arrow stone; the key
   arrive: {
     from: () => ({ ...at('papa', 'steps_foot'), ...at('mama', 'slab'), ...at('troll', 'boulder'), ...at('my', 'stone'), ...cam('papa', 'wide', [0.45, 0.5]) }),
     run: async s => {
       const papa = s.person('papa'), my = s.person('my');
-      const toMy = ready(s, { ...cam('my', 'full', [0.5, 0.55]) });
+      const toMy = ready(s, { ...CAM0, camera_x: 7.0, camera_z: 27.15, camera_h: -1.2, camera_yaw: 8, camera_look: 0.02 });
       await papa.walk([[9.95, 30.75]]);
       papa.turn(0);
       papa.reach({ r: 'door#door' });
@@ -263,7 +266,7 @@ const FILM = {
       s.tell('arrive:arrow');
       await s.wait(2.4);
       s.set('my_with', ['key']);
-      my.look('papa');
+      my.look([8.2, 27.4, 1.3]);
       s.tell('arrive:key');
       await s.wait(1.6);
     },
@@ -356,7 +359,7 @@ const FILM = {
   },
   // 2.5 — dusk: Papa alone on the rocks at the edge, a wave over his boots
   dusk: {
-    from: () => ({ ...at('papa', 'edge'), ...cam('papa', 'wide', [0.6, 0.55]) }),
+    from: () => ({ ...at('papa', 'edge'), ...CAM0, camera_x: -0.6, camera_z: 7.4, camera_h: -0.3, camera_yaw: -22, camera_look: 0.04 }),
     run: async s => {
       await s.wait(2.5);
       s.set('edge_splash', (s.get('edge_splash') ?? 0) + 1);
@@ -369,7 +372,7 @@ const FILM = {
   },
   // 3.1 — the pines at the threshold; Papa leans on the door (the door minigame next)
   pines: {
-    from: () => ({ ...at('papa', 'door', { papa_do: loop('lean_door') }), ...at('my', 'below_door'), ...cam('papa', 'wide', [0.5, 0.5], { camera_x: 1.6 }) }),
+    from: () => ({ ...at('papa', 'door', { papa_do: loop('lean_door') }), ...at('my', 'below_door'), ...DOOR_CAM }),
     run: async s => {
       await s.wait(2);
       s.tell('pines:push');
@@ -379,7 +382,7 @@ const FILM = {
   // 3.1 — the door open; the rime's trail at the threshold; the Fisherman far off
   door_open: {
     after: 'pines',
-    from: () => ({ ...at('papa', 'door'), ...cam('papa', 'wide', [0.5, 0.5], { camera_x: 1.6 }) }),
+    from: () => ({ ...at('papa', 'door'), ...DOOR_CAM }),
     run: async s => {
       const far = ready(s, { ...cam('fisher', 'wide', [0.6, 0.5]) });
       const papa = s.person('papa');
@@ -430,13 +433,12 @@ const FILM = {
   },
   // 4.4 «cape» — Papa out of the door into the storm with the lantern, toward the cape
   out_storm: {
-    from: () => ({ ...at('papa', 'door', { papa_with: ['lantern'], papa_gait: 'lantern_walk', papa_turn: 180, papa_reach: null, papa_look: null }), papa_lantern: 1, ...cam('papa', 'wide', [0.5, 0.5]) }),
+    from: () => ({ ...at('papa', 'door', { papa_with: ['lantern'], papa_gait: 'lantern_walk', papa_turn: 180, papa_reach: null, papa_look: null }), papa_lantern: 1, ...cam('papa', 'wide', [0.45, 0.55]) }),
     run: async s => {
       const papa = s.person('papa');
-      const going = papa.walk([[8.6, 28.6], [5.5, 24.5], [1.2, 21.5]]);
-      await s.wait(7);
+      await papa.walk([[8.4, 28.4], [6.6, 26.4]]);
       s.tell('out_storm:out');
-      await going;
+      await s.wait(0.6);
       await s.wait(1);
     },
   },
