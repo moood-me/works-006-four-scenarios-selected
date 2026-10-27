@@ -103,13 +103,16 @@ starting arrangement.
   alone in the boat, packing. *Л: `carry`, `put_down`.*
 
 **П.6**
-- `basket` (≈ 12 s, by a cut): day, the veranda; Mama packs the basket: the insert `basket` opens and the things go in
-  one by one (`packed` 0 → 3: hat, notebook, sweater), the candles on top (`candles` "basket") — `basket:candles`
-  (Papa's «Leave the candles. There's a lighthouse!», her «All right»); the candles out, back on the shelf, the jar
-  under the sweater (`packed` 4) — `basket:jam`; on the play's `paints` (the branch «Маме») the box of paints last, on
-  top — `basket:paints` (otherwise My's «And your paints?» and Mama's answer are said here). Ends: the insert open,
-  packed. Needs a new key `packed` (0…4: how many of hat, notebook, sweater, jam are in) — stage 5's code.
-- `push_off` (≈ 18 s, by a cut): dusk 1, the jetty; the family in the boat (Papa at the tiller, Mama with the basket,
+- `basket` (≈ 12 s, by a cut; one piece for both branches — the game sets the play's `paints` before it): day, the
+  veranda; Mama packs the basket: the insert `basket` opens and the things go in one by one (`packed` 0 → 3: hat,
+  notebook, sweater), the candles on top (`candles` "basket") — `basket:candles` (Papa's «Leave the candles. There's a
+  lighthouse!», her «All right»); the candles out, back on the shelf, the jar under the sweater (`packed` 4) —
+  `basket:jam`; then `basket:paints`, told in both branches: with `paints` the box of paints goes in last, on top
+  («Маме»); without it nothing more goes in, and the game says My's «And your paints?» and Mama's answer there
+  («всем»). Ends: the insert open, packed. `packed` (0…4: how many of hat, notebook, sweater, jam are in) is the
+  piece's own key (in `states`, not the play's).
+- `push_off` (≈ 18 s, by a cut): dusk 1 (the evening light made lighter after the stand: people and the boat read
+  clearly), the jetty; the family in the boat (Papa at the tiller, Mama with the basket,
   the son, My on the bow), the lantern lit on her bow — `push_off:lantern`; the boat pushes off and goes out along the
   shore (her place moved — new keys `boat_a`, `boat_d`; the camera stays on the jetty) — `push_off:away`; the camera
   turns to the beach: the Groke walks down to the water toward the light, the rime in her steps (`frost` 0.4 → 1) —

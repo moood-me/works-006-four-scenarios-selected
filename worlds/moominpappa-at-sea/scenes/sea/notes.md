@@ -52,6 +52,7 @@ lighthouse's island astern.
 | `island` | `none` · `ahead` · `behind` | `none` |
 | `heading` | −1…1 (М2) | 0 |
 | `wave` | 0…1 (М2) | 0 |
+| `glance` | `never` · `once` · `sea` — the son's look in the finale (`home:look`) | `sea` |
 
 ## Pieces (stage 5 — the contract; no code yet)
 
@@ -72,9 +73,10 @@ toward the bow) and in the pieces' own close shots of it (`lantern`); in `aft` i
   `quiet:back`. Ends wide.
 
 **1.3**
-- `glance` (≈ 8 s, by a cut): Papa sees where his son is looking and glances round (`fore`, Papa close) — `glance:strip`
-  (his «The moon's path. Pretty»); `aft` over his shoulder: the strip and, beside it, the moon's path. Ends: Papa medium
-  by the tiller, the lantern burning on the bow beyond him — the pose for the choice `boat` (`tiller#grip`).
+- `glance` (≈ 10 s, by a cut): Papa sees where his son is looking and glances round (`fore`, Papa close) — `glance:strip`
+  (his «The moon's path. Pretty»); `aft` over his shoulder: the strip and, beside it, the moon's path; Papa turns back
+  to look ahead, the eyes behind him unseen — `glance:ahead` («The eyes he does not see…»). Ends: Papa medium by the
+  tiller, the lantern burning on the bow beyond him — the pose for the choice `boat` (`tiller#grip`).
 - `douse` (≈ 14 s, after `glance`): Papa reaches forward and puts the lantern out (`lantern_at` "out") — `douse:out`;
   `aft`, wide: the boat goes on by moonlight, the strip falls behind and is gone (`trail` 0.4 → 0 over 8 s) —
   `douse:gone`; Mama wakes in the dark and lifts her head — `douse:wake` («Where are we?» …). Ends: Mama awake, moonlit.
@@ -90,11 +92,16 @@ toward the bow) and in the pieces' own close shots of it (`lantern`); in `aft` i
   *Л: the lantern in his paws (a part), `hold_lantern`, `rub_paws`, `tuck`.*
 
 **The finale «Лодка в долину» (day, going home)**
-- `home` (≈ 14 s, by a cut): `aft`, the island astern (`island` "behind"); Papa at the tiller telling, with his paw —
-  `home:tell`; My on the mast — `home:my` («That's not how it was»); the son on the stern looking back at the island —
-  `home:look`. Ends on the son's back and the island.
-- `last` (≈ 8 s, after `home`): the dark lighthouse falls behind (the island going from 230 m to ~600 m over the piece)
-  — `last:far`. Ends: the island small astern. (The Fisherman at its door: see the question below.)
+- `home` (≈ 16 s, by a cut; after the landing's `cast_off`): `aft`, the island astern (`island` "behind"); first the
+  family settling, Mama looking up at the sky — `home:term` (with the term kept: «Full moon» — «The captain keeps his
+  word» — «The captain didn't light it»; otherwise nothing is said there); Papa at the tiller telling, with his paw —
+  `home:tell`; My on the mast — `home:my` («That's not how it was»); the son on the stern — `home:look`: by the play's
+  `glance` (the finales' rule, as the shore's `look_son`): `sea` — he looks back at the island till it is small;
+  `once` — he turns once to look at Papa, then back to the island; `never` — he looks at the island, never at Papa.
+  Ends on the son and the island.
+- `last` (≈ 8 s, after `home`, or by a cut after the landing's `fisher_door`): the dark lighthouse falls behind (the
+  island going from 230 m to ~600 m over the piece) — `last:far`. Ends: the island small astern — the finale's last
+  shot. (The Fisherman at the door is the landing's `fisher_door`, seen from the water.)
 
 ## Contract for the check
 
@@ -102,15 +109,15 @@ toward the bow) and in the pieces' own close shots of it (`lantern`); in `aft` i
 {"beats": {
   "night": {"after": [], "tells": ["night:star", "night:eyes", "night:closer", "night:back"], "seconds": 16, "show": false},
   "quiet": {"after": ["night"], "tells": ["quiet:back"], "seconds": 10, "show": false},
-  "glance": {"after": [], "tells": ["glance:strip"], "seconds": 8, "show": false},
+  "glance": {"after": [], "tells": ["glance:strip", "glance:ahead"], "seconds": 10, "show": false},
   "douse": {"after": ["glance"], "tells": ["douse:out", "douse:gone", "douse:wake"], "seconds": 14, "show": false},
   "keep": {"after": ["glance"], "tells": ["keep:tuck", "keep:near", "keep:face"], "seconds": 14, "show": false},
   "hold": {"after": ["glance"], "tells": ["hold:give", "hold:shine", "hold:drift", "hold:frost", "hold:dawn"], "seconds": 24, "show": false},
-  "home": {"after": [], "tells": ["home:tell", "home:my", "home:look"], "seconds": 14, "show": false},
+  "home": {"after": [], "tells": ["home:term", "home:tell", "home:my", "home:look"], "seconds": 16, "show": false},
   "last": {"after": ["home"], "tells": ["last:far"], "seconds": 8, "show": false}
  },
  "points": ["papa", "mama", "troll", "my", "groke", "fisher", "lantern", "tiller#grip", "star", "strip", "isle#step", "lighthouse#door"],
  "offers": ["tiller#grip", "star"],
- "party": {"moon": 0.6},
+ "party": {"moon": 0.6, "glance": "sea"},
  "acts": {"heading": {"values": [], "tells": []}, "wave": {"values": [], "tells": []}}}
 ```
