@@ -21,8 +21,8 @@ Papa on the dune.
   ends softly at the water's edge.
 - `seahorses` — three glowing sea-horses in the shallows, each a layer bobbing out of step; when `seahorses` becomes
   `gone` the script moves `seahorses_away` 0 → 1 over 6 s and they swim off to the left, their glows going out.
-- `stone` (a form) and `stone_lantern` on it: the lantern shown by `lantern_stone` — lit (its globe a layer of added
-  light, its flame `e.light` taken by the light `stone_lamp`, reach 7 m, flickering), out (cold glass), none.
+- `stone` (a form) and `stone_lantern` on it — the world's one lantern (`modules/lantern`, `tools/lantern.py`): shown
+  by `lantern_stone` — lit (flame full), low (turned low), out, none (not there); its light `stone_lamp` (reach 7 m).
 - `blanket` (a plane) is laid by the script behind the son, wherever he is (`blanket_a`, `blanket_d`); `dune` — the
   dune's top (point `dune#top`) and the hollow where Papa sat (`dune_dent`).
 - The script (`script.js`): the island's lightning; `groke_at` → the Groke's place (`groke_a`, `groke_d`) and turn —
@@ -104,9 +104,9 @@ Seconds are estimates (the people at their own pace). Each piece's `from` sets w
   `past:passed` (`dune_dent` stays where Papa sat).
 - `leave` (4.7 «Мама права», night → dawn, ≈ 16 s): the Groke howls — `leave:howl`; toward morning she walks into the
   sea and is gone, her white trail running out to the water (`track` 0 → 1) — `leave:gone`.
-- `beam` («Луч», night, ≈ 8 s): the beam (`beam` 1) comes round over the shore: by the keys — the son on dark sand by
-  the Groke, the Groke reaching toward the beam as it goes on; or the empty sand, the white trail, the son alone by
-  the water — `beam:pass`.
+- `beam` («Луч», night, ≈ 3–14 s): the beam (`beam` 1) comes round over the shore: by the keys — the son on dark sand
+  by the Groke, or the empty sand, the white trail, the son alone by the water; as it comes round to them (its bearing
+  from the lighthouse to the son, within 8°) the Groke reaches toward it — `beam:pass` — and it goes on.
 - `morning` («Лодка», common shots; morning, ≈ 5 s): the sand after night 3, nobody or the son as the keys say: the
   dark circle (`warm`), the white trail (`track`), the hollow on the dune (`dune_dent`) — `morning:held`.
 - `corner` («Пирог», the moonlit evening of the 27th, ≈ 8 s): each in his own corner — the son on the dark sand by the

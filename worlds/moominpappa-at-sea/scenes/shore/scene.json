@@ -179,10 +179,11 @@
     {
       "id": "stone_lamp",
       "of": "stone_lantern#flame",
-      "color": "#ffc874",
+      "color": "#ffd08c",
       "strength": 1.5,
       "reach": 7,
-      "flicker": 0.12
+      "flicker": 0.1,
+      "glow": 0.2
     },
     {
       "id": "hand_lamp",
@@ -197,6 +198,7 @@
   "modules": [
     "cast",
     "island",
+    "lantern",
     "beats"
   ],
   "objects": [
@@ -458,7 +460,10 @@
         -0.48,
         0.16,
         0.03
-      ]
+      ],
+      "uniforms": {
+        "lit": 0
+      }
     },
     {
       "id": "seahorses",

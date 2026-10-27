@@ -467,15 +467,19 @@ function film(scene) {
         await s.wait(1);
       },
     },
-    // «Луч»: the beam comes round over the shore; the Groke (if she is here) reaches toward it as it goes on
+    // «Луч»: the beam comes round over the shore; as it comes to them, the Groke (if she is here) reaches toward it, and
+    // it goes on
     beam: {
       from: () => (get('groke_here') ? { ...view(), ...grokeSat(), ...trollBeside() }
         : { ...view(), ...AT('troll', ALONE, 270, { troll_look: [-12, 9, 1] }) }),
       run: async s => {
-        await s.wait(2);
-        if (get('groke_here')) await s.person('groke').do('reach_toward');
+        // (the beam's bearing from the lighthouse to the son, the one it passes: island.beam turns it, a turn in 12 s)
+        const [a, d] = get('groke_here') ? besideOf(get('groke_at')) : ALONE;
+        const b = turnTo(LIGHTHOUSE[0], LIGHTHOUSE[1], a, d);
+        if ((get('beam') ?? 0) > 0) await s.until(() => Math.abs((((get('beam_turn') ?? 0) - b) % 360 + 540) % 360 - 180) < 8);
+        if (get('groke_here')) s.person('groke').do('reach_toward');
         s.tell('beam:pass');
-        await s.wait(2);
+        await s.wait(2.5);
       },
     },
     // the morning sand after night 3, as the keys say
