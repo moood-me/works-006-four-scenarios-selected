@@ -1,4 +1,5 @@
 // The sea's mechanics.
+// - `view` puts the camera on the boat (lib.js VIEWS) as one cut: looking aft, or forward.
 // - The island stands where `island` says (lib.js ISLAND_AT): far out of sight, ahead, astern — put at once.
 // - What follows behind comes nearer with `trail`: the Groke swims at the strip's near end (her place).
 // - The lantern: on the bow lit, in the son's paws, or out (`lantern_at`) — the two lights read the shares worked out
@@ -6,6 +7,9 @@
 // - The boat's nose off the star (`heading`) turns her; the swell (`wave` its height) lifts and drops her bow, slowly.
 // - The island's lightning (a storm over a half).
 const L = scene.lib;
+function view() {
+  scene.cut(L.VIEWS[scene.get('view')] ?? L.VIEWS.aft);
+}
 function island() {
   scene.set('isle_d', L.ISLAND_AT[scene.get('island')] ?? L.ISLAND_AT.none);
 }
@@ -21,10 +25,12 @@ function lantern() {
 function heading() {
   scene.set('boat_facing', 180 + 9 * Math.max(-1, Math.min(1, scene.get('heading') ?? 0)));
 }
+view();
 island();
 trail();
 lantern();
 heading();
+scene.on('change', 'view', view);
 scene.on('change', 'island', island);
 scene.on('change', 'trail', trail);
 scene.on('move', 'trail', trail);

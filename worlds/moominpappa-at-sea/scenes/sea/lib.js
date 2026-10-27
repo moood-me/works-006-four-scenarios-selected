@@ -31,4 +31,10 @@ const GROKE_ACROSS = 0.7;
 // where the island is, by `island`: far out of sight ahead in the night (none), ahead of the bow at dawn (ahead —
 // behind the camera), astern by day as they sail home (behind — seen over the stern)
 const ISLAND_AT = { none: -6000, ahead: -260, behind: 230 };
-return { SEA, FLOOR, land, shore, BOW, STERN, SEATS, RIBS, rib, trailNear, GROKE_ACROSS, ISLAND_AT };
+// the camera on the boat, in her frame (it faces the start: her across is the viewer's mirrored), by `view`: aft —
+// from before the bow looking aft; fore — from behind the stern looking forward
+const VIEWS = {
+  aft: { camera_x: 1.0, camera_z: -4.8, camera_h: 1.1, camera_yaw: 8, camera_look: 0.14 },
+  fore: { camera_x: 1.0, camera_z: 5.2, camera_h: 1.1, camera_yaw: 188, camera_look: 0.14 },
+};
+return { VIEWS, SEA, FLOOR, land, shore, BOW, STERN, SEATS, RIBS, rib, trailNear, GROKE_ACROSS, ISLAND_AT };
