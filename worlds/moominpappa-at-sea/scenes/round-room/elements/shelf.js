@@ -1,5 +1,7 @@
-// The shelf on the wall over the table: a plank on two iron brackets, and on it the green can of paraffin — enough
-// for three nights of the lantern —, a jar of jam that nobody asked for, a candle-less candlestick.
+// The shelf on the wall over Moominmamma's garden: a plank on two iron brackets, and on it the green can of paraffin —
+// three measures, a night of the lantern each, Moominpappa's three strokes on its label, one struck through for each
+// measure gone (`paraffin` 3…0; empty, its cap off beside it) —, a jar of jam that nobody asked for, a candle-less
+// candlestick.
 g.fillStyle = "#8c6e50";
 g.fillRect(-0.45, -0.04, 0.9, 0.04);
 g.strokeStyle = "#3a3634";
@@ -19,9 +21,28 @@ g.fillRect(-0.13, -0.33, 0.26, 0.33);
 g.fillStyle = "rgba(30, 40, 30, 0.25)";
 g.fillRect(0.05, -0.33, 0.08, 0.33);
 g.fillStyle = "#c7b98a";
-g.fillRect(-0.1, -0.26, 0.14, 0.1);
+g.fillRect(-0.11, -0.27, 0.17, 0.12);
+const left = Math.max(0, Math.min(3, e.state.paraffin ?? 3));
+g.strokeStyle = "#2c2a30";
+g.lineWidth = 0.012;
+for (let i = 0; i < 3; i++) {
+  const sx = -0.08 + i * 0.05;
+  g.beginPath();
+  g.moveTo(sx, -0.25);
+  g.lineTo(sx + 0.008, -0.17);
+  g.stroke();
+}
+g.lineWidth = 0.008;
+for (let i = left; i < 3; i++) {
+  const sx = -0.08 + i * 0.05;
+  g.beginPath();
+  g.moveTo(sx - 0.02, -0.2);
+  g.lineTo(sx + 0.03, -0.225);
+  g.stroke();
+}
 g.fillStyle = "#3a3d38";
-g.fillRect(-0.09, -0.38, 0.06, 0.05);
+if (left > 0) g.fillRect(-0.09, -0.38, 0.06, 0.05);
+else g.fillRect(-0.29, -0.04, 0.06, 0.04);
 g.strokeStyle = "#3a3d38";
 g.lineWidth = 0.013;
 g.beginPath();

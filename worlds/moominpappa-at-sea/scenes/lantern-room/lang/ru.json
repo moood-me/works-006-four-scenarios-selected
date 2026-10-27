@@ -1,0 +1,8 @@
+{"strings": [
+  {"text":"The Burner","translation":"Горелка","where":"scenes/lantern-room/elements/sheets.js"},
+  {"text":"The Pot","translation":"Кастрюля","where":"scenes/lantern-room/elements/sheets.js"},
+  {"text":"In a wind, warm the burner with paraffin till the flame goes blue. Do not let go before.","translation":"В ветер горелку греть керосином, пока пламя не посинеет. Раньше не отпускать.","where":"scenes/lantern-room/elements/soot.js"},
+  {"text":"The oil is thick: warm it in a pot on the stove, carry it up wrapped. On a still evening warm oil runs by itself; in a wind, only with paraffin.","translation":"Масло густое: греть в кастрюле на плите, нести укутанным. В тихий вечер тёплое пойдёт само; в ветер — только с керосином.","where":"scenes/lantern-room/elements/soot.js"},
+  {"text":"The Lantern Room","translation":"Фонарная","where":"scenes/lantern-room/scene.json title"},
+  {"text":"The lantern room at the top of the lighthouse.","translation":"Фонарная наверху маяка.","where":"scenes/lantern-room/scene.json caption"}
+]}
