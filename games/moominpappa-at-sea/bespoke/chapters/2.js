@@ -221,7 +221,6 @@ export default {
         await lie;
       } else if (night1 === 'son') {
         await g.say('papa', 'Take it. I won’t ask');
-        g.mood('troll', g.state.marks.son_given ? 'neutral' : 'surprised');
         await g.play(lantern);
         on(g, 'n1_son:gone', () => g.sound.door());
         await g.beat('n1_son');

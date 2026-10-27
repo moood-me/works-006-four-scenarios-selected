@@ -88,7 +88,8 @@ export default {
       const garden = g.state.scales.garden;
       g.beds({ storm: 0.5, sea_in: 0.3, wind: 0.4 });
       const flood = g.told('storm:flood');
-      on(g, 'storm:door', () => { g.sound.door(); setTimeout(() => g.sound.glass(), 900); });
+      on(g, 'storm:door', () => g.sound.door());
+      on(g, 'storm:glass', () => g.sound.glass());
       await g.scene(SCENES.room, { beat: 'storm', here: ['papa', 'mama', 'my', 'troll'], moods: { papa: 'thinking', mama: 'afraid', my: 'laugh', troll: 'afraid' },
         keys: STORM });
       const storm = g.beat('storm');
@@ -100,6 +101,7 @@ export default {
       g.beds({ storm: 0.8, wind: 0.5 });
       on(g, 'under_wave:wave', () => g.sound.wave(1));
       await g.scene(SCENES.cape, { beat: 'under_wave', here: ['fisher'], keys: land(25, 'night', 1) }, { cut: true });
+      g.each('flash:strike', () => g.sound.thunder(0.8));
       await g.beat('under_wave');
       g.beds({ storm: 0.5, sea_in: 0.3, wind: 0.4 });
       await g.scene(SCENES.room, { beat: shutters(garden), here: ['papa', 'mama', 'my', 'troll'], moods: { papa: 'thinking', mama: 'afraid', my: 'laugh', troll: 'afraid' },
@@ -173,6 +175,7 @@ export default {
           on(g, 'st_lit:laugh', () => g.mood('papa', 'laugh'));
           await g.beat('st_lit');
           await g.scene(SCENES.cape, { beat: 'beam_cape', here: ['fisher'], keys: { ...land(25, 'night', 1), beam: 1, lighthouse_lit: 1 } }, { cut: true });
+          g.each('flash:strike', () => g.sound.thunder(0.8));
           await g.beat('beam_cape');
         } else {
           on(g, 'st_out:flash', () => { g.mood('papa', 'sad'); g.sound.thunder(1); });
@@ -204,8 +207,10 @@ export default {
         await go();
         g.beds({ storm: 0.9, wind: 0.6 });
         await g.scene(SCENES.landing, { beat: 'out_storm', here: ['papa'], moods: { papa: 'angry' }, keys: land(25, 'night', 1) }, { cut: true });
+        g.each('flash:strike', () => g.sound.thunder(0.8));
         await g.beat('out_storm');
         await g.scene(SCENES.cape, { beat: 'crossing', here: ['fisher', 'papa'], moods: { papa: 'angry', fisher: 'neutral' }, keys: { ...land(25, 'night', 1), net: 'knot' } }, { cut: true });
+        g.each('flash:strike', () => g.sound.thunder(0.8));
         await g.beat('crossing');
         await g.play(rocks);
         const out = g.told('blown:out');
@@ -281,7 +286,8 @@ export default {
       const room = { ...isle(26, 'night'), lantern_at: 'table', flame: 'out', drip: 0.3, basket: m.promise === 'term' };
       g.beds({ sea_in: 0.2 });
       const door = g.told('night3:door'), mama = g.told('night3:mama');
-      await g.scene(SCENES.room, { beat: 'night3', here: ['papa', 'mama', 'troll'], moods: { papa: 'thinking', mama: 'sad', troll: m.son_closed ? 'afraid' : 'neutral' }, keys: room }, { cut: true });
+      await g.scene(SCENES.room, { beat: 'night3', here: ['papa', 'mama', 'troll'], moods: { papa: 'thinking', mama: 'sad', troll: 'neutral' },
+        keys: { ...room, son_look: m.son_closed ? 'away' : m.son_knows ? 'papa' : 'none' } }, { cut: true });
       const night = g.beat('night3');
       await door;
       if (m.son_later) await g.say('troll', 'Later');

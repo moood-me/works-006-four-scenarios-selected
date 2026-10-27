@@ -189,7 +189,12 @@ async function step(c, s, state, where) {
     }
     return told(text, ms);
   };
-  const { here, mood, beds } = g;
+  const { here, mood, beds, each } = g;
+  g.each = (text, fn) => {
+    const acts = Object.values(contractOf(folder)?.acts ?? {});
+    if (contractOf(folder) && !acts.some(x => x.tells.includes(text))) miss(`${where}: g.each “${text}” — no act of the scene “${folder}” tells it`);
+    return each(text, fn);
+  };
   g.here = (id, on) => { person(folder, id, where); if (on) present.add(id); else present.delete(id); return here(id, on); };
   g.mood = (id, m) => { person(folder, id, where); return mood(id, m); };
   g.beds = (levels, seconds) => {

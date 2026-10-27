@@ -41,7 +41,7 @@ export default {
       g.beds({ sea_in: 0.35, wind: 0.1 });
       const paws = g.told('morning:paws'), wall = g.told('morning:wall');
       await g.scene(SCENES.room, { beat: 'morning', here: ['papa', 'mama', 'my', 'troll'], moods: { papa: 'thinking', mama: 'sad', my: 'smile', troll: 'tired' },
-        keys: { ...isle(24, 'morning'), ...LANTERN[night1 ?? 'lamp'] } }, { cut: true });
+        keys: { ...isle(24, 'morning'), ...LANTERN[night1 ?? 'lamp'], son_look: night1 === 'son' ? 'up' : 'none' } }, { cut: true });
       const morning = g.beat('morning');
       await paws;
       if (night1 === 'lamp' || night1 === 'mama') await g.say('papa', 'Toughening up. Quite right');
@@ -195,7 +195,7 @@ export default {
         } else await g.beat('n2_put');
         if (g.state.marks.promise === 'ask') g.note(tr('“I won’t ask” is broken.'));
       } else {
-        await g.beat(top ? 'n2_taken' : 'n2_follow');
+        await g.beat(top ? 'n2_follow_up' : 'n2_follow');
         g.beds({ sea: 0.4, wind: 0.12 });
         await g.scene(SCENES.shore, { beat: 'follow_start', here: ['papa', 'troll', 'groke'], moods: { papa: 'thinking', troll: 'sad' }, keys: { ...isle(24, 'night'), ...near } }, { cut: true });
         await g.beat('follow_start');

@@ -109,11 +109,12 @@ export default {
         await g.say('narrator', 'The lighthouse shone far. For everyone who was at sea');
         await beamMy;
         g.beds({ sea: 0.3, wind: 0.1 });
-        await g.scene(SCENES.landing, { beat: 'beam_pass', here: [], keys: { ...land(27, 'night'), ...lit, pines: 1, boat: 'tarred' } }, { cut: true });
-        await g.beat('beam_pass');
+        await g.scene(SCENES.landing, { beat: 'beam_window', here: [], keys: { ...land(27, 'night'), ...lit, pines: 1, boat: 'tarred' } }, { cut: true });
+        await g.beat('beam_window');
       } else if (f.ending === 'boat') {
         g.beds({ sea_in: 0.25 });
-        await g.scene(SCENES.room, { beat: 'e_basket', here: ['mama'], moods: { mama: 'smile' }, keys: room('morning', f, { wall_mama: 0, basket: true, garden: f.form === 'late' ? 4 : g.state.scales.garden }) });
+        await g.scene(SCENES.room, { beat: 'e_basket', here: ['mama'], moods: { mama: 'smile' },
+          keys: room('morning', f, { wall_mama: 0, basket: true, garden: f.form === 'late' ? 4 : g.state.scales.garden, paints_left: f.form === 'late' }) });
         g.title(tr('A Boat to the Valley'));
         await g.beat('e_basket');
         g.beds({ sea: 0.35, wind: 0.08 });

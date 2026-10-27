@@ -18,7 +18,8 @@
 //   g.beat(name, {wait}) — a piece of the shown scene; → once it has ended (the scene tells 'beat:<name>'), or at once
 //     with wait: false. To wait for a moment of a piece, make the g.told before g.beat. A piece cut to that is not the
 //     next one of the scene's film: g.set('beat_next', name) while the one before plays (its first frame made ready)
-//   g.told(text, ms) — until the scene tells `text` (→ true), or ms pass (→ false)
+//   g.told(text, ms) — until the scene tells `text` (→ true), or ms pass (→ false); g.each(text, fn) — fn each time
+//     the shown scene tells it (its lightning), till the next scene
 //   g.set(key, value, seconds) / g.get(key) — the shown scene's state; g.here(id, on), g.mood(id, mood) — someone of
 //     it comes or goes, their face
 //   g.wait(ms) — time of the game's own (a pause); never to wait for something the scene does
@@ -80,7 +81,7 @@ export function carry(folder, state) {
     case SCENES.room: return {
       paints: c.tell === 'asked' ? 'green' : 'red_blue', garden: s.garden, sill: s.garden, wall_grass: 'wall' in c,
       log: 1, log_depth: c.day === 'pool', paraffin: s.paraffin,
-      brushes: c.wall === 'call' ? 'jar' : 'sill', apple_leaves: c.wall !== 'call',
+      brushes: c.wall === 'call' ? 'jar' : 'sill', apple_leaves: c.wall !== 'call', son_given: !!m.son_given,
       line27: c.night1 === 'son' && c.wall === 'wait' ? 'next' : m.line27 ? 'clean' : 'dust', stone: !!m.son_later,
     };
     case SCENES.top: return { sheets: s.lamp, cot: m.promise === 'lamp' ? 'made' : 'none' };
@@ -169,6 +170,7 @@ export function facts(state) {
 export const on = (g, moment, fn) => { g.told(moment).then(ok => { if (ok) fn(); }); };
 
 const BEAT = 180000; // a piece longer than this has not ended: the scene lacks it
+const EACH = 600000; // ms g.each waits for a tell before it asks again
 const SKIPPABLE = 20000; // ms in a minigame of a step not seen yet before the ⏭ may skip it
 
 export function context(b, view, hub, state, j = null, { forward = null } = {}) {
@@ -188,6 +190,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
   const put = (key, value, seconds) => (unseen() ? j.did([key, value]) : b.set(key, value, seconds));
   let people = new Set(), present = new Set(); // the shown scene's people; those of them there now
   let opening = null; // the piece the scene was opened with, till g.beat takes it up: {name, ended}
+  let shown = 0; // the scenes the step has opened (g.each listens to the one shown)
   let playing = null; // the minigame played now: {signal, end, skippable}
   // the page's ⏭ as the step stands now: none while a choice is offered or the step is still unseen; in a minigame —
   // its skip, where it may be skipped; else, where the step is seen, on to the next interaction
@@ -240,6 +243,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       for (const id of people) st[`${id}_here`] = present.has(id);
       for (const [id, mood] of Object.entries(moods)) st[`${id}_mood`] = mood;
       if (beat) st.beat = beat;
+      shown++;
       if (unseen()) {
         opening = beat ? { name: beat, ended: g.told(`beat:${beat}`, BEAT) } : null;
         j.scene(folder, st);
@@ -268,6 +272,12 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
     },
     told(text, ms = 60000) {
       return gone() ? never : unseen() ? j.heard(text, ms) : alive(hub.told(text, ms));
+    },
+    each(text, fn) {
+      if (gone() || unseen()) return;
+      const mine = shown;
+      const again = () => hub.told(text, EACH).then(ok => { if (!gone() && mine === shown) { if (ok) fn(); again(); } });
+      again();
     },
     set: (key, value, seconds) => (gone() ? undefined : put(key, value, seconds)),
     get: key => (unseen() ? j.values[key] : b.get(key)),
