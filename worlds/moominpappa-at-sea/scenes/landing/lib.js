@@ -220,7 +220,7 @@ function at(id, place, more = {}) {
   return {
     [`${id}_at`]: place, [`${id}_placed`]: place, [`${id}_a`]: p.at[0], [`${id}_d`]: p.at[1], [`${id}_on`]: p.on ?? null,
     [`${id}_turn`]: p.turn, [`${id}_do`]: p.do, [`${id}_look`]: p.look ?? null, [`${id}_reach`]: p.reach ?? null,
-    [`${id}_with`]: null, [`${id}_gait`]: null, ...more,
+    [`${id}_with`]: null, [`${id}_wear`]: null, [`${id}_gait`]: null, ...more,
   };
 }
 // the camera: the scene's own (the whole landing), or framing a target
@@ -433,8 +433,10 @@ const FILM = {
     from: () => ({ ...at('papa', 'door', { papa_with: ['lantern'], papa_gait: 'lantern_walk', papa_turn: 180, papa_reach: null, papa_look: null }), papa_lantern: 1, ...cam('papa', 'wide', [0.5, 0.5]) }),
     run: async s => {
       const papa = s.person('papa');
-      await papa.walk([[8.6, 28.6], [5.5, 24.5], [1.2, 21.5]]);
+      const going = papa.walk([[8.6, 28.6], [5.5, 24.5], [1.2, 21.5]]);
+      await s.wait(7);
       s.tell('out_storm:out');
+      await going;
       await s.wait(1);
     },
   },
@@ -513,7 +515,7 @@ const FILM = {
   // «Boat» — as the boat goes: the Fisherman with his net at the stone and the locked door, seen between the pines; close
   // as he lifts his hand after her
   fisher_door: {
-    from: () => ({ ...at('fisher', 'path', { fisher_with: ['net_shoulder'] }), ...cam('fisher', 'wide', [0.5, 0.55]) }),
+    from: () => ({ ...at('fisher', 'path', { fisher_with: ['net_shoulder'], fisher_wear: { parts: [] } }), ...cam('fisher', 'wide', [0.5, 0.55]) }),
     run: async s => {
       const fisher = s.person('fisher');
       await fisher.walk([[8.2, 28.2]]);

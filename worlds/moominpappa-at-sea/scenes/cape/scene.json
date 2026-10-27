@@ -359,7 +359,7 @@
       ]
     },
     {
-      "id": "matchbox",
+      "id": "box",
       "name": "Papa's box of matches",
       "across": -0.3,
       "distance": 3.5,
@@ -506,6 +506,11 @@
       "insert": "knot_open"
     },
     {
+      "id": "matchbox",
+      "name": "The matchbox close",
+      "insert": "matchbox_open"
+    },
+    {
       "id": "fisher",
       "name": "The Fisherman",
       "person": {
@@ -602,6 +607,10 @@
     "knot": 0,
     "knot_open": 0,
     "knot_paws": 1,
+    "matchbox_open": 0,
+    "matchbox_give": 0,
+    "matchbox_close": 0,
+    "fisher_wear": null,
     "papa_lantern": 0,
     "beat": null,
     "beat_next": null,
@@ -787,6 +796,30 @@
       ],
       "smooth": true,
       "means": "the close-up of the knot open (the people package's closeups shot knot)"
+    },
+    "matchbox_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the matchbox close open (closeups shot matchbox: the matches minigame)"
+    },
+    "matchbox_give": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the matchbox close: the box from Papa's paw into the Fisherman's palm (the matches minigame)"
+    },
+    "matchbox_close": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the matchbox close: the Fisherman's fingers closing on it"
     },
     "knot_paws": {
       "range": [

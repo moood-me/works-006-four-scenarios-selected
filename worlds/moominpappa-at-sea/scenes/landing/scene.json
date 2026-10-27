@@ -188,7 +188,8 @@
   "modules": [
     "cast",
     "island",
-    "beats"
+    "beats",
+    "closeups"
   ],
   "objects": [
     {
@@ -576,6 +577,11 @@
       }
     },
     {
+      "id": "mooring",
+      "name": "The mooring close",
+      "insert": "mooring_open"
+    },
+    {
       "id": "edge_splash",
       "name": "A wave on the rocks at the edge",
       "particles": {
@@ -686,6 +692,8 @@
     "papa_shore": "silent",
     "fisher_here": false,
     "fisher_hand": false,
+    "mooring": 0,
+    "mooring_open": 0,
     "boat_off": 0,
     "edge_splash": 0,
     "papa_lantern": 0,
@@ -1055,6 +1063,22 @@
     "fisher_hand": {
       "type": "boolean",
       "means": "«Boat» (the play's: «invited»): the Fisherman at the door lifts his hand after Mama as the boat goes (fisher_door)"
+    },
+    "mooring": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the mooring minigame: the rope let go off the ring (the mooring close; cast_off follows)"
+    },
+    "mooring_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the mooring close open (closeups shot mooring)"
     },
     "boat_off": {
       "range": [

@@ -68,10 +68,6 @@ are told as `<piece>:<moment>` — the game speaks its lines there. Where the pe
 
 ## Open for the game (stage 5)
 
-- `fisher_door`: framed from the landing's side between the pines (the door and the Fisherman read), close when he lifts
-  his hand — not strictly from the water.
-- The pieces use the cast's stage-5 names (`cast.md`, pm/people): motions and parts not made yet stand in as standing;
-  the render says which.
 - The game sets only the play's keys (the hour, the weather, `cleft`, `boat`, `beam`, `papa_shore`, `troll_at` by
   «son closed»); where people stand is each piece's own (its `from`).
 - `cast_off` hands over to `sea`; `fisher_door` comes after `sea home` and the shore's `morning`.
@@ -81,8 +77,8 @@ are told as `<piece>:<moment>` — the game speaks its lines there. Where the pe
 
 ```json
 {"beats": {"arrive": {"after": [], "tells": ["arrive:door", "arrive:arrow", "arrive:key"], "seconds": 20, "show": false}, "patch": {"after": ["arrive"], "tells": ["patch:seen"], "seconds": 9, "show": false}, "asleep": {"after": ["arrive"], "tells": ["asleep:asleep"], "seconds": 8, "show": false}, "bundles": {"after": [], "tells": ["bundles:fell", "bundles:wet", "bundles:sat"], "seconds": 24, "show": false}, "weed": {"after": [], "tells": ["weed:packed", "weed:laugh"], "seconds": 16, "show": false}, "wet_back": {"after": [], "tells": ["wet_back:empty"], "seconds": 8, "show": false}, "dusk": {"after": [], "tells": ["dusk:stood"], "seconds": 12, "show": false}, "pines": {"after": [], "tells": ["pines:push"], "seconds": 8, "show": false}, "door_open": {"after": ["pines"], "tells": ["door_open:frost", "door_open:fisher"], "seconds": 10, "show": false}, "storm_coming": {"after": [], "tells": ["storm_coming:sky"], "seconds": 9, "show": false}, "boat_up": {"after": ["storm_coming"], "tells": ["boat_up:up"], "seconds": 7, "show": false}, "out_storm": {"after": [], "tells": ["out_storm:out"], "seconds": 8, "show": false}, "calm": {"after": [], "tells": ["calm:water"], "seconds": 14, "show": false}, "caulk": {"after": ["calm"], "tells": ["caulk:done"], "seconds": 9, "show": false}, "leave": {"after": [], "tells": ["leave:key", "leave:ready"], "seconds": 16, "show": false}, "cast_off": {"after": ["leave"], "tells": ["cast_off:off"], "seconds": 8, "show": false}, "fisher_door": {"after": [], "tells": ["fisher_door:stone", "fisher_door:palm", "fisher_door:hand"], "seconds": 16, "show": false}, "threshold": {"after": [], "tells": ["threshold:palm", "threshold:sat"], "seconds": 14, "show": false}, "beam_pass": {"after": [], "tells": ["beam_pass:my"], "seconds": 8, "show": false}, "mooring_touch": {"after": [], "tells": ["mooring_touch:touch", "mooring_touch:dark"], "seconds": 12, "show": false}, "look_marks": {"after": [], "tells": ["look_marks:cleft"], "seconds": 6, "show": false}},
- "points": ["lighthouse#door", "lighthouse#lantern", "door#door", "arrow_stone#stone", "granite#cleft", "boat#boat", "boat#mooring", "boat#lantern", "rock#edge", "sky#moon", "cape#point", "pines#crown", "papa", "mama", "troll", "my", "fisher", "papa#chest", "mama#chest", "troll#chest", "my#chest", "fisher#chest"],
- "offers": ["papa#chest", "mama#chest", "troll#chest", "my#chest", "fisher#chest", "lighthouse#door", "door#door", "boat#mooring"],
+ "points": ["lighthouse#door", "lighthouse#lantern", "door#door", "arrow_stone#stone", "granite#cleft", "boat#boat", "boat#mooring", "boat#lantern", "mooring#rope", "rock#edge", "sky#moon", "cape#point", "pines#crown", "papa", "mama", "troll", "my", "fisher", "papa#chest", "mama#chest", "troll#chest", "my#chest", "fisher#chest"],
+ "offers": ["papa#chest", "mama#chest", "troll#chest", "my#chest", "fisher#chest", "lighthouse#door", "door#door", "boat#mooring", "mooring#rope"],
  "party": {"dawn": 1, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "lighthouse_lit": 0, "beam": 0, "pines": 0, "frost_step": false, "frost_patch": false, "boat": "moored", "cleft": "empty", "driftwood": false, "bundles": "slab", "troll_at": "boulder", "papa_shore": "silent", "fisher_hand": false},
  "acts": {"door": {"values": [], "tells": ["door:open"]}, "boat_up": {"values": [], "tells": ["boat_up:up"]}, "mooring": {"values": [], "tells": ["mooring:free"]}, "flash": {"values": [], "tells": []}}}
 ```

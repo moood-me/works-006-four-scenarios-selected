@@ -56,7 +56,7 @@ objects = [
     el("rack", "The net drying on its poles", -5.0, 4.9, [-1.75, -2.05, 1.75, 0.06], facing=150, translucent=0.45, shadow=True),
     el("seat", "The Fisherman's stone", SEAT["at"][0], SEAT["at"][1], [-1, -0.42, 1, 0], shadow=True),
     el("net", "The net at his feet", r3(feet[0] - 0.35), r3(feet[1] + 0.05), [-0.75, -0.62, 2.7, 0.1], shadow=True),
-    el("matchbox", "Papa's box of matches", -0.3, 3.5, [-1.6, -1.2, 1.0, 0.2], elevation=0.36),
+    el("box", "Papa's box of matches", -0.3, 3.5, [-1.6, -1.2, 1.0, 0.2], elevation=0.36),
     el("pie", "Moominmamma's pie", -0.05, 3.3, [-0.25, -0.15, 0.25, 0.02], shadow=True),
     el("bread", "The bread stone", -2.6, 5.4, [-0.55, -0.4, 0.55, 0.04], shadow=True),
     el("driftwood", "A driftwood trunk", 2.9, 2.3, [-2.5, -0.55, 2.55, 0.08], facing=165, shadow=True),
@@ -70,6 +70,7 @@ objects = [
      "particles": {"kind": "splashes", "source": [4, 1.2, 0], "rate": 16, "amount": "storm"}},
     island.RAIN,
     {"id": "knot", "name": "The knot close", "insert": "knot_open"},
+    {"id": "matchbox", "name": "The matchbox close", "insert": "matchbox_open"},
     person("fisher", "The Fisherman", "seated"),
     person("papa", "Moominpappa", "sit_look"),
     person("mama", "Moominmamma", "seated"),
@@ -79,7 +80,7 @@ objects = [
 
 PEOPLE = list(START)
 state = {**island.STATE,
-         "net": "dry", "bread": False, "pie": False, "matchbox": "none", "fisher_mark": "keeper", "cross": 0, "carry": 0, "knot": 0, "knot_open": 0, "knot_paws": 1, "papa_lantern": 0, "beat": None, "beat_next": None,
+         "net": "dry", "bread": False, "pie": False, "matchbox": "none", "fisher_mark": "keeper", "cross": 0, "carry": 0, "knot": 0, "knot_open": 0, "knot_paws": 1, "matchbox_open": 0, "matchbox_give": 0, "matchbox_close": 0, "fisher_wear": None, "papa_lantern": 0, "beat": None, "beat_next": None,
          "my_here": False, "troll_here": False,
          **{f"{id}_at": START[id] for id in PEOPLE}, **{f"{id}_placed": "" for id in PEOPLE},
          "fisher_mood": "neutral", "papa_mood": "thinking", "mama_mood": "tired", "my_mood": "smile", "troll_mood": "thinking"}
@@ -101,6 +102,9 @@ states = {
     "carry": {"range": [0, 1], "smooth": True, "means": "the carry minigame: how far Papa has come over the stones with the pie or the bread"},
     "knot": {"range": [0, 1], "smooth": True, "means": "the knot minigame: the thread drawn out of the knot (the close-up knot's pull)"},
     "knot_open": {"range": [0, 1], "smooth": True, "means": "the close-up of the knot open (the people package's closeups shot knot)"},
+    "matchbox_open": {"range": [0, 1], "smooth": True, "means": "the matchbox close open (closeups shot matchbox: the matches minigame)"},
+    "matchbox_give": {"range": [0, 1], "smooth": True, "means": "the matchbox close: the box from Papa's paw into the Fisherman's palm (the matches minigame)"},
+    "matchbox_close": {"range": [0, 1], "smooth": True, "means": "the matchbox close: the Fisherman's fingers closing on it"},
     "knot_paws": {"range": [0, 1], "means": "the knot close: Papa's paws at the knot (1), or the net alone on the Fisherman's knees (0)"},
     "papa_lantern": {"range": [0, 1], "smooth": True, "means": "the lantern in Papa's paw lit (its light at papa#flame)"},
     "beat": {"type": "string", "means": "the piece playing (the module beats; the game names it)"},

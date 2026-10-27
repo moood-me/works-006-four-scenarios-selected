@@ -451,7 +451,7 @@ const FILM = {
     from: () => ({ ...at('fisher', 'seat'), ...at('papa', 'beside'), ...cam('seat', 'full', [0.45, 0.55]) }),
     run: async s => {
       s.camera({ target: 'seat', shot: 'full', frame: [0.45, 0.55], glide: 1.5 });
-      s.person('papa').reach({ r: 'matchbox#box' });
+      s.person('papa').reach({ r: 'box#box' });
       await s.wait(1.2);
       s.set('matchbox', 'stone');
       s.person('papa').reach(null);
@@ -495,7 +495,7 @@ const FILM = {
   },
   // late «Pie» — the last frame: the matchbox on the stone, held
   box_shot: {
-    from: () => ({ matchbox: 'stone', ...cam('matchbox#box', 'close', [0.5, 0.5]) }),
+    from: () => ({ matchbox: 'stone', ...cam('box#box', 'close', [0.5, 0.5]) }),
     run: async s => {
       await s.wait(1.5);
       s.tell('box_shot:box');

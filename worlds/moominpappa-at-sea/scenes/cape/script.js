@@ -1,12 +1,12 @@
 // The cape's mechanics: the storm's lightning and the beam (the island's); the Fisherman's net in his hands unless it
-// is folded (`net`); the people at their places (`<id>_at`: lib.PLACES, put by the island's `places`); Papa along the
+// is folded (`net`: his look's net taken off by `fisher_wear`, the folded roll is the element `net`); the people at their places (`<id>_at`: lib.PLACES, put by the island's `places`); Papa along the
 // way over the rocks by the minigames' keys — `cross` (0…3: at each hold, the storm) and `carry` (0…1: the pie, the
 // bread); the pieces (lib.FILM, the module beats).
 const L = scene.lib;
 scene.kit.island.lightning(scene);
 scene.kit.island.beam(scene);
 function net() {
-  scene.set('fisher_with', (scene.get('net') ?? 'dry') === 'folded' ? [] : null);
+  scene.set('fisher_wear', (scene.get('net') ?? 'dry') === 'folded' ? { parts: [] } : null);
 }
 scene.on('change', 'net', net);
 net();
