@@ -198,6 +198,26 @@
       "on": "flash"
     },
     {
+      "id": "lamp_papa",
+      "at": "papa#flame",
+      "on": "papa_lamp",
+      "color": "#ffd08c",
+      "strength": 1.1,
+      "reach": 5,
+      "flicker": 0.1,
+      "glow": 0.2
+    },
+    {
+      "id": "lamp_troll",
+      "at": "troll#flame",
+      "on": "troll_lamp",
+      "color": "#ffd08c",
+      "strength": 1.1,
+      "reach": 5,
+      "flicker": 0.1,
+      "glow": 0.2
+    },
+    {
       "id": "glass_light",
       "of": "glazing",
       "daylight": 1
@@ -206,7 +226,9 @@
   "modules": [
     "cast",
     "island",
-    "lantern"
+    "lantern",
+    "beats",
+    "closeups"
   ],
   "objects": [
     {
@@ -618,6 +640,11 @@
       "inside": true
     },
     {
+      "id": "match",
+      "name": "The match at the wick close",
+      "insert": "match_open"
+    },
+    {
       "id": "papa",
       "name": "Moominpappa",
       "person": {
@@ -627,6 +654,10 @@
       },
       "across": 0.8,
       "distance": 3.6,
+      "place": {
+        "across": "papa_a",
+        "distance": "papa_d"
+      },
       "inside": true
     },
     {
@@ -638,6 +669,10 @@
       },
       "across": -1.4,
       "distance": 4.62,
+      "place": {
+        "across": "my_a",
+        "distance": "my_d"
+      },
       "inside": true
     },
     {
@@ -649,6 +684,10 @@
       },
       "across": -1.83,
       "distance": 4.58,
+      "place": {
+        "across": "troll_a",
+        "distance": "troll_d"
+      },
       "inside": true
     }
   ],
@@ -673,6 +712,18 @@
     "lantern_at": "none",
     "lantern_flame": "full",
     "smoke": 0,
+    "beat": "",
+    "beat_next": "",
+    "papa_lamp": 0,
+    "troll_lamp": 0,
+    "match_open": 0,
+    "match": 0,
+    "papa_a": 0.8,
+    "papa_d": 3.6,
+    "my_a": -1.4,
+    "my_d": 4.62,
+    "troll_a": -1.83,
+    "troll_d": 4.58,
     "papa_turn": 205,
     "papa_look": "burner#wick",
     "papa_mood": "thinking",
@@ -832,6 +883,68 @@
         1
       ],
       "means": "the burner's soot rising — the script sets it from flame"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (modules/beats)"
+    },
+    "papa_lamp": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the lantern papa carries burns (its light at the hand)"
+    },
+    "troll_lamp": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the lantern troll carries burns (its light at the hand)"
+    },
+    "match_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up `match` open (modules/closeups)"
+    },
+    "match": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М3: the match brought to the wick (the close-up `match`)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game plays next (modules/beats: made ready ahead)"
+    },
+    "papa_a": {
+      "type": "number",
+      "means": "where papa stands, across"
+    },
+    "papa_d": {
+      "type": "number",
+      "means": "where papa stands, distance"
+    },
+    "my_a": {
+      "type": "number",
+      "means": "where my stands, across"
+    },
+    "my_d": {
+      "type": "number",
+      "means": "where my stands, distance"
+    },
+    "troll_a": {
+      "type": "number",
+      "means": "where troll stands, across"
+    },
+    "troll_d": {
+      "type": "number",
+      "means": "where troll stands, distance"
     }
   },
   "music": {

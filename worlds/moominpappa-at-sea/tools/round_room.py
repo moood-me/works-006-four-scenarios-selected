@@ -64,17 +64,24 @@ panes = [pane(W0, W1, WIN["sill"], WIN["top"]),
           door_out[0] + [DOOR["spring"]]]]
 # the island's far lights, coming in only at the window and the door: the sun by day, at dawn (low, far into the room),
 # at dusk; the moon from the sky's moon; the lightning from its bolt, seen low in the window
+# a lantern carried lit: its light at the flame in the hand (modules/cast part lantern…), on by `<id>_lamp`
+carried = [{"id": f"lamp_{who}", "at": f"{who}#flame", "on": f"{who}_lamp", "color": "#ffd08c", "strength": 1.1, "reach": 5, "flicker": 0.1,
+            "glow": 0.2} for who in ("papa", "troll")]
 far = island.lights(([18, 38], "#fff1dc", 1.3), ([8, 7], "#ffe0c2", 1.3), [38, 6], [9, 4], lantern=False)
 for l in far:
     l["through"] = panes
 # the island's light outside; how much of it comes into the room
 light = island.light(WIND)
 light["inside"] = 0.75
+# (no beam here: the lighthouse's beam is the lantern room's and the outside scenes')
+light["looks"]["storm"]["lights"].pop("beam", None)
 for k, v in {"dawn": 0.8, "dusk": 0.8, "night": 0.85, "storm": 0.65}.items():
     light["looks"][k]["inside"] = v
 cheek = lambda t, face, h, deep: {"across": at(t, R + deep / 2)[0], "distance": at(t, R + deep / 2)[1], "elevation": h, "facing": r3(face)}
 person = lambda id, name, who, a, d, does=None: {"id": id, "name": name, "person": {"cast": "cast", "who": who, **({"does": does} if does else {})},
-                                                 "across": a, "distance": d, "inside": True}
+                                                 "across": a, "distance": d, "place": {"across": id + "_a", "distance": id + "_d"},
+                                                 "inside": True}
+PEOPLE_AT = {"papa": (-2.7, 4.6), "mama": (-1.05, 4.25), "my": (0.78, 4.6), "troll": tuple(at(WIN["mid"], 3.2))}
 stove = at(68, 3.1)
 spec = {
     "engine": 3,
@@ -87,9 +94,10 @@ spec = {
         lantern.light("lamp", "lantern#flame"),
         {"id": "fire", "of": "stove#fire", "color": "#ff9a50", "strength": 1, "reach": 3.5, "flicker": 0.35},
         *far,
+        *carried,
         {"id": "window_light", "of": "casement", "daylight": 1, "on": "window_open"},
         {"id": "door_light", "of": "door", "daylight": 1, "on": "door"}],
-    "modules": ["cast", "island", "lantern"],
+    "modules": ["cast", "island", "lantern", "beats", "closeups"],
     "objects": [
         island.sky(0.41, (0.2, -0.3), 1.03, 1.67),
         island.sea(-5, {"strength": 0.2, "fade": 0, "rough": 0.6, "ripple": 0.4}),
@@ -157,13 +165,17 @@ spec = {
          "particles": {"kind": "smoke", "at": "cup#cup", "color": "#f4f4f2", "rate": 3, "size": [0.03, 0.18], "speed": [0.08, 0.15],
                        "life": [2, 3], "opacity": 0.25, "gravity": -0.1, "shadow": 0, "amount": "tea"}},
         card("wall_mama", "Moominmamma in her garden", *at(-10.5, R - 0.015), [-0.22, -0.42, 0.28, 0.01], facing=169.5, elevation=1.0),
+        card("bench", "The bench", 0.03, 5.15, [-0.85, -0.5, 0.85, 0.03], shadow=True),
         card("stool", "Moominmamma's stool", -1.05, 4.25, [-0.22, -0.5, 0.22, 0.03], shadow=True),
         card("handbag", "Moominmamma's handbag", -1.45, 4.0, [-0.25, -0.4, 0.25, 0.03], facing=200, shadow=True),
         {"id": "motes", "name": "Dust in the light", "across": 1.4, "distance": 6.1, "elevation": 0.9, "inside": True,
          "particles": {"kind": "dust", "source": [1.6, 1.6, 1.4]}},
+        {"id": "needle", "name": "Mama's needle close", "insert": "needle_open"},
+        {"id": "handle", "name": "The lantern's handle close", "insert": "handle_open"},
+        {"id": "paws", "name": "The boy's paws close", "insert": "paws_open"},
         person("papa", "Moominpappa", "papa", -2.7, 4.6, "hands_behind"),
         person("mama", "Moominmamma", "mama", -1.05, 4.25, "seated"),
-        person("my", "Little My", "my", 0.6, 4.1, "seated"),
+        person("my", "Little My", "my", 0.78, 4.6, "seated"),
         person("troll", "Moomintroll", "troll", *at(WIN["mid"], 3.2)),
     ],
     "state": {
@@ -173,10 +185,12 @@ spec = {
         "lantern_at": "table", "flame": "full", "paraffin": 3, "stove": "cold", "firewood": True, "steam": 0,
         "cups": 0, "tea": 0, "door": 0, "basket": False, "stone": False, "shutters": False, "wet": False, "drip": 0,
         "door_f": DOOR_FACING, "lantern_a": LANTERN["table"][0], "lantern_d": LANTERN["table"][1], "lantern_e": LANTERN["table"][2],
-        "window_open": 1,
+        "window_open": 1, "lantern_x": 0, "papa_lamp": 0, "troll_lamp": 0, "needle_open": 0, "handle_open": 0, "paws_open": 0,
+        "paws_rub": 0, "paws_thaw": 0, "thread": 0, "give": 0, "can_sway": 0, "wipe": 0, "eyes": 0, "door_shake": 0, "mama_to": "papa", "beat": "", "beat_next": "",
+        **{f"{k}_a": v[0] for k, v in PEOPLE_AT.items()}, **{f"{k}_d": v[1] for k, v in PEOPLE_AT.items()},
         "papa_turn": 120, "papa_look": [0, 4.45, 0.9], "papa_mood": "thinking",
         "mama_on": [-1.05, 4.25, 0.45], "mama_turn": 115, "mama_look": [0, 4.45, 0.9], "mama_mood": "smile",
-        "my_on": [0.6, 4.1, 0.72], "my_turn": 230, "my_look": "papa", "my_mood": "smile",
+        "my_on": [0.78, 4.6, 0.72], "my_turn": 250, "my_look": "papa", "my_mood": "smile",
         "troll_turn": WIN["mid"], "troll_look": at(WIN["mid"], 12) + [0.4], "troll_mood": "thinking"},
     "states": {
         **island.STATES,
@@ -210,6 +224,22 @@ spec = {
         "lantern_d": {"type": "number", "means": "the lantern's place, distance — the script sets it from lantern_at"},
         "lantern_e": {"type": "number", "means": "the lantern's place, elevation — the script sets it from lantern_at"},
         "window_open": {"range": [0, 1], "means": "the window lets the day in (0 behind the shutters) — the script sets it from shutters"},
+        **{f"{k}_lamp": {"range": [0, 1], "means": f"the lantern {k} carries burns (its light at the hand)"} for k in ("papa", "troll")},
+        **{f"{k}_open": {"range": [0, 1], "smooth": True, "means": f"the close-up `{k}` open (modules/closeups)"} for k in ("needle", "handle", "paws")},
+        "paws_rub": {"range": [0, 1], "smooth": True, "means": "the close-up `paws`: Mama's paws rubbing his"},
+        "paws_thaw": {"range": [0, 1], "smooth": True, "means": "the close-up `paws`: the rime going"},
+        "thread": {"range": [0, 1], "smooth": True, "means": "М5б: the thread to the needle's eye and through (the close-up `needle`)"},
+        "give": {"range": [0, 1], "smooth": True, "means": "М5в: Papa's paw opening on the handle, the boy's closing (the close-up `handle`)"},
+        "can_sway": {"range": [-1, 1], "smooth": True, "means": "М2б: the can's sway as he carries it"},
+        "wipe": {"range": [0, 1], "smooth": True, "means": "М6в: the dust wiped along the line"},
+        "eyes": {"range": [0, 1], "smooth": True, "means": "М7а: Papa's eyes opening"},
+        "door_shake": {"range": [0, 1], "smooth": True, "means": "М9б: the door's blow"},
+        "lantern_x": {"type": "number", "means": "the lantern moved along the table from its middle, metres (the piece «Бери, бери»)"},
+        "mama_to": {"values": ["papa", "apple"], "means": "whom Mama tells «I want to go home» at the door in the storm: Papa, or the painted apple tree (Ш2 «Гуляет»)"},
+        "beat": {"type": "string", "means": "the piece playing (modules/beats)"},
+        "beat_next": {"type": "string", "means": "the piece the game plays next (modules/beats: made ready ahead)"},
+        **{f"{k}_a": {"type": "number", "means": f"where {k} stands, across"} for k in PEOPLE_AT},
+        **{f"{k}_d": {"type": "number", "means": f"where {k} stands, distance"} for k in PEOPLE_AT},
     },
     "music": music,
 }

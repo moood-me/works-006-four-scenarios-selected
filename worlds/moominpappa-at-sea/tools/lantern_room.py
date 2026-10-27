@@ -61,6 +61,9 @@ light = island.light(WIND)
 light["inside"] = 0.9
 for k, v in {"night": 0.85, "storm": 0.6}.items():
     light["looks"][k]["inside"] = v
+# a lantern carried lit: its light at the flame in the hand (modules/cast part lantern…), on by `<id>_lamp`
+carried = [{"id": f"lamp_{who}", "at": f"{who}#flame", "on": f"{who}_lamp", "color": "#ffd08c", "strength": 1.1, "reach": 5, "flicker": 0.1,
+            "glow": 0.2} for who in ("papa", "troll")]
 far = island.lights(([30, 40], "#fff1dc", 1.3), ([5, 6], "#ffe0c2", 1.3), [30, 5], [11, 5], lantern=False)
 barrel = at(-100, 2.2)
 spec = {
@@ -77,8 +80,9 @@ spec = {
         {"id": "blue_flame", "of": "burner#blue", "color": "#9cbcff", "strength": 0.9, "reach": 4, "flicker": 0.2},
         lantern.light("lantern", "lantern#flame", reach=5),
         *far,
+        *carried,
         {"id": "glass_light", "of": "glazing", "daylight": 1}],
-    "modules": ["cast", "island", "lantern"],
+    "modules": ["cast", "island", "lantern", "beats", "closeups"],
     "objects": [
         island.sky(0.31, (1.47, -0.4), 0.98, 1.47),
         island.sea(-16, {"strength": 0.22, "fade": 0, "rough": 0.6, "ripple": 0.45}),
@@ -115,15 +119,20 @@ spec = {
         card("cot_legs", "The camp bed's legs", 1.75, 4.2, [-0.38, -0.44, 0.38, 0.03]),
         card("stair", "The stair under the hatch", HATCH["a"], r3(HATCH["d"] + HATCH["half"]), [-0.42, -2.42, 0.42, 0.02], elevation=-2.4),
         lantern.element("lantern", "The storm lantern", *at(-40, 1.6), inside=True),
+        {"id": "match", "name": "The match at the wick close", "insert": "match_open"},
         {"id": "papa", "name": "Moominpappa", "person": {"cast": "cast", "who": "papa", "does": "hands_behind"}, "across": 0.8, "distance": 3.6,
-         "inside": True},
-        {"id": "my", "name": "Little My", "person": {"cast": "cast", "who": "my"}, "across": -1.4, "distance": 4.62, "inside": True},
-        {"id": "troll", "name": "Moomintroll", "person": {"cast": "cast", "who": "troll"}, "across": -1.83, "distance": 4.58, "inside": True},
+         "place": {"across": "papa_a", "distance": "papa_d"}, "inside": True},
+        {"id": "my", "name": "Little My", "person": {"cast": "cast", "who": "my"}, "across": -1.4, "distance": 4.62,
+         "place": {"across": "my_a", "distance": "my_d"}, "inside": True},
+        {"id": "troll", "name": "Moomintroll", "person": {"cast": "cast", "who": "troll"}, "across": -1.83, "distance": 4.58,
+         "place": {"across": "troll_a", "distance": "troll_d"}, "inside": True},
     ],
     "state": {
         **island.STATE,
         "lenses": 0, "flame": "out", "slant": 0, "sheets": 0, "pot": False, "cot": "none", "gallery_glass": "whole",
-        "lantern_at": "none", "lantern_flame": "full", "smoke": 0,
+        "lantern_at": "none", "lantern_flame": "full", "smoke": 0, "beat": "", "beat_next": "", "papa_lamp": 0, "troll_lamp": 0, "match_open": 0,
+        "match": 0,
+        "papa_a": 0.8, "papa_d": 3.6, "my_a": -1.4, "my_d": 4.62, "troll_a": -1.83, "troll_d": 4.58,
         "papa_turn": 205, "papa_look": "burner#wick", "papa_mood": "thinking",
         "my_turn": 120, "my_look": "papa", "my_mood": "smile",
         "troll_turn": 130, "troll_look": "papa", "troll_mood": "neutral"},
@@ -139,6 +148,12 @@ spec = {
         "lantern_at": {"values": ["none", "floor"], "means": "the storm lantern carried up: not here, or on the floor by the sooty wall"},
         "lantern_flame": {"values": ["full", "low", "out"], "means": "the storm lantern's flame up here: full, turned low, out"},
         "smoke": {"range": [0, 1], "means": "the burner's soot rising — the script sets it from flame"},
+        "beat": {"type": "string", "means": "the piece playing (modules/beats)"},
+        **{f"{k}_lamp": {"range": [0, 1], "means": f"the lantern {k} carries burns (its light at the hand)"} for k in ("papa", "troll")},
+        "match_open": {"range": [0, 1], "smooth": True, "means": "the close-up `match` open (modules/closeups)"},
+        "match": {"range": [0, 1], "smooth": True, "means": "М3: the match brought to the wick (the close-up `match`)"},
+        "beat_next": {"type": "string", "means": "the piece the game plays next (modules/beats: made ready ahead)"},
+        **{f"{k}_{x}": {"type": "number", "means": f"where {k} stands, {w}"} for k in ("papa", "my", "troll") for x, w in (("a", "across"), ("d", "distance"))},
         "beam": {**island.STATES["beam"], "means": "the beam out through the glass — the script sets it from flame (lit)"},
     },
     "music": music,
