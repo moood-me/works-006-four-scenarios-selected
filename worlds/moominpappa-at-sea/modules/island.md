@@ -60,7 +60,8 @@ stars as thick all round), the sea centred on the start, 6000 × 6000 m, the cre
   `lighthouse#lantern`; the lantern's glow `lantern` (lit by the scene's light `lantern` on `lighthouse_lit` — a scene
   with the lighthouse takes it into its lights, else the glow shows by day); its glass warm when `lighthouse_lit` is
   over a half (the element repaints on that key only: `"redraw": {"lighthouse_lit": 1}`). `doorway: true` — the door is
-  a card of its own (`door(g, e)`, painted from its hinge, `DOOR` its size; point `<id>#door`), the tower shows the dark
+  a card of its own (`door(g, e, {hinge})`, painted from its hinge — left by default, or right; `DOOR` its size; point
+  `<id>#door`), the tower shows the dark
   doorway behind it.
 - `steps(g, e)` — the granite steps to the door (box [-0.8, -0.55, 0.8, 0.05]).
 - `pine(g, e)` — a small crooked black pine, its crown a layer the wind sways (box [-1.9, -3.75, 1.75, 0.1]; point

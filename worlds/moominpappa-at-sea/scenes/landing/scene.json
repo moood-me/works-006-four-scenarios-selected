@@ -245,7 +245,7 @@
       "id": "door",
       "name": "The lighthouse door",
       "on": "lighthouse",
-      "across": -0.5,
+      "across": 0.5,
       "distance": -1.94,
       "elevation": 0.42,
       "facing": 180,
@@ -253,9 +253,9 @@
         "facing": "door_turn"
       },
       "box": [
-        -0.05,
+        -1.05,
         -1.9,
-        1.05,
+        0.05,
         0.03
       ],
       "shadow": true
@@ -782,7 +782,7 @@
         1
       ],
       "smooth": true,
-      "means": "the lighthouse door: 0 shut … 1 open outward, toward the landing (the door minigame moves it)"
+      "means": "the lighthouse door, hung on its right jamb: 0 shut … 1 open outward, toward the landing (the door minigame moves it)"
     },
     "frost_step": {
       "type": "boolean",
@@ -959,7 +959,7 @@
     },
     "door_turn": {
       "type": "number",
-      "means": "the door's facing (the script's, from door)"
+      "means": "the door's facing (the script's, from door: 180 − 70 · door)"
     },
     "boat_a": {
       "type": "number",

@@ -148,11 +148,15 @@ function lighthouse(g, e, opts = {}) {
   e.form(e.kit.revolve(P.profile), { closed: 'u', ground: '#f2efe9' });
 }
 
-// The lighthouse door as a card of its own, painted from its hinge (x 0 at the left jamb, the door to x 1.0; its foot
-// at the sill): dark red-brown boards under an arch, an iron ring. A scene turns it about its hinge ("place":
-// {"facing": key}). Its point "door#door".
-function door(g, e) {
+// The lighthouse door as a card of its own, painted from its hinge (its foot at the sill): dark red-brown boards
+// under an arch, an iron ring at its free edge. opts.hinge: "left" (default — x 0 at the left jamb, the door to x 1.0)
+// or "right" (hung on the right jamb, seen from outside: the door from x −1.0 to 0). A scene turns it about its hinge
+// ("place": {"facing": key}: + opens toward the viewer a door hung on the left, − one hung on the right). Its point
+// "<id>#door".
+function door(g, e, opts = {}) {
   const w = DOOR.half * 2, h = DOOR.top - DOOR.sill;
+  g.save();
+  if (opts.hinge === 'right') g.translate(-w, 0);
   g.fillStyle = '#6e3c33';
   g.beginPath();
   g.moveTo(0, 0);
@@ -172,9 +176,10 @@ function door(g, e) {
   g.strokeStyle = '#2a2626';
   g.lineWidth = 0.035;
   g.beginPath();
-  g.arc(0.8, -0.83, 0.07, 0, Math.PI * 2);
+  g.arc(opts.hinge === 'right' ? 0.2 : 0.8, -0.83, 0.07, 0, Math.PI * 2);
   g.stroke();
   e.at(0.5, -0.9, 'door');
+  g.restore();
 }
 
 // The steps up to the lighthouse door: rough granite slabs laid up the knoll's face, greyer than the rock, their edges

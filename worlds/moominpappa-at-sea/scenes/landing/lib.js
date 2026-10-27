@@ -57,7 +57,7 @@ function bundle(g, x, w, h, wet) {
 const PINES = [[2.6, 23.0, 8.8, 29.9], [15.8, 25.5, 11.4, 30.0], [4.2, 31.5, 12.1, 31.3]];
 // the boat moored (her bow on the rocks of the cove, her stern afloat) and pulled up the rocks: [across, distance, turn]
 const BOAT = { moored: [-3.9, 8.6, 195], up: [-3.2, 6.6, 200] };
-// the door's swing: shut facing the landing, open outward toward it by `door`
+// the door's swing: hung on its right jamb, shut facing the landing, open outward toward it by `door`
 const DOOR_OPEN = 70;
 // the people's places (`<id>_at`): where each stands or sits, turned how, doing what, looking at what
 const stand = { motion: 'stand', loop: true };
