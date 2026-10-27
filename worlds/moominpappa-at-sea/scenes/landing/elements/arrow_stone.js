@@ -1,5 +1,5 @@
 // The stone with an arrow scratched on it, by the foot of the steps (the keeper's key lies under it): grey granite,
-// the arrow pale where it was cut.
+// the arrow pale where it was cut. Its point `arrow_stone#stone`.
 g.fillStyle = "#a99c9a";
 g.beginPath();
 g.moveTo(-0.38, 0);
@@ -18,4 +18,4 @@ g.moveTo(0.1, -0.27);
 g.lineTo(0.18, -0.2);
 g.lineTo(0.1, -0.13);
 g.stroke();
-e.at(0, -0.2, "arrow");
+e.at(0, -0.2, "stone");

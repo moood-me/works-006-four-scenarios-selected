@@ -96,10 +96,10 @@
         }
       },
       "flash": {
-        "ambient": 1.0,
+        "ambient": 0.9,
         "ambientColor": "#e6ecff",
-        "brightness": 1.2,
-        "saturation": 0.7
+        "brightness": 1.1,
+        "saturation": 0.75
       }
     }
   },
@@ -147,7 +147,7 @@
         25
       ],
       "color": "#e8eeff",
-      "strength": 2.2,
+      "strength": 1.8,
       "on": "flash"
     },
     {
@@ -187,9 +187,9 @@
       "plane": true,
       "across": 0,
       "distance": 1450,
-      "elevation": -1.3,
       "width": 2400,
       "depth": 3000,
+      "elevation": -1.3,
       "reflect": {
         "strength": 0.18,
         "fade": 0,
@@ -242,6 +242,25 @@
       }
     },
     {
+      "id": "door",
+      "name": "The lighthouse door",
+      "on": "lighthouse",
+      "across": -0.5,
+      "distance": -1.94,
+      "elevation": 0.42,
+      "facing": 180,
+      "place": {
+        "facing": "door_turn"
+      },
+      "box": [
+        -0.05,
+        -1.9,
+        1.05,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
       "id": "steps",
       "name": "Steps to the lighthouse door",
       "across": 10,
@@ -251,6 +270,20 @@
         -0.55,
         0.8,
         0.05
+      ]
+    },
+    {
+      "id": "bundles_steps",
+      "name": "The bundles on the steps",
+      "across": 10.9,
+      "distance": 30.0,
+      "elevation": 0.17,
+      "shadow": true,
+      "box": [
+        -1.1,
+        -0.5,
+        1.4,
+        0.1
       ]
     },
     {
@@ -314,17 +347,111 @@
       "distance": 27.5
     },
     {
+      "id": "pine1",
+      "name": "A pine that creeps to the door",
+      "across": 2.6,
+      "distance": 23,
+      "box": [
+        -1.9,
+        -3.75,
+        1.75,
+        0.1
+      ],
+      "shadow": true,
+      "place": {
+        "across": "pine1_a",
+        "distance": "pine1_d"
+      }
+    },
+    {
+      "id": "pine2",
+      "name": "A pine that creeps to the door",
+      "across": 15.8,
+      "distance": 25.5,
+      "box": [
+        -1.9,
+        -3.75,
+        1.75,
+        0.1
+      ],
+      "shadow": true,
+      "place": {
+        "across": "pine2_a",
+        "distance": "pine2_d"
+      }
+    },
+    {
+      "id": "pine3",
+      "name": "A pine that creeps to the door",
+      "across": 4.2,
+      "distance": 31.5,
+      "box": [
+        -1.9,
+        -3.75,
+        1.75,
+        0.1
+      ],
+      "shadow": true,
+      "place": {
+        "across": "pine3_a",
+        "distance": "pine3_d"
+      }
+    },
+    {
       "id": "boat",
       "name": "The boat Adventure",
       "across": -3.9,
       "distance": 8.6,
       "facing": 195,
-      "shadow": true,
+      "place": {
+        "across": "boat_a",
+        "distance": "boat_d",
+        "facing": "boat_turn"
+      },
       "box": [
         -1.95,
         -2.85,
         2.45,
         0.2
+      ],
+      "shadow": true
+    },
+    {
+      "id": "sprout",
+      "name": "A shoot out of the cleft",
+      "across": 1.7000000000000002,
+      "distance": 4.6,
+      "box": [
+        -0.15,
+        -0.6,
+        0.15,
+        0.05
+      ]
+    },
+    {
+      "id": "rock",
+      "name": "Wet rocks at the cove's edge",
+      "across": -3.55,
+      "distance": 12.6,
+      "shadow": true,
+      "box": [
+        -1,
+        -0.45,
+        1,
+        0.05
+      ]
+    },
+    {
+      "id": "driftwood",
+      "name": "Driftwood along the cove",
+      "across": -3.6,
+      "distance": 8.9,
+      "shadow": true,
+      "box": [
+        -1.5,
+        -0.7,
+        1.5,
+        0.1
       ]
     },
     {
@@ -360,10 +487,10 @@
       "distance": 3.4,
       "shadow": true,
       "box": [
-        -1.15,
-        -0.56,
-        1.15,
-        0
+        -0.5,
+        -0.5,
+        0.5,
+        0.05
       ]
     },
     {
@@ -395,6 +522,32 @@
       ]
     },
     {
+      "id": "spray",
+      "name": "Spray on the cove's rocks",
+      "across": -4.0,
+      "distance": 9.5,
+      "particles": {
+        "kind": "splashes",
+        "source": [
+          1.2,
+          5,
+          0
+        ],
+        "rate": 14,
+        "amount": "storm"
+      }
+    },
+    {
+      "id": "rain",
+      "name": "Rain",
+      "particles": {
+        "kind": "rain",
+        "amount": "storm",
+        "count": 9000,
+        "wind": 1.2
+      }
+    },
+    {
       "id": "papa",
       "name": "Moominpappa",
       "person": {
@@ -403,7 +556,11 @@
         "does": "hands_behind"
       },
       "across": 0.45,
-      "distance": 3.4
+      "distance": 3.4,
+      "place": {
+        "across": "papa_a",
+        "distance": "papa_d"
+      }
     },
     {
       "id": "mama",
@@ -414,7 +571,11 @@
         "does": "seated"
       },
       "across": -1.3,
-      "distance": 3.35
+      "distance": 3.35,
+      "place": {
+        "across": "mama_a",
+        "distance": "mama_d"
+      }
     },
     {
       "id": "troll",
@@ -425,7 +586,41 @@
         "does": "seated"
       },
       "across": -2.65,
-      "distance": 4.4
+      "distance": 4.4,
+      "place": {
+        "across": "troll_a",
+        "distance": "troll_d"
+      }
+    },
+    {
+      "id": "my",
+      "name": "Little My",
+      "person": {
+        "cast": "cast",
+        "who": "my",
+        "does": "sit_look"
+      },
+      "across": 7.15,
+      "distance": 28,
+      "place": {
+        "across": "my_a",
+        "distance": "my_d"
+      }
+    },
+    {
+      "id": "fisher",
+      "name": "The Fisherman",
+      "person": {
+        "cast": "cast",
+        "who": "fisher",
+        "does": "stand"
+      },
+      "across": 16.2,
+      "distance": 27,
+      "place": {
+        "across": "fisher_a",
+        "distance": "fisher_d"
+      }
     }
   ],
   "state": {
@@ -436,13 +631,42 @@
     "storm": 0,
     "flash": 0,
     "lighthouse_lit": 0,
+    "pines": 0,
+    "door": 0,
+    "frost_step": false,
+    "frost_patch": false,
+    "boat": "moored",
+    "boat_up": 0,
+    "cleft": "empty",
+    "driftwood": false,
+    "bundles": "slab",
+    "fisher_here": false,
+    "papa_at": "slab",
+    "mama_at": "slab",
+    "troll_at": "boulder",
+    "my_at": "stone",
+    "fisher_at": "away",
+    "papa_placed": "",
+    "mama_placed": "",
+    "troll_placed": "",
+    "my_placed": "",
+    "fisher_placed": "",
+    "papa_mood": "smile",
+    "mama_mood": "smile",
+    "troll_mood": "thinking",
+    "my_mood": "smile",
+    "fisher_mood": "neutral",
+    "papa_a": 0.45,
+    "papa_d": 3.4,
+    "papa_turn": 215,
     "papa_look": [
       -3,
       -2,
       1.6
     ],
-    "papa_mood": "smile",
-    "papa_turn": 215,
+    "mama_a": -1.3,
+    "mama_d": 3.35,
+    "mama_turn": 150,
     "mama_on": [
       -1.3,
       3.4,
@@ -453,8 +677,9 @@
       1,
       1.3
     ],
-    "mama_mood": "smile",
-    "mama_turn": 150,
+    "troll_a": -2.65,
+    "troll_d": 4.4,
+    "troll_turn": 240,
     "troll_on": [
       -2.65,
       4.4,
@@ -465,8 +690,28 @@
       0,
       0.8
     ],
-    "troll_mood": "thinking",
-    "troll_turn": 240
+    "my_a": 7.15,
+    "my_d": 28,
+    "my_turn": 200,
+    "my_look": "arrow_stone#stone",
+    "fisher_a": 16.2,
+    "fisher_d": 27,
+    "fisher_turn": 35,
+    "fisher_look": [
+      30,
+      60,
+      1.5
+    ],
+    "pine1_a": 2.6,
+    "pine1_d": 23,
+    "pine2_a": 15.8,
+    "pine2_d": 25.5,
+    "pine3_a": 4.2,
+    "pine3_d": 31.5,
+    "door_turn": 180,
+    "boat_a": -3.9,
+    "boat_d": 8.6,
+    "boat_turn": 195
   },
   "states": {
     "dawn": {
@@ -523,6 +768,210 @@
       ],
       "smooth": true,
       "means": "the lighthouse's lamp burns: the lantern's glass warm, its light and glow (no beam)"
+    },
+    "pines": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "how far the three pines have crept up to the lighthouse door overnight (1 — at the threshold); between steps"
+    },
+    "door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lighthouse door: 0 shut … 1 open outward, toward the landing (the door minigame moves it)"
+    },
+    "frost_step": {
+      "type": "boolean",
+      "means": "the frost's trail from the water to the door and back, thickest on the threshold"
+    },
+    "frost_patch": {
+      "type": "boolean",
+      "means": "a white patch of rime on the stones by the landing"
+    },
+    "boat": {
+      "values": [
+        "moored",
+        "up",
+        "cracked",
+        "tarred",
+        "away"
+      ],
+      "means": "the boat: moored in the cove (bow on the rocks, stern afloat, rocking), pulled up the rocks, pulled up with a split in her side, the split tarred, gone"
+    },
+    "boat_up": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "while moored: how far she is pulled up the rocks (the boat minigame moves it; 1 — where 'up' has her)"
+    },
+    "cleft": {
+      "values": [
+        "empty",
+        "weed",
+        "sprout"
+      ],
+      "means": "the cleft by the landing: bare, packed with seaweed, a green shoot out of the weed"
+    },
+    "driftwood": {
+      "type": "boolean",
+      "means": "driftwood thrown up along the cove after the storm"
+    },
+    "bundles": {
+      "values": [
+        "slab",
+        "steps",
+        "none"
+      ],
+      "means": "the luggage: on the slab as landed (the bundle Mama sits on, her bag, the paraffin can), the bundles on the lighthouse steps (one wet), all carried in"
+    },
+    "papa_at": {
+      "values": [
+        "slab",
+        "edge",
+        "door",
+        "boat",
+        "cleft",
+        "water",
+        "stone"
+      ],
+      "means": "where papa is (the script puts them there: lib.PLACES.papa): slab — on the slab, hands behind; edge — on the wet rocks at the cove's edge, facing the sea; door — at the door, a hand on it; boat — by the boat; cleft — at the cleft; water — at the water in the cove; stone — by the arrow stone"
+    },
+    "mama_at": {
+      "values": [
+        "slab",
+        "steps",
+        "cleft",
+        "stand"
+      ],
+      "means": "where mama is (the script puts them there: lib.PLACES.mama): slab — sitting on the bundle; steps — sitting on the lighthouse steps; cleft — at the cleft; stand — standing on the slab"
+    },
+    "troll_at": {
+      "values": [
+        "boulder",
+        "boat"
+      ],
+      "means": "where troll is (the script puts them there: lib.PLACES.troll): boulder — sitting on the boulder; boat — by the boat's stern"
+    },
+    "my_at": {
+      "values": [
+        "stone",
+        "rock"
+      ],
+      "means": "where my is (the script puts them there: lib.PLACES.my): stone — sitting by the arrow stone; rock — sitting on the slab, near"
+    },
+    "fisher_at": {
+      "values": [
+        "away",
+        "door",
+        "threshold"
+      ],
+      "means": "where fisher is (the script puts them there: lib.PLACES.fisher): away — far on the rocks, going away from the lighthouse; door — at the door, his palm on it; threshold — sitting on the threshold, facing the sea"
+    },
+    "papa_placed": {
+      "type": "string",
+      "means": "the place papa was last put at (the script's: put again only when papa_at asks another)"
+    },
+    "mama_placed": {
+      "type": "string",
+      "means": "the place mama was last put at (the script's: put again only when mama_at asks another)"
+    },
+    "troll_placed": {
+      "type": "string",
+      "means": "the place troll was last put at (the script's: put again only when troll_at asks another)"
+    },
+    "my_placed": {
+      "type": "string",
+      "means": "the place my was last put at (the script's: put again only when my_at asks another)"
+    },
+    "fisher_placed": {
+      "type": "string",
+      "means": "the place fisher was last put at (the script's: put again only when fisher_at asks another)"
+    },
+    "papa_a": {
+      "type": "number",
+      "means": "where papa stands, across (the script's, from papa_at)"
+    },
+    "papa_d": {
+      "type": "number",
+      "means": "where papa stands, distance (the script's, from papa_at)"
+    },
+    "mama_a": {
+      "type": "number",
+      "means": "where mama stands, across (the script's, from mama_at)"
+    },
+    "mama_d": {
+      "type": "number",
+      "means": "where mama stands, distance (the script's, from mama_at)"
+    },
+    "troll_a": {
+      "type": "number",
+      "means": "where troll stands, across (the script's, from troll_at)"
+    },
+    "troll_d": {
+      "type": "number",
+      "means": "where troll stands, distance (the script's, from troll_at)"
+    },
+    "my_a": {
+      "type": "number",
+      "means": "where my stands, across (the script's, from my_at)"
+    },
+    "my_d": {
+      "type": "number",
+      "means": "where my stands, distance (the script's, from my_at)"
+    },
+    "fisher_a": {
+      "type": "number",
+      "means": "where fisher stands, across (the script's, from fisher_at)"
+    },
+    "fisher_d": {
+      "type": "number",
+      "means": "where fisher stands, distance (the script's, from fisher_at)"
+    },
+    "pine1_a": {
+      "type": "number",
+      "means": "where the creeping pine 1 stands, across (the script's, from pines)"
+    },
+    "pine1_d": {
+      "type": "number",
+      "means": "where the creeping pine 1 stands, distance (the script's, from pines)"
+    },
+    "pine2_a": {
+      "type": "number",
+      "means": "where the creeping pine 2 stands, across (the script's, from pines)"
+    },
+    "pine2_d": {
+      "type": "number",
+      "means": "where the creeping pine 2 stands, distance (the script's, from pines)"
+    },
+    "pine3_a": {
+      "type": "number",
+      "means": "where the creeping pine 3 stands, across (the script's, from pines)"
+    },
+    "pine3_d": {
+      "type": "number",
+      "means": "where the creeping pine 3 stands, distance (the script's, from pines)"
+    },
+    "door_turn": {
+      "type": "number",
+      "means": "the door's facing (the script's, from door)"
+    },
+    "boat_a": {
+      "type": "number",
+      "means": "where the boat lies, across (the script's, from boat and boat_up)"
+    },
+    "boat_d": {
+      "type": "number",
+      "means": "where the boat lies, distance (the script's, from boat and boat_up)"
+    },
+    "boat_turn": {
+      "type": "number",
+      "means": "the boat's facing (the script's, from boat and boat_up)"
     }
   },
   "music": {
