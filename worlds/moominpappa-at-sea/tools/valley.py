@@ -208,14 +208,14 @@ spec = {
               'looks': {
                   'dawn': {'ambient': 0.72, 'ambientColor': '#eadfee', 'tint': '#f4c8c0', 'tintStrength': 0.07, 'haze': 0.09,
                            'hazeColor': '#ecd8d8', 'lights': {'sun': 0.2}},
-                  'dusk': {'ambient': 0.64, 'ambientColor': '#ffdcb8', 'tint': '#ffb072', 'tintStrength': 0.1, 'haze': 0.09,
-                           'hazeColor': '#f2cba6', 'saturation': 1.12, 'lights': {'sun': 0}},
+                  'dusk': {'ambient': 0.82, 'ambientColor': '#ffe4c8', 'tint': '#ffb98a', 'tintStrength': 0.07, 'haze': 0.07,
+                           'hazeColor': '#f4d4b4', 'saturation': 1.1, 'brightness': 1.06, 'lights': {'sun': 0}},
                   'night': {'ambient': 0.42, 'ambientColor': '#8797cc', 'tint': '#5a6aaa', 'tintStrength': 0.08, 'saturation': 0.8,
                             'haze': 0.07, 'hazeColor': '#3c4a74', 'hazeGlow': 0.6, 'lights': {'sun': 0, 'evening': 0, 'morning': 0}},
               }},
     'lights': [
         {'id': 'sun', 'from': [-140, 38], 'color': '#fff1dc', 'strength': 1.25},
-        {'id': 'evening', 'from': [-100, 9], 'color': '#ffbf80', 'strength': 1.5, 'on': 'dusk'},
+        {'id': 'evening', 'from': [-100, 9], 'color': '#ffc88e', 'strength': 1.8, 'on': 'dusk'},
         {'id': 'morning', 'from': [95, 10], 'color': '#ffd9cc', 'strength': 1.25, 'on': 'dawn'},
         {'id': 'moon', 'from': 'moon#disc', 'color': '#cdd8f2', 'strength': 1.0, 'on': 'night'},
         {'id': 'lamp', 'of': 'lamp#flame', 'color': '#ffcf88', 'strength': 1.4, 'reach': 5, 'on': 'lamps', 'glow': 0.25, 'flicker': 0.05},

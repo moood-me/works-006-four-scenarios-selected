@@ -14,7 +14,7 @@ Son»; the trees, their titles and rows are the game's (`bespoke/map.js`, in `be
 - **The points** — unseen, 12 m off, in a row at the frame's 0.28: `c0` the prologue over the valley, `c1` I over the
   open sea, `c2` II by the island on the chart, `c3`–`c4` III–IV over the island's plan, `c5` the epilogue and `c6`
   the finale at the plan's far side (12 chart units, 5.4 m, apart from `c2` on); `author` at the sheet's left edge.
-- No people, no music, no beats. The showcase goes chapter by chapter, the course pencilled in chapter I (about 25 s).
+- No people, no music, no beats (stage 5 too: the map has no pieces; the game draws its trees). The showcase goes chapter by chapter, the course pencilled in chapter I (about 25 s).
 
 ## Keys
 
@@ -31,5 +31,6 @@ Son»; the trees, their titles and rows are the game's (`bespoke/map.js`, in `be
  "points": ["c0", "c1", "c2", "c3", "c4", "c5", "c6", "author"],
  "offers": [],
  "party": {},
+ "acts": {},
  "keys": {"shown": 0, "come": 0, "route": 0}}
 ```

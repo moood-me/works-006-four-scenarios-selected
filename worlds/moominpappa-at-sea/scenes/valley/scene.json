@@ -37,13 +37,14 @@
         }
       },
       "dusk": {
-        "ambient": 0.64,
-        "ambientColor": "#ffdcb8",
-        "tint": "#ffb072",
-        "tintStrength": 0.1,
-        "haze": 0.09,
-        "hazeColor": "#f2cba6",
-        "saturation": 1.12,
+        "ambient": 0.82,
+        "ambientColor": "#ffe4c8",
+        "tint": "#ffb98a",
+        "tintStrength": 0.07,
+        "haze": 0.07,
+        "hazeColor": "#f4d4b4",
+        "saturation": 1.1,
+        "brightness": 1.06,
         "lights": {
           "sun": 0
         }
@@ -81,8 +82,8 @@
         -100,
         9
       ],
-      "color": "#ffbf80",
-      "strength": 1.5,
+      "color": "#ffc88e",
+      "strength": 1.8,
       "on": "dusk"
     },
     {
