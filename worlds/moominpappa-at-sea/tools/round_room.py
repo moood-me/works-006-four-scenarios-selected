@@ -5,6 +5,7 @@
 import json, math, sys
 sys.path.insert(0, sys.argv[1] + '/tools')
 import island
+import lantern
 
 root = sys.argv[1]
 folder = root + '/scenes/round-room'
@@ -83,12 +84,12 @@ spec = {
     "camera": {"mode": "picture"},
     "light": light,
     "lights": [
-        {"id": "lamp", "of": "lantern#flame", "color": "#ffd08c", "strength": 1.2, "reach": 6, "flicker": 0.1, "glow": 0.2},
+        lantern.light("lamp", "lantern#flame"),
         {"id": "fire", "of": "stove#fire", "color": "#ff9a50", "strength": 1, "reach": 3.5, "flicker": 0.35},
         *far,
         {"id": "window_light", "of": "casement", "daylight": 1, "on": "window_open"},
         {"id": "door_light", "of": "door", "daylight": 1, "on": "door"}],
-    "modules": ["cast", "island"],
+    "modules": ["cast", "island", "lantern"],
     "objects": [
         island.sky(0.41, (0.2, -0.3), 1.03, 1.67),
         island.sea(-5, {"strength": 0.2, "fade": 0, "rough": 0.6, "ripple": 0.4}),
@@ -149,8 +150,8 @@ spec = {
         {"id": "table", "name": "The table", "plane": True, "across": 0, "distance": 4.45, "elevation": 0.72, "width": 1.5, "depth": 0.8,
          "inside": True},
         card("table_legs", "The table's legs", 0, 4.45, [-0.85, -0.76, 0.85, 0.05], facing=180, shadow=True),
-        card("lantern", "The storm lantern", *LANTERN["table"][:2], [-0.16, -0.48, 0.16, 0.03], elevation=LANTERN["table"][2],
-             place={"across": "lantern_a", "distance": "lantern_d", "elevation": "lantern_e"}, uniforms={"lit": 1}),
+        lantern.element("lantern", "The storm lantern", *LANTERN["table"], inside=True,
+                        place={"across": "lantern_a", "distance": "lantern_d", "elevation": "lantern_e"}),
         card("cup", "The cups", -0.42, 4.3, [-0.07, -0.12, 0.3, 0.01], elevation=0.72),
         {"id": "tea_steam", "name": "Steam over the tea", "inside": True,
          "particles": {"kind": "smoke", "at": "cup#cup", "color": "#f4f4f2", "rate": 3, "size": [0.03, 0.18], "speed": [0.08, 0.15],
@@ -213,4 +214,5 @@ spec = {
     "music": music,
 }
 island.shaders(folder)
+lantern.shader(folder, "lantern")
 json.dump(spec, open(folder + '/scene.json', 'w', encoding='utf-8', newline='\n'), indent=2, ensure_ascii=False)

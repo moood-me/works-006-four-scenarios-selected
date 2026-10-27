@@ -100,10 +100,10 @@
         "inside": 0.65
       },
       "flash": {
-        "ambient": 1.0,
+        "ambient": 0.9,
         "ambientColor": "#e6ecff",
-        "brightness": 1.2,
-        "saturation": 0.7
+        "brightness": 1.1,
+        "saturation": 0.75
       }
     },
     "inside": 0.75
@@ -373,7 +373,7 @@
         4
       ],
       "color": "#e8eeff",
-      "strength": 2.2,
+      "strength": 1.8,
       "on": "flash",
       "through": [
         [
@@ -442,7 +442,8 @@
   ],
   "modules": [
     "cast",
-    "island"
+    "island",
+    "lantern"
   ],
   "objects": [
     {
@@ -979,21 +980,21 @@
       "across": 0.12,
       "distance": 4.4,
       "elevation": 0.72,
-      "place": {
-        "across": "lantern_a",
-        "distance": "lantern_d",
-        "elevation": "lantern_e"
-      },
-      "uniforms": {
-        "lit": 1
-      },
       "box": [
         -0.16,
         -0.48,
         0.16,
         0.03
       ],
-      "inside": true
+      "uniforms": {
+        "lit": 0
+      },
+      "inside": true,
+      "place": {
+        "across": "lantern_a",
+        "distance": "lantern_d",
+        "elevation": "lantern_e"
+      }
     },
     {
       "id": "cup",

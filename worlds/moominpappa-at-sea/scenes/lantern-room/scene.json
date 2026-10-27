@@ -98,10 +98,10 @@
         "inside": 0.6
       },
       "flash": {
-        "ambient": 1.0,
+        "ambient": 0.9,
         "ambientColor": "#e6ecff",
-        "brightness": 1.2,
-        "saturation": 0.7
+        "brightness": 1.1,
+        "saturation": 0.75
       }
     },
     "inside": 0.9
@@ -176,7 +176,7 @@
         5
       ],
       "color": "#e8eeff",
-      "strength": 2.2,
+      "strength": 1.8,
       "on": "flash"
     },
     {
@@ -187,7 +187,8 @@
   ],
   "modules": [
     "cast",
-    "island"
+    "island",
+    "lantern"
   ],
   "objects": [
     {
@@ -585,15 +586,16 @@
       "name": "The storm lantern",
       "across": -1.028,
       "distance": 5.226,
-      "uniforms": {
-        "lit": 0
-      },
+      "elevation": 0,
       "box": [
         -0.16,
         -0.48,
         0.16,
         0.03
       ],
+      "uniforms": {
+        "lit": 0
+      },
       "inside": true
     },
     {
