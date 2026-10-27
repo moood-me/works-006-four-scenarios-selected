@@ -38,8 +38,9 @@ lighthouse = island.lighthouse(6, 3)
 lighthouse.update({'on': 'isle', 'elevation': 6.1})
 
 objects = [
-    island.sky(0.6, (-0.35, 0.42), 1.95, -0.15),
-    island.sea(0, {'strength': 0.2, 'fade': 0, 'rough': 0.55, 'ripple': 0.4}),
+    island.sky(0.6, (-0.35, 0.42), 1.95, -0.15, round=True),
+    {'id': 'star', 'name': 'The star Papa steers by', 'sky': True, 'box': [round(16 / 9 / 2 + math.pi - 0.23, 3), 0.15, round(16 / 9 / 2 + math.pi - 0.13, 3), 0.25]},
+    island.sea(0, {'strength': 0.2, 'fade': 0, 'rough': 0.55, 'ripple': 0.4}, round=True),
     {'id': 'boat', 'name': 'The boat Adventure', 'unseen': True, 'across': 0, 'distance': 0, 'elevation': 0, 'onLand': False,
      'facing': 180, 'height': 0.1, 'box': [-0.05, -0.1, 0.05, 0], 'place': {'facing': 'boat_facing', 'tilt': 'boat_pitch'}},
     on_boat('hull', 'Her hull', 0, 0, 0, [r3(-RIB / 2), r3(-WAY), r3(RIB / 2), 0], shadow=True),
@@ -78,6 +79,7 @@ STATES.update({
     'frost_boat': {'range': [0, 1], 'smooth': True, 'means': 'the rime creeping over the stern deck from the transom to the son\'s paws (1 — all of it)'},
     'island': {'values': ['none', 'ahead', 'behind'], 'means': 'where the island is: out of sight (the night crossing); ahead of the bow (dawn — not in this view, which looks aft); astern, seen over the stern (by day, going home)'},
     'heading': {'range': [-1, 1], 'smooth': True, 'means': 'the boat\'s nose off the star (М2): −1 … 1, about 9° either way'},
+    'view': {'values': ['aft', 'fore'], 'means': 'the camera on the boat: aft — from before the bow over everyone at what follows behind (the strip, the Groke, the island going home); fore — from behind the stern over everyone toward the bow, the star they steer by (М2) and the island ahead at dawn'},
     'wave': {'range': [0, 1], 'means': 'the swell\'s height (М2): how much her bow lifts and drops'},
     'isle_d': {'type': 'number', 'means': 'the scene\'s own (script.js, from island): the island\'s distance — not set from outside'},
     'groke_a': {'type': 'number', 'means': 'the scene\'s own (script.js, from trail) — not set from outside'},
@@ -90,7 +92,7 @@ STATES.update({
 
 state = {**island.STATE, 'lantern_at': 'bow', 'trail': 0.4, 'frost_boat': 0, 'island': 'none', 'heading': 0, 'wave': 0,
          'isle_d': -6000, 'groke_a': 0.7, 'groke_d': 34, 'lantern_bow_on': 1, 'lantern_troll_on': 0, 'boat_facing': 180, 'boat_pitch': 0,
-         'camera_x': 1.0, 'camera_z': -4.8, 'camera_h': 1.1, 'camera_yaw': 8, 'camera_look': 0.14, 'fisher_here': False, 'fisher_on': 'isle#step', 'fisher_turn': 180,
+         'view': 'aft', 'fisher_here': False, 'fisher_on': 'isle#step', 'fisher_turn': 180,
          'groke_turn': 180, 'groke_look': 'troll'}
 for who, turn, look in [('papa', 180, [0, -40, 2]), ('mama', 165, None), ('troll', 20, 'groke'), ('my', 200, [-3, -12, 4])]:
     state[f'{who}_on'] = {'on': 'boat', 'at': SEATS[who]}
