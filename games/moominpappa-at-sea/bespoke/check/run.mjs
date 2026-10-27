@@ -36,6 +36,7 @@ globalThis.tr = Object.assign(fill, { n: (n, one, other, p) => fill(n === 1 ? on
 const PEOPLE = JSON.parse(readFileSync(join(game, 'people.json'), 'utf8'));
 const { ENDINGS, SCENES: FOLDERS, carry, facts, context } = await load('story.js');
 const { jump } = await load('jump.js');
+const { unheard } = await load('sound.js');
 const { CHAPTERS, PLAYS, fresh } = await load('game.js');
 
 // --- what does not match: text → the number of paths it was met on
@@ -67,6 +68,15 @@ for (const folder of readdirSync(join(world, 'scenes'))) {
     c.offers ??= [];
     c.party ??= {};
     c.acts ??= {};
+    c.beats ??= {};
+    for (const a of Object.values(c.acts)) a.tells ??= [];
+    for (const [name, beat] of Object.entries(c.beats)) {
+      beat.after ??= [];
+      beat.tells ??= [];
+      for (const a of beat.after) if (!(a in c.beats)) miss(`${notes}: the piece “${name}” comes after “${a}”, which is not there`);
+      for (const t of beat.tells) if (t.split(':')[0] !== name) miss(`${notes}: the piece “${name}”: its moment “${t}” is not named “${name}:<moment>”`);
+    }
+    scene.order = Object.keys(c.beats);
     scene.contract = c;
   } catch (e) {
     miss(`${notes}: the contract not read: ${e.message}`);
@@ -122,20 +132,63 @@ const lines = new Map(); // `${who}\n${text}` → {who, text}
 // a step played unseen on `state` (its choices made as they say, the first offered where they say nothing) → {state,
 // made: the choice it made, titles: the titles it showed}
 async function step(c, s, state, where) {
-  const j = jump(Infinity);
+  const j = jump(Infinity, unheard());
   const g = context(b, view, hub, structuredClone(state), j);
   let folder = null;
   const made = [], titles = [];
-  const { scene, set, say, choose, play, title } = g;
+  const { scene, set, say, choose, play, title, beat, told } = g;
+  // the piece shown: {last: the piece begun last, opening: the one the scene was opened on, not taken up yet, next:
+  // beat_next set}; the moments waited for whose piece has not begun yet
+  let cur = null, pending = [];
+  const contractOf = f => SCENES.get(f)?.contract;
+  const begins = (name, opening) => {
+    const s = SCENES.get(folder), c = s?.contract;
+    if (!c) return;
+    const piece = c.beats[name];
+    if (!piece) miss(`${where}: no piece “${name}” in the scene “${folder}”`);
+    else if (piece.show === true) miss(`${where}: the piece “${name}” of the scene “${folder}” is the showcase's only (show: true)`);
+    // a piece not opening the scene: after one of its `after`, or a cut — the next in the scene's table after the one
+    // before it, or the one beat_next named
+    if (piece && !opening && cur.last && !piece.after.includes(cur.last)) {
+      const next = s.order[s.order.indexOf(cur.last) + 1];
+      if (name !== next && cur.next !== name) miss(`${where}: “${folder}”: ${cur.last} → ${name}, a cut not by the table and without beat_next`);
+    }
+    cur.next = null;
+    cur.last = name;
+    for (const text of pending.filter(t => t.split(':')[0] === name)) {
+      if (piece && !piece.tells.includes(text)) miss(`${where}: the piece “${name}” of the scene “${folder}” has no moment “${text}”`);
+    }
+    pending = pending.filter(t => t.split(':')[0] !== name);
+  };
   g.scene = (f, o = {}, x) => {
     folder = f;
     if (!Object.values(FOLDERS).includes(f)) miss(`${where}: g.scene “${f}” — not one of SCENES`);
     for (const id of o.here ?? []) person(f, id, where);
     for (const id of Object.keys(o.moods ?? {})) person(f, id, where);
     for (const [k, v] of Object.entries({ ...carry(f, g.state), ...o.keys })) key(f, k, v, where);
+    cur = { last: null, opening: o.beat ?? null, next: null };
+    if (o.beat) begins(o.beat, true);
+    else miss(`${where}: the scene “${f}” opened on no piece`);
     return scene(f, o, x);
   };
-  g.set = (k, v) => { key(folder, k, v, where, true); return set(k, v); };
+  g.beat = (name, how) => {
+    if (!cur) miss(`${where}: the piece “${name}” before any scene`);
+    else if (cur.opening !== name) begins(name, false);
+    if (cur) cur.opening = null;
+    return beat(name, how);
+  };
+  g.told = (text, ms) => {
+    if (!text.startsWith('beat:')) {
+      const head = text.split(':')[0], acts = Object.values(contractOf(folder)?.acts ?? {});
+      if (!acts.some(a => a.tells.includes(text)) || !(head in (contractOf(folder)?.acts ?? {}))) pending.push(text);
+    }
+    return told(text, ms);
+  };
+  g.set = (k, v) => {
+    if (k === 'beat_next') { if (cur) cur.next = v; }
+    else key(folder, k, v, where, true);
+    return set(k, v);
+  };
   g.say = (who, text, at) => {
     if (!PEOPLE[who]) miss(`${where}: “${text}” — said by “${who}”, no one of people.json`);
     lines.set(`${who}\n${text}`, { who, text });
@@ -155,6 +208,7 @@ async function step(c, s, state, where) {
   let broke = null;
   await Promise.race([CHAPTERS[c].steps[s](g).catch(e => { broke = e; }), j.idle]);
   if (broke) miss(`${where}: the step broke: ${broke.message}`);
+  for (const text of pending) miss(`${where}: the moment “${text}” waited for — its piece never played`);
   return { state: g.state, made, titles };
 }
 // (a stub's point: as stub.js was given it)

@@ -1,11 +1,11 @@
 /* Moominpappa at Sea — what the game draws over the scene: paper slips in the island's watercolour (warm paper, grey-blue
-   ink), the lantern's yellow for what is the player's. Plates with “Next”, the stub mini-games' cards, the scales,
+   ink), the lantern's yellow for what is the player's. The stub mini-games' cards, the scales,
    the map's leaves over the chart. */
 #layer { --paper: #f6efe0; --paper-edge: #d9ccb0; --ink: #2b3a4f; --ink-soft: #5b6b80; --sea: #6f8fb0; --lantern: #e9b949;
   --serif: Georgia, "Times New Roman", serif; }
 #layer .gauge, #layer .toasts, #layer .hint, #layer .title, #layer .card { pointer-events: none; }
 
-#layer .slip, #layer .plate, #layer .card, #layer .gauge .row, #layer .hint {
+#layer .slip, #layer .card, #layer .gauge .row, #layer .hint {
   box-sizing: border-box; color: var(--ink); font-family: var(--serif); background: var(--paper);
   border: 1px solid var(--paper-edge); border-radius: 4px; box-shadow: 0 6px 22px rgba(20, 30, 45, 0.28); }
 
@@ -30,17 +30,6 @@
 #layer .slip .arrows { font-weight: 700; }
 #layer .slip.gone { opacity: 0; translate: 0 -6px; }
 @keyframes pm-in { from { opacity: 0; translate: 0 6px; } }
-
-/* a plate with “Next”, low in the middle (over the speech's place: a plate is read, not heard) */
-#layer .plate { position: absolute; left: 50%; bottom: 20px; translate: -50% 0; width: min(640px, calc(100vw - 32px));
-  padding: 16px 20px 14px; z-index: 10; opacity: 0; transition: opacity 0.35s ease; }
-#layer .plate.on { opacity: 1; }
-#layer .plate .text { margin: 0 0 12px; font-size: 18px; line-height: 1.45; }
-#layer .plate h3 { margin: 0 0 8px; font-size: 15px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
-#layer .plate ul { margin: 0 0 12px; padding-left: 18px; font-size: 16px; line-height: 1.4; max-height: 46vh; overflow: auto; }
-#layer .plate .next { display: block; margin-left: auto; min-width: 110px; min-height: 44px; padding: 8px 18px; border: 0; border-radius: 22px;
-  background: var(--ink); color: var(--paper); font: 600 16px/1 var(--serif); cursor: pointer; }
-#layer .plate .next:hover { background: #3b5070; }
 
 /* a stub mini-game's card, high on the right under the plate of the language */
 #layer .card { position: absolute; top: 110px; right: 14px; width: min(340px, 44vw); padding: 10px 14px;
@@ -85,6 +74,11 @@
   padding: 14px 16px 16px; color: var(--ink); background: var(--paper); border: 1px solid var(--paper-edge); border-radius: 4px;
   box-shadow: 0 8px 26px rgba(20, 30, 45, 0.3); }
 #underlay .map .leaf.future { width: 120px; opacity: 0.7; }
+/* the pin it hangs by, at its chapter's point on the chart */
+#underlay .map .leaf:not(.sign)::before { content: ""; position: absolute; left: 50%; top: -7px; width: 14px; height: 14px; margin-left: -7px;
+  border-radius: 50%; background: radial-gradient(circle at 35% 35%, #f3d98a, #b8862f 60%, #7a5418); box-shadow: 0 2px 3px rgba(20, 30, 45, 0.35); }
+#underlay .map .leaf:not(.sign) { transform-origin: 50% 0; rotate: -0.6deg; }
+#underlay .map .leaf.here, #underlay .map .leaf.next { rotate: 0deg; }
 #underlay .map .leaf.sign { width: auto; padding: 0; background: none; border: 0; box-shadow: none; }
 #underlay .map .leaf.here, #underlay .map .leaf.next { border-top: 4px solid var(--lantern); }
 #underlay .map button { font: inherit; color: inherit; background: none; border: 0; padding: 0; text-align: left; cursor: default; }
