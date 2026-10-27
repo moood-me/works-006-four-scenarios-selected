@@ -1,0 +1,14 @@
+{
+ "strings": [
+  {
+   "text": "The Cape",
+   "translation": "Мыс",
+   "where": "scenes/cape/scene.json title"
+  },
+  {
+   "text": "August. Sophia's tent on the bare rocks; the fog is coming in from the sea.",
+   "translation": "Август. Софьина палатка на голых камнях; с моря идёт туман.",
+   "where": "scenes/cape/scene.json caption"
+  }
+ ]
+}
