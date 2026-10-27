@@ -116,7 +116,7 @@ fn shade(painted: vec4f, at: vec2f, uv: vec2f) -> vec4f {
   c = mix(c, ct, layer(1, at).a);
   // the storm's clouds: their bellies darker where they are thick; darker by night, yet seen
   let sc = layer(2, at);
-  let dark = mix(1.0, 0.5, u_night) * mix(1.0, 0.85, u_dusk);
+  let dark = mix(1.0, 0.68, u_night) * mix(1.0, 0.85, u_dusk);
   let scol = mix(rgb(156.0, 162.0, 172.0), rgb(86.0, 94.0, 108.0), sc.a) * dark;
   c = mix(c, scol, sc.a * u_storm);
   // the lightning: the whole sky lit a moment, the bolt white

@@ -5,6 +5,7 @@
 import json, math, sys
 sys.path.insert(0, sys.argv[1] + '/tools')
 import island
+import lantern
 
 root = sys.argv[1]
 folder = root + '/scenes/lantern-room'
@@ -72,10 +73,10 @@ spec = {
     "lights": [
         {"id": "lamp", "of": "burner#flame", "color": "#ffd590", "strength": 1.4, "reach": 7, "flicker": 0.05, "glow": 0.2},
         {"id": "blue_flame", "of": "burner#blue", "color": "#9cbcff", "strength": 0.9, "reach": 4, "flicker": 0.2},
-        {"id": "lantern", "of": "lantern#flame", "color": "#ffd08c", "strength": 1.2, "reach": 5, "flicker": 0.1, "glow": 0.2},
+        lantern.light("lantern", "lantern#flame", reach=5),
         *far,
         {"id": "glass_light", "of": "glazing", "daylight": 1}],
-    "modules": ["cast", "island"],
+    "modules": ["cast", "island", "lantern"],
     "objects": [
         island.sky(0.31, (1.47, -0.4), 0.98, 1.47),
         island.sea(-16, {"strength": 0.22, "fade": 0, "rough": 0.6, "ripple": 0.45}),
@@ -111,7 +112,7 @@ spec = {
          "inside": True, "shadow": True},
         card("cot_legs", "The camp bed's legs", 1.75, 4.2, [-0.38, -0.44, 0.38, 0.03]),
         card("stair", "The stair under the hatch", HATCH["a"], r3(HATCH["d"] + HATCH["half"]), [-0.42, -2.42, 0.42, 0.02], elevation=-2.4),
-        card("lantern", "The storm lantern", *at(-40, 1.6), [-0.16, -0.48, 0.16, 0.03], uniforms={"lit": 0}),
+        lantern.element("lantern", "The storm lantern", *at(-40, 1.6), inside=True),
         {"id": "papa", "name": "Moominpappa", "person": {"cast": "cast", "who": "papa", "does": "hands_behind"}, "across": 0.8, "distance": 3.6,
          "inside": True},
         {"id": "my", "name": "Little My", "person": {"cast": "cast", "who": "my"}, "across": -1.4, "distance": 4.62, "inside": True},
@@ -140,4 +141,5 @@ spec = {
     "music": music,
 }
 island.shaders(folder)
+lantern.shader(folder, "lantern")
 json.dump(spec, open(folder + '/scene.json', 'w', encoding='utf-8', newline='\n'), indent=2, ensure_ascii=False)

@@ -1,5 +1,6 @@
-// The globe glows from within as much as the flame burns (u_lit 0…1, set by animate from `flame`); the guard's wires
-// and the cap stay before it.
+// The storm lantern's globe (modules/lantern.md; the same text in every scene with a lantern — tools/lantern): it glows
+// from within as much as the flame burns (u_lit 0…1, set by the module's move); the guard's wires and the cap stay
+// before it.
 fn shade(painted: vec4f, at: vec2f, uv: vec2f) -> vec4f {
   let tin = layer(0, at);
   let globe = layer(1, at);

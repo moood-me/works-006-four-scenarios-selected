@@ -52,8 +52,6 @@ const stairAt = (() => {
   return [a + 0.1 * Math.sin(f), d + 0.1 * Math.cos(f), h + 0.045];
 })();
 const LANTERN = { table: [0.12, 4.4, 0.72], stair: stairAt, bunk: [...at(-80, 2.55), 0], none: [0.12, 4.4, 0.72] };
-// the flame's strength by `flame` (its light and the glass's glow)
-const FLAME = { full: 1, low: 0.45, out: 0, frost: 0 };
 
 // the whitewash every wall shares: a pale lime white, the blue-grey dado below with its dark rule, a few damp clouds
 // and hairline cracks (each wall's own e.rnd), over the painting's box [x0, x1] × [−top, −bottom] (wall heights)
@@ -255,5 +253,5 @@ function myFigure(g, x, y, h) {
   g.fill();
 }
 return { C, R, H, DEG, WIN, DOOR, DOOR_R, W0, W1, D0, D1, WALLS, at, wallX, DOOR_FACING, DOOR_SWING, arch, SEA, land, shore, STAIR,
-  LANTERN, FLAME, DADO,
+  LANTERN, DADO,
   whitewash, knot, write, scribble, PAINTS, flower, moomin, myFigure, INK };
