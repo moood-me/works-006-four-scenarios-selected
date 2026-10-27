@@ -1,7 +1,8 @@
-// The room's mechanics: the storm's lightning (modules/island); the door's leaf turned by `door`; the storm lantern put
+// The room's mechanics: the storm's lightning and the beam's turn (modules/island); the door's leaf turned by `door`; the storm lantern put
 // where `lantern_at` says; the window's day shut out by `shutters`.
 const L = scene.lib;
 scene.kit.island.lightning(scene);
+scene.kit.island.beam(scene);
 function door() {
   scene.set("door_f", L.DOOR_FACING + L.DOOR_SWING * scene.get("door"));
 }

@@ -50,6 +50,10 @@ flowers), `brushes` (sill · jar), `lantern_at` (table · stair · bunk · none)
 cups — the plan's `cup_cold`, as a number the steam can be), `door` 0…1, `basket`, `stone`, `shutters`, `wet`,
 `drip` 0…1. The script's own: `door_f`, `lantern_a/d/e`, `window_open`.
 
+## The beam
+
+The lighthouse's beam (`beam`, turned by `beam_turn` — modules/island `beam`): a cone from the lantern twelve metres over the room, seen in the haze through the window as it passes; the game sets `beam` (as on the landing and the cape).
+
 ## Open
 
 - The sill's flowers are painted on the sill and are not readable from the wide view (the sill is seen almost edge

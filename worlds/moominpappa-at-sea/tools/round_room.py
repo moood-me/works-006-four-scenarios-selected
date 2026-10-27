@@ -87,6 +87,9 @@ spec = {
         lantern.light("lamp", "lantern#flame"),
         {"id": "fire", "of": "stove#fire", "color": "#ff9a50", "strength": 1, "reach": 3.5, "flicker": 0.35},
         *far,
+        # the lighthouse's beam from its lantern twelve metres overhead: seen through the window passing over the sea
+        {"id": "beam", "across": C[0], "distance": C[1], "elevation": 12, "on": "beam", "color": "#fff1c8", "strength": 6,
+         "reach": 600, "cone": {"bearing": 0, "height": -1, "width": 10, "soft": 0.35}, "place": {"bearing": "beam_turn"}},
         {"id": "window_light", "of": "casement", "daylight": 1, "on": "window_open"},
         {"id": "door_light", "of": "door", "daylight": 1, "on": "door"}],
     "modules": ["cast", "island", "lantern"],

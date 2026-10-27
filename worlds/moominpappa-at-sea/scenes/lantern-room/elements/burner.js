@@ -2,7 +2,8 @@
 // it the burner on its wick. A flat sheet facing the room (the drum is seen from one side); its shader turns the drum's
 // panels as the lamp burns, lights the flame from within, and lays the grime over the glass as murky as `lenses` says.
 // The layers: 1 the glass, 2 the flame, 3 the blue flame (the burner warmed with paraffin), 4 the grime. Its lights,
-// the engine's: "flame" (warm, strong) and "blue" — each dimmed by animate. Points: the wick, the lens.
+// the engine's: "flame" (warm, strong) and "blue" — each dimmed by animate —, and "beam", the lighthouse's beam out
+// through the glass while it burns (the scene's light `beam`, on `beam`). Points: the wick, the lens.
 const L = e.lib, r = L.LENS.r, h = L.LENS.top - L.LENS.foot, fy = -(L.LENS.flame - L.LENS.foot);
 // the burner inside: its brass font and the wick
 g.fillStyle = "#8c7444";
@@ -72,5 +73,7 @@ e.layer("grime", {}, c => {
 });
 e.light(0, fy - 0.08, 0.22, "#ffd590", 2, "flame");
 e.light(0, fy - 0.03, 0.12, "#8fb4ff", 1, "blue");
+// the beam's lamp: the flame through the lens, taken by the scene's light `beam` (a cone turned by `beam_turn`)
+e.light(0, fy - 0.08, 0.3, "#fff1c8", 1.2, "beam");
 e.at(0, fy, "wick");
 e.at(0, -h / 2, "lens");

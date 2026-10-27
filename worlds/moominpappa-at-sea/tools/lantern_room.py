@@ -72,6 +72,8 @@ spec = {
     "light": light,
     "lights": [
         {"id": "lamp", "of": "burner#flame", "color": "#ffd590", "strength": 1.4, "reach": 7, "flicker": 0.05, "glow": 0.2},
+        {"id": "beam", "of": "burner#beam", "on": "beam", "color": "#fff1c8", "strength": 6, "reach": 600,
+         "cone": {"bearing": 0, "height": -1, "width": 10, "soft": 0.35}, "place": {"bearing": "beam_turn"}},
         {"id": "blue_flame", "of": "burner#blue", "color": "#9cbcff", "strength": 0.9, "reach": 4, "flicker": 0.2},
         lantern.light("lantern", "lantern#flame", reach=5),
         *far,
@@ -137,6 +139,7 @@ spec = {
         "lantern_at": {"values": ["none", "floor"], "means": "the storm lantern carried up: not here, or on the floor by the sooty wall"},
         "lantern_flame": {"values": ["full", "low", "out"], "means": "the storm lantern's flame up here: full, turned low, out"},
         "smoke": {"range": [0, 1], "means": "the burner's soot rising — the script sets it from flame"},
+        "beam": {**island.STATES["beam"], "means": "the beam out through the glass — the script sets it from flame (lit)"},
     },
     "music": music,
 }
