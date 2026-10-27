@@ -25,7 +25,7 @@
   "states": {
     "shown": {
       "type": "number",
-      "means": "the chapter the player is at (0 the prologue … 5 the epilogue): the view goes to its point c<i> (camera_x)"
+      "means": "the chapter the player is at (0 the prologue … 5 the epilogue, 6 the finale): the view goes to its point c<i> (camera_x)"
     },
     "come": {
       "type": "number",
@@ -100,7 +100,7 @@
       "id": "c2",
       "name": "Chapter",
       "unseen": true,
-      "across": 22.95,
+      "across": 22.05,
       "distance": 12,
       "elevation": 8.72,
       "height": 0.1,
@@ -115,7 +115,7 @@
       "id": "c3",
       "name": "Chapter",
       "unseen": true,
-      "across": 29.7,
+      "across": 27.45,
       "distance": 12,
       "elevation": 8.72,
       "height": 0.1,
@@ -130,7 +130,7 @@
       "id": "c4",
       "name": "Chapter",
       "unseen": true,
-      "across": 35.55,
+      "across": 32.85,
       "distance": 12,
       "elevation": 8.72,
       "height": 0.1,
@@ -145,7 +145,22 @@
       "id": "c5",
       "name": "Chapter",
       "unseen": true,
-      "across": 41.4,
+      "across": 38.25,
+      "distance": 12,
+      "elevation": 8.72,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c6",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 43.65,
       "distance": 12,
       "elevation": 8.72,
       "height": 0.1,
