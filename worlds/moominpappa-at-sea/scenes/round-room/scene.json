@@ -970,6 +970,36 @@
       }
     },
     {
+      "id": "spill_splash",
+      "name": "Paraffin splashed on the threshold",
+      "inside": true,
+      "particles": {
+        "kind": "splashes",
+        "at": "door#threshold",
+        "color": "#e8e2c8",
+        "burst": {
+          "on": "spill",
+          "count": 26,
+          "over": 0.08
+        }
+      }
+    },
+    {
+      "id": "dust_puff",
+      "name": "The dust off the line",
+      "inside": true,
+      "particles": {
+        "kind": "puff",
+        "at": "wall_a#line27",
+        "color": "#c9c1ae",
+        "burst": {
+          "on": "dust_cloud",
+          "count": 30,
+          "over": 0.1
+        }
+      }
+    },
+    {
       "id": "bunks",
       "name": "The bunks",
       "across": -3.169,
@@ -1275,11 +1305,13 @@
     "paws_open": 0,
     "paws_rub": 0,
     "paws_thaw": 0,
+    "spill": 0,
+    "dust_cloud": 0,
     "thread": 0,
     "give": 0,
     "can_sway": 0,
     "wipe": 0,
-    "eyes": 0,
+    "eyes": 1,
     "door_shake": 0,
     "mama_to": "papa",
     "beat": "",
@@ -1656,6 +1688,14 @@
       "smooth": true,
       "means": "М5в: Papa's paw opening on the handle, the boy's closing (the close-up `handle`)"
     },
+    "spill": {
+      "type": "number",
+      "means": "М2б: paraffin splashed over the threshold — each change, a splash (the mini-game counts it up)"
+    },
+    "dust_cloud": {
+      "type": "number",
+      "means": "М6в: the dust wiped too hard — each change, a cloud of it off the line (the mini-game counts it up)"
+    },
     "can_sway": {
       "range": [
         -1,
@@ -1678,7 +1718,7 @@
         1
       ],
       "smooth": true,
-      "means": "М7а: Papa's eyes opening"
+      "means": "М7а «Спит»: Papa's eyes — 0 shut, asleep (on a seat or on the floor); 1 open, on the boy"
     },
     "door_shake": {
       "range": [

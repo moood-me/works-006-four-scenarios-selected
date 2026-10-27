@@ -10,3 +10,20 @@ scene.on("change", "flame", smoke);
 scene.on("load", smoke);
 smoke();
 scene.kit.island.beam(scene);
+// «Asleep» (М7а): Papa's eyes by `eyes` — shut (asleep, the head down), open (awake, looking at the boy)
+let awake = null;
+function eyes() {
+  const open = (scene.get("eyes") ?? 0) >= 0.5;
+  if (open === awake) return;
+  awake = open;
+  const papa = scene.person("papa");
+  if (open) {
+    papa.do("wake");
+    papa.look("troll");
+  } else {
+    papa.do("doze_floor", { loop: true });
+    papa.look(null);
+  }
+}
+scene.on("change", "eyes", eyes);
+scene.on("move", "eyes", eyes);

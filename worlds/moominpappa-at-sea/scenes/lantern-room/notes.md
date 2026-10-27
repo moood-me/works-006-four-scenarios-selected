@@ -80,7 +80,7 @@ The scene's film in pieces (`modules/beats`: the game sets `beat`, the scene tel
 | `e_light` | Эпилог «Лестница» / поздний «Пирог», two sheets | on a still evening Papa warms the pot, lights the lamp with his matchbox — and goes down without staying | flame lit | the lamp burning, the room empty | lit, down |
 | `shot_cot` | finales, the common frames; 3.5 the bed empty | the camp bed by the promise (made, empty, slept in) | — | the bed, held | seen |
 
-Keys of the mini-games (`acts`): `match` (М3, the match toward the wick 0…1); М5а/М5г move `slant`, М9а/М9г `flame` (the party's keys, set by the mini-game while it plays). The beam: the scene's own, on while `flame` is lit.
+Keys of the mini-games (`acts`): `match` (М3, the match toward the wick 0…1), `match_open` (its close-up), `match_out` (the match blown out halfway); `eyes` (М7а at «Гуляет», played after `n2_asleep`: under 0.5 Papa asleep by the lamp, over it awake on the boy — the script); М5а/М5г move `slant`, М9а/М9г `flame` (the party's keys, set by the mini-game while it plays). The beam: the scene's own, on while `flame` is lit.
 
 ## Contract for the check
 
@@ -311,7 +311,9 @@ Keys of the mini-games (`acts`): `match` (М3, the match toward the wick 0…1);
   "lantern#flame",
   "papa",
   "my",
-  "troll"
+  "troll",
+  "match#flame",
+  "match#wick"
  ],
  "offers": [
   "burner#wick",
@@ -346,6 +348,18 @@ Keys of the mini-games (`acts`): `match` (М3, the match toward the wick 0…1);
  },
  "acts": {
   "match": {
+   "values": [],
+   "tells": []
+  },
+  "match_open": {
+   "values": [],
+   "tells": []
+  },
+  "match_out": {
+   "values": [],
+   "tells": []
+  },
+  "eyes": {
    "values": [],
    "tells": []
   }

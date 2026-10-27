@@ -30,3 +30,20 @@ scene.on("load", () => {
 door();
 lantern();
 shutters();
+// «Asleep» (М7а): Papa's eyes by `eyes` — shut (asleep, the head down), open (awake, looking at the boy)
+let awake = null;
+function eyes() {
+  const open = (scene.get("eyes") ?? 0) >= 0.5;
+  if (open === awake) return;
+  awake = open;
+  const papa = scene.person("papa");
+  if (open) {
+    papa.do("wake");
+    papa.look("troll");
+  } else {
+    papa.do(scene.get("papa_on") ? "doze" : "doze_floor", { loop: true });
+    papa.look(null);
+  }
+}
+scene.on("change", "eyes", eyes);
+scene.on("move", "eyes", eyes);

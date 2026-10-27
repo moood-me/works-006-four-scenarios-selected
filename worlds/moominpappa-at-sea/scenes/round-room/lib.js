@@ -548,6 +548,7 @@ function film(scene) {
       from: () => ROOM(SIT("mama", "stool"), STAND("papa", [-1.25, 4.8, 160]), { lantern_x: 0.45, needle_open: 0, ...ON("mama", "medium") }),
       run: async s => {
         const papa = P(s, "papa"), mama = P(s, "mama");
+        if (s.get("needle_open") > 0) await s.move("needle_open", 0, { over: 0.5 });
         await rise(s, "mama", "stool");
         await walk(mama, [-0.6, 5.3]);
         await sit(s, "mama", "bench_l");
@@ -569,6 +570,7 @@ function film(scene) {
         { lantern_x: 0.45, handle_open: 0, ...ON("troll", "medium") }),
       run: async s => {
         const troll = P(s, "troll");
+        if (s.get("handle_open") > 0) await s.move("handle_open", 0, { over: 0.5 });
         s.set("lantern_at", "none");
         hold(s, "troll", ["lantern"]);
         troll.mood("sad");

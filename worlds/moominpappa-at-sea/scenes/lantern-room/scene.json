@@ -718,6 +718,8 @@
     "troll_lamp": 0,
     "match_open": 0,
     "match": 0,
+    "match_out": 0,
+    "eyes": 1,
     "papa_a": 0.8,
     "papa_d": 3.6,
     "my_a": -1.4,
@@ -909,6 +911,21 @@
       ],
       "smooth": true,
       "means": "the close-up `match` open (modules/closeups)"
+    },
+    "match_out": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "М3: the match blown out halfway (the close-up `match`)"
+    },
+    "eyes": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М7а «Спит» (at «Гуляет»): Papa's eyes — 0 shut, asleep; 1 open, on the boy"
     },
     "match": {
       "range": [

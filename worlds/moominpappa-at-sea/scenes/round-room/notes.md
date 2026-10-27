@@ -134,7 +134,7 @@ The scene's film in pieces (`modules/beats`: the game sets `beat`, the scene tel
 | `shot_wall` | finales, the common frames | the wall: the garden's colours, Mama by her mark, the line of the 27th (clean or under dust) | — | the wall, held | seen |
 | `shot_table` | finales, the common frames; «Лодка» at «отвернулся» | the table: the cups, the lantern, the basket by the door if it is there (with wall_mama 1 and the table empty — Mama under the apple tree) | — | the table, held | seen |
 
-Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers by them). A party key of the storm: `mama_to` (papa · apple — whom Mama tells «Мне хочется домой» at the door: the apple tree at Ш2 «Гуляет»). Keys: `can_sway` (М2б, the can's sway −1…1), `thread` (М5б, the thread to the eye 0…1), `give` (М5в, the handle let go 0…1), `wipe` (М6в, the dust wiped along the line 0…1), `eyes` (М7а, Papa's eyes open 0…1), `door_shake` (М9б, the door's blow 0…1). The piece's own key `lantern_x` (the lantern along the table in `give`) is in `states`, not the party's.
+Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers by them). A party key of the storm: `mama_to` (papa · apple — whom Mama tells «Мне хочется домой» at the door: the apple tree at Ш2 «Гуляет»). Keys: `can_sway` (М2б, the can's sway −1…1), `thread` (М5б, the thread to the eye 0…1), `give` (М5в, the handle let go 0…1), `wipe` (М6в, the dust wiped along the line 0…1), `eyes` (М7а, Papa's eyes open 0…1), `door_shake` (М9б, the door's blow 0…1); the close-ups `needle_open`, `handle_open` (the mini-game opens and closes them; the pieces after close them if left open); `spill` (М2б: each change a splash of paraffin on the threshold), `dust_cloud` (М6в: each change a cloud of dust off the line). `eyes` 1 — awake: under 0.5 the script puts Papa to sleep where he is (seated or on the floor), over it wakes him onto the boy. The piece's own key `lantern_x` (the lantern along the table in `give`) is in `states`, not the party's.
 
 ## Contract for the check
 
@@ -799,7 +799,12 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
   "papa",
   "mama",
   "my",
-  "troll"
+  "troll",
+  "needle#eye",
+  "needle#thread",
+  "handle#papa",
+  "handle#troll",
+  "paws#paws"
  ],
  "offers": [
   "lantern#flame",
@@ -874,6 +879,22 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
    "tells": []
   },
   "door_shake": {
+   "values": [],
+   "tells": []
+  },
+  "needle_open": {
+   "values": [],
+   "tells": []
+  },
+  "handle_open": {
+   "values": [],
+   "tells": []
+  },
+  "spill": {
+   "values": [],
+   "tells": []
+  },
+  "dust_cloud": {
    "values": [],
    "tells": []
   }
