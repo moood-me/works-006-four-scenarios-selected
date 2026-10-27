@@ -581,6 +581,7 @@
     "bread": false,
     "pie": false,
     "matchbox": "none",
+    "fisher_mark": "keeper",
     "my_here": false,
     "troll_here": false,
     "fisher_at": "seat",
@@ -730,6 +731,14 @@
         "folded"
       ],
       "means": "the Fisherman's net: drying on the poles and heaped at his feet, in his hands; a snarl of a knot in the heap; drawn out of the heap up into his paws as Papa sits by it, the knot before him; a pale mended patch where Papa untangled it; folded into a roll beside him, his hands empty, the poles bare"
+    },
+    "fisher_mark": {
+      "values": [
+        "keeper",
+        "invited",
+        "sat"
+      ],
+      "means": "how the Fisherman met Papa (the play's mark): turned away (keeper), went off — later lifts his hand after Mama (invited), sat with him (sat); the common shots show him so"
     },
     "bread": {
       "type": "boolean",

@@ -80,6 +80,7 @@ const PLACES = {
   troll: {
     boulder: { at: [-2.65, 4.4], on: [-2.65, 4.4, 0.5], turn: 240, do: 'seated', look: [-6, 0, 0.8] },
     boat: { at: [-4.4, 8.0], turn: 120, do: stand, look: 'boat#boat' },
+    boat_far: { at: [-3.4, 9.6], turn: 200, do: stand, look: 'boat#boat' },
   },
   my: {
     stone: { at: [7.15, 28.0], turn: 200, do: 'sit_look', look: 'arrow_stone#stone' },

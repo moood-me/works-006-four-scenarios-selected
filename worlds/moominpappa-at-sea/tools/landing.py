@@ -77,7 +77,7 @@ objects = [
 PEOPLE = list(START)
 state = {**island.STATE, "dawn": 1,
          "pines": 0, "door": 0, "frost_step": False, "frost_patch": False, "boat": "moored", "boat_up": 0,
-         "cleft": "empty", "driftwood": False, "bundles": "slab",
+         "cleft": "empty", "driftwood": False, "bundles": "slab", "papa_shore": "silent",
          "fisher_here": False,
          **{f"{id}_at": START[id] for id in PEOPLE}, **{f"{id}_placed": "" for id in PEOPLE},
          "papa_mood": "smile", "mama_mood": "smile", "troll_mood": "thinking", "my_mood": "smile", "fisher_mood": "neutral"}
@@ -105,10 +105,11 @@ states = {
     "boat_up": {"range": [0, 1], "smooth": True, "means": "while moored: how far she is pulled up the rocks (the boat minigame moves it; 1 — where 'up' has her)"},
     "cleft": {"values": ["empty", "weed", "sprout"], "means": "the cleft by the landing: bare, packed with seaweed, a green shoot out of the weed"},
     "driftwood": {"type": "boolean", "means": "driftwood thrown up along the cove after the storm"},
+    "papa_shore": {"values": ["look", "silent", "crouch", "glance", "none"], "means": "4.5, by the storm's choice: Papa at the water says «You see» (look), says nothing (silent), crouches and strokes the water (crouch), looks at the sea over his shoulder and goes to the boat (glance), does not come out (none)"},
     "bundles": {"values": ["slab", "steps", "none"], "means": "the luggage: on the slab as landed (the bundle Mama sits on, her bag, the paraffin can), the bundles on the lighthouse steps (one wet), all carried in"},
     "papa_at": {"values": list(L["PLACES"]["papa"]), "means": at_means("papa") + ": slab — on the slab, hands behind; edge — on the wet rocks at the cove's edge, facing the sea; door — at the door, a hand on it; boat — by the boat; cleft — at the cleft; water — at the water in the cove; stone — by the arrow stone"},
     "mama_at": {"values": list(L["PLACES"]["mama"]), "means": at_means("mama") + ": slab — sitting on the bundle; steps — sitting on the lighthouse steps; cleft — at the cleft; stand — standing on the slab"},
-    "troll_at": {"values": list(L["PLACES"]["troll"]), "means": at_means("troll") + ": boulder — sitting on the boulder; boat — by the boat's stern"},
+    "troll_at": {"values": list(L["PLACES"]["troll"]), "means": at_means("troll") + ": boulder — sitting on the boulder; boat — by the boat's stern; boat_far — on the far side of the hull (the play's, «son closed»)"},
     "my_at": {"values": list(L["PLACES"]["my"]), "means": at_means("my") + ": stone — sitting by the arrow stone; rock — sitting on the slab, near"},
     "fisher_at": {"values": list(L["PLACES"]["fisher"]), "means": at_means("fisher") + ": away — far on the rocks, going away from the lighthouse; door — at the door, his palm on it; threshold — sitting on the threshold, facing the sea"},
     **{f"{id}_placed": {"type": "string", "means": f"the place {id} was last put at (the script's: put again only when {id}_at asks another)"} for id in PEOPLE},

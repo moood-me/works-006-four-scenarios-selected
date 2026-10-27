@@ -662,6 +662,7 @@
     "cleft": "empty",
     "driftwood": false,
     "bundles": "slab",
+    "papa_shore": "silent",
     "fisher_here": false,
     "papa_at": "slab",
     "mama_at": "slab",
@@ -864,6 +865,16 @@
       "type": "boolean",
       "means": "driftwood thrown up along the cove after the storm"
     },
+    "papa_shore": {
+      "values": [
+        "look",
+        "silent",
+        "crouch",
+        "glance",
+        "none"
+      ],
+      "means": "4.5, by the storm's choice: Papa at the water says «You see» (look), says nothing (silent), crouches and strokes the water (crouch), looks at the sea over his shoulder and goes to the boat (glance), does not come out (none)"
+    },
     "bundles": {
       "values": [
         "slab",
@@ -896,9 +907,10 @@
     "troll_at": {
       "values": [
         "boulder",
-        "boat"
+        "boat",
+        "boat_far"
       ],
-      "means": "where troll is (the script puts them there: lib.PLACES.troll): boulder — sitting on the boulder; boat — by the boat's stern"
+      "means": "where troll is (the script puts them there: lib.PLACES.troll): boulder — sitting on the boulder; boat — by the boat's stern; boat_far — on the far side of the hull (the play's, «son closed»)"
     },
     "my_at": {
       "values": [
