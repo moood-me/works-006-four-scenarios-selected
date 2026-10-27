@@ -31,7 +31,7 @@ export default {
       await g.plate(tr('Papa sees where his son is looking and glances round: a white strip on the water.'));
       await g.say('papa', 'The moon’s path. Pretty');
       await g.plate(tr('The eyes he does not see: he has to look ahead.'));
-      const boat = await g.choose('boat', { lantern: [
+      const boat = await g.choose('boat', { 'tiller#grip': [
         { id: 'douse', label: tr('“Put out the lantern. We’ll go by the stars.”') },
         { id: 'keep', label: tr('“Leave it burning. Mama will wake up and be frightened.”') },
         { id: 'hold', label: tr('“Here. Shine it back, since you’re looking.”') },
