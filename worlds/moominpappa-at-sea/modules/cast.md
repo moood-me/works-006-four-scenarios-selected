@@ -1,7 +1,7 @@
 # cast — the people of “Moominpappa at Sea”
 
 A module for scenes with people (elements with `person`: `{"cast": "cast", "who": …}`). In the scene's `modules`.
-5 looks, 3 motions. A part's lengths are a man's metres times `F.fit.h` (the height as a share of 1.76 m).
+6 looks, 3 motions. A part's lengths are a man's metres times `F.fit.h` (the height as a share of 1.76 m).
 
 ## Style
 
@@ -26,7 +26,12 @@ angry, surprised, afraid, disgusted, thinking, tired).
   heavy grey brows, a long drooping nose, a thin mouth, grey stubble under the jaw — it takes `<id>_mood`), a faded
   oilskin to below the knees, ragged at the hem (`oilcoat`), an ochre sou'wester (`souwester`), his net (`netload`).
 
-The Groke is not here yet.
+- `groke` — the Groke (Морра): big and round (0.94 of a man tall, much the widest), in her own style `groke` (from
+  `moomin`: a big wide head sunk into the shoulders, no neck, short legs, thick arms, a body widening down to a mound),
+  her own face `groke` (big pale round eyes bulging, a small dark pupil in each, heavy sagging brows, a broad round
+  nose, a wide mouth drawn down — it takes `<id>_mood`), grey-blue all over; her cloak `groke` falls from the shoulders
+  to the ground (no feet seen) over a frost-white layer a little longer and wider: the cold white edge at the hem and
+  between its tatters. The frost she leaves on the ground is the scene's, not hers.
 
 ## Parts
 
