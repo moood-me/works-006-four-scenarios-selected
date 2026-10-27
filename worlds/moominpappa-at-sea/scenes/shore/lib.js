@@ -46,7 +46,7 @@ const shore = shoreOf(land, SEA, -20, 40, -8, 70);
 // Where people come from and go to on the beach (across, distance): the way in from the right, over the dune's low end
 // from the lighthouse; the water's edge by the stone; Mama's way off along the beach; the dune's path down to the
 // stone (the son's, «Следом»); the way from the right up onto the dune's top («До дюны»); the son by the water alone.
-const ENTRY = [3.4, 3], WEED = [-3.2, 5.2], AWAY = [-3, 15], SEAHORSE_SPOT = [-3.4, 6.2], SEAHORSES = [-4.6, 5.4];
+const ENTRY = [3.4, 3], NEAR_ENTRY = [1.9, 3.3], WEED = [-3.2, 5.2], AWAY = [-3, 15], SEAHORSE_SPOT = [-3.4, 6.2], SEAHORSES = [-4.6, 5.4];
 const AT_STONE = [0.2, 4.4], BACKED = [0.9, 3.7], DUNE_TOP = [5.2, 7.5], OVER_DUNE = [7.6, 9.2];
 const DOWN = [[4.6, 6.6], [3, 5.6], [1.6, 5]], PAPA_DOWN = [[6.9, 8.8], [5.6, 7.9], [5.2, 7.5]];
 const UP = [[7.6, 3], [6.6, 4.6], [5.6, 6.4], [5.2, 7.5]], ALONE = [-3, 5.4], PAST = [[2, 6.4], [5.2, 7.9], [8.4, 9.6]];
@@ -90,8 +90,11 @@ const cutTo = async (s, values) => {
   await s.until(() => shot.ready);
   shot.cut();
 };
-// where the blanket lies: on the sand by the son sitting at [a, d], on the viewer's side of him
+// where the blanket lies: on the sand by the son sitting at [a, d], on the viewer's side of him; where Mama stands to
+// lay it, and where she comes from (a few steps off, toward the lighthouse's side)
 const BLANKET = ([a, d]) => ({ blanket_a: a + 0.1, blanket_d: d - 0.75 });
+const BLANKET_SPOT = ([a, d]) => [a + 0.8, d - 0.95];
+const BLANKET_FROM = at => { const [a, d] = BLANKET_SPOT(besideOf(at)); return [a + 1.6, d - 0.6]; };
 
 // The film, for the scene (its keys read as each piece begins). A piece's `from` puts what it does not move itself —
 // the people's places, what they do and hold, the camera, the scene's own keys; never the hour, the weather or who is
@@ -105,7 +108,7 @@ function film(scene) {
   // the Groke sitting at her place (groke_at) facing the lighthouse, or the lantern on the stone if it is there
   const grokeSat = (more = {}) => {
     const at = get('groke_at'), p = seatOf(at), lit = get('lantern_stone') !== 'none';
-    return AT('groke', p, lit ? toStone(p) : toLight(at), { groke_do: LOOP('sit_look'), groke_mood: 'sad', ...more });
+    return AT('groke', p, lit ? toStone(p) : toLight(at), { groke_do: LOOP('sit_look'), groke_mood: 'sad', groke_look: lit ? 'stone#lantern' : LANTERN_ROOM, ...more });
   };
   // the son sitting beside her on the viewer's side, facing as she does
   const trollBeside = (more = {}) => {
@@ -199,18 +202,18 @@ function film(scene) {
         await go(s, 'groke', [seatOf(at)], toLight(at), 'glide');
         await groke.do('sit_floor');
         groke.do('sit_look', { loop: true });
-        await dolly(s, NEAR(seatOf(at), 4, 0.2));
+        await dolly(s, NEAR(seatOf(at), 3.6, 0.7, -0.05));
         s.tell('dusk_sit:sat');
         await s.wait(1.5);
       },
     },
     // Ш1 «Наверх»: she looks up at the far little light in the lantern room and howls
     howl: {
-      from: () => ({ ...view(NEAR(seatOf(get('groke_at')), 4, 0.2)), ...grokeSat() }),
+      from: () => ({ ...view(NEAR(seatOf(get('groke_at')), 3.6, 0.7, -0.05)), ...grokeSat() }),
       run: async s => {
         const groke = s.person('groke');
         groke.look(LANTERN_ROOM);
-        await dolly(s, NEAR(seatOf(get('groke_at')), 2.6, 0.4));
+        await dolly(s, NEAR(seatOf(get('groke_at')), 2.6, 0.8, -0.08));
         await s.wait(1);
         s.tell('howl:howl');
         await s.wait(4);
@@ -246,17 +249,18 @@ function film(scene) {
     wade: {
       from: () => ({ ...view(), groke_at: 'water', lantern_stone: 'none', hand_lit: 0.4,
         ...AT('groke', SEATS.water, 280, { groke_mood: 'sad' }),
-        ...AT('troll', ENTRY, 250, { troll_with: ['lantern_low'], troll_mood: 'afraid' }) }),
+        ...AT('troll', NEAR_ENTRY, 250, { troll_with: ['lantern_low'], troll_mood: 'afraid' }) }),
       run: async s => {
         const troll = s.person('troll'), groke = s.person('groke');
-        await go(s, 'troll', [[2.2, 3.6], AT_STONE], toStone(AT_STONE), 'run');
+        // (he runs down with the dim light; she turns to it as he comes — the first moment within a few seconds)
+        await s.all(go(s, 'troll', [AT_STONE], toStone(AT_STONE), 'run'),
+          (async () => { await s.wait(1.5); groke.look('troll#flame'); await groke.turn(turnTo(...SEATS.water, ...STONE)); })());
+        s.tell('wade:turn');
         await troll.do('put_down');
         troll.with(null);
         s.set('hand_lit', 0);
         s.set('lantern_stone', 'low');
-        await groke.turn(turnTo(...SEATS.water, ...STONE));
         groke.look('stone#lantern');
-        s.tell('wade:turn');
         troll.gait('back_away');
         await troll.walk([BACKED]);
         troll.gait(null);
@@ -279,13 +283,13 @@ function film(scene) {
       run: async s => {
         await s.wait(2);
         s.tell('night2:sat');
-        await dolly(s, NEAR(seatOf(get('groke_at')), 4, 0.2), 3);
+        await dolly(s, NEAR(seatOf(get('groke_at')), 3.6, 0.7, -0.05), 3);
         await s.wait(2);
       },
     },
     // 3.6 «Пойти следом»: the son going down the dune's path with the lantern, Papa coming over the dune behind him
     follow_start: {
-      from: () => ({ ...view({ camera_yaw: 18 }), lantern_stone: 'none', hand_lit: 1, ...grokeSat(),
+      from: () => ({ ...view({ camera_yaw: 12 }), lantern_stone: 'none', hand_lit: 1, ...grokeSat(),
         ...AT('troll', DUNE_TOP, turnTo(...DUNE_TOP, ...DOWN[0]), { troll_with: ['lantern'], troll_mood: 'sad' }),
         ...AT('papa', OVER_DUNE, turnTo(...OVER_DUNE, ...PAPA_DOWN[1]), { papa_mood: 'thinking', papa_look: 'troll' }) }),
       run: async s => {
@@ -296,7 +300,7 @@ function film(scene) {
     // after the minigame: the son sets the lantern on the stone, the Groke rises toward it, Papa stops on the dune
     follow_end: {
       after: 'follow_start',
-      from: () => ({ ...view({ camera_yaw: 18 }), lantern_stone: 'none', hand_lit: 1, ...grokeSat(),
+      from: () => ({ ...view({ camera_yaw: 12 }), lantern_stone: 'none', hand_lit: 1, ...grokeSat(),
         ...AT('troll', DOWN[2], toStone(DOWN[2]), { troll_with: ['lantern'], troll_mood: 'sad' }),
         ...AT('papa', PAPA_DOWN[1], turnTo(...PAPA_DOWN[1], ...STONE), { papa_mood: 'thinking', papa_look: 'troll' }) }),
       run: async s => {
@@ -328,7 +332,7 @@ function film(scene) {
         const groke = s.person('groke');
         await s.wait(1);
         groke.look(LANTERN_ROOM);
-        await dolly(s, NEAR(seatOf(get('groke_at')), 4, 0.2));
+        await dolly(s, NEAR(seatOf(get('groke_at')), 3.6, 0.7, -0.05));
         s.tell('wide:howl');
         await s.wait(3);
       },
@@ -356,23 +360,21 @@ function film(scene) {
     blanket: {
       after: 'beside',
       from: () => ({ ...view(), frost: 1, warm: 0, blanket: false, ...grokeSat(), ...trollBeside({ troll_with: ['rime_arms'] }),
-        ...AT('mama', ENTRY, 250, { mama_with: ['blanket'], mama_mood: 'neutral' }) }),
+        ...AT('mama', BLANKET_FROM(get('groke_at')), 250, { mama_with: ['blanket'], mama_mood: 'neutral' }) }),
       run: async s => {
         const mama = s.person('mama'), at = get('groke_at');
         mama.here(true);
         const b = BLANKET(besideOf(at));
         s.set('blanket_a', b.blanket_a);
         s.set('blanket_d', b.blanket_d);
-        const spot = [b.blanket_a + 0.7, b.blanket_d - 0.2];
-        await go(s, 'mama', [[2, 3.6], spot], turnTo(...spot, b.blanket_a, b.blanket_d), 'carry_walk');
+        const spot = BLANKET_SPOT(besideOf(at));
+        await go(s, 'mama', [spot], turnTo(...spot, b.blanket_a, b.blanket_d), 'carry_walk');
         await mama.do('put_down');
         mama.with(null);
         s.set('blanket', true);
         s.tell('blanket:laid');
-        await go(s, 'mama', [[2, 3.6], ENTRY], null);
-        mama.here(false);
         s.move('frost', 0.7, { over: 6 });
-        await s.move('warm', 1, { over: 6 });
+        await s.all(s.move('warm', 1, { over: 6 }), (async () => { await go(s, 'mama', [ENTRY], null); mama.here(false); })());
         s.person('groke').mood('neutral');
         s.tell('blanket:warm');
         await s.wait(1.5);
@@ -380,7 +382,7 @@ function film(scene) {
     },
     // 4.7 «До дюны»: Papa and the son side by side coming from the right onto the dune's path
     dune_start: {
-      from: () => ({ ...view({ camera_yaw: 30 }), frost: 1, ...AT('groke', SEATS.edge, toLight('edge'), { groke_do: LOOP('sit_look'), groke_mood: 'sad' }),
+      from: () => ({ ...view({ camera_yaw: 52 }), frost: 1, ...AT('groke', SEATS.edge, toLight('edge'), { groke_do: LOOP('sit_look'), groke_mood: 'sad' }),
         ...AT('troll', [UP[0][0] + 0.9, UP[0][1] - 1.4], 330, { troll_mood: 'neutral' }),
         ...AT('papa', [UP[0][0] + 1.5, UP[0][1] - 1.6], 330, { papa_mood: 'thinking' }) }),
       run: async s => {
@@ -391,7 +393,7 @@ function film(scene) {
     // on the dune's top: the son stops, says it, and goes on down alone; Papa sits down on the dune
     dune_stop: {
       after: 'dune_start',
-      from: () => ({ ...view({ camera_yaw: 30 }), frost: 1, ...AT('groke', SEATS.edge, toLight('edge'), { groke_do: LOOP('sit_look'), groke_mood: 'sad' }),
+      from: () => ({ ...view({ camera_yaw: 52 }), frost: 1, ...AT('groke', SEATS.edge, toLight('edge'), { groke_do: LOOP('sit_look'), groke_mood: 'sad' }),
         ...AT('troll', DUNE_TOP, turnTo(...DUNE_TOP, ...ALONE), { troll_mood: 'neutral' }),
         ...AT('papa', [DUNE_TOP[0] + 0.6, DUNE_TOP[1] + 0.3], turnTo(DUNE_TOP[0] + 0.6, DUNE_TOP[1] + 0.3, ...ALONE), { papa_mood: 'thinking', papa_look: 'troll' }) }),
       run: async s => {
@@ -399,7 +401,7 @@ function film(scene) {
         await dolly(s, NEAR(DUNE_TOP, 4.5), 2);
         s.tell('dune_stop:say');
         await s.wait(1.5);
-        dolly(s, { ...VIEW, camera_yaw: 30 }, 3);
+        dolly(s, { ...VIEW, camera_yaw: 25 }, 3);
         await go(s, 'troll', [[3, 6], [0.6, 5.2], ALONE], turnTo(...ALONE, ...SEATS.edge));
         troll.look('groke');
         await papa.do('sit_floor');
@@ -450,7 +452,7 @@ function film(scene) {
       run: async s => {
         const groke = s.person('groke'), at = get('groke_at');
         groke.look(LANTERN_ROOM);
-        await dolly(s, NEAR(seatOf(at), 4, 0.2));
+        await dolly(s, NEAR(seatOf(at), 3.6, 0.7, -0.05));
         s.tell('leave:howl');
         await s.wait(3);
         dolly(s, VIEW, 3);

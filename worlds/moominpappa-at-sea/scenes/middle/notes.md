@@ -39,8 +39,8 @@ creeps the pines and turns Papa under the armful by `sway`; `showcase.js` plays 
 Seconds are estimates. Motions and parts are the cast's (package Л): the `rope` with its weight in the hands, the
 `armful`; `crouch`, `put_down` (a stone), `pull_rope`, `carry` (the armful high).
 
-- `ring` (2.3, day, ≈ 16 s): the son comes down the path into the clearing, looks round, and lays the stones in a ring
-  one by one, crouching (`ring` set, `ring_n` 0 → 9) — `ring:set` (his line); My on the granite on the left, busy
+- `ring` (2.3, day, ≈ 8 s): the son crouched at the far side of his clearing, laying the last stones of the ring one by
+  one (`ring` set, `ring_n` 4 → 9) — `ring:set` (his line, ≈ 2.5 s in); he stands up; My on the granite on the left, busy
   with her own (as `my_here` says). Ends with him standing over the ring.
 - `sound_ready` (2.4 «Омут», day, ≈ 10 s): Papa comes to the rock with the rope and its weight, ties it to the rock and
   stands at the pool's lip holding it — `sound_ready:ready` (the pose for «Лот»: `pool#water` in the middle 4:3). The
@@ -76,8 +76,8 @@ Seconds are estimates. Motions and parts are the cast's (package Л): the `rope`
 - `day` (2.4, the afternoon, ≈ 8 s): Papa comes up into the hollow and looks round — the pool, the pines, the paths
   down to the shore and to the cape; ends with him standing in the middle 4:3 (`papa#chest`): the pose for the choice
   «День Папы» — `day:look`.
-- `ring` (2.3, day, ≈ 16 s): the son comes down the path into the clearing, looks round, and lays the stones in a ring
-  one by one, crouching (`ring` set, `ring_n` 0 → 9) — `ring:set` (his line); My on the granite on the left, busy
+- `ring` (2.3, day, ≈ 8 s): the son crouched at the far side of his clearing, laying the last stones of the ring one by
+  one (`ring` set, `ring_n` 4 → 9) — `ring:set` (his line, ≈ 2.5 s in); he stands up; My on the granite on the left, busy
   with her own (as `my_here` says). Ends with him standing over the ring.
 - `sound_ready` (2.4 «Омут», day, ≈ 10 s): Papa comes to the rock with the rope and its weight, ties it to the rock and
   stands at the pool's lip holding it — `sound_ready:ready` (the pose for «Лот»: `pool#water` in the middle 4:3). The
