@@ -1,0 +1,865 @@
+{
+  "engine": 3,
+  "title": "The Lantern Room",
+  "caption": "The lantern room at the top of the lighthouse.",
+  "horizon": 0.3,
+  "camera": {
+    "mode": "picture"
+  },
+  "light": {
+    "ambient": 0.62,
+    "ambientColor": "#c9d2e4",
+    "bounce": 0.55,
+    "haze": 0.04,
+    "hazeColor": "#eadcc6",
+    "hazeGlow": 0,
+    "shafts": 0.3,
+    "tint": "#ffd9a6",
+    "tintStrength": 0.07,
+    "vignette": 0.24,
+    "grain": 0.08,
+    "saturation": 1.08,
+    "wind": [
+      1,
+      0.3,
+      1.3
+    ],
+    "looks": {
+      "dawn": {
+        "ambient": 0.68,
+        "ambientColor": "#dfe6ef",
+        "bounce": 0.55,
+        "haze": 0.035,
+        "hazeColor": "#e3e1e0",
+        "hazeGlow": 0,
+        "shafts": 0,
+        "tint": "#f6dccb",
+        "tintStrength": 0.05,
+        "vignette": 0.22,
+        "grain": 0.08,
+        "saturation": 1.08,
+        "lights": {
+          "sun": 0
+        }
+      },
+      "dusk": {
+        "ambient": 0.6,
+        "ambientColor": "#cdbfdc",
+        "haze": 0.05,
+        "hazeColor": "#e8c4b4",
+        "hazeGlow": 0.3,
+        "shafts": 0.25,
+        "tint": "#ffb48c",
+        "tintStrength": 0.1,
+        "saturation": 1.05,
+        "lights": {
+          "sun": 0
+        }
+      },
+      "night": {
+        "ambient": 0.5,
+        "ambientColor": "#9cb0e0",
+        "bounce": 0.6,
+        "haze": 0.05,
+        "hazeColor": "#5f7299",
+        "hazeGlow": 0.6,
+        "shafts": 0.35,
+        "tint": "#a8bcff",
+        "tintStrength": 0.1,
+        "saturation": 0.8,
+        "vignette": 0.26,
+        "lights": {
+          "sun": 0,
+          "sun_dawn": 0,
+          "sun_dusk": 0
+        },
+        "inside": 0.85
+      },
+      "storm": {
+        "ambient": 0.6,
+        "ambientColor": "#bcc6d0",
+        "haze": 0.13,
+        "hazeColor": "#9ea9b3",
+        "shafts": 0.1,
+        "tint": "#c4d4e4",
+        "tintStrength": 0.08,
+        "saturation": 0.8,
+        "wind": [
+          1,
+          0.3,
+          2.4
+        ],
+        "lights": {
+          "sun": 0.25,
+          "sun_dawn": 0.3,
+          "sun_dusk": 0.3,
+          "moon": 0.6
+        },
+        "inside": 0.6
+      },
+      "flash": {
+        "ambient": 1.0,
+        "ambientColor": "#e6ecff",
+        "brightness": 1.2,
+        "saturation": 0.7
+      }
+    },
+    "inside": 0.9
+  },
+  "lights": [
+    {
+      "id": "lamp",
+      "of": "burner#flame",
+      "color": "#ffd590",
+      "strength": 1.4,
+      "reach": 7,
+      "flicker": 0.05,
+      "glow": 0.2
+    },
+    {
+      "id": "blue_flame",
+      "of": "burner#blue",
+      "color": "#9cbcff",
+      "strength": 0.9,
+      "reach": 4,
+      "flicker": 0.2
+    },
+    {
+      "id": "lantern",
+      "of": "lantern#flame",
+      "color": "#ffd08c",
+      "strength": 1.2,
+      "reach": 5,
+      "flicker": 0.1,
+      "glow": 0.2
+    },
+    {
+      "id": "sun",
+      "from": [
+        30,
+        40
+      ],
+      "color": "#fff1dc",
+      "strength": 1.3
+    },
+    {
+      "id": "sun_dawn",
+      "from": [
+        5,
+        6
+      ],
+      "color": "#ffe0c2",
+      "strength": 1.3,
+      "on": "dawn"
+    },
+    {
+      "id": "sun_dusk",
+      "from": [
+        30,
+        5
+      ],
+      "color": "#ffb486",
+      "strength": 1.3,
+      "on": "dusk"
+    },
+    {
+      "id": "moon",
+      "from": "sky#moon",
+      "color": "#cdd8ff",
+      "strength": 0.9,
+      "on": "night"
+    },
+    {
+      "id": "flash",
+      "from": [
+        11,
+        5
+      ],
+      "color": "#e8eeff",
+      "strength": 2.2,
+      "on": "flash"
+    },
+    {
+      "id": "glass_light",
+      "of": "glazing",
+      "daylight": 1
+    }
+  ],
+  "modules": [
+    "cast",
+    "island"
+  ],
+  "objects": [
+    {
+      "id": "sky",
+      "name": "The sky",
+      "sky": true,
+      "uniforms": {
+        "low": 0.31,
+        "day_x": 1.47,
+        "day_y": -0.4,
+        "dawn_x": 0.98,
+        "dusk_x": 1.47,
+        "dawn": 0,
+        "dusk": 0,
+        "night": 0,
+        "storm": 0,
+        "flash": 0
+      }
+    },
+    {
+      "id": "sea",
+      "name": "The sea",
+      "plane": true,
+      "across": 0,
+      "distance": 1450,
+      "elevation": -16,
+      "width": 2400,
+      "depth": 3000,
+      "reflect": {
+        "strength": 0.22,
+        "fade": 0,
+        "rough": 0.6,
+        "ripple": 0.45
+      },
+      "uniforms": {
+        "storm": 0
+      }
+    },
+    {
+      "id": "gallery_floor",
+      "name": "The gallery",
+      "plane": true,
+      "across": 0,
+      "distance": 4.0,
+      "elevation": -0.05,
+      "width": 7.2,
+      "depth": 7.2
+    },
+    {
+      "id": "gallery",
+      "name": "The gallery's rail",
+      "elevation": -0.05,
+      "box": [
+        -1.127,
+        -1.12,
+        1.127,
+        0.02
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": 1.985,
+          "distance": 6.731,
+          "facing": 216,
+          "elevation": -0.05
+        },
+        {
+          "across": 0.0,
+          "distance": 7.376,
+          "facing": 180,
+          "elevation": -0.05
+        },
+        {
+          "across": 3.211,
+          "distance": 5.043,
+          "facing": 252,
+          "elevation": -0.05
+        },
+        {
+          "across": 3.211,
+          "distance": 2.957,
+          "facing": 288,
+          "elevation": -0.05
+        }
+      ]
+    },
+    {
+      "id": "floor",
+      "name": "The floor",
+      "plane": true,
+      "across": 0,
+      "distance": 4.0,
+      "elevation": 0,
+      "width": 5.6,
+      "depth": 5.6,
+      "inside": true
+    },
+    {
+      "id": "ceiling",
+      "name": "The ceiling",
+      "plane": true,
+      "across": 0,
+      "distance": 4.0,
+      "elevation": 2.6,
+      "width": 5.8,
+      "depth": 5.8,
+      "tilt": 180,
+      "inside": true
+    },
+    {
+      "id": "wall",
+      "name": "The landward sides",
+      "box": [
+        -0.865,
+        -2.6,
+        0.865,
+        0
+      ],
+      "inside": true,
+      "copies": [
+        {
+          "across": -2.533,
+          "distance": 3.177,
+          "facing": 72
+        },
+        {
+          "across": -2.533,
+          "distance": 4.823,
+          "facing": 108
+        }
+      ]
+    },
+    {
+      "id": "soot",
+      "name": "The sooty wall by the burner",
+      "across": -1.565,
+      "distance": 6.154,
+      "facing": 144,
+      "box": [
+        -0.865,
+        -2.6,
+        0.865,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "glazing",
+      "name": "The glazed sides",
+      "box": [
+        -0.865,
+        -2.6,
+        0.865,
+        0
+      ],
+      "inside": true,
+      "copies": [
+        {
+          "across": 0.0,
+          "distance": 6.663,
+          "facing": 180
+        },
+        {
+          "across": 1.565,
+          "distance": 6.154,
+          "facing": 216
+        },
+        {
+          "across": 2.533,
+          "distance": 4.823,
+          "facing": 252
+        }
+      ]
+    },
+    {
+      "id": "glass_door",
+      "name": "The glazed side with the gallery door",
+      "across": 2.533,
+      "distance": 3.177,
+      "facing": 288,
+      "box": [
+        -0.865,
+        -2.6,
+        0.865,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "crack",
+      "name": "The struck glass",
+      "across": 1.559,
+      "distance": 6.146,
+      "facing": 216,
+      "box": [
+        -0.865,
+        -2.6,
+        0.865,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "spray_right",
+      "name": "Spray on the struck glass",
+      "on": "crack",
+      "distance": 0.03,
+      "elevation": 1.8,
+      "particles": {
+        "kind": "drops",
+        "source": [
+          1.63,
+          0,
+          1.5
+        ],
+        "rate": 6,
+        "amount": "storm"
+      }
+    },
+    {
+      "id": "spray_door",
+      "name": "Spray on the door's glass",
+      "on": "glass_door",
+      "distance": 0.03,
+      "elevation": 1.8,
+      "particles": {
+        "kind": "drops",
+        "source": [
+          1.63,
+          0,
+          1.5
+        ],
+        "rate": 6,
+        "amount": "storm"
+      }
+    },
+    {
+      "id": "lamp",
+      "name": "The lamp's pedestal",
+      "across": 0,
+      "distance": 4.0,
+      "shadow": true,
+      "box": [
+        -0.565,
+        -1.0,
+        0.565,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "burner",
+      "name": "The lamp",
+      "across": 0,
+      "distance": 4.0,
+      "elevation": 0.9,
+      "uniforms": {
+        "spin": 0,
+        "lit": 0,
+        "blue": 0,
+        "clean": 0
+      },
+      "box": [
+        -0.45,
+        -1.07,
+        0.45,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "lamp_top",
+      "name": "The lamp's cap",
+      "across": 0,
+      "distance": 4.0,
+      "elevation": 1.95,
+      "box": [
+        -0.785,
+        -0.786,
+        0.785,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "burner_smoke",
+      "name": "Soot off the smoking burner",
+      "inside": true,
+      "across": 0,
+      "distance": 3.55,
+      "elevation": 1.95,
+      "particles": {
+        "kind": "smoke",
+        "color": "#3a3634",
+        "rate": 10,
+        "size": [
+          0.1,
+          0.9
+        ],
+        "speed": [
+          0.2,
+          0.5
+        ],
+        "life": [
+          2,
+          3.5
+        ],
+        "opacity": 0.55,
+        "amount": "smoke"
+      }
+    },
+    {
+      "id": "sheets",
+      "name": "The sheets by the lamp",
+      "across": 0,
+      "distance": 3.88,
+      "elevation": 0.32,
+      "box": [
+        -0.21,
+        -0.31,
+        0.21,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "pot",
+      "name": "The pot in the frock coat",
+      "across": -0.6,
+      "distance": 3.75,
+      "shadow": true,
+      "box": [
+        -0.3,
+        -0.4,
+        0.4,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "barrel",
+      "name": "The barrel of oil",
+      "across": -2.167,
+      "distance": 3.618,
+      "shadow": true,
+      "box": [
+        -0.911,
+        -0.834,
+        0.911,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "cot",
+      "name": "The camp bed",
+      "plane": true,
+      "across": 1.75,
+      "distance": 4.2,
+      "elevation": 0.4,
+      "width": 1.1,
+      "depth": 1.9,
+      "inside": true,
+      "shadow": true
+    },
+    {
+      "id": "cot_legs",
+      "name": "The camp bed's legs",
+      "across": 1.75,
+      "distance": 4.2,
+      "box": [
+        -0.38,
+        -0.44,
+        0.38,
+        0.03
+      ],
+      "inside": true
+    },
+    {
+      "id": "stair",
+      "name": "The stair under the hatch",
+      "across": -1.6,
+      "distance": 4.95,
+      "elevation": -2.4,
+      "box": [
+        -0.42,
+        -2.42,
+        0.42,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "lantern",
+      "name": "The storm lantern",
+      "across": -1.028,
+      "distance": 5.226,
+      "uniforms": {
+        "lit": 0
+      },
+      "box": [
+        -0.16,
+        -0.48,
+        0.16,
+        0.03
+      ],
+      "inside": true
+    },
+    {
+      "id": "papa",
+      "name": "Moominpappa",
+      "person": {
+        "cast": "cast",
+        "who": "papa",
+        "does": "hands_behind"
+      },
+      "across": 0.8,
+      "distance": 3.6,
+      "inside": true
+    },
+    {
+      "id": "my",
+      "name": "Little My",
+      "person": {
+        "cast": "cast",
+        "who": "my"
+      },
+      "across": -1.4,
+      "distance": 4.62,
+      "inside": true
+    },
+    {
+      "id": "troll",
+      "name": "Moomintroll",
+      "person": {
+        "cast": "cast",
+        "who": "troll"
+      },
+      "across": -1.83,
+      "distance": 4.58,
+      "inside": true
+    }
+  ],
+  "state": {
+    "dawn": 0,
+    "dusk": 0,
+    "night": 0,
+    "moon": 0.6,
+    "storm": 0,
+    "flash": 0,
+    "lighthouse_lit": 0,
+    "lenses": 0,
+    "flame": "out",
+    "slant": 0,
+    "sheets": 0,
+    "pot": false,
+    "cot": "none",
+    "gallery_glass": "whole",
+    "lantern_at": "none",
+    "lantern_flame": "full",
+    "smoke": 0,
+    "papa_turn": 205,
+    "papa_look": "burner#wick",
+    "papa_mood": "thinking",
+    "my_turn": 120,
+    "my_look": "papa",
+    "my_mood": "smile",
+    "troll_turn": 130,
+    "troll_look": "papa",
+    "troll_mood": "neutral"
+  },
+  "states": {
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dawn's light and sky (0 — the day)"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dusk's light and sky, the afterglow (0 — the day); may move before the eyes"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the moonlit night (0 — the day); over dawn and dusk"
+    },
+    "moon": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the moon's phase: 0 a thin crescent … 1 full (changes between steps; seen by night)"
+    },
+    "storm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the storm: grey light and sky, its clouds, many quick crests, rain, wind; over a half — lightning now and then"
+    },
+    "flash": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "lightning: the sky and everything lit white a moment (the storm's script and the game's moments)"
+    },
+    "lighthouse_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lighthouse's lamp burns: the lantern's glass warm, its light and glow (no beam)"
+    },
+    "lenses": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lens drum: 0 murky … 1 wiped clean"
+    },
+    "flame": {
+      "values": [
+        "out",
+        "smoky",
+        "blue",
+        "lit"
+      ],
+      "means": "the burner: out; a dull flame smoking; burning blue (warmed with paraffin, the oil not running yet); lit — the lamp burns and the drum turns"
+    },
+    "slant": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the keeper's pencil under the soot: 0 only grooves … 1 legible in a light held slanting along the wall"
+    },
+    "sheets": {
+      "range": [
+        0,
+        2
+      ],
+      "means": "sheets pinned by the lamp: «The Burner», then «The Pot» (one: the second nail bare)"
+    },
+    "pot": {
+      "type": "boolean",
+      "means": "the pot of warm oil wrapped in the frock coat, by the lamp"
+    },
+    "cot": {
+      "values": [
+        "none",
+        "made",
+        "empty",
+        "taken"
+      ],
+      "means": "the camp bed: none; made; set up and nobody sleeps in it (its blanket folded at its foot); slept in"
+    },
+    "gallery_glass": {
+      "values": [
+        "whole",
+        "cracked"
+      ],
+      "means": "the glass the sea strikes: whole, or cracked in the storm"
+    },
+    "lantern_at": {
+      "values": [
+        "none",
+        "floor"
+      ],
+      "means": "the storm lantern carried up: not here, or on the floor by the sooty wall"
+    },
+    "lantern_flame": {
+      "values": [
+        "full",
+        "low",
+        "out"
+      ],
+      "means": "the storm lantern's flame up here: full, turned low, out"
+    },
+    "smoke": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the burner's soot rising — the script sets it from flame"
+    }
+  },
+  "music": {
+    "prompts": [
+      {
+        "text": "Solo nylon-string guitar picking a slow, plain northern folk tune, close and intimate, sea wind behind it",
+        "weight": 0
+      },
+      {
+        "text": "Soft accordion holding long quiet chords, a little out of breath, a Finnish summer evening by the shore",
+        "weight": 0
+      },
+      {
+        "text": "Sparse felt piano, three notes and a long pause, cold clear morning air, gentle melancholy",
+        "weight": 0
+      },
+      {
+        "text": "A small clarinet melody, wistful and a little comic, like a story told to a child, over a bowed double bass",
+        "weight": 0
+      },
+      {
+        "text": "Glassy harmonium drones with the hiss of waves on granite, slow and wide, almost still",
+        "weight": 0.5
+      },
+      {
+        "text": "Music box playing a lullaby slightly out of tune, far away, nostalgic",
+        "weight": 0
+      },
+      {
+        "text": "Solo cello, long low phrases, lonely lighthouse at dawn, restrained and warm",
+        "weight": 0.7
+      },
+      {
+        "text": "Kantele plucked softly, open fifths, Nordic folk, bright and bare",
+        "weight": 0
+      },
+      {
+        "text": "Brushed snare and upright bass, a slow cheerful waltz, a family on a boat trip",
+        "weight": 0
+      },
+      {
+        "text": "Whistled melody over a ukulele, light-hearted, a proud father setting out on an adventure",
+        "weight": 0
+      },
+      {
+        "text": "Strings swelling slowly into a wide open chord, the sea and the sky, hopeful and sad at once",
+        "weight": 0
+      },
+      {
+        "text": "Wind chimes and low synth pad, the bare island at night, the moon on the water",
+        "weight": 0.6
+      },
+      {
+        "text": "Tin whistle and frame drum, a storm coming up over the sea, restless",
+        "weight": 0.3
+      },
+      {
+        "text": "A celesta and a flute, an imaginary garden painted on a wall, bees and summer warmth",
+        "weight": 0
+      },
+      {
+        "text": "Low drone of a foghorn-like brass note under thin high violins, a dark lighthouse, waiting",
+        "weight": 0.9
+      },
+      {
+        "text": "Children's choir humming wordlessly, very far off, a memory of a valley",
+        "weight": 0
+      }
+    ],
+    "bpm": 62,
+    "density": 0.25,
+    "brightness": 0.4,
+    "scale": "D_MAJOR_B_MINOR"
+  }
+}
