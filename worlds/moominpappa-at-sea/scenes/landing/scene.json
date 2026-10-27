@@ -187,9 +187,9 @@
       "plane": true,
       "across": 0,
       "distance": 1450,
-      "elevation": -1.3,
       "width": 2400,
       "depth": 3000,
+      "elevation": -1.3,
       "reflect": {
         "strength": 0.18,
         "fade": 0,
@@ -223,26 +223,6 @@
       "distance": 17.5,
       "width": 64,
       "depth": 66
-    },
-    {
-      "id": "frost_trail",
-      "name": "The frost's trail to the door",
-      "plane": true,
-      "drape": true,
-      "across": 3.5,
-      "distance": 24.5,
-      "width": 16,
-      "depth": 13
-    },
-    {
-      "id": "frost_patch",
-      "name": "The white patch by the landing",
-      "plane": true,
-      "drape": true,
-      "across": -0.4,
-      "distance": 9.5,
-      "width": 4,
-      "depth": 3.2
     },
     {
       "id": "lighthouse",
@@ -437,15 +417,15 @@
       "shadow": true
     },
     {
-      "id": "cleft",
-      "name": "The cleft by the landing",
-      "across": -1.2,
-      "distance": 11.8,
+      "id": "sprout",
+      "name": "A shoot out of the cleft",
+      "across": 1.7000000000000002,
+      "distance": 4.6,
       "box": [
-        -1.1,
-        -0.45,
-        1.1,
-        0.6
+        -0.15,
+        -0.6,
+        0.15,
+        0.05
       ]
     },
     {
@@ -883,7 +863,7 @@
         "stone",
         "rock"
       ],
-      "means": "where my is (the script puts them there: lib.PLACES.my): stone — sitting by the arrow stone; rock — sitting on the rocks above the cove"
+      "means": "where my is (the script puts them there: lib.PLACES.my): stone — sitting by the arrow stone; rock — sitting on the slab, near"
     },
     "fisher_at": {
       "values": [

@@ -187,9 +187,9 @@
       "plane": true,
       "across": 0,
       "distance": 1450,
-      "elevation": -1.6,
       "width": 2400,
       "depth": 3000,
+      "elevation": -1.6,
       "reflect": {
         "strength": 0.22,
         "fade": 0,
@@ -369,19 +369,6 @@
       ]
     },
     {
-      "id": "rocks",
-      "name": "Boulders on the way over the rocks",
-      "across": 1.8,
-      "distance": 6.2,
-      "shadow": true,
-      "box": [
-        -0.7,
-        -0.6,
-        0.7,
-        0.05
-      ]
-    },
-    {
       "id": "driftwood",
       "name": "A driftwood trunk",
       "across": 2.9,
@@ -455,7 +442,7 @@
         -2.4,
         -0.6,
         2.4,
-        1.6
+        0.6
       ]
     },
     {

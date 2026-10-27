@@ -21,19 +21,22 @@ breathe; no motions, no camera, no showcase yet).
     her strakes, tarred — a black stripe of tar over it; away — not painted.
   - `<id>_at` — each person at a named place (`lib.PLACES`, put by the island's `places`: their place keys, seat,
     turn, motion, look, reach); `<id>_placed` keeps which, so a scene opened again goes on as it was.
-- Painted by the keys, once per state: `frost_step` (`frost_trail`, a draped plane: two broken bands of rime from the
-  water's edge up to the threshold and back), `frost_patch` (a draped plane of rime by the landing), `cleft` (empty ·
-  weed · sprout: the slit lies on the slab toward the eye, the shoot stands up), `driftwood` (parts along the cove),
+- Painted by the keys, once per state: on the granite itself (`lib.marks`; the granite repaints when they change, between
+  steps) — `frost_step` (two broken bands of rime from the water's edge up to the threshold and back), `frost_patch`
+  (rime by the landing), `cleft` (empty ·
+  weed · sprout: the slit in the slab before the family, point `granite#cleft`; the shoot is the card `sprout`), `driftwood` (parts along the cove),
   `bundles` (slab — the bundle Mama sits on, her bag, the can; steps — three bundles on the lighthouse steps, one wet;
   none).
 - The storm: the island's look, sky and sea; rain (`rain`) and spray on the cove's rocks (`spray`) by `storm`;
   lightning by the island's script. No lighthouse beam: the engine has no turning spotlight yet — the lantern's own
   light and glow are `lighthouse_lit`.
 - The boulder is a form (Moomintroll sits on it); the bundle is a card now (it goes away with the luggage).
-- People: the world's cast — papa, mama, troll, my, fisher (the Fisherman is not here at the start).
+- People: the world's cast — papa, mama, troll, my, fisher (the Fisherman is not here at the start). Their places are
+  near the camera where the story allows (the cleft is in the slab before the family, Little My's rock is on the slab);
+  the door, the steps and the arrow stone stay at the lighthouse, 28–31 m off: those are framed by the pieces' shots.
 
 ## Contract for the check
 
 ```json
-{"beats": {}, "points": ["lighthouse#door", "lighthouse#lantern", "door#door", "arrow_stone#stone", "cleft#cleft", "boat#boat", "boat#mooring", "boat#lantern", "rock#edge", "sky#moon", "cape#point", "pines#crown", "papa", "mama", "troll", "my", "fisher"], "offers": ["papa", "mama", "troll", "my", "fisher", "lighthouse#door", "door#door", "arrow_stone#stone", "cleft#cleft", "boat", "boat#mooring", "rock#edge"], "party": {"dawn": 1, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "lighthouse_lit": 0, "pines": 0, "frost_step": false, "frost_patch": false, "boat": "moored", "cleft": "empty", "driftwood": false, "bundles": "slab", "papa_at": "slab", "mama_at": "slab", "troll_at": "boulder", "my_at": "stone", "fisher_at": "away"}, "acts": {"door": {"values": [], "tells": []}, "boat_up": {"values": [], "tells": []}, "flash": {"values": [], "tells": []}}}
+{"beats": {}, "points": ["lighthouse#door", "lighthouse#lantern", "door#door", "arrow_stone#stone", "granite#cleft", "boat#boat", "boat#mooring", "boat#lantern", "rock#edge", "sky#moon", "cape#point", "pines#crown", "papa", "mama", "troll", "my", "fisher"], "offers": ["papa", "mama", "troll", "my", "fisher", "lighthouse#door", "door#door", "arrow_stone#stone", "granite#cleft", "boat", "boat#mooring", "rock#edge"], "party": {"dawn": 1, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "lighthouse_lit": 0, "pines": 0, "frost_step": false, "frost_patch": false, "boat": "moored", "cleft": "empty", "driftwood": false, "bundles": "slab", "papa_at": "slab", "mama_at": "slab", "troll_at": "boulder", "my_at": "stone", "fisher_at": "away"}, "acts": {"door": {"values": [], "tells": []}, "boat_up": {"values": [], "tells": []}, "flash": {"values": [], "tells": []}}}
 ```

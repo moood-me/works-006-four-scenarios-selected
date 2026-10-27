@@ -16,7 +16,7 @@ steps (stage 4: people stand or sit and breathe; no motions, no camera, no showc
   is; folded — his hands empty (`fisher_with` [] by the script; else the cast's `netload`).
 - `bread` — the loaf on the flat stone by the path (`bread#stone`); `pie` — the pie on the rock beside him;
   `matchbox` (none · stone · palm) — on his stone, or in his right hand (its animate carries it to `fisher#hand_r`).
-- `rocks` — three low boulders on the way over the rocks, `rocks#hold1…3` (the storm's minigame).
+- The rocks Papa holds on to in the storm are knobs of the land itself (`lib.HOLDS`, painted by the granite): their tops `granite#hold1…3` (the storm's minigame).
 - The storm: the island's look, sky and sea; rain, spray on the cove's rocks, and `surge` — the wave coming in over
   the rocks and under the Fisherman (a layer its animate brings in and draws back, only in a storm); lightning by the
   island's script. No lighthouse beam (the engine has none yet).
@@ -28,5 +28,5 @@ steps (stage 4: people stand or sit and breathe; no motions, no camera, no showc
 ## Contract for the check
 
 ```json
-{"beats": {}, "points": ["lighthouse#door", "lighthouse#lantern", "rack#net", "net#knot", "bread#stone", "pie#pie", "rocks#hold1", "rocks#hold2", "rocks#hold3", "seat", "sky#moon", "fisher", "papa", "mama", "my", "troll"], "offers": ["fisher", "papa", "mama", "my", "troll", "net#knot", "bread#stone", "rocks#hold1", "rocks#hold2", "rocks#hold3", "seat"], "party": {"dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "lighthouse_lit": 0, "net": "dry", "bread": false, "pie": false, "matchbox": "none", "fisher_at": "seat", "papa_at": "beside", "mama_at": "steps", "my_at": "rock", "troll_at": "near"}, "acts": {"flash": {"values": [], "tells": []}}}
+{"beats": {}, "points": ["lighthouse#door", "lighthouse#lantern", "rack#net", "net#knot", "bread#stone", "pie#pie", "granite#hold1", "granite#hold2", "granite#hold3", "seat", "sky#moon", "fisher", "papa", "mama", "my", "troll"], "offers": ["fisher", "papa", "mama", "my", "troll", "net#knot", "bread#stone", "granite#hold1", "granite#hold2", "granite#hold3", "seat"], "party": {"dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "lighthouse_lit": 0, "net": "dry", "bread": false, "pie": false, "matchbox": "none", "fisher_at": "seat", "papa_at": "beside", "mama_at": "steps", "my_at": "rock", "troll_at": "near"}, "acts": {"flash": {"values": [], "tells": []}}}
 ```

@@ -25,6 +25,14 @@ reflect)`, `lighthouse(across, distance)`, `RAIN` (rain on `storm`), `STATE`, `S
 copies `tools/island/sky.wgsl` and `tools/island/sea.wgsl` beside its sky and sea (the same text in every scene: a
 change is made there and copied by every generator).
 
+## All round
+
+For a scene whose camera turns (looks round, rides a boat): `tools/island.py` `sky(..., round=True)` and
+`sea(..., round=True)`, and in the element code `island.sky(g, e, {…, round: true})`, `island.sea(g, e, {round: true,
+reach})` — the sky painted a whole turn about the gaze (2π stage heights, its ends meeting; clouds, storm clouds and
+stars as thick all round), the sea centred on the start, 6000 × 6000 m, the crests on every side out to `reach` metres
+(520). Without it (landing, cape) the sky is the stage and its margins, the sea and its crests ahead.
+
 ## The land
 
 - `bump(a, d, ca, cd, ra, rd)` — a round knoll, 1 at its centre; `ridge(a, d, a0, d0, a1, d1, h0, h1, w)` — a granite
@@ -47,7 +55,7 @@ change is made there and copied by every generator).
 - `granite(g, e, {centre, size, pools, marks, near, crack})` — the draped granite plane over the land: drifts,
   speckle, lichen on the dry tops, the joints and cracks, rain pools, the wet rim. `marks` — how many drifts, specks,
   lichens, cracks ([60, 900, 260, 110]); `near` — for a big plane, the share of each anywhere, the rest near the viewer;
-  `crack` — [width, spread, dark alpha, pale alpha, the long ones' way, the short ones' way].
+  `crack` — [width, spread, dark alpha, pale alpha, the long ones' way, the short ones' way].; `points` — [[across, distance, name], …]: named points on the land (`<id>#name`, lifted onto it).
 - `lighthouse(g, e, {doorway})` — the white tower (a form; `TOWER`, `TOWER_ROUND`): points `lighthouse#door`,
   `lighthouse#lantern`; the lantern's glow `lantern` (lit by the scene's light `lantern` on `lighthouse_lit` — a scene
   with the lighthouse takes it into its lights, else the glow shows by day); its glass warm when `lighthouse_lit` is

@@ -98,11 +98,13 @@ fn shade(painted: vec4f, at: vec2f, uv: vec2f) -> vec4f {
   let star = layer(3, at);
   let twinkle = 0.55 + 0.45 * noise2(at * 220.0 + vec2f(u_time * 1.3, 0.0));
   c = min(c + vec3f(star.a * twinkle * u_night * (1.0 - 0.85 * u_storm)), vec3f(1.0));
-  // the moon by night: its lit part and its ring, pale; the rest of its disc a little lighter than the sky
+  // the moon by night: its lit part and its ring, pale; the rest of its disc a little lighter than the sky; in a storm
+  // only a faint glow of it behind the clouds
   let moon = layer(4, at);
   let lit = moon.r / max(moon.a, 0.001);
   let mc = mix(rgb(66.0, 78.0, 112.0), rgb(250.0, 246.0, 230.0), lit);
-  c = mix(c, mc, moon.a * u_night);
+  let moon_seen = u_night * (1.0 - 0.88 * u_storm);
+  c = mix(c, mc, moon.a * moon_seen);
   // the clouds, coloured by the hour and by where they are: gold near the day's sun, rose low at dawn, apricot near
   // the dusk's afterglow, grey-blue by night
   let k = 0.5 + 0.5 * clamp(at.y / 0.48, 0.0, 1.0);
@@ -123,6 +125,6 @@ fn shade(painted: vec4f, at: vec2f, uv: vec2f) -> vec4f {
   c = mix(c, rgb(226.0, 232.0, 255.0), u_flash * 0.5);
   let bolt = layer(5, at).a * u_flash;
   c = mix(c, vec3f(1.0), bolt);
-  emission = vec3f(bolt * 3.0) + srgbToLinear(rgb(250.0, 246.0, 230.0)) * moon.a * lit * u_night * 0.35;
+  emission = vec3f(bolt * 3.0) + srgbToLinear(rgb(250.0, 246.0, 230.0)) * moon.a * lit * moon_seen * 0.35;
   return vec4f(srgbToLinear(clamp(c, vec3f(0.0), vec3f(1.0))), 1.0);
 }
