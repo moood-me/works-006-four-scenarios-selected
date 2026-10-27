@@ -46,7 +46,7 @@ export default {
         await g.plate(tr('Quickly, at the floor, with a smile. He holds out his coat — she won’t take it. He lays it on the coal beside her and turns to the bolt; cut — the coat is on her. He nods at the lorry — she shakes her head and steps back. Then, past him, as if to no one:'));
         await g.say('sara', 'I only asked where my boy is');
       }
-      const shed = await g.choose('shed', { bill: [
+      const shed = await g.choose('shed', { 'bill#chest': [
         { id: 'promise', label: tr('“I’ll ask where he is”') },
         { id: 'silent', label: tr('Say nothing') },
       ] });
@@ -84,7 +84,7 @@ export default {
         tr('On “by mistake” a sign shows at the top of the screen for three seconds: a bolt, and under it his words, “The bolt was outside.”'),
         tr('Tapped — the words break out of Bill. Not tapped — the sign goes. For now: the choice.'),
       ]);
-      const out = await g.choose('bolt', { bill: [
+      const out = await g.choose('bolt', { 'bill#chest': [
         { id: 'out', label: tr('“The bolt was drawn from the outside, Mother”') },
         { id: 'hold', label: tr('Let the sign pass') },
       ] });
@@ -103,7 +103,7 @@ export default {
     async g => {
       if (g.state.choices.bolt === 'out') return;
       await g.scene(SCENES.parlour, { here: ['mother', 'bill', 'sara'], moods: { mother: 'thinking', bill: 'tired', sara: 'neutral' } }, { cut: true });
-      const plea = await g.choose('plea', { mother: [
+      const plea = await g.choose('plea', { 'mother#chest': [
         { id: 'silent', label: tr('Say nothing') },
         { id: 'shoes', label: tr('“She could do with some kind of shoes, Mother”') },
       ] });

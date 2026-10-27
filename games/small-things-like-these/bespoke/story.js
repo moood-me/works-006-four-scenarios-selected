@@ -16,8 +16,8 @@
 //     they are in the scene, else low in the middle, as the narrator), in their voice; → a breath after it is heard
 //   g.plate(text) — a plate over the scene: what happens here that the scene does not show; → once “Next” is pressed
 //   g.sheet(title, lines) — the same, a list (what the camera passes in a finale)
-//   g.choose(choice, {ref: options}) — the player presses one of the points ('id#point' | 'id'), then one of its
-//     options ([{id, label}]: petals, one too — the language of mini-games, hub.offer); → the option's id, kept in
+//   g.choose(choice, {ref: options}) — the player presses one of the points ('id#point' — on a person
+//     one of their own points, 'bill#chest', never over the face; 'id' — an element), then one of its options ([{id, label}]: petals, one too — the language of mini-games, hub.offer); → the option's id, kept in
 //     state.choices[choice] (choice null: not a choice of the chapter's map)
 //   g.play(minigame, opts) — a mini-game (a module of minigames/: {title, about, skipped, run(g, b, opts, signal)});
 //     the signal aborts when it is skipped (the page's ⏭, where it may be skipped) or the step is left; → its result

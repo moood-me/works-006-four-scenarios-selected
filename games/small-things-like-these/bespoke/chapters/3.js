@@ -81,7 +81,7 @@ export default {
       await g.plate(tr('And quieter, pettily:'));
       await g.say('eileen', 'I always said Maggie Reilly thought too much of herself. And now her daughter’s gone “to an aunt”');
       await g.plate(tr('He can’t go to the priest or the guards: the sisters and the town are one.'));
-      const eileen = await g.choose('eileen', { bill: [
+      const eileen = await g.choose('eileen', { 'bill#chest': [
         { id: 'all', label: tr('Tell her everything: the bare feet, the bolt, the boy — “I can’t leave it so”') },
         { id: 'house', label: tr('“We’ll take her in, the way Mrs Wilson took Mammy. If the sisters give her up”') },
         { id: 'bundle', label: tr('Explain no more; ask her for a bundle — socks, a cardigan, “for a girl”') },
@@ -149,7 +149,7 @@ export default {
       await g.say('postman', 'May, the usual');
       await g.plate(tr('She leans over the counter, her eyes on the men:'));
       await g.say('kehoe', 'They say you were up there before light on Sunday. Mind yourself, Bill. They’ve a finger in every pie');
-      const cafe = await g.choose('cafe', { bill: [
+      const cafe = await g.choose('cafe', { 'bill#chest': [
         { id: 'coal', label: tr('“I only bring the coal, Mrs Kehoe. I’ve five girls”') },
         { id: 'child', label: tr('Whisper: ask her cousin at the hospital about Sara’s boy') },
         { id: 'public', label: tr('Say it, low: “A girl was locked in the coal shed all night. Barefoot”') },

@@ -59,11 +59,16 @@ const b = {
 const nothing = () => {};
 const view = new Proxy({}, { get: () => nothing });
 const hub = { offer: () => new Promise(nothing), ask: async () => null, withdraw: nothing };
-// a point ('id', 'id#name') of a scene: its element, and its name in the element's code
+// a person's own points (moood/docs/agents/people.md): a mark on someone stands on one of them, never on the face
+const BODY = ['head', 'hand_r', 'hand_l', 'hands', 'chest', 'hips', 'shoulder_r', 'shoulder_l', 'back', 'nape', 'foot_r', 'foot_l', 'feet'];
+// a point ('id', 'id#name') of a scene: its element, and its name — a person's own point, else named in the element's
+// code
 function point(folder, ref, where) {
   const s = SCENES.get(folder), [id, name] = ref.split('#');
   if (!s) return;
-  if (!s.objects.has(id)) miss(`${where}: the point “${ref}” — no element “${id}” in the scene “${folder}”`);
+  const o = s.objects.get(id);
+  if (!o) miss(`${where}: the point “${ref}” — no element “${id}” in the scene “${folder}”`);
+  else if (o.person) { if (!BODY.includes(name)) miss(`${where}: the point “${ref}” — a mark on a person stands on one of their points (${BODY.join(', ')})`); }
   else if (name && !new RegExp(`['"\`]${name}['"\`]`).test(s.code(id))) miss(`${where}: the point “${ref}” — the element's code names no “${name}”`);
 }
 

@@ -42,7 +42,7 @@ export default {
       await g.plate(tr('One of them has stood up — barefoot, her hands red. Close, her face:'));
       await g.say('sara', 'Mister, take me away. Just as far as the river. I can do anything');
       await g.plate(tr('He can’t take her now, and it shows: a sister is near, it is broad day, she is barefoot.'));
-      const chapel = await g.choose('chapel', { sara: [
+      const chapel = await g.choose('chapel', { 'sara#chest': [
         { id: 'leave', label: tr('Say he has the wrong door, and go') },
         { id: 'toffee', label: tr('Whisper his name, and set a bag of toffees on her bucket') },
         { id: 'aloud', label: tr('Ask the sister aloud: “Why are they on their knees in this cold?”') },
