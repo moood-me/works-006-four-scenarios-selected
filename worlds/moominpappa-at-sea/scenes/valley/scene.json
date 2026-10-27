@@ -1461,6 +1461,22 @@
         "distance": "my_d"
       },
       "shadow": true
+    },
+    {
+      "id": "groke",
+      "across": -10.6,
+      "distance": 36,
+      "name": "The Groke",
+      "person": {
+        "cast": "cast",
+        "who": "groke",
+        "does": "hands_behind"
+      },
+      "place": {
+        "across": "groke_a",
+        "distance": "groke_d"
+      },
+      "shadow": true
     }
   ],
   "state": {

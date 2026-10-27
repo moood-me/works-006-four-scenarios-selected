@@ -191,8 +191,8 @@ objects = [
 ]
 # where they stand as the scene opens (the garden's set-up, lib.js SETUPS.garden — the script puts the set-up `where` names)
 for who, does, a, d in [('papa', 'hands_behind', 1.5, 8.6), ('mama', 'hands_behind', 6.2, 14.55), ('troll', 'sit_look', -3.45, 10.2),
-                        ('my', 'sit_look', -3.35, 11.5)]:
-    objects.append({'id': who, 'across': a, 'distance': d, 'name': {'papa': 'Moominpappa', 'mama': 'Moominmamma', 'troll': 'Moomintroll', 'my': 'Little My'}[who],
+                        ('my', 'sit_look', -3.35, 11.5), ('groke', 'hands_behind', GROKE[0], GROKE[1])]:
+    objects.append({'id': who, 'across': a, 'distance': d, 'name': {'papa': 'Moominpappa', 'mama': 'Moominmamma', 'troll': 'Moomintroll', 'my': 'Little My', 'groke': 'The Groke'}[who],
                     'person': {'cast': 'cast', 'who': who, 'does': does}, 'place': {'across': f'{who}_a', 'distance': f'{who}_d'},
                     'shadow': True})
 

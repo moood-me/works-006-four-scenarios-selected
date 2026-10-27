@@ -22,7 +22,9 @@ Mountains. The warm side of the island's hand: soft late-summer green and ochre,
   looks, motions; the camera; `jam` and `luggage`): `garden` (П.1–П.3: Mama at the stove on the veranda, the children
   sitting by the stream, Papa by the apple tree), `map` (П.4: Papa at the table under the lamp), `supper` (П.5: the
   four at the table; «to Mama» — the game has only Papa and Mama here), `jetty` (П.5 morning, П.6: by the boat, the
-  luggage on the jetty, My on the post by the bow). The game says who is here (`<id>_here`) and their moods.
+  luggage on the jetty, My on the post by the bow). In every set-up the Groke stands far off on the beach
+  (`lib.GROKE`), looking at the lit window (at the jetty — at the bow lantern). The game says who is here
+  (`<id>_here`) and their moods.
 - **The little fire** — `moss` (`green` · `smoulder` · `burnt`) and `smoke` (М1: grey smoke to white steam); the
   emitters and the ember read `smoke_grey`, `smoke_white`, which the script works out (not set from outside).
 - **The Groke's frost** — `frost`: 0…0.4 the rime round where she stands on the beach (`lib.GROKE`) widens — the sand
@@ -31,9 +33,7 @@ Mountains. The warm side of the island's hand: soft late-summer green and ochre,
 - **Inserts** — `chart` (Papa's chart on the table at night, the module `chart`; point `chart#island`) and `basket`
   (the basket from above: hat, notebook, sweater, the jam jar under its edge; `candles` "basket" — the candles across
   it, "shelf" — on the shelf by the door; `paints` — the box of paints on top).
-- **Stage 4**: people stand, sit and breathe (`hands_behind`, `seated`, `sit_look`); no motions, no beats yet. The
-  Groke is not in the scene yet: she comes into the cast from the package «Берег» (В3), then she is placed at
-  `lib.GROKE` in every set-up.
+- **Stage 4**: people stand, sit and breathe (`hands_behind`, `seated`, `sit_look`); no motions, no beats yet.
 - `tools/valley.py` writes `scene.json` (the trees on the hills seeded; the heights from the land). Change the land
   or the house's profile in both and run it.
 - The showcase: the evening coming, the fire and the ladle's steam, the Groke's rime, night at the chart, the supper,
@@ -59,7 +59,7 @@ Mountains. The warm side of the island's hand: soft late-summer green and ochre,
 
 ```json
 {"beats": {},
- "points": ["papa", "mama", "troll", "my", "apple#moss", "moss#fire", "chart#island", "boat#lantern", "stove#pan", "table",
+ "points": ["papa", "mama", "troll", "my", "groke", "apple#moss", "moss#fire", "chart#island", "boat#lantern", "stove#pan", "table",
   "luggage", "boat", "window_lit"],
  "offers": ["apple#moss", "chart#island", "boat#lantern"],
  "party": {"where": "garden", "dawn": 0, "dusk": 0, "night": 0, "moon": 0.2, "lamps": 0, "moss": "green", "smoke": 0, "frost": 0,
