@@ -2,6 +2,7 @@
 // (`net`); the people at their places (`<id>_at`: lib.PLACES, put by the island's `places`).
 const L = scene.lib;
 scene.kit.island.lightning(scene);
+scene.kit.island.beam(scene);
 function net() {
   scene.set('fisher_with', (scene.get('net') ?? 'dry') === 'folded' ? [] : null);
 }

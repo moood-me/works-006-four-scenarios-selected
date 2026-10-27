@@ -9,7 +9,7 @@ import json, math, os, shutil
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 # the common keys: where they start (the empty play: the day, a waxing moon, calm, the lighthouse dark) and what they are
-STATE = {"dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "calm": 0, "flash": 0, "lighthouse_lit": 0}
+STATE = {"dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "calm": 0, "flash": 0, "lighthouse_lit": 0, "beam": 0, "beam_turn": 0}
 STATES = {
     "dawn": {"range": [0, 1], "smooth": True, "means": "the dawn's light and sky (0 — the day)"},
     "dusk": {"range": [0, 1], "smooth": True, "means": "the dusk's light and sky, the afterglow (0 — the day); may move before the eyes"},
@@ -18,7 +18,9 @@ STATES = {
     "storm": {"range": [0, 1], "smooth": True, "means": "the storm: grey light and sky, its clouds, many quick crests, rain, wind; over a half — lightning now and then"},
     "calm": {"range": [0, 1], "smooth": True, "means": "the sea calm: few crests, slow (a still night)"},
     "flash": {"range": [0, 1], "smooth": True, "means": "lightning: the sky and everything lit white a moment (the storm's script and the game's moments)"},
-    "lighthouse_lit": {"range": [0, 1], "smooth": True, "means": "the lighthouse's lamp burns: the lantern's glass warm, its light and glow (no beam)"},
+    "lighthouse_lit": {"range": [0, 1], "smooth": True, "means": "the lighthouse's lamp burns: the lantern's glass warm, its light and glow"},
+    "beam": {"range": [0, 1], "smooth": True, "means": "the lighthouse's beam: 0 none … 1 full; while on, the island's script turns it (seen in the air by night, at dusk, in a storm)"},
+    "beam_turn": {"type": "number", "means": "the beam's bearing, degrees (the island's script turns it on and on while beam is on)"},
 }
 
 # the day: the base light (as the cape's late afternoon was approved)
@@ -50,7 +52,8 @@ def light(wind):
 
 def lights(sun, sun_dawn, sun_dusk, bolt, lantern=True):
     """The far lights: the sun by day, at dawn and at dusk ([bearing, height] each — the scene's own), the moon (from
-    the sky's moon), the lightning (from where its bolt is), and the lighthouse's lantern (when the lighthouse is seen)."""
+    the sky's moon), the lightning (from where its bolt is); and, when the lighthouse is seen, its lantern and its beam
+    (a cone from the lantern, turned by `beam_turn`, on by `beam` — the scene's script calls island.beam)."""
     out = [
         {"id": "sun", "from": sun[0], "color": sun[1], "strength": sun[2]},
         {"id": "sun_dawn", "from": sun_dawn[0], "color": sun_dawn[1], "strength": sun_dawn[2], "on": "dawn"},
@@ -60,6 +63,8 @@ def lights(sun, sun_dawn, sun_dusk, bolt, lantern=True):
     ]
     if lantern:
         out.append({"id": "lantern", "of": "lighthouse#lantern", "on": "lighthouse_lit", "color": "#ffd27e", "strength": 2.5, "reach": 40})
+        out.append({"id": "beam", "of": "lighthouse#beam", "on": "beam", "color": "#fff1c8", "strength": 6, "reach": 600,
+                    "cone": {"bearing": 0, "height": -1, "width": 10, "soft": 0.35}, "place": {"bearing": "beam_turn"}})
     return out
 
 

@@ -29,8 +29,8 @@ breathe; no motions, no camera, no showcase yet).
   `bundles` (slab — the bundle Mama sits on, her bag, the can; steps — three bundles on the lighthouse steps, one wet;
   none).
 - The storm: the island's look, sky and sea; rain (`rain`) and spray on the cove's rocks (`spray`) by `storm`;
-  lightning by the island's script. No lighthouse beam: the engine has no turning spotlight yet — the lantern's own
-  light and glow are `lighthouse_lit`.
+  lightning by the island's script. The lighthouse's beam — `beam` (on), turned by the island's script (`beam_turn`);
+  the lantern's own light and glow are `lighthouse_lit`.
 - The boulder is a form (Moomintroll sits on it); the bundle is a card now (it goes away with the luggage).
 - People: the world's cast — papa, mama, troll, my, fisher (the Fisherman is not here at the start). Their places are
   near the camera where the story allows (the cleft is in the slab before the family, Little My's rock is on the slab);
@@ -39,5 +39,5 @@ breathe; no motions, no camera, no showcase yet).
 ## Contract for the check
 
 ```json
-{"beats": {}, "points": ["lighthouse#door", "lighthouse#lantern", "door#door", "arrow_stone#stone", "granite#cleft", "boat#boat", "boat#mooring", "boat#lantern", "rock#edge", "sky#moon", "cape#point", "pines#crown", "papa", "mama", "troll", "my", "fisher"], "offers": ["papa", "mama", "troll", "my", "fisher", "lighthouse#door", "door#door", "arrow_stone#stone", "granite#cleft", "boat", "boat#mooring", "rock#edge"], "party": {"dawn": 1, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "lighthouse_lit": 0, "pines": 0, "frost_step": false, "frost_patch": false, "boat": "moored", "cleft": "empty", "driftwood": false, "bundles": "slab", "papa_at": "slab", "mama_at": "slab", "troll_at": "boulder", "my_at": "stone", "fisher_at": "away"}, "acts": {"door": {"values": [], "tells": []}, "boat_up": {"values": [], "tells": []}, "flash": {"values": [], "tells": []}}}
+{"beats": {}, "points": ["lighthouse#door", "lighthouse#lantern", "door#door", "arrow_stone#stone", "granite#cleft", "boat#boat", "boat#mooring", "boat#lantern", "rock#edge", "sky#moon", "cape#point", "pines#crown", "papa", "mama", "troll", "my", "fisher"], "offers": ["papa", "mama", "troll", "my", "fisher", "lighthouse#door", "door#door", "arrow_stone#stone", "granite#cleft", "boat", "boat#mooring", "rock#edge"], "party": {"dawn": 1, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "lighthouse_lit": 0, "pines": 0, "frost_step": false, "frost_patch": false, "boat": "moored", "cleft": "empty", "driftwood": false, "bundles": "slab", "papa_at": "slab", "mama_at": "slab", "troll_at": "boulder", "my_at": "stone", "fisher_at": "away", "beam": 0}, "acts": {"door": {"values": [], "tells": []}, "boat_up": {"values": [], "tells": []}, "flash": {"values": [], "tells": []}}}
 ```

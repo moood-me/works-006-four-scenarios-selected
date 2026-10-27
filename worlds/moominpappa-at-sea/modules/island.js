@@ -59,7 +59,8 @@ const DOOR = { half: 0.5, sill: 0.42, top: 2.25 };
 // painting is the tower unrolled: the way round (its front in the middle) by the profile's length, top down. The
 // lantern's glass is dark, or warm when the lamp burns (`lighthouse_lit` over a half: the scene repaints it on that
 // key alone — "redraw"); its flame is the e.light "lantern" (the scene's light `lantern` takes it, on
-// `lighthouse_lit`). `opts.doorway`: the door is a card of its own (door(g, e)) — the tower shows the dark doorway
+// `lighthouse_lit`); the beam's lamp is its e.light "beam" (the scene's light `beam`: a cone the island's script
+// turns, `beam`, `beam_turn` — its own light, so the tower casts no shadow of it). `opts.doorway`: the door is a card of its own (door(g, e)) — the tower shows the dark doorway
 // behind it.
 function lighthouse(g, e, opts = {}) {
   const P = TOWER, W = TOWER_ROUND, L = P.len, y = h => -L + P.at(h), lit = (e.state.lighthouse_lit ?? 0) > 0.5;
@@ -145,6 +146,7 @@ function lighthouse(g, e, opts = {}) {
   e.at(0, y(1.2), 'door');
   e.at(0, y(12.6), 'lantern');
   e.light(0, y(12.6), 1.1, '#ffd27e', 1.6, 'lantern');
+  e.light(0, y(12.6), 0.5, '#fff1c8', 1.2, 'beam');
   e.form(e.kit.revolve(P.profile), { closed: 'u', ground: '#f2efe9' });
 }
 
@@ -529,6 +531,21 @@ function skyMove(e) {
   e.glow('moon', night * (1 - 0.9 * storm));
 }
 
+// ── the beam ──────────────────────────────────────────────────────────
+// The lighthouse's beam turning, for a scene's script: while `beam` is on, `beam_turn` (the cone's bearing, degrees)
+// goes on round at its pace — a turn every `period` seconds (12) —; put out, it stops where it is. The light itself is
+// tools/island.py's `beam` (in lights()).
+function beam(scene, period = 12) {
+  const go = () => {
+    const at = scene.get('beam_turn') ?? 0;
+    if ((scene.get('beam') ?? 0) > 0) scene.move('beam_turn', at + 3600, { over: period * 10, ease: 'linear' });
+    else scene.set('beam_turn', at);
+  };
+  scene.on('change', 'beam', go);
+  scene.every(period * 10, go);
+  go();
+}
+
 // ── the storm ─────────────────────────────────────────────────────────
 // The storm's lightning, for a scene's script: while `storm` is over a half, now and then a flash — `flash` up at once
 // and down over a moment, sometimes twice — the more often the stronger the storm. A game's own flashes (its moments)
@@ -575,4 +592,4 @@ function places(scene, PLACES) {
   }
 }
 
-return { places, bump, ridge, shoreOf, TOWER, TOWER_ROUND, DOOR, lighthouse, door, steps, pine, granite, sea, seaMove, sky, skyMove, lightning };
+return { places, beam, bump, ridge, shoreOf, TOWER, TOWER_ROUND, DOOR, lighthouse, door, steps, pine, granite, sea, seaMove, sky, skyMove, lightning };

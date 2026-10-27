@@ -4,6 +4,7 @@
 // as it was.
 const L = scene.lib;
 scene.kit.island.lightning(scene);
+scene.kit.island.beam(scene);
 const mix = (a, b, u) => a + (b - a) * u;
 function pines() {
   const u = scene.get('pines') ?? 0;

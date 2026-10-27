@@ -12,8 +12,10 @@ shaders of the sky and the sea, moved by the state — no painting is made again
 may move before the eyes), `moon` 0…1 (the phase: a thin crescent → full; changes between steps; seen by night),
 `calm` 0…1 (the sea still: few crests, slow — a quiet night), `storm` 0…1 (grey light and sky, the storm's clouds, many quick crests, rain, wind; over a half — lightning now and
 then by `lightning`), `flash` 0…1 (lightning: a far light, the look `flash`, the bolt and the lit sky), `lighthouse_lit`
-0…1 (the lighthouse's lamp burns: its lantern's glass warm, its light `lantern` and its glow). No beam yet: the engine
-has no turning spotlight. Their defaults and `states` — `tools/island.py` `STATE`, `STATES`.
+0…1 (the lighthouse's lamp burns: its lantern's glass warm, its light `lantern` and its glow), `beam` 0…1 (the
+lighthouse's beam: a cone of light from the lantern, seen in the air where the look's `hazeGlow` is over 0 — by night,
+at dusk, in a storm) and `beam_turn` (its bearing, degrees: `beam(scene)` in the scene's script turns it on and on
+while `beam` is on, a turn in 12 s). Their defaults and `states` — `tools/island.py` `STATE`, `STATES`.
 
 ## What a scene writes (tools/island.py)
 
@@ -77,6 +79,12 @@ a turn on, is not drawn there; the sky's soft carry fills it (lighter, no stars,
 `{at: [across, distance], on, turn, do, look, reach}` (the person's `"place": {"across": "<id>_a", "distance":
 "<id>_d"}`); set at once when `<id>_at` changes, and on opening only if it differs from `<id>_placed` (so a scene
 restored goes on as it was). A scene declares `<id>_at`, `<id>_placed`, `<id>_a`, `<id>_d` in its `states`.
+
+## The beam
+
+`beam(scene, period)` — in the script of a scene with the lighthouse (and its lights from `lights()`): while `beam`
+is on, `beam_turn` goes round, a turn every `period` seconds (12); put out, it stops. The light `beam` is the
+lighthouse's own e.light `beam` (so the tower casts no shadow of it) with a cone 10° wide, a little down.
 
 ## The storm's script
 

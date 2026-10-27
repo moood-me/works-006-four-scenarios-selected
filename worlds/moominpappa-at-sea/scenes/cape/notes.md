@@ -19,7 +19,7 @@ steps (stage 4: people stand or sit and breathe; no motions, no camera, no showc
 - The rocks Papa holds on to in the storm are knobs of the land itself (`lib.HOLDS`, painted by the granite): their tops `granite#hold1…3` (the storm's minigame).
 - The storm: the island's look, sky and sea; rain, spray on the cove's rocks, and `surge` — the wave coming in over
   the rocks and under the Fisherman (a layer its animate brings in and draws back, only in a storm); lightning by the
-  island's script. No lighthouse beam (the engine has none yet).
+  island's script. The lighthouse's beam across the cove and the cape — `beam` (on), turned by the island's script.
 - People (the world's cast): `<id>_at` — fisher (seat · away), papa (beside · behind · net · under · stand), mama
   (steps · beside · apart), my (rock), troll (near); put by the island's `places` from `lib.PLACES`. Little My and
   Moomintroll are not here at the start.
@@ -28,5 +28,5 @@ steps (stage 4: people stand or sit and breathe; no motions, no camera, no showc
 ## Contract for the check
 
 ```json
-{"beats": {}, "points": ["lighthouse#door", "lighthouse#lantern", "rack#net", "net#knot", "bread#stone", "pie#pie", "granite#hold1", "granite#hold2", "granite#hold3", "seat", "sky#moon", "fisher", "papa", "mama", "my", "troll"], "offers": ["fisher", "papa", "mama", "my", "troll", "net#knot", "bread#stone", "granite#hold1", "granite#hold2", "granite#hold3", "seat"], "party": {"dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "lighthouse_lit": 0, "net": "dry", "bread": false, "pie": false, "matchbox": "none", "fisher_at": "seat", "papa_at": "beside", "mama_at": "steps", "my_at": "rock", "troll_at": "near"}, "acts": {"flash": {"values": [], "tells": []}}}
+{"beats": {}, "points": ["lighthouse#door", "lighthouse#lantern", "rack#net", "net#knot", "bread#stone", "pie#pie", "granite#hold1", "granite#hold2", "granite#hold3", "seat", "sky#moon", "fisher", "papa", "mama", "my", "troll"], "offers": ["fisher", "papa", "mama", "my", "troll", "net#knot", "bread#stone", "granite#hold1", "granite#hold2", "granite#hold3", "seat"], "party": {"dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "lighthouse_lit": 0, "net": "dry", "bread": false, "pie": false, "matchbox": "none", "fisher_at": "seat", "papa_at": "beside", "mama_at": "steps", "my_at": "rock", "troll_at": "near", "beam": 0}, "acts": {"flash": {"values": [], "tells": []}}}
 ```

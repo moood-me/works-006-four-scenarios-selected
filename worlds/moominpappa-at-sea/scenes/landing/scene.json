@@ -157,6 +157,23 @@
       "color": "#ffd27e",
       "strength": 2.5,
       "reach": 40
+    },
+    {
+      "id": "beam",
+      "of": "lighthouse#beam",
+      "on": "beam",
+      "color": "#fff1c8",
+      "strength": 6,
+      "reach": 600,
+      "cone": {
+        "bearing": 0,
+        "height": -1,
+        "width": 10,
+        "soft": 0.35
+      },
+      "place": {
+        "bearing": "beam_turn"
+      }
     }
   ],
   "modules": [
@@ -633,6 +650,8 @@
     "calm": 0,
     "flash": 0,
     "lighthouse_lit": 0,
+    "beam": 0,
+    "beam_turn": 0,
     "pines": 0,
     "door": 0,
     "frost_step": false,
@@ -777,7 +796,19 @@
         1
       ],
       "smooth": true,
-      "means": "the lighthouse's lamp burns: the lantern's glass warm, its light and glow (no beam)"
+      "means": "the lighthouse's lamp burns: the lantern's glass warm, its light and glow"
+    },
+    "beam": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lighthouse's beam: 0 none … 1 full; while on, the island's script turns it (seen in the air by night, at dusk, in a storm)"
+    },
+    "beam_turn": {
+      "type": "number",
+      "means": "the beam's bearing, degrees (the island's script turns it on and on while beam is on)"
     },
     "pines": {
       "range": [
