@@ -257,7 +257,9 @@ function myFigure(g, x, y, h) {
 // room), the table's corner (My), the floor by the keeper's wall (Papa, waiting), the window's outer ledge (My outside)
 const SEAT = {
   stool: [-1.05, 4.25, 0.45, 115], bench_l: [-0.32, 5.1, 0.44, 180], bench_r: [0.38, 5.1, 0.44, 180], corner: [0.78, 4.6, 0.72, 250],
-  wall: [...at(-37, 3.2), 0, 323], sill_out: [...at(WIN.mid, R + WIN.deep + 0.12), WIN.sill, WIN.mid + 180],
+  wall: [...at(-37, 3.2), 0, 323],
+  // (a seat's top is over the land there: outside the tower the knoll is lower than the floor)
+  sill_out: [...at(WIN.mid, R + WIN.deep + 0.12), WIN.sill - land(...at(WIN.mid, R + WIN.deep + 0.12)), WIN.mid + 180],
 };
 // standing places: [across, distance, turn]
 const SPOT = {
@@ -1127,7 +1129,7 @@ function film(scene) {
         papa.gait(null);
         await s.move("door", 0, { over: 1 });
         await moment(s, "st_go:gone", 1.5);
-        cam(s, ON("mama", "medium"));
+        cam(s, ON("mama", "close"));
         await moment(s, "st_go:after", 3);
       },
     },
@@ -1465,9 +1467,9 @@ function film(scene) {
         const papa = P(s, "papa");
         await rise(s, "papa", "bench_r");
         await walk(papa, SPOT.stair_step);
-        papa.on([...stairAt.slice(0, 2), stairAt[2] - 0.05]);
-        papa.turn(STAIR.facing + 90);
-        papa.do("seated", { loop: true });
+        papa.on(stairAt);
+        papa.turn(STAIR.facing);
+        papa.do("sit_step", { loop: true });
         await moment(s, "e_step:step", 4);
       },
     },

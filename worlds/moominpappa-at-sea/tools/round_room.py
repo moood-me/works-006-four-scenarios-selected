@@ -144,6 +144,12 @@ spec = {
              place={"facing": "door_f"}, shadow=True),
         card("basket", "Moominmamma's basket", *at(31, 3.2), [-0.28, -0.66, 0.28, 0.03], shadow=True),
         card("stone", "The boy's stone", *at(D1 + 1.5, 3.4), [-0.12, -0.12, 0.12, 0.02]),
+        # the tread under the middle one, where someone sitting on the middle step sets the feet (unseen: the stair's
+        # card paints it)
+        {"id": "stair_tread", "name": "The stair's lower tread", "plane": True, "unseen": True, "walk": True,
+         "across": r3(LANTERN["stair"][0] + 0.28 * math.sin(STAIR["facing"] * D)), "distance": r3(LANTERN["stair"][1] + 0.28 * math.cos(STAIR["facing"] * D)),
+         "elevation": r3((math.ceil(STAIR["treads"] / 2) - 1) * H / (STAIR["treads"] + 1) + 0.045), "width": 0.5, "depth": 0.5,
+         "rotation": STAIR["facing"] - 180},
         card("stair", "The stair to the hatch", *at(STAIR["theta"], STAIR["r"]), [-1.25, -3.65, 1.25, 0.03], facing=STAIR["facing"], shadow=True),
         card("shelf", "The shelf with the paraffin", *at(6, 3.48), [-0.5, -0.5, 0.5, 0.2], facing=186, elevation=1.85, shadow=True),
         card("stove", "The stove", *stove, [-0.4, -3.65, 0.8, 0.05], shadow=True),

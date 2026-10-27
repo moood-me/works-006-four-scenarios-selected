@@ -846,6 +846,19 @@
       "inside": true
     },
     {
+      "id": "stair_tread",
+      "name": "The stair's lower tread",
+      "plane": true,
+      "unseen": true,
+      "walk": true,
+      "across": -2.17,
+      "distance": 5.754,
+      "elevation": 1.588,
+      "width": 0.5,
+      "depth": 0.5,
+      "rotation": -48
+    },
+    {
       "id": "stair",
       "name": "The stair to the hatch",
       "across": -2.452,

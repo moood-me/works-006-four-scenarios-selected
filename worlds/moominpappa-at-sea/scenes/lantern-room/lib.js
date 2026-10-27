@@ -80,7 +80,7 @@ const GALLERY_WAY = [at(108, 2.3), at(108, RAIL - 0.35), at(90, RAIL - 0.35), at
 const COT_BED = [1.75, 4.3, 0.42];
 // eyes from beside: inside by the glass on the right, on Papa out on the gallery (raised over the beam's cone); by the
 // lamp's left, on whoever holds the lantern to the soot
-const EYE = { gallery: [...at(64, 1.7), 1.95], soot: [...at(12, 0.5), 1.75] };
+const EYE = { gallery: [...at(64, 1.7), 1.95], soot: [...at(30, 1.2), 1.9] };
 function film(scene) {
   // the lanterns carried lit: how much each burns (the light at its flame, `<id>_lamp`)
   const LIT = { lantern: 1, lantern_low: 0.45 }, LAMPS = { papa_lamp: 1, troll_lamp: 1 };
