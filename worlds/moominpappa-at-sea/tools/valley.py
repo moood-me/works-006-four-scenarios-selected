@@ -103,8 +103,6 @@ birches = [{'across': -6.3, 'distance': 13.5, 'scale': 1.0}, {'across': -6.9, 'd
            {'across': 13.8, 'distance': 26, 'scale': 1.1, 'flip': True}] + scatter(10, 0, 60, 40, 110, hills, 0.8, 1.2)
 
 STATES = {
-    'where': {'values': ['garden', 'map', 'supper', 'jetty'],
-              'means': 'the set-up (lib.js SETUPS), put as one cut: garden — П.1–П.3, Mama at the jam on the veranda, the children by the stream, Papa by the apple tree; map — П.4, Papa at the chart under the lamp on the veranda; supper — П.5, the four at the table on the veranda (late: Papa and Mama, the game says who is here); jetty — П.5 morning and П.6, at the jetty by the boat, the luggage on it'},
     'dawn': {'range': [0, 1], 'smooth': True, 'means': 'the morning light (a look): 0 none … 1 early morning, rose from the right'},
     'dusk': {'range': [0, 1], 'smooth': True, 'means': 'the evening light (a look): 0 none … 1 golden evening, the low sun from the left'},
     'night': {'range': [0, 1], 'smooth': True, 'means': 'the night (a look): 0 none … 1 a clear moonlit night, light enough to read faces; day is dawn, dusk and night all 0'},
@@ -120,8 +118,11 @@ STATES = {
     'chart': {'range': [0, 1], 'smooth': True, 'means': 'the insert: Papa\'s chart on the table under the lamp, close (0 closed … 1 open); its point chart#island'},
     'basket': {'range': [0, 1], 'smooth': True, 'means': 'the insert: Mama\'s basket packed, from above (0 closed … 1 open)'},
     'lantern_bow': {'range': [0, 1], 'smooth': True, 'means': 'the lantern on the boat\'s bow lit'},
-    'jam': {'range': [0, 1], 'smooth': True, 'means': 'the set-up\'s (where): the jam cooking on the veranda stove — its fire, its steam'},
-    'luggage': {'range': [0, 1], 'smooth': True, 'means': 'the set-up\'s (where): the basket, the bundle and the can waiting on the jetty'},
+    'jam': {'range': [0, 1], 'smooth': True, 'means': 'the pieces\': the jam cooking on the veranda stove — its fire, its steam'},
+    'luggage': {'range': [0, 1], 'smooth': True, 'means': 'the pieces\': the basket, the bundle and the can waiting on the jetty'},
+    'packed': {'range': [0, 5], 'means': 'the pieces\' (basket): how much is in the basket — 1 the hat, 2 the notebook, 3 the sweater, 4 the jar under it, 5 the paints on top (only with the play\'s paints)'},
+    'boat_a': {'type': 'number', 'means': 'the pieces\' (push_off): where the boat is, across (moored: −15.4)'},
+    'boat_d': {'type': 'number', 'means': 'the pieces\' (push_off): where the boat is, distance (moored: 22.85)'},
 }
 
 objects = [
@@ -174,7 +175,8 @@ objects = [
     {'id': 'posts', 'name': 'The jetty\'s posts', 'box': [-0.1, -1.25, 0.1, 0.02], 'onLand': False, 'across': -11.9, 'distance': 23.5,
      'elevation': -0.95,
      'copies': [{'across': a, 'distance': d, 'elevation': -0.95} for a, d in [(-11.9, 23.5), (-14.0, 23.5), (-16.15, 23.5), (-16.15, 24.5), (-14.0, 24.5)]]},
-    card('boat', 'The boat Adventure', -15.4, 22.85, [-2.1, -2.75, 2.0, 0.45], onLand=False, elevation=WATER, facing=180, shadow=True),
+    card('boat', 'The boat Adventure', -15.4, 22.85, [-2.1, -2.75, 2.0, 0.45], onLand=False, elevation=WATER, facing=180, shadow=True,
+         place={'across': 'boat_a', 'distance': 'boat_d'}),
     card('luggage', 'The luggage on the jetty', -13.75, 23.7, [-0.6, -0.6, 0.6, 0.03], onLand=False, elevation=-0.15, facing=180, shadow=True),
     {'id': 'tufts', 'name': 'Tall grass near', 'box': [-0.45, -0.9, 0.45, 0.05], 'across': -2.0, 'distance': 4.6,
      'copies': [{'across': a, 'distance': d, 'scale': s} for a, d, s in
@@ -189,7 +191,7 @@ objects = [
     {'id': 'chart', 'name': 'Papa\'s chart on the table, close', 'insert': 'chart'},
     {'id': 'basket', 'name': 'Mama\'s basket, packed', 'insert': 'basket', 'iris': [0.889, 0.5, 0.62, 0.44]},
 ]
-# where they stand as the scene opens (the garden's set-up, lib.js SETUPS.garden — the script puts the set-up `where` names)
+# where they stand as the scene opens (as in the piece `garden`; each piece puts them where it begins)
 for who, does, a, d in [('papa', 'hands_behind', 1.5, 8.6), ('mama', 'hands_behind', 6.2, 14.55), ('troll', 'sit_look', -3.45, 10.2),
                         ('my', 'sit_look', -3.35, 11.5), ('groke', 'hands_behind', GROKE[0], GROKE[1])]:
     objects.append({'id': who, 'across': a, 'distance': d, 'name': {'papa': 'Moominpappa', 'mama': 'Moominmamma', 'troll': 'Moomintroll', 'my': 'Little My', 'groke': 'The Groke'}[who],
@@ -225,11 +227,11 @@ spec = {
         {'id': 'bow_lantern', 'of': 'boat#lantern', 'color': '#ffcf88', 'strength': 1.0, 'reach': 4, 'on': 'lantern_bow', 'glow': 0.3,
          'flicker': 0.05},
     ],
-    'modules': ['cast', 'chart'],
+    'modules': ['cast', 'chart', 'beats'],
     'objects': objects,
-    'state': {'where': 'garden', 'dawn': 0, 'dusk': 0, 'night': 0, 'moon': 0.2, 'lamps': 0, 'moss': 'green', 'smoke': 0, 'smoke_grey': 0,
+    'state': {'dawn': 0, 'dusk': 0, 'night': 0, 'moon': 0.2, 'lamps': 0, 'moss': 'green', 'smoke': 0, 'smoke_grey': 0,
               'smoke_white': 0, 'frost': 0, 'candles': 'shelf', 'paints': False, 'chart': 0, 'basket': 0, 'lantern_bow': 0, 'jam': 1,
-              'luggage': 0},
+              'luggage': 0, 'packed': 5, 'boat_a': -15.4, 'boat_d': 22.85},
     'states': STATES,
     'music': {
         'prompts': [

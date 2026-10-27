@@ -1,15 +1,12 @@
 // The sea's mechanics.
-// - `view` puts the camera on the boat (lib.js VIEWS) as one cut: looking aft, or forward.
 // - The island stands where `island` says (lib.js ISLAND_AT): far out of sight, ahead, astern — put at once.
 // - What follows behind comes nearer with `trail`: the Groke swims at the strip's near end (her place).
-// - The lantern: on the bow lit, in the son's paws, or out (`lantern_at`) — the two lights read the shares worked out
-//   here (`lantern_bow_on`, `lantern_troll_on`).
+// - The lantern: burning on the bow, in Papa's paw, in the son's paws, or out (`lantern_at`) — the three lights read the
+//   shares worked out here (`lantern_bow_on`, `lantern_papa_on`, `lantern_troll_on`).
 // - The boat's nose off the star (`heading`) turns her; the swell (`wave` its height) lifts and drops her bow, slowly.
-// - The island's lightning (a storm over a half).
+// - The island's lightning (a storm over a half) and its beam.
+// - The pieces, as the game names them (`beat`; lib.FILM, the module beats).
 const L = scene.lib;
-function view() {
-  scene.cut(L.VIEWS[scene.get('view')] ?? L.VIEWS.aft);
-}
 function island() {
   scene.set('isle_d', L.ISLAND_AT[scene.get('island')] ?? L.ISLAND_AT.none);
 }
@@ -20,17 +17,16 @@ function trail() {
 function lantern() {
   const at = scene.get('lantern_at') ?? 'bow';
   scene.set('lantern_bow_on', at === 'bow' ? 1 : 0);
+  scene.set('lantern_papa_on', at === 'papa' ? 1 : 0);
   scene.set('lantern_troll_on', at === 'troll' ? 1 : 0);
 }
 function heading() {
   scene.set('boat_facing', 180 + 9 * Math.max(-1, Math.min(1, scene.get('heading') ?? 0)));
 }
-view();
 island();
 trail();
 lantern();
 heading();
-scene.on('change', 'view', view);
 scene.on('change', 'island', island);
 scene.on('change', 'trail', trail);
 scene.on('move', 'trail', trail);
@@ -46,3 +42,4 @@ scene.every(2.6, () => {
 });
 scene.kit.island.lightning(scene);
 scene.kit.island.beam(scene);
+scene.kit.beats.play(scene, L.FILM);
