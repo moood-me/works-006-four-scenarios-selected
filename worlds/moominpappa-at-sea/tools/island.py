@@ -44,7 +44,7 @@ def light(wind):
                   "vignette": 0.26, "lights": {"sun": 0, "sun_dawn": 0, "sun_dusk": 0}},
         "storm": {"ambient": 0.6, "ambientColor": "#bcc6d0", "haze": 0.13, "hazeColor": "#9ea9b3", "shafts": 0.1,
                   "tint": "#c4d4e4", "tintStrength": 0.08, "saturation": 0.8, "wind": [wind[0], wind[1], 2.4],
-                  "lights": {"sun": 0.25, "sun_dawn": 0.3, "sun_dusk": 0.3, "moon": 0.6}},
+                  "lights": {"sun": 0.25, "sun_dawn": 0.3, "sun_dusk": 0.3, "moon": 0.6, "beam": 0.4}},
         "flash": {"ambient": 0.9, "ambientColor": "#e6ecff", "brightness": 1.1, "saturation": 0.75},
     }
     return {**DAY, "wind": wind, "looks": looks}

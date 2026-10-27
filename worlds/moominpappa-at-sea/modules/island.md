@@ -84,7 +84,7 @@ restored goes on as it was). A scene declares `<id>_at`, `<id>_placed`, `<id>_a`
 
 `beam(scene, period)` — in the script of a scene with the lighthouse (and its lights from `lights()`): while `beam`
 is on, `beam_turn` goes round, a turn every `period` seconds (12); put out, it stops. The light `beam` is the
-lighthouse's own e.light `beam` (so the tower casts no shadow of it) with a cone 10° wide, a little down.
+lighthouse's own e.light `beam` (so the tower casts no shadow of it) with a cone 10° wide, a little down; in a storm (thick haze) it gives 0.4 of its strength, so that it is a strong beam and not a white wall.
 
 ## The storm's script
 
