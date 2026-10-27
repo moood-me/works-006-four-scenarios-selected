@@ -15,7 +15,8 @@ breathe; no motions, no camera, no showcase yet).
   - `pines` 0…1 — the three pines `pine1…3` creep from the island's back to the threshold (their place keys
     `pine<n>_a/_d`); the six `pines` copies stay.
   - `door` 0…1 — the door is a card of its own on the tower (`island.door`; the tower paints the dark doorway),
-    hung on its left jamb, opening outward toward the landing (`door_turn` = 180 + 70 · door) — against the pines.
+    hung on its right jamb as seen from outside (as the round room's door, seen from inside, on its left), opening
+    outward toward the landing (`door_turn` = 180 − 70 · door) — against the pines.
   - `boat` (moored · up · cracked · tarred · away) and `boat_up` 0…1 — moored, her bow on the rocks and her stern
     afloat, rocking (her animate); pulled up the rocks as `boat_up` grows (`boat_a/_d/_turn`); cracked — a split along
     her strakes, tarred — a black stripe of tar over it; away — not painted.

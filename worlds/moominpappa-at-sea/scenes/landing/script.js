@@ -13,7 +13,7 @@ function pines() {
   });
 }
 function door() {
-  scene.set('door_turn', 180 + L.DOOR_OPEN * (scene.get('door') ?? 0));
+  scene.set('door_turn', 180 - L.DOOR_OPEN * (scene.get('door') ?? 0));
 }
 function boat() {
   const u = (scene.get('boat') ?? 'moored') === 'moored' ? scene.get('boat_up') ?? 0 : 1, [a0, d0, t0] = L.BOAT.moored, [a1, d1, t1] = L.BOAT.up;
