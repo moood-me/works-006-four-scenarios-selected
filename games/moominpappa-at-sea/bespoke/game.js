@@ -5,8 +5,8 @@
 // docs/new-games/papa-i-more/scenario.md), each a row of steps on the world's scenes; the choices, the scales
 // (Mama's garden, the lamp's sheets, paraffin, the Groke's nights) and what is remembered carry from chapter to
 // chapter; the three hinges decide the ending (story.js facts) — the play always goes through to the epilogue.
-// Stage 4 (rpg docs/writing-games-v2/game-stages.md): the play whole on the world's own scenes, people standing; what
-// the film would show — plates with “Next”; the mini-games — stubs (minigames/stub.js).
+// Stage 5 (rpg docs/writing-games-v2/game-stages.md): the play whole on the world's own scenes, in their pieces (the
+// world's module `beats`), with its sounds (sound.js); the mini-games — stubs (minigames/stub.js) till their package.
 //   The map of the play (moood/docs/agents/games.md §2): a leaf for each chapter hung at its point over “The chart”,
 // Papa's sea chart (map.js), his course pencilled as far as the play has sailed. What can be done on it is its own
 // drawing — pressed, the language's mark opens there, born open (story.js hub.ask): the main run's pointer — “Start”, “Continue” (from the beginning of the step it stopped
@@ -28,6 +28,7 @@ import { ENDINGS, SCALES, SCENES, context, facts, listen } from './story.js';
 import { ui } from './ui.js';
 import { trees } from './map.js';
 import { jump as unseen } from './jump.js';
+import { beds, wake, unheard, pause } from './sound.js';
 import prologue from './chapters/prologue.js';
 import one from './chapters/1.js';
 import two from './chapters/2.js';
@@ -64,6 +65,7 @@ export const fresh = () => ({
 
 export default async function (b) {
   await b.css('ui.css');
+  b.onPause(pause);
   b.minigame.style({
     font: 'Georgia, "Times New Roman", serif',
     colors: { mark: '#f4ead2', fill: '#f4ead2', good: '#ffe08a', danger: '#c8553d', fork: '#c9d2e4', ghost: '#f4ead2' },
@@ -77,7 +79,7 @@ export default async function (b) {
     const k = `${as}:${n}`;
     if (!dry.has(k)) dry.set(k, (async () => {
       const came = n ? (await ran(as, n - 1)).state : fresh();
-      const j = unseen(Infinity);
+      const j = unseen(Infinity, unheard());
       const g = context(b, view, hub, { ...structuredClone(came), choices: Object.assign(Object.create(PLAYS[as].choices), came.choices) }, j);
       await Promise.race([STEPS[n](g).catch(() => {}), j.idle]);
       return { state: { ...g.state, choices: { ...g.state.choices } }, games: j.plays.map(m => m.title) };
@@ -107,6 +109,7 @@ export default async function (b) {
   for (let after = {}; ;) {
     const to = await map(after);
     after = {};
+    wake(); // (a touch: the page may be heard from now on)
     if (to === 'drop') { replay = null; continue; }
     if (to === 'keep') { await keepReplay(); if (kept.chapter === END) ended(); continue; }
     if (to === 'main' || to === 'back') replay = null;
@@ -131,7 +134,7 @@ export default async function (b) {
       if (r.step >= ch.steps.length) return 'done';
       view.gauge(r.chapter === EPILOGUE ? null : r);
       const mine = r.chapter === EPILOGUE ? { ...view, gauge() {} } : view;
-      const g = context(b, mine, hub, structuredClone(run(r)), r.play != null ? unseen(r.play) : null,
+      const g = context(b, mine, hub, structuredClone(run(r)), r.play != null ? unseen(r.play, unheard()) : null,
         { forward: r.step < (kept.seen[r.chapter] ?? 0) });
       b.at({ chapter: r.chapter, step: r.step, replay: !!replay });
       const how = await Promise.race([
@@ -182,6 +185,7 @@ export default async function (b) {
     b.hush();
     view.quiet();
     view.gauge(null);
+    beds({ clock: 0.25, crickets: 0.15 }, 2); // (the chart on the veranda's table, an August night)
     const at = replay ? replay.run.chapter : Math.min(kept.chapter, EPILOGUE);
     const route = kept.chapter > 1 ? 1 : kept.chapter === 1 ? Math.min(1, kept.step / 2) : 0;
     await b.show(SCENES.chart, { state: { shown: at, route }, captions: false });
