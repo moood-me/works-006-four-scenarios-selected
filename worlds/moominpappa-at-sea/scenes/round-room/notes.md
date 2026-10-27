@@ -133,7 +133,7 @@ The scene's film in pieces (`modules/beats`: the game sets `beat`, the scene tel
 | `shot_wall` | finales, the common frames | the wall: the garden's colours, Mama by her mark, the line of the 27th (clean or under dust) | — | the wall, held | seen |
 | `shot_table` | finales, the common frames; «Лодка» at «отвернулся» | the table: the cups, the lantern, the basket by the door if it is there (with wall_mama 1 and the table empty — Mama under the apple tree) | — | the table, held | seen |
 
-Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers by them): `can_sway` (М2б, the can's sway −1…1), `thread` (М5б, the thread to the eye 0…1), `give` (М5в, the handle let go 0…1), `wipe` (М6в, the dust wiped along the line 0…1), `eyes` (М7а, Papa's eyes open 0…1), `door_shake` (М9б, the door's blow 0…1). The piece's own key `lantern_x` (the lantern along the table in `give`) is in `states`, not the party's.
+Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers by them). A party key of the storm: `mama_to` (papa · apple — whom Mama tells «Мне хочется домой» at the door: the apple tree at Ш2 «Гуляет»). Keys: `can_sway` (М2б, the can's sway −1…1), `thread` (М5б, the thread to the eye 0…1), `give` (М5в, the handle let go 0…1), `wipe` (М6в, the dust wiped along the line 0…1), `eyes` (М7а, Papa's eyes open 0…1), `door_shake` (М9б, the door's blow 0…1). The piece's own key `lantern_x` (the lantern along the table in `give`) is in `states`, not the party's.
 
 ## Contract for the check
 
@@ -844,6 +844,7 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
   "cups": 0,
   "tea": 0,
   "door": 0,
+  "mama_to": "papa",
   "basket": false,
   "stone": false,
   "shutters": false,

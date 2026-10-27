@@ -95,8 +95,7 @@
           "sun": 0.25,
           "sun_dawn": 0.3,
           "sun_dusk": 0.3,
-          "moon": 0.6,
-          "beam": 0.4
+          "moon": 0.6
         },
         "inside": 0.65
       },
@@ -444,7 +443,8 @@
   "modules": [
     "cast",
     "island",
-    "lantern"
+    "lantern",
+    "beats"
   ],
   "objects": [
     {
@@ -1055,6 +1055,20 @@
       "inside": true
     },
     {
+      "id": "bench",
+      "name": "The bench",
+      "across": 0.03,
+      "distance": 5.15,
+      "shadow": true,
+      "box": [
+        -0.85,
+        -0.5,
+        0.85,
+        0.03
+      ],
+      "inside": true
+    },
+    {
       "id": "stool",
       "name": "Moominmamma's stool",
       "across": -1.05,
@@ -1109,6 +1123,10 @@
       },
       "across": -2.7,
       "distance": 4.6,
+      "place": {
+        "across": "papa_a",
+        "distance": "papa_d"
+      },
       "inside": true
     },
     {
@@ -1121,6 +1139,10 @@
       },
       "across": -1.05,
       "distance": 4.25,
+      "place": {
+        "across": "mama_a",
+        "distance": "mama_d"
+      },
       "inside": true
     },
     {
@@ -1131,8 +1153,12 @@
         "who": "my",
         "does": "seated"
       },
-      "across": 0.6,
-      "distance": 4.1,
+      "across": 0.78,
+      "distance": 4.6,
+      "place": {
+        "across": "my_a",
+        "distance": "my_d"
+      },
       "inside": true
     },
     {
@@ -1144,6 +1170,10 @@
       },
       "across": 1.302,
       "distance": 6.723,
+      "place": {
+        "across": "troll_a",
+        "distance": "troll_d"
+      },
       "inside": true
     }
   ],
@@ -1188,6 +1218,18 @@
     "lantern_d": 4.4,
     "lantern_e": 0.72,
     "window_open": 1,
+    "lantern_x": 0,
+    "mama_to": "papa",
+    "beat": "",
+    "beat_next": "",
+    "papa_a": -2.7,
+    "mama_a": -1.05,
+    "my_a": 0.78,
+    "troll_a": 1.302,
+    "papa_d": 4.6,
+    "mama_d": 4.25,
+    "my_d": 4.6,
+    "troll_d": 6.723,
     "papa_turn": 120,
     "papa_look": [
       0,
@@ -1208,11 +1250,11 @@
     ],
     "mama_mood": "smile",
     "my_on": [
-      0.6,
-      4.1,
+      0.78,
+      4.6,
       0.72
     ],
-    "my_turn": 230,
+    "my_turn": 250,
     "my_look": "papa",
     "my_mood": "smile",
     "troll_turn": 24,
@@ -1481,6 +1523,57 @@
         1
       ],
       "means": "the window lets the day in (0 behind the shutters) — the script sets it from shutters"
+    },
+    "lantern_x": {
+      "type": "number",
+      "means": "the lantern moved along the table from its middle, metres (the piece «Бери, бери»)"
+    },
+    "mama_to": {
+      "values": [
+        "papa",
+        "apple"
+      ],
+      "means": "whom Mama tells «I want to go home» at the door in the storm: Papa, or the painted apple tree (Ш2 «Гуляет»)"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (modules/beats)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game plays next (modules/beats: made ready ahead)"
+    },
+    "papa_a": {
+      "type": "number",
+      "means": "where papa stands, across"
+    },
+    "mama_a": {
+      "type": "number",
+      "means": "where mama stands, across"
+    },
+    "my_a": {
+      "type": "number",
+      "means": "where my stands, across"
+    },
+    "troll_a": {
+      "type": "number",
+      "means": "where troll stands, across"
+    },
+    "papa_d": {
+      "type": "number",
+      "means": "where papa stands, distance"
+    },
+    "mama_d": {
+      "type": "number",
+      "means": "where mama stands, distance"
+    },
+    "my_d": {
+      "type": "number",
+      "means": "where my stands, distance"
+    },
+    "troll_d": {
+      "type": "number",
+      "means": "where troll stands, distance"
     }
   },
   "music": {

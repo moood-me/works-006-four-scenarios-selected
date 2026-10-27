@@ -206,7 +206,8 @@
   "modules": [
     "cast",
     "island",
-    "lantern"
+    "lantern",
+    "beats"
   ],
   "objects": [
     {
@@ -627,6 +628,10 @@
       },
       "across": 0.8,
       "distance": 3.6,
+      "place": {
+        "across": "papa_a",
+        "distance": "papa_d"
+      },
       "inside": true
     },
     {
@@ -638,6 +643,10 @@
       },
       "across": -1.4,
       "distance": 4.62,
+      "place": {
+        "across": "my_a",
+        "distance": "my_d"
+      },
       "inside": true
     },
     {
@@ -649,6 +658,10 @@
       },
       "across": -1.83,
       "distance": 4.58,
+      "place": {
+        "across": "troll_a",
+        "distance": "troll_d"
+      },
       "inside": true
     }
   ],
@@ -673,6 +686,14 @@
     "lantern_at": "none",
     "lantern_flame": "full",
     "smoke": 0,
+    "beat": "",
+    "beat_next": "",
+    "papa_a": 0.8,
+    "papa_d": 3.6,
+    "my_a": -1.4,
+    "my_d": 4.62,
+    "troll_a": -1.83,
+    "troll_d": 4.58,
     "papa_turn": 205,
     "papa_look": "burner#wick",
     "papa_mood": "thinking",
@@ -832,6 +853,38 @@
         1
       ],
       "means": "the burner's soot rising — the script sets it from flame"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (modules/beats)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game plays next (modules/beats: made ready ahead)"
+    },
+    "papa_a": {
+      "type": "number",
+      "means": "where papa stands, across"
+    },
+    "papa_d": {
+      "type": "number",
+      "means": "where papa stands, distance"
+    },
+    "my_a": {
+      "type": "number",
+      "means": "where my stands, across"
+    },
+    "my_d": {
+      "type": "number",
+      "means": "where my stands, distance"
+    },
+    "troll_a": {
+      "type": "number",
+      "means": "where troll stands, across"
+    },
+    "troll_d": {
+      "type": "number",
+      "means": "where troll stands, distance"
     }
   },
   "music": {
