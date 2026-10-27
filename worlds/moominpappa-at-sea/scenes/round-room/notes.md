@@ -14,7 +14,7 @@ Stage 4 (all the states, people stand and breathe): every state is a key of the 
 - The window (`WIN`, at 24°): its cheeks (`reveal`), the deep sill (a plane), the casement; outside it the shutters
   (`shutters`, a card that paints only when shut; shadows the moon).
 - The door (`DOOR`, at 44°) is the lighthouse's own (`modules/island` `DOOR`: its arch as wide, as high over its sill):
-  its casing (`door`: points `door#door`, `door#threshold`), the leaf (`door_leaf`, hinged at its left as seen from
+  its casing (`door`: points `door#door`, `door#threshold`), the leaf (`door_leaf`: `island.door`, one drawing on both sides, hinged at its left as seen from
   the room, turned by `door_f`), the reveal through the wall (`door_reveal`, one `kit.extrude` form: up a jamb, round
   the arch, down the other), the wall about the arch (`door_top`, a flat sheet with the arch cut out), the threshold,
   and outside the top step (`porch`) and the knoll's granite.
