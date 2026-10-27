@@ -63,7 +63,7 @@ cups — the plan's `cup_cold`, as a number the steam can be), `door` 0…1, `ba
 {"beats": {},
  "points": ["wall_a#keeper", "wall_a#nobody", "wall_a#log", "wall_a#line27", "wall_a#garden", "wall_a#apple", "wall_a#gate", "wall_mama#mama", "sill#garden", "jar#jar", "shelf#paraffin", "stair#stair", "stair#hatch", "casement#window", "stove#stove", "stove#hob", "lantern#flame", "door#door", "door#threshold", "cup#cup", "basket#basket", "stone#stone", "papa", "mama", "my", "troll"],
  "offers": ["lantern#flame", "shelf#paraffin", "wall_a#keeper", "wall_a#gate", "wall_a#line27", "door#door", "door#threshold", "cup#cup", "stair#stair", "papa#chest", "mama#chest", "my#chest", "troll#chest"],
- "party": {"dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0,
+ "party": {"calm": 0, "dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0,
    "garden": -1, "paints": "green", "wall_mama": 0, "wall_grass": false, "apple_leaves": true, "clouds": false,
    "line27": "dust", "log": 0, "log_depth": false, "sill": -1, "brushes": "sill", "lantern_at": "table", "flame": "full",
    "paraffin": 3, "stove": "cold", "firewood": true, "steam": 0, "cups": 0, "tea": 0, "door": 0, "basket": false,

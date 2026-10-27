@@ -45,7 +45,7 @@ Papa on the dune.
 ```json
 {"points": ["stone#lantern", "dune#top", "groke#chest", "troll#chest", "papa#chest", "mama#chest", "lighthouse#lantern", "lighthouse#door"],
 "offers": ["stone#lantern", "dune#top", "groke#chest", "troll#chest"],
-"party": {"dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0,
+"party": {"beam": 0, "calm": 0, "dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0,
   "seahorses": "here", "groke_at": "edge", "frost": 0, "warm": 0, "track": 0, "lantern_stone": "none", "blanket": false,
   "troll_at": "near", "dune_dent": false, "groke_here": false, "troll_here": true, "papa_here": false, "mama_here": false},
 "acts": {}}

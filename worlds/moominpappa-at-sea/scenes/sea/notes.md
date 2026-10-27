@@ -59,7 +59,7 @@ lighthouse's island astern.
 {"beats": {},
  "points": ["papa", "mama", "troll", "my", "groke", "fisher", "lantern", "tiller#grip", "star", "strip", "isle#step", "lighthouse#door"],
  "offers": ["lantern", "tiller#grip", "star"],
- "party": {"view": "aft", "dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0, "lantern_at": "bow",
+ "party": {"beam": 0, "calm": 0, "view": "aft", "dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0, "lantern_at": "bow",
   "trail": 0.4, "frost_boat": 0, "island": "none", "heading": 0, "wave": 0},
  "acts": {}}
 ```

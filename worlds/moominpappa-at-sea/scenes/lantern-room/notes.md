@@ -54,7 +54,7 @@ cracked), `lantern_at` (none · floor), `lantern_flame` (full · low · out). Th
 {"beats": {},
  "points": ["burner#wick", "burner#lens", "soot#grooves", "sheets#sheet", "cot#cot", "stair#hatch", "gallery#rail", "crack#glass", "barrel#oil", "pot#pot", "lantern#flame", "papa", "my", "troll"],
  "offers": ["burner#wick", "soot#grooves", "sheets#sheet", "cot#cot", "stair#hatch", "gallery#rail", "lantern#flame", "papa#chest", "my#chest", "troll#chest"],
- "party": {"dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0,
+ "party": {"calm": 0, "dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0,
    "lenses": 0, "flame": "out", "slant": 0, "sheets": 0, "pot": false, "cot": "none", "gallery_glass": "whole",
    "lantern_at": "none", "lantern_flame": "full"},
  "acts": {}}

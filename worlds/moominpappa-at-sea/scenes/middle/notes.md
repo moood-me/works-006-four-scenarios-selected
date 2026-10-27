@@ -34,7 +34,7 @@ metre above the clearing, so the pool is seen from above enough to read as water
 ```json
 {"points": ["pool#water", "ring#stones", "ground#path", "troll#chest", "papa#chest", "mama#chest", "my#chest", "lighthouse#lantern", "lighthouse#door"],
 "offers": ["pool#water", "ring#stones", "ground#path", "troll#chest", "papa#chest"],
-"party": {"dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0,
+"party": {"beam": 0, "calm": 0, "dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0,
   "pines": 0, "ring": "none", "rope": 0, "coil": false, "troll_here": true, "papa_here": false, "mama_here": false, "my_here": false},
 "acts": {}}
 ```
