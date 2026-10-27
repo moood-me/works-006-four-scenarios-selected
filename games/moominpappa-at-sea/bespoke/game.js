@@ -5,12 +5,11 @@
 // docs/new-games/papa-i-more/scenario.md), each a row of steps on the world's scenes; the choices, the scales
 // (Mama's garden, the lamp's sheets, paraffin, the Groke's nights) and what is remembered carry from chapter to
 // chapter; the three hinges decide the ending (story.js facts) — the play always goes through to the epilogue.
-// Stage 3 (rpg docs/writing-games-v2/game-stages.md): the play whole on the world's three scenes, people standing; what
-// the film would show — plates with “Next”; the mini-games — stubs (minigames/stub.js); places not drawn yet — the
-// people in a scene of the world and a label saying where it really is.
-//   The map of the play (moood/docs/agents/games.md §2), at stage 3 a row of leaves over the landing (map.js) — the
-// world has no map's scene yet. What can be done on it is its own drawing — pressed, the language's mark opens there,
-// born open (story.js hub.ask): the main run's pointer — “Start”, “Continue” (from the beginning of the step it stopped
+// Stage 4 (rpg docs/writing-games-v2/game-stages.md): the play whole on the world's own scenes, people standing; what
+// the film would show — plates with “Next”; the mini-games — stubs (minigames/stub.js).
+//   The map of the play (moood/docs/agents/games.md §2): a leaf for each chapter hung at its point over “The chart”,
+// Papa's sea chart (map.js), his course pencilled as far as the play has sailed. What can be done on it is its own
+// drawing — pressed, the language's mark opens there, born open (story.js hub.ask): the main run's pointer — “Start”, “Continue” (from the beginning of the step it stopped
 // in); a chapter played — “Replay the chapter”; each fork the main run reached in it — “Replay from here”. The play
 // begins on the map, comes to it after each chapter, by ☰ (the step going on is left — played again from its
 // beginning), and whenever it is opened again. Its author has one more sign: his map of the chapters and their steps
@@ -175,14 +174,17 @@ export default async function (b) {
     return keep({ ...on, steps: { ...pick(kept.steps, j => j < i), [i]: steps, [i + 1]: [on] }, seen: kept.seen });
   }
 
-  // the map, over the landing at dawn. What brought the play here: a chapter played through (reveal: its rows come one
+  // the map, over the chart: the view at the chapter the play is at, the course as far as the main run has sailed (to
+  // the island in chapter I). What brought the play here: a chapter played through (reveal: its rows come one
   // by one). → what was picked: an option's id, or {jump} — the author's map
   async function map({ reveal = null }) {
     b.menu(null);
     b.hush();
     view.quiet();
     view.gauge(null);
-    await b.show(SCENES.landing, { state: { papa_here: false, mama_here: false, troll_here: false }, captions: false });
+    const at = replay ? replay.run.chapter : Math.min(kept.chapter, EPILOGUE);
+    const route = kept.chapter > 1 ? 1 : kept.chapter === 1 ? Math.min(1, kept.step / 2) : 0;
+    await b.show(SCENES.chart, { state: { shown: at, route }, captions: false });
     const drawn = trees(b, sky(), { grow: reveal, author: !!author });
     const notice = replay?.done && anew() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};
     let asked = null; // (an option that would leave the replay: asked again)

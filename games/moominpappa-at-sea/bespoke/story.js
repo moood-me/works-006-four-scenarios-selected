@@ -1,15 +1,17 @@
 // What a chapter's steps play with: context(b, view, hub, state, j, {forward}) → g. Its state is a working copy — kept
 // only once the step is done (game.js). A step left behind (the player went to the map: ☰) does nothing more and never
 // ends: whatever it still calls returns a promise that never settles.
-// Stage 3 of the game (rpg docs/writing-games-v2/game-stages.md): the whole play on the world's three scenes as they
-// are — people stand, the scenes only say who is there. What the scenario's film would show is a plate with “Next”
-// (g.plate, g.sheet); a mini-game is its stub — a mark to press and a card saying what it will be (minigames/stub.js);
-// a place the world has not got yet — the people in one of its scenes and a label saying where it really is.
+// Stage 4 of the game (rpg docs/writing-games-v2/game-stages.md): the whole play on the world's own scenes, people
+// standing; each step opens its place at its hour, with what the play has made of it (carry) and what the step shows
+// (keys). What the scenario's film would show is still a plate with “Next” (g.plate, g.sheet); a mini-game is its stub
+// — a mark to press and a card saying what it will be (minigames/stub.js).
 //   g.state — what the play carries: {scales, shown, marks, choices} (game.js); what follows from it: facts(g.state)
 //   g.signal — aborts when the step is left
-//   g.scene(folder, {here, moods, where}, {cut}) — that scene of the world, full-screen: of its people only `here`
-//     (ids) are there (`<id>_here`, the engine's key), their faces as `moods` say ({id: mood}); `where` — a label in
-//     the corner, where this really happens (none: the place is the scene's own). Always opened anew
+//   g.scene(folder, {here, moods, keys}, {cut}) — that scene of the world, full-screen: of its people only `here`
+//     (ids) are there (`<id>_here`, the engine's key), their faces as `moods` say ({id: mood}); its keys — what the
+//     play has made of the place (carry), and over them the step's own `keys` (the hour: isle() / sky(), where people
+//     are, what is shown). Always opened anew; cut — in one frame, else through the game's fade (time has passed)
+//   g.set(key, value) — a key of the shown scene changes (what happens there now)
 //   g.here(id, on) — someone of the shown scene comes or goes (in one cut); g.mood(id, mood) — their face
 //   g.wait(ms) — time of the game's own (a pause)
 //   g.say(who, text, at) — someone of the game's people (people.json) says it over `at` (default: over themselves if
@@ -37,8 +39,41 @@
 // (a dry run: game.js, check/run.mjs): then nothing of it is said, shown or heard, a plate goes by at once, and a
 // minigame gives its `skipped`.
 
-// the world's scenes the game plays, by their folders (the landing — also the map's background, game.js)
-export const SCENES = { landing: 'landing', room: 'round-room', cape: 'cape' };
+// the world's scenes the game plays, by their folders (the chart — the map's background, game.js)
+export const SCENES = { valley: 'valley', sea: 'sea', landing: 'landing', room: 'round-room', top: 'lantern-room',
+  cape: 'cape', middle: 'middle', shore: 'shore', chart: 'chart' };
+
+// The hour of a step (scenario §4: 20–27 August), as the scenes' common keys have it: the light (day — all its looks
+// 0; a look is a number, so “noon → dusk” can go on before the eyes), the moon's phase that night (full on the 25th,
+// the storm's), and on the island the sea: white crests till the storm, still on the quiet days after it.
+const LOOKS = { day: {}, dawn: { dawn: 1 }, morning: { dawn: 0.5 }, dusk: { dusk: 1 }, night: { night: 1 } };
+const MOON = { 20: 0.45, 21: 0.5, 22: 0.6, 23: 0.75, 24: 0.9, 25: 1, 26: 0.95, 27: 0.9 };
+const CALM = { 22: 0.5, 23: 0, 24: 0, 25: 0, 26: 1, 27: 0.8 };
+// sky(date, look) — the valley's; isle(date, look, storm) — a scene with the island's sea (look: a name of LOOKS, or
+// the looks themselves)
+export const sky = (date, look) => ({ dawn: 0, dusk: 0, night: 0, ...(LOOKS[look] ?? look), moon: MOON[date] });
+export const isle = (date, look, storm = 0) => ({ ...sky(date, look), storm, calm: storm ? 0 : CALM[date] });
+
+// What the play has made of a place so far, as its scene's keys (a step's own keys go over them): Mama's paints and
+// flowers (the windowsill's from 2.6, the wall's from the first night: the steps before say so themselves), the log,
+// the can, the line by the floor, the stone on the threshold; the sheets and the camp bed up top; the seaweed in the
+// cleft; the Fisherman's bread and the place Papa untangled. Only the choices made (a play the author's map goes by
+// has the rest beneath them — game.js: not made yet, nothing of them is seen).
+export function carry(folder, state) {
+  const c = { ...state.choices }, m = state.marks, s = state.scales;
+  switch (folder) {
+    case SCENES.room: return {
+      paints: c.tell === 'asked' ? 'green' : 'red_blue', garden: s.garden, sill: s.garden, wall_grass: 'wall' in c,
+      log: 1, log_depth: c.day === 'pool', paraffin: s.paraffin,
+      brushes: c.wall === 'call' ? 'jar' : 'sill', apple_leaves: c.wall !== 'call',
+      line27: c.night1 === 'son' && c.wall === 'wait' ? 'next' : m.line27 ? 'clean' : 'dust', stone: !!m.son_later,
+    };
+    case SCENES.top: return { sheets: s.lamp, cot: m.promise === 'lamp' ? 'made' : 'none' };
+    case SCENES.landing: return { cleft: c.day === 'weed' ? 'weed' : 'empty' };
+    case SCENES.cape: return { bread: c.fisher === 'invite', net: c.day === 'fisher' && c.fisher === 'sit' ? 'mended' : 'dry' };
+    default: return {};
+  }
+}
 
 // The scales (scenario §8), each with two sides: where they start, their bounds, its name in the gauge, the side the
 // player reads when they move (up: delta > 0, down: delta < 0), and the one line that says what they mean. Paraffin
@@ -162,10 +197,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
     const { shown, then } = j;
     j.seen();
     view.gauge(state);
-    if (shown) {
-      await alive(b.show(shown.folder, { state: shown.state, captions: false, then }));
-      view.where(shown.where);
-    }
+    if (shown) await alive(b.show(shown.folder, { state: shown.state, captions: false, then }));
     ahead();
   })());
   // (waiting for the player: a choice, a plate — no ⏭ meanwhile)
@@ -179,24 +211,26 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
   const g = {
     state,
     signal: left.signal,
-    async scene(folder, { here = [], moods = {}, where = null } = {}, { cut = false } = {}) {
+    async scene(folder, { here = [], moods = {}, keys = {} } = {}, { cut = false } = {}) {
       if (gone()) return never;
       const spec = await alive(unseen() ? j.real(b.specOf(folder)) : b.specOf(folder));
       people = new Set((spec.objects ?? []).filter(o => o.person).map(o => o.id));
       for (const id of here) if (!people.has(id)) throw new Error(`the scene “${folder}” has no “${id}”`);
       present = new Set(here);
-      const st = {};
+      const st = { ...carry(folder, state), ...keys };
       for (const id of people) st[`${id}_here`] = present.has(id);
       for (const [id, mood] of Object.entries(moods)) st[`${id}_mood`] = mood;
-      if (unseen()) { j.scene(folder, st, where); return; }
+      if (unseen()) { j.scene(folder, st); return; }
       showing = true;
       try {
         if (fast) await alive(land());
         hub.withdraw();
-        view.where(null);
         await alive(b.show(folder, { state: st, captions: false, fade: !cut }));
-        view.where(where);
       } finally { showing = false; }
+    },
+    set(key, value) {
+      if (gone()) return;
+      put(key, value);
     },
     here(id, on) {
       if (gone()) return;
@@ -319,7 +353,6 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       left.abort();
       hub.withdraw();
       b.hush();
-      view.where(null);
     },
   };
   if (j && j.target < Infinity) j.idle.then(seen);

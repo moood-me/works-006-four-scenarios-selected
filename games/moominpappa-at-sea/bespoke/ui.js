@@ -8,10 +8,9 @@
 //     “Next”; → once it is pressed (or Space / Enter)
 //   view.sheet(title, lines, {signal}) — the same, a list
 //   view.card(title, gesture, text) — the card of a stub mini-game, high on the right: what it will be; → takes it away
-//   view.where(text | null) — the label high on the left: where this really happens (a stand-in scene)
 //   view.hint(text) — one line low in the middle; → a function that takes it away
 //   view.title(text, {signal}) — words in the middle of the frame; → once they have gone (9 s)
-//   view.quiet() — what a chapter left showing (its slips, its hint, its label) taken away: the map comes
+//   view.quiet() — what a chapter left showing (its slips, its hint) taken away: the map comes
 //   view.author({chapters, plays: [labels], at() → {chapter, step}, games(as, chapter, step) → promise of [titles of
 //     its minigames], go(as, chapter, step, game)}) — the author's map, opened by his sign on the map (→ toggle)
 // (⏸, ⏭ and ☰ are the page's: the game draws none of them.)
@@ -29,8 +28,6 @@ const button = (text, title, onclick, cls) =>
 export function ui(layer) {
   const gauge = el('div', 'gauge', layer);
   const toasts = el('div', 'toasts', layer);
-  const label = el('p', 'where', layer);
-  label.hidden = true;
   let hinted = () => {};
   // a plate (or a sheet) waiting for “Next”: one at a time
   function plate(fill, { signal } = {}) {
@@ -89,10 +86,6 @@ export function ui(layer) {
       el('p', 'stub', c).textContent = tr('A mini-game to be: for now, press the mark.');
       return () => c.remove();
     },
-    where(text) {
-      label.hidden = !text;
-      label.textContent = text ?? '';
-    },
     hint(text) {
       hinted();
       const h = el('p', 'hint', layer);
@@ -113,7 +106,6 @@ export function ui(layer) {
     quiet() {
       toasts.replaceChildren();
       hinted();
-      label.hidden = true;
     },
     author({ chapters, plays, at, games, go }) {
       // the map (his sign on the map opens it): “play as…”, then every chapter a column of its steps (and their
