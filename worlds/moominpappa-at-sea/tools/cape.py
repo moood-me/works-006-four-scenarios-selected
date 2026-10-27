@@ -69,6 +69,7 @@ objects = [
     {"id": "spray", "name": "Spray on the cape's rocks", "across": 1.6, "distance": 8.4,
      "particles": {"kind": "splashes", "source": [4, 1.2, 0], "rate": 16, "amount": "storm"}},
     island.RAIN,
+    {"id": "knot", "name": "The knot close", "insert": "knot_open"},
     person("fisher", "The Fisherman", "seated"),
     person("papa", "Moominpappa", "sit_look"),
     person("mama", "Moominmamma", "seated"),
@@ -78,7 +79,7 @@ objects = [
 
 PEOPLE = list(START)
 state = {**island.STATE,
-         "net": "dry", "bread": False, "pie": False, "matchbox": "none", "fisher_mark": "keeper", "cross": 0, "carry": 0, "knot": 0, "knot_open": 0, "papa_lantern": 0, "beat": None, "beat_next": None,
+         "net": "dry", "bread": False, "pie": False, "matchbox": "none", "fisher_mark": "keeper", "cross": 0, "carry": 0, "knot": 0, "knot_open": 0, "knot_paws": 1, "papa_lantern": 0, "beat": None, "beat_next": None,
          "my_here": False, "troll_here": False,
          **{f"{id}_at": START[id] for id in PEOPLE}, **{f"{id}_placed": "" for id in PEOPLE},
          "fisher_mood": "neutral", "papa_mood": "thinking", "mama_mood": "tired", "my_mood": "smile", "troll_mood": "thinking"}
@@ -100,6 +101,7 @@ states = {
     "carry": {"range": [0, 1], "smooth": True, "means": "the carry minigame: how far Papa has come over the stones with the pie or the bread"},
     "knot": {"range": [0, 1], "smooth": True, "means": "the knot minigame: the thread drawn out of the knot (the close-up knot's pull)"},
     "knot_open": {"range": [0, 1], "smooth": True, "means": "the close-up of the knot open (the people package's closeups shot knot)"},
+    "knot_paws": {"range": [0, 1], "means": "the knot close: Papa's paws at the knot (1), or the net alone on the Fisherman's knees (0)"},
     "papa_lantern": {"range": [0, 1], "smooth": True, "means": "the lantern in Papa's paw lit (its light at papa#flame)"},
     "beat": {"type": "string", "means": "the piece playing (the module beats; the game names it)"},
     "beat_next": {"type": "string", "means": "the piece the game goes to next (its cut made ready)"},
@@ -124,7 +126,7 @@ spec = {
     "camera": {"mode": "picture"},
     "light": island.light(WIND),
     "lights": island.lights(([-115, 16], "#ffd6a0", 1.5), ([140, 12], "#ffe0c2", 1.35), [-80, 4], [10, 25]) + [island.hand_lantern("papa")],
-    "modules": ["cast", "island", "beats"],
+    "modules": ["cast", "island", "beats", "closeups"],
     "objects": objects,
     "state": state,
     "states": states,
