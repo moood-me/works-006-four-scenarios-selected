@@ -39,44 +39,6 @@ creeps the pines and turns Papa under the armful by `sway`; `showcase.js` plays 
 Seconds are estimates. Motions and parts are the cast's (package Л): the `rope` with its weight in the hands, the
 `armful`; `crouch`, `put_down` (a stone), `pull_rope`, `carry` (the armful high).
 
-- `ring` (2.3, day, ≈ 8 s): the son crouched at the far side of his clearing, laying the last stones of the ring one by
-  one (`ring` set, `ring_n` 4 → 9) — `ring:set` (his line, ≈ 2.5 s in); he stands up; My on the granite on the left, busy
-  with her own (as `my_here` says). Ends with him standing over the ring.
-- `sound_ready` (2.4 «Омут», day, ≈ 10 s): Papa comes to the rock with the rope and its weight, ties it to the rock and
-  stands at the pool's lip holding it — `sound_ready:ready` (the pose for «Лот»: `pool#water` in the middle 4:3). The
-  minigame moves `rope`.
-- `sound_after` (after `sound_ready`, ≈ 12 s): all the rope is out (`rope` 1) and there is no bottom: Papa looks into
-  the pool (surprised, then smiling) — `sound_after:look`; behind his back the pines creep toward the lighthouse
-  (`pines` + 0.4 over ≈ 6 s) — `sound_after:pines`.
-- `armful_in` (2.4 «Водоросли», day, ≈ 6 s): Papa comes down the path with the armful above his head, not seeing his
-  feet; the son at the clearing's edge — `armful_in:ready` (the pose for «Охапка»). The minigame moves `sway`; he walks
-  on toward the ring as it plays.
-  While it plays he walks on toward the ring as far as `armful_way` (0…1, the minigame's way) says, at the armful's
-  gait; `sway` turns him under it; leaned over to the edge (|sway| ≥ 0.92) weed slides off the armful (`spill`, a
-  burst of it falling to the moss).
-- `armful_through` (after `armful_in`, ≈ 10 s): he walks straight through the ring and knocks it apart (`ring` →
-  broken) — `armful_through:kick`; goes on and off to the right toward the landing; the son looks at his back —
-  `armful_through:gone`.
-- `regather` (after `armful_through`, ≈ 14 s): the son sets the stones back one by one (`ring` set, `ring_n` 0 → 9) —
-  `regather:done`.
-- `rope_shot` (common shots, «Омут», ≈ 4 s): the rock at the pool with the coiled rope (`coil`) — `rope_shot:held`.
-- `ring_shot` (common shots, «Сын: потом», ≈ 4 s): the ring in the clearing one stone short (`ring` one_missing) —
-  `ring_shot:held`.
-
-New keys for these (stage 5): `ring_n` 0…9 — how many stones of a set ring are there while it is laid (each stone a
-layer of `ring`, shown by it: no painting again); the acts `sway` and `armful_way` (0…1: how far along his way to the ring he has carried it — the minigame moves it);
-`spill` (the scene's own).
-
-## Pieces (stage 5: `lib.js` FILM, played by `beat` through the world's `beats`; the game says the lines at the moments)
-
-How they are made: `lib.js` `film(scene)` — as the shore's (`from` by `AT`, `run` a sequence, the camera the scene's
-own moved nearer, `NEAR`/`dolly`). The ring's stones are layers of `ring` at their own depths, each in its place and
-kicked apart, shown by `ring` and `ring_n` — laid one by one with no painting again. `script.js` plays the pieces,
-creeps the pines and turns Papa under the armful by `sway`; `showcase.js` plays them all, each in its play's keys.
-
-Seconds are estimates. Motions and parts are the cast's (package Л): the `rope` with its weight in the hands, the
-`armful`; `crouch`, `put_down` (a stone), `pull_rope`, `carry` (the armful high).
-
 - `day` (2.4, the afternoon, ≈ 8 s): Papa comes up into the hollow and looks round — the pool, the pines, the paths
   down to the shore and to the cape; ends with him standing in the middle 4:3 (`papa#chest`): the pose for the choice
   «День Папы» — `day:look`.
@@ -105,8 +67,8 @@ Seconds are estimates. Motions and parts are the cast's (package Л): the `rope`
   `ring_shot:held`.
 
 New keys for these (stage 5): `ring_n` 0…9 — how many stones of a set ring are there while it is laid (each stone a
-layer of `ring`, shown by it: no painting again); the acts `sway` and `armful_way` (0…1: how far along his way to the ring he has carried it — the minigame moves it);
-`spill` (the scene's own).
+layer of `ring`, shown by it: no painting again); the acts `sway` and `armful_way` (0…1: how far along his way to
+the ring he has carried it — the minigame moves it); `spill` (the scene's own).
 
 ## Contract for the check
 
