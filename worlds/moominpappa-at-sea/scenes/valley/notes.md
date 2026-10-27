@@ -21,7 +21,7 @@ Mountains. The warm side of the island's hand: soft late-summer green and ochre,
 - **Pieces** (`lib.js` `FILM`, played by the module `beats` from `script.js`; the showcase plays them all in order
   with their play's keys, `SHOWFILM`). Each piece's `from` puts its people (`PLACES`: where, seat, turn, motion,
   look), the camera, and what of the place goes with it (`jam`, `lamps`, `luggage`, `lantern_bow`, the boat, the
-  inserts); the hour, the moon and `paints` are the play's. Where the operator cannot frame (the veranda's chairs and
+  inserts); the lantern on the boat's bow is the world's (`boat_lantern`, `lantern` with its `bracket`); the hour, the moon and `paints` are the play's. Where the operator cannot frame (the veranda's chairs and
   the house round the table, the jetty seen from the beach) the shots are placed by hand (`SHOTS`). Motions and parts
   are the cast's names (`stroll`, `stir`, `seated`, `sit_look`, `carry_walk`, `put_down`, `glide`; `ladle`, `spoon`,
   `bundle`, `basket`). The Groke stands far off on the beach (`lib.GROKE`), looking at the lit window.
@@ -53,7 +53,7 @@ Mountains. The warm side of the island's hand: soft late-summer green and ochre,
 | `chart`, `basket` | 0…1 inserts | 0 |
 | `lantern_bow` | 0…1 | 0 |
 
-## Pieces (stage 5 — the contract; no code yet)
+## Pieces (stage 5 — the contract; the code in lib.js FILM)
 
 The scene's film in beats (`modules/beats`: the key `beat`, `beat_next`; `beat:<name>` told as a beat ends). Each
 piece begins from its own values (`from`: the light, who is where, the camera) unless it comes `after` the one named.
@@ -132,7 +132,7 @@ everyone.
   "basket": {"after": [], "tells": ["basket:candles", "basket:jam", "basket:paints"], "seconds": 12, "show": false},
   "push_off": {"after": [], "tells": ["push_off:lantern", "push_off:away", "push_off:groke"], "seconds": 18, "show": false}
  },
- "points": ["papa", "mama", "troll", "my", "groke", "apple#moss", "moss#fire", "chart#island", "boat#lantern", "stove#pan", "table",
+ "points": ["papa", "mama", "troll", "my", "groke", "apple#moss", "moss#fire", "chart#island", "boat_lantern#flame", "stove#pan", "table",
   "luggage", "boat", "window_lit"],
  "offers": ["apple#moss", "chart#island"],
  "party": {"moon": 0.2, "paints": false},

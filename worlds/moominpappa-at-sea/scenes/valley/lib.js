@@ -367,7 +367,7 @@ const FILM = {
       await s.wait(3);
       for (const k of ['camera_x', 'camera_z', 'camera_yaw']) s.move(k, SHOTS.shore[k], { over: 4, ease: 'inOut' });
       const groke = s.person('groke');
-      groke.look('boat#lantern');
+      groke.look('boat_lantern#flame');
       s.set('groke_gait', 'glide');
       s.move('frost', 1, { over: 6 });
       await groke.walk([GROKE_WATER]);

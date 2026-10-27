@@ -141,7 +141,7 @@
     },
     {
       "id": "bow_lantern",
-      "of": "boat#lantern",
+      "of": "boat_lantern#flame",
       "color": "#ffcf88",
       "strength": 1.0,
       "reach": 4,
@@ -153,7 +153,8 @@
   "modules": [
     "cast",
     "chart",
-    "beats"
+    "beats",
+    "lantern"
   ],
   "objects": [
     {
@@ -1245,6 +1246,24 @@
       ]
     },
     {
+      "id": "boat_lantern",
+      "name": "The lantern on the bow",
+      "across": 1.705,
+      "distance": -0.02,
+      "elevation": 1.08,
+      "box": [
+        -0.16,
+        -0.48,
+        0.16,
+        0.27
+      ],
+      "uniforms": {
+        "lit": 0
+      },
+      "on": "boat",
+      "facing": 180
+    },
+    {
       "id": "luggage",
       "name": "The luggage on the jetty",
       "across": -13.75,
@@ -1645,6 +1664,14 @@
       ],
       "means": "the pieces' (basket): how much is in the basket — 1 the hat, 2 the notebook, 3 the sweater, 4 the jar under it, 5 the paints on top (only with the play's paints)"
     },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (modules/beats): the game names it"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will name next (modules/beats: its cut made ready)"
+    },
     "boat_a": {
       "type": "number",
       "means": "the pieces' (push_off): where the boat is, across (moored: −15.4)"
@@ -1652,6 +1679,46 @@
     "boat_d": {
       "type": "number",
       "means": "the pieces' (push_off): where the boat is, distance (moored: 22.85)"
+    },
+    "papa_a": {
+      "type": "number",
+      "means": "the pieces': where papa stands, across (lib.js PLACES)"
+    },
+    "papa_d": {
+      "type": "number",
+      "means": "the pieces': where papa stands, distance (lib.js PLACES)"
+    },
+    "mama_a": {
+      "type": "number",
+      "means": "the pieces': where mama stands, across (lib.js PLACES)"
+    },
+    "mama_d": {
+      "type": "number",
+      "means": "the pieces': where mama stands, distance (lib.js PLACES)"
+    },
+    "troll_a": {
+      "type": "number",
+      "means": "the pieces': where troll stands, across (lib.js PLACES)"
+    },
+    "troll_d": {
+      "type": "number",
+      "means": "the pieces': where troll stands, distance (lib.js PLACES)"
+    },
+    "my_a": {
+      "type": "number",
+      "means": "the pieces': where my stands, across (lib.js PLACES)"
+    },
+    "my_d": {
+      "type": "number",
+      "means": "the pieces': where my stands, distance (lib.js PLACES)"
+    },
+    "groke_a": {
+      "type": "number",
+      "means": "the pieces': where groke stands, across (lib.js PLACES)"
+    },
+    "groke_d": {
+      "type": "number",
+      "means": "the pieces': where groke stands, distance (lib.js PLACES)"
     }
   },
   "music": {

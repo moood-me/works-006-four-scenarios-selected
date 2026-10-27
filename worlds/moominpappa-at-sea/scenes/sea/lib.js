@@ -28,8 +28,8 @@ function rib([d, w, rail, keel]) {
   const side = k.map(([x, y]) => [-w * x, rail - H * y, -d]);
   return [...side, ...side.slice(0, -1).reverse().map(([x, y, z]) => [-x, y, z])];
 }
-// where what follows behind is, by `trail` (0 — far astern … 1 — at the stern): the near end of the white strip of rime
-// on the water, and the Groke swimming in it
+// where what follows behind is, by `trail` (0 — far astern, about 50 m … 1 — at the stern; below 0 falling away out
+// of sight, −1.5 some 130 m): the near end of the white strip of rime on the water, and the Groke swimming in it
 const trailNear = t => STERN + 2 + (1 - t) * 50;
 const GROKE_ACROSS = 0.7;
 // where the island is, by `island`: far out of sight ahead in the night (none), ahead of the bow at dawn (ahead), astern
@@ -154,8 +154,8 @@ const FILM = {
       await s.wait(1);
       const wide = ready(s, VIEWS.wide);
       await cutTo(s, wide);
-      await s.move('trail', 0, { over: 8 });
-      s.set('groke_here', false);
+      // the strip and the Groke in it fall behind, far astern, out of sight in the dark
+      await s.move('trail', -1.5, { over: 9 });
       s.tell('douse:gone');
       const mama = ready(s, VIEWS.mama);
       await cutTo(s, mama);
@@ -212,7 +212,7 @@ const FILM = {
       s.tell('hold:give');
       await s.wait(1);
       // the son on the stern deck, shining it back; the Groke comes on into its light; Papa steers without it
-      const stern = ready(s, { ...VIEWS.son_stern, handle_open: 0, ...seat('troll', 'troll_stern', 0, 'seated_hold', 'groke', { troll_with: ['lantern'], troll_mood: 'afraid' }) });
+      const stern = ready(s, { ...VIEWS.son_stern, handle_open: 0, ...seat('troll', 'troll_stern', 90, 'seated_hold', 'groke', { troll_with: ['lantern'], troll_mood: 'afraid' }) });
       await cutTo(s, stern);
       const aft = ready(s, VIEWS.aft);
       await s.wait(1.5);
@@ -230,13 +230,15 @@ const FILM = {
       await s.move('paws_open', 1, { over: 0.5 });
       s.tell('hold:frost');
       await s.wait(2.5);
-      // dawn: the night goes, the island ahead; Mama wakes, throws off her blanket, and he is beside her: she rubs his paws
-      const dawn = ready(s, { ...VIEWS.fore, paws_open: 0, island: 'ahead', night: 0, dawn: 1, heading: 0,
+      // dawn: Mama wakes, throws off her blanket, and he is beside her: she rubs his paws as the night goes
+      const dawn = ready(s, { ...VIEWS.fore, paws_open: 0, island: 'ahead', heading: 0,
         ...seat('troll', 'troll_close', 180, 'seated_hold', 'mama', { troll_with: ['lantern', 'rime_paws'], troll_mood: 'sad' }),
         ...seat('mama', 'mama', 180, 'seated', 'troll', { mama_reach: { r: 'troll#hands', l: 'troll#hands' }, mama_mood: 'sad' }) });
       await s.move('paws_open', 0, { over: 0.4 });
       await cutTo(s, dawn);
-      await s.wait(2);
+      // the night goes and the dawn comes up before the eyes, the island ahead coming out of the dark
+      s.move('night', 0, { over: 6 });
+      await s.move('dawn', 1, { over: 6 });
       await s.move('paws_open', 1, { over: 0.5 });
       await s.move('paws_rub', 1, { over: 3 });
       s.tell('hold:dawn');
@@ -247,7 +249,7 @@ const FILM = {
   },
   // the finale «Лодка в долину»: going home by day, the island astern — the term, Papa's story, My, the son's look
   home: {
-    from: () => ({ ...PAPA({ papa_mood: 'smile' }), ...seat('mama', 'mama', 180, 'seated', null), ...MY(), ...seat('troll', 'troll_stern', 0, 'seated', [-25, 236, 6]),
+    from: () => ({ ...PAPA({ papa_mood: 'smile' }), ...seat('mama', 'mama', 180, 'seated', null), ...MY(), ...seat('troll', 'troll_stern', 90, 'seated', [-25, 236, 6]),
       lantern_at: 'out', trail: 0, frost_boat: 0, island: 'behind', heading: 0, groke_here: false, ...VIEWS.aft }),
     run: async s => {
       await s.wait(1);
@@ -283,7 +285,7 @@ const FILM = {
   // the finale's last shot: the dark lighthouse falls behind
   last: {
     after: 'home',
-    from: () => ({ ...PAPA(), ...seat('mama', 'mama', 180, 'seated', null), ...MY(), ...seat('troll', 'troll_stern', 0, 'seated', [-25, 236, 6]),
+    from: () => ({ ...PAPA(), ...seat('mama', 'mama', 180, 'seated', null), ...MY(), ...seat('troll', 'troll_stern', 90, 'seated', [-25, 236, 6]),
       lantern_at: 'out', trail: 0, frost_boat: 0, island: 'behind', heading: 0, groke_here: false, ...VIEWS.aft }),
     run: async s => {
       const wide = ready(s, VIEWS.wide);

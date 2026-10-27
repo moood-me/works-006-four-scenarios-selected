@@ -6,6 +6,10 @@ import json
 import math
 import os
 import random
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import lantern  # noqa: E402
 
 HERE = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'scenes', 'valley')
 
@@ -121,6 +125,8 @@ STATES = {
     'jam': {'range': [0, 1], 'smooth': True, 'means': 'the pieces\': the jam cooking on the veranda stove — its fire, its steam'},
     'luggage': {'range': [0, 1], 'smooth': True, 'means': 'the pieces\': the basket, the bundle and the can waiting on the jetty'},
     'packed': {'range': [0, 5], 'means': 'the pieces\' (basket): how much is in the basket — 1 the hat, 2 the notebook, 3 the sweater, 4 the jar under it, 5 the paints on top (only with the play\'s paints)'},
+    'beat': {'type': 'string', 'means': 'the piece playing (modules/beats): the game names it'},
+    'beat_next': {'type': 'string', 'means': 'the piece the game will name next (modules/beats: its cut made ready)'},
     'boat_a': {'type': 'number', 'means': 'the pieces\' (push_off): where the boat is, across (moored: −15.4)'},
     'boat_d': {'type': 'number', 'means': 'the pieces\' (push_off): where the boat is, distance (moored: 22.85)'},
 }
@@ -177,6 +183,7 @@ objects = [
      'copies': [{'across': a, 'distance': d, 'elevation': -0.95} for a, d in [(-11.9, 23.5), (-14.0, 23.5), (-16.15, 23.5), (-16.15, 24.5), (-14.0, 24.5)]]},
     card('boat', 'The boat Adventure', -15.4, 22.85, [-2.1, -2.75, 2.0, 0.45], onLand=False, elevation=WATER, facing=180, shadow=True,
          place={'across': 'boat_a', 'distance': 'boat_d'}),
+    lantern.element('boat_lantern', 'The lantern on the bow', 1.705, -0.02, 1.08, bracket=True, on='boat', facing=180),
     card('luggage', 'The luggage on the jetty', -13.75, 23.7, [-0.6, -0.6, 0.6, 0.03], onLand=False, elevation=-0.15, facing=180, shadow=True),
     {'id': 'tufts', 'name': 'Tall grass near', 'box': [-0.45, -0.9, 0.45, 0.05], 'across': -2.0, 'distance': 4.6,
      'copies': [{'across': a, 'distance': d, 'scale': s} for a, d, s in
@@ -197,6 +204,10 @@ for who, does, a, d in [('papa', 'hands_behind', 1.5, 8.6), ('mama', 'hands_behi
     objects.append({'id': who, 'across': a, 'distance': d, 'name': {'papa': 'Moominpappa', 'mama': 'Moominmamma', 'troll': 'Moomintroll', 'my': 'Little My', 'groke': 'The Groke'}[who],
                     'person': {'cast': 'cast', 'who': who, 'does': does}, 'place': {'across': f'{who}_a', 'distance': f'{who}_d'},
                     'shadow': True})
+
+for who in ['papa', 'mama', 'troll', 'my', 'groke']:
+    STATES[f'{who}_a'] = {'type': 'number', 'means': f"the pieces': where {who} stands, across (lib.js PLACES)"}
+    STATES[f'{who}_d'] = {'type': 'number', 'means': f"the pieces': where {who} stands, distance (lib.js PLACES)"}
 
 spec = {
     'engine': 3,
@@ -224,10 +235,10 @@ spec = {
         {'id': 'window', 'of': 'window_lit#glow', 'color': '#ffcf88', 'strength': 0.7, 'reach': 5, 'on': 'lamps'},
         {'id': 'stove_fire', 'of': 'stove#fire', 'color': '#ff9c4a', 'strength': 0.5, 'reach': 1.2, 'on': 'jam', 'flicker': 0.3},
         {'id': 'ember', 'of': 'moss#ember', 'color': '#ff8a3a', 'strength': 0.7, 'reach': 1.2, 'on': 'smoke_grey', 'flicker': 0.4},
-        {'id': 'bow_lantern', 'of': 'boat#lantern', 'color': '#ffcf88', 'strength': 1.0, 'reach': 4, 'on': 'lantern_bow', 'glow': 0.3,
+        {'id': 'bow_lantern', 'of': 'boat_lantern#flame', 'color': '#ffcf88', 'strength': 1.0, 'reach': 4, 'on': 'lantern_bow', 'glow': 0.3,
          'flicker': 0.05},
     ],
-    'modules': ['cast', 'chart', 'beats'],
+    'modules': ['cast', 'chart', 'beats', 'lantern'],
     'objects': objects,
     'state': {'dawn': 0, 'dusk': 0, 'night': 0, 'moon': 0.2, 'lamps': 0, 'moss': 'green', 'smoke': 0, 'smoke_grey': 0,
               'smoke_white': 0, 'frost': 0, 'candles': 'shelf', 'paints': False, 'chart': 0, 'basket': 0, 'lantern_bow': 0, 'jam': 1,
@@ -255,6 +266,7 @@ spec = {
         'bpm': 72, 'density': 0.3, 'brightness': 0.55, 'scale': 'D_MAJOR_B_MINOR'},
 }
 
+lantern.shader(HERE, 'boat_lantern')
 with open(os.path.join(HERE, 'scene.json'), 'w', encoding='utf-8') as f:
     f.write(json.dumps(spec, indent=2, ensure_ascii=False) + '\n')
 print('house', r3(LEN), r3(ROUND), 'trees', len(spruces), len(oaks), len(birches))

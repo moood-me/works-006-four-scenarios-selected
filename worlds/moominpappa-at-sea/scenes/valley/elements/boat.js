@@ -1,7 +1,7 @@
 // The boat «Adventure» afloat by the jetty, side-on, her bow to the left (to the sea): a clinker hull of pale weathered
-// blue with a white rail, her stub of a mast with the sail furled round it, the ship's lantern on its bracket at the
-// bow — its glass glowing warm when it is lit (`lantern_bow`: the layer lit and the light `bow_lantern`). Her anchor is
-// at the waterline; what is under the water the sea hides.
+// blue with a white rail, her stub of a mast with the sail furled round it (a layer rocking a little on the swell). The
+// lantern on her bow is the world's (`boat_lantern`, on her). Her anchor is at the waterline; what is under the water
+// the sea hides.
 e.layer('hull', { pivot: [0, 0] }, c => {
   c.fillStyle = '#7f9cb0';
   c.beginPath();
@@ -50,27 +50,5 @@ e.layer('hull', { pivot: [0, 0] }, c => {
     c.lineTo(0.19, y + 0.03);
     c.stroke();
   }
-  // the lantern at the bow: brass, its glass dark — lit, a warm layer over it and its light
-  c.fillStyle = '#3a3632';
-  c.fillRect(-1.72, -1.05, 0.04, 0.26);
-  c.fillStyle = '#a5874f';
-  c.fillRect(-1.79, -1.3, 0.17, 0.05);
-  c.fillRect(-1.79, -1.08, 0.17, 0.04);
-  c.fillStyle = '#58646c';
-  c.fillRect(-1.77, -1.25, 0.13, 0.17);
-  c.beginPath();
-  c.moveTo(-1.79, -1.3);
-  c.lineTo(-1.705, -1.38);
-  c.lineTo(-1.62, -1.3);
-  c.fillStyle = '#a5874f';
-  c.fill();
 });
-e.layer('lit', { pivot: [0, 0] }, c => {
-  c.fillStyle = '#ffd890';
-  c.fillRect(-1.77, -1.25, 0.13, 0.17);
-  c.fillStyle = '#fff4d0';
-  c.fillRect(-1.73, -1.21, 0.05, 0.09);
-  e.light(-1.705, -1.17, 0.35, '#ffcf88', 1, 'lantern');
-});
-e.at(-1.705, -1.17, 'lantern');
 e.at(0, -0.6);

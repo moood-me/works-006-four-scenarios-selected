@@ -15,7 +15,7 @@ lighthouse's island astern.
   turn her. On her: the hull (a form, `e.kit.loft` of `lib.RIBS` — her ribs from the stem to the transom), the
   transom, the floorboards, the thwarts, the stern deck (the Groke's rime creeps over it from the transom as
   `frost_boat` grows — its shader), the mast with its crosstree, the tiller (point `tiller#grip`), the lantern on its
-  bracket at the bow (point `lantern`, light `bow_lantern`), Mama's blanket. The people sit `on` her (`lib.SEATS`):
+  bracket at the bow (the world's `lantern`, `bracket`; point `lantern#flame`, light `bow_lantern`), Mama's blanket. The people sit `on` her (`lib.SEATS`):
   Papa on the stern thwart by the tiller (his paw on `tiller#grip`), Mama asleep (`doze`) on the middle thwart just
   before him, the son at its other end (pressed against her, `troll_close`; on the stern deck with the lantern,
   `troll_stern`), My on the crosstree.
@@ -51,14 +51,14 @@ lighthouse's island astern.
 | --- | --- | --- |
 | `dawn`, `dusk`, `night`, `moon`, `storm`, `flash`, `lighthouse_lit` | the island's common keys (1.1–1.3: night 1; the hold branch's dawn: dawn 1; the finale: day) | island's |
 | `lantern_at` | `bow` · `papa` · `troll` · `out` | `bow` |
-| `trail` | 0…1 | 0.4 |
+| `trail` | −1.5…1 (below 0 falling away out of sight) | 0.4 |
 | `frost_boat` | 0…1 | 0 |
 | `island` | `none` · `ahead` · `behind` | `none` |
 | `heading` | −1…1 (М2) | 0 |
 | `wave` | 0…1 (М2) | 0 |
 | `glance` | `never` · `once` · `sea` — the son's look in the finale (`home:look`) | `sea` |
 
-## Pieces (stage 5 — the contract; no code yet)
+## Pieces (stage 5 — the contract; the code in lib.js FILM)
 
 The film in beats (`modules/beats`), as the valley's. The lantern is seen where it matters: in `fore` (over the stern
 toward the bow) and in the pieces' own close shots of it (`lantern`); in `aft` it is at the frame's foot. The choice of
@@ -82,8 +82,8 @@ toward the bow) and in the pieces' own close shots of it (`lantern`); in `aft` i
   to look ahead, the eyes behind him unseen — `glance:ahead` («The eyes he does not see…»). Ends: Papa medium by the
   tiller, the lantern burning on the bow beyond him — the pose for the choice `boat` (`tiller#grip`).
 - `douse` (≈ 14 s, after `glance`): Papa reaches forward and puts the lantern out (`lantern_at` "out") — `douse:out`;
-  `aft`, wide: the boat goes on by moonlight, the strip falls behind and is gone (`trail` 0.4 → 0 over 8 s) —
-  `douse:gone`; Mama wakes in the dark and lifts her head — `douse:wake` («Where are we?» …). Ends: Mama awake, moonlit.
+  `aft`, wide: the boat goes on by moonlight, the strip and the Groke in it fall behind, far astern, out of sight in
+  the dark (`trail` 0.4 → −1.5 over 9 s) — `douse:gone`; Mama wakes in the dark and lifts her head — `douse:wake` («Where are we?» …). Ends: Mama awake, moonlit.
 - `keep` (≈ 14 s, after `glance`): Papa tucks the blanket round Mama — `keep:tuck`; `aft`: the strip comes nearer
   (`trail` 0.4 → 0.8 over 6 s) — `keep:near`; the son's face close, the eyes clear behind him, his paws on the gunwale
   shaking; Papa looks ahead — `keep:face`. Ends on the son's face.
@@ -120,7 +120,7 @@ toward the bow) and in the pieces' own close shots of it (`lantern`); in `aft` i
   "home": {"after": [], "tells": ["home:term", "home:tell", "home:my", "home:look"], "seconds": 16, "show": false},
   "last": {"after": ["home"], "tells": ["last:far"], "seconds": 8, "show": false}
  },
- "points": ["papa", "mama", "troll", "my", "groke", "lantern", "tiller#grip", "star", "strip", "lighthouse#door", "handle#troll", "paws#paws"],
+ "points": ["papa", "mama", "troll", "my", "groke", "lantern#flame", "tiller#grip", "star", "strip", "lighthouse#door", "handle#troll", "paws#paws"],
  "offers": ["tiller#grip", "star"],
  "party": {"moon": 0.6, "calm": 0, "glance": "sea"},
  "acts": {"heading": {"values": [], "tells": []}, "wave": {"values": [], "tells": []}}}

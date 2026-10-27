@@ -212,7 +212,8 @@
     "cast",
     "island",
     "beats",
-    "closeups"
+    "closeups",
+    "lantern"
   ],
   "objects": [
     {
@@ -386,17 +387,20 @@
     {
       "id": "lantern",
       "name": "The lantern on the bow",
-      "on": "boat",
       "across": 0,
       "distance": -2.05,
-      "elevation": 0.72,
-      "facing": 180,
+      "elevation": 0.8,
       "box": [
-        -0.12,
-        -0.52,
-        0.12,
-        0.16
-      ]
+        -0.16,
+        -0.48,
+        0.16,
+        0.27
+      ],
+      "uniforms": {
+        "lit": 0
+      },
+      "on": "boat",
+      "facing": 180
     },
     {
       "id": "blanket",
@@ -724,11 +728,19 @@
     },
     "trail": {
       "range": [
-        0,
+        -1.5,
         1
       ],
       "smooth": true,
-      "means": "what follows behind: 0 the strip of rime and the Groke in it far astern (about 50 m) … 1 just behind the stern"
+      "means": "what follows behind: 0 the strip of rime and the Groke in it far astern (about 50 m) … 1 just behind the stern; below 0 falling away out of sight (−1.5: some 130 m)"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (modules/beats): the game names it"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will name next (modules/beats: its cut made ready)"
     },
     "frost_boat": {
       "range": [

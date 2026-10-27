@@ -12,7 +12,7 @@ function island() {
 }
 function trail() {
   scene.set('groke_a', L.GROKE_ACROSS);
-  scene.set('groke_d', L.trailNear(Math.max(0, Math.min(1, scene.get('trail') ?? 0))));
+  scene.set('groke_d', L.trailNear(Math.max(-1.5, Math.min(1, scene.get('trail') ?? 0))));
 }
 function lantern() {
   const at = scene.get('lantern_at') ?? 'bow';

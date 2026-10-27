@@ -4,6 +4,7 @@
 import json, math, sys
 sys.path.insert(0, sys.argv[1] + '/tools')
 import island
+import lantern
 
 root = sys.argv[1]
 folder = root + '/scenes/sea'
@@ -54,7 +55,7 @@ objects = [
     on_boat('mast', 'Her mast', 0, -1.2, -0.15, [-0.7, -3.25, 0.7, 0.02], facing=180, shadow=True),
     {'id': 'tiller', 'name': 'The tiller', 'plane': True, 'on': 'boat', 'across': 0.1, 'distance': 1.95, 'elevation': 0.62,
      'width': 0.08, 'depth': 0.85},
-    on_boat('lantern', 'The lantern on the bow', 0, -2.05, 0.72, [-0.12, -0.52, 0.12, 0.16], facing=180),
+    lantern.element('lantern', 'The lantern on the bow', 0, -2.05, 0.8, bracket=True, on='boat', facing=180),
     on_boat('blanket', 'Mama\'s blanket', -0.24, 0.33, -0.05, [-0.5, -0.78, 0.5, 0.02], facing=180, shadow=True),
     {'id': 'strip', 'name': 'The strip of rime on the water', 'plane': True, 'across': 0.5, 'distance': 47.5,
      'elevation': 0.04, 'width': 7, 'depth': 90, 'uniforms': {'near': 30}, 'inFront': ['sea']},
@@ -75,7 +76,9 @@ objects.append({'id': 'groke', 'name': NAMES['groke'], 'person': {'cast': 'cast'
 STATES = dict(island.STATES)
 STATES.update({
     'lantern_at': {'values': ['bow', 'papa', 'troll', 'out'], 'means': 'the lantern: burning on its bracket at the bow; in Papa\'s paw, held out to the son; in the son\'s paws, shining back; on the bracket, put out (the pieces give whoever holds it the cast\'s part lantern)'},
-    'trail': {'range': [0, 1], 'smooth': True, 'means': 'what follows behind: 0 the strip of rime and the Groke in it far astern (about 50 m) … 1 just behind the stern'},
+    'trail': {'range': [-1.5, 1], 'smooth': True, 'means': 'what follows behind: 0 the strip of rime and the Groke in it far astern (about 50 m) … 1 just behind the stern; below 0 falling away out of sight (−1.5: some 130 m)'},
+    'beat': {'type': 'string', 'means': 'the piece playing (modules/beats): the game names it'},
+    'beat_next': {'type': 'string', 'means': 'the piece the game will name next (modules/beats: its cut made ready)'},
     'frost_boat': {'range': [0, 1], 'smooth': True, 'means': 'the rime creeping over the stern deck from the transom to the son\'s paws (1 — all of it)'},
     'island': {'values': ['none', 'ahead', 'behind'], 'means': 'where the island is: out of sight (the night crossing); ahead of the bow (dawn); astern (by day, going home)'},
     'glance': {'values': ['never', 'once', 'sea'], 'means': 'the son\'s look in the finale (home:look): never at Papa, once, or only at the sea'},
@@ -126,7 +129,7 @@ spec = {
     'camera': {'mode': 'picture', 'on': 'boat'},
     'light': island.light(WIND),
     'lights': lights,
-    'modules': ['cast', 'island', 'beats', 'closeups'],
+    'modules': ['cast', 'island', 'beats', 'closeups', 'lantern'],
     'objects': objects,
     'state': state,
     'states': STATES,
@@ -151,5 +154,6 @@ spec = {
         'bpm': 66, 'density': 0.25, 'brightness': 0.4, 'scale': 'D_MAJOR_B_MINOR'},
 }
 island.shaders(folder)
+lantern.shader(folder, 'lantern')
 json.dump(spec, open(folder + '/scene.json', 'w', encoding='utf-8', newline='\n'), ensure_ascii=False, indent=2)
 print('rib', r3(RIB), 'way', WAY)
