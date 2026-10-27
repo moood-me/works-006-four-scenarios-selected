@@ -65,7 +65,7 @@ objects = [
                 {"across": -1.8, "distance": 6.0, "scale": 1.2}, {"across": 1.9, "distance": 3.6, "scale": 0.9},
                 {"across": -6.2, "distance": 7.4, "scale": 1.3, "flip": True}, {"across": -0.2, "distance": 5.6, "scale": 0.9},
                 {"across": 3.9, "distance": 1.4, "scale": 1.1, "flip": True}]},
-    el("surge", "The storm's wave over the rocks", -0.9, 2.95, [-2.4, -0.6, 2.4, 0.6]),
+    el("surge", "The storm's wave over the rocks", -0.5, 4.4, [-2.6, -2.6, 2.6, 1.4], facing=228),
     {"id": "spray", "name": "Spray on the cape's rocks", "across": 1.6, "distance": 8.4,
      "particles": {"kind": "splashes", "source": [4, 1.2, 0], "rate": 16, "amount": "storm"}},
     island.RAIN,
@@ -80,7 +80,7 @@ objects = [
 
 PEOPLE = list(START)
 state = {**island.STATE,
-         "net": "dry", "bread": False, "pie": False, "matchbox": "none", "fisher_mark": "keeper", "cross": 0, "carry": 0, "knot": 0, "knot_open": 0, "knot_paws": 1, "knot_pull": 0, "carry_tilt": 0, "matchbox_open": 0, "matchbox_give": 0, "matchbox_close": 0, "fisher_wear": None, "papa_lantern": 0, "beat": None, "beat_next": None,
+         "net": "dry", "bread": False, "pie": False, "matchbox": "none", "fisher_mark": "keeper", "cross": 0, "carry": 0, "knot": 0, "knot_open": 0, "knot_paws": 1, "knot_pull": 0, "carry_tilt": 0, "wave": 0, "matchbox_open": 0, "matchbox_give": 0, "matchbox_close": 0, "fisher_wear": None, "papa_lantern": 0, "beat": None, "beat_next": None,
          "my_here": False, "troll_here": False,
          **{f"{id}_at": START[id] for id in PEOPLE}, **{f"{id}_placed": "" for id in PEOPLE},
          "fisher_mood": "neutral", "papa_mood": "thinking", "mama_mood": "tired", "my_mood": "smile", "troll_mood": "thinking"}
@@ -106,6 +106,7 @@ states = {
     "matchbox_give": {"range": [0, 1], "smooth": True, "means": "the matchbox close: the box from Papa's paw into the Fisherman's palm (the matches minigame)"},
     "matchbox_close": {"range": [0, 1], "smooth": True, "means": "the matchbox close: the Fisherman's fingers closing on it"},
     "knot_pull": {"range": [0, 1], "smooth": True, "means": "the knot close's thread drawn out (the script: the minigame's knot while Papa works it; 0 — the knot itself in the close-ups after)"},
+    "wave": {"range": [0, 1], "smooth": True, "means": "a storm's wave over the rocks, raised by a piece (0 none … 1 over the two sitting there, to the shoulders)"},
     "carry_tilt": {"range": [-1, 1], "smooth": True, "means": "the carry minigame: how the pie or the bread tips in Papa's paws over the stones (0 level)"},
     "knot_paws": {"range": [0, 1], "means": "the knot close: Papa's paws at the knot (1), or the net alone on the Fisherman's knees (0)"},
     "papa_lantern": {"range": [0, 1], "smooth": True, "means": "the lantern in Papa's paw lit (its light at papa#flame)"},

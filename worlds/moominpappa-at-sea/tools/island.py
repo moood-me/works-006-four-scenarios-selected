@@ -9,7 +9,7 @@ import json, math, os, shutil
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 # the common keys: where they start (the empty play: the day, a waxing moon, calm, the lighthouse dark) and what they are
-STATE = {"dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "calm": 0, "flash": 0, "lighthouse_lit": 0, "beam": 0, "beam_turn": 0}
+STATE = {"dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "calm": 0, "flash": 0, "lighthouse_lit": 0, "beam": 0, "beam_turn": 0, "beam_tilt": -1, "room_lit": 0}
 STATES = {
     "dawn": {"range": [0, 1], "smooth": True, "means": "the dawn's light and sky (0 — the day)"},
     "dusk": {"range": [0, 1], "smooth": True, "means": "the dusk's light and sky, the afterglow (0 — the day); may move before the eyes"},
@@ -21,6 +21,8 @@ STATES = {
     "lighthouse_lit": {"range": [0, 1], "smooth": True, "means": "the lighthouse's lamp burns: the lantern's glass warm, its light and glow"},
     "beam": {"range": [0, 1], "smooth": True, "means": "the lighthouse's beam: 0 none … 1 full; while on, the island's script turns it (seen in the air by night, at dusk, in a storm)"},
     "beam_turn": {"type": "number", "means": "the beam's bearing, degrees (the island's script turns it on and on while beam is on)"},
+    "room_lit": {"range": [0, 1], "means": "the round room's window on the tower lit from within (seen from outside)"},
+    "beam_tilt": {"range": [-60, 10], "smooth": True, "means": "the beam's height, degrees (−1 a little down, out to sea; a piece tilts it down onto someone «in the beam»)"},
 }
 
 # the day: the base light (as the cape's late afternoon was approved)
@@ -63,8 +65,9 @@ def lights(sun, sun_dawn, sun_dusk, bolt, lantern=True):
     ]
     if lantern:
         out.append({"id": "lantern", "of": "lighthouse#lantern", "on": "lighthouse_lit", "color": "#ffd27e", "strength": 2.5, "reach": 40})
+        out.append({"id": "window", "of": "lighthouse#window", "on": "room_lit", "color": "#ffcf86", "strength": 1.2, "reach": 10})
         out.append({"id": "beam", "of": "lighthouse#beam", "on": "beam", "color": "#fff1c8", "strength": 6, "reach": 600,
-                    "cone": {"bearing": 0, "height": -1, "width": 10, "soft": 0.35}, "place": {"bearing": "beam_turn"}})
+                    "cone": {"bearing": 0, "height": -1, "width": 10, "soft": 0.35}, "place": {"bearing": "beam_turn", "height": "beam_tilt"}})
     return out
 
 
@@ -91,7 +94,7 @@ def lighthouse(across, distance, **k):
     """The lighthouse (a form: elements/lighthouse.js calls the module's lighthouse), sunk 0.45 m so its plinth meets
     its knoll; it repaints only on lighthouse_lit (its lantern's glass)."""
     return {"id": "lighthouse", "name": "The lighthouse", "across": across, "distance": distance, "elevation": -0.45,
-            "box": [-5.03, -15.8, 5.03, 0], "shadow": True, "redraw": {"lighthouse_lit": 1}, **k}
+            "box": [-5.03, -15.8, 5.03, 0], "shadow": True, "redraw": {"lighthouse_lit": 1, "room_lit": 1}, **k}
 
 
 def hand_lantern(who):

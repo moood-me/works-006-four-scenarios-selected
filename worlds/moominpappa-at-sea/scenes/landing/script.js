@@ -30,7 +30,8 @@ function door() {
   scene.after(0.2, () => scene.move('door_turn', at(stop), { over: 0.4, ease: 'inOut' }));
 }
 function boat() {
-  const u = (scene.get('boat') ?? 'moored') === 'moored' ? scene.get('boat_up') ?? 0 : 1, [a0, d0, t0] = L.BOAT.moored, [a1, d1, t1] = L.BOAT.up;
+  // moored and tarred (mended, back in the water) she is afloat at the landing; up and cracked — up the rocks
+  const st = scene.get('boat') ?? 'moored', u = st === 'moored' ? scene.get('boat_up') ?? 0 : st === 'tarred' ? 0 : 1, [a0, d0, t0] = L.BOAT.moored, [a1, d1, t1] = L.BOAT.up;
   const o = scene.get('boat_off') ?? 0, [a2, d2, t2] = L.BOAT.off;
   scene.set('boat_a', mix(mix(a0, a1, u), a2, o));
   scene.set('boat_d', mix(mix(d0, d1, u), d2, o));

@@ -58,7 +58,8 @@ const DOOR = { half: 0.5, sill: 0.42, top: 2.25 };
 // cap; the door at its foot facing the start, two small windows up the tower, weather streaks down the whitewash. Its
 // painting is the tower unrolled: the way round (its front in the middle) by the profile's length, top down. The
 // lantern's glass is dark, or warm when the lamp burns (`lighthouse_lit` over a half: the scene repaints it on that
-// key alone — "redraw"); its flame is the e.light "lantern" (the scene's light `lantern` takes it, on
+// key alone — "redraw"); the round room's window (the lower one) warm when `room_lit` — its glow the e.light "window";
+// its flame is the e.light "lantern" (the scene's light `lantern` takes it, on
 // `lighthouse_lit`); the beam's lamp is its e.light "beam" (the scene's light `beam`: a cone the island's script
 // turns, `beam`, `beam_turn` — its own light, so the tower casts no shadow of it). `opts.doorway`: the door is a card of its own (door(g, e)) — the tower shows the dark doorway
 // behind it.
@@ -137,8 +138,9 @@ function lighthouse(g, e, opts = {}) {
     g.arc(0.3, y(1.25), 0.07, 0, Math.PI * 2);
     g.stroke();
   }
+  const roomLit = (e.state.room_lit ?? 0) > 0.5;
   for (const h of [5.2, 8.6]) {
-    g.fillStyle = '#3a434c';
+    g.fillStyle = h === 5.2 && roomLit ? '#f0cf86' : '#3a434c';
     g.fillRect(-0.22, y(h + 0.7), 0.44, 0.7);
     g.fillStyle = '#8a7e74';
     g.fillRect(-0.28, y(h) - 0.06, 0.56, 0.08);
@@ -147,6 +149,8 @@ function lighthouse(g, e, opts = {}) {
   e.at(0, y(12.6), 'lantern');
   e.light(0, y(12.6), 1.1, '#ffd27e', 1.6, 'lantern');
   e.light(0, y(12.6), 0.5, '#fff1c8', 1.2, 'beam');
+  e.at(0, y(5.55), 'window');
+  e.light(0, y(5.55), 0.5, '#ffcf86', 1.2, 'window');
   e.form(e.kit.revolve(P.profile), { closed: 'u', ground: '#f2efe9' });
 }
 
@@ -548,7 +552,8 @@ function beam(scene, period = 12) {
 
 // ── the storm ─────────────────────────────────────────────────────────
 // The storm's lightning, for a scene's script: while `storm` is over a half, now and then a flash — `flash` up at once
-// and down over a moment, sometimes twice — the more often the stronger the storm. A game's own flashes (its moments)
+// and down over a moment, sometimes twice — the more often the stronger the storm; each strike told to the game
+// (`flash:strike`: it plays the thunder). A game's own flashes (its moments)
 // set `flash` the same way.
 function lightning(scene) {
   let next = 0;
@@ -558,6 +563,7 @@ function lightning(scene) {
     next = scene.time + (3 + 7 * scene.random()) / s;
     scene.set('flash', 1);
     scene.move('flash', 0, { over: 0.5, ease: 'out' });
+    scene.tell('flash:strike');
     if (scene.random() < 0.4) {
       scene.after(0.25, () => {
         scene.set('flash', 0.8);

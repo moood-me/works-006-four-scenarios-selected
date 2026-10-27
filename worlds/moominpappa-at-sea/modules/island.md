@@ -15,7 +15,8 @@ then by `lightning`), `flash` 0…1 (lightning: a far light, the look `flash`, t
 0…1 (the lighthouse's lamp burns: its lantern's glass warm, its light `lantern` and its glow), `beam` 0…1 (the
 lighthouse's beam: a cone of light from the lantern, seen in the air where the look's `hazeGlow` is over 0 — by night,
 at dusk, in a storm) and `beam_turn` (its bearing, degrees: `beam(scene)` in the scene's script turns it on and on
-while `beam` is on, a turn in 12 s). Their defaults and `states` — `tools/island.py` `STATE`, `STATES`.
+while `beam` is on, a turn in 12 s), `room_lit` 0/1 (the round room's window on the tower lit — its light `window`), `beam_tilt` (its height, degrees: −1 — a little down, out to sea; a piece tilts it
+down onto the one «in the beam» as it passes, and back). Their defaults and `states` — `tools/island.py` `STATE`, `STATES`.
 
 ## What a scene writes (tools/island.py)
 
@@ -89,6 +90,6 @@ lighthouse's own e.light `beam` (so the tower casts no shadow of it) with a cone
 ## The storm's script
 
 `lightning(scene)` — in the scene's script: while `storm` is over a half, now and then `flash` up and down (sometimes
-twice), the more often the stronger the storm. A game's moments set `flash` the same way.
+twice), the more often the stronger the storm; each strike told (`flash:strike` — the game's thunder). A game's moments set `flash` the same way.
 
-Used by: `landing`, `cape`.
+Used by: `landing`, `cape`, `middle`, `shore`, `sea`, `valley`, `round-room`, `lantern-room`.
