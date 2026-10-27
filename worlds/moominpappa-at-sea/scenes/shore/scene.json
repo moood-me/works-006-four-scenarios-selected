@@ -160,6 +160,14 @@
       "reach": 40
     },
     {
+      "id": "window",
+      "of": "lighthouse#window",
+      "on": "room_lit",
+      "color": "#ffcf86",
+      "strength": 1.2,
+      "reach": 10
+    },
+    {
       "id": "beam",
       "of": "lighthouse#beam",
       "on": "beam",
@@ -173,7 +181,8 @@
         "soft": 0.35
       },
       "place": {
-        "bearing": "beam_turn"
+        "bearing": "beam_turn",
+        "height": "beam_tilt"
       }
     },
     {
@@ -276,7 +285,8 @@
       ],
       "shadow": true,
       "redraw": {
-        "lighthouse_lit": 1
+        "lighthouse_lit": 1,
+        "room_lit": 1
       }
     },
     {
@@ -557,6 +567,8 @@
     "lighthouse_lit": 0,
     "beam": 0,
     "beam_turn": 0,
+    "beam_tilt": -1,
+    "room_lit": 0,
     "seahorses": "here",
     "seahorses_away": 0,
     "groke_at": "edge",
@@ -669,6 +681,21 @@
     "beam_turn": {
       "type": "number",
       "means": "the beam's bearing, degrees (the island's script turns it on and on while beam is on)"
+    },
+    "room_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the round room's window on the tower lit from within (seen from outside)"
+    },
+    "beam_tilt": {
+      "range": [
+        -60,
+        10
+      ],
+      "smooth": true,
+      "means": "the beam's height, degrees (−1 a little down, out to sea; a piece tilts it down onto someone «in the beam»)"
     },
     "seahorses": {
       "values": [

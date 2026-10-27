@@ -53,6 +53,9 @@ const UP = [[7.6, 3], [6.6, 4.6], [5.6, 6.4], [5.2, 7.5]], ALONE = [-3, 5.4], PA
 // the lighthouse's lantern room (the Groke looks up to its little light): a point over the land there
 const LANTERN_ROOM = [LIGHTHOUSE[0], LIGHTHOUSE[1], 12.6];
 const seatOf = at => SEATS[at] ?? SEATS.edge;
+// the beam's tilt from the lighthouse's lantern down to the chest of one at [a, d] (degrees, `beam_tilt`; the tower
+// sunk 0.45 m into its knoll, the lantern 12.6 m up it)
+const tiltTo = (a, d) => Math.atan2(land(a, d) + 0.9 - (land(LIGHTHOUSE[0], LIGHTHOUSE[1]) - 0.45 + 12.6), Math.hypot(a - LIGHTHOUSE[0], d - LIGHTHOUSE[1])) * 180 / Math.PI;
 // in the shallows off her place, where she comes up out of the sea
 const SHALLOWS = at => { const [a, d] = seatOf(at); return [WATER - 0.9, d + 0.5]; };
 const besideOf = at => { const [a, d] = seatOf(at); return [a + BESIDE[0], d + BESIDE[1]]; };
@@ -476,10 +479,13 @@ function film(scene) {
         // (the beam's bearing from the lighthouse to the son, the one it passes: island.beam turns it, a turn in 12 s)
         const [a, d] = get('groke_here') ? besideOf(get('groke_at')) : ALONE;
         const b = turnTo(LIGHTHOUSE[0], LIGHTHOUSE[1], a, d);
+        // (tilted down onto them as it comes, and back out to sea after)
+        s.move('beam_tilt', tiltTo(a, d), { over: 2, ease: 'inOut' });
         if ((get('beam') ?? 0) > 0) await s.until(() => Math.abs((((get('beam_turn') ?? 0) - b) % 360 + 540) % 360 - 180) < 8);
         if (get('groke_here')) s.person('groke').do('reach_toward');
         s.tell('beam:pass');
         await s.wait(2.5);
+        s.move('beam_tilt', -1, { over: 2, ease: 'inOut' });
       },
     },
     // the morning sand after night 3, as the keys say
