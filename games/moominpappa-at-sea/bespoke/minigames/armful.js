@@ -20,17 +20,18 @@ export default {
   title: tr('The Armful'),
   about: 8,
   skipped: { spilt: 0 },
-  points: [],
+  points: ['papa#chest'],
   keys: ['sway', 'armful_way'],
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('Seaweed higher than his head.') });
     const send = keys(g);
-    settle(signal, () => { g.set('sway', 0, 0.6); g.set('armful_way', 1); });
+    const over = settle(signal, () => { g.set('sway', 0, 0.6); g.set('armful_way', 1); });
     send('sway', 0);
     send('armful_way', 0);
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, steer: 'rate', release: 'stay', push: 0 });
+    mg.mark({ at: 'papa#chest', kind: 'ring', quiet: true }); // (no touch of its own: what is led)
     teach(b, mg, [lead]);
-    let way = 0, spilt = 0, over = false, walked = 0;
+    let way = 0, spilt = 0, leaned = false, walked = 0;
     const done = await until(mg, ({ dt }) => {
       const s = lead.state;
       if (s.held) {
@@ -41,18 +42,19 @@ export default {
       lead.set({ push: s.held ? (k % 2 ? -1 : 1) * (PUSH + GROW * way) * Math.sin((Math.PI * into) / STEP) : 0 });
       send('sway', s.arrow);
       send('armful_way', way);
-      if (!over && Math.abs(s.arrow) >= SPILL) {
-        over = true;
+      if (!leaned && Math.abs(s.arrow) >= SPILL) {
+        leaned = true;
         spilt++;
         g.failed();
         mg.error('danger', { chip: true });
       }
-      if (over && Math.abs(s.arrow) < UPRIGHT) over = false;
+      if (leaned && Math.abs(s.arrow) < UPRIGHT) leaned = false;
       mg.plate.set({ fill: way, glow: s.in ? (s.held ? 'good' : 'idle') : 'bad' });
       return way >= 1;
     });
     if (!done) return this.skipped;
     g.set('sway', 0, 0.6);
+    over();
     await mg.end({ as: spilt ? 'flawed' : 'clean' });
     return { spilt };
   },

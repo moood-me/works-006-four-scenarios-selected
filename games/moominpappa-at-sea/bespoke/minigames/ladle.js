@@ -21,7 +21,7 @@ export default {
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('A thread of smoke out of the moss under the apple tree.') });
     const send = keys(g);
-    settle(signal, () => g.set('smoke', 1, 0.5));
+    const over = settle(signal, () => g.set('smoke', 1, 0.5));
     send('smoke', 0);
     const fire = mg.mark({ at: 'apple#moss', kind: 'groove' });
     const hold = mg.hold({ on: fire, seconds: SECONDS, drain: DRAIN });
@@ -48,6 +48,7 @@ export default {
     send('smoke', 1);
     mg.snap({ at: fire });
     g.mood('papa', 'smile');
+    over();
     await mg.end({ as: early ? 'flawed' : 'clean' });
     return { early };
   },

@@ -10,7 +10,7 @@
 //   → {}
 import { clamp, until, keys, teach, settle } from './hands.js';
 
-const PULLS = 5, TEAR = 0.12;
+const PULLS = 5, TEAR = 0.1;
 
 export default {
   title: tr('The Lead'),
@@ -21,7 +21,7 @@ export default {
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('A rope with a weight, and black water with no bottom.') });
     const send = keys(g);
-    settle(signal, () => g.set('rope', 1, 0.5));
+    const over = settle(signal, () => g.set('rope', 1, 0.5));
     send('rope', 0);
     mg.plate.set({ notches: Array.from({ length: PULLS - 1 }, (_, i) => (i + 1) / PULLS) });
     const water = mg.mark({ at: 'pool#water', kind: 'dash' });
@@ -39,6 +39,7 @@ export default {
     if (!done) return this.skipped;
     send('rope', 1);
     mg.snap({ at: water });
+    over();
     await mg.end({ as: 'clean' });
     return {};
   },

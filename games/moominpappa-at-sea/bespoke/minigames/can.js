@@ -19,14 +19,15 @@ export default {
   title: tr('The Can'),
   about: 8,
   skipped: { splashed: 0 },
-  points: [],
+  points: ['papa#chest'],
   keys: ['can_sway', 'spill'],
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('A full can, and a high threshold.') });
     const send = keys(g);
-    settle(signal, () => g.set('can_sway', 0, 0.6));
+    const over = settle(signal, () => g.set('can_sway', 0, 0.6));
     send('can_sway', 0);
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, steer: 'rate', release: 'stay', push: 0 });
+    mg.mark({ at: 'papa#chest', kind: 'ring', quiet: true }); // (no touch of its own: what is led)
     teach(b, mg, [lead]);
     let way = 0, splashed = 0, tipped = false, walked = 0;
     const done = await until(mg, ({ dt }) => {
@@ -52,6 +53,7 @@ export default {
     });
     if (!done) return this.skipped;
     g.set('can_sway', 0, 0.6);
+    over();
     await mg.end({ as: splashed ? 'flawed' : 'clean' });
     return { splashed };
   },

@@ -8,14 +8,17 @@
 //   teach(b, mg, gestures) — the ghost shows the gestures as soon as their marks are in the frame — every time, so that
 //     what the hands do is plain from the first second — and again whenever the player stands still (3 s, then every
 //     6); gone with the gestures
-//   settle(signal, fn) — fn once the minigame is over, however it ends (played through, skipped, the step left): the
-//     scene left as a minigame played through leaves it (an insert closed, a key at its end)
+//   settle(signal, fn) → over() — fn if the minigame is cut short (skipped, the step left): the scene left as a
+//     minigame played through leaves it (an insert closed, a key at its end); over() — it is played through (called
+//     just before mg.end): fn no more
 //   pace(tau) → {at(u, dt) → how fast u goes now, a second (smoothed over tau s: a frame's jump is no jerk), reset()}
 //   letGo(g, b, mg, {at, take, sign, wait, held}) — “hold, then let go” (scenario §7): a groove at `at`, held till it
 //     is full (`take` s: the paw has taken hold; let go sooner — it ebbs, and the paw takes hold again; held(u) each
-//     frame of it, early() — let go after it had begun to fill); then the sign (sign(): what the scene shows now), and
-//     the groove's arc of time runs down `wait` s (5 — the scenario's): the finger lifted — let go; the arc run out —
-//     it goes by itself, “held long”. → 'let' | 'long' | null (the mini-game ended first)
+//     frame of it, early() — let go after it had begun to fill); then the call to let go: the sign (sign(): what the
+//     scene shows — the other pulls, the rope slides — and the plate's new line, the ghost cannot show it under a
+//     finger that is down), and the groove's arc of time running down `wait` s (5 — the scenario's): the finger lifted — let go; the arc run out — it goes by itself,
+//     “held long”. Never touched for ALONE s — the same as held long (the scenario's way out by time).
+//     → 'let' | 'long' | null (the mini-game ended first)
 export const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 export const until = (mg, fn) => new Promise(ok => {
   const offs = [mg.on('frame', e => { if (fn(e)) { offs.forEach(f => f()); ok(true); } }), mg.on('end', () => { offs.forEach(f => f()); ok(false); })];
@@ -40,22 +43,32 @@ export function pace(tau = 0.25) {
     reset() { v = 0; was = null; },
   };
 }
-export const settle = (signal, fn) => signal.addEventListener('abort', fn, { once: true });
+export function settle(signal, fn) {
+  let done = false;
+  signal.addEventListener('abort', () => { if (!done) fn(); }, { once: true });
+  return () => { done = true; };
+}
 
+const ALONE = 12;
 export async function letGo(g, b, mg, { at, take = 1.2, sign = () => {}, wait = 5, held = () => {}, early = () => {} }) {
   const mark = mg.mark({ at, kind: 'groove' });
   const hold = mg.hold({ on: mark, seconds: take, drain: 0.6 });
   const taught = teach(b, mg, [hold]);
   const ebb = hold.on('up', () => { if (hold.state.fill > 0.15 && hold.state.fill < 1) early(); });
-  const took = await until(mg, () => {
+  let touched = false;
+  const touch = mg.on('down', () => { touched = true; });
+  const t00 = mg.t;
+  const took = await until(mg, ({ t }) => {
     const s = hold.state;
     held(s.fill);
     mg.plate.set({ fill: 0.5 * s.fill, glow: s.held ? 'good' : 'idle' });
-    return s.fill >= 1 && s.held;
+    return (s.fill >= 1 && s.held) || (!touched && t - t00 >= ALONE);
   });
   ebb();
+  touch();
   taught.remove();
   if (!took) return null;
+  if (!hold.state.held) { mark.remove(); return 'long'; }
   sign();
   mark.set({ time: 1 });
   const t0 = mg.t;

@@ -1,6 +1,7 @@
 // М10б «Holding Him» (night 3, «Mama is right», the round room, after «Mama is right», in the pose of the choice: Papa's
 // paw on the boy's shoulder): hold — a groove on the boy (`troll#chest`), filled in SECONDS while held. Let go before it
-// is full (once it had begun) — the end at once: the boy stands a long time in the doorway, but does not go (flawed).
+// is full (once it had begun) — the end at once (flawed; what it shows — the boy long in the doorway, scenario §7 —
+// is the chapter's and the scene's: no key or piece for it yet).
 // Full — the end (clean). Never touched — after LIMIT s the end all the same (neutral). The piece after it: the boy at
 // the window till dawn.
 //   What he does: Papa keeps his paw on his son's shoulder through the night's first minutes.

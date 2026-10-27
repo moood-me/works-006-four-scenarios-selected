@@ -22,7 +22,7 @@ export default {
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('A creak, and a hand on the lantern.') });
     let eyes = false, sign = null;
-    settle(signal, () => { if (!eyes) g.set('eyes', 0); });
+    const over = settle(signal, () => { if (!eyes) g.set('eyes', 0); });
     g.set('eyes', 0);
     mg.show({ handsOff: true });
     const t0 = mg.t;
@@ -42,6 +42,7 @@ export default {
       return now >= SECONDS;
     });
     if (!done) return this.skipped;
+    over();
     await mg.end({ as: 'neutral' });
     return { eyes };
   },

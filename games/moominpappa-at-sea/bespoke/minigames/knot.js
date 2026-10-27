@@ -25,7 +25,7 @@ export default {
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('A net pulled into a knot.') });
     const send = keys(g);
-    settle(signal, () => { g.set('knot_open', 0, 0.4); g.set('knot', 1); });
+    const over = settle(signal, () => { g.set('knot_open', 0, 0.4); g.set('knot', 1); });
     send('knot', 0);
     g.set('knot_open', 1, 0.4);
     mg.plate.set({ notches: Array.from({ length: PULLS - 1 }, (_, i) => (i + 1) / PULLS) });
@@ -56,6 +56,7 @@ export default {
     mg.snap({ at: end });
     if (!(await count(mg, 0.8))) return this.skipped;
     g.set('knot_open', 0, 0.4);
+    over();
     await mg.end({ as: jerks ? 'flawed' : 'clean' });
     return { jerks };
   },

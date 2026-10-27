@@ -21,7 +21,7 @@ export default {
   keys: ['door_shake'],
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('A door, and the sea behind it.') });
-    settle(signal, () => g.set('door_shake', 0, 0.6));
+    const over = settle(signal, () => g.set('door_shake', 0, 0.6));
     g.set('door_shake', 0);
     const door = mg.mark({ at: 'door#door', kind: 'groove', danger: 0 });
     const hold = mg.hold({ on: door, seconds: 0.4, drain: 0.4 });
@@ -46,6 +46,7 @@ export default {
       return now >= END;
     });
     if (!done) return this.skipped;
+    over();
     await mg.end({ as: gave ? 'flawed' : 'clean' });
     return { gave };
   },

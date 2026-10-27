@@ -22,7 +22,7 @@ export default {
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('A needle, a thread, and big paws.') });
     const send = keys(g);
-    settle(signal, () => { g.set('needle_open', 0, 0.4); g.set('thread', 1); });
+    const over = settle(signal, () => { g.set('needle_open', 0, 0.4); g.set('thread', 1); });
     send('thread', 0);
     g.set('needle_open', 1, 0.4);
     const end = mg.mark({ at: 'needle#thread', kind: 'dash' });
@@ -42,6 +42,7 @@ export default {
     end.remove();
     if (!(await count(mg, 0.9))) return this.skipped;
     g.set('needle_open', 0, 0.4);
+    over();
     await mg.end({ as: 'clean' });
     return { tries };
   },

@@ -24,7 +24,7 @@ export default {
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('Pines against the door.') });
     const send = keys(g);
-    settle(signal, () => g.set('door', 1, 0.5));
+    const over = settle(signal, () => g.set('door', 1, 0.5));
     send('door', 0);
     mg.plate.set({ notches: Array.from({ length: PULLS - 1 }, (_, i) => (i + 1) / PULLS) });
     const leaf = mg.mark({ at: 'door#door', kind: 'dash' });
@@ -53,6 +53,7 @@ export default {
     if (!done) return this.skipped;
     send('door', 1);
     mg.snap({ at: leaf });
+    over();
     await mg.end({ as: bangs ? 'flawed' : 'clean' });
     return { bangs };
   },
