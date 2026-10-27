@@ -16,10 +16,18 @@ scene.on('change', 'pines', creep);
 scene.on('move', 'pines', creep);
 // the pieces (lib.js `film`), played by `beat` through the world's `beats`
 scene.kit.beats.play(scene, L.film(scene));
-// «Охапка» (sway −1…1): the armful sways and Papa under it turns this way and that from the way he is going
+// «Охапка»: as the minigame moves armful_way (0 → 1) Papa walks on under the armful toward the ring, at its gait; the
+// armful's sway (−1…1) turns him this way and that from the way he goes; leaned over to the edge (|sway| ≥ 0.92) some
+// of it slides off — a burst of weed (spill counts them), once till it is upright again
+const way = () => scene.person('papa').walk([L.along(L.ARMFUL_WAY, scene.get('armful_way'))]);
+let over = false;
 const sway = () => {
-  const [a, d] = L.ARMFUL[1], [a2, d2] = L.ARMFUL[2];
-  scene.set('papa_turn', L.turnTo(a, d, a2, d2) + 14 * scene.get('sway'));
+  const [a, d] = L.ARMFUL_WAY[0], [a2, d2] = L.ARMFUL_WAY[1], v = scene.get('sway');
+  scene.set('papa_turn', L.turnTo(a, d, a2, d2) + 14 * v);
+  if (!over && Math.abs(v) >= 0.92) { over = true; scene.set('spill', scene.get('spill') + 1); }
+  if (over && Math.abs(v) < 0.4) over = false;
 };
-scene.on('change', 'sway', sway);
-scene.on('move', 'sway', sway);
+for (const [key, fn] of [['armful_way', way], ['sway', sway]]) {
+  scene.on('change', key, fn);
+  scene.on('move', key, fn);
+}

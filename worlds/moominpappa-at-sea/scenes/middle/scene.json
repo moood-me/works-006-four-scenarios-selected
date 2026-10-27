@@ -585,6 +585,38 @@
       }
     },
     {
+      "id": "spill",
+      "name": "Weed sliding off the armful",
+      "particles": {
+        "kind": "leaves",
+        "at": "papa#armful",
+        "burst": {
+          "on": "spill",
+          "count": 40,
+          "over": 0.4
+        },
+        "rate": 0,
+        "size": [
+          0.1,
+          0.08
+        ],
+        "colors": [
+          "#4e6a3a",
+          "#6b7f45",
+          "#5a4a30",
+          "#3f5a33"
+        ],
+        "speed": [
+          0.4,
+          1.4
+        ],
+        "spread": 70,
+        "gravity": 6,
+        "ground": "stop",
+        "settle": 6
+      }
+    },
+    {
       "id": "rain",
       "name": "Rain",
       "particles": {
@@ -612,6 +644,8 @@
     "rope": 0,
     "coil": false,
     "sway": 0,
+    "armful_way": 0,
+    "spill": 0,
     "beat": "",
     "beat_next": "",
     "troll_a": -0.5,
@@ -753,7 +787,19 @@
         1
       ],
       "smooth": true,
-      "means": "«Охапка» (the minigame): the armful over Papa's head swaying, he turns under it"
+      "means": "«Охапка» (the minigame): the armful over Papa's head swaying, he turns under it; leaned over to the edge, some weed slides off"
+    },
+    "armful_way": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "«Охапка» (the minigame): how far along his way to the ring Papa has carried the armful; he walks there"
+    },
+    "spill": {
+      "type": "number",
+      "means": "the scene's own: how many times weed has slid off the armful (each time a burst of it)"
     },
     "beat": {
       "type": "string",

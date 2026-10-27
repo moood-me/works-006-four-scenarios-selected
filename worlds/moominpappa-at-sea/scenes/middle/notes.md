@@ -51,6 +51,9 @@ Seconds are estimates. Motions and parts are the cast's (package Л): the `rope`
 - `armful_in` (2.4 «Водоросли», day, ≈ 6 s): Papa comes down the path with the armful above his head, not seeing his
   feet; the son at the clearing's edge — `armful_in:ready` (the pose for «Охапка»). The minigame moves `sway`; he walks
   on toward the ring as it plays.
+  While it plays he walks on toward the ring as far as `armful_way` (0…1, the minigame's way) says, at the armful's
+  gait; `sway` turns him under it; leaned over to the edge (|sway| ≥ 0.92) weed slides off the armful (`spill`, a
+  burst of it falling to the moss).
 - `armful_through` (after `armful_in`, ≈ 10 s): he walks straight through the ring and knocks it apart (`ring` →
   broken) — `armful_through:kick`; goes on and off to the right toward the landing; the son looks at his back —
   `armful_through:gone`.
@@ -61,7 +64,8 @@ Seconds are estimates. Motions and parts are the cast's (package Л): the `rope`
   `ring_shot:held`.
 
 New keys for these (stage 5): `ring_n` 0…9 — how many stones of a set ring are there while it is laid (each stone a
-layer of `ring`, shown by it: no painting again); the act `sway`.
+layer of `ring`, shown by it: no painting again); the acts `sway` and `armful_way` (0…1: how far along his way to the ring he has carried it — the minigame moves it);
+`spill` (the scene's own).
 
 ## Pieces (stage 5: `lib.js` FILM, played by `beat` through the world's `beats`; the game says the lines at the moments)
 
@@ -88,6 +92,9 @@ Seconds are estimates. Motions and parts are the cast's (package Л): the `rope`
 - `armful_in` (2.4 «Водоросли», day, ≈ 6 s): Papa comes down the path with the armful above his head, not seeing his
   feet; the son at the clearing's edge — `armful_in:ready` (the pose for «Охапка»). The minigame moves `sway`; he walks
   on toward the ring as it plays.
+  While it plays he walks on toward the ring as far as `armful_way` (0…1, the minigame's way) says, at the armful's
+  gait; `sway` turns him under it; leaned over to the edge (|sway| ≥ 0.92) weed slides off the armful (`spill`, a
+  burst of it falling to the moss).
 - `armful_through` (after `armful_in`, ≈ 10 s): he walks straight through the ring and knocks it apart (`ring` →
   broken) — `armful_through:kick`; goes on and off to the right toward the landing; the son looks at his back —
   `armful_through:gone`.
@@ -98,7 +105,8 @@ Seconds are estimates. Motions and parts are the cast's (package Л): the `rope`
   `ring_shot:held`.
 
 New keys for these (stage 5): `ring_n` 0…9 — how many stones of a set ring are there while it is laid (each stone a
-layer of `ring`, shown by it: no painting again); the act `sway`.
+layer of `ring`, shown by it: no painting again); the acts `sway` and `armful_way` (0…1: how far along his way to the ring he has carried it — the minigame moves it);
+`spill` (the scene's own).
 
 ## Contract for the check
 
@@ -116,5 +124,5 @@ layer of `ring`, shown by it: no painting again); the act `sway`.
  "points": ["pool#water", "ring#stones", "ground#path", "troll#chest", "papa#chest", "mama#chest", "my#chest", "lighthouse#lantern", "lighthouse#door"],
  "offers": ["pool#water", "ring#stones", "ground#path", "troll#chest", "papa#chest"],
  "party": {"beam": 0, "calm": 0, "dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0, "pines": 0, "ring": "none", "ring_n": 9, "rope": 0, "coil": false, "troll_here": true, "papa_here": false, "mama_here": false, "my_here": false},
- "acts": {"rope": {"values": [], "tells": []}, "sway": {"values": [], "tells": []}}}
+ "acts": {"rope": {"values": [], "tells": []}, "sway": {"values": [], "tells": []}, "armful_way": {"values": [], "tells": []}}}
 ```
