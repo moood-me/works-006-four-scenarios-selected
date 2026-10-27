@@ -7,43 +7,179 @@
     "mode": "picture"
   },
   "light": {
-    "ambient": 0.68,
-    "ambientColor": "#dfe6ef",
+    "ambient": 0.62,
+    "ambientColor": "#c9d2e4",
     "bounce": 0.55,
-    "haze": 0.035,
-    "hazeColor": "#e3e1e0",
+    "haze": 0.04,
+    "hazeColor": "#eadcc6",
     "hazeGlow": 0,
-    "shafts": 0,
-    "tint": "#f6dccb",
-    "tintStrength": 0.05,
-    "vignette": 0.22,
+    "shafts": 0.3,
+    "tint": "#ffd9a6",
+    "tintStrength": 0.07,
+    "vignette": 0.24,
     "grain": 0.08,
+    "saturation": 1.08,
     "wind": [
       0.6,
       -1,
       0.9
     ],
-    "saturation": 1.08
+    "looks": {
+      "dawn": {
+        "ambient": 0.68,
+        "ambientColor": "#dfe6ef",
+        "bounce": 0.55,
+        "haze": 0.035,
+        "hazeColor": "#e3e1e0",
+        "hazeGlow": 0,
+        "shafts": 0,
+        "tint": "#f6dccb",
+        "tintStrength": 0.05,
+        "vignette": 0.22,
+        "grain": 0.08,
+        "saturation": 1.08,
+        "lights": {
+          "sun": 0
+        }
+      },
+      "dusk": {
+        "ambient": 0.6,
+        "ambientColor": "#cdbfdc",
+        "haze": 0.05,
+        "hazeColor": "#e8c4b4",
+        "hazeGlow": 0.3,
+        "shafts": 0.25,
+        "tint": "#ffb48c",
+        "tintStrength": 0.1,
+        "saturation": 1.05,
+        "lights": {
+          "sun": 0
+        }
+      },
+      "night": {
+        "ambient": 0.5,
+        "ambientColor": "#9cb0e0",
+        "bounce": 0.6,
+        "haze": 0.05,
+        "hazeColor": "#5f7299",
+        "hazeGlow": 0.6,
+        "shafts": 0.35,
+        "tint": "#a8bcff",
+        "tintStrength": 0.1,
+        "saturation": 0.8,
+        "vignette": 0.26,
+        "lights": {
+          "sun": 0,
+          "sun_dawn": 0,
+          "sun_dusk": 0
+        }
+      },
+      "storm": {
+        "ambient": 0.6,
+        "ambientColor": "#bcc6d0",
+        "haze": 0.13,
+        "hazeColor": "#9ea9b3",
+        "shafts": 0.1,
+        "tint": "#c4d4e4",
+        "tintStrength": 0.08,
+        "saturation": 0.8,
+        "wind": [
+          0.6,
+          -1,
+          2.4
+        ],
+        "lights": {
+          "sun": 0.25,
+          "sun_dawn": 0.3,
+          "sun_dusk": 0.3,
+          "moon": 0.6
+        }
+      },
+      "flash": {
+        "ambient": 1.0,
+        "ambientColor": "#e6ecff",
+        "brightness": 1.2,
+        "saturation": 0.7
+      }
+    }
   },
   "lights": [
     {
       "id": "sun",
       "from": [
+        -140,
+        42
+      ],
+      "color": "#ffe6c8",
+      "strength": 1.45
+    },
+    {
+      "id": "sun_dawn",
+      "from": [
         -125,
         15
       ],
       "color": "#ffe0c2",
-      "strength": 1.35
+      "strength": 1.35,
+      "on": "dawn"
+    },
+    {
+      "id": "sun_dusk",
+      "from": [
+        100,
+        4
+      ],
+      "color": "#ffb486",
+      "strength": 1.3,
+      "on": "dusk"
+    },
+    {
+      "id": "moon",
+      "from": "sky#moon",
+      "color": "#cdd8ff",
+      "strength": 0.9,
+      "on": "night"
+    },
+    {
+      "id": "flash",
+      "from": [
+        -30,
+        25
+      ],
+      "color": "#e8eeff",
+      "strength": 2.2,
+      "on": "flash"
+    },
+    {
+      "id": "lantern",
+      "of": "lighthouse#lantern",
+      "on": "lighthouse_lit",
+      "color": "#ffd27e",
+      "strength": 2.5,
+      "reach": 40
     }
   ],
   "modules": [
-    "cast"
+    "cast",
+    "island"
   ],
   "objects": [
     {
       "id": "sky",
-      "name": "Dawn sky",
-      "sky": true
+      "name": "The sky",
+      "sky": true,
+      "uniforms": {
+        "low": 0.64,
+        "day_x": -0.35,
+        "day_y": 0.42,
+        "dawn_x": -0.15,
+        "dusk_x": 1.95,
+        "dawn": 0,
+        "dusk": 0,
+        "night": 0,
+        "storm": 0,
+        "flash": 0
+      }
     },
     {
       "id": "sea",
@@ -59,6 +195,9 @@
         "fade": 0,
         "rough": 0.55,
         "ripple": 0.4
+      },
+      "uniforms": {
+        "storm": 0
       }
     },
     {
@@ -97,7 +236,10 @@
         5.03,
         0
       ],
-      "shadow": true
+      "shadow": true,
+      "redraw": {
+        "lighthouse_lit": 1
+      }
     },
     {
       "id": "steps",
@@ -116,13 +258,13 @@
       "name": "The stone with the arrow",
       "across": 7.7,
       "distance": 28.5,
+      "shadow": true,
       "box": [
         -0.45,
         -0.45,
         0.45,
         0.05
-      ],
-      "shadow": true
+      ]
     },
     {
       "id": "pines",
@@ -177,52 +319,52 @@
       "across": -3.9,
       "distance": 8.6,
       "facing": 195,
+      "shadow": true,
       "box": [
         -1.95,
         -2.85,
         2.45,
         0.2
-      ],
-      "shadow": true
+      ]
     },
     {
       "id": "stones",
       "name": "Loose stones",
       "across": 0,
       "distance": 0,
+      "shadow": true,
       "box": [
         -0.5,
         -0.3,
         0.5,
         0.05
-      ],
-      "shadow": true
+      ]
     },
     {
       "id": "boulder",
       "name": "Boulder",
       "across": -2.65,
       "distance": 4.4,
+      "shadow": true,
       "box": [
         -1.6,
         -0.74,
         1.6,
         0
-      ],
-      "shadow": true
+      ]
     },
     {
       "id": "bundle",
       "name": "Bundle of blankets",
       "across": -1.3,
       "distance": 3.4,
+      "shadow": true,
       "box": [
         -1.15,
         -0.56,
         1.15,
         0
-      ],
-      "shadow": true
+      ]
     },
     {
       "id": "handbag",
@@ -230,13 +372,13 @@
       "across": -0.55,
       "distance": 3.75,
       "facing": 200,
+      "shadow": true,
       "box": [
         -0.25,
         -0.4,
         0.25,
         0.03
-      ],
-      "shadow": true
+      ]
     },
     {
       "id": "can",
@@ -244,13 +386,13 @@
       "across": 1.3,
       "distance": 4.1,
       "facing": 165,
+      "shadow": true,
       "box": [
         -0.2,
         -0.55,
         0.2,
         0.03
-      ],
-      "shadow": true
+      ]
     },
     {
       "id": "papa",
@@ -287,12 +429,20 @@
     }
   ],
   "state": {
+    "dawn": 1,
+    "dusk": 0,
+    "night": 0,
+    "moon": 0.6,
+    "storm": 0,
+    "flash": 0,
+    "lighthouse_lit": 0,
     "papa_look": [
       -3,
       -2,
       1.6
     ],
     "papa_mood": "smile",
+    "papa_turn": 215,
     "mama_on": [
       -1.3,
       3.4,
@@ -304,6 +454,7 @@
       1.3
     ],
     "mama_mood": "smile",
+    "mama_turn": 150,
     "troll_on": [
       -2.65,
       4.4,
@@ -315,9 +466,64 @@
       0.8
     ],
     "troll_mood": "thinking",
-    "papa_turn": 215,
-    "mama_turn": 150,
     "troll_turn": 240
+  },
+  "states": {
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dawn's light and sky (0 — the day)"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dusk's light and sky, the afterglow (0 — the day); may move before the eyes"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the moonlit night (0 — the day); over dawn and dusk"
+    },
+    "moon": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the moon's phase: 0 a thin crescent … 1 full (changes between steps; seen by night)"
+    },
+    "storm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the storm: grey light and sky, its clouds, many quick crests, rain, wind; over a half — lightning now and then"
+    },
+    "flash": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "lightning: the sky and everything lit white a moment (the storm's script and the game's moments)"
+    },
+    "lighthouse_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lighthouse's lamp burns: the lantern's glass warm, its light and glow (no beam)"
+    }
   },
   "music": {
     "prompts": [

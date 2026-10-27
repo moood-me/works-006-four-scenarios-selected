@@ -1,7 +1,12 @@
 # Writes scenes/cape/scene.json: the Fisherman's cape — its elements and where they stand, its light, its people.
 # Run from the world's root: python tools/cape.py .
 import json, math, sys
+sys.path.insert(0, sys.argv[1] + '/tools')
+import island
+
 root = sys.argv[1]
+folder = root + '/scenes/cape'
+WIND = [-1, 0.4, 1.1]
 D = math.pi / 180
 r3 = lambda v: round(v, 3)
 land = json.load(open(root + '/scenes/landing/scene.json', encoding='utf-8'))
@@ -27,11 +32,10 @@ def el(id, name, a, d, box=None, **k):
     return o
 
 objects = [
-    {"id": "sky", "name": "Afternoon sky", "sky": True},
-    {"id": "sea", "name": "The sea", "plane": True, "across": 0, "distance": 1450, "elevation": -1.6, "width": 2400, "depth": 3000,
-     "reflect": {"strength": 0.22, "fade": 0, "rough": 0.6, "ripple": 0.45}},
+    island.sky(0.56, (-0.35, 0.42), 1.98, -0.3),
+    island.sea(-1.6, {"strength": 0.22, "fade": 0, "rough": 0.6, "ripple": 0.45}),
     {"id": "granite", "name": "The cape's granite", "plane": True, "drape": True, "across": 10, "distance": 35, "width": 100, "depth": 92},
-    el("lighthouse", "The lighthouse", TOWER[0], TOWER[1], [-5.03, -15.8, 5.03, 0], elevation=-0.45, shadow=True),
+    island.lighthouse(TOWER[0], TOWER[1]),
     el("steps", "Steps to the lighthouse door", TOWER[0], TOWER[1] - 2.6, [-0.8, -0.55, 0.8, 0.05]),
     {"id": "pines", "name": "Island pines", "box": [-1.9, -3.75, 1.75, 0.1], "shadow": True, "across": 23, "distance": 49,
      "copies": [{"across": 23, "distance": 49}, {"across": 32.5, "distance": 51, "scale": 0.85, "flip": True},
@@ -56,18 +60,19 @@ spec = {
     "caption": "The Fisherman sits with his net, his side to the lighthouse. Papa sits down beside him and says nothing.",
     "horizon": 0.38,
     "camera": {"mode": "picture"},
-    "light": {"ambient": 0.62, "ambientColor": "#c9d2e4", "bounce": 0.55, "haze": 0.04, "hazeColor": "#eadcc6", "hazeGlow": 0,
-              "shafts": 0.3, "tint": "#ffd9a6", "tintStrength": 0.07, "vignette": 0.24, "grain": 0.08, "wind": [-1, 0.4, 1.1],
-              "saturation": 1.08},
-    "lights": [{"id": "sun", "from": [-115, 16], "color": "#ffd6a0", "strength": 1.5}],
-    "modules": ["cast"],
+    "light": island.light(WIND),
+    "lights": island.lights(([-115, 16], "#ffd6a0", 1.5), ([140, 12], "#ffe0c2", 1.35), [-80, 4], [10, 25]),
+    "modules": ["cast", "island"],
     "objects": objects,
     "state": {
+        **island.STATE,
         "fisher_on": [SEAT[0], SEAT[1], 0.3], "fisher_turn": FT,
         "fisher_look": [-40, 8, 1.2], "fisher_mood": "neutral",
         "papa_turn": 215, "papa_look": [-40, 24, 1], "papa_mood": "thinking",
         "mama_on": [TOWER[0] - 0.8, TOWER[1] - 2.9, 0.35], "mama_turn": 200, "mama_look": [0, 5, 1], "mama_mood": "tired",
     },
+    "states": dict(island.STATES),
     "music": music,
 }
-json.dump(spec, open(root + '/scenes/cape/scene.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+island.shaders(folder)
+json.dump(spec, open(folder + '/scene.json', 'w', encoding='utf-8', newline='\n'), ensure_ascii=False, indent=2)
