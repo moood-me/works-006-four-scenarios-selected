@@ -40,13 +40,96 @@ Papa on the dune.
   by the moon ahead on the right); facing the lantern on the stone she turns three-quarters to the viewer. The cost:
   the lighthouse itself is not in the picture (its light is — `lighthouse_lit`).
 
+## Pieces (stage 5: `lib.js` FILM, played by `beat` through the world's `beats`; the game says the lines at the moments)
+
+Seconds are estimates (the people at their own pace). Each piece's `from` sets what it does not move itself; a piece
+`after` another goes on from where that one ended. The people's motions and parts are the cast's (package Л):
+`basket`, `lantern` in the hand, `blanket`, `armful`; `crouch`, `sit_down`/`sit_floor`, `back_away`, `put_down`,
+`sway` (the Groke over the light), `reach` (the Groke to the beam).
+
+- `weed` (2.3, day, ≈ 10 s): Mama comes along the strand with her basket, crouches at the water and gathers weed into
+  it — `weed:water`; she goes on along the beach, smaller. The sea-horses in the shallows behind.
+- `seahorses` (2.3, day, ≈ 8 s): the son comes down to the water by the sea-horses and crouches — `seahorses:crouch`
+  (his line). Ends crouched, his face to them in profile.
+- `laugh` (after `seahorses`, ≈ 8 s): the sea-horses toss their heads (laughing) and swim off (`seahorses` → gone) —
+  `laugh:gone`; close on the son's face, looking down (`sad`) — `laugh:face`.
+- `armful_load` (2.4 «Водоросли», day, ≈ 8 s): Papa at the water heaps weed from Mama's basket into his arms, higher
+  than his head; Mama beside him — `armful_load:up`. Ends turned toward the dune (the way to the middle).
+- `dusk_sit` (2.6, dusk, ≈ 12 s): frost whitens on the strand (`frost` 0 → 0.4); with `track` already 1 the strip from
+  the sea is there first; the Groke comes up out of the shallows and sits down on the sand facing the lighthouse (side
+  on) — `dusk_sit:sat`.
+- `howl` (Ш1 «Наверх», night, ≈ 10 s): the Groke sitting, her face turned up to the far little light in the lantern
+  room (off the right; `lighthouse_lit` low); she howls — `howl:howl` (the game's sound); close on her face in profile.
+- `gift` (Ш1 «Сыну»; 3.6 «Не открывать глаз», night, ≈ 20 s): the son comes along the strand with the lantern, sets
+  it on the stone (`lantern_stone` → lit) — `gift:set` (his line, on «Сыну»); backs away three steps (`troll_at` →
+  near); the Groke gets up, turns to the light, comes nearer and sways over it, clumsy and quiet — `gift:sway`. Ends
+  in her swaying (the frost under her as the game sets it).
+- `wade` (Ш1 «По очереди», night toward dawn, ≈ 18 s): the Groke waist-deep in the sea (`groke_at` water); the son runs
+  down with the dim lantern and sets it on the stone (`lantern_stone` → low); she turns to it — `wade:turn`; comes out
+  and sits down at the water's edge far off (`groke_at` → edge) — `wade:sat`; the son turns the wick up for her
+  (`lantern_stone` → lit) — `wade:wick`.
+- `night2` (3.5, night, ≈ 8 s): the Groke sitting by the stones (`groke_at` as the game says: closest if she was given
+  light), her frost about her — `night2:sat`.
+- `follow_start` (3.6 «Пойти следом», night, ≈ 6 s): the son on the dune's path with the lantern going down toward the
+  stone, Papa coming over the dune behind him — `follow_start:ready` (the pose for «Следом»: the son's back, Papa's
+  way down the dune in the middle 4:3). The minigame moves `follow` and `follow_at` (below).
+- `follow_end` (after `follow_start`, ≈ 14 s): the son sets the lantern on the stone (`lantern_stone` → lit); the
+  Groke rises toward the light — `follow_end:rise`; Papa stops on the dune's top (`dune#top`) — `follow_end:stop`;
+  the son does not turn; with `follow_close` he sits down by the Groke with his back to his father.
+- `wide` (4.6, night, ≈ 8 s): the Groke on the shore, the frost round her wide (`frost` 1; `groke_at` closest if she
+  was given light); she howls — `wide:howl`.
+- `beside` (4.7 «Пусть идёт», night, ≈ 14 s): the son comes along the strand without a lantern and sits down beside
+  her — `beside:sat`; the frost creeps to him; white to the elbows — `beside:white` (the cast's rime on him).
+- `blanket` (after `beside`, ≈ 16 s): Mama over the dune with the blanket, lays it on the sand behind the son
+  (`blanket` → true) — `blanket:laid`; she goes back over the dune; time passes: the frost stops, the sand under the
+  Groke darkens (`warm` 0 → 1), she hums — `blanket:warm`.
+- `dune_start` (4.7 «Я до дюны», night, ≈ 5 s): Papa and the son come side by side from the right onto the dune's
+  path — `dune_start:ready` (the pose for «Рядом»). The minigame moves `walk` and `walk_at`.
+- `dune_stop` (after `dune_start`, ≈ 12 s): on the dune's top the son stops — `dune_stop:say` (his line); he goes on
+  down to the water alone; Papa sits down on the dune — `dune_stop:sat`.
+- `dawn_beside` (after `dune_stop`, ≈ 14 s): the Groke keeps off (`groke_at` edge), the frost reaches the son —
+  `dawn_beside:frost`; toward dawn (`dawn` → 0.6) she comes and sits down beside him, the sand darkens (`warm` → 1) —
+  `dawn_beside:sat`.
+- `past` (after `dawn_beside`, dawn, ≈ 10 s): the son gets up and walks up the dune past Papa and does not stop —
+  `past:passed` (`dune_dent` stays where Papa sat).
+- `leave` (4.7 «Мама права», night → dawn, ≈ 16 s): the Groke howls — `leave:howl`; toward morning she walks into the
+  sea and is gone, her white trail running out to the water (`track` 0 → 1) — `leave:gone`.
+- `beam` («Луч», night, ≈ 8 s): the beam (`beam` 1) comes round over the shore: by the keys — the son on dark sand by
+  the Groke, the Groke reaching toward the beam as it goes on; or the empty sand, the white trail, the son alone by
+  the water — `beam:pass`.
+- `morning` («Лодка», common shots; morning, ≈ 5 s): the sand after night 3, nobody or the son as the keys say: the
+  dark circle (`warm`), the white trail (`track`), the hollow on the dune (`dune_dent`) — `morning:held`.
+
+New keys for these (stage 5): `lantern_stone` gets `low` (a dim flame); `follow_close` (Papa came too close — the son
+sits with his back to him); the acts `follow`, `follow_at`, `walk`, `walk_at`.
+
 ## Contract for the check
 
 ```json
-{"points": ["stone#lantern", "dune#top", "groke#chest", "troll#chest", "papa#chest", "mama#chest", "lighthouse#lantern", "lighthouse#door"],
-"offers": ["stone#lantern", "dune#top", "groke#chest", "troll#chest"],
-"party": {"beam": 0, "calm": 0, "dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0,
-  "seahorses": "here", "groke_at": "edge", "frost": 0, "warm": 0, "track": 0, "lantern_stone": "none", "blanket": false,
-  "troll_at": "near", "dune_dent": false, "groke_here": false, "troll_here": true, "papa_here": false, "mama_here": false},
-"acts": {}}
+{"beats": {
+ "weed": {"after": [], "tells": ["weed:water"], "seconds": 10, "show": false},
+ "seahorses": {"after": [], "tells": ["seahorses:crouch"], "seconds": 8, "show": false},
+ "laugh": {"after": ["seahorses"], "tells": ["laugh:gone", "laugh:face"], "seconds": 8, "show": false},
+ "armful_load": {"after": [], "tells": ["armful_load:up"], "seconds": 8, "show": false},
+ "dusk_sit": {"after": [], "tells": ["dusk_sit:sat"], "seconds": 12, "show": false},
+ "howl": {"after": [], "tells": ["howl:howl"], "seconds": 10, "show": false},
+ "gift": {"after": [], "tells": ["gift:set", "gift:sway"], "seconds": 20, "show": false},
+ "wade": {"after": [], "tells": ["wade:turn", "wade:sat", "wade:wick"], "seconds": 18, "show": false},
+ "night2": {"after": [], "tells": ["night2:sat"], "seconds": 8, "show": false},
+ "follow_start": {"after": [], "tells": ["follow_start:ready"], "seconds": 6, "show": false},
+ "follow_end": {"after": ["follow_start"], "tells": ["follow_end:rise", "follow_end:stop"], "seconds": 14, "show": false},
+ "wide": {"after": [], "tells": ["wide:howl"], "seconds": 8, "show": false},
+ "beside": {"after": [], "tells": ["beside:sat", "beside:white"], "seconds": 14, "show": false},
+ "blanket": {"after": ["beside"], "tells": ["blanket:laid", "blanket:warm"], "seconds": 16, "show": false},
+ "dune_start": {"after": [], "tells": ["dune_start:ready"], "seconds": 5, "show": false},
+ "dune_stop": {"after": ["dune_start"], "tells": ["dune_stop:say", "dune_stop:sat"], "seconds": 12, "show": false},
+ "dawn_beside": {"after": ["dune_stop"], "tells": ["dawn_beside:frost", "dawn_beside:sat"], "seconds": 14, "show": false},
+ "past": {"after": ["dawn_beside"], "tells": ["past:passed"], "seconds": 10, "show": false},
+ "leave": {"after": [], "tells": ["leave:howl", "leave:gone"], "seconds": 16, "show": false},
+ "beam": {"after": [], "tells": ["beam:pass"], "seconds": 8, "show": false},
+ "morning": {"after": [], "tells": ["morning:held"], "seconds": 5, "show": false}},
+ "points": ["stone#lantern", "dune#top", "seahorses", "groke#chest", "troll#chest", "papa#chest", "mama#chest", "lighthouse#lantern", "lighthouse#door"],
+ "offers": ["stone#lantern", "dune#top", "groke#chest", "troll#chest", "papa#chest"],
+ "party": {"beam": 0, "calm": 0, "dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0, "seahorses": "here", "groke_at": "edge", "frost": 0, "warm": 0, "track": 0, "lantern_stone": "none", "blanket": false, "troll_at": "near", "dune_dent": false, "follow_close": false, "groke_here": false, "troll_here": true, "papa_here": false, "mama_here": false},
+ "acts": {"follow": {"values": [], "tells": []}, "follow_at": {"values": [], "tells": []}, "walk": {"values": [], "tells": []}, "walk_at": {"values": [], "tells": []}}}
 ```
