@@ -52,30 +52,34 @@ The lighthouse's beam (`beam`, turned by `beam_turn` — modules/island `beam`):
 
 ## Pieces (stage 5)
 
-The scene's film in pieces (`modules/beats`: the game sets `beat`, the scene tells `beat:<name>` at its end and `<piece>:<moment>` at each moment the game speaks or acts on; the game's lines are the game's). The keys a piece moves are its own; the party's keys it starts from are the step's (the game's `g.scene`). The seconds are estimates.
+The scene's film in pieces (`modules/beats`: the game sets `beat`, the scene tells `beat:<name>` at its end and `<piece>:<moment>` at each moment the game speaks or acts on). A piece that leads to a mini-game or a choice ends in its pose; what follows it is another piece (`after`). The places of people are the pieces' (`from`); the party's keys are the step's. The seconds are estimates.
 
 | Piece | Step | What it shows | Keys it sets | Ends on | Moments (`<piece>:<moment>`) |
 | --- | --- | --- | --- | --- | --- |
-| `lamp_look` | 2.1 | the same afternoon: the cloudy lenses; Papa dips a finger in the barrel — the oil thick as jam; the wall by the burner black with soot, grooves under his finger | lenses 0, flame out | Papa at the burner: the pose for М3 «Спичка» (burner#wick) | oil, soot, wick |
-| `smoke_out` (after lamp_look) | 2.2 | the flame catches, smokes and goes out; My in the hatch | flame smoky→out, my in the hatch | My in the hatch, Papa facing her | out, my |
-| `n1_up` | 2.7 Ш1 «Наверх» | Papa comes up with the lantern: the pose for М5а «Ровно» at the sooty wall; the writing comes up, he reads; he splashes paraffin on the burner, strikes: blue, out; he pins up the sheet, sets up the camp bed | lantern_at floor, slant, flame blue→out, sheets +1, cot made | Papa by the cold lamp, the sheet on the board | wall, read, out, sheet |
-| `n1_cold` | 2.7 Ш1 «Сыну» | Papa up by the cold lamp, listening (the silence) | flame out | Papa by the lamp | listen |
-| `n1_half` | 2.7 Ш1 «По очереди» | the pose for М5г «Полсвета»: the sheet by the dim flame — the writing does not come up; before dawn he takes the lantern down | lantern_at floor, lantern_flame low, slant low | the empty room above, the lantern gone | wall, down |
+| `lamp_look` | 2.1 | the same afternoon: the cloudy lenses; Papa dips a finger in the barrel — the oil thick as jam; the wall by the burner black with soot, grooves under his finger | — | Papa at the burner: the pose for М3 «Спичка» (burner#wick) | oil, soot, wick |
+| `smoke_out` (after lamp_look) | 2.2 | the flame catches, smokes and goes out; My in the hatch | flame smoky→out | My in the hatch, Papa facing her | out, my |
+| `n1_up` | 2.7 Ш1 «Наверх» | Papa comes up with the lantern | lantern_at floor | the pose for М5а «Ровно»: the lantern held slanting at the soot (soot#grooves) | wall |
+| `n1_read` (after n1_up) | 2.7 Ш1 «Наверх» | he reads; splashes paraffin on the burner, strikes: blue, out; pins up the sheet, sets up the camp bed | flame blue→out, sheets +1, cot made | Papa by the cold lamp, the sheet on the board | read, out, sheet |
+| `n1_cold` | 2.7 Ш1 «Сыну» | Papa up by the cold lamp, listening (the silence) | — | Papa by the lamp | listen |
+| `n1_half` | 2.7 Ш1 «По очереди» | Papa up with the turned-down lantern | lantern_at floor, lantern_flame low | the pose for М5г «Полсвета» (soot#grooves) | wall |
+| `n1_down` (after n1_half) | 2.7 Ш1 «По очереди» | towards morning he takes the lantern down through the hatch | lantern_at none | the empty room above | down |
 | `lenses` | 3.2 | noon: Papa up by the lamp rubbing the lenses | lenses 0→1 | the lenses clear | wiped |
 | `w_lamp` | 3.4 Ш2 «Гуляет» | Papa by the lamp till dusk: wiping the lenses, striking matches, talking to the burner; the light goes to dusk | dusk 0→1 | Papa by the lamp at dusk | dusk |
-| `n2_asleep` | 3.5 «Гуляет» | Papa asleep by the lamp (the lantern on the floor, its light straight on the soot: no grooves); the boy appears in the hatch and reaches for the lantern; the creak | night, lantern_at floor, slant 0, troll in the hatch | the pose for 3.6 (lantern#flame) | hatch |
+| `n2_asleep` | 3.5 «Гуляет» | Papa asleep by the lamp (the lantern on the floor, its light straight on the soot: no grooves); the boy appears in the hatch and reaches for the lantern; the creak | lantern_at floor | the pose for 3.6 (lantern#flame) | hatch |
 | `n2_read` (after n2_asleep) | 3.6 «Положи», by the lamp | the boy sets the lantern down; Papa turns the wick up, holds it slanting by the soot, reads the next piece; the sheet | lantern_flame full, slant, sheets +1 | the sheet pinned | wall, read, sheet |
-| `n2_taken` (after n2_asleep) | 3.6 «Не открывать глаз» / «Следом», by the lamp | the boy goes down with the lantern (Papa after him: «Следом»); the camp bed stays empty | lantern_at none, cot empty | the dark lantern room | gone |
-| `pot_up` | 4.2 | Papa sets the pot wrapped in his frock coat by the lamp | pot true | the pot by the lamp | set |
-| `st_gallery` | 4.4 Ш3 «Маяк» | Papa on the gallery shouting at the storm; a wave into the glass — it cracks; what is by the lamp is seen: the sheets (the empty place of the second), the pot or none, the cold barrel | storm, gallery_glass cracked | Papa at the burner: the pose for М9а (burner#wick) | shout, wave, sheets, wick |
-| `st_lit` (after st_gallery) | 4.4 Ш3 «Маяк», two sheets | the warm oil runs, the flame rises, the lenses turn; Papa on the gallery, wet, laughing | flame lit | Papa on the gallery, the lamp burning | lit, laugh |
+| `n2_taken` (after n2_asleep) | 3.6 «Не открывать глаз» / «Следом», by the lamp | the boy goes down with the lantern (Papa after him: «Следом»); the camp bed stays empty | lantern_at none | the dark lantern room | gone |
+| `pot_up` | 4.2 (the showcase) | Papa sets the pot wrapped in his frock coat by the lamp | pot | the pot by the lamp | set |
+| `st_gallery` | 4.4 Ш3 «Маяк» | Papa on the gallery shouting at the storm; a wave into the glass — it cracks; what is by the lamp is seen: the sheets (the empty place of the second), the pot or none, the cold barrel | gallery_glass cracked | Papa at the burner: the pose for М9а (burner#wick) | shout, wave, sheets, wick |
+| `st_lit` (after st_gallery) | 4.4 Ш3 «Маяк», two sheets | the warm oil runs, the flame rises, the lenses turn, the beam goes out through the glass; Papa on the gallery, wet, laughing (the camera where the beam does not sweep it) | flame lit | Papa on the gallery, the lamp burning | lit, laugh |
 | `st_out` (after st_gallery) | 4.4 Ш3 «Маяк», fewer sheets | the paraffin burns blue, the oil does not run; the flame rises and dies; lightning — Papa's face close; he listens to the wind by the cold lamp | flame blue→out, flash | Papa by the cold lamp | out, flash, listen |
-| `st_both` | 4.4 Ш3 «Горелка и бегом» | the pose for М9г at the burner; a bang below; the flame dies behind him as he goes down | flame blue→out | the dark lamp, the hatch | wick, bang, down |
-| `e_write` | Эпилог «Луч» | Papa on the gallery writing his Big Book of the sea, the lamp burning (late: he sleeps up here all week — the bed slept in) | flame lit, lenses 1, cot taken | Papa on the gallery | write |
-| `e_light` | Эпилог «Лестница», two sheets | on a still evening Papa warms the pot, lights the lamp — and goes down without staying | flame lit, pot | the lamp burning, the room empty | lit, down |
-| `shot_cot` | finales, the common frames | the camp bed by the promise (made, empty, slept in) | — | the bed, held | seen |
+| `st_both` | 4.4 Ш3 «Горелка и бегом» | Papa at the burner with the last paraffin | — | the pose for М9г (burner#wick) | wick |
+| `st_both_down` (after st_both) | 4.4 Ш3 «Горелка и бегом» | a bang below; the flame dies behind him as he goes down through the hatch | flame blue→out | the dark lamp, the hatch | bang, down |
+| `burnt_out` | 4.5, «Маяк» lit | dawn: the lamp burns down — the flame sinks and goes out | flame lit→out, dawn | the cold lamp at dawn | low, out |
+| `e_write` | Эпилог «Луч» | Papa on the gallery writing his Big Book of the sea, the lamp burning; «через неделю»: My in the hatch — «Это ты не умеешь» — «Уже умею» (late: he sleeps up here all week — the bed slept in) | — | Papa on the gallery | write, my |
+| `e_light` | Эпилог «Лестница» / поздний «Пирог», two sheets | on a still evening Papa warms the pot, lights the lamp with his matchbox — and goes down without staying | flame lit | the lamp burning, the room empty | lit, down |
+| `shot_cot` | finales, the common frames; 3.5 the bed empty | the camp bed by the promise (made, empty, slept in) | — | the bed, held | seen |
 
-Keys of the mini-games (`acts`): `match` (М3, the match toward the wick 0…1); М5а/М5г move `slant`, М9а/М9г `flame` (the party's keys, set by the mini-game while it plays).
+Keys of the mini-games (`acts`): `match` (М3, the match toward the wick 0…1); М5а/М5г move `slant`, М9а/М9г `flame` (the party's keys, set by the mini-game while it plays). The beam: the scene's own, on while `flame` is lit.
 
 ## Contract for the check
 
@@ -106,12 +110,21 @@ Keys of the mini-games (`acts`): `match` (М3, the match toward the wick 0…1);
   "n1_up": {
    "after": [],
    "tells": [
-    "n1_up:wall",
-    "n1_up:read",
-    "n1_up:out",
-    "n1_up:sheet"
+    "n1_up:wall"
    ],
-   "seconds": 26,
+   "seconds": 10,
+   "show": false
+  },
+  "n1_read": {
+   "after": [
+    "n1_up"
+   ],
+   "tells": [
+    "n1_read:read",
+    "n1_read:out",
+    "n1_read:sheet"
+   ],
+   "seconds": 20,
    "show": false
   },
   "n1_cold": {
@@ -125,10 +138,19 @@ Keys of the mini-games (`acts`): `match` (М3, the match toward the wick 0…1);
   "n1_half": {
    "after": [],
    "tells": [
-    "n1_half:wall",
-    "n1_half:down"
+    "n1_half:wall"
    ],
-   "seconds": 16,
+   "seconds": 8,
+   "show": false
+  },
+  "n1_down": {
+   "after": [
+    "n1_half"
+   ],
+   "tells": [
+    "n1_down:down"
+   ],
+   "seconds": 8,
    "show": false
   },
   "lenses": {
@@ -222,19 +244,38 @@ Keys of the mini-games (`acts`): `match` (М3, the match toward the wick 0…1);
   "st_both": {
    "after": [],
    "tells": [
-    "st_both:wick",
-    "st_both:bang",
-    "st_both:down"
+    "st_both:wick"
    ],
-   "seconds": 12,
+   "seconds": 8,
+   "show": false
+  },
+  "st_both_down": {
+   "after": [
+    "st_both"
+   ],
+   "tells": [
+    "st_both_down:bang",
+    "st_both_down:down"
+   ],
+   "seconds": 8,
+   "show": false
+  },
+  "burnt_out": {
+   "after": [],
+   "tells": [
+    "burnt_out:low",
+    "burnt_out:out"
+   ],
+   "seconds": 10,
    "show": false
   },
   "e_write": {
    "after": [],
    "tells": [
-    "e_write:write"
+    "e_write:write",
+    "e_write:my"
    ],
-   "seconds": 12,
+   "seconds": 14,
    "show": false
   },
   "e_light": {

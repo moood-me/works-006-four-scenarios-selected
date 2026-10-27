@@ -64,59 +64,76 @@ Its passing in «Луч» is a cut to a scene with the lighthouse outside (the g
 
 ## Pieces (stage 5)
 
-The scene's film in pieces (`modules/beats`: the game sets `beat`, the scene tells `beat:<name>` at its end and `<piece>:<moment>` at each moment the game speaks or acts on; the game's lines are the game's). The keys a piece moves are its own; the party's keys it starts from are the step's (the game's `g.scene`). The seconds are estimates.
+The scene's film in pieces (`modules/beats`: the game sets `beat`, the scene tells `beat:<name>` at its end and `<piece>:<moment>` at each moment the game speaks or acts on). A piece that leads to a mini-game or a choice ends in its pose; what follows it is another piece (`after`). The places of people are the pieces' (`from`); the party's keys are the step's. The seconds are estimates.
 
 | Piece | Step | What it shows | Keys it sets | Ends on | Moments (`<piece>:<moment>`) |
 | --- | --- | --- | --- | --- | --- |
-| `can_in` | 1.5 | Papa comes in at the door with the full can, the others behind him | door 1, lantern none | Papa on the threshold, the can in his paws: the pose for М2б «Банка» (door#threshold) | threshold |
-| `can_shelf` (after can_in) | 1.5 | the can onto the shelf; Mama looks into it; Papa to the window, the white crests | paraffin 3 | Papa at the window, facing out | mama, window |
+| `can_in` | 1.5 | Papa comes in at the door with the full can, the others behind him | door | Papa on the threshold, the can in his paws: the pose for М2б «Банка» (door#threshold) | threshold |
+| `can_shelf` (after can_in) | 1.5 | the can onto the shelf; Mama looks into it; Papa to the window, the white crests | — | Papa at the window, facing out | mama, window |
 | `wall_read` | 1.5 | My at the keeper's wall reading; the camera rests on the knot under the line | — | close on wall_a#nobody | my, knot |
 | `log_write` (after wall_read) | 1.5 | Papa writes «23 August. Arrived» over «Nobody again», standing, high; Mama crouched at the basket, back to him, finds a place on the sill and paints the first stem | log 0→1, sill −1→0 | the stem on the sill, close | written, stem |
-| `supper` | 2.6 | evening: Mama paints the sill (the flowers by the scale, her paints), the cold stove, the lantern on the table; Papa looks at the hatch; Mama sews close to the lantern | sill, paints, stove cold, firewood false, dusk→night | Mama at the lantern sewing | sill, hatch, sew |
-| `give` (after supper) | 2.6 | «Бери, бери»: Mama pushes the lantern over to Papa; he moves it back; she pushes it again; the boy at the window asks for it; the pose: the lantern in the middle, everyone looking at it | lantern_x (the lantern along the table) | the pose for Ш1 (lantern#flame) | give1, give2, ask, pose |
-| `n1_lamp` (after give) | 2.7 Ш1 «Наверх» | Papa fills the lantern and carries it up the stair; the room in moonlight, Mama puts her sewing down, the boy at the window | lantern_at table→none | the room in moonlight | up |
-| `n1_mama` (after give) | 2.7 Ш1 «Маме» | Papa's term; the pose for М5б «Нитка» at Mama's needle; she moves over on the bench, he sits; lying down she turns the wick low | flame full→low | the two at the table, the wick low | term, needle, sat, low |
-| `n1_son` (after give) | 2.7 Ш1 «Сыну» | the pose for М5в «Фонарь»: the boy's hand on the handle by Papa's; he goes out with it, eyes down; Mama looks Papa in the face, puts down her sewing | lantern_at table→none, door | Papa and Mama at the dark table | hand, gone, face |
-| `n1_turns` (after give) | 2.7 Ш1 «По очереди» | Papa turns the wick down; Mama sews by the low flame, pricks her finger; Papa stands at the stair — «Хорошо»; he goes up; she moves to the window and finishes the seam by the moon | flame low | Mama at the window in the moonlight | low, stair, window |
+| `supper` | 2.6 | evening: Mama paints the sill (the flowers by the scale, her paints), the cold stove, the lantern on the table; Papa looks at the hatch; Mama sews close to the lantern | — | Mama at the lantern sewing | sill, hatch, sew |
+| `give` (after supper) | 2.6 | «Бери, бери»: Mama pushes the lantern over to Papa; he moves it back; she pushes it again; the boy at the window asks for it; everyone looking at the lantern | lantern_x (internal: the lantern along the table) | the lantern in the middle, everyone round it | give1, give2, ask |
+| `fill` (after give) | 2.7 | night: Papa fills the lantern from the can — one measure, till morning | paraffin −1, night | the pose for Ш1: the lantern in the middle (lantern#flame), Papa's face close | poured |
+| `n1_lamp` (after fill) | 2.7 Ш1 «Наверх» | Papa carries the lantern up the stair; the room in moonlight, Mama puts her sewing down, the boy at the window | lantern_at table→none | the room in moonlight | up |
+| `n1_mama` (after fill) | 2.7 Ш1 «Маме» | Papa's term; Mama's, Papa's and My's lines; Papa by Mama's needle | — | the pose for М5б «Нитка» (Mama's needle; the insert `needle`) | term |
+| `n1_mama_sat` (after n1_mama) | 2.7 Ш1 «Маме» | she moves over on the bench, he sits; lying down she turns the wick low | flame full→low | the two at the table, the wick low | sat, low |
+| `n1_son` (after fill) | 2.7 Ш1 «Сыну», after М5в | the boy goes out with the lantern, eyes down; Mama looks Papa in the face, puts down her sewing | lantern_at table→none, door | Papa and Mama at the dark table | hand, gone, face |
+| `n1_turns` (after fill) | 2.7 Ш1 «По очереди» | Papa turns the wick down; Mama sews by the low flame, pricks her finger; Papa stands at the stair — «Хорошо»; he goes up; she moves to the window and finishes the seam by the moon | flame low, lantern_at none | Mama at the window in the moonlight | low, stair, window |
+| `n1_step` | 2.7 Ш1 «По очереди», towards morning | Papa comes down and sets the lantern on the middle step; the boy, awake all night, takes it and runs out to the shore | lantern_at stair→none, door | the open door, the step empty | set, ran |
 | `dawn_line` | 2.7 Ш1 «Сыну», dawn | the boy brings the lantern with its last flame and sets it by his bunk; Papa comes down and sees the line at the floor in the low slanting light; the flame goes out | lantern_at bunk, flame low→out, dawn | close on wall_a#line27 | bunk, line, out |
 | `dawn_stair` | 2.7 Ш1 «По очереди», morning | the lantern on the middle step, white with rime; Papa shakes it — empty | lantern_at stair, flame frost | Papa with the empty lantern | shake |
-| `morning` | 3.1 | the boy at the table, his paws white; Mama drops the cup, rubs his paws; Papa looks at the paws; the garden grown on the wall overnight, the brush on the sill in the moon's square; little Papa at the gate if it is there | garden, sill, brushes sill | the wall, wide (wall_a#garden) | paws, wall |
+| `morning` | 3.1 | the boy at the table, his paws white; Mama drops the cup, rubs his paws; Papa looks at the paws; the garden grown on the wall overnight, the brush on the sill in the moon's square; little Papa at the gate if it is there | — | the wall, wide (wall_a#garden) | paws, wall |
 | `into_wall` | 3.2 | noon: Mama finishes the last branch, steps back, looks (≤1: rubs her eyes and sits as one sits to rest; else looks round the empty room) — and steps into the wall under the apple tree; My outside on the sill sees it through the glass | mama_here false, wall_mama 0→1 | her figure in the garden, close | branch, in |
-| `empty_room` (after into_wall) | 3.3 | Papa comes down from the hatch; the cold tea on the table; My in the door; Papa sees the figure under the apple tree, puts his palm on the painted gate — his face close | papa at the gate | the pose for Ш2: wall_a#gate, his face | down, my, gate |
-| `w_walk` | 3.4 Ш2 «Гуляет», dusk | the empty room at dusk; Mama comes out of the wall — only My sees it from the sill | dusk, wall_mama 1→0, wall_grass, mama_here | Mama in the room, My at the window | out |
-| `w_call` (after empty_room) | 3.4 Ш2 «Звать» | Papa calls with his palm on the gate (the pose for М6б); Mama comes out at once, tired; she puts her brushes away in the jar | wall_mama 1→0, wall_grass, brushes jar | the two at the table | palm, out, jar |
-| `w_wait` (after empty_room) | 3.4 Ш2 «Ждать» | the cup set down, Papa sits on the floor by the wall; the light from noon to dusk, the tea cold, new tea, flowers growing round Mama's figure; the pose for М6в at the line; the boy in the door with a stone — «Тсс. Потом» — he goes, the stone on the threshold; at dusk Mama comes out, touches the cup, sits down by him on the floor | cups 1, tea, dusk 0→1, garden +1, line27, stone, wall_mama 1→0, wall_grass | the two on the floor by the wall | sit, line, son, hush, stone, out, cup, beside |
-| `n2_call` | 3.5 «Звать» | night 2: Mama asleep on the bench at the table mid-word; Papa turns the wick down himself; the boy comes to the table; a creak — Papa wakes and sees his hand on the lantern | night, flame low | the pose for 3.6: troll's hand on the lantern (lantern#flame) | hand |
-| `n2_wait` | 3.5 «Ждать» | night 2: Papa dozing on the floor by the cup; Mama, going to bed, turns the wick low; the boy comes to the table; the creak, the hand on the lantern | night, flame low | the pose for 3.6 (lantern#flame) | low, hand |
-| `n2_walk` | 3.5 «Гуляет» | night 2 below: Mama lying awake facing the wall, humming like her bees | night, lantern_at none | Mama facing the wall | hum |
-| `n2_sleep` | 3.6 «Не открывать глаз» | the pose for М7а: the boy with the lantern, still, looking at his father; he goes out with it | lantern_at none, door | Papa lying, the door | still, gone |
+| `empty_room` (after into_wall) | 3.3 | Papa comes down from the hatch; the cold tea on the table; My in the door; Papa sees the figure under the apple tree, puts his palm on the painted gate — his face close | — | the pose for Ш2 and М6б: his palm on wall_a#gate, his face | down, my, gate |
+| `w_walk` | 3.4 Ш2 «Гуляет», dusk | the empty room at dusk; Mama comes out of the wall — only My sees it from the sill outside | dusk, wall_mama 1→0, wall_grass, mama_here | Mama in the room, My at the window | out |
+| `w_call` (after empty_room) | 3.4 Ш2 «Звать», after М6б | Mama comes out at once, tired; she puts her brushes away in the jar | wall_mama 1→0, wall_grass, mama_here, brushes jar | the two at the table | out, jar |
+| `w_wait` (after empty_room) | 3.4 Ш2 «Ждать» | the cup set down, Papa sits on the floor by the wall; the light from noon toward dusk, the tea cold, new tea, flowers growing round Mama's figure | cups 1, tea, dusk, garden +1 | the pose for М6в «Пыль» at wall_a#line27 | sit |
+| `w_wait_son` (after w_wait) | 3.4 Ш2 «Ждать» | the line read; the boy in the door with a stone — «Тсс. Потом» — he goes, the stone on the threshold; at dusk Mama comes out, touches the cup, sits down by him on the floor | stone, wall_mama 1→0, wall_grass, mama_here, dusk 1 | the two on the floor by the wall | line, son, hush, stone, out, cup, beside |
+| `n2_call` | 3.5 «Звать» | night 2: Mama asleep on the bench at the table mid-word; Papa turns the wick down himself; the boy comes to the table; a creak — Papa wakes and sees his hand on the lantern | flame low | the pose for 3.6: troll's hand on the lantern (lantern#flame) | hand |
+| `n2_wait` | 3.5 «Ждать» | night 2: Papa dozing on the floor by the cup; Mama, going to bed, turns the wick low; the boy comes to the table; the creak, the hand on the lantern | flame low | the pose for 3.6 (lantern#flame) | low, hand |
+| `n2_walk` | 3.5 «Гуляет» | night 2 below: Mama lying awake facing the wall, humming like her bees | lantern_at none | Mama facing the wall | hum |
+| `n2_sleep` | 3.6 «Не открывать глаз» | the boy with the lantern, still, looking at his father | — | the pose for М7а «Спит» (Papa's face, the boy) | still |
+| `n2_sleep_gone` (after n2_sleep) | 3.6 «Не открывать глаз» | the boy goes out with the lantern | lantern_at none, door | Papa lying, the door | gone |
 | `n2_put` | 3.6 «Положи» | the boy sets the lantern down without looking and stands at the window till dawn; Papa lies awake looking at his back | lantern_at table | the boy's back at the window | down, window |
 | `n2_follow` | 3.6 «Пойти следом» | the boy goes out with the lantern; Papa gets up and goes out after him | lantern_at none, door | the open door, the night | out |
-| `breakfast` | 4.1 | grey morning, wind: breakfast; Papa boasts of the boat; My counts; the boy gets up and leaves | storm 0.3 | the table, the boy's empty place | boast, my, leave |
+| `n2_morning` | 3.6, morning after «следом» | morning: My and Papa at the table — «Ты же обещал…» / «Шпион» | — | the two at the table | my |
+| `breakfast` | 4.1 | grey morning, wind: breakfast; Papa boasts of the boat; My's words by the branch | — | the table | boast, my |
+| `breakfast_leave` (after breakfast) | 4.1 | the boy gets up and leaves the table; Mama heard | door | the boy's empty place | leave |
 | `oil` | 4.2 | towards evening Papa stokes the stove with the whole bundle, warms the pot of oil, wraps it in his frock coat and carries it up; supper of cold bread | stove fire, firewood false | the three at the table with bread | fire, up, bread |
-| `storm` | 4.3 | the storm: a wave down the pipe floods the stove — hiss, steam; the door will not hold; glass rings upstairs; My at the window, delighted; in the window the cape (the game cuts to the cape); the full moon in a break | storm 1, stove flooded, steam, door shaking, flash | Papa and Mama by the door | flood, door, window, moon |
-| `storm_sleeve` (after storm) | 4.3, garden ≤ 1 | Mama ties the shutters, then stands by Papa holding his sleeve | shutters | the two side by side | sleeve |
-| `storm_shutters` (after storm) | 4.3, garden 2 | Mama ties the shutters without a word | shutters | Mama at the shutters | tied |
-| `storm_gate` (after storm) | 4.3, garden ≥ 3 | Mama ties the shutters and for a moment lays her palm on the painted gate | shutters | her palm on the gate | gate |
-| `st_door` | 4.4 Ш3 «Дверь» | the last paraffin into the lantern; Papa's order, back to the hatch; the pose for М9б at the door; the four sitting with their backs to the door; a flash in the window: the lighthouse dark, someone under the wave on the cape | paraffin 0, flame full, door_shake | the four against the door | order, hold, sat, flash |
-| `st_left` | 4.4 Ш3, Papa gone (Маяк, Мыс) | Mama alone with the children holding the door, without warm light | flame out / lantern none | the three against the door | held |
+| `storm` | 4.3 | the storm: a wave down the pipe floods the stove — hiss, steam; the door will not hold; glass rings upstairs; then the window (the game cuts to the cape) | stove flooded, steam, door | the window, the cape out there | flood, door, window |
+| `storm_sleeve` (after storm) | 4.3, garden ≤ 1 | Mama ties the shutters, then stands by Papa holding his sleeve (with her own paints: the box of paints under her apron) | shutters | the two side by side | held, paints |
+| `storm_shutters` (after storm) | 4.3, garden 2 | Mama ties the shutters without a word (her paints under her apron) | shutters | Mama at the shutters | tied, paints |
+| `storm_gate` (after storm) | 4.3, garden ≥ 3 | Mama ties the shutters and for a moment lays her palm on the painted gate (her paints under her apron) | shutters | her palm on the gate | gate, paints |
+| `storm_moon` (after storm_sleeve, storm_shutters, storm_gate) | 4.3 | the full moon in a break of the clouds; My at the window, delighted by the storm; Mama looks at the moon | flash | the pose for Ш3: papa#chest in the middle, his face | moon, my |
+| `st_door` | 4.4 Ш3 «Дверь» | the last paraffin into the lantern; Papa's order, his back to the hatch | paraffin 0, flame full | the pose for М9б «Дверь» (door#door) | fill, order |
+| `st_door_sat` (after st_door) | 4.4 Ш3 «Дверь» | the four sitting with their backs to the door; Papa's story of the storm, My, the laugh; Mama: «Мне хочется домой» (to Papa, or to the apple tree under the wave's blow); a flash in the window: the lighthouse dark, someone under the wave on the cape | flash | the four against the door | sat, story, told, laugh, home, flash |
+| `st_go` | 4.4 Ш3 «Маяк», «Мыс», «Горелка» | Papa goes: the lines (the cape: «Человек за бортом…», My, Mama); the last paraffin into the lantern (the cape) or carried up (the lamp, the burner); he goes out at the door or up through the hatch; Mama after him | paraffin 0, lantern_at none, door | Mama and the children by the door | say, fill, gone, after |
+| `st_left` | 4.4 Ш3, Papa gone | Mama alone with the children holding the door, without warm light | — | the three against the door | held |
 | `st_run` | 4.4 Ш3 «Горелка и бегом» | Papa comes down: the wave already in, the floor wet, Mama and the children at the door; he stands with them, the door already held | wet | the four at the door | in |
-| `calm` | 4.5 | dawn after the storm: drips from the ceiling, the empty can, the flooded stove; Mama packs her basket and sets it by the door (the term) | dawn, wet, drip, basket | the basket by the door | drip, basket |
-| `night3` | 4.6 | night 3: the boy at the door without a lantern (the stone in his paws if «потом»); Mama's lines; the pose for 4.7: Papa's paw on his shoulder (troll#chest) | night, lantern_at stair/table, flame out, stone false | the pose for 4.7 | door, mama, shoulder |
-| `n3_go` (after night3) | 4.7 «Пусть идёт» | the boy goes; Mama takes the blanket out and comes back; she stands at the window till morning, Papa behind her; at dawn the boy in the door in the blanket — «Она не страшная…»; Mama rubs his paws, sits by him, sets tea for Papa | door, dawn, cups 1 | Mama by the boy, Papa's tea | out, blanket, window, dawn, tea |
-| `n3_right` (after night3) | 4.7 «Мама права» | the boy at the window till dawn; Mama covers him with the blanket | dawn | the boy at the window under the blanket | window, blanket |
-| `n3_dune` (after night3) | 4.7 «Пойдём» | Papa and the boy go out; Mama sets two cups on the table, one goes cold; at dawn the boy passes Papa in the door without stopping | door, cups 2, tea 1→0, dawn | the cold cup | out, cups, pass |
-| `e_beam` | Эпилог «Луч» | Mama by the wall (by Ш2; «отвернулся» — the table empty, she under the apple tree); My on her belly at the wall reading the low lines — «Мне сегодня сорок…»; she looks out at the cape; the window over the table (the beam's passing — the game's cut outside) | wall_mama, line27 stripe | the window and the table | wall, my, window |
+| `calm` | 4.5 | dawn after the storm: drips from the ceiling, the empty can, the flooded stove; Mama packs her basket and sets it by the door (the term) | basket | the basket by the door | drip, basket |
+| `night3` | 4.6 | night 3: the boy at the door without a lantern (the stone in his paws if «потом»); Mama's lines; Papa's paw on his shoulder | — | the pose for 4.7 (troll#chest, Papa's paw on his shoulder) | door, mama, shoulder |
+| `n3_go` (after night3) | 4.7 «Пусть идёт» | the boy goes; Mama takes the blanket and goes out after him | door | the open door | out, blanket |
+| `n3_dawn` | 4.7 «Пусть идёт» | Mama at the window till morning, Papa behind her; at dawn the boy in the door in the blanket — «Она не страшная…»; Mama rubs his paws, sits by him, sets tea for Papa | dawn, cups 1 | Mama by the boy, Papa's tea | window, dawn, rub, tea |
+| `n3_right` (after night3) | 4.7 «Мама права» | the boy at the window (closed: trembling, he obeys, does not look at Papa) | — | the boy at the window | window |
+| `n3_cover` | 4.7 «Мама права», dawn | Mama covers the boy at the window with the blanket | dawn | the boy under the blanket | blanket |
+| `n3_dune` (after night3) | 4.7 «Пойдём» | Papa and the boy go out | door | the open door | out |
+| `n3_cups` | 4.7 «Пойдём» | Mama at the window with the blanket; two cups on the table, one goes cold | cups 2, tea 1→0 | the cold cup | cups, cold |
+| `unpack` | Эпилог «Луч», «Пирог» at the term | Mama silently unpacks her basket | basket false | Mama at the shelf | unpack |
+| `e_beam` | Эпилог «Луч» | Mama by her mark: at the table by two cups, by the bare apple tree — or the table empty and she under the apple tree | wall_mama | Mama (or the empty table) | mama |
+| `e_beam_my` (after e_beam) | Эпилог «Луч» | My on her belly at the wall reading the low lines — «…Ha. I know»; she looks out at the cape; the window over the table (the beam's passing — the game's cut outside) | line27 stripe | the window and the table | my, look, window |
 | `e_basket` | Эпилог «Лодка» | Mama carries her basket out of the door (late: leaves her paints on the sill) | basket false, door | the empty room, the paints on the sill | out |
-| `e_pie` | Эпилог «Пирог», morning | Papa at the table telling the night on the cape; My; Mama bakes the pie on the dry driftwood | stove fire, firewood | the pie, the table | story, pie |
+| `e_story` | Эпилог «Пирог», morning | Papa at the table telling the night on the cape; My; in the full one «Сегодня у него день рождения» — «Наконец-то» | — | the table | story, birthday |
+| `e_pie` (after e_story) | Эпилог «Пирог» | Mama bakes the pie on the dry driftwood; the pie goes out to the cape | stove fire | the pie carried out at the door | pie, out |
 | `e_home_was` | Эпилог «Пирог», Mama was (позвал, ждал) | Mama washes the tin, pours two cups and waits at the table; Papa comes back: she asleep on the bench, his cup cold beside her | cups 2, tea 1→0 | the cold cup (the last frame) | cups, back |
 | `e_home_away` | Эпилог «Пирог», Mama was not (отвернулся) | Mama washes the tin, lays her palm on the painted veranda and goes into the garden; Papa comes back to the empty room, one cup on the table | wall_mama 0→1, cups 1 | the empty table (the last frame) | veranda, back |
 | `e_late` | Эпилог поздний «Пирог» | Papa writes «27 August. Calm.»; My on her belly wipes the dust from the low lines, reads aloud, laughs; Papa looks from his line to that one — the same date — then at the knot; Mama wraps bread for him | log 2, line27 stripe | the line and the clean stripe under it | log, my, knot, bread |
-| `e_stair` | Эпилог «Лестница» | the empty lantern; Mama painting clouds over the apple tree (or the brushes dry in the jar and she with her tea before the leafless tree); Papa telling My of the storm; Mama: «Ты был везде»; My runs a finger along the knot; Papa sits on the middle step | clouds / brushes jar, lantern_at stair/table, flame out | Papa on the middle step, the empty lantern (the last frame) | story, everywhere, knot, step |
+| `e_stair` | Эпилог «Лестница» | the empty lantern; Mama painting clouds over the apple tree (or the brushes dry in the jar and she with her tea before the leafless tree); Papa telling My of the storm; Mama: «Ты был везде»; My runs a finger along the knot | clouds | the pose for «Лестница» (stair#stair) | story, everywhere, knot |
+| `e_step` (after e_stair) | Эпилог «Лестница» | Papa sitting on the middle step, the empty lantern (the last frame) | — | Papa on the middle step | step |
 | `shot_wall` | finales, the common frames | the wall: the garden's colours, Mama by her mark, the line of the 27th (clean or under dust) | — | the wall, held | seen |
-| `shot_table` | finales, the common frames | the table: the cups, the lantern | — | the table, held | seen |
+| `shot_table` | finales, the common frames; «Лодка» at «отвернулся» | the table: the cups, the lantern, the basket by the door if it is there (with wall_mama 1 and the table empty — Mama under the apple tree) | — | the table, held | seen |
 
-Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers by them): `can_sway` (М2б, the can's sway −1…1), `thread` (М5б, the thread to the eye 0…1), `give` (М5в, the handle let go 0…1), `wipe` (М6в, the dust wiped along the line 0…1), `eyes` (М7а, Papa's eyes open 0…1), `door_shake` (М9б, the door's blow 0…1).
+Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers by them): `can_sway` (М2б, the can's sway −1…1), `thread` (М5б, the thread to the eye 0…1), `give` (М5в, the handle let go 0…1), `wipe` (М6в, the dust wiped along the line 0…1), `eyes` (М7а, Papa's eyes open 0…1), `door_shake` (М9б, the door's blow 0…1). The piece's own key `lantern_x` (the lantern along the table in `give`) is in `states`, not the party's.
 
 ## Contract for the check
 
@@ -179,15 +196,24 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
    "tells": [
     "give:give1",
     "give:give2",
-    "give:ask",
-    "give:pose"
+    "give:ask"
    ],
    "seconds": 22,
    "show": false
   },
-  "n1_lamp": {
+  "fill": {
    "after": [
     "give"
+   ],
+   "tells": [
+    "fill:poured"
+   ],
+   "seconds": 10,
+   "show": false
+  },
+  "n1_lamp": {
+   "after": [
+    "fill"
    ],
    "tells": [
     "n1_lamp:up"
@@ -197,32 +223,40 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
   },
   "n1_mama": {
    "after": [
-    "give"
+    "fill"
    ],
    "tells": [
-    "n1_mama:term",
-    "n1_mama:needle",
-    "n1_mama:sat",
-    "n1_mama:low"
+    "n1_mama:term"
    ],
-   "seconds": 24,
+   "seconds": 12,
+   "show": false
+  },
+  "n1_mama_sat": {
+   "after": [
+    "n1_mama"
+   ],
+   "tells": [
+    "n1_mama_sat:sat",
+    "n1_mama_sat:low"
+   ],
+   "seconds": 14,
    "show": false
   },
   "n1_son": {
    "after": [
-    "give"
+    "fill"
    ],
    "tells": [
     "n1_son:hand",
     "n1_son:gone",
     "n1_son:face"
    ],
-   "seconds": 16,
+   "seconds": 14,
    "show": false
   },
   "n1_turns": {
    "after": [
-    "give"
+    "fill"
    ],
    "tells": [
     "n1_turns:low",
@@ -230,6 +264,15 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
     "n1_turns:window"
    ],
    "seconds": 20,
+   "show": false
+  },
+  "n1_step": {
+   "after": [],
+   "tells": [
+    "n1_step:set",
+    "n1_step:ran"
+   ],
+   "seconds": 12,
    "show": false
   },
   "dawn_line": {
@@ -293,11 +336,10 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
     "empty_room"
    ],
    "tells": [
-    "w_call:palm",
     "w_call:out",
     "w_call:jar"
    ],
-   "seconds": 16,
+   "seconds": 14,
    "show": false
   },
   "w_wait": {
@@ -305,16 +347,25 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
     "empty_room"
    ],
    "tells": [
-    "w_wait:sit",
-    "w_wait:line",
-    "w_wait:son",
-    "w_wait:hush",
-    "w_wait:stone",
-    "w_wait:out",
-    "w_wait:cup",
-    "w_wait:beside"
+    "w_wait:sit"
    ],
-   "seconds": 30,
+   "seconds": 16,
+   "show": false
+  },
+  "w_wait_son": {
+   "after": [
+    "w_wait"
+   ],
+   "tells": [
+    "w_wait_son:line",
+    "w_wait_son:son",
+    "w_wait_son:hush",
+    "w_wait_son:stone",
+    "w_wait_son:out",
+    "w_wait_son:cup",
+    "w_wait_son:beside"
+   ],
+   "seconds": 26,
    "show": false
   },
   "n2_call": {
@@ -345,10 +396,19 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
   "n2_sleep": {
    "after": [],
    "tells": [
-    "n2_sleep:still",
-    "n2_sleep:gone"
+    "n2_sleep:still"
    ],
-   "seconds": 12,
+   "seconds": 6,
+   "show": false
+  },
+  "n2_sleep_gone": {
+   "after": [
+    "n2_sleep"
+   ],
+   "tells": [
+    "n2_sleep_gone:gone"
+   ],
+   "seconds": 8,
    "show": false
   },
   "n2_put": {
@@ -368,14 +428,31 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
    "seconds": 10,
    "show": false
   },
+  "n2_morning": {
+   "after": [],
+   "tells": [
+    "n2_morning:my"
+   ],
+   "seconds": 8,
+   "show": false
+  },
   "breakfast": {
    "after": [],
    "tells": [
     "breakfast:boast",
-    "breakfast:my",
-    "breakfast:leave"
+    "breakfast:my"
    ],
-   "seconds": 22,
+   "seconds": 18,
+   "show": false
+  },
+  "breakfast_leave": {
+   "after": [
+    "breakfast"
+   ],
+   "tells": [
+    "breakfast_leave:leave"
+   ],
+   "seconds": 8,
    "show": false
   },
   "oil": {
@@ -393,10 +470,9 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
    "tells": [
     "storm:flood",
     "storm:door",
-    "storm:window",
-    "storm:moon"
+    "storm:window"
    ],
-   "seconds": 24,
+   "seconds": 18,
    "show": false
   },
   "storm_sleeve": {
@@ -404,7 +480,8 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
     "storm"
    ],
    "tells": [
-    "storm_sleeve:sleeve"
+    "storm_sleeve:held",
+    "storm_sleeve:paints"
    ],
    "seconds": 8,
    "show": false
@@ -414,7 +491,8 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
     "storm"
    ],
    "tells": [
-    "storm_shutters:tied"
+    "storm_shutters:tied",
+    "storm_shutters:paints"
    ],
    "seconds": 6,
    "show": false
@@ -424,20 +502,58 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
     "storm"
    ],
    "tells": [
-    "storm_gate:gate"
+    "storm_gate:gate",
+    "storm_gate:paints"
    ],
    "seconds": 8,
+   "show": false
+  },
+  "storm_moon": {
+   "after": [
+    "storm_sleeve",
+    "storm_shutters",
+    "storm_gate"
+   ],
+   "tells": [
+    "storm_moon:moon",
+    "storm_moon:my"
+   ],
+   "seconds": 10,
    "show": false
   },
   "st_door": {
    "after": [],
    "tells": [
-    "st_door:order",
-    "st_door:hold",
-    "st_door:sat",
-    "st_door:flash"
+    "st_door:fill",
+    "st_door:order"
+   ],
+   "seconds": 12,
+   "show": false
+  },
+  "st_door_sat": {
+   "after": [
+    "st_door"
+   ],
+   "tells": [
+    "st_door_sat:sat",
+    "st_door_sat:story",
+    "st_door_sat:told",
+    "st_door_sat:laugh",
+    "st_door_sat:home",
+    "st_door_sat:flash"
    ],
    "seconds": 26,
+   "show": false
+  },
+  "st_go": {
+   "after": [],
+   "tells": [
+    "st_go:say",
+    "st_go:fill",
+    "st_go:gone",
+    "st_go:after"
+   ],
+   "seconds": 16,
    "show": false
   },
   "st_left": {
@@ -481,12 +597,20 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
    ],
    "tells": [
     "n3_go:out",
-    "n3_go:blanket",
-    "n3_go:window",
-    "n3_go:dawn",
-    "n3_go:tea"
+    "n3_go:blanket"
    ],
-   "seconds": 28,
+   "seconds": 10,
+   "show": false
+  },
+  "n3_dawn": {
+   "after": [],
+   "tells": [
+    "n3_dawn:window",
+    "n3_dawn:dawn",
+    "n3_dawn:rub",
+    "n3_dawn:tea"
+   ],
+   "seconds": 22,
    "show": false
   },
   "n3_right": {
@@ -494,10 +618,17 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
     "night3"
    ],
    "tells": [
-    "n3_right:window",
-    "n3_right:blanket"
+    "n3_right:window"
    ],
-   "seconds": 14,
+   "seconds": 10,
+   "show": false
+  },
+  "n3_cover": {
+   "after": [],
+   "tells": [
+    "n3_cover:blanket"
+   ],
+   "seconds": 8,
    "show": false
   },
   "n3_dune": {
@@ -505,21 +636,46 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
     "night3"
    ],
    "tells": [
-    "n3_dune:out",
-    "n3_dune:cups",
-    "n3_dune:pass"
+    "n3_dune:out"
    ],
-   "seconds": 20,
+   "seconds": 8,
+   "show": false
+  },
+  "n3_cups": {
+   "after": [],
+   "tells": [
+    "n3_cups:cups",
+    "n3_cups:cold"
+   ],
+   "seconds": 12,
+   "show": false
+  },
+  "unpack": {
+   "after": [],
+   "tells": [
+    "unpack:unpack"
+   ],
+   "seconds": 8,
    "show": false
   },
   "e_beam": {
    "after": [],
    "tells": [
-    "e_beam:wall",
-    "e_beam:my",
-    "e_beam:window"
+    "e_beam:mama"
    ],
-   "seconds": 20,
+   "seconds": 8,
+   "show": false
+  },
+  "e_beam_my": {
+   "after": [
+    "e_beam"
+   ],
+   "tells": [
+    "e_beam_my:my",
+    "e_beam_my:look",
+    "e_beam_my:window"
+   ],
+   "seconds": 16,
    "show": false
   },
   "e_basket": {
@@ -530,13 +686,24 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
    "seconds": 10,
    "show": false
   },
-  "e_pie": {
+  "e_story": {
    "after": [],
    "tells": [
-    "e_pie:story",
-    "e_pie:pie"
+    "e_story:story",
+    "e_story:birthday"
    ],
-   "seconds": 18,
+   "seconds": 14,
+   "show": false
+  },
+  "e_pie": {
+   "after": [
+    "e_story"
+   ],
+   "tells": [
+    "e_pie:pie",
+    "e_pie:out"
+   ],
+   "seconds": 14,
    "show": false
   },
   "e_home_was": {
@@ -573,10 +740,19 @@ Keys of the mini-games (`acts`, numbers the mini-game moves; the scene answers b
    "tells": [
     "e_stair:story",
     "e_stair:everywhere",
-    "e_stair:knot",
-    "e_stair:step"
+    "e_stair:knot"
    ],
-   "seconds": 24,
+   "seconds": 20,
+   "show": false
+  },
+  "e_step": {
+   "after": [
+    "e_stair"
+   ],
+   "tells": [
+    "e_step:step"
+   ],
+   "seconds": 8,
    "show": false
   },
   "shot_wall": {
