@@ -60,6 +60,8 @@ const PINES = [[2.6, 23.0, 8.8, 29.9], [15.8, 25.5, 11.4, 30.0], [4.2, 31.5, 12.
 const BOAT = { moored: [-3.9, 8.6, 195], up: [-3.2, 6.6, 200], off: [-15, 17, 230] };
 // the door's swing: hung on its right jamb, shut facing the landing, open outward toward it by `door`
 const DOOR_OPEN = 70;
+// how far it opens while the pines stand at the threshold (a share of DOOR_OPEN): there it bumps one
+const DOOR_STOP = 0.6;
 // the people's places (`<id>_at`): where each stands or sits, turned how, doing what, looking at what
 const stand = { motion: 'stand', loop: true };
 const PLACES = {
@@ -638,4 +640,4 @@ const SHOWFILM = Object.fromEntries(Object.entries(FILM).map(([k, b]) => [k, {
   },
 }]));
 
-return { FILM, SHOWFILM, SEA, land, shore, bundle, marks, CLEFT, PINES, BOAT, DOOR_OPEN, PLACES };
+return { DOOR_STOP, FILM, SHOWFILM, SEA, land, shore, bundle, marks, CLEFT, PINES, BOAT, DOOR_OPEN, PLACES };

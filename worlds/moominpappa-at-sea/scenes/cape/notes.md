@@ -66,10 +66,20 @@ are told as `<piece>:<moment>` — the game speaks its lines there. Where the pe
 
 ## Open for the game (stage 5)
 
-- The knot close (`net_ask:knot`, `net_taken:knot`, `lightning:knot`) is the people package's close-up `knot`
-  (`closeups`, its point `knot#thread` for the knot minigame), opened by `knot_open`.
+- The knot close is the closeups shot `knot` (the insert `knot`, `knot_open`; the minigame's point `knot#thread`). Its
+  pull (`knot_pull`) is the minigame's `knot` while Papa works the knot; in the close-ups after (`net_ask:knot`,
+  `net_taken:knot`, `lightning:knot`) it is 0 — the knot itself, the Fisherman's sign, the same as under the wall's
+  lines; `knot_paws` 0 in the lightning: the net alone on his knees.
+- The matches minigame's close is the closeups shot `matchbox` (`matchbox_open`, `matchbox_give`, `matchbox_close`);
+  the cape's own box (on the stone, in his palm by `matchbox`) is the element `box`, point `box#box`.
+- The carry minigame's `carry_tilt` (−1…1) tips the pie or the bread: Papa's paws uneven before his chest
+  (`papa_reach`, the script), level at 0; `carry` takes him along the way.
+- The faces: the camera before the two on the cape's left, low (lib `FACES`, `FACES_CLOSE`); the way over the rocks
+  from the right (`WAY_CAM`).
 - The lantern Papa carries in `crossing`/`blown` is the cast's part `lantern` in his paw, `lantern_out` from `blown`.
 - `matches_stone` serves both the full «Pie» (after `pie`) and the late one (after `bread_take`).
+- Folded, the Fisherman's own net (`netload`) is taken off by `fisher_wear` {"parts": []} (the script); the roll beside
+  him is the element `net`.
 
 ## Contract for the check
 
@@ -78,5 +88,5 @@ are told as `<piece>:<moment>` — the game speaks its lines there. Where the pe
  "points": ["lighthouse#door", "lighthouse#lantern", "rack#net", "net#knot", "bread#stone", "pie#pie", "granite#hold1", "granite#hold2", "granite#hold3", "seat", "box#box", "matchbox#box", "matchbox#palm", "sky#moon", "knot#thread", "fisher", "papa", "mama", "my", "troll", "fisher#chest", "papa#chest", "mama#chest", "my#chest", "troll#chest"],
  "offers": ["fisher#chest", "papa#chest", "mama#chest", "my#chest", "troll#chest", "net#knot", "bread#stone", "granite#hold1", "granite#hold2", "granite#hold3", "knot#thread", "matchbox#box", "pie#pie", "seat"],
  "party": {"dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "lighthouse_lit": 0, "beam": 0, "net": "dry", "bread": false, "pie": false, "matchbox": "none", "mama_at": "steps", "fisher_mark": "keeper"},
- "acts": {"knot": {"values": [], "tells": ["knot:loose"]}, "matchbox_give": {"values": [], "tells": []}, "cross": {"values": [0, 1, 2, 3], "tells": ["cross:hold1", "cross:hold2", "cross:hold3"]}, "carry": {"values": [], "tells": ["carry:there"]}, "matchbox": {"values": ["none", "stone", "palm"], "tells": []}, "flash": {"values": [], "tells": []}}}
+ "acts": {"knot": {"values": [], "tells": ["knot:loose"]}, "knot_open": {"values": [], "tells": []}, "matchbox_open": {"values": [], "tells": []}, "matchbox_give": {"values": [], "tells": []}, "carry_tilt": {"values": [], "tells": []}, "cross": {"values": [0, 1, 2, 3], "tells": ["cross:hold1", "cross:hold2", "cross:hold3"]}, "carry": {"values": [], "tells": ["carry:there"]}, "matchbox": {"values": ["none", "stone", "palm"], "tells": []}, "flash": {"values": [], "tells": []}}}
 ```

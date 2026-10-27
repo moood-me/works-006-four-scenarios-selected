@@ -13,8 +13,21 @@ function pines() {
     scene.set(`pine${i + 1}_d`, mix(d0, d1, u));
   });
 }
+// the door: with the pines at the threshold it opens only so far — at `DOOR_STOP` it bumps a pine and swings back
+// a little, and holds there (the door minigame pushes on)
+let bumped = false;
 function door() {
-  scene.set('door_turn', 180 - L.DOOR_OPEN * (scene.get('door') ?? 0));
+  const u = scene.get('door') ?? 0, stop = (scene.get('pines') ?? 0) >= 0.5 ? L.DOOR_STOP : 1, at = v => 180 - L.DOOR_OPEN * v;
+  if (u < stop) {
+    bumped = false;
+    scene.set('door_turn', at(u));
+    return;
+  }
+  if (bumped) return;
+  bumped = true;
+  scene.set('door_turn', at(stop));
+  scene.move('door_turn', at(stop - 0.16), { over: 0.2, ease: 'out' });
+  scene.after(0.2, () => scene.move('door_turn', at(stop), { over: 0.4, ease: 'inOut' }));
 }
 function boat() {
   const u = (scene.get('boat') ?? 'moored') === 'moored' ? scene.get('boat_up') ?? 0 : 1, [a0, d0, t0] = L.BOAT.moored, [a1, d1, t1] = L.BOAT.up;

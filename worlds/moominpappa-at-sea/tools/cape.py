@@ -80,7 +80,7 @@ objects = [
 
 PEOPLE = list(START)
 state = {**island.STATE,
-         "net": "dry", "bread": False, "pie": False, "matchbox": "none", "fisher_mark": "keeper", "cross": 0, "carry": 0, "knot": 0, "knot_open": 0, "knot_paws": 1, "matchbox_open": 0, "matchbox_give": 0, "matchbox_close": 0, "fisher_wear": None, "papa_lantern": 0, "beat": None, "beat_next": None,
+         "net": "dry", "bread": False, "pie": False, "matchbox": "none", "fisher_mark": "keeper", "cross": 0, "carry": 0, "knot": 0, "knot_open": 0, "knot_paws": 1, "knot_pull": 0, "carry_tilt": 0, "matchbox_open": 0, "matchbox_give": 0, "matchbox_close": 0, "fisher_wear": None, "papa_lantern": 0, "beat": None, "beat_next": None,
          "my_here": False, "troll_here": False,
          **{f"{id}_at": START[id] for id in PEOPLE}, **{f"{id}_placed": "" for id in PEOPLE},
          "fisher_mood": "neutral", "papa_mood": "thinking", "mama_mood": "tired", "my_mood": "smile", "troll_mood": "thinking"}
@@ -105,6 +105,8 @@ states = {
     "matchbox_open": {"range": [0, 1], "smooth": True, "means": "the matchbox close open (closeups shot matchbox: the matches minigame)"},
     "matchbox_give": {"range": [0, 1], "smooth": True, "means": "the matchbox close: the box from Papa's paw into the Fisherman's palm (the matches minigame)"},
     "matchbox_close": {"range": [0, 1], "smooth": True, "means": "the matchbox close: the Fisherman's fingers closing on it"},
+    "knot_pull": {"range": [0, 1], "smooth": True, "means": "the knot close's thread drawn out (the script: the minigame's knot while Papa works it; 0 — the knot itself in the close-ups after)"},
+    "carry_tilt": {"range": [-1, 1], "smooth": True, "means": "the carry minigame: how the pie or the bread tips in Papa's paws over the stones (0 level)"},
     "knot_paws": {"range": [0, 1], "means": "the knot close: Papa's paws at the knot (1), or the net alone on the Fisherman's knees (0)"},
     "papa_lantern": {"range": [0, 1], "smooth": True, "means": "the lantern in Papa's paw lit (its light at papa#flame)"},
     "beat": {"type": "string", "means": "the piece playing (the module beats; the game names it)"},

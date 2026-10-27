@@ -607,6 +607,8 @@
     "knot": 0,
     "knot_open": 0,
     "knot_paws": 1,
+    "knot_pull": 0,
+    "carry_tilt": 0,
     "matchbox_open": 0,
     "matchbox_give": 0,
     "matchbox_close": 0,
@@ -820,6 +822,22 @@
       ],
       "smooth": true,
       "means": "the matchbox close: the Fisherman's fingers closing on it"
+    },
+    "knot_pull": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the knot close's thread drawn out (the script: the minigame's knot while Papa works it; 0 — the knot itself in the close-ups after)"
+    },
+    "carry_tilt": {
+      "range": [
+        -1,
+        1
+      ],
+      "smooth": true,
+      "means": "the carry minigame: how the pie or the bread tips in Papa's paws over the stones (0 level)"
     },
     "knot_paws": {
       "range": [
