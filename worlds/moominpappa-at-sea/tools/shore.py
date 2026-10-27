@@ -55,40 +55,55 @@ objects = [
     el("seahorses", "The sea-horses", -4.6, 7, [-8.2, -0.9, 1.8, 0.3], elevation=SEA, onLand=False),
     person("groke", "The Groke", "groke", -2.9, 6.8, place={"across": "groke_a", "distance": "groke_d"}),
     person("troll", "Moomintroll", "troll", 0.7, 4.1, place={"across": "troll_a", "distance": "troll_d"}),
-    person("papa", "Moominpappa", "papa", 4.7, 7.6),
-    person("mama", "Moominmamma", "mama", -3.2, 11),
+    person("papa", "Moominpappa", "papa", 4.7, 7.6, place={"across": "papa_a", "distance": "papa_d"}),
+    person("mama", "Moominmamma", "mama", -3.2, 11, place={"across": "mama_a", "distance": "mama_d"}),
     island.RAIN,
 ]
 
 lights = island.lights(([-160, 42], "#fff0dc", 1.35), ([80, 10], "#ffe0c2", 1.3), [-70, 4], [-40, 28]) + [
-    {"id": "stone_lamp", "of": "stone_lantern#flame", "color": "#ffc874", "strength": 1.5, "reach": 7, "flicker": 0.12}]
+    {"id": "stone_lamp", "of": "stone_lantern#flame", "color": "#ffc874", "strength": 1.5, "reach": 7, "flicker": 0.12},
+    {"id": "hand_lamp", "at": "troll#flame", "on": "hand_lit", "color": "#ffc874", "strength": 1.4, "reach": 6, "flicker": 0.12}]
 
 # the empty play: the day, the sea-horses in the shallows, the son three steps from the stone; the Groke, Papa and Mama
 # not here (the game says who is)
 state = {**island.STATE,
          "seahorses": "here", "seahorses_away": 0, "groke_at": "edge", "frost": 0, "warm": 0, "track": 0, "lantern_stone": "none",
          "blanket": False, "troll_at": "near", "dune_dent": False,
-         "groke_a": -2.9, "groke_d": 6.8, "troll_a": 0.7, "troll_d": 4.1, "blanket_a": 0, "blanket_d": 6,
+         "groke_a": -2.9, "groke_d": 6.8, "troll_a": 0.7, "troll_d": 4.1, "papa_a": 4.7, "papa_d": 7.6, "mama_a": -3.2, "mama_d": 11,
+         "blanket_a": 0, "blanket_d": 6, "hand_lit": 0, "follow_close": False, "glance": "sea", "follow": 0, "follow_at": 0, "walk": 0, "walk_at": 0, "beat": "", "beat_next": "",
          "groke_here": False, "papa_here": False, "mama_here": False,
          "papa_turn": 265, "papa_look": "groke", "mama_turn": 250, "groke_mood": "sad"}
 
 states = {**island.STATES,
           "seahorses": {"values": ["here", "gone"], "means": "the sea-horses in the shallows off the stone, glowing (by day); gone — they swim off to the left and are gone"},
           "seahorses_away": {"range": [0, 1], "smooth": True, "means": "the scene's own: how far the sea-horses have swum off (moved by the scene when seahorses becomes gone)"},
-          "groke_at": {"values": ["edge", "near", "closest", "water"], "means": "where the Groke is: far off at the water's edge; nearer the lighthouse up the strand; nearer still; waist-deep in the sea. She faces the lantern on the stone while it is there, else the lighthouse"},
+          "groke_at": {"values": ["edge", "near", "closest", "water"], "means": "where the Groke sits (her frost round it): far off at the water's edge; nearer the lighthouse up the strand; nearer still; waist-deep in the sea. She faces the lantern on the stone while it is there, else the lighthouse"},
           "frost": {"range": [0, 1], "smooth": True, "means": "the rime round the Groke: 0 none … 1 widest (over three metres); grows and melts before the eyes"},
           "warm": {"range": [0, 1], "smooth": True, "means": "the sand under the Groke dark and damp: she has got warm"},
           "track": {"range": [0, 1], "smooth": True, "means": "her white trail from where she sat down to the water: how far it has run (1 — to the water)"},
-          "lantern_stone": {"values": ["none", "lit", "out"], "means": "the family's lantern on the flat stone: not there; burning (it lights the sand, the son, the Groke); out, cold glass"},
+          "lantern_stone": {"values": ["none", "lit", "low", "out"], "means": "the family's lantern on the flat stone: not there; burning (it lights the sand, the son, the Groke); turned low, a dim flame; out, cold glass"},
           "blanket": {"type": "boolean", "means": "the blanket on the sand behind the son (wherever he is)"},
-          "troll_at": {"values": ["far", "near", "beside"], "means": "where the son is: near the viewer, far from her; three steps back from the stone; beside the Groke at her left, facing as she does. Changed while the scene plays, he walks there"},
+          "troll_at": {"values": ["far", "near", "beside"], "means": "where the son stands when the scene is opened without a piece: off to the right, far from her; three steps back from the stone; beside the Groke on the viewer's side, facing as she does (the pieces place him themselves)"},
           "dune_dent": {"type": "boolean", "means": "the hollow in the sand on the dune's top where Moominpappa sat all night"},
-          "groke_a": {"range": [-8, 2], "means": "the scene's own: where the Groke stands (across, metres) — set from groke_at"},
-          "groke_d": {"range": [4, 10], "means": "the scene's own: where the Groke stands (distance, metres) — set from groke_at"},
-          "troll_a": {"range": [-8, 4], "means": "the scene's own: where the son stands (across, metres) — set from troll_at"},
-          "troll_d": {"range": [2, 10], "means": "the scene's own: where the son stands (distance, metres) — set from troll_at"},
+          "groke_a": {"range": [-10, 4], "means": "the scene's own: where the Groke stands (across, metres) — set from groke_at"},
+          "groke_d": {"range": [3, 12], "means": "the scene's own: where the Groke stands (distance, metres) — set from groke_at"},
+          "troll_a": {"range": [-8, 12], "means": "the scene's own: where the son stands (across, metres) — set from troll_at"},
+          "troll_d": {"range": [0, 16], "means": "the scene's own: where the son stands (distance, metres) — set from troll_at"},
           "blanket_a": {"range": [-8, 4], "means": "the scene's own: where the blanket lies (across, metres) — behind the son"},
-          "blanket_d": {"range": [2, 10], "means": "the scene's own: where the blanket lies (distance, metres) — behind the son"}}
+          "blanket_d": {"range": [2, 10], "means": "the scene's own: where the blanket lies (distance, metres) — behind the son"},
+          "papa_a": {"range": [-8, 12], "means": "the scene's own: where Papa stands (across, metres) — the pieces' and the minigames'"},
+          "papa_d": {"range": [0, 16], "means": "the scene's own: where Papa stands (distance, metres)"},
+          "mama_a": {"range": [-8, 12], "means": "the scene's own: where Mama stands (across, metres) — the pieces'"},
+          "mama_d": {"range": [0, 16], "means": "the scene's own: where Mama stands (distance, metres)"},
+          "hand_lit": {"range": [0, 1], "smooth": True, "means": "the scene's own: the lantern in the son's hand alight (its light at troll#flame) — the pieces'"},
+          "follow_close": {"type": "boolean", "means": "«Следом»: Papa came too close — at the stone the son sits down by the Groke with his back to his father"},
+          "glance": {"values": ["never", "once", "sea"], "means": "the son's look in the finales (look_son): never at Papa — down at the sand; once — up at the dune and back; at the sea"},
+          "follow": {"range": [0, 1], "smooth": True, "means": "«Следом» (the minigame): how far down the dune's path to the stone the son is; he walks there"},
+          "follow_at": {"range": [0, 1], "smooth": True, "means": "«Следом» (the minigame): how far down from over the dune after him Papa is; he walks there"},
+          "walk": {"range": [0, 1], "smooth": True, "means": "«Рядом» (the minigame): how far up the way onto the dune's top the son is; he walks there"},
+          "walk_at": {"range": [-1, 1], "smooth": True, "means": "«Рядом» (the minigame): Papa beside the son on his right, metres ahead (+) or behind (−) him"},
+          "beat": {"type": "string", "means": "the piece playing (the world's beats: notes.md «Pieces»)"},
+          "beat_next": {"type": "string", "means": "the piece the game will play next (its cut made ready)"}}
 
 spec = {
     "engine": 3,
@@ -98,7 +113,7 @@ spec = {
     "camera": {"mode": "picture"},
     "light": island.light(WIND),
     "lights": lights,
-    "modules": ["cast", "island"],
+    "modules": ["cast", "island", "beats"],
     "objects": objects,
     "state": state,
     "states": states,

@@ -48,7 +48,7 @@ objects = [
     el("rock", "The rock at the pool's lip", ROCK['a'], ROCK['d'], [-1.9, -0.8, 1.9, 0], shadow=True),
     el("coil", "The rope coiled on the rock", ROCK['a'], ROCK['d'], [-0.25, -0.2, 0.25, 0.05], elevation=0.6),
     el("rope", "The rope let down into the pool", ROPE['a'], ROPE['d'], [-0.4, -0.85, 0.7, 0.1], elevation=r3(LIB['rope'])),
-    el("ring", "The son's ring of stones", RING['a'], RING['d'], [-1.1, -0.3, 1.1, 0.05], shadow=True),
+    el("ring", "The son's ring of stones", RING['a'], RING['d'], [-2.6, -0.3, 2.6, 0.05], shadow=True),
     island.lighthouse(TOWER['a'], TOWER['d']),
     el("steps", "Steps to the lighthouse door", TOWER['a'], TOWER['d'] - 2.6, [-0.8, -0.55, 0.8, 0.05]),
     {"id": "pines", "name": "Island pines", "box": PINE, "shadow": True, "across": -2, "distance": 38,
@@ -60,10 +60,10 @@ objects = [
      "across": a, "distance": d, "place": {"across": f"pine{k + 1}_a", "distance": f"pine{k + 1}_d"}}
     for k, (a, d) in enumerate(LIB['PINES'])
 ] + [
-    person("troll", "Moomintroll", "troll", -0.5, 4.6),
-    person("papa", "Moominpappa", "papa", 3.3, 5.4),
-    person("mama", "Moominmamma", "mama", 0.4, 8.5),
-    person("my", "Little My", "my", -3.4, 5.6),
+    person("troll", "Moomintroll", "troll", -0.5, 4.6, place={"across": "troll_a", "distance": "troll_d"}),
+    person("papa", "Moominpappa", "papa", 3.3, 5.4, place={"across": "papa_a", "distance": "papa_d"}),
+    person("mama", "Moominmamma", "mama", 0.4, 8.5, place={"across": "mama_a", "distance": "mama_d"}),
+    person("my", "Little My", "my", -3.4, 5.6, place={"across": "my_a", "distance": "my_d"}),
     island.RAIN,
 ]
 
@@ -71,7 +71,8 @@ lights = island.lights(([150, 45], "#fff0dc", 1.35), ([-90, 12], "#ffe0c2", 1.3)
 
 # the empty play: the day, the clearing without its ring, no rope, the pines where they stood; only the son here (the
 # game says who is)
-state = {**island.STATE, "pines": 0, "ring": "none", "rope": 0, "coil": False,
+state = {**island.STATE, "pines": 0, "ring": "none", "ring_n": 9, "rope": 0, "coil": False, "sway": 0, "beat": "", "beat_next": "",
+         "troll_a": -0.5, "troll_d": 4.6, "papa_a": 3.3, "papa_d": 5.4, "mama_a": 0.4, "mama_d": 8.5, "my_a": -3.4, "my_d": 5.6,
          **{f"pine{k + 1}_{x}": r3(v) for k, p in enumerate(LIB['PINES']) for x, v in zip("ad", p)},
          "papa_here": False, "mama_here": False, "my_here": False,
          "troll_turn": 295, "troll_look": "ring#stones", "troll_mood": "thinking",
@@ -79,7 +80,12 @@ state = {**island.STATE, "pines": 0, "ring": "none", "rope": 0, "coil": False,
 
 states = {**island.STATES,
           "pines": {"range": [0, 1], "smooth": True, "means": "the pines about the clearing creep toward the lighthouse: 0 where they stood when the family came, 1 three and a half metres nearer it (from chapter to chapter; may move before the eyes)"},
-          "ring": {"values": ["none", "set", "broken", "one_missing"], "means": "the son's ring of stones on the moss of his clearing: none; set — a whole ring; broken — kicked apart, scattered; one_missing — whole but for one stone"},
+          "ring": {"values": ["none", "set", "broken", "one_missing"], "means": "the son's ring of stones on the moss of his clearing: none; set — the ring (ring_n of its stones laid); broken — kicked apart, scattered (ring_n of them laid back); one_missing — whole but for one stone"},
+          "ring_n": {"range": [0, 9], "means": "how many stones of the ring are in their places while it is laid (9 — all)"},
+          "sway": {"range": [-1, 1], "smooth": True, "means": "«Охапка» (the minigame): the armful over Papa's head swaying, he turns under it"},
+          "beat": {"type": "string", "means": "the piece playing (the world's beats: notes.md «Pieces»)"},
+          "beat_next": {"type": "string", "means": "the piece the game will play next (its cut made ready)"},
+          **{f"{p}_{x}": {"range": [-20, 20], "means": "the scene's own: where a person stands (metres) — the pieces'"} for p in ["troll", "papa", "mama", "my"] for x in "ad"},
           "rope": {"range": [0, 1], "smooth": True, "means": "the rope with its weight let down into the pool from the rock: 0 none of it … 1 all of it (its coil on the rock smaller); while it moves it trembles and rings spread on the water"},
           "coil": {"type": "boolean", "means": "the rope pulled up and coiled on the rock at the pool's lip (after the sounding)"},
           **{f"pine{k + 1}_{x}": {"range": [-20, 60], "means": "the scene's own: where a creeping pine stands (metres) — set from pines"} for k in range(len(LIB['PINES'])) for x in "ad"}}
@@ -92,7 +98,7 @@ spec = {
     "camera": {"mode": "picture"},
     "light": island.light(WIND),
     "lights": lights,
-    "modules": ["cast", "island"],
+    "modules": ["cast", "island", "beats"],
     "objects": objects,
     "state": state,
     "states": states,

@@ -14,3 +14,12 @@ const creep = () => {
 creep();
 scene.on('change', 'pines', creep);
 scene.on('move', 'pines', creep);
+// the pieces (lib.js `film`), played by `beat` through the world's `beats`
+scene.kit.beats.play(scene, L.film(scene));
+// «Охапка» (sway −1…1): the armful sways and Papa under it turns this way and that from the way he is going
+const sway = () => {
+  const [a, d] = L.ARMFUL[1], [a2, d2] = L.ARMFUL[2];
+  scene.set('papa_turn', L.turnTo(a, d, a2, d2) + 14 * scene.get('sway'));
+};
+scene.on('change', 'sway', sway);
+scene.on('move', 'sway', sway);

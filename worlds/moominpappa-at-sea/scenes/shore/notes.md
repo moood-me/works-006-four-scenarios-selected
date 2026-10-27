@@ -42,6 +42,14 @@ Papa on the dune.
 
 ## Pieces (stage 5: `lib.js` FILM, played by `beat` through the world's `beats`; the game says the lines at the moments)
 
+How they are made: `lib.js` `film(scene)` — each piece's `from` (people's places by `AT`, the camera, the scene's own
+keys; never the hour, the weather, who is here) and `run` (a sequence: walks at the cast's gaits, motions, keys moved,
+the camera moved, `scene.tell` at the moments). The camera is the scene's own moved nearer (`NEAR`: along the line the
+viewer sees one by, turned to them; `dolly` over seconds, `cutTo` a shot made ready — the son's blush), not the
+operator: framing the seated Groke close the operator stands inside her (reported). `script.js` plays them
+(`beats.play`) and moves the people by the minigames' acts; `showcase.js` plays a selection, each piece in its play's
+keys. Seconds below are measured roughly on renders.
+
 Seconds are estimates (the people at their own pace). Each piece's `from` sets what it does not move itself; a piece
 `after` another goes on from where that one ended. The people's motions and parts are the cast's (package Л):
 `basket`, `lantern` in the hand, `blanket`, `armful`; `crouch`, `sit_down`/`sit_floor`, `back_away`, `put_down`,
@@ -80,8 +88,8 @@ Seconds are estimates (the people at their own pace). Each piece's `from` sets w
   was given light); she howls — `wide:howl`.
 - `beside` (4.7 «Пусть идёт», night, ≈ 14 s): the son comes along the strand without a lantern and sits down beside
   her — `beside:sat`; the frost creeps to him; white to the elbows — `beside:white` (the cast's rime on him).
-- `blanket` (after `beside`, ≈ 16 s): Mama over the dune with the blanket, lays it on the sand behind the son
-  (`blanket` → true) — `blanket:laid`; she goes back over the dune; time passes: the frost stops, the sand under the
+- `blanket` (after `beside`, ≈ 20 s): Mama comes from the lighthouse's side with the blanket, lays it on the sand by
+  the son, on the viewer's side of him (`blanket` → true) — `blanket:laid`; she goes back; time passes: the frost stops, the sand under the
   Groke darkens (`warm` 0 → 1), she hums — `blanket:warm`.
 - `dune_start` (4.7 «Я до дюны», night, ≈ 5 s): Papa and the son come side by side from the right onto the dune's
   path — `dune_start:ready` (the pose for «Рядом»). The minigame moves `walk` and `walk_at`.
@@ -105,6 +113,14 @@ sits with his back to him); the acts `follow`, `follow_at`, `walk`, `walk_at`.
 
 ## Pieces (stage 5: `lib.js` FILM, played by `beat` through the world's `beats`; the game says the lines at the moments)
 
+How they are made: `lib.js` `film(scene)` — each piece's `from` (people's places by `AT`, the camera, the scene's own
+keys; never the hour, the weather, who is here) and `run` (a sequence: walks at the cast's gaits, motions, keys moved,
+the camera moved, `scene.tell` at the moments). The camera is the scene's own moved nearer (`NEAR`: along the line the
+viewer sees one by, turned to them; `dolly` over seconds, `cutTo` a shot made ready — the son's blush), not the
+operator: framing the seated Groke close the operator stands inside her (reported). `script.js` plays them
+(`beats.play`) and moves the people by the minigames' acts; `showcase.js` plays a selection, each piece in its play's
+keys. Seconds below are measured roughly on renders.
+
 Seconds are estimates (the people at their own pace). Each piece's `from` sets what it does not move itself; a piece
 `after` another goes on from where that one ended. The people's motions and parts are the cast's (package Л):
 `basket`, `lantern` in the hand, `blanket`, `armful`; `crouch`, `sit_down`/`sit_floor`, `back_away`, `put_down`,
@@ -143,8 +159,8 @@ Seconds are estimates (the people at their own pace). Each piece's `from` sets w
   was given light); she howls — `wide:howl`.
 - `beside` (4.7 «Пусть идёт», night, ≈ 14 s): the son comes along the strand without a lantern and sits down beside
   her — `beside:sat`; the frost creeps to him; white to the elbows — `beside:white` (the cast's rime on him).
-- `blanket` (after `beside`, ≈ 16 s): Mama over the dune with the blanket, lays it on the sand behind the son
-  (`blanket` → true) — `blanket:laid`; she goes back over the dune; time passes: the frost stops, the sand under the
+- `blanket` (after `beside`, ≈ 20 s): Mama comes from the lighthouse's side with the blanket, lays it on the sand by
+  the son, on the viewer's side of him (`blanket` → true) — `blanket:laid`; she goes back; time passes: the frost stops, the sand under the
   Groke darkens (`warm` 0 → 1), she hums — `blanket:warm`.
 - `dune_start` (4.7 «Я до дюны», night, ≈ 5 s): Papa and the son come side by side from the right onto the dune's
   path — `dune_start:ready` (the pose for «Рядом»). The minigame moves `walk` and `walk_at`.

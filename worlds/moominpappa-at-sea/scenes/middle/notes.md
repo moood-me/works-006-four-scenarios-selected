@@ -31,6 +31,11 @@ metre above the clearing, so the pool is seen from above enough to read as water
 
 ## Pieces (stage 5: `lib.js` FILM, played by `beat` through the world's `beats`; the game says the lines at the moments)
 
+How they are made: `lib.js` `film(scene)` — as the shore's (`from` by `AT`, `run` a sequence, the camera the scene's
+own moved nearer, `NEAR`/`dolly`). The ring's stones are layers of `ring` at their own depths, each in its place and
+kicked apart, shown by `ring` and `ring_n` — laid one by one with no painting again. `script.js` plays the pieces,
+creeps the pines and turns Papa under the armful by `sway`; `showcase.js` plays them all, each in its play's keys.
+
 Seconds are estimates. Motions and parts are the cast's (package Л): the `rope` with its weight in the hands, the
 `armful`; `crouch`, `put_down` (a stone), `pull_rope`, `carry` (the armful high).
 
@@ -59,6 +64,11 @@ New keys for these (stage 5): `ring_n` 0…9 — how many stones of a set ring a
 layer of `ring`, shown by it: no painting again); the act `sway`.
 
 ## Pieces (stage 5: `lib.js` FILM, played by `beat` through the world's `beats`; the game says the lines at the moments)
+
+How they are made: `lib.js` `film(scene)` — as the shore's (`from` by `AT`, `run` a sequence, the camera the scene's
+own moved nearer, `NEAR`/`dolly`). The ring's stones are layers of `ring` at their own depths, each in its place and
+kicked apart, shown by `ring` and `ring_n` — laid one by one with no painting again. `script.js` plays the pieces,
+creeps the pines and turns Papa under the armful by `sway`; `showcase.js` plays them all, each in its play's keys.
 
 Seconds are estimates. Motions and parts are the cast's (package Л): the `rope` with its weight in the hands, the
 `armful`; `crouch`, `put_down` (a stone), `pull_rope`, `carry` (the armful high).
