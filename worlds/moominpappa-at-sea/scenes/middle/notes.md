@@ -1,8 +1,10 @@
 # The Middle of the Island (С7 of the game «Папа и море»)
 
-A hollow in the middle of the island, looking up toward the lighthouse on its knoll beyond the black pines: the son's
-mossy clearing in the near left with his ring of stones, the black pool in its granite basin on the right with a
-rock at its lip, the path going up through the pines; beyond, all round, the island falls away to the sea.
+A hollow in the middle of the island, the viewer on a granite shoulder above it, looking up toward the lighthouse on
+its knoll beyond the black pines: close below, the son's mossy clearing on the left with his ring of stones and the
+black pool in its granite basin with a rock at its lip; the path going up through the pines; beyond, all round, the
+island falls away to the sea. The action is 4–7 m off (the son a quarter of the frame); the viewer stands half a
+metre above the clearing, so the pool is seen from above enough to read as water.
 
 - The land is one function (`lib.js` `land`), made with the island's shapes: the hollow, granite backs left and
   right, the knoll; the pool's basin a level floor under a steep rim (`raw`'s mask), its water `POOL.level` over it.

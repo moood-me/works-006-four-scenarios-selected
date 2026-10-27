@@ -2,7 +2,7 @@
   "engine": 3,
   "title": "The Beach",
   "caption": "The sand by the water. At night the Groke comes here and sits facing the lights.",
-  "horizon": 0.5,
+  "horizon": 0.42,
   "camera": {
     "mode": "picture"
   },
@@ -177,9 +177,9 @@
       "name": "The sky",
       "sky": true,
       "uniforms": {
-        "low": 0.6,
+        "low": 0.55,
         "day_x": 0.3,
-        "day_y": 0.38,
+        "day_y": 0.34,
         "dawn_x": 1.7,
         "dusk_x": 0.15,
         "dawn": 0,
@@ -213,20 +213,20 @@
       "name": "The island's granite",
       "plane": true,
       "drape": true,
-      "across": 24,
-      "distance": 46,
-      "width": 60,
-      "depth": 84
+      "across": 30,
+      "distance": 14,
+      "width": 56,
+      "depth": 80
     },
     {
       "id": "sand",
       "name": "The beach",
       "plane": true,
       "drape": true,
-      "across": 0,
-      "distance": 18,
-      "width": 28,
-      "depth": 48,
+      "across": 2,
+      "distance": 14,
+      "width": 32,
+      "depth": 40,
       "inFront": [
         "granite"
       ]
@@ -234,8 +234,8 @@
     {
       "id": "lighthouse",
       "name": "The lighthouse",
-      "across": 26,
-      "distance": 48,
+      "across": 34,
+      "distance": 5,
       "elevation": -0.45,
       "box": [
         -5.03,
@@ -258,38 +258,38 @@
         0.1
       ],
       "shadow": true,
-      "across": 21.5,
-      "distance": 45,
+      "across": 12.5,
+      "distance": 14,
       "copies": [
         {
-          "across": 21.5,
-          "distance": 45
+          "across": 12.5,
+          "distance": 14
         },
         {
-          "across": 30.5,
-          "distance": 49,
+          "across": 16,
+          "distance": 19,
           "scale": 0.85,
           "flip": true
         },
         {
-          "across": 23.5,
-          "distance": 53,
+          "across": 10.5,
+          "distance": 19,
           "scale": 1.1
         },
         {
-          "across": 18.5,
-          "distance": 41,
+          "across": 20,
+          "distance": 9,
           "scale": 0.8,
           "flip": true
         },
         {
-          "across": 31,
-          "distance": 43,
+          "across": 27,
+          "distance": 2,
           "scale": 0.9
         },
         {
-          "across": 14,
-          "distance": 36,
+          "across": 8.5,
+          "distance": 12,
           "scale": 0.7
         }
       ]
@@ -303,60 +303,60 @@
         0.75,
         0.08
       ],
-      "across": 4.6,
-      "distance": 7.5,
+      "across": 3.4,
+      "distance": 3.2,
       "copies": [
         {
-          "across": 4.6,
-          "distance": 7.5,
+          "across": 3.4,
+          "distance": 3.2,
           "scale": 1,
           "flip": false
         },
         {
-          "across": 8.6,
-          "distance": 7.2,
+          "across": 6.4,
+          "distance": 5.4,
           "scale": 0.9,
           "flip": false
         },
         {
-          "across": 8.6,
-          "distance": 12.2,
+          "across": 7.4,
+          "distance": 9.6,
           "scale": 1.3,
           "flip": false
         },
         {
-          "across": 5.1,
-          "distance": 13.4,
+          "across": 3.6,
+          "distance": 9.9,
           "scale": 1.1,
           "flip": true
         },
         {
-          "across": 7.2,
-          "distance": 15.2,
+          "across": 5.8,
+          "distance": 12.2,
           "scale": 1,
           "flip": false
         },
         {
-          "across": 4.3,
-          "distance": 11.1,
+          "across": 2.9,
+          "distance": 7.6,
           "scale": 0.8,
           "flip": true
         },
         {
-          "across": 9.4,
-          "distance": 10.1,
+          "across": 8.4,
+          "distance": 7.1,
           "scale": 1.1,
           "flip": true
         },
         {
-          "across": 6.1,
-          "distance": 17.6,
+          "across": 4.4,
+          "distance": 14.4,
           "scale": 1.2,
           "flip": false
         },
         {
-          "across": 3.9,
-          "distance": 15.8,
+          "across": 1.8,
+          "distance": 12.4,
           "scale": 0.9,
           "flip": false
         }
@@ -367,8 +367,8 @@
       "name": "The dune's top",
       "plane": true,
       "drape": true,
-      "across": 6.4,
-      "distance": 11,
+      "across": 5.2,
+      "distance": 7.5,
       "width": 2,
       "depth": 2
     },
@@ -376,8 +376,8 @@
       "id": "rime",
       "name": "The Groke's frost",
       "plane": true,
-      "across": -2.2,
-      "distance": 12,
+      "across": -2.5,
+      "distance": 6.5,
       "elevation": 0.012,
       "width": 10,
       "depth": 9,
@@ -396,7 +396,7 @@
       "name": "The blanket",
       "plane": true,
       "across": 0,
-      "distance": 10,
+      "distance": 6,
       "elevation": 0.02,
       "width": 1.3,
       "depth": 0.8,
@@ -408,8 +408,8 @@
     {
       "id": "stone",
       "name": "The flat stone",
-      "across": -1.2,
-      "distance": 9.6,
+      "across": -0.5,
+      "distance": 4.9,
       "shadow": true,
       "box": [
         -1.7,
@@ -421,8 +421,8 @@
     {
       "id": "stone_lantern",
       "name": "The lantern on the stone",
-      "across": -1.2,
-      "distance": 9.6,
+      "across": -0.5,
+      "distance": 4.9,
       "elevation": 0.3,
       "box": [
         -0.16,
@@ -434,8 +434,8 @@
     {
       "id": "seahorses",
       "name": "The sea-horses",
-      "across": -5.2,
-      "distance": 10.2,
+      "across": -4.6,
+      "distance": 7,
       "elevation": -0.1,
       "onLand": false,
       "box": [
@@ -452,8 +452,8 @@
         "cast": "cast",
         "who": "groke"
       },
-      "across": -2.4,
-      "distance": 13,
+      "across": -2.9,
+      "distance": 6.8,
       "place": {
         "across": "groke_a",
         "distance": "groke_d"
@@ -466,8 +466,8 @@
         "cast": "cast",
         "who": "troll"
       },
-      "across": 0.2,
-      "distance": 8.4,
+      "across": 0.7,
+      "distance": 4.1,
       "place": {
         "across": "troll_a",
         "distance": "troll_d"
@@ -480,8 +480,8 @@
         "cast": "cast",
         "who": "papa"
       },
-      "across": 6.3,
-      "distance": 11.4
+      "across": 4.7,
+      "distance": 7.6
     },
     {
       "id": "mama",
@@ -490,8 +490,8 @@
         "cast": "cast",
         "who": "mama"
       },
-      "across": -3.0,
-      "distance": 17
+      "across": -3.2,
+      "distance": 11
     },
     {
       "id": "rain",
@@ -522,16 +522,16 @@
     "blanket": false,
     "troll_at": "near",
     "dune_dent": false,
-    "groke_a": -2.4,
-    "groke_d": 13,
-    "troll_a": 0.2,
-    "troll_d": 8.4,
+    "groke_a": -2.9,
+    "groke_d": 6.8,
+    "troll_a": 0.7,
+    "troll_d": 4.1,
     "blanket_a": 0,
-    "blanket_d": 10,
+    "blanket_d": 6,
     "groke_here": false,
     "papa_here": false,
     "mama_here": false,
-    "papa_turn": 285,
+    "papa_turn": 265,
     "papa_look": "groke",
     "mama_turn": 250,
     "groke_mood": "sad"
@@ -673,8 +673,8 @@
     },
     "groke_d": {
       "range": [
-        9,
-        16
+        4,
+        10
       ],
       "means": "the scene's own: where the Groke stands (distance, metres) — set from groke_at"
     },
@@ -687,8 +687,8 @@
     },
     "troll_d": {
       "range": [
-        3,
-        16
+        2,
+        10
       ],
       "means": "the scene's own: where the son stands (distance, metres) — set from troll_at"
     },
@@ -701,8 +701,8 @@
     },
     "blanket_d": {
       "range": [
-        3,
-        16
+        2,
+        10
       ],
       "means": "the scene's own: where the blanket lies (distance, metres) — behind the son"
     }

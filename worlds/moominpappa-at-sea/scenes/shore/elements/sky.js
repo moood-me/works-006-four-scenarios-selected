@@ -1,3 +1,3 @@
-// The island's sky (modules/island): its colours by the hour are its shader's; the moon over the sea on the left,
-// the lightning far out beyond it.
-e.kit.island.sky(g, e, { low: 0.6, moon: [0.35, 0.2], bolt: [0.25, 0.03] });
+// The island's sky (modules/island): its colours by the hour are its shader's; the moon ahead on the right, over
+// the land, so that its light falls on the faces turned toward the lighthouse; the lightning far out over the sea.
+e.kit.island.sky(g, e, { low: 0.55, moon: [1.42, 0.13], bolt: [0.3, 0.03] });

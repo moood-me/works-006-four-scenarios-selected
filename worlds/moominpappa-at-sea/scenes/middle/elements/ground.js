@@ -46,7 +46,7 @@ for (let i = 0; i < 2200; i++) {
 }
 // the path: from the clearing up through the pines toward the lighthouse — trodden earth, a few small stones on it
 const way = [at(L.RING.a + 1.2, L.RING.d + 1.4)];
-for (const [a, d] of [[0.6, 11], [1.6, 15], [1.2, 20], [2.6, 26], [3.2, 33], [3.9, 40]]) way.push(at(a, d));
+for (const [a, d] of [[0.2, 7.5], [0.9, 10], [1.0, 14], [1.6, 20], [2, 28], [2, 37]]) way.push(at(a, d));
 g.strokeStyle = "rgba(128, 100, 80, 0.55)";
 g.lineCap = "round";
 g.lineJoin = "round";
@@ -79,4 +79,4 @@ for (let i = 1; i < way.length; i++) {
   g.restore();
 }
 // where the path goes in among the pines: ground#path
-e.at(...at(1.2, 13), "path");
+e.at(...at(0.9, 10), "path");

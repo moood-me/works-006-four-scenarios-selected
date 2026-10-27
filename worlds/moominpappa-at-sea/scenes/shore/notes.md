@@ -1,8 +1,9 @@
 # The Beach (С8 of the game «Папа и море»)
 
-The island's sandy lee shore, looking along it: the sea on the left to the horizon, a level strand of wet and dry sand
-along the water, the flat stone at the water's edge, the sand rising on the right to a low dune with lyme grass, and
-beyond the dune the granite knoll with the lighthouse and its pines. By day the son by the water and the sea-horses
+The island's sandy lee shore, the viewer close to where the Groke comes, looking along it: the sea on the left to the
+horizon, a level strand of wet and dry sand along the water, the flat stone at the water's edge a few metres ahead,
+the sand rising on the right to a low dune with lyme grass, and off to the right beyond the dune (out of the
+picture) the granite knoll with the lighthouse; its pines show at the right edge. By day the son by the water and the sea-horses
 in the shallows; at night the Groke by the water facing the lights, her frost round her, the lantern on the stone,
 Papa on the dune.
 
@@ -29,14 +30,15 @@ Papa on the dune.
   turn (beside her: at her left, facing as she does) — set at once when the scene opens, walked at his own pace when
   it changes while the scene plays.
 - People (the world's cast): the Groke (`groke`, new in the cast with this scene), the son, Papa on the dune's top,
-  Mama by the water further along. Stage 4: they stand and breathe, no motions yet (sitting, the Groke sitting down
+  Mama by the water further along. The son beside the Groke stands on the viewer's side of her. Stage 4: they stand and breathe, no motions yet (sitting, the Groke sitting down
   and swaying over the light, walking into the sea — stage 5).
 - The lighthouse's lantern seen lit from here (Papa up there with the storm lantern, night 1 «Наверх») is the
   island's `lighthouse_lit`; at 0.25 its glow is faint at this distance. No beam: the engine has no turning
   spotlight yet.
-- Composition: when the Groke faces the lighthouse she has her back to the viewer (the lighthouse is ahead); she
-  faces the viewer when the lantern is on the stone. Her face in the moments without the lantern is the game's
-  camera's (stage 5: `camera_target`, `camera_yaw`).
+- Composition: the action is 4–7 m from the viewer (the Groke a third of the frame's height, the son a quarter).
+  The lighthouse stands off to the right, level with her, so facing it she is seen side-on (her face in profile, lit
+  by the moon ahead on the right); facing the lantern on the stone she turns three-quarters to the viewer. The cost:
+  the lighthouse itself is not in the picture (its light is — `lighthouse_lit`).
 
 ## Contract for the check
 

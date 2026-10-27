@@ -1,9 +1,9 @@
-// The frost round the Groke, from above (the plane's metres: x across, y toward the viewer; its centre at across -2.2,
-// distance 12, on the level strand): painted once for where she sits (groke_at) — the white rime crystals out to its
+// The frost round the Groke, from above (the plane's metres: x across, y toward the viewer; its centre at across -2.5,
+// distance 6.5, on the level strand): painted once for where she sits (groke_at) — the white rime crystals out to its
 // widest, the sand under her dark and damp where she has warmed, the white trail from her seat down to the water.
 // Its shader shows as much of each as the keys say (frost, warm, track): the rime grows and melts, the dark circle
 // comes (over the rime: frost round where she sat), the trail runs out to the water — no painting again.
-const CA = -2.2, CD = 12, R = 3.4, L = e.lib, seat = L.SEATS[e.state.groke_at] ?? L.SEATS.edge;
+const CA = -2.5, CD = 6.5, R = 3.4, L = e.lib, seat = L.SEATS[e.state.groke_at] ?? L.SEATS.edge;
 // (only on the sand: the plane lies level on the strand, a little over the sea — the shader ends it at the water's
 // edge, wx)
 const sx = seat[0] - CA, sy = CD - seat[1], wx = L.WATER - 0.55 - CA;
