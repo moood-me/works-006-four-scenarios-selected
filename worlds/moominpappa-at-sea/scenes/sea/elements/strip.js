@@ -16,7 +16,7 @@ const band = (y, w, a) => {
 };
 for (let y = -45; y < 45; y += 1) {
   const far = (45 - y) / 90; // 0 at the stern's end … 1 far astern
-  band(y, 1.3 + 1.9 * far, 0.95 - 0.35 * far);
+  band(y, 1.3 + 1.9 * far, 1 - 0.25 * far);
 }
 // floes: flat white pieces, more near, with a bluish shade on one side
 for (let i = 0; i < 520; i++) {

@@ -1,7 +1,6 @@
 // The lighthouse's island seen from the sea, side-on: low backs of pink granite rising to the knoll where the
 // lighthouse stands (the module's tower stands on it, a few metres behind this face), black crooked pines in its
 // cracks, the white of the swell breaking along its foot. Metres from its middle at the waterline, 90 m across.
-// Its point `isle#step`: the ground before the lighthouse's door, where someone stands there.
 const back = [[-45, 0.4], [-38, 1.4], [-30, 2.2], [-22, 3.0], [-14, 4.2], [-6, 5.6], [0, 6.3], [6, 6.6], [12, 6.2], [18, 4.8],
   [26, 3.4], [34, 2.0], [41, 0.9], [45, 0.3]];
 const outline = () => {
@@ -57,4 +56,3 @@ for (const [x, s] of [[-18, 1.0], [-11, 1.3], [-8, 0.9], [14, 1.2], [19, 1.0], [
     g.fill();
   }
 }
-e.at(6, -6.6, 'step');

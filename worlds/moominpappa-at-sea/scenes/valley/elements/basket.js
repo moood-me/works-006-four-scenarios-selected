@@ -1,8 +1,9 @@
 // Mama's basket packed, seen from above (an insert, `basket`, in an oval): its wicker rim on the veranda's boards and in
-// it what she put in — Papa's top hat and his notebook, Moomintroll's striped sweater and, under its edge, the jar of
+// it what she has put in so far (`packed`: the hat, the notebook, the sweater, the jar — in that order) — Papa's top
+// hat and his notebook, Moomintroll's striped sweater and, under its edge, the jar of
 // jam nobody asked about; the candles lying across it while they are packed (`candles` "basket"); the box of paints on
-// top when she took them (`paints`). Warm evening light painted from the upper left, as an insert's light is.
-const A = e.aspect, X = A / 2, Y = 0.52, st = e.state;
+// top when she took them (`paints`, and `packed` 5). Warm evening light painted from the upper left, as an insert's light is.
+const A = e.aspect, X = A / 2, Y = 0.52, st = e.state, pk = st.packed ?? 5;
 // the boards
 g.fillStyle = '#a58d6c';
 g.fillRect(-0.4, -0.05, A + 0.8, 1.1);
@@ -41,8 +42,8 @@ g.fillStyle = '#5a4128';
 g.beginPath();
 g.ellipse(X, Y + 0.01, 0.47, 0.32, 0, 0, Math.PI * 2);
 g.fill();
-// the jar of jam, its lid peeping out from under the sweater
-shade(s => {
+// the jar of jam, its lid peeping out from under the sweater (in fourth)
+if (pk >= 4) shade(s => {
   g.fillStyle = s ? g.fillStyle : '#d6e0e0';
   g.beginPath();
   g.arc(X + 0.17, Y + 0.17, 0.075, 0, Math.PI * 2);
@@ -61,8 +62,8 @@ shade(s => {
     g.fill();
   }
 });
-// the sweater, folded: blue-grey knit with cream stripes
-shade(s => {
+// the sweater, folded: blue-grey knit with cream stripes (third)
+if (pk >= 3) shade(s => {
   g.save();
   g.translate(X - 0.07, Y + 0.05);
   g.rotate(-0.12);
@@ -88,8 +89,8 @@ shade(s => {
   }
   g.restore();
 });
-// Papa's notebook
-shade(s => {
+// Papa's notebook (second)
+if (pk >= 2) shade(s => {
   g.save();
   g.translate(X - 0.27, Y - 0.15);
   g.rotate(0.25);
@@ -103,8 +104,8 @@ shade(s => {
   }
   g.restore();
 });
-// Papa's top hat, upside down: the brim's ring, the crown's inside
-shade(s => {
+// Papa's top hat, upside down: the brim's ring, the crown's inside (first)
+if (pk >= 1) shade(s => {
   if (!s) g.fillStyle = '#232124';
   g.beginPath();
   g.ellipse(X + 0.24, Y - 0.1, 0.16, 0.13, 0.2, 0, Math.PI * 2);
@@ -138,7 +139,7 @@ if ((st.candles ?? 'shelf') === 'basket') {
   });
 }
 // the box of paints on top, open: its pans of colour
-if (st.paints) {
+if (st.paints && pk >= 5) {
   shade(s => {
     g.save();
     g.translate(X + 0.04, Y + 0.08);

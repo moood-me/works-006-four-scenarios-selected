@@ -18,13 +18,13 @@ Mountains. The warm side of the island's hand: soft late-summer green and ochre,
   moon over the sea, `moon#disc`; light enough to read faces); day is all three at 0. The sky is one painting and its
   three lights as layers mixed by its shader (`sky.wgsl`), the clouds drifting, tinted to the light. Lamps: the
   veranda lamp and the window (`lamps`), the stove's fire (`jam`), the ember in the moss, the bow lantern.
-- **Set-ups** — `where` names one (`lib.js` `SETUPS`); `script.js` puts it as one cut (people's places, seats, turns,
-  looks, motions; the camera; `jam` and `luggage`): `garden` (П.1–П.3: Mama at the stove on the veranda, the children
-  sitting by the stream, Papa by the apple tree), `map` (П.4: Papa at the table under the lamp), `supper` (П.5: the
-  four at the table; «to Mama» — the game has only Papa and Mama here), `jetty` (П.5 morning, П.6: by the boat, the
-  luggage on the jetty, My on the post by the bow). In every set-up the Groke stands far off on the beach
-  (`lib.GROKE`), looking at the lit window (at the jetty — at the bow lantern). The game says who is here
-  (`<id>_here`) and their moods.
+- **Pieces** (`lib.js` `FILM`, played by the module `beats` from `script.js`; the showcase plays them all in order
+  with their play's keys, `SHOWFILM`). Each piece's `from` puts its people (`PLACES`: where, seat, turn, motion,
+  look), the camera, and what of the place goes with it (`jam`, `lamps`, `luggage`, `lantern_bow`, the boat, the
+  inserts); the hour, the moon and `paints` are the play's. Where the operator cannot frame (the veranda's chairs and
+  the house round the table, the jetty seen from the beach) the shots are placed by hand (`SHOTS`). Motions and parts
+  are the cast's names (`stroll`, `stir`, `seated`, `sit_look`, `carry_walk`, `put_down`, `glide`; `ladle`, `spoon`,
+  `bundle`, `basket`). The Groke stands far off on the beach (`lib.GROKE`), looking at the lit window.
 - **The little fire** — `moss` (`green` · `smoulder` · `burnt`) and `smoke` (М1: grey smoke to white steam); the
   emitters and the ember read `smoke_grey`, `smoke_white`, which the script works out (not set from outside).
 - **The Groke's frost** — `frost`: 0…0.4 the rime round where she stands on the beach (`lib.GROKE`) widens — the sand
@@ -33,7 +33,6 @@ Mountains. The warm side of the island's hand: soft late-summer green and ochre,
 - **Inserts** — `chart` (Papa's chart on the table at night, the module `chart`; point `chart#island`) and `basket`
   (the basket from above: hat, notebook, sweater, the jam jar under its edge; `candles` "basket" — the candles across
   it, "shelf" — on the shelf by the door; `paints` — the box of paints on top).
-- **Stage 4**: people stand, sit and breathe (`hands_behind`, `seated`, `sit_look`); no motions, no beats yet.
 - `tools/valley.py` writes `scene.json` (the trees on the hills seeded; the heights from the land). Change the land
   or the house's profile in both and run it.
 - The showcase: the evening coming, the fire and the ladle's steam, the Groke's rime, night at the chart, the supper,
@@ -43,7 +42,6 @@ Mountains. The warm side of the island's hand: soft late-summer green and ochre,
 
 | Key | Values | Default |
 | --- | --- | --- |
-| `where` | `garden` · `map` · `supper` · `jetty` | `garden` |
 | `dawn`, `dusk`, `night` | 0…1 looks (П.1–П.3, П.6: dusk 1; П.4: night 1; П.5 supper: dusk 0.6 + night 0.5; morning: dawn 0.7) | 0 |
 | `moon` | 0…1 phase | 0.2 |
 | `lamps` | 0…1 | 0 |
@@ -61,8 +59,8 @@ The scene's film in beats (`modules/beats`: the key `beat`, `beat_next`; `beat:<
 piece begins from its own values (`from`: the light, who is where, the camera) unless it comes `after` the one named.
 The game says its lines at the moments the scene tells (`<piece>:<moment>`); a silent stretch before the game's next
 moment is never longer than ~8 s. Seconds are estimates (people at their gait's pace). People's motions are the cast's
-(package Л): what a piece needs of them is listed under it. `where` (stage 4's set-ups) stays as each piece's
-starting arrangement.
+(package Л): what a piece needs of them is listed under it. Stage 4's `where` is gone: each piece's `from` puts
+everyone.
 
 **П.1–П.3 (the garden; dusk 1, `lamps` 0.4 — the window lit early)**
 - `garden` (≈ 14 s): wide, the garden as stage 4's `garden`. Mama stirs the jam on the stove, the children sit by the
@@ -90,11 +88,11 @@ starting arrangement.
   Ends: the insert open, `chart#island` in the middle of 4:3 — the pose for the choice `tell`.
 
 **П.5**
-- `supper` (≈ 14 s, by a cut; «Всем»): dusk 0.6 + night 0.5, the four at the table as stage 4's `supper`. Papa half
-  rises — `supper:said` (his «We're moving to the lighthouse!», My's «Hooray!»); a cut to the son close: he puts down
+- `supper` (≈ 14 s, by a cut; «Всем»): dusk 0.6 + night 0.5, the four at the table. Papa, seated, laughing, turned
+  to his son — `supper:said` (the cast has no half-rise) (his «We're moving to the lighthouse!», My's «Hooray!»); a cut to the son close: he puts down
   his spoon and looks at his father for the first time this evening — `supper:spoon` («To the lighthouse? For
   good?»); Papa beaming, medium — `supper:beam`; Mama close, silent — `supper:mama` (her «I'll pack our things» after
-  a pause). Ends on Mama. *Л: `rise_half`, `put_down` (the spoon — a part), `seated`.*
+  a pause). Ends on Mama. *(The spoon: his paw to the cloth, the part `spoon` gone from it.)*
 - `late` (≈ 10 s, by a cut; «Маме»): night, Papa and Mama at the table, the chart between them; the insert `chart` for
   a moment, then Mama's face close looking at it a long time — `late:look` («Is there any earth there?» …); both,
   medium — `late:yes` («All right. I'll take my paints»). Ends: both at the table.

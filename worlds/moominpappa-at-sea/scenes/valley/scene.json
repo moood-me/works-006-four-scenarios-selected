@@ -152,7 +152,8 @@
   ],
   "modules": [
     "cast",
-    "chart"
+    "chart",
+    "beats"
   ],
   "objects": [
     {
@@ -1232,6 +1233,10 @@
       "elevation": -0.45,
       "facing": 180,
       "shadow": true,
+      "place": {
+        "across": "boat_a",
+        "distance": "boat_d"
+      },
       "box": [
         -2.1,
         -2.75,
@@ -1481,7 +1486,6 @@
     }
   ],
   "state": {
-    "where": "garden",
     "dawn": 0,
     "dusk": 0,
     "night": 0,
@@ -1498,18 +1502,12 @@
     "basket": 0,
     "lantern_bow": 0,
     "jam": 1,
-    "luggage": 0
+    "luggage": 0,
+    "packed": 5,
+    "boat_a": -15.4,
+    "boat_d": 22.85
   },
   "states": {
-    "where": {
-      "values": [
-        "garden",
-        "map",
-        "supper",
-        "jetty"
-      ],
-      "means": "the set-up (lib.js SETUPS), put as one cut: garden — П.1–П.3, Mama at the jam on the veranda, the children by the stream, Papa by the apple tree; map — П.4, Papa at the chart under the lamp on the veranda; supper — П.5, the four at the table on the veranda (late: Papa and Mama, the game says who is here); jetty — П.5 morning and П.6, at the jetty by the boat, the luggage on it"
-    },
     "dawn": {
       "range": [
         0,
@@ -1630,7 +1628,7 @@
         1
       ],
       "smooth": true,
-      "means": "the set-up's (where): the jam cooking on the veranda stove — its fire, its steam"
+      "means": "the pieces': the jam cooking on the veranda stove — its fire, its steam"
     },
     "luggage": {
       "range": [
@@ -1638,7 +1636,22 @@
         1
       ],
       "smooth": true,
-      "means": "the set-up's (where): the basket, the bundle and the can waiting on the jetty"
+      "means": "the pieces': the basket, the bundle and the can waiting on the jetty"
+    },
+    "packed": {
+      "range": [
+        0,
+        5
+      ],
+      "means": "the pieces' (basket): how much is in the basket — 1 the hat, 2 the notebook, 3 the sweater, 4 the jar under it, 5 the paints on top (only with the play's paints)"
+    },
+    "boat_a": {
+      "type": "number",
+      "means": "the pieces' (push_off): where the boat is, across (moored: −15.4)"
+    },
+    "boat_d": {
+      "type": "number",
+      "means": "the pieces' (push_off): where the boat is, distance (moored: 22.85)"
     }
   },
   "music": {

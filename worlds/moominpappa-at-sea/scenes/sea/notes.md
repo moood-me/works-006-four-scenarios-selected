@@ -15,28 +15,33 @@ lighthouse's island astern.
   turn her. On her: the hull (a form, `e.kit.loft` of `lib.RIBS` — her ribs from the stem to the transom), the
   transom, the floorboards, the thwarts, the stern deck (the Groke's rime creeps over it from the transom as
   `frost_boat` grows — its shader), the mast with its crosstree, the tiller (point `tiller#grip`), the lantern on its
-  bracket at the bow (point `lantern`, light `bow_lantern`), Mama's blanket. The people sit `on` her (`lib.SEATS`).
-- **The camera** rides her (`camera.on`); `view` puts it as one cut (`lib.js` `VIEWS`, in her frame — it faces the
-  start: her `across` is the viewer's mirrored): `aft` — before the bow, looking aft over everyone at what follows
-  behind; `fore` — behind the stern, looking forward over everyone at the bow lantern, the star (`star`, ahead on the
-  round sky, seen at night — М2) and the island ahead at dawn. The island's sky and sea are painted all round
-  (`round`), so both views see them.
+  bracket at the bow (point `lantern`, light `bow_lantern`), Mama's blanket. The people sit `on` her (`lib.SEATS`):
+  Papa on the stern thwart by the tiller (his paw on `tiller#grip`), Mama asleep (`doze`) on the middle thwart just
+  before him, the son at its other end (pressed against her, `troll_close`; on the stern deck with the lantern,
+  `troll_stern`), My on the crosstree.
+- **The camera** rides her (`camera.on`). Its shots are placed by hand in her frame (`lib.js` `VIEWS`: `aft`, `fore`,
+  `wide`, `behind` — close behind Papa at the tiller, the son's face beside him, the bow lantern and the star beyond,
+  the choice's pose; `papa`, `papa_sea`, `lantern`, `son`, `son_stern`, `mama`): in a boat this small the operator,
+  framing a target, comes into people's heads. Her frame faces the start: her `across` is the viewer's mirrored. The
+  island's sky and sea are painted all round (`round`).
 - **What follows behind** — `trail`: the strip of rime (`strip`, a plane on the sea astern of her, not on her — she
   pitches; drawn `inFront` of the sea, which it lies on) shown from where the Groke swims on astern; the Groke (`groke`,
   standing on the sea floor `lib.FLOOR`, her head and eyes over the water) comes from ~52 m (0) to ~4 m (1) behind the
   stern (`lib.trailNear`). No strip while she is not here.
-- **The lantern** — `lantern_at`: `bow` (burning on its bracket), `troll` (in the son's paws: its light from his right
-  hand `troll#hand_r`; the bracket empty), `out` (on the bracket, dark).
-- **The island** — `island`: `none` (far out of sight: the night crossing), `ahead` (260 m before her bow, seen in
-  `fore`), `behind` (230 m astern, seen over the stern: going home). The island is a card of pink granite
-  backs (`isle`) with the island's lighthouse (`modules/island`, dark) on it; the Fisherman stands before its door
-  (`fisher_on` `isle#step`) when the game has him here.
+- **The lantern** — `lantern_at`: `bow` (burning on its bracket), `papa` (in Papa's paw, held out), `troll` (in the
+  son's paws) — the bracket empty and the cast's part `lantern` in the paw, its light from `<id>#flame` —, `out` (on the
+  bracket, dark).
+- **The island** — `island`: `none` (far out of sight: the night crossing), `ahead` (260 m before her bow, seen
+  forward at dawn), `behind` (230 m astern, going home; the piece `last` moves it on away). A card of pink granite
+  backs (`isle`) with the island's dark lighthouse on it.
+- **Close-ups** (the world's `closeups`): `handle` (`handle_open`, `handle_give` — the lantern's bail from Papa's paw
+  to the son's) and `paws` (`paws_open`, `paws_rub` — his paws on the lantern white with rime, Mama's paws rubbing).
+- **Pieces** (`lib.js` `FILM`, the module `beats` in `script.js`; the showcase plays `night`, `quiet`, `glance`,
+  `hold`, `home`, `last` with their play's keys). The crossing's night wants the island's `calm` (≈ 0.8, the game's):
+  with the sea's crests all round, a calm sea is what lets the white strip read.
 - The script works out what the keys move: `isle_d`, `groke_a`, `groke_d`, `lantern_bow_on`, `lantern_troll_on`,
   `boat_facing`, `boat_pitch` (the scene's own, not set from outside); the swell every 2.6 s (`wave` its height); the
   island's lightning in a storm.
-- **Stage 4**: people sit and breathe (`seated`; the Groke `hands_behind`); no motions, no beats yet. Mama «asleep» is
-  seated with `tired` (a lying motion is stage 5's); the lantern in the son's paws has its light but no lantern drawn in
-  his hand — the cast has no such part yet (stage 5, package Л).
 - The showcase: the night, the strip and the Groke coming nearer; the lantern in the son's paws and the rime creeping
   over the stern; dawn; by day going home, the island astern (about 30 s).
 
@@ -45,8 +50,7 @@ lighthouse's island astern.
 | Key | Values | Default |
 | --- | --- | --- |
 | `dawn`, `dusk`, `night`, `moon`, `storm`, `flash`, `lighthouse_lit` | the island's common keys (1.1–1.3: night 1; the hold branch's dawn: dawn 1; the finale: day) | island's |
-| `view` | `aft` · `fore` | `aft` |
-| `lantern_at` | `bow` · `troll` · `out` | `bow` |
+| `lantern_at` | `bow` · `papa` · `troll` · `out` | `bow` |
 | `trail` | 0…1 | 0.4 |
 | `frost_boat` | 0…1 | 0 |
 | `island` | `none` · `ahead` · `behind` | `none` |
@@ -116,8 +120,8 @@ toward the bow) and in the pieces' own close shots of it (`lantern`); in `aft` i
   "home": {"after": [], "tells": ["home:term", "home:tell", "home:my", "home:look"], "seconds": 16, "show": false},
   "last": {"after": ["home"], "tells": ["last:far"], "seconds": 8, "show": false}
  },
- "points": ["papa", "mama", "troll", "my", "groke", "fisher", "lantern", "tiller#grip", "star", "strip", "isle#step", "lighthouse#door"],
+ "points": ["papa", "mama", "troll", "my", "groke", "lantern", "tiller#grip", "star", "strip", "lighthouse#door", "handle#troll", "paws#paws"],
  "offers": ["tiller#grip", "star"],
- "party": {"moon": 0.6, "glance": "sea"},
+ "party": {"moon": 0.6, "calm": 0, "glance": "sea"},
  "acts": {"heading": {"values": [], "tells": []}, "wave": {"values": [], "tells": []}}}
 ```

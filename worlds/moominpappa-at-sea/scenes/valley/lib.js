@@ -79,11 +79,11 @@ const inBoat = who => ({ on: 'boat', at: BOAT.seats[who] });
 const PLACES = {
   papa: {
     path: P([5.2, 12.7], 250, 'hands_behind'),
-    tree: P([1.5, 8.6], 245, 'hands_behind', 'moss#fire'),
+    tree: P([0.65, 9.95], 210, 'hands_behind', 'moss#fire'),
     back: P(v(-0.2, 0.72), 180, 'seated', 'table', seat('back')),
     jetty_root: P([-11.6, 24.0], 270, 'hands_behind'),
     table: P(v(0.45, -0.7), 200, 'hands_behind', 'mama'),
-    boat: P(BOAT.moored, 90, 'steer', null, inBoat('papa')),
+    boat: P(BOAT.moored, 90, 'seated', null, inBoat('papa')),
   },
   mama: {
     stove: P([6.2, 14.55], 262, 'stir', 'stove#pan'),
@@ -119,6 +119,20 @@ function at(id, place, more = {}) {
 }
 const CAM0 = { camera_target: null, camera_shot: 'full', camera_frame: null, camera_glide: 1.5, camera_x: 0, camera_z: 0, camera_h: 0, camera_yaw: 0, camera_look: 0 };
 const cam = (target, shot, frame, more = {}) => ({ ...CAM0, camera_target: target, camera_shot: shot, camera_frame: frame ?? null, ...more });
+// Shots placed by hand where the operator cannot frame (the veranda's chairs and the house stand round the table; the
+// jetty seen from the beach): the camera's place over the ground (camera_x, camera_z), how it turns and looks down.
+const at_ = (x, z, yaw, look, h = 0) => ({ ...CAM0, camera_x: x, camera_z: z, camera_yaw: yaw, camera_look: look, camera_h: h });
+const SHOTS = {
+  // the veranda from before its rail: Papa's face (he sits facing us), Mama's (on the left end, turned right), the son's
+  // (on the right end, turned left) — each from the other end of the table
+  papa: at_(7.2, 13.2, 0, 0.06),
+  mama: at_(8.5, 13.9, -45, 0.06),
+  troll: at_(5.9, 13.9, 45, 0.06),
+  // the jetty from the beach by it: My on the post, Papa on the deck, the boat
+  jetty: at_(-12.5, 18.5, -22, 0.04),
+  // the jetty and the beach beyond: the boat going out, the Groke on the sand
+  shore: at_(-11.5, 15, 0, 0),
+};
 // the place's own as a piece begins: the jam on the stove, the lamps, the luggage on the jetty, the bow lantern, the
 // boat moored, the inserts shut
 const PLACE0 = { jam: 0, lamps: 0, luggage: 0, lantern_bow: 0, boat_a: BOAT.moored[0], boat_d: BOAT.moored[1], chart: 0, basket: 0 };
@@ -140,11 +154,11 @@ const FILM = {
       const papa = s.person('papa');
       await s.wait(1.5);
       s.tell('garden:walk');
-      const walk = papa.walk([[3.6, 11.4], [2.2, 9.6], [1.5, 8.6]]);
+      const walk = papa.walk([[3.6, 11.4], [1.8, 10.6], [0.65, 9.95]]);
       await s.wait(2);
       s.camera({ target: 'papa', shot: 'wide', frame: [0.55, 0.55], glide: 4 });
       await walk;
-      papa.turn(245);
+      papa.turn(210);
       papa.look('moss#fire');
       s.camera({ target: 'papa', shot: 'wide', frame: [0.65, 0.55], glide: 2.5 });
       await s.wait(2);
@@ -159,7 +173,7 @@ const FILM = {
     run: async s => {
       s.set('moss', 'smoulder');
       s.set('smoke', 0);
-      const face = ready(s, cam('papa', 'close', [0.5, 0.45]));
+      const face = ready(s, cam('papa', 'medium', [0.5, 0.45]));
       await s.wait(2);
       s.set('papa_mood', 'surprised');
       await cutTo(s, face);
@@ -223,10 +237,12 @@ const FILM = {
   },
   // П.4: night on the veranda — Papa alone at the chart under the lamp; the chart close: the pose for ⚑ tell
   map: {
-    from: () => ({ ...PLACE0, lamps: 1, ...at('papa', 'back'), ...at('groke', 'beach'), ...cam('papa', 'full', [0.5, 0.55]) }),
+    from: () => ({ ...PLACE0, lamps: 1, ...at('papa', 'back'), ...at('groke', 'beach'), ...cam('table', 'wide', [0.5, 0.65]) }),
     run: async s => {
-      s.camera({ target: 'papa', shot: 'medium', frame: [0.5, 0.45], glide: 4 });
-      await s.wait(4);
+      const face = ready(s, SHOTS.papa);
+      await s.wait(2);
+      await cutTo(s, face);
+      await s.wait(2);
       s.tell('map:face');
       await s.wait(1.5);
       await s.move('chart', 1, { over: 0.6 });
@@ -234,29 +250,32 @@ const FILM = {
       await s.wait(1);
     },
   },
-  // П.5 «to everyone»: the supper — Papa's news, the son's spoon, Mama silent
+  // П.5 «to everyone»: the supper — Papa's news (he beams, seated: the cast has no half-rise), the son's spoon, Mama
+  // silent
   supper: {
     from: () => ({ ...PLACE0, lamps: 1, ...at('papa', 'back'), ...at('mama', 'left'), ...at('troll', 'right', { troll_with: ['spoon'] }), ...at('my', 'stool'),
       ...cam('table', 'wide', [0.5, 0.68]) }),
     run: async s => {
-      const son = ready(s, cam('troll', 'close', [0.5, 0.45]));
+      const son = ready(s, SHOTS.troll);
       await s.wait(1);
-      s.set('papa_do', 'rise_half');
+      s.set('papa_mood', 'laugh');
+      s.person('papa').look('troll');
       s.tell('supper:said');
       await s.wait(3);
-      s.set('troll_do', 'seated_push');
       await cutTo(s, son);
+      // the spoon set down on the table: his paw to the cloth before him, the spoon out of it
+      s.set('troll_reach', { r: [7.55, 15.15, 0.95] });
       await s.wait(1);
       s.set('troll_with', null);
-      s.set('troll_do', loop('seated'));
+      s.set('troll_reach', null);
       s.person('troll').look('papa');
       s.tell('supper:spoon');
       await s.wait(2.5);
-      const papa = ready(s, cam('papa', 'medium', [0.5, 0.45]));
+      const papa = ready(s, SHOTS.papa);
       await cutTo(s, papa);
       s.tell('supper:beam');
       await s.wait(2.5);
-      const mama = ready(s, cam('mama', 'close', [0.5, 0.45]));
+      const mama = ready(s, SHOTS.mama);
       await cutTo(s, mama);
       s.person('mama').look([7.2, 15.2, 1.0]);
       await s.wait(1.5);
@@ -268,7 +287,7 @@ const FILM = {
   late: {
     from: () => ({ ...PLACE0, lamps: 1, ...at('papa', 'back'), ...at('mama', 'left'), ...cam('table', 'wide', [0.5, 0.65]) }),
     run: async s => {
-      const face = ready(s, cam('mama', 'close', [0.5, 0.45]));
+      const face = ready(s, SHOTS.mama);
       await s.wait(1.5);
       await s.move('chart', 1, { over: 0.5 });
       await s.wait(2.5);
@@ -287,14 +306,12 @@ const FILM = {
   // П.5, the morning after «to Mama»: My on the post; Papa packs the boat alone
   morning: {
     from: () => ({ ...PLACE0, luggage: 1, ...at('papa', 'jetty_root', { papa_with: ['bundle'], papa_gait: 'carry_walk' }), ...at('my', 'post'),
-      ...CAM0, camera_x: -11.5, camera_z: 15 }),
+      ...SHOTS.jetty }),
     run: async s => {
       const papa = s.person('papa');
-      s.camera({ target: 'my', shot: 'full', frame: [0.4, 0.55], glide: 2 });
       await s.wait(2);
       s.tell('morning:my');
       await s.wait(2.5);
-      s.camera({ target: 'papa', shot: 'wide', frame: [0.5, 0.55], glide: 2.5 });
       await papa.walk([[-14.6, 24.0]]);
       await papa.do('put_down');
       s.set('papa_with', null);
@@ -333,19 +350,20 @@ const FILM = {
   // П.6: the evening of the 22nd — the boat pushes off with her lantern on the bow; the Groke walks down to the water
   push_off: {
     from: () => ({ ...PLACE0, lamps: 0.4, frost: 0.4, ...at('papa', 'boat'), ...at('mama', 'boat', { mama_with: ['basket'] }), ...at('troll', 'boat'),
-      ...at('my', 'boat'), ...at('groke', 'beach'), ...CAM0, camera_x: -11.5, camera_z: 15 }),
+      ...at('my', 'boat'), ...at('groke', 'beach'), ...SHOTS.jetty }),
     run: async s => {
       await s.wait(1.5);
       await s.move('lantern_bow', 1, { over: 0.8 });
       s.tell('push_off:lantern');
       await s.wait(1.5);
-      s.camera({ target: 'boat', shot: 'wide', frame: [0.4, 0.55], glide: 3 });
+      s.move('camera_x', SHOTS.shore.camera_x, { over: 4, ease: 'inOut' });
+      s.move('camera_z', SHOTS.shore.camera_z, { over: 4, ease: 'inOut' });
+      s.move('camera_yaw', SHOTS.shore.camera_yaw, { over: 4, ease: 'inOut' });
       const away = s.path(['boat_a', 'boat_d'], [BOAT.moored, ...BOAT.away], { speed: 1.4, ease: 'inOut' });
       await s.wait(3);
       s.tell('push_off:away');
       await s.wait(3);
       const groke = s.person('groke');
-      s.camera({ target: 'groke', shot: 'wide', frame: [0.55, 0.6], glide: 3.5 });
       groke.look('boat#lantern');
       s.set('groke_gait', 'glide');
       s.move('frost', 1, { over: 6 });

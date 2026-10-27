@@ -1,6 +1,7 @@
-// The star Papa steers by, ahead of the bow (on the round sky straight behind the aft view: across the turn from it),
+// The star Papa steers by, ahead of the bow (on the round sky a little past the turn straight behind the aft view —
+// over the bow seen from behind the stern),
 // bright and a little blue, its rays; seen at night (its animate shows it as far as `night` is). Its point `star`.
-const x = e.aspect / 2 + Math.PI - 0.18, y = 0.2;
+const x = e.aspect / 2 + Math.PI - 0.13, y = 0.2;
 e.layer('star', {}, c => {
   c.strokeStyle = 'rgba(236, 242, 255, 0.85)';
   c.lineWidth = 0.0018;
