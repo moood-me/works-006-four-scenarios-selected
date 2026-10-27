@@ -16,7 +16,8 @@ breathe; no motions, no camera, no showcase yet).
     `pine<n>_a/_d`); the six `pines` copies stay.
   - `door` 0…1 — the door is a card of its own on the tower (`island.door`; the tower paints the dark doorway),
     hung on its right jamb as seen from outside (as the round room's door, seen from inside, on its left), opening
-    outward toward the landing (`door_turn` = 180 − 70 · door) — against the pines.
+    outward toward the landing (`door_turn` = 180 − 70 · door) — against the pines: while they stand at the threshold
+    it opens only to `DOOR_STOP`, bumps one there and swings back a little.
   - `boat` (moored · up · cracked · tarred · away) and `boat_up` 0…1 — moored, her bow on the rocks and her stern
     afloat, rocking (her animate); pulled up the rocks as `boat_up` grows (`boat_a/_d/_turn`); cracked — a split along
     her strakes, tarred — a black stripe of tar over it; away — not painted.
@@ -69,9 +70,14 @@ are told as `<piece>:<moment>` — the game speaks its lines there. Where the pe
 ## Open for the game (stage 5)
 
 - The game sets only the play's keys (the hour, the weather, `cleft`, `boat`, `beam`, `papa_shore`, `troll_at` by
-  «son closed»); where people stand is each piece's own (its `from`).
-- `cast_off` hands over to `sea`; `fisher_door` comes after `sea home` and the shore's `morning`.
+  «son closed», `fisher_hand`); where people stand is each piece's own (its `from`).
+- `cast_off` hands over to `sea`; `fisher_door` comes after `sea home` and the shore's `morning`: framed from the
+  landing's side between the pines (the door and the Fisherman read; his net over his shoulder — `fisher_wear`
+  {"parts": []} with `net_shoulder`), close when he lifts his hand.
 - `threshold` follows the cape's `pie_leave` (the order of leaving: Papa passes the Fisherman at the threshold).
+- The mooring minigame's close is the closeups shot `mooring` (`mooring_open`; `mooring` lets the rope go).
+- The door minigame (`door`): while the pines stand at the threshold the door opens only to `DOOR_STOP`, bumps a pine
+  and swings back a little.
 
 ## Contract for the check
 
@@ -80,5 +86,5 @@ are told as `<piece>:<moment>` — the game speaks its lines there. Where the pe
  "points": ["lighthouse#door", "lighthouse#lantern", "door#door", "arrow_stone#stone", "granite#cleft", "boat#boat", "boat#mooring", "boat#lantern", "mooring#rope", "rock#edge", "sky#moon", "cape#point", "pines#crown", "papa", "mama", "troll", "my", "fisher", "papa#chest", "mama#chest", "troll#chest", "my#chest", "fisher#chest"],
  "offers": ["papa#chest", "mama#chest", "troll#chest", "my#chest", "fisher#chest", "lighthouse#door", "door#door", "boat#mooring", "mooring#rope"],
  "party": {"dawn": 1, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "lighthouse_lit": 0, "beam": 0, "pines": 0, "frost_step": false, "frost_patch": false, "boat": "moored", "cleft": "empty", "driftwood": false, "bundles": "slab", "troll_at": "boulder", "papa_shore": "silent", "fisher_hand": false},
- "acts": {"door": {"values": [], "tells": ["door:open"]}, "boat_up": {"values": [], "tells": ["boat_up:up"]}, "mooring": {"values": [], "tells": ["mooring:free"]}, "flash": {"values": [], "tells": []}}}
+ "acts": {"door": {"values": [], "tells": ["door:open"]}, "boat_up": {"values": [], "tells": ["boat_up:up"]}, "mooring": {"values": [], "tells": ["mooring:free"]}, "mooring_open": {"values": [], "tells": []}, "flash": {"values": [], "tells": []}}}
 ```

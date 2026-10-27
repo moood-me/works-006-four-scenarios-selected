@@ -114,8 +114,11 @@ function glideTo(s, values, over = 1.8) {
   s.set('camera_target', null);
   for (const k of ['camera_x', 'camera_z', 'camera_h', 'camera_yaw', 'camera_look']) s.move(k, values[k], { over, ease: 'inOut' });
 }
+// the knot close after the knot is undone: the knot itself — the Fisherman's sign, the same as under the keeper's
+// lines on the wall (the scenario's «the same knot») —, not the tangle's thread
 async function knotClose(s, paws = 1) {
   s.set('knot_paws', paws);
+  s.set('knot_pull', 0);
   s.set(KNOT_SHOT, 1);
   await s.wait(2.5);
   s.set(KNOT_SHOT, 0);

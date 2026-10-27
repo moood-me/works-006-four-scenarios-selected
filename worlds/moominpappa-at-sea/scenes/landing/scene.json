@@ -646,8 +646,8 @@
         "who": "my",
         "does": "sit_look"
       },
-      "across": 7.15,
-      "distance": 28,
+      "across": 7.05,
+      "distance": 28.75,
       "place": {
         "across": "my_a",
         "distance": "my_d"
@@ -748,9 +748,9 @@
       0,
       0.8
     ],
-    "my_a": 7.15,
-    "my_d": 28,
-    "my_turn": 200,
+    "my_a": 7.05,
+    "my_d": 28.75,
+    "my_turn": 175,
     "my_look": "arrow_stone#stone",
     "fisher_a": 16.2,
     "fisher_d": 27,
