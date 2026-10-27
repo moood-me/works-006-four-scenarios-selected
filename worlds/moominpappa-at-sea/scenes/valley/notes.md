@@ -55,14 +55,85 @@ Mountains. The warm side of the island's hand: soft late-summer green and ochre,
 | `chart`, `basket` | 0…1 inserts | 0 |
 | `lantern_bow` | 0…1 | 0 |
 
+## Pieces (stage 5 — the contract; no code yet)
+
+The scene's film in beats (`modules/beats`: the key `beat`, `beat_next`; `beat:<name>` told as a beat ends). Each
+piece begins from its own values (`from`: the light, who is where, the camera) unless it comes `after` the one named.
+The game says its lines at the moments the scene tells (`<piece>:<moment>`); a silent stretch before the game's next
+moment is never longer than ~8 s. Seconds are estimates (people at their gait's pace). People's motions are the cast's
+(package Л): what a piece needs of them is listed under it. `where` (stage 4's set-ups) stays as each piece's
+starting arrangement.
+
+**П.1–П.3 (the garden; dusk 1, `lamps` 0.4 — the window lit early)**
+- `garden` (≈ 14 s): wide, the garden as stage 4's `garden`. Mama stirs the jam on the stove, the children sit by the
+  stream (the bark boats drift), Papa walks slowly along the path from the veranda's corner to the apple tree, hands
+  behind his back (`garden:walk` as he sets off — the narrator's line); the camera goes with him to a medium two-shot of
+  him and the moss — `garden:tree` as he stops. Ends: Papa by the tree, the moss beside him, green. *Л: `walk` with
+  `hands_behind`, `stir`.*
+- `smoke` (≈ 6 s, after `garden`): `moss` → `smoulder`: a thread of grey smoke out of the moss; a cut to Papa's face
+  close, it lights up (`surprised` → `smile`) — `smoke:seen`; back to the medium: the pose for М1 — Papa beside the
+  moss, `apple#moss` in the middle of 4:3, the camera still. Ends there. *Л: the ladle in his hand (a part).*
+- (М1 «Ковш» — the game's: `smoke` 0 → 1, grey smoke to white steam.)
+- `spot` (≈ 18 s, after `smoke`): `moss` → `burnt`, the steam thins. Papa straightens with the ladle — `spot:shout`
+  (his «Fire!»); Mama comes down the veranda steps and across the lawn to the spot (≈ 9 m) and looks at it —
+  `spot:mama` («How good that you noticed»); she turns and goes back to her jam — `spot:back` («And she goes back»); My
+  comes up from the stream, looks — `spot:my` («Ti-iny»), runs back; Papa alone by the spot, the ladle hanging —
+  `spot:alone` (his quieter «I put out a fire»). Ends: Papa alone, medium. *Л: `walk`, `look_down`, `lower_arm`.*
+- `groke_far` (≈ 8 s, after `spot`): the camera turns from Papa down the meadow to the beach far off: the Groke looking
+  at the lit window; the grass round her whitens (`frost` 0 → 0.4 over 5 s) — `groke_far:white`. Ends on her, wide
+  enough to see the house's window and her both.
+
+**П.4 (night 1, `lamps` 1)**
+- `map` (≈ 10 s, by a cut): night on the veranda, Papa alone at the table with the chart under the lamp; a clock's
+  ticking and crickets are the game's sound. The camera comes in to him medium, the lamp beside his face — `map:face`;
+  the insert `chart` opens — `map:chart` (his «A lighthouse. And not lit»; his second line after the game's pause).
+  Ends: the insert open, `chart#island` in the middle of 4:3 — the pose for the choice `tell`.
+
+**П.5**
+- `supper` (≈ 14 s, by a cut; «Всем»): dusk 0.6 + night 0.5, the four at the table as stage 4's `supper`. Papa half
+  rises — `supper:said` (his «We're moving to the lighthouse!», My's «Hooray!»); a cut to the son close: he puts down
+  his spoon and looks at his father for the first time this evening — `supper:spoon` («To the lighthouse? For
+  good?»); Papa beaming, medium — `supper:beam`; Mama close, silent — `supper:mama` (her «I'll pack our things» after
+  a pause). Ends on Mama. *Л: `rise_half`, `put_down` (the spoon — a part), `seated`.*
+- `late` (≈ 10 s, by a cut; «Маме»): night, Papa and Mama at the table, the chart between them; the insert `chart` for
+  a moment, then Mama's face close looking at it a long time — `late:look` («Is there any earth there?» …); both,
+  medium — `late:yes` («All right. I'll take my paints»). Ends: both at the table.
+- `morning` (≈ 12 s, by a cut; after «Маме»): dawn 0.7, the jetty (stage 4's `jetty`): My on the post — `morning:my`
+  («Boring»); Papa carries a bundle down the jetty into the boat alone, there and back — `morning:pack`. Ends: Papa
+  alone in the boat, packing. *Л: `carry`, `put_down`.*
+
+**П.6**
+- `basket` (≈ 12 s, by a cut): day, the veranda; Mama packs the basket: the insert `basket` opens and the things go in
+  one by one (`packed` 0 → 3: hat, notebook, sweater), the candles on top (`candles` "basket") — `basket:candles`
+  (Papa's «Leave the candles. There's a lighthouse!», her «All right»); the candles out, back on the shelf, the jar
+  under the sweater (`packed` 4) — `basket:jam`; on the play's `paints` (the branch «Маме») the box of paints last, on
+  top — `basket:paints` (otherwise My's «And your paints?» and Mama's answer are said here). Ends: the insert open,
+  packed. Needs a new key `packed` (0…4: how many of hat, notebook, sweater, jam are in) — stage 5's code.
+- `push_off` (≈ 18 s, by a cut): dusk 1, the jetty; the family in the boat (Papa at the tiller, Mama with the basket,
+  the son, My on the bow), the lantern lit on her bow — `push_off:lantern`; the boat pushes off and goes out along the
+  shore (her place moved — new keys `boat_a`, `boat_d`; the camera stays on the jetty) — `push_off:away`; the camera
+  turns to the beach: the Groke walks down to the water toward the light, the rime in her steps (`frost` 0.4 → 1) —
+  `push_off:groke`. Ends: the boat small with her lantern, the Groke at the water's edge. *Л: sitting in the boat,
+  the Groke's `glide`.*
+
 ## Contract for the check
 
 ```json
-{"beats": {},
+{"beats": {
+  "garden": {"after": [], "tells": ["garden:walk", "garden:tree"], "seconds": 14, "show": false},
+  "smoke": {"after": ["garden"], "tells": ["smoke:seen"], "seconds": 6, "show": false},
+  "spot": {"after": ["smoke"], "tells": ["spot:shout", "spot:mama", "spot:back", "spot:my", "spot:alone"], "seconds": 18, "show": false},
+  "groke_far": {"after": ["spot"], "tells": ["groke_far:white"], "seconds": 8, "show": false},
+  "map": {"after": [], "tells": ["map:face", "map:chart"], "seconds": 10, "show": false},
+  "supper": {"after": [], "tells": ["supper:said", "supper:spoon", "supper:beam", "supper:mama"], "seconds": 14, "show": false},
+  "late": {"after": [], "tells": ["late:look", "late:yes"], "seconds": 10, "show": false},
+  "morning": {"after": [], "tells": ["morning:my", "morning:pack"], "seconds": 12, "show": false},
+  "basket": {"after": [], "tells": ["basket:candles", "basket:jam", "basket:paints"], "seconds": 12, "show": false},
+  "push_off": {"after": [], "tells": ["push_off:lantern", "push_off:away", "push_off:groke"], "seconds": 18, "show": false}
+ },
  "points": ["papa", "mama", "troll", "my", "groke", "apple#moss", "moss#fire", "chart#island", "boat#lantern", "stove#pan", "table",
   "luggage", "boat", "window_lit"],
- "offers": ["apple#moss", "chart#island", "boat#lantern"],
- "party": {"where": "garden", "dawn": 0, "dusk": 0, "night": 0, "moon": 0.2, "lamps": 0, "moss": "green", "smoke": 0, "frost": 0,
-  "candles": "shelf", "paints": false, "chart": 0, "basket": 0, "lantern_bow": 0},
- "acts": {}}
+ "offers": ["apple#moss", "chart#island"],
+ "party": {"moon": 0.2, "paints": false},
+ "acts": {"smoke": {"values": [], "tells": []}}}
 ```
