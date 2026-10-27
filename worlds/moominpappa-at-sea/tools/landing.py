@@ -4,7 +4,7 @@
 # Run from the world's root: python tools/landing.py .
 import json, sys
 sys.path.insert(0, sys.argv[1] + '/tools')
-import island
+import island, lantern
 
 root = sys.argv[1]
 folder = root + '/scenes/landing'
@@ -59,6 +59,7 @@ objects = [
     el("sprout", "A shoot out of the cleft", L["CLEFT"][0] + 0.1, L["CLEFT"][1], [-0.15, -0.6, 0.15, 0.05]),
     el("rock", "Wet rocks at the cove's edge", -3.55, 12.6, [-1, -0.45, 1, 0.05], shadow=True),
     el("driftwood", "Driftwood along the cove", -3.6, 8.9, [-1.5, -0.7, 1.5, 0.1], shadow=True),
+    lantern.element("bow_lantern", "The lantern on the bow", 1.68, -0.02, 1.18, on="boat"),
     el("stones", "Loose stones", 0, 0, [-0.5, -0.3, 0.5, 0.05], shadow=True),
     el("boulder", "Boulder", -2.65, 4.4, [-1.6, -0.74, 1.6, 0], shadow=True),
     el("bundle", "Bundle of blankets", -1.3, 3.4, [-0.5, -0.5, 0.5, 0.05], shadow=True),
@@ -139,11 +140,12 @@ spec = {
     "camera": {"mode": "picture"},
     "light": island.light(WIND),
     "lights": island.lights(([-140, 42], "#ffe6c8", 1.45), ([-125, 15], "#ffe0c2", 1.35), [100, 4], [-30, 25]) + [island.hand_lantern("papa")],
-    "modules": ["cast", "island", "beats", "closeups"],
+    "modules": ["cast", "island", "beats", "closeups", "lantern"],
     "objects": objects,
     "state": state,
     "states": states,
     "music": old["music"],
 }
 island.shaders(folder)
+lantern.shader(folder, 'bow_lantern')
 json.dump(spec, open(folder + '/scene.json', 'w', encoding='utf-8', newline='\n'), ensure_ascii=False, indent=2)

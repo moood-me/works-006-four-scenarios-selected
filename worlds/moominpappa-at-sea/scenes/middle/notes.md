@@ -86,5 +86,5 @@ the ring he has carried it — the minigame moves it); `spill` (the scene's own)
  "points": ["pool#water", "ring#stones", "ground#path", "troll#chest", "papa#chest", "mama#chest", "my#chest", "lighthouse#lantern", "lighthouse#door"],
  "offers": ["pool#water", "ring#stones", "ground#path", "troll#chest", "papa#chest"],
  "party": {"beam": 0, "calm": 0, "dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0, "pines": 0, "ring": "none", "ring_n": 9, "rope": 0, "coil": false, "troll_here": true, "papa_here": false, "mama_here": false, "my_here": false},
- "acts": {"rope": {"values": [], "tells": []}, "sway": {"values": [], "tells": []}, "armful_way": {"values": [], "tells": []}}}
+ "acts": {"rope": {"values": [], "tells": []}, "sway": {"values": [], "tells": []}, "armful_way": {"values": [], "tells": []}, "flash": {"values": [], "tells": ["flash:strike"]}}}
 ```

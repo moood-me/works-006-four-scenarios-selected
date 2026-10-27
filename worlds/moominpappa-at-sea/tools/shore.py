@@ -3,6 +3,7 @@
 import json, sys
 sys.path.insert(0, sys.argv[1] + '/tools')
 import island
+import lantern
 
 root = sys.argv[1]
 folder = root + '/scenes/shore'
@@ -51,7 +52,7 @@ objects = [
     {"id": "blanket", "name": "The blanket", "plane": True, "across": 0, "distance": 6, "elevation": FLAT + 0.02, "width": 1.3, "depth": 0.8,
      "place": {"across": "blanket_a", "distance": "blanket_d"}},
     el("stone", "The flat stone", STONE[0], STONE[1], [-1.7, -0.55, 1.7, 0], shadow=True),
-    el("stone_lantern", "The lantern on the stone", STONE[0], STONE[1], [-0.16, -0.48, 0.16, 0.03], elevation=0.3),
+    lantern.element("stone_lantern", "The lantern on the stone", STONE[0], STONE[1], 0.3),
     el("seahorses", "The sea-horses", -4.6, 7, [-8.2, -0.9, 1.8, 0.3], elevation=SEA, onLand=False),
     person("groke", "The Groke", "groke", -2.9, 6.8, place={"across": "groke_a", "distance": "groke_d"}),
     person("troll", "Moomintroll", "troll", 0.7, 4.1, place={"across": "troll_a", "distance": "troll_d"}),
@@ -61,7 +62,7 @@ objects = [
 ]
 
 lights = island.lights(([-160, 42], "#fff0dc", 1.35), ([80, 10], "#ffe0c2", 1.3), [-70, 4], [-40, 28]) + [
-    {"id": "stone_lamp", "of": "stone_lantern#flame", "color": "#ffc874", "strength": 1.5, "reach": 7, "flicker": 0.12},
+    lantern.light("stone_lamp", "stone_lantern#flame", reach=7, strength=1.5),
     {"id": "hand_lamp", "at": "troll#flame", "on": "hand_lit", "color": "#ffc874", "strength": 1.4, "reach": 6, "flicker": 0.12}]
 
 # the empty play: the day, the sea-horses in the shallows, the son three steps from the stone; the Groke, Papa and Mama
@@ -113,11 +114,12 @@ spec = {
     "camera": {"mode": "picture"},
     "light": island.light(WIND),
     "lights": lights,
-    "modules": ["cast", "island", "beats"],
+    "modules": ["cast", "island", "lantern", "beats"],
     "objects": objects,
     "state": state,
     "states": states,
     "music": music,
 }
 island.shaders(folder)
+lantern.shader(folder, 'stone_lantern')
 json.dump(spec, open(folder + '/scene.json', 'w', encoding='utf-8', newline='\n'), ensure_ascii=False, indent=2)

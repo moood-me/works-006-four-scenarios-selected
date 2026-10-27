@@ -61,20 +61,9 @@ if (state !== "away") {
       c.lineTo(0.02, y + 0.03);
       c.stroke();
     }
-    // the lantern on its bracket at the bow: brass, its glass dark
+    // the bracket at the bow the lantern stands on (the lantern itself: the element `bow_lantern`, the world's)
     c.fillStyle = "#3a3632";
     c.fillRect(1.66, -1.18, 0.04, 0.24);
-    c.fillStyle = "#a5874f";
-    c.fillRect(1.6, -1.42, 0.17, 0.05);
-    c.fillRect(1.6, -1.2, 0.17, 0.04);
-    c.fillStyle = "#58646c";
-    c.fillRect(1.62, -1.37, 0.13, 0.17);
-    c.fillStyle = "#a5874f";
-    c.beginPath();
-    c.moveTo(1.6, -1.42);
-    c.lineTo(1.685, -1.5);
-    c.lineTo(1.77, -1.42);
-    c.fill();
     // the split along her strakes, and the tar over it
     if (state === "cracked" || state === "tarred") {
       c.strokeStyle = "#2a2622";
@@ -93,7 +82,6 @@ if (state !== "away") {
       c.quadraticCurveTo(0.4, -0.5, 1.05, -0.48);
       c.stroke();
     }
-    e.at(1.68, -1.3, "lantern");
     // where the family sit in her (floor points: «on» her as she goes)
     e.at(-1.0, -0.3, "seat_a");
     e.at(-0.3, -0.3, "seat_b");
