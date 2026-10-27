@@ -148,11 +148,15 @@ function lighthouse(g, e, opts = {}) {
   e.form(e.kit.revolve(P.profile), { closed: 'u', ground: '#f2efe9' });
 }
 
-// The lighthouse door as a card of its own, painted from its hinge (x 0 at the left jamb, the door to x 1.0; its foot
-// at the sill): dark red-brown boards under an arch, an iron ring. A scene turns it about its hinge ("place":
-// {"facing": key}). Its point "door#door".
-function door(g, e) {
+// The lighthouse door as a card of its own, painted from its hinge (its foot at the sill): dark red-brown boards
+// under an arch, an iron ring at its free edge. opts.hinge: "left" (default — x 0 at the left jamb, the door to x 1.0)
+// or "right" (hung on the right jamb, seen from outside: the door from x −1.0 to 0). A scene turns it about its hinge
+// ("place": {"facing": key}: + opens toward the viewer a door hung on the left, − one hung on the right). Its point
+// "<id>#door".
+function door(g, e, opts = {}) {
   const w = DOOR.half * 2, h = DOOR.top - DOOR.sill;
+  g.save();
+  if (opts.hinge === 'right') g.translate(-w, 0);
   g.fillStyle = '#6e3c33';
   g.beginPath();
   g.moveTo(0, 0);
@@ -172,9 +176,10 @@ function door(g, e) {
   g.strokeStyle = '#2a2626';
   g.lineWidth = 0.035;
   g.beginPath();
-  g.arc(0.8, -0.83, 0.07, 0, Math.PI * 2);
+  g.arc(opts.hinge === 'right' ? 0.2 : 0.8, -0.83, 0.07, 0, Math.PI * 2);
   g.stroke();
   e.at(0.5, -0.9, 'door');
+  g.restore();
 }
 
 // The steps up to the lighthouse door: rough granite slabs laid up the knoll's face, greyer than the rock, their edges
@@ -270,7 +275,8 @@ function blot(g, x, y, r, color, alpha) {
 // [width, depth] (the plane's), pools [[across, distance, rx, ry, turn], …]; marks — how many drifts, specks, lichens,
 // cracks; near — for a big plane, the share of each of them anywhere (the rest near the viewer: the detail thickest
 // there; none: all anywhere); crack — [width, its spread, the dark ones' alpha, the pale ones', the long ones' way and
-// the short ones' way (radians, on the plane)].
+// the short ones' way (radians, on the plane)]; points — [[across, distance, name], …]: named points on the land
+// ("<id>#name", lifted onto it — a rock of the land a game points at).
 function granite(g, e, opts) {
   const [CA, CD] = opts.centre, [W, D] = opts.size, L = e.lib, at = (a, d) => [a - CA, CD - d];
   const [nDrift, nSpeck, nLichen, nCrack] = opts.marks ?? [60, 900, 260, 110];
@@ -335,16 +341,20 @@ function granite(g, e, opts) {
     const [x, y] = at(a, d);
     blot(g, x, y, 0.75, '104, 80, 82', 0.4 * (1 - h / 0.55));
   });
+  for (const [a, d, name] of opts.points ?? []) e.at(...at(a, d), name);
 }
 
-// The sea from above — a reflecting plane `opts.D` metres out (its centre), 2400 × 3000 m, over the scene's land
-// (e.lib): grey-blue, a lighter green-grey over the shallows round the rocks; two layers its shader (sea.wgsl) shows
-// by turns — the white crests the wind raises all over it (they come and go; more of them, faster, in a storm), the
-// foam washing round the rocks at the waterline.
+// The sea from above — a reflecting plane over the scene's land (e.lib): grey-blue, a lighter green-grey over the
+// shallows round the rocks; two layers its shader (sea.wgsl) shows by turns — the white crests the wind raises all
+// over it (they come and go; more of them, faster, in a storm), the foam washing round the rocks at the waterline.
+// opts: D — how far out its centre is (2400 × 3000 m, the crests ahead of the start); round — all round the start
+// (its centre at the start, 6000 × 6000 m, the crests on every side out to `reach` metres, 520 unless said: a scene
+// whose camera turns, or rides a boat).
 function sea(g, e, opts) {
-  const D = opts.D, L = e.lib;
+  const round = !!opts.round, D = round ? 0 : opts.D, L = e.lib, reach = opts.reach ?? 520;
+  const [w, h] = round ? [6000, 6000] : [2400, 3000];
   g.fillStyle = '#4f7896';
-  g.fillRect(-1200, -1500, 2400, 3000);
+  g.fillRect(-w / 2, -h / 2, w, h);
   // the shallows: where the granite runs on under the water
   L.shore(-1.4, 0, 0.8, (a, d, h) => {
     const k = 1 + h / 1.4, s = g.createRadialGradient(a, D - d, 0, a, D - d, 1.3);
@@ -356,11 +366,16 @@ function sea(g, e, opts) {
   e.layer('crests', {}, c => {
     c.strokeStyle = 'rgba(244, 246, 246, 0.85)';
     c.lineCap = 'round';
-    for (let i = 0; i < 2600; i++) {
-      const d = 4 + 520 * e.rnd() ** 2, a = (e.rnd() - 0.5) * (40 + d * 2.4);
+    for (let i = 0; i < (round ? 7000 : 2600); i++) {
+      let d = 4 + reach * e.rnd() ** 2, a = (e.rnd() - 0.5) * (40 + d * 2.4);
+      if (round) {
+        const r = d, t = e.rnd() * Math.PI * 2;
+        a = r * Math.sin(t);
+        d = r * Math.cos(t);
+      }
       if (L.land(a, d) > L.SEA - 0.6) continue;
-      const len = 0.8 + e.rnd() * 2.2 + d * 0.012;
-      c.lineWidth = 0.14 + e.rnd() * 0.16 + d * 0.0025;
+      const far = round ? Math.hypot(a, d) : d, len = 0.8 + e.rnd() * 2.2 + far * 0.012;
+      c.lineWidth = 0.14 + e.rnd() * 0.16 + far * 0.0025;
       c.beginPath();
       c.moveTo(a - len / 2, D - d);
       c.quadraticCurveTo(a, D - d - len * 0.12, a + len / 2, D - d + len * 0.05);
@@ -389,15 +404,17 @@ function seaMove(e) {
 // drifting with the wind), 2 the storm's clouds (heavy, torn, faster, with gaps), 3 the stars, 4 the moon at its phase
 // (`moon` 0…1: a thin crescent → full; its point "<sky>#moon" — the light `moon` comes from it — and its glow
 // "moon", which the sea's mirror draws out into a path), 5 the lightning's bolt. opts: moon [x, y], bolt [x, y]
-// (stage heights), low — where the sky's colours end at the bottom (as the shader's uniform `low`).
+// (stage heights), low — where the sky's colours end at the bottom (as the shader's uniform `low`); round — painted a
+// whole turn round (2π stage heights about the gaze, its ends meeting: the sky element's "box" says so too —
+// tools/island.py sky(round=True)) for a scene whose camera turns; else the stage and its margins.
 function sky(g, e, opts) {
-  const A = e.aspect, L = -0.3, R = A + 0.3, W = R - L, H = opts.low;
+  const A = e.aspect, round = !!opts.round, L = round ? A / 2 - Math.PI : -0.3, R = round ? A / 2 + Math.PI : A + 0.3, W = R - L, H = opts.low, more = W / (A + 0.6);
   g.fillStyle = '#a6b6b8';
   g.fillRect(L, -0.35, W, 1.6);
   // clouds: long soft lumps, each painted three times a width apart so the drift wraps round seamlessly; white —
   // the shader colours them by the hour and by where they are
   const clouds = [];
-  for (let i = 0; i < 11; i++) {
+  for (let i = 0; i < Math.round(11 * more); i++) {
     const y = 0.06 + e.rnd() * 0.42;
     clouds.push({ x: L + e.rnd() * W, y, w: 0.18 + e.rnd() * 0.32, h: 0.018 + e.rnd() * 0.03 });
   }
@@ -428,7 +445,7 @@ function sky(g, e, opts) {
   // the storm's clouds: big heavy masses low and high, overlapping, with gaps between them where the sky (and the
   // moon) shows; the shader darkens their bellies
   const masses = [];
-  for (let i = 0; i < 16; i++) {
+  for (let i = 0; i < Math.round(16 * more); i++) {
     const y = -0.2 + e.rnd() * 0.7;
     masses.push({ x: L + e.rnd() * W, y, w: 0.3 + e.rnd() * 0.45, h: 0.06 + e.rnd() * 0.08 });
   }
@@ -443,7 +460,7 @@ function sky(g, e, opts) {
   });
   // the stars: small points over the upper sky, a few brighter
   e.layer('stars', { box: [L, -0.35, R, H] }, c => {
-    for (let i = 0; i < 700; i++) {
+    for (let i = 0; i < Math.round(700 * more); i++) {
       const x = L + e.rnd() * W, y = -0.35 + (H + 0.3) * e.rnd() ** 1.3, r = 0.0007 + 0.0016 * e.rnd() ** 4;
       c.fillStyle = `rgba(255, 255, 255, ${0.35 + 0.65 * e.rnd()})`;
       c.beginPath();
@@ -500,7 +517,7 @@ function sky(g, e, opts) {
     fork(bx, by, H - by, 0.008, 2);
   });
 }
-// the sky's animate: the hour, the storm and the flash to its shader; the moon's glow by night, faint in a storm
+// the sky's animate: the hour, the storm and the flash to its shader; the moon's glow by night, all but gone in a storm
 function skyMove(e) {
   const s = e.state, night = s.night ?? 0, storm = s.storm ?? 0;
   e.uniform('dawn', s.dawn ?? 0);
@@ -508,7 +525,7 @@ function skyMove(e) {
   e.uniform('night', night);
   e.uniform('storm', storm);
   e.uniform('flash', s.flash ?? 0);
-  e.glow('moon', night * (1 - 0.7 * storm));
+  e.glow('moon', night * (1 - 0.9 * storm));
 }
 
 // ── the storm ─────────────────────────────────────────────────────────

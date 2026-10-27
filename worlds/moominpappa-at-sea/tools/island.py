@@ -4,7 +4,7 @@
 # lightning, the lighthouse's lantern), the sky and the sea elements, the rain — and the two shaders copied beside them.
 # A scene gives only what is its own: where its sun stands at each hour, where its moon and its bolt are on its sky,
 # where its sky's colours end, its wind.
-import json, os, shutil
+import json, math, os, shutil
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -62,19 +62,23 @@ def lights(sun, sun_dawn, sun_dusk, bolt, lantern=True):
     return out
 
 
-def sky(low, day, dawn_x, dusk_x):
+def sky(low, day, dawn_x, dusk_x, round=False):
     """The sky element: its colours end at `low` (stage heights), the day's sun warm at `day` [x, y], the dawn's and
     the dusk's at the horizon by dawn_x, dusk_x. Its code (elements/sky.js) calls the module's sky with the moon and
-    the bolt; its animate is the module's skyMove."""
-    return {"id": "sky", "name": "The sky", "sky": True,
+    the bolt (and `round: true` when this is); its animate is the module's skyMove. round — painted a whole turn round
+    the gaze, for a scene whose camera turns."""
+    extra = {"box": [16 / 9 / 2 - math.pi, -0.35, 16 / 9 / 2 + math.pi, 1.25]} if round else {}
+    return {"id": "sky", "name": "The sky", "sky": True, **extra,
             "uniforms": {"low": low, "day_x": day[0], "day_y": day[1], "dawn_x": dawn_x, "dusk_x": dusk_x,
                          "dawn": 0, "dusk": 0, "night": 0, "storm": 0, "flash": 0}}
 
 
-def sea(elevation, reflect):
-    """The sea: one reflecting plane 1450 m out (2400 × 3000 m) at the scene's sea level."""
-    return {"id": "sea", "name": "The sea", "plane": True, "across": 0, "distance": 1450, "elevation": elevation,
-            "width": 2400, "depth": 3000, "reflect": reflect, "uniforms": {"storm": 0}}
+def sea(elevation, reflect, round=False):
+    """The sea: one reflecting plane at the scene's sea level — 1450 m out (2400 × 3000 m), or round the start
+    (6000 × 6000 m, its code calling the module's sea with `round: true`) for a scene whose camera turns."""
+    place = {"distance": 0, "width": 6000, "depth": 6000} if round else {"distance": 1450, "width": 2400, "depth": 3000}
+    return {"id": "sea", "name": "The sea", "plane": True, "across": 0, **place, "elevation": elevation,
+            "reflect": reflect, "uniforms": {"storm": 0}}
 
 
 def lighthouse(across, distance, **k):
