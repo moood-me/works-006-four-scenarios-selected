@@ -10,7 +10,7 @@ shaders of the sky and the sea, moved by the state — no painting is made again
 
 `dawn`, `dusk`, `night` 0…1 (looks of the light, in this order — a later one over an earlier; the day is all 0; each
 may move before the eyes), `moon` 0…1 (the phase: a thin crescent → full; changes between steps; seen by night),
-`storm` 0…1 (grey light and sky, the storm's clouds, many quick crests, rain, wind; over a half — lightning now and
+`calm` 0…1 (the sea still: few crests, slow — a quiet night), `storm` 0…1 (grey light and sky, the storm's clouds, many quick crests, rain, wind; over a half — lightning now and
 then by `lightning`), `flash` 0…1 (lightning: a far light, the look `flash`, the bolt and the lit sky), `lighthouse_lit`
 0…1 (the lighthouse's lamp burns: its lantern's glass warm, its light `lantern` and its glow). No beam yet: the engine
 has no turning spotlight. Their defaults and `states` — `tools/island.py` `STATE`, `STATES`.
@@ -32,6 +32,10 @@ For a scene whose camera turns (looks round, rides a boat): `tools/island.py` `s
 reach})` — the sky painted a whole turn about the gaze (2π stage heights, its ends meeting; clouds, storm clouds and
 stars as thick all round), the sea centred on the start, 6000 × 6000 m, the crests on every side out to `reach` metres
 (520). Without it (landing, cape) the sky is the stage and its margins, the sea and its crests ahead.
+
+An engine gap (2026-10-27): with a camera that looks ahead (not `around`), turned so far that the gaze comes to the
+end of a whole-turn sky (`camera_yaw` ≈ 180° here), the painting is drawn only up to its own end — its other end,
+a turn on, is not drawn there; the sky's soft carry fills it (lighter, no stars, a cloud smeared): a sharp seam.
 
 ## The land
 

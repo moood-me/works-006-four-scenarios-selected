@@ -9,13 +9,14 @@ import json, math, os, shutil
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 # the common keys: where they start (the empty play: the day, a waxing moon, calm, the lighthouse dark) and what they are
-STATE = {"dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0}
+STATE = {"dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "calm": 0, "flash": 0, "lighthouse_lit": 0}
 STATES = {
     "dawn": {"range": [0, 1], "smooth": True, "means": "the dawn's light and sky (0 — the day)"},
     "dusk": {"range": [0, 1], "smooth": True, "means": "the dusk's light and sky, the afterglow (0 — the day); may move before the eyes"},
     "night": {"range": [0, 1], "smooth": True, "means": "the moonlit night (0 — the day); over dawn and dusk"},
     "moon": {"range": [0, 1], "means": "the moon's phase: 0 a thin crescent … 1 full (changes between steps; seen by night)"},
     "storm": {"range": [0, 1], "smooth": True, "means": "the storm: grey light and sky, its clouds, many quick crests, rain, wind; over a half — lightning now and then"},
+    "calm": {"range": [0, 1], "smooth": True, "means": "the sea calm: few crests, slow (a still night)"},
     "flash": {"range": [0, 1], "smooth": True, "means": "lightning: the sky and everything lit white a moment (the storm's script and the game's moments)"},
     "lighthouse_lit": {"range": [0, 1], "smooth": True, "means": "the lighthouse's lamp burns: the lantern's glass warm, its light and glow (no beam)"},
 }
@@ -78,7 +79,7 @@ def sea(elevation, reflect, round=False):
     (6000 × 6000 m, its code calling the module's sea with `round: true`) for a scene whose camera turns."""
     place = {"distance": 0, "width": 6000, "depth": 6000} if round else {"distance": 1450, "width": 2400, "depth": 3000}
     return {"id": "sea", "name": "The sea", "plane": True, "across": 0, **place, "elevation": elevation,
-            "reflect": reflect, "uniforms": {"storm": 0}}
+            "reflect": reflect, "uniforms": {"storm": 0, "calm": 0}}
 
 
 def lighthouse(across, distance, **k):

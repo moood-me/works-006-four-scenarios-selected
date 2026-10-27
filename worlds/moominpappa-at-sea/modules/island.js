@@ -392,9 +392,10 @@ function sea(g, e, opts) {
     });
   });
 }
-// the sea's animate: the storm to its shader
+// the sea's animate: the storm and the calm to its shader
 function seaMove(e) {
   e.uniform('storm', e.state.storm ?? 0);
+  e.uniform('calm', e.state.calm ?? 0);
 }
 
 // ── the sky ───────────────────────────────────────────────────────────
