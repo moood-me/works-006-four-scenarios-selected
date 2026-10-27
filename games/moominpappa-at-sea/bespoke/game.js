@@ -6,7 +6,7 @@
 // (Mama's garden, the lamp's sheets, paraffin, the Groke's nights) and what is remembered carry from chapter to
 // chapter; the three hinges decide the ending (story.js facts) — the play always goes through to the epilogue.
 // Stage 5 (rpg docs/writing-games-v2/game-stages.md): the play whole on the world's own scenes, in their pieces (the
-// world's module `beats`), with its sounds (sound.js); the mini-games — stubs (minigames/stub.js) till their package.
+// world's module `beats`), with its sounds (sound.js) and its mini-games (minigames/).
 //   The map of the play (moood/docs/agents/games.md §2): a leaf for each chapter hung at its point over “The chart”,
 // Papa's sea chart (map.js), his course pencilled as far as the play has sailed. What can be done on it is its own
 // drawing — pressed, the language's mark opens there, born open (story.js hub.ask): the main run's pointer — “Start”, “Continue” (from the beginning of the step it stopped
@@ -186,7 +186,7 @@ export default async function (b) {
     view.quiet();
     view.gauge(null);
     beds({ clock: 0.25, crickets: 0.15 }, 2); // (the chart on the veranda's table, an August night)
-    const at = replay ? replay.run.chapter : Math.min(kept.chapter, EPILOGUE);
+    const at = replay ? replay.run.chapter : kept.chapter; // (END: the finale's leaf, c6)
     const route = kept.chapter > 1 ? 1 : kept.chapter === 1 ? Math.min(1, kept.step / 2) : 0;
     await b.show(SCENES.chart, { state: { shown: at, route }, captions: false });
     const drawn = trees(b, sky(), { grow: reveal, author: !!author });

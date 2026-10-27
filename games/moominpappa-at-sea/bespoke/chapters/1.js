@@ -70,7 +70,7 @@ export default {
       g.beds({ sea: 0.5, wind: 0.2 });
       const door = g.told('arrive:door'), arrow = g.told('arrive:arrow');
       await g.scene(SCENES.landing, { beat: 'arrive', here: ['papa', 'mama', 'troll', 'my'], moods: { papa: 'smile', mama: 'tired', troll: 'thinking' },
-        keys: { ...land(23, 'dawn'), frost_patch: boat === 'keep' } });
+        keys: { ...land(23, 'dawn'), frost_patch: boat === 'keep' } }, { cut: boat === 'hold' });
       g.title(tr('23 August'));
       const arrive = g.beat('arrive');
       await door;

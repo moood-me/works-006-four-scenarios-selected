@@ -36,7 +36,7 @@ globalThis.tr = Object.assign(fill, { n: (n, one, other, p) => fill(n === 1 ? on
 const PEOPLE = JSON.parse(readFileSync(join(game, 'people.json'), 'utf8'));
 const { ENDINGS, SCENES: FOLDERS, carry, facts, context } = await load('story.js');
 const { jump } = await load('jump.js');
-const { unheard } = await load('sound.js');
+const { unheard, BED_NAMES } = await load('sound.js');
 const { CHAPTERS, PLAYS, fresh } = await load('game.js');
 
 // --- what does not match: text → the number of paths it was met on
@@ -133,7 +133,11 @@ const lines = new Map(); // `${who}\n${text}` → {who, text}
 // made: the choice it made, titles: the titles it showed}
 async function step(c, s, state, where) {
   const j = jump(Infinity, unheard(), { result: outcome });
-  const g = context(b, view, hub, structuredClone(state), j);
+  // (the choices of a play the author's map goes by lie under those made, as game.js lays them: carry sees only these)
+  const st = structuredClone(state);
+  st.choices = Object.assign(Object.create(Object.getPrototypeOf(state.choices)), st.choices);
+  const g = context(b, view, hub, st, j);
+  let present = new Set(); // the shown scene's people the step has there (here, g.here)
   let folder = null;
   const made = [], titles = [];
   const { scene, set, say, choose, play, title, beat, told } = g;
@@ -167,6 +171,7 @@ async function step(c, s, state, where) {
     for (const id of Object.keys(o.moods ?? {})) person(f, id, where);
     for (const [k, v] of Object.entries({ ...carry(f, g.state), ...o.keys })) key(f, k, v, where);
     cur = { last: null, opening: o.beat ?? null, next: null };
+    present = new Set(o.here ?? []);
     if (o.beat) begins(o.beat, true);
     else miss(`${where}: the scene “${f}” opened on no piece`);
     return scene(f, o, x);
@@ -184,6 +189,13 @@ async function step(c, s, state, where) {
     }
     return told(text, ms);
   };
+  const { here, mood, beds } = g;
+  g.here = (id, on) => { person(folder, id, where); if (on) present.add(id); else present.delete(id); return here(id, on); };
+  g.mood = (id, m) => { person(folder, id, where); return mood(id, m); };
+  g.beds = (levels, seconds) => {
+    for (const name of Object.keys(levels ?? {})) if (!BED_NAMES.includes(name)) miss(`${where}: g.beds — no bed “${name}” in sound.js`);
+    return beds(levels, seconds);
+  };
   g.set = (k, v) => {
     if (k === 'beat_next') { if (cur) cur.next = v; }
     else key(folder, k, v, where, true);
@@ -191,6 +203,8 @@ async function step(c, s, state, where) {
   };
   g.say = (who, text, at) => {
     if (!PEOPLE[who]) miss(`${where}: “${text}” — said by “${who}”, no one of people.json`);
+    // (someone of the shown scene the step has not brought in — a piece brought them: said over them, `at` given)
+    else if (at === undefined && SCENES.get(folder)?.people.has(who) && !present.has(who)) miss(`${where}: “${text}” — said as the narrator by “${who}”, of the scene “${folder}” but not here for the step (give at)`);
     lines.set(`${who}\n${text}`, { who, text });
     return say(who, text, at);
   };
@@ -283,7 +297,7 @@ outcome = null;
 const NAMED = { 'The Beam': 'beam', 'The Boat': 'boat', 'The Pie': 'pie', 'Halfway up the Stair': 'stair' };
 for (const p of PLAYS) {
   let state = fresh();
-  for (const [c, s] of STEPS) state = (await step(c, s, { ...state, choices: { ...p.choices, ...state.choices } }, p.label)).state;
+  for (const [c, s] of STEPS) state = (await step(c, s, { ...state, choices: Object.assign(Object.create(p.choices), { ...state.choices }) }, p.label)).state;
   const f = facts(state), named = Object.entries(NAMED).find(([head]) => p.label.startsWith(head))?.[1];
   if (named !== f.ending) miss(`PLAYS “${p.label}” ends in “${f.ending}” (${f.form})`);
   if (/\blate\b/.test(p.label) !== (f.form === 'late')) miss(`PLAYS “${p.label}”: the form is ${f.form}`);

@@ -328,6 +328,7 @@ export function bees(level = 1, seconds = 2) {
 }
 
 const BEDS = { sea, sea_in, storm, wind, gale, stream, fire, crickets, clock, bees };
+export const BED_NAMES = Object.keys(BEDS);
 export function beds(levels = {}, seconds = 2) {
   for (const [name, play] of Object.entries(BEDS)) play(levels[name] ?? 0, seconds);
 }

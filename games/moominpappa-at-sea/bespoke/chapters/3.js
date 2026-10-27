@@ -90,7 +90,7 @@ export default {
         await g.beat('w_lamp');
         g.beds({ sea_in: 0.15, bees: 0.35, wind: 0.1 });
         on(g, 'w_walk:out', () => g.beds({ sea_in: 0.3, wind: 0.1 }, 3));
-        await g.scene(SCENES.room, { beat: 'w_walk', here: ['my'], moods: { my: 'smile', mama: 'tired' }, keys: { ...isle(24, 'dusk'), lantern_at: 'none', wall_mama: 1, cups: 1 } }, { cut: true });
+        await g.scene(SCENES.room, { beat: 'w_walk', here: ['my'], moods: { my: 'smile', mama: 'tired' }, keys: { ...isle(24, 'dusk'), lantern_at: 'none', wall_mama: 1, cups: 1 } });
         await g.beat('w_walk');
       } else if (wall === 'call') {
         await g.say('papa', 'Mamma! Mamma!');
@@ -100,9 +100,9 @@ export default {
         const call = g.beat('w_call');
         await out;
         g.mood('mama', 'tired');
-        await g.say('mama', 'I only lay down for a moment under the apple tree');
+        await g.say('mama', 'I only lay down for a moment under the apple tree', 'mama');
         await jar;
-        if (g.state.marks.promise === 'term') await g.say('mama', 'Two more nights');
+        if (g.state.marks.promise === 'term') await g.say('mama', 'Two more nights', 'mama');
         await call;
       } else {
         g.sound.cup();
@@ -111,7 +111,7 @@ export default {
         const son = g.told('w_wait_son:son'), hush = g.told('w_wait_son:hush'), cup = g.told('w_wait_son:cup'), beside = g.told('w_wait_son:beside');
         const rest = g.beat('w_wait_son');
         await son;
-        await g.say('troll', 'Pappa, I…');
+        await g.say('troll', 'Pappa, I…', 'troll');
         await hush;
         await g.say('papa', 'Shh. Later');
         await cup;
@@ -121,7 +121,7 @@ export default {
         g.mood('papa', 'smile');
         await g.say('papa', 'And I found a line here, by the way. The old keeper’s. By myself, under the dust');
         await g.wait(1500);
-        await g.say('mama', 'How good that you noticed');
+        await g.say('mama', 'How good that you noticed', 'mama');
         await rest;
       }
       g.apply('wall');

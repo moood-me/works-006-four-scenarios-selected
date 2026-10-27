@@ -10,7 +10,7 @@ import { SCENES, facts, isle, land, on } from '../story.js';
 import { boat, burner, hold, rocks, both, shoulder, keep, beside } from '../minigames/all.js';
 
 // the round room in the storm (4.3–4.4): the stove flooded, steam, the floor wet, the door not staying shut
-const STORM = { ...isle(25, 'night', 1), stove: 'flooded', steam: 1, wet: true, door: 0.15, lantern_at: 'table', flame: 'full', firewood: false };
+const STORM = { ...isle(25, 'night', 1), stove: 'flooded', steam: 1, wet: true, door: 0.15, lantern_at: 'table', flame: 'out', firewood: false };
 // the lantern room in the storm: the pan of warm oil there with two sheets
 const top = g => ({ ...isle(25, 'night', 1), pot: g.state.scales.lamp === 2 });
 // Mama ties the shutters as her garden stands (4.3): ≤ 1 — then holds Papa's sleeve; 2 — without a word; ≥ 3 — her palm
@@ -88,7 +88,7 @@ export default {
       const garden = g.state.scales.garden;
       g.beds({ storm: 0.5, sea_in: 0.3, wind: 0.4 });
       const flood = g.told('storm:flood');
-      on(g, 'storm:door', () => g.sound.door());
+      on(g, 'storm:door', () => { g.sound.door(); setTimeout(() => g.sound.glass(), 900); });
       await g.scene(SCENES.room, { beat: 'storm', here: ['papa', 'mama', 'my', 'troll'], moods: { papa: 'thinking', mama: 'afraid', my: 'laugh', troll: 'afraid' },
         keys: STORM });
       const storm = g.beat('storm');
@@ -139,7 +139,7 @@ export default {
         await fill;
         g.sound.pour();
         await after;
-        if (wall === 'walk') await g.say('mama', 'Well, there');
+        if (wall === 'walk') await g.say('mama', 'Well, there', 'wall_a#garden');
         else await g.say('mama', 'Be careful out there');
         await leaving;
       };
@@ -147,7 +147,7 @@ export default {
       const left = async () => {
         g.beds({ storm: 0.5, sea_in: 0.3, wind: 0.4 });
         await g.scene(SCENES.room, { beat: 'st_left', here: ['mama', 'my', 'troll'], moods: { mama: 'afraid', my: 'surprised', troll: 'afraid' },
-          keys: { ...STORM, shutters: true, flame: 'out' } }, { cut: true });
+          keys: { ...STORM, shutters: true, lantern_at: storm === 'cape' ? 'none' : 'table' } }, { cut: true });
         await g.beat('st_left');
       };
       if (storm === 'light') {
@@ -180,6 +180,7 @@ export default {
         }
         await left();
       } else if (storm === 'door') {
+        on(g, 'st_door:fill', () => g.sound.pour());
         const order = g.told('st_door:order');
         const doorway = g.beat('st_door');
         await order;
@@ -193,7 +194,7 @@ export default {
         await told;
         await g.say('my', 'You’ve told that one');
         await home;
-        if (wall === 'walk') await g.say('mama', 'I want to go home', 'narrator');
+        if (wall === 'walk') await g.say('mama', 'I want to go home', 'wall_a#apple');
         else {
           await g.say('mama', 'I want to go home');
           await g.say('mama', 'Pass me the blanket');
@@ -280,7 +281,7 @@ export default {
       const room = { ...isle(26, 'night'), lantern_at: 'table', flame: 'out', drip: 0.3, basket: m.promise === 'term' };
       g.beds({ sea_in: 0.2 });
       const door = g.told('night3:door'), mama = g.told('night3:mama');
-      await g.scene(SCENES.room, { beat: 'night3', here: ['papa', 'mama', 'troll'], moods: { papa: 'thinking', mama: 'sad', troll: 'neutral' }, keys: { ...room, stone: false } }, { cut: true });
+      await g.scene(SCENES.room, { beat: 'night3', here: ['papa', 'mama', 'troll'], moods: { papa: 'thinking', mama: 'sad', troll: m.son_closed ? 'afraid' : 'neutral' }, keys: room }, { cut: true });
       const night = g.beat('night3');
       await door;
       if (m.son_later) await g.say('troll', 'Later');
