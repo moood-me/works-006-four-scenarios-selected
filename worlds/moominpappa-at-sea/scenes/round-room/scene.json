@@ -469,9 +469,9 @@
       "plane": true,
       "across": 0,
       "distance": 1450,
-      "elevation": -5,
       "width": 2400,
       "depth": 3000,
+      "elevation": -5,
       "reflect": {
         "strength": 0.2,
         "fade": 0,
