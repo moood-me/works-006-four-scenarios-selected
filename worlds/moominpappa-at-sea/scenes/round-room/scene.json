@@ -95,7 +95,8 @@
           "sun": 0.25,
           "sun_dawn": 0.3,
           "sun_dusk": 0.3,
-          "moon": 0.6
+          "moon": 0.6,
+          "beam": 0.4
         },
         "inside": 0.65
       },
@@ -1155,6 +1156,8 @@
     "calm": 0,
     "flash": 0,
     "lighthouse_lit": 0,
+    "beam": 0,
+    "beam_turn": 0,
     "garden": -1,
     "paints": "green",
     "wall_mama": 0,
@@ -1282,7 +1285,19 @@
         1
       ],
       "smooth": true,
-      "means": "the lighthouse's lamp burns: the lantern's glass warm, its light and glow (no beam)"
+      "means": "the lighthouse's lamp burns: the lantern's glass warm, its light and glow"
+    },
+    "beam": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lighthouse's beam: 0 none … 1 full; while on, the island's script turns it (seen in the air by night, at dusk, in a storm)"
+    },
+    "beam_turn": {
+      "type": "number",
+      "means": "the beam's bearing, degrees (the island's script turns it on and on while beam is on)"
     },
     "garden": {
       "range": [

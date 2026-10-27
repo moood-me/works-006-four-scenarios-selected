@@ -39,10 +39,12 @@ lamp's own key is `flame`). The room's: `lenses` 0…1 (murky … wiped), `flame
 drum turns), `slant` 0…1, `sheets` 0–2, `pot`, `cot` (none · made · empty · taken), `gallery_glass` (whole ·
 cracked), `lantern_at` (none · floor), `lantern_flame` (full · low · out). The script's own: `smoke`.
 
+## The beam
+
+The lighthouse's beam (`beam`, turned by `beam_turn` — modules/island `beam`): the lamp's own light `burner#beam`, a cone out through the glass, on while the lamp burns (the script sets `beam` from `flame`).
+
 ## Open
 
-- The lighthouse's beam: not made — the engine has no turning spotlight yet (plan, «Что проверено до начала»); the
-  lamp's own light and glow only.
 - `cot` taken: the bed slept in (the blanket thrown back, his hat by the pillow); Moominpappa lying in it needs a
   lying motion (stage 5).
 - The room is bigger than the island's lighthouse's lantern seen from outside (5.6 m across against 2 m): it has to
