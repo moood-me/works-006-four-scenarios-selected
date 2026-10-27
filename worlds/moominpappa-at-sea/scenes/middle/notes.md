@@ -29,12 +29,49 @@ metre above the clearing, so the pool is seen from above enough to read as water
 - People (the world's cast): the son by his ring, Papa at the pool's lip by the rock, Mama on the path, My on the
   granite on the left. Stage 4: they stand and breathe, no motions yet.
 
+## Pieces (stage 5: `lib.js` FILM, played by `beat` through the world's `beats`; the game says the lines at the moments)
+
+Seconds are estimates. Motions and parts are the cast's (package Л): the `rope` with its weight in the hands, the
+`armful`; `crouch`, `put_down` (a stone), `pull_rope`, `carry` (the armful high).
+
+- `ring` (2.3, day, ≈ 16 s): the son comes down the path into the clearing, looks round, and lays the stones in a ring
+  one by one, crouching (`ring` set, `ring_n` 0 → 9) — `ring:set` (his line); My on the granite on the left, busy
+  with her own (as `my_here` says). Ends with him standing over the ring.
+- `sound_ready` (2.4 «Омут», day, ≈ 10 s): Papa comes to the rock with the rope and its weight, ties it to the rock and
+  stands at the pool's lip holding it — `sound_ready:ready` (the pose for «Лот»: `pool#water` in the middle 4:3). The
+  minigame moves `rope`.
+- `sound_after` (after `sound_ready`, ≈ 12 s): all the rope is out (`rope` 1) and there is no bottom: Papa looks into
+  the pool (surprised, then smiling) — `sound_after:look`; behind his back the pines creep toward the lighthouse
+  (`pines` + 0.4 over ≈ 6 s) — `sound_after:pines`.
+- `armful_in` (2.4 «Водоросли», day, ≈ 6 s): Papa comes down the path with the armful above his head, not seeing his
+  feet; the son at the clearing's edge — `armful_in:ready` (the pose for «Охапка»). The minigame moves `sway`; he walks
+  on toward the ring as it plays.
+- `armful_through` (after `armful_in`, ≈ 10 s): he walks straight through the ring and knocks it apart (`ring` →
+  broken) — `armful_through:kick`; goes on and off to the right toward the landing; the son looks at his back —
+  `armful_through:gone`.
+- `regather` (after `armful_through`, ≈ 14 s): the son sets the stones back one by one (`ring` set, `ring_n` 0 → 9) —
+  `regather:done`.
+- `rope_shot` (common shots, «Омут», ≈ 4 s): the rock at the pool with the coiled rope (`coil`) — `rope_shot:held`.
+- `ring_shot` (common shots, «Сын: потом», ≈ 4 s): the ring in the clearing one stone short (`ring` one_missing) —
+  `ring_shot:held`.
+
+New keys for these (stage 5): `ring_n` 0…9 — how many stones of a set ring are there while it is laid (each stone a
+layer of `ring`, shown by it: no painting again); the act `sway`.
+
 ## Contract for the check
 
 ```json
-{"points": ["pool#water", "ring#stones", "ground#path", "troll#chest", "papa#chest", "mama#chest", "my#chest", "lighthouse#lantern", "lighthouse#door"],
-"offers": ["pool#water", "ring#stones", "ground#path", "troll#chest", "papa#chest"],
-"party": {"beam": 0, "calm": 0, "dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0,
-  "pines": 0, "ring": "none", "rope": 0, "coil": false, "troll_here": true, "papa_here": false, "mama_here": false, "my_here": false},
-"acts": {}}
+{"beats": {
+ "ring": {"after": [], "tells": ["ring:set"], "seconds": 16, "show": false},
+ "sound_ready": {"after": [], "tells": ["sound_ready:ready"], "seconds": 10, "show": false},
+ "sound_after": {"after": ["sound_ready"], "tells": ["sound_after:look", "sound_after:pines"], "seconds": 12, "show": false},
+ "armful_in": {"after": [], "tells": ["armful_in:ready"], "seconds": 6, "show": false},
+ "armful_through": {"after": ["armful_in"], "tells": ["armful_through:kick", "armful_through:gone"], "seconds": 10, "show": false},
+ "regather": {"after": ["armful_through"], "tells": ["regather:done"], "seconds": 14, "show": false},
+ "rope_shot": {"after": [], "tells": ["rope_shot:held"], "seconds": 4, "show": false},
+ "ring_shot": {"after": [], "tells": ["ring_shot:held"], "seconds": 4, "show": false}},
+ "points": ["pool#water", "ring#stones", "ground#path", "troll#chest", "papa#chest", "mama#chest", "my#chest", "lighthouse#lantern", "lighthouse#door"],
+ "offers": ["pool#water", "ring#stones", "ground#path", "troll#chest", "papa#chest"],
+ "party": {"beam": 0, "calm": 0, "dawn": 0, "dusk": 0, "night": 0, "moon": 0.6, "storm": 0, "flash": 0, "lighthouse_lit": 0, "pines": 0, "ring": "none", "ring_n": 9, "rope": 0, "coil": false, "troll_here": true, "papa_here": false, "mama_here": false, "my_here": false},
+ "acts": {"rope": {"values": [], "tells": []}, "sway": {"values": [], "tells": []}}}
 ```
