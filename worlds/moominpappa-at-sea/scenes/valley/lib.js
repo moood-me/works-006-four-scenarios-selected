@@ -67,7 +67,7 @@ const SEATS = { back: [-0.2, 0.72, 0.32], left: [-1.25, -0.1, 0.32], right: [0.8
 // side; up from the waterline) — Papa at the tiller in the stern, Mama and the son amidships, My on the bow
 const BOAT = {
   moored: [-15.4, 22.85],
-  away: [[-17.2, 26.5], [-20.5, 33], [-24.5, 42]],
+  away: [[-16.6, 25.2], [-18.2, 28.4], [-19.6, 31.2]],
   seats: { papa: [-1.3, 0.35, 0.25], mama: [-0.45, 0.35, 0.25], troll: [0.35, 0.35, 0.25], my: [1.45, 0.3, 0.5] },
 };
 const v = (x, y) => [VERANDA.at[0] + x, VERANDA.at[1] + y];
@@ -127,10 +127,12 @@ const SHOTS = {
   // (on the right end, turned left) — each from the other end of the table
   papa: at_(7.2, 13.2, 0, 0.06),
   mama: at_(8.5, 13.9, -45, 0.06),
-  troll: at_(5.9, 13.9, 45, 0.06),
+  troll: at_(6.7, 14.0, 55, 0.08),
   // the jetty from the beach by it: My on the post, Papa on the deck, the boat
   jetty: at_(-12.5, 18.5, -22, 0.04),
-  // the jetty and the beach beyond: the boat going out, the Groke on the sand
+  // along the jetty after the boat as she goes out, her lantern on the bow
+  after: at_(-13.2, 20.2, -32, 0.04),
+  // the jetty and the beach beyond: the boat out on the water, the Groke on the sand
   shore: at_(-11.5, 15, 0, 0),
 };
 // the place's own as a piece begins: the jam on the stove, the lamps, the luggage on the jetty, the bow lantern, the
@@ -268,9 +270,11 @@ const FILM = {
       await s.wait(1);
       s.set('troll_with', null);
       s.set('troll_reach', null);
-      s.person('troll').look('papa');
+      s.person('troll').look('table');
       s.tell('supper:spoon');
-      await s.wait(2.5);
+      await s.wait(1.2);
+      s.person('troll').look('papa');
+      await s.wait(1.3);
       const papa = ready(s, SHOTS.papa);
       await cutTo(s, papa);
       s.tell('supper:beam');
@@ -356,13 +360,12 @@ const FILM = {
       await s.move('lantern_bow', 1, { over: 0.8 });
       s.tell('push_off:lantern');
       await s.wait(1.5);
-      s.move('camera_x', SHOTS.shore.camera_x, { over: 4, ease: 'inOut' });
-      s.move('camera_z', SHOTS.shore.camera_z, { over: 4, ease: 'inOut' });
-      s.move('camera_yaw', SHOTS.shore.camera_yaw, { over: 4, ease: 'inOut' });
-      const away = s.path(['boat_a', 'boat_d'], [BOAT.moored, ...BOAT.away], { speed: 1.4, ease: 'inOut' });
+      const away = s.path(['boat_a', 'boat_d'], [BOAT.moored, ...BOAT.away], { speed: 0.9, ease: 'inOut' });
+      for (const k of ['camera_x', 'camera_z', 'camera_yaw']) s.move(k, SHOTS.after[k], { over: 5, ease: 'inOut' });
       await s.wait(3);
       s.tell('push_off:away');
       await s.wait(3);
+      for (const k of ['camera_x', 'camera_z', 'camera_yaw']) s.move(k, SHOTS.shore[k], { over: 4, ease: 'inOut' });
       const groke = s.person('groke');
       groke.look('boat#lantern');
       s.set('groke_gait', 'glide');
