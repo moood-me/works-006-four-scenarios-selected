@@ -18,12 +18,90 @@
     "tintStrength": 0.07,
     "vignette": 0.24,
     "grain": 0.08,
+    "saturation": 1.08,
     "wind": [
       -1,
       0.4,
       1.1
     ],
-    "saturation": 1.08
+    "looks": {
+      "dawn": {
+        "ambient": 0.68,
+        "ambientColor": "#dfe6ef",
+        "bounce": 0.55,
+        "haze": 0.035,
+        "hazeColor": "#e3e1e0",
+        "hazeGlow": 0,
+        "shafts": 0,
+        "tint": "#f6dccb",
+        "tintStrength": 0.05,
+        "vignette": 0.22,
+        "grain": 0.08,
+        "saturation": 1.08,
+        "lights": {
+          "sun": 0
+        }
+      },
+      "dusk": {
+        "ambient": 0.6,
+        "ambientColor": "#cdbfdc",
+        "haze": 0.05,
+        "hazeColor": "#e8c4b4",
+        "hazeGlow": 0.3,
+        "shafts": 0.25,
+        "tint": "#ffb48c",
+        "tintStrength": 0.1,
+        "saturation": 1.05,
+        "lights": {
+          "sun": 0
+        }
+      },
+      "night": {
+        "ambient": 0.5,
+        "ambientColor": "#9cb0e0",
+        "bounce": 0.6,
+        "haze": 0.05,
+        "hazeColor": "#5f7299",
+        "hazeGlow": 0.6,
+        "shafts": 0.35,
+        "tint": "#a8bcff",
+        "tintStrength": 0.1,
+        "saturation": 0.8,
+        "vignette": 0.26,
+        "lights": {
+          "sun": 0,
+          "sun_dawn": 0,
+          "sun_dusk": 0
+        }
+      },
+      "storm": {
+        "ambient": 0.6,
+        "ambientColor": "#bcc6d0",
+        "haze": 0.13,
+        "hazeColor": "#9ea9b3",
+        "shafts": 0.1,
+        "tint": "#c4d4e4",
+        "tintStrength": 0.08,
+        "saturation": 0.8,
+        "wind": [
+          -1,
+          0.4,
+          2.4
+        ],
+        "lights": {
+          "sun": 0.25,
+          "sun_dawn": 0.3,
+          "sun_dusk": 0.3,
+          "moon": 0.6
+        }
+      },
+      "flash": {
+        "ambient": 1.0,
+        "ambientColor": "#e6ecff",
+        "brightness": 1.2,
+        "saturation": 0.7
+      }
+    }
   },
   "lights": [
     {
@@ -34,16 +112,74 @@
       ],
       "color": "#ffd6a0",
       "strength": 1.5
+    },
+    {
+      "id": "sun_dawn",
+      "from": [
+        140,
+        12
+      ],
+      "color": "#ffe0c2",
+      "strength": 1.35,
+      "on": "dawn"
+    },
+    {
+      "id": "sun_dusk",
+      "from": [
+        -80,
+        4
+      ],
+      "color": "#ffb486",
+      "strength": 1.3,
+      "on": "dusk"
+    },
+    {
+      "id": "moon",
+      "from": "sky#moon",
+      "color": "#cdd8ff",
+      "strength": 0.9,
+      "on": "night"
+    },
+    {
+      "id": "flash",
+      "from": [
+        10,
+        25
+      ],
+      "color": "#e8eeff",
+      "strength": 2.2,
+      "on": "flash"
+    },
+    {
+      "id": "lantern",
+      "of": "lighthouse#lantern",
+      "on": "lighthouse_lit",
+      "color": "#ffd27e",
+      "strength": 2.5,
+      "reach": 40
     }
   ],
   "modules": [
-    "cast"
+    "cast",
+    "island"
   ],
   "objects": [
     {
       "id": "sky",
-      "name": "Afternoon sky",
-      "sky": true
+      "name": "The sky",
+      "sky": true,
+      "uniforms": {
+        "low": 0.56,
+        "day_x": -0.35,
+        "day_y": 0.42,
+        "dawn_x": 1.98,
+        "dusk_x": -0.3,
+        "dawn": 0,
+        "dusk": 0,
+        "night": 0,
+        "storm": 0,
+        "flash": 0
+      }
     },
     {
       "id": "sea",
@@ -59,6 +195,9 @@
         "fade": 0,
         "rough": 0.6,
         "ripple": 0.45
+      },
+      "uniforms": {
+        "storm": 0
       }
     },
     {
@@ -77,13 +216,16 @@
       "across": 28,
       "distance": 54,
       "elevation": -0.45,
-      "shadow": true,
       "box": [
         -5.03,
         -15.8,
         5.03,
         0
-      ]
+      ],
+      "shadow": true,
+      "redraw": {
+        "lighthouse_lit": 1
+      }
     },
     {
       "id": "steps",
@@ -287,6 +429,13 @@
     }
   ],
   "state": {
+    "dawn": 0,
+    "dusk": 0,
+    "night": 0,
+    "moon": 0.6,
+    "storm": 0,
+    "flash": 0,
+    "lighthouse_lit": 0,
     "fisher_on": [
       -0.9,
       3.6,
@@ -318,6 +467,63 @@
       1
     ],
     "mama_mood": "tired"
+  },
+  "states": {
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dawn's light and sky (0 — the day)"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dusk's light and sky, the afterglow (0 — the day); may move before the eyes"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the moonlit night (0 — the day); over dawn and dusk"
+    },
+    "moon": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the moon's phase: 0 a thin crescent … 1 full (changes between steps; seen by night)"
+    },
+    "storm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the storm: grey light and sky, its clouds, many quick crests, rain, wind; over a half — lightning now and then"
+    },
+    "flash": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "lightning: the sky and everything lit white a moment (the storm's script and the game's moments)"
+    },
+    "lighthouse_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lighthouse's lamp burns: the lantern's glass warm, its light and glow (no beam)"
+    }
   },
   "music": {
     "prompts": [

@@ -8,10 +8,9 @@ bundles.
 
 - The land is one function (`lib.js` `land`): the viewer's rock and the cape running out to the left, the
   Fisherman's knob of rock on it, a cove of water ahead, the island's back on the right up to the lighthouse's knoll.
-  `SEA` is the sea's height. `granite` is one draped plane; `sea` one reflecting plane with the landing's shader
-  (crests coming and going, foam washing the waterline).
-- The lighthouse, its steps and the pines are the landing's paintings (the tower's profile is in `lib.js` `TOWER`, as
-  there). Points: `lighthouse#door`, `lighthouse#lantern`, `rack#net`.
+  `SEA` is the sea's height. The sky, the sea, the granite, the lighthouse, its steps and the pines are the world's
+  module `island` (`modules/island.md`), and so are the hour and the storm (the light from `tools/island.py`: the
+  cape's late afternoon is the island's day). Points: `lighthouse#door`, `lighthouse#lantern`, `rack#net`.
 - `lib.net` draws a net's diamond mesh (the rack's hanging net — a layer the wind sways, translucent to the sun —
   and the heap at his feet).
 - The low sun is out of the picture behind the viewer's left shoulder (the light `sun`, `from` [-115, 16]): it lights
