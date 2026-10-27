@@ -58,6 +58,13 @@ change is made there and copied by every generator).
 - `pine(g, e)` — a small crooked black pine, its crown a layer the wind sways (box [-1.9, -3.75, 1.75, 0.1]; point
   `<id>#crown`); copies of it stand about.
 
+## The people at their places
+
+`places(scene, PLACES)` — in the scene's script: each person stands where `<id>_at` names, `PLACES[id][name]` =
+`{at: [across, distance], on, turn, do, look, reach}` (the person's `"place": {"across": "<id>_a", "distance":
+"<id>_d"}`); set at once when `<id>_at` changes, and on opening only if it differs from `<id>_placed` (so a scene
+restored goes on as it was). A scene declares `<id>_at`, `<id>_placed`, `<id>_a`, `<id>_d` in its `states`.
+
 ## The storm's script
 
 `lightning(scene)` — in the scene's script: while `storm` is over a half, now and then `flash` up and down (sometimes

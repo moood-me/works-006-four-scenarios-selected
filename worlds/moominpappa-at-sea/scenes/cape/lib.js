@@ -36,4 +36,31 @@ function net(g, x0, x1, top, bottom, cell, color) {
   }
   g.stroke();
 }
-return { SEA, land, shore, net };
+// the people's places (`<id>_at`; the scene's script puts them there): where each stands or sits, turned how, doing
+// what, looking at what
+const stand = { motion: 'stand', loop: true };
+const PLACES = {
+  fisher: {
+    seat: { at: [-0.9, 3.6], on: [-0.9, 3.6, 0.3], turn: 250, do: 'seated', look: [-40, 8, 1.2] },
+    away: { at: [-1.2, 10.5], turn: 300, do: stand, look: [-60, 30, 1.5] },
+  },
+  papa: {
+    beside: { at: [0.75, 4.15], turn: 215, do: 'sit_look', look: [-40, 24, 1] },
+    behind: { at: [1.3, 4.7], turn: 245, do: 'hands_behind', look: 'fisher' },
+    net: { at: [0.75, 4.15], turn: 235, do: 'sit_look', look: 'net#knot' },
+    under: { at: [-0.15, 3.85], turn: 240, do: 'sit_look', look: [-40, 8, 1] },
+    stand: { at: [1.7, 4.4], turn: 245, do: stand, look: 'fisher' },
+  },
+  mama: {
+    steps: { at: [27.2, 51.1], on: [27.2, 51.1, 0.35], turn: 200, do: 'seated', look: [0, 5, 1] },
+    beside: { at: [1.95, 4.6], turn: 225, do: 'sit_look', look: 'papa' },
+    apart: { at: [3.7, 3.3], turn: 120, do: 'sit_look', look: [30, 20, 1] },
+  },
+  my: {
+    rock: { at: [-3.0, 6.4], turn: 200, do: 'sit_look', look: [-20, -5, 1] },
+  },
+  troll: {
+    near: { at: [2.7, 5.2], turn: 225, do: 'sit_look', look: 'fisher' },
+  },
+};
+return { SEA, land, shore, net, PLACES };

@@ -42,7 +42,7 @@ def light(wind):
         "storm": {"ambient": 0.6, "ambientColor": "#bcc6d0", "haze": 0.13, "hazeColor": "#9ea9b3", "shafts": 0.1,
                   "tint": "#c4d4e4", "tintStrength": 0.08, "saturation": 0.8, "wind": [wind[0], wind[1], 2.4],
                   "lights": {"sun": 0.25, "sun_dawn": 0.3, "sun_dusk": 0.3, "moon": 0.6}},
-        "flash": {"ambient": 1.0, "ambientColor": "#e6ecff", "brightness": 1.2, "saturation": 0.7},
+        "flash": {"ambient": 0.9, "ambientColor": "#e6ecff", "brightness": 1.1, "saturation": 0.75},
     }
     return {**DAY, "wind": wind, "looks": looks}
 
@@ -55,7 +55,7 @@ def lights(sun, sun_dawn, sun_dusk, bolt, lantern=True):
         {"id": "sun_dawn", "from": sun_dawn[0], "color": sun_dawn[1], "strength": sun_dawn[2], "on": "dawn"},
         {"id": "sun_dusk", "from": sun_dusk, "color": "#ffb486", "strength": 1.3, "on": "dusk"},
         {"id": "moon", "from": "sky#moon", "color": "#cdd8ff", "strength": 0.9, "on": "night"},
-        {"id": "flash", "from": bolt, "color": "#e8eeff", "strength": 2.2, "on": "flash"},
+        {"id": "flash", "from": bolt, "color": "#e8eeff", "strength": 1.8, "on": "flash"},
     ]
     if lantern:
         out.append({"id": "lantern", "of": "lighthouse#lantern", "on": "lighthouse_lit", "color": "#ffd27e", "strength": 2.5, "reach": 40})
@@ -92,3 +92,14 @@ def shaders(scene):
     for name in ("sky", "sea"):
         shutil.copyfile(os.path.join(HERE, "island", name + ".wgsl"), os.path.join(scene, "elements", name + ".wgsl"))
 
+
+
+def lib(root, scene):
+    """The scene's lib as its paintings and scripts get it (with the island's module), evaluated by node — for a
+    generator that needs its numbers (what JSON can carry of what it returns)."""
+    import subprocess
+    code = ("const fs = require('fs'), r = process.argv[1], s = process.argv[2];"
+            "const island = new Function('anim', 'data', fs.readFileSync(r + '/modules/island.js', 'utf8'))({}, null);"
+            "const lib = new Function('anim', 'kit', fs.readFileSync(r + '/scenes/' + s + '/lib.js', 'utf8'))({}, { island });"
+            "process.stdout.write(JSON.stringify(lib));")
+    return json.loads(subprocess.run(["node", "-e", code, root, scene], capture_output=True, text=True, check=True).stdout)

@@ -96,10 +96,10 @@
         }
       },
       "flash": {
-        "ambient": 1.0,
+        "ambient": 0.9,
         "ambientColor": "#e6ecff",
-        "brightness": 1.2,
-        "saturation": 0.7
+        "brightness": 1.1,
+        "saturation": 0.75
       }
     }
   },
@@ -147,7 +147,7 @@
         25
       ],
       "color": "#e8eeff",
-      "strength": 2.2,
+      "strength": 1.8,
       "on": "flash"
     },
     {
@@ -317,16 +317,68 @@
       ]
     },
     {
-      "id": "heap",
+      "id": "net",
       "name": "The net at his feet",
       "across": -1.72,
       "distance": 3.479,
       "shadow": true,
       "box": [
+        -0.75,
+        -0.62,
+        2.7,
+        0.1
+      ]
+    },
+    {
+      "id": "matchbox",
+      "name": "Papa's box of matches",
+      "across": -0.3,
+      "distance": 3.5,
+      "elevation": 0.36,
+      "box": [
+        -1.6,
+        -1.2,
+        1.0,
+        0.2
+      ]
+    },
+    {
+      "id": "pie",
+      "name": "Moominmamma's pie",
+      "across": -0.05,
+      "distance": 3.3,
+      "shadow": true,
+      "box": [
+        -0.25,
+        -0.15,
+        0.25,
+        0.02
+      ]
+    },
+    {
+      "id": "bread",
+      "name": "The bread stone",
+      "across": -2.6,
+      "distance": 5.4,
+      "shadow": true,
+      "box": [
+        -0.55,
+        -0.4,
+        0.55,
+        0.04
+      ]
+    },
+    {
+      "id": "rocks",
+      "name": "Boulders on the way over the rocks",
+      "across": 1.8,
+      "distance": 6.2,
+      "shadow": true,
+      "box": [
         -0.7,
-        -0.3,
+        -0.6,
         0.7,
-        0.06
+        0.05
       ]
     },
     {
@@ -395,6 +447,44 @@
       ]
     },
     {
+      "id": "surge",
+      "name": "The storm's wave over the rocks",
+      "across": -0.9,
+      "distance": 2.95,
+      "box": [
+        -2.4,
+        -0.6,
+        2.4,
+        1.6
+      ]
+    },
+    {
+      "id": "spray",
+      "name": "Spray on the cape's rocks",
+      "across": 1.6,
+      "distance": 8.4,
+      "particles": {
+        "kind": "splashes",
+        "source": [
+          4,
+          1.2,
+          0
+        ],
+        "rate": 16,
+        "amount": "storm"
+      }
+    },
+    {
+      "id": "rain",
+      "name": "Rain",
+      "particles": {
+        "kind": "rain",
+        "amount": "storm",
+        "count": 9000,
+        "wind": 1.2
+      }
+    },
+    {
       "id": "fisher",
       "name": "The Fisherman",
       "person": {
@@ -403,7 +493,11 @@
         "does": "seated"
       },
       "across": -0.9,
-      "distance": 3.6
+      "distance": 3.6,
+      "place": {
+        "across": "fisher_a",
+        "distance": "fisher_d"
+      }
     },
     {
       "id": "papa",
@@ -414,7 +508,11 @@
         "does": "sit_look"
       },
       "across": 0.75,
-      "distance": 4.15
+      "distance": 4.15,
+      "place": {
+        "across": "papa_a",
+        "distance": "papa_d"
+      }
     },
     {
       "id": "mama",
@@ -425,7 +523,41 @@
         "does": "seated"
       },
       "across": 27.2,
-      "distance": 51.1
+      "distance": 51.1,
+      "place": {
+        "across": "mama_a",
+        "distance": "mama_d"
+      }
+    },
+    {
+      "id": "my",
+      "name": "Little My",
+      "person": {
+        "cast": "cast",
+        "who": "my",
+        "does": "sit_look"
+      },
+      "across": -3,
+      "distance": 6.4,
+      "place": {
+        "across": "my_a",
+        "distance": "my_d"
+      }
+    },
+    {
+      "id": "troll",
+      "name": "Moomintroll",
+      "person": {
+        "cast": "cast",
+        "who": "troll",
+        "does": "sit_look"
+      },
+      "across": 2.7,
+      "distance": 5.2,
+      "place": {
+        "across": "troll_a",
+        "distance": "troll_d"
+      }
     }
   ],
   "state": {
@@ -436,37 +568,73 @@
     "storm": 0,
     "flash": 0,
     "lighthouse_lit": 0,
+    "net": "dry",
+    "bread": false,
+    "pie": false,
+    "matchbox": "none",
+    "my_here": false,
+    "troll_here": false,
+    "fisher_at": "seat",
+    "papa_at": "beside",
+    "mama_at": "steps",
+    "my_at": "rock",
+    "troll_at": "near",
+    "fisher_placed": "",
+    "papa_placed": "",
+    "mama_placed": "",
+    "my_placed": "",
+    "troll_placed": "",
+    "fisher_mood": "neutral",
+    "papa_mood": "thinking",
+    "mama_mood": "tired",
+    "my_mood": "smile",
+    "troll_mood": "thinking",
+    "fisher_a": -0.9,
+    "fisher_d": 3.6,
+    "fisher_turn": 250,
     "fisher_on": [
       -0.9,
       3.6,
       0.3
     ],
-    "fisher_turn": 250,
     "fisher_look": [
       -40,
       8,
       1.2
     ],
-    "fisher_mood": "neutral",
+    "papa_a": 0.75,
+    "papa_d": 4.15,
     "papa_turn": 215,
     "papa_look": [
       -40,
       24,
       1
     ],
-    "papa_mood": "thinking",
+    "mama_a": 27.2,
+    "mama_d": 51.1,
+    "mama_turn": 200,
     "mama_on": [
       27.2,
       51.1,
       0.35
     ],
-    "mama_turn": 200,
     "mama_look": [
       0,
       5,
       1
     ],
-    "mama_mood": "tired"
+    "my_a": -3,
+    "my_d": 6.4,
+    "my_turn": 200,
+    "my_look": [
+      -20,
+      -5,
+      1
+    ],
+    "troll_a": 2.7,
+    "troll_d": 5.2,
+    "troll_turn": 225,
+    "troll_look": "fisher"
   },
   "states": {
     "dawn": {
@@ -523,6 +691,129 @@
       ],
       "smooth": true,
       "means": "the lighthouse's lamp burns: the lantern's glass warm, its light and glow (no beam)"
+    },
+    "net": {
+      "values": [
+        "dry",
+        "knot",
+        "papa",
+        "mended",
+        "folded"
+      ],
+      "means": "the Fisherman's net: drying on the poles and heaped at his feet, in his hands; a snarl of a knot in the heap; drawn out of the heap up into his paws as Papa sits by it, the knot before him; a pale mended patch where Papa untangled it; folded into a roll beside him, his hands empty, the poles bare"
+    },
+    "bread": {
+      "type": "boolean",
+      "means": "Moominmamma's bread on the flat stone by the path (bread#stone)"
+    },
+    "pie": {
+      "type": "boolean",
+      "means": "Moominmamma's pie on the rock beside the Fisherman"
+    },
+    "matchbox": {
+      "values": [
+        "none",
+        "stone",
+        "palm"
+      ],
+      "means": "Papa's box of matches: not there, on the Fisherman's stone beside him, in the Fisherman's right hand"
+    },
+    "fisher_at": {
+      "values": [
+        "seat",
+        "away"
+      ],
+      "means": "where fisher is (the script puts them there: lib.PLACES.fisher): seat — on his stone, his side to the lighthouse, facing the sea; away — far off on the rocks to the left, going away"
+    },
+    "papa_at": {
+      "values": [
+        "beside",
+        "behind",
+        "net",
+        "under",
+        "stand"
+      ],
+      "means": "where papa is (the script puts them there: lib.PLACES.papa): beside — sitting beside him looking out to sea; behind — standing at the Fisherman's back; net — sitting at the net, looking at its knot; under — sitting close by him, under the waves; stand — standing near him"
+    },
+    "mama_at": {
+      "values": [
+        "steps",
+        "beside",
+        "apart"
+      ],
+      "means": "where mama is (the script puts them there: lib.PLACES.mama): steps — far off on the lighthouse steps; beside — sitting at Papa's side; apart — sitting apart, facing the shore"
+    },
+    "my_at": {
+      "values": [
+        "rock"
+      ],
+      "means": "where my is (the script puts them there: lib.PLACES.my): rock — sitting on the rocks by his shelter"
+    },
+    "troll_at": {
+      "values": [
+        "near"
+      ],
+      "means": "where troll is (the script puts them there: lib.PLACES.troll): near — sitting a little off, looking at the Fisherman"
+    },
+    "fisher_placed": {
+      "type": "string",
+      "means": "the place fisher was last put at (the script's: put again only when fisher_at asks another)"
+    },
+    "papa_placed": {
+      "type": "string",
+      "means": "the place papa was last put at (the script's: put again only when papa_at asks another)"
+    },
+    "mama_placed": {
+      "type": "string",
+      "means": "the place mama was last put at (the script's: put again only when mama_at asks another)"
+    },
+    "my_placed": {
+      "type": "string",
+      "means": "the place my was last put at (the script's: put again only when my_at asks another)"
+    },
+    "troll_placed": {
+      "type": "string",
+      "means": "the place troll was last put at (the script's: put again only when troll_at asks another)"
+    },
+    "fisher_a": {
+      "type": "number",
+      "means": "where fisher stands, across (the script's, from fisher_at)"
+    },
+    "fisher_d": {
+      "type": "number",
+      "means": "where fisher stands, distance (the script's, from fisher_at)"
+    },
+    "papa_a": {
+      "type": "number",
+      "means": "where papa stands, across (the script's, from papa_at)"
+    },
+    "papa_d": {
+      "type": "number",
+      "means": "where papa stands, distance (the script's, from papa_at)"
+    },
+    "mama_a": {
+      "type": "number",
+      "means": "where mama stands, across (the script's, from mama_at)"
+    },
+    "mama_d": {
+      "type": "number",
+      "means": "where mama stands, distance (the script's, from mama_at)"
+    },
+    "my_a": {
+      "type": "number",
+      "means": "where my stands, across (the script's, from my_at)"
+    },
+    "my_d": {
+      "type": "number",
+      "means": "where my stands, distance (the script's, from my_at)"
+    },
+    "troll_a": {
+      "type": "number",
+      "means": "where troll stands, across (the script's, from troll_at)"
+    },
+    "troll_d": {
+      "type": "number",
+      "means": "where troll stands, distance (the script's, from troll_at)"
     }
   },
   "music": {

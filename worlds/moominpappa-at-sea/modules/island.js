@@ -497,7 +497,7 @@ function sky(g, e, opts) {
       c.stroke();
       for (const [px, py] of branches) fork(px, py, len * 0.4, w * 0.55, depth - 1);
     };
-    fork(bx, by, H - by, 0.0045, 2);
+    fork(bx, by, H - by, 0.008, 2);
   });
 }
 // the sky's animate: the hour, the storm and the flash to its shader; the moon's glow by night, faint in a storm
@@ -532,4 +532,29 @@ function lightning(scene) {
   });
 }
 
-return { bump, ridge, shoreOf, TOWER, TOWER_ROUND, DOOR, lighthouse, door, steps, pine, granite, sea, seaMove, sky, skyMove, lightning };
+// ── the people at their places ────────────────────────────────────────
+// For a scene's script: each person of `PLACES` stands where `<id>_at` names — PLACES[id][name]: {at: [across,
+// distance], on (a seat: [across, distance, elevation]), turn, do (a motion), look, reach} — their place's keys
+// `<id>_a`, `<id>_d` (the person's "place"), `<id>_on`, `<id>_turn`, `<id>_do`, `<id>_look`, `<id>_reach` set at once.
+// Kept in the state: put again only when `<id>_at` asks another place than `<id>_placed` (the one they were put at) —
+// a scene opened again goes on as it was.
+function places(scene, PLACES) {
+  const put = id => {
+    const at = scene.get(`${id}_at`), p = PLACES[id][at];
+    if (!p || scene.get(`${id}_placed`) === at) return;
+    scene.set(`${id}_a`, p.at[0]);
+    scene.set(`${id}_d`, p.at[1]);
+    scene.set(`${id}_on`, p.on ?? null);
+    scene.set(`${id}_turn`, p.turn);
+    scene.set(`${id}_do`, p.do);
+    scene.set(`${id}_look`, p.look ?? null);
+    scene.set(`${id}_reach`, p.reach ?? null);
+    scene.set(`${id}_placed`, at);
+  };
+  for (const id in PLACES) {
+    scene.on('change', `${id}_at`, () => put(id));
+    put(id);
+  }
+}
+
+return { places, bump, ridge, shoreOf, TOWER, TOWER_ROUND, DOOR, lighthouse, door, steps, pine, granite, sea, seaMove, sky, skyMove, lightning };
