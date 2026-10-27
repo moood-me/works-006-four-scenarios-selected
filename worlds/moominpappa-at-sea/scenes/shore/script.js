@@ -1,4 +1,5 @@
 scene.kit.island.lightning(scene);
+scene.kit.island.beam(scene);
 // The beach's mechanics: where the Groke is (groke_at) and where the son stands (troll_at) put them there and turn
 // them — the Groke to the lantern on the stone while it is there, else to the lighthouse; the son to her — and lay the
 // blanket behind him; the sea-horses swim off when they go (seahorses → gone). Set when the scene opens, at once;

@@ -1,4 +1,5 @@
 scene.kit.island.lightning(scene);
+scene.kit.island.beam(scene);
 // The pines creep toward the lighthouse as `pines` goes from 0 to 1: each its own place (pine<k>_a, pine<k>_d), set
 // from where `pines` is now — when the scene opens, when it is set, and every frame while it moves.
 const L = scene.lib;

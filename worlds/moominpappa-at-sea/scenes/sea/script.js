@@ -45,3 +45,4 @@ scene.every(2.6, () => {
   scene.move('boat_pitch', up * amp, { over: 2.6, ease: 'inOut' });
 });
 scene.kit.island.lightning(scene);
+scene.kit.island.beam(scene);
