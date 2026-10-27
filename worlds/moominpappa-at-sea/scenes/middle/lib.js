@@ -51,6 +51,21 @@ const turnTo = (a, d, a2, d2) => (Math.atan2(a2 - a, d2 - d) * 180 / Math.PI + 3
 // way the armful goes — from the pines on the left down through the ring and off to the right toward the landing.
 const PATH = [[0.9, 10], [0.4, 7.6]], LOOK_ROUND = [0.5, 5.2], EDGE = [-3, 4.4], LIP = [3.3, 5.4], MY_ROCK = [-3.4, 5.6];
 const ARMFUL = [[-4.4, 8.8], [-3, 6.4], [-1.8, 5.2], [0.6, 3.4], [3.2, 2.2], [6, 1.6]];
+// the way he carries it while the player keeps it up («Охапка», armful_way 0 → 1): from where he stood to the ring's
+// edge, where the piece after it walks him on through the ring
+const ARMFUL_WAY = [ARMFUL[1], [-2.5, 5.95]];
+// the point u (0…1) of the way along points, by length
+const along = (pts, u) => {
+  const seg = [];
+  let total = 0;
+  for (let i = 1; i < pts.length; i++) { const l = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); seg.push(l); total += l; }
+  let left = Math.max(0, Math.min(1, u)) * total;
+  for (let i = 0; i < seg.length; i++) {
+    if (left <= seg[i] || i === seg.length - 1) { const k = seg[i] ? Math.min(1, left / seg[i]) : 0; return [pts[i][0] + (pts[i + 1][0] - pts[i][0]) * k, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * k]; }
+    left -= seg[i];
+  }
+  return pts[pts.length - 1];
+};
 const AT = (id, [a, d], turn, more = {}) => ({ [`${id}_a`]: a, [`${id}_d`]: d, [`${id}_turn`]: turn, [`${id}_do`]: 'stand',
   [`${id}_with`]: null, [`${id}_look`]: null, [`${id}_gait`]: null, [`${id}_on`]: null, [`${id}_wear`]: null, ...more });
 const LOOP = motion => ({ motion, loop: true });
@@ -169,6 +184,8 @@ function film(scene) {
       run: async s => {
         await go(s, 'papa', [ARMFUL[1]], null, 'carry_high');
         s.person('papa').do('hold_high', { loop: true });
+        // (he walks on under it as the minigame moves armful_way — at the armful's gait)
+        s.person('papa').gait('carry_high');
         s.tell('armful_in:ready');
       },
     },
@@ -223,4 +240,4 @@ function film(scene) {
   };
 }
 
-return { SEA, land, shore, POOL, RING, ROCK, ROPE, LIGHTHOUSE, PINES, pineAt, turnTo, film, ARMFUL };
+return { SEA, land, shore, POOL, RING, ROCK, ROPE, LIGHTHOUSE, PINES, pineAt, turnTo, film, ARMFUL, ARMFUL_WAY, along };

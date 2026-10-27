@@ -64,6 +64,10 @@ objects = [
     person("papa", "Moominpappa", "papa", 3.3, 5.4, place={"across": "papa_a", "distance": "papa_d"}),
     person("mama", "Moominmamma", "mama", 0.4, 8.5, place={"across": "mama_a", "distance": "mama_d"}),
     person("my", "Little My", "my", -3.4, 5.6, place={"across": "my_a", "distance": "my_d"}),
+    {"id": "spill", "name": "Weed sliding off the armful",
+     "particles": {"kind": "leaves", "at": "papa#armful", "burst": {"on": "spill", "count": 40, "over": 0.4}, "rate": 0,
+                   "size": [0.1, 0.08], "colors": ["#4e6a3a", "#6b7f45", "#5a4a30", "#3f5a33"], "speed": [0.4, 1.4], "spread": 70,
+                   "gravity": 6, "ground": "stop", "settle": 6}},
     island.RAIN,
 ]
 
@@ -71,7 +75,7 @@ lights = island.lights(([150, 45], "#fff0dc", 1.35), ([-90, 12], "#ffe0c2", 1.3)
 
 # the empty play: the day, the clearing without its ring, no rope, the pines where they stood; only the son here (the
 # game says who is)
-state = {**island.STATE, "pines": 0, "ring": "none", "ring_n": 9, "rope": 0, "coil": False, "sway": 0, "beat": "", "beat_next": "",
+state = {**island.STATE, "pines": 0, "ring": "none", "ring_n": 9, "rope": 0, "coil": False, "sway": 0, "armful_way": 0, "spill": 0, "beat": "", "beat_next": "",
          "troll_a": -0.5, "troll_d": 4.6, "papa_a": 3.3, "papa_d": 5.4, "mama_a": 0.4, "mama_d": 8.5, "my_a": -3.4, "my_d": 5.6,
          **{f"pine{k + 1}_{x}": r3(v) for k, p in enumerate(LIB['PINES']) for x, v in zip("ad", p)},
          "papa_here": False, "mama_here": False, "my_here": False,
@@ -82,7 +86,9 @@ states = {**island.STATES,
           "pines": {"range": [0, 1], "smooth": True, "means": "the pines about the clearing creep toward the lighthouse: 0 where they stood when the family came, 1 three and a half metres nearer it (from chapter to chapter; may move before the eyes)"},
           "ring": {"values": ["none", "set", "broken", "one_missing"], "means": "the son's ring of stones on the moss of his clearing: none; set — the ring (ring_n of its stones laid); broken — kicked apart, scattered (ring_n of them laid back); one_missing — whole but for one stone"},
           "ring_n": {"range": [0, 9], "means": "how many stones of the ring are in their places while it is laid (9 — all)"},
-          "sway": {"range": [-1, 1], "smooth": True, "means": "«Охапка» (the minigame): the armful over Papa's head swaying, he turns under it"},
+          "sway": {"range": [-1, 1], "smooth": True, "means": "«Охапка» (the minigame): the armful over Papa's head swaying, he turns under it; leaned over to the edge, some weed slides off"},
+          "armful_way": {"range": [0, 1], "smooth": True, "means": "«Охапка» (the minigame): how far along his way to the ring Papa has carried the armful; he walks there"},
+          "spill": {"type": "number", "means": "the scene's own: how many times weed has slid off the armful (each time a burst of it)"},
           "beat": {"type": "string", "means": "the piece playing (the world's beats: notes.md «Pieces»)"},
           "beat_next": {"type": "string", "means": "the piece the game will play next (its cut made ready)"},
           **{f"{p}_{x}": {"range": [-20, 20], "means": "the scene's own: where a person stands (metres) — the pieces'"} for p in ["troll", "papa", "mama", "my"] for x in "ad"},
