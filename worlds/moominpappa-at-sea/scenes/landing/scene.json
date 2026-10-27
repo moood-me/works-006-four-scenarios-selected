@@ -175,11 +175,20 @@
       "place": {
         "bearing": "beam_turn"
       }
+    },
+    {
+      "id": "papa_lantern",
+      "at": "papa#flame",
+      "on": "papa_lantern",
+      "color": "#ffcf86",
+      "strength": 1.4,
+      "reach": 9
     }
   ],
   "modules": [
     "cast",
-    "island"
+    "island",
+    "beats"
   ],
   "objects": [
     {
@@ -567,6 +576,18 @@
       }
     },
     {
+      "id": "edge_splash",
+      "name": "A wave on the rocks at the edge",
+      "particles": {
+        "kind": "splashes",
+        "at": "rock#edge",
+        "burst": {
+          "on": "edge_splash",
+          "count": 70
+        }
+      }
+    },
+    {
       "id": "papa",
       "name": "Moominpappa",
       "person": {
@@ -662,7 +683,14 @@
     "cleft": "empty",
     "driftwood": false,
     "bundles": "slab",
+    "papa_shore": "silent",
     "fisher_here": false,
+    "fisher_hand": false,
+    "boat_off": 0,
+    "edge_splash": 0,
+    "papa_lantern": 0,
+    "beat": null,
+    "beat_next": null,
     "papa_at": "slab",
     "mama_at": "slab",
     "troll_at": "boulder",
@@ -864,6 +892,16 @@
       "type": "boolean",
       "means": "driftwood thrown up along the cove after the storm"
     },
+    "papa_shore": {
+      "values": [
+        "look",
+        "silent",
+        "crouch",
+        "glance",
+        "none"
+      ],
+      "means": "4.5, by the storm's choice: Papa at the water says «You see» (look), says nothing (silent), crouches and strokes the water (crouch), looks at the sea over his shoulder and goes to the boat (glance), does not come out (none)"
+    },
     "bundles": {
       "values": [
         "slab",
@@ -880,7 +918,13 @@
         "boat",
         "cleft",
         "water",
-        "stone"
+        "stone",
+        "steps_foot",
+        "patch",
+        "boat_walk",
+        "above_water",
+        "mooring",
+        "in_boat"
       ],
       "means": "where papa is (the script puts them there: lib.PLACES.papa): slab — on the slab, hands behind; edge — on the wet rocks at the cove's edge, facing the sea; door — at the door, a hand on it; boat — by the boat; cleft — at the cleft; water — at the water in the cove; stone — by the arrow stone"
     },
@@ -889,21 +933,29 @@
         "slab",
         "steps",
         "cleft",
-        "stand"
+        "stand",
+        "cove",
+        "patch",
+        "boat_side",
+        "in_boat"
       ],
       "means": "where mama is (the script puts them there: lib.PLACES.mama): slab — sitting on the bundle; steps — sitting on the lighthouse steps; cleft — at the cleft; stand — standing on the slab"
     },
     "troll_at": {
       "values": [
         "boulder",
-        "boat"
+        "boat",
+        "boat_far",
+        "in_boat"
       ],
-      "means": "where troll is (the script puts them there: lib.PLACES.troll): boulder — sitting on the boulder; boat — by the boat's stern"
+      "means": "where troll is (the script puts them there: lib.PLACES.troll): boulder — sitting on the boulder; boat — by the boat's stern; boat_far — on the far side of the hull (the play's, «son closed»)"
     },
     "my_at": {
       "values": [
         "stone",
-        "rock"
+        "rock",
+        "below_door",
+        "in_boat"
       ],
       "means": "where my is (the script puts them there: lib.PLACES.my): stone — sitting by the arrow stone; rock — sitting on the slab, near"
     },
@@ -911,7 +963,8 @@
       "values": [
         "away",
         "door",
-        "threshold"
+        "threshold",
+        "path"
       ],
       "means": "where fisher is (the script puts them there: lib.PLACES.fisher): away — far on the rocks, going away from the lighthouse; door — at the door, his palm on it; threshold — sitting on the threshold, facing the sea"
     },
@@ -998,6 +1051,38 @@
     "pine3_d": {
       "type": "number",
       "means": "where the creeping pine 3 stands, distance (the script's, from pines)"
+    },
+    "fisher_hand": {
+      "type": "boolean",
+      "means": "«Boat» (the play's: «invited»): the Fisherman at the door lifts his hand after Mama as the boat goes (fisher_door)"
+    },
+    "boat_off": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the boat going off out of the cove with the family in her (cast_off)"
+    },
+    "edge_splash": {
+      "type": "number",
+      "means": "each step up — a wave splashes on the rocks at the edge (rock#edge)"
+    },
+    "papa_lantern": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lantern in Papa's paw lit (its light at papa#flame)"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (the module beats; the game names it)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game goes to next (its cut made ready)"
     },
     "door_turn": {
       "type": "number",

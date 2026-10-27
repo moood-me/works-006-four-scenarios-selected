@@ -6,8 +6,6 @@ match at the wick, the matchbox, the mooring, the son's paws on the lantern. No 
 knotted, the faded oilskin's sleeve). Their light is painted (the lantern's warm, the moon's cold, the lightning's
 white); the scene's light does not fall on an insert.
 
-*Names first (stage 5): the shots, their fields and points below are the contract; the drawing is being made.*
-
 ## How a scene shows a shot
 
 In the scene's `modules` — `closeups`. The insert's element — its id the shot's name, opened by the key `<shot>_open`
@@ -39,3 +37,45 @@ In the scene's `modules` — `closeups`. The insert's element — its id the sho
 | `paws` | the son's paws round the lantern, white with rime; Mama's paws coming to rub them | `frost` 0…1 (1) — the rime on his paws; `rub` 0…1 (0) — Mama's paws over his, rubbing; `thaw` 0…1 (0) — the rime going | `paws#paws` — his paws |
 
 The shot's name with no point (`knot`, `needle`, …) — the main thing in it.
+
+## Where the points stand
+
+In the shot's units: the frame's height, the origin in the frame's middle, y down (16:9 — x ±0.89; the middle 4:3 —
+±0.667). On 4:3 and 21:9 all is the same about the middle.
+
+| point | where (when it moves: from → to) |
+| --- | --- |
+| `knot#knot` (= `knot`) | (−0.08, −0.02) |
+| `knot#thread` | (0.14, 0.05) → (0.46, 0.13) with `pull` |
+| `needle#eye` (= `needle`) | (−0.06, −0.2) |
+| `needle#thread` | (0.33, −0.13) → the eye at `thread` 0.85 → (−0.15, −0.215) at 1 |
+| `handle#papa` | (0.1, −0.24); from `give` 0.3 up and off to (0.42, −0.66) |
+| `handle#troll` | (−0.12, −0.235) |
+| `match#flame` | (−0.4, 0.14) → (0.13, −0.01) with `match` |
+| `match#wick` (= `match`) | (0.2, −0.03) |
+| `matchbox#box` | (−0.34, −0.15) → (0.19, 0.04) with `give` (there from 0.8) |
+| `matchbox#palm` (= `matchbox`) | (0.2, 0.07) |
+| `mooring#rope` | (0.22, 0.05) |
+| `paws#paws` | (0, 0.13) |
+
+## Layers (what `live` moves)
+
+The layers and the motions are inside the module; the scene need not know of them. A shot is painted once; while it
+is open nothing is painted anew.
+
+- `knot`: `hard`, `loose` (the knot tight and loosened, cross-faded by `pull`), `thread` (painted along +x from the
+  knot, turned to its end and drawn out), `paw_l`, `paw_r` (with the thread's end), `flash` (a cold white, `add`).
+- `needle`: `glow` (the lantern's light, flickering; dimmer at `low`), `hand` (her right paw and the thread, moved
+  with its end), `dim` (the room darker at `low`); the needle and her left paw are the painting.
+- `handle`: `glow`; `troll_open`, `troll_shut` (cross-faded); `papa_shut`, `papa_open` (cross-faded, then up and off).
+- `match`: `wickglow`, `wick` (the wick's flame, grown from the wick by `lit`), `hand` (the paw and the match),
+  `mflame` (its flame, bent by the draught), `smoke` (at `out`).
+- `matchbox`: `f_open` (his open fingers), `box`, `papa` (with the box; from 0.8 back and gone), `f_shut` (his fingers
+  closed over the box).
+- `mooring`: `glints` (drifting on the water), `rope` (slips off and down whole), `shut`, `open` (Papa's paw).
+- `paws`: `glow`, `cold` (his paws blued), `rime`, `warm` (pink coming back), `mama` (her paws coming down, rubbing).
+
+## Checked
+
+A trial spec with the seven inserts (`sheets/pm-closeups/closeups-trial.json` beside the world's clones, not a scene of
+the world), rendered on the GPU: each shot at the start, in between and at the end of its fields, 16:9 and 21:9.
