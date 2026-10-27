@@ -235,7 +235,8 @@
         "ripple": 0.4
       },
       "uniforms": {
-        "storm": 0
+        "storm": 0,
+        "calm": 0
       }
     },
     {
@@ -516,6 +517,7 @@
     "night": 0,
     "moon": 0.6,
     "storm": 0,
+    "calm": 0,
     "flash": 0,
     "lighthouse_lit": 0,
     "lantern_at": "bow",
@@ -629,6 +631,14 @@
       ],
       "smooth": true,
       "means": "the storm: grey light and sky, its clouds, many quick crests, rain, wind; over a half — lightning now and then"
+    },
+    "calm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the sea calm: few crests, slow (a still night)"
     },
     "flash": {
       "range": [
