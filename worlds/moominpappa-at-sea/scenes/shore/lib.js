@@ -46,7 +46,7 @@ const shore = shoreOf(land, SEA, -20, 40, -8, 70);
 // Where people come from and go to on the beach (across, distance): the way in from the right, over the dune's low end
 // from the lighthouse; the water's edge by the stone; Mama's way off along the beach; the dune's path down to the
 // stone (the son's, «Следом»); the way from the right up onto the dune's top («До дюны»); the son by the water alone.
-const ENTRY = [3.4, 3], WEED = [-3.4, 5.5], AWAY = [-3, 15], SEAHORSE_SPOT = [-3.4, 6.2], SEAHORSES = [-4.6, 5.4];
+const ENTRY = [3.4, 3], WEED = [-3.2, 5.2], AWAY = [-3, 15], SEAHORSE_SPOT = [-3.4, 6.2], SEAHORSES = [-4.6, 5.4];
 const AT_STONE = [0.2, 4.4], BACKED = [0.9, 3.7], DUNE_TOP = [5.2, 7.5], OVER_DUNE = [7.6, 9.2];
 const DOWN = [[4.6, 6.6], [3, 5.6], [1.6, 5]], PAPA_DOWN = [[6.9, 8.8], [5.6, 7.9], [5.2, 7.5]];
 const UP = [[7.6, 3], [6.6, 4.6], [5.6, 6.4], [5.2, 7.5]], ALONE = [-3, 5.4], PAST = [[2, 6.4], [5.2, 7.9], [8.4, 9.6]];
@@ -134,7 +134,9 @@ function film(scene) {
         await s.wait(3);
         mama.with(['basket_weed']);
         await mama.do('crouch_rise');
-        await go(s, 'mama', [[-3.3, 9], AWAY], null, 'hand_walk');
+        // (she sets off along the beach: the piece ends as she goes, a few steps on — she walks on after it)
+        await go(s, 'mama', [[-3.3, 8]], null, 'hand_walk');
+        s.person('mama').walk([AWAY]);
       },
     },
     // 2.3: the son down to the water by the sea-horses, crouching to them
