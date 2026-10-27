@@ -6,7 +6,7 @@
 // the lantern room, the shore (gift, follow), the morning after.
 // Reads: choices.night1; scales.garden, lamp, groke; marks.promise, line27. Leaves: choices.wall, night2; scales.garden,
 // lamp, paraffin, groke; marks.mama_wall, line27, son_later, son_closed, son_knows.
-import { SCENES, isle, on } from '../story.js';
+import { SCENES, isle, land, on } from '../story.js';
 import { door, palm, dust, asleep, after } from '../minigames/all.js';
 
 // where the lantern is in the morning after night 1 (2.7): carried up, on the table burnt out, by the boy's bunk, on the
@@ -27,7 +27,7 @@ export default {
       const { night1 } = g.state.choices, garden = g.state.scales.garden;
       g.beds({ sea: 0.45, wind: 0.2 });
       const push = g.told('pines:push');
-      await g.scene(SCENES.landing, { beat: 'pines', here: ['papa', 'my', 'fisher'], moods: { papa: 'angry' }, keys: { ...isle(24, 'morning'), pines: 1 } });
+      await g.scene(SCENES.landing, { beat: 'pines', here: ['papa', 'my', 'fisher'], moods: { papa: 'angry' }, keys: { ...land(24, 'morning'), pines: 1 } });
       g.title(tr('24 August'));
       const pines = g.beat('pines');
       await push;

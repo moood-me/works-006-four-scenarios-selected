@@ -4,7 +4,7 @@
 // Scenes: the sea (night, quiet; glance and its branches), the landing (arrive, patch / asleep; bundles), the round
 // room (can_in, can_shelf, wall_read, log_write), the cape (approach and its branches).
 // Reads: choices.tell. Leaves: choices.boat, choices.fisher, marks.son_given, marks.fisher, scales.garden.
-import { SCENES, isle, moon, on } from '../story.js';
+import { SCENES, isle, land, moon, on } from '../story.js';
 import { tiller, can } from '../minigames/all.js';
 
 export default {
@@ -20,7 +20,7 @@ export default {
       g.beds({ sea: 0.45, gale: 0.25 });
       const star = g.told('night:star');
       await g.scene(SCENES.sea, { beat: 'night', here: ['papa', 'mama', 'troll', 'my', 'groke'], moods: { papa: 'smile', mama: 'tired', troll: 'afraid' },
-        keys: moon(22) });
+        keys: { ...moon(22), calm: 0.8 } });
       const night = g.beat('night');
       await star;
       await g.say('papa', 'We steer by that star. The captain knows the way');
@@ -33,7 +33,7 @@ export default {
       g.beds({ sea: 0.45, gale: 0.2 });
       const strip = g.told('glance:strip');
       await g.scene(SCENES.sea, { beat: 'glance', here: ['papa', 'mama', 'troll', 'my', 'groke'], moods: { papa: 'neutral', mama: 'tired', troll: 'afraid' },
-        keys: moon(22) }, { cut: true });
+        keys: { ...moon(22), calm: 0.8 } }, { cut: true });
       const glance = g.beat('glance');
       await strip;
       await g.say('papa', 'The moon’s path. Pretty');
@@ -70,7 +70,7 @@ export default {
       g.beds({ sea: 0.5, wind: 0.2 });
       const door = g.told('arrive:door'), arrow = g.told('arrive:arrow');
       await g.scene(SCENES.landing, { beat: 'arrive', here: ['papa', 'mama', 'troll', 'my'], moods: { papa: 'smile', mama: 'tired', troll: 'thinking' },
-        keys: { ...isle(23, 'dawn'), frost_patch: boat === 'keep' } });
+        keys: { ...land(23, 'dawn'), frost_patch: boat === 'keep' } });
       g.title(tr('23 August'));
       const arrive = g.beat('arrive');
       await door;
@@ -120,7 +120,7 @@ export default {
     async g => {
       g.beds({ sea: 0.55, wind: 0.25 });
       await g.scene(SCENES.cape, { beat: 'approach', here: ['fisher', 'papa', 'mama'], moods: { papa: 'smile', fisher: 'neutral', mama: 'tired' },
-        keys: isle(23, 'day') });
+        keys: land(23, 'day') });
       await g.beat('approach');
       const fisher = await g.choose('fisher', { 'fisher#chest': [
         { id: 'keeper', label: tr('“We are the new keepers. If anything happens — you know where to find us.”') },
@@ -149,7 +149,7 @@ export default {
         // (meanwhile, at the lighthouse: Mama alone with the wet bundles)
         const sat = g.told('bundles:sat');
         on(g, 'bundles:fell', () => g.sound.splash(0.6));
-        await g.scene(SCENES.landing, { beat: 'bundles', here: ['mama', 'papa'], moods: { mama: 'tired', papa: 'thinking' }, keys: isle(23, 'day') }, { cut: true });
+        await g.scene(SCENES.landing, { beat: 'bundles', here: ['mama', 'papa'], moods: { mama: 'tired', papa: 'thinking' }, keys: land(23, 'day') }, { cut: true });
         const bundles = g.beat('bundles');
         await sat;
         await g.say('mama', 'All done');

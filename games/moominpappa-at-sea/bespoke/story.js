@@ -62,9 +62,11 @@ const LOOKS = { day: {}, dawn: { dawn: 1 }, morning: { dawn: 0.5 }, dusk: { dusk
 const MOON = { 20: 0.45, 21: 0.5, 22: 0.6, 23: 0.75, 24: 0.9, 25: 1, 26: 0.95, 27: 0.9 };
 const CALM = { 22: 0.5, 23: 0, 24: 0, 25: 0, 26: 1, 27: 0.8 };
 // moon(date) — the valley's and the sea's (their light is their pieces'); isle(date, look, storm) — a scene on the
-// island (look: a name of LOOKS, or the looks themselves)
+// island with its sea's calm (look: a name of LOOKS, or the looks themselves)
 export const moon = date => ({ moon: MOON[date] });
-export const isle = (date, look, storm = 0) => ({ dawn: 0, dusk: 0, night: 0, ...(LOOKS[look] ?? look), ...moon(date), storm, calm: storm ? 0 : CALM[date] });
+export const isle = (date, look, storm = 0) => ({ ...land(date, look, storm), calm: storm ? 0 : CALM[date] });
+// land(date, look, storm) — the same without the sea's calm: the landing and the cape (their crests are their own)
+export const land = (date, look, storm = 0) => ({ dawn: 0, dusk: 0, night: 0, ...(LOOKS[look] ?? look), ...moon(date), storm });
 
 // What the play has made of a place so far, as its scene's keys (a step's own keys go over them): Mama's paints and
 // flowers (the windowsill's from 2.6, the wall's from the first night: the steps before say so themselves), the log,

@@ -6,7 +6,7 @@
 // the lantern room, the shore.
 // Reads: choices.tell, boat, fisher; scales.garden, groke. Leaves: choices.day, night1; scales.garden, lamp, paraffin,
 // groke; marks.promise, line27.
-import { SCENES, isle, on } from '../story.js';
+import { SCENES, isle, land, on } from '../story.js';
 import { match, lead, armful, knot, steady, thread, lantern, half } from '../minigames/all.js';
 
 export default {
@@ -41,7 +41,7 @@ export default {
       await g.scene(SCENES.shore, { beat: 'weed', here: ['mama'], moods: { mama: 'neutral' }, keys: isle(23, 'day') });
       await g.beat('weed');
       if (g.state.choices.fisher === 'invite') {
-        await g.scene(SCENES.cape, { beat: 'bread', here: ['fisher', 'mama'], keys: isle(23, 'day') }, { cut: true });
+        await g.scene(SCENES.cape, { beat: 'bread', here: ['fisher', 'mama'], keys: land(23, 'day') }, { cut: true });
         await g.beat('bread');
       }
       g.beds({ wind: 0.2, sea: 0.2 });
@@ -91,7 +91,7 @@ export default {
         await g.beat('regather');
         g.beds({ sea: 0.5, wind: 0.15 });
         const packed = g.told('weed:packed'), laugh = g.told('weed:laugh');
-        await g.scene(SCENES.landing, { beat: 'weed', here: ['papa', 'mama'], moods: { papa: 'smile', mama: 'neutral' }, keys: isle(23, 'day') }, { cut: true });
+        await g.scene(SCENES.landing, { beat: 'weed', here: ['papa', 'mama'], moods: { papa: 'smile', mama: 'neutral' }, keys: land(23, 'day') }, { cut: true });
         const weed = g.beat('weed');
         await packed;
         await g.say('mama', 'Nothing will grow here');
@@ -103,7 +103,7 @@ export default {
         g.beds({ sea: 0.55, wind: 0.25 });
         const sat = g.state.choices.fisher === 'sit';
         await g.scene(SCENES.cape, { beat: sat ? 'net_sit' : 'net_left', here: ['fisher', 'papa'], moods: { papa: 'thinking', fisher: 'neutral' },
-          keys: isle(23, 'day') }, { cut: true });
+          keys: land(23, 'day') }, { cut: true });
         await g.beat(sat ? 'net_sit' : 'net_left');
         await g.play(knot);
         g.sound.rustle();
@@ -120,7 +120,7 @@ export default {
       if (day !== 'weed') {
         // (the evening: Mama back from the shore, wet, the basket empty)
         g.beds({ sea: 0.5, wind: 0.15 });
-        await g.scene(SCENES.landing, { beat: 'wet_back', here: ['mama'], moods: { mama: 'tired' }, keys: isle(23, 'dusk') });
+        await g.scene(SCENES.landing, { beat: 'wet_back', here: ['mama'], moods: { mama: 'tired' }, keys: land(23, 'dusk') });
         await g.beat('wet_back');
       }
       g.apply('day');
@@ -130,7 +130,7 @@ export default {
       g.beds({ sea: 0.6, wind: 0.2 });
       const stood = g.told('dusk:stood');
       on(g, 'beat:dusk', () => g.sound.splash(0.5));
-      await g.scene(SCENES.landing, { beat: 'dusk', here: ['papa'], moods: { papa: 'thinking' }, keys: isle(23, 'dusk') });
+      await g.scene(SCENES.landing, { beat: 'dusk', here: ['papa'], moods: { papa: 'thinking' }, keys: land(23, 'dusk') });
       const dusk = g.beat('dusk');
       await stood;
       if (g.state.choices.day !== 'weed') await g.say('papa', 'I’ll understand you. You’ll see');
@@ -168,7 +168,7 @@ export default {
     // 2.7: ⚑ whose lantern tonight — night 1
     async g => {
       g.beds({ sea_in: 0.3, wind: 0.1 });
-      on(g, 'fill:pour', () => g.sound.pour());
+      on(g, 'fill:poured', () => g.sound.pour());
       await g.scene(SCENES.room, { beat: 'fill', here: ['papa', 'mama', 'my', 'troll'], moods: { papa: 'thinking', mama: 'neutral', my: 'smile', troll: 'thinking' },
         keys: { ...isle(23, 'night'), garden: -1 } }, { cut: true });
       g.title(tr('Night 1, 23/24 August'));

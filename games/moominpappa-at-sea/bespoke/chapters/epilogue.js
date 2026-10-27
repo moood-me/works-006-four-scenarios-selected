@@ -6,7 +6,7 @@
 // the lantern room and the beam's way (the room, the landing, the cape, the shore); the room, the landing, the sea, the
 // shore going home; the room and the cape at the pie; the landing, the lantern room and the room's stair.
 // Reads: everything (facts). Leaves: nothing.
-import { SCENES, facts, isle, moon, on } from '../story.js';
+import { SCENES, facts, isle, land, moon, on } from '../story.js';
 import { beam, mooring, pie, bread, matches, stair } from '../minigames/all.js';
 
 // the room on the 27th (look: the hour): the storm's damage gone, the lantern empty; Mama — at the table, or in the
@@ -37,10 +37,10 @@ export default {
       await g.beat('shot_wall');
       await shot(SCENES.room, 'shot_table', room('morning', f, { cups: f.wall === 'wait' ? 2 : 1 }), f.wall === 'walk' ? [] : ['mama']);
       g.beds({ sea: 0.3, wind: 0.08 });
-      await shot(SCENES.landing, 'look_marks', { ...isle(27, 'morning'), pines: 1, boat: 'tarred', driftwood: true, cleft: f.day === 'weed' ? 'sprout' : 'empty' });
+      await shot(SCENES.landing, 'look_marks', { ...land(27, 'morning'), pines: 1, boat: 'tarred', driftwood: true, cleft: f.day === 'weed' ? 'sprout' : 'empty' });
       if (f.day === 'pool') await shot(SCENES.middle, 'rope_shot', { ...isle(27, 'morning'), coil: true });
       if (m.son_later) await shot(SCENES.middle, 'ring_shot', { ...isle(27, 'morning'), ring: 'one_missing' });
-      await shot(SCENES.cape, 'look_fisher', { ...isle(27, 'morning'), fisher_mark: MARK[f.fisher],
+      await shot(SCENES.cape, 'look_fisher', { ...land(27, 'morning'), fisher_mark: MARK[f.fisher],
         net: f.day === 'fisher' ? (f.fisher === 'sit' ? 'mended' : 'folded') : 'dry' }, ['fisher']);
       await shot(SCENES.shore, 'morning', { ...isle(27, 'morning'), ...sand(f), troll_at: f.night3 === 'go' ? 'beside' : 'far' }, f.night3 === 'right' ? ['troll'] : ['troll', 'groke']);
       await shot(SCENES.shore, 'look_son', { ...isle(27, 'morning'), ...sand(f), glance: f.glance }, ['troll']);
@@ -88,13 +88,13 @@ export default {
           keys: room('night', f, { cups: f.wall === 'wait' ? 2 : 1, apple_leaves: f.wall !== 'call' }) }, { cut: true });
         await g.beat('e_beam');
         g.beds({ sea: 0.3, wind: 0.1 });
-        const lit = { ...isle(27, 'night'), beam: 1, lighthouse_lit: 1 };
-        await g.scene(SCENES.landing, { beat: 'beam_pass', here: ['my'], keys: { ...lit, pines: 1, boat: 'tarred' } }, { cut: true });
+        const lit = { beam: 1, lighthouse_lit: 1 };
+        await g.scene(SCENES.landing, { beat: 'beam_pass', here: ['my'], keys: { ...land(27, 'night'), ...lit, pines: 1, boat: 'tarred' } }, { cut: true });
         await g.beat('beam_pass');
-        await g.scene(SCENES.cape, { beat: 'beam_pass', here: ['fisher'], keys: lit }, { cut: true });
+        await g.scene(SCENES.cape, { beat: 'beam_pass', here: ['fisher'], keys: { ...land(27, 'night'), ...lit } }, { cut: true });
         await g.beat('beam_pass');
         await g.scene(SCENES.shore, { beat: 'beam', here: f.night3 === 'right' ? ['troll'] : ['troll', 'groke'],
-          keys: { ...lit, ...sand(f), troll_at: f.night3 === 'right' ? 'far' : 'beside' } }, { cut: true });
+          keys: { ...isle(27, 'night'), ...lit, ...sand(f), troll_at: f.night3 === 'right' ? 'far' : 'beside' } }, { cut: true });
         await g.beat('beam');
         g.beds({ sea_in: 0.2 });
         const read = g.told('e_beam_my:my'), out = g.told('e_beam_my:window');
@@ -113,13 +113,13 @@ export default {
         g.beds({ sea: 0.35, wind: 0.08 });
         on(g, 'leave:key', () => g.sound.creak());
         await g.scene(SCENES.landing, { beat: 'leave', here: ['papa', 'mama', 'troll', 'my'], moods: { papa: 'smile', mama: 'smile', troll: 'sad' },
-          keys: { ...isle(27, 'morning'), pines: 1, boat: 'tarred', bundles: 'none' } }, { cut: true });
+          keys: { ...land(27, 'morning'), pines: 1, boat: 'tarred', bundles: 'none' } }, { cut: true });
         await g.beat('leave');
         await g.play(mooring);
         g.set('mooring', 1);
         await g.beat('cast_off');
         g.beds({ sea: 0.45, gale: 0.15 });
-        const going = moon(27);
+        const going = { ...moon(27), glance: f.glance };
         const term = g.told('home:term'), my = g.told('home:my');
         await g.scene(SCENES.sea, { beat: 'home', here: ['papa', 'mama', 'troll', 'my'], moods: { papa: 'smile', mama: 'smile', troll: 'sad' }, keys: going }, { cut: true });
         const home = g.beat('home');
@@ -142,10 +142,10 @@ export default {
           await g.beat('shot_table');
         }
         g.beds({ sea: 0.35, wind: 0.08 });
-        await g.scene(SCENES.landing, { beat: 'fisher_door', here: ['fisher'], keys: { ...isle(27, 'morning'), pines: 1, boat: 'away', fisher_hand: f.fisher === 'invite' } }, { cut: true });
+        await g.scene(SCENES.landing, { beat: 'fisher_door', here: ['fisher'], keys: { ...land(27, 'morning'), pines: 1, boat: 'away', fisher_hand: f.fisher === 'invite' } }, { cut: true });
         await g.beat('fisher_door');
         g.beds({ sea: 0.45, gale: 0.15 });
-        await g.scene(SCENES.sea, { beat: 'last', here: ['papa', 'mama', 'troll', 'my', 'fisher'], moods: { papa: 'smile', mama: 'smile', troll: 'sad' }, keys: going }, { cut: true });
+        await g.scene(SCENES.sea, { beat: 'last', here: ['papa', 'mama', 'troll', 'my'], moods: { papa: 'smile', mama: 'smile', troll: 'sad' }, keys: going }, { cut: true });
         await g.beat('last');
       } else if (f.ending === 'pie') {
         if (f.basket) await unpack();
@@ -168,7 +168,7 @@ export default {
         if (f.form === 'full') {
           await g.beat('e_pie');
           g.beds({ sea: 0.4, wind: 0.08 });
-          await g.scene(SCENES.cape, { beat: 'pie_way', here: ['fisher', 'papa', 'my'], moods: { papa: 'smile', fisher: 'neutral' }, keys: isle(27, 'night') });
+          await g.scene(SCENES.cape, { beat: 'pie_way', here: ['fisher', 'papa', 'my'], moods: { papa: 'smile', fisher: 'neutral' }, keys: land(27, 'night') });
           await g.beat('pie_way');
           await g.play(pie);
           g.set('carry', 1);
@@ -193,7 +193,7 @@ export default {
           }
           const up = g.told('pie_leave:up'), go = g.told('pie_leave:go');
           await g.scene(SCENES.cape, { beat: 'pie_leave', here: ['fisher', 'papa', 'mama', 'my'], moods: { papa: 'smile', fisher: 'neutral', mama: 'tired' },
-            keys: { ...isle(27, 'night'), pie: true, matchbox: f.spoke ? 'palm' : 'stone', mama_at: f.night3 === 'go' ? 'apart' : 'beside' } }, { cut: f.night3 === 'dune' });
+            keys: { ...land(27, 'night'), pie: true, matchbox: f.spoke ? 'palm' : 'stone', mama_at: f.night3 === 'go' ? 'apart' : 'beside' } }, { cut: f.night3 === 'dune' });
           const leaving = g.beat('pie_leave');
           await up;
           await g.say('mama', 'I’ll go and wash the tin');
@@ -201,7 +201,7 @@ export default {
           await g.say('papa', 'Go on, go on');
           await leaving;
           if (f.spoke) {
-            await g.scene(SCENES.landing, { beat: 'threshold', here: ['fisher', 'papa'], keys: { ...isle(27, 'night'), pines: 1, boat: 'tarred' } }, { cut: true });
+            await g.scene(SCENES.landing, { beat: 'threshold', here: ['fisher', 'papa'], keys: { ...land(27, 'night'), pines: 1, boat: 'tarred' } }, { cut: true });
             await g.beat('threshold');
           } else await g.beat('stone_empty');
           g.beds({ sea_in: 0.2 });
@@ -224,7 +224,7 @@ export default {
           }
           g.beds({ sea: 0.4, wind: 0.08 });
           await g.scene(SCENES.cape, { beat: 'bread_way', here: ['fisher', 'papa'], moods: { papa: 'thinking', fisher: 'neutral' },
-            keys: { ...isle(27, 'night'), beam: f.sheets === 2 ? 1 : 0, lighthouse_lit: f.sheets === 2 ? 1 : 0 } });
+            keys: { ...land(27, 'night'), beam: f.sheets === 2 ? 1 : 0, lighthouse_lit: f.sheets === 2 ? 1 : 0 } });
           await g.beat('bread_way');
           await g.play(bread);
           g.set('carry', 1);
@@ -246,12 +246,12 @@ export default {
           await g.scene(SCENES.room, { beat: 'shot_wall', here: [], keys: room('night', f, { log: 2, line27: 'stripe' }) }, { cut: true });
           await g.beat('shot_wall');
           g.beds({ sea: 0.3, wind: 0.05 });
-          await g.scene(SCENES.cape, { beat: 'box_shot', here: [], keys: { ...isle(27, 'night'), matchbox: 'stone' } }, { cut: true });
+          await g.scene(SCENES.cape, { beat: 'box_shot', here: [], keys: { ...land(27, 'night'), matchbox: 'stone' } }, { cut: true });
           await g.beat('box_shot');
         }
       } else {
         g.beds({ sea: 0.3, wind: 0.05 });
-        await g.scene(SCENES.landing, { beat: 'mooring_touch', here: ['papa'], moods: { papa: 'thinking' }, keys: { ...isle(27, 'morning'), pines: 1, boat: 'tarred' } });
+        await g.scene(SCENES.landing, { beat: 'mooring_touch', here: ['papa'], moods: { papa: 'thinking' }, keys: { ...land(27, 'morning'), pines: 1, boat: 'tarred' } });
         g.title(tr('Halfway up the Stair'));
         await g.beat('mooring_touch');
         if (f.sheets === 2) {

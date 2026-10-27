@@ -58,7 +58,7 @@ export const after = stub({ title: tr('After Him'), gesture: BALANCE, at: 'troll
   about: tr('Keeping the distance behind the boy. Too near — he sits down by the Groke with his back to his father. Knowing.'),
   phrase: tr('A boy with a lantern, and steps behind him.') });
 // chapter 4
-export const boat = stub({ title: tr('The Boat'), gesture: PULL, at: 'boat',
+export const boat = stub({ title: tr('The Boat'), gesture: PULL, at: 'boat#boat',
   about: tr('The boat pulled up the rocks, the two of them, in time. A jerk — the boy looks round. Together, without words.'),
   phrase: tr('A heavy boat, and two pulling.') });
 export const burner = stub({ title: tr('The Burner'), gesture: tr('hold, then let go'), at: 'burner#wick',
