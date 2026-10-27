@@ -18,7 +18,7 @@ export default {
   about: 9,
   skipped: { clouds: 0 },
   points: ['wall_a#line27'],
-  keys: ['wipe'],
+  keys: ['wipe', 'dust_cloud'],
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('Dust by the floor, and a line under it.') });
     const send = keys(g);
@@ -37,6 +37,8 @@ export default {
       if (s.held && !spent && speed.at(s.u, dt) > FAST) {
         spent = true;
         clouds++;
+        g.set('dust_cloud', (g.get('dust_cloud') ?? 0) + 1);
+        g.failed();
         mg.error('jerk', { at: line });
         g.mood('papa', 'surprised');
       }

@@ -21,11 +21,11 @@ export default {
   about: 9,
   skipped: { matches: 1 },
   points: ['match#flame', 'match#wick'],
-  keys: ['match_open', 'match'],
+  keys: ['match_open', 'match', 'match_out'],
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('A wick, a match, and a draught from the gallery.') });
     const send = keys(g);
-    settle(signal, () => g.set('match', 1));
+    settle(signal, () => { g.set('match', 1); g.set('match_out', 0); });
     send('match', 0);
     g.set('match_open', 1, 0.4);
     g.sound.strike();
@@ -36,6 +36,8 @@ export default {
     pull.on('release', ({ u }) => {
       if (u >= THERE || u < 0.05 || out) return;
       out = true;
+      g.set('match_out', 1);
+      g.failed();
       mg.error('early', { at: flame });
     });
     for (;;) {
@@ -51,6 +53,7 @@ export default {
       if (!(await count(mg, OUT))) return this.skipped;
       matches++;
       pull.set({ u: 0 });
+      g.set('match_out', 0);
       send('match', 0);
       g.sound.strike();
       out = false;

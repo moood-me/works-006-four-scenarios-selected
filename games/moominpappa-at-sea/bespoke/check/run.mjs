@@ -132,7 +132,7 @@ const lines = new Map(); // `${who}\n${text}` → {who, text}
 // a step played unseen on `state` (its choices made as they say, the first offered where they say nothing) → {state,
 // made: the choice it made, titles: the titles it showed}
 async function step(c, s, state, where) {
-  const j = jump(Infinity, unheard());
+  const j = jump(Infinity, unheard(), { result: outcome });
   const g = context(b, view, hub, structuredClone(state), j);
   let folder = null;
   const made = [], titles = [];
@@ -203,7 +203,7 @@ async function step(c, s, state, where) {
     if (choice) made.push(choice);
     return choose(choice, offers);
   };
-  g.play = (m, o) => { point(folder, atOf(m), where, false); return play(m, o); };
+  g.play = (m, o) => { minigame(m, where, folder); return play(m, o); };
   g.title = text => { titles.push(text); return title(text); };
   let broke = null;
   await Promise.race([CHAPTERS[c].steps[s](g).catch(e => { broke = e; }), j.idle]);
@@ -211,16 +211,18 @@ async function step(c, s, state, where) {
   for (const text of pending) miss(`${where}: the moment “${text}” waited for — its piece never played`);
   return { state: g.state, made, titles };
 }
-// (a stub's point: as stub.js was given it)
-const POINTS = new Map();
-const stubs = await load('minigames/all.js');
-for (const [name, m] of Object.entries(stubs)) {
-  const src = readFileSync(join(game, 'minigames/all.js'), 'utf8');
-  const at = new RegExp(`export const ${name} = stub\\(\\{[^]*?at: '([^']+)'`).exec(src)?.[1];
-  if (!at) miss(`minigames/all.js: “${name}” has no point`);
-  POINTS.set(m, at ?? '');
+// the mini-games (minigames/all.js): each says where its marks stand (points) and what of the scene it moves (keys)
+const GAMES = await load('minigames/all.js');
+for (const [name, m] of Object.entries(GAMES)) {
+  if (!Array.isArray(m.points)) miss(`minigames/${name}: no points`);
+  if (!Array.isArray(m.keys)) miss(`minigames/${name}: no keys`);
 }
-const atOf = m => POINTS.get(m) ?? '';
+// a mini-game played on the scene shown: its points in the contract's points or offers, its keys in its party or acts
+function minigame(m, where, folder) {
+  for (const ref of m.points ?? []) point(folder, ref, where, false);
+  const c = SCENES.get(folder)?.contract;
+  for (const k of m.keys ?? []) if (c && !(k in c.party) && !(k in c.acts)) miss(`${where}: the mini-game “${m.title}” moves “${k}”, not in the party or acts of the scene “${folder}”`);
+}
 
 // --- the map's background (game.js map): the chart's keys, a point for each chapter and the finale, the author's
 {
@@ -265,7 +267,17 @@ function finish(state, picked) {
   const key = `${f.ending} ${f.form}`;
   ends.set(key, (ends.get(key) ?? 0) + 1);
 }
+// the mini-games played unseen give their `skipped` (as played cleanly); a second walk gives the outcomes the chapters
+// read otherwise (asleep: the sign touched — the boy knows) — its paths checked as the first's, not counted again
+let outcome = null;
 await walk(0, fresh(), { titles: [] });
+const counted = { paths, ends: new Map(ends) };
+outcome = m => (m === GAMES.asleep ? { eyes: true } : m.skipped);
+await walk(0, fresh(), { titles: [] });
+paths = counted.paths;
+ends.clear();
+for (const [k, n] of counted.ends) ends.set(k, n);
+outcome = null;
 
 // the author's plays end as their labels say
 const NAMED = { 'The Beam': 'beam', 'The Boat': 'boat', 'The Pie': 'pie', 'Halfway up the Stair': 'stair' };

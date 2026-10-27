@@ -174,7 +174,9 @@ export default {
       if (!top) g.set('beat_next', { sleep: 'n2_sleep', put: 'n2_put', follow: 'n2_follow' }[night2]);
       if (night2 === 'sleep') {
         if (!top) await g.beat('n2_sleep');
-        await g.play(asleep);
+        // (the sign touched: their eyes met — the boy knows that his father knows; scenario §9)
+        const { eyes } = await g.play(asleep);
+        if (eyes) g.mark('son_knows', true, tr('Moomintroll knows that his father knows.'));
         await g.beat(top ? 'n2_taken' : 'n2_sleep_gone');
         g.beds({ sea: 0.4, wind: 0.12 });
         await g.scene(SCENES.shore, { beat: 'gift', here: ['troll', 'groke'], moods: { troll: 'thinking' }, keys: { ...isle(24, 'night'), ...near, frost: given ? 0.2 : 0.3 } }, { cut: true });

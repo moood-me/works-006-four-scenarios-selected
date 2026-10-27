@@ -32,7 +32,7 @@ export default {
     });
     if (!done) return this.skipped;
     if (hold.state.fill >= 1) mg.snap({ at: boy });
-    else if (early) mg.error('early', { at: boy });
+    else if (early) { g.failed(); mg.error('early', { at: boy }); }
     await mg.end({ as: hold.state.fill >= 1 ? 'clean' : early ? 'flawed' : 'neutral' });
     return { early };
   },

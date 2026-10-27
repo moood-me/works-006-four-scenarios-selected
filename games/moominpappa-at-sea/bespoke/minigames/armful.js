@@ -21,12 +21,13 @@ export default {
   about: 8,
   skipped: { spilt: 0 },
   points: [],
-  keys: ['sway'],
+  keys: ['sway', 'armful_way'],
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('Seaweed higher than his head.') });
     const send = keys(g);
-    settle(signal, () => g.set('sway', 0, 0.6));
+    settle(signal, () => { g.set('sway', 0, 0.6); g.set('armful_way', 1); });
     send('sway', 0);
+    send('armful_way', 0);
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, steer: 'rate', release: 'stay', push: 0 });
     teach(b, mg, [lead]);
     let way = 0, spilt = 0, over = false, walked = 0;
@@ -39,9 +40,11 @@ export default {
       const k = Math.floor(walked / STEP), into = walked - k * STEP;
       lead.set({ push: s.held ? (k % 2 ? -1 : 1) * (PUSH + GROW * way) * Math.sin((Math.PI * into) / STEP) : 0 });
       send('sway', s.arrow);
+      send('armful_way', way);
       if (!over && Math.abs(s.arrow) >= SPILL) {
         over = true;
         spilt++;
+        g.failed();
         mg.error('danger', { chip: true });
       }
       if (over && Math.abs(s.arrow) < UPRIGHT) over = false;

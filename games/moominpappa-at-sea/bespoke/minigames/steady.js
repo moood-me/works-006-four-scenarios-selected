@@ -43,6 +43,7 @@ export function side({ low = false } = {}) {
             shook++;
             rest = { ...s.at };
             hold.set({ fill: Math.max(0, s.fill - DROP) });
+            g.failed();
             mg.error('jerk', { at: soot });
           }
         }

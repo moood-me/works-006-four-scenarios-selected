@@ -30,7 +30,7 @@ export function burner({ down = false } = {}) {
       const how = await letGo(g, b, mg, {
         at: 'burner#wick', take: down ? SOONER : TAKE, wait: WAIT,
         held: u => { if (u > 0.05 && !lit) { lit = true; g.set('flame', 'smoky'); g.sound.flare(0.5); } },
-        early: () => mg.error('early', { chip: true }),
+        early: () => { g.failed(); mg.error('early', { chip: true }); },
         sign: () => {
           if (down) {
             g.sound.door();

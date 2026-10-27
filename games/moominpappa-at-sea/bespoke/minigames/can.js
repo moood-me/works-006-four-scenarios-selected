@@ -20,7 +20,7 @@ export default {
   about: 8,
   skipped: { splashed: 0 },
   points: [],
-  keys: ['can_sway'],
+  keys: ['can_sway', 'spill'],
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('A full can, and a high threshold.') });
     const send = keys(g);
@@ -42,6 +42,8 @@ export default {
       if (!tipped && Math.abs(s.arrow) >= SPLASH) {
         tipped = true;
         splashed++;
+        g.set('spill', (g.get('spill') ?? 0) + 1);
+        g.failed();
         mg.error('danger', { chip: true });
       }
       if (tipped && Math.abs(s.arrow) < LEVEL) tipped = false;

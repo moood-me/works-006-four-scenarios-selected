@@ -31,6 +31,7 @@ export default {
       const f = hold.state.fill;
       if (f <= 0.15 || f >= 1) return;
       early++;
+      g.failed();
       mg.error('early', { at: fire });
       if (early === 1) {
         g.mood('papa', 'surprised');

@@ -47,11 +47,13 @@ export function walking({ keys: moves, put, title, phrase, gap, near, far, pace,
         if (d < near) nearFor += dt; else nearFor = 0;
         if (nearFor >= HOLD && !isClose) {
           isClose = true;
+          g.failed();
           mg.error('danger', { at: boy });
           if (close) g.set(close, true);
         }
         if (d > far && !isBehind) {
           isBehind = true;
+          g.failed();
           mg.error('behind', { at: boy });
         }
         put(send, p, s);

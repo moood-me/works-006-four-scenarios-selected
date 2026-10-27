@@ -55,6 +55,7 @@ export default {
       if (night2 !== 'follow') {
         if (first && second) await g.say('my', 'Your son takes the lantern to the Groke. Every night');
         else if (first) await g.say('my', 'Your son took the lantern to the Groke. The one you left him');
+        else if (second && m.son_knows) await g.say('my', 'Your son took the lantern to the Groke last night. And you watched and lay there');
         else if (second) await g.say('my', 'Your son took the lantern to the Groke last night. And you snored. Pretending');
         else await g.say('my', 'Your son goes to the Groke at night. Without a lantern. He sits there and freezes');
         leaves = true;

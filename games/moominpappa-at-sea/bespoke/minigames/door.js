@@ -40,6 +40,7 @@ export default {
         spent = true;
         bangs++;
         open = Math.max(0, open - BACK);
+        g.failed();
         mg.error('jerk', { at: leaf });
         g.sound.door();
         g.mood('my', 'laugh');

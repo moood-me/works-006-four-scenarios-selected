@@ -46,6 +46,7 @@ export function carrying({ bread = false } = {}) {
           tipped = true;
           wobbles++;
           stand = STAND;
+          g.failed();
           mg.error('danger', { chip: true });
           if (!bread && wobbles === 1) g.say('my', 'You’ll drop it');
         }

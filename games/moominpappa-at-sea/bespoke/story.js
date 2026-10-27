@@ -3,8 +3,8 @@
 // ends: whatever it still calls returns a promise that never settles.
 // Stage 5 (rpg docs/writing-games-v2/game-stages.md): each step is a row of the scenes' pieces (the world's module
 // `beats`: the key `beat`, the scene tells `beat:<name>` as a piece ends and `<piece>:<moment>` at its moments); the
-// game says its lines at the moments, makes its choices and mini-games in the poses the pieces end in, cuts from scene
-// to scene, titles the dates. The mini-games are still stubs (minigames/stub.js) till the minigames' package.
+// game says its lines at the moments, makes its choices and mini-games (minigames/) in the poses the pieces end in, cuts
+// from scene to scene, titles the dates.
 //   g.state — what the play carries: {scales, shown, marks, choices} (game.js); what follows from it: facts(g.state)
 //   g.signal — aborts when the step is left: stop what it started on it
 //   g.sound — the game's sounds (sound.js); g.beds(levels, seconds) — the beds named to their levels, every other one
@@ -30,8 +30,9 @@
 //     state.choices[choice] (choice null: not a choice of the chapter's map)
 //   g.play(minigame, opts) — a mini-game (a module of minigames/: {title, about, skipped, run(g, b, opts, signal)});
 //     the signal aborts when it is skipped (the page's ⏭, where it may be skipped) or the step is left; → its result
-//   g.minigame({phrase}) — inside a minigame's run: the language's mini-game begun; g.card(title, gesture, text) — the
-//     stub's card beside it, gone with the minigame (→ a function that takes it away sooner)
+//   g.minigame({phrase}) — inside a minigame's run: the language's mini-game begun; g.failed() — a mistake made in it:
+//     from then on the page's ⏭ may skip it (a mini-game the player has not seen may be skipped once they failed it,
+//     or after SKIPPABLE s)
 //   g.apply(choice) — what the option chosen does, by EFFECTS: the scales, then each mark
 //   g.scale(name, delta) — a scale moves; the player sees which way (the gauge, the words)
 //   g.gauge(name) — the scale is shown from now on; its one line of what it means said once
@@ -335,11 +336,12 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       mg.on('skip', playing.end);
       return mg;
     },
-    card(title, gesture, text) {
-      if (!playing) throw new Error('g.card: only inside a minigame (g.play)');
-      const off = view.card(title, gesture, text);
-      playing.signal.addEventListener('abort', off);
-      return off;
+    // a mistake made in the mini-game (beside its mg.error): from the first one on it may be skipped (scenario §7:
+    // “Skip” after the first failure — the page's ⏭)
+    failed() {
+      if (!playing || playing.skippable) return;
+      playing.skippable = true;
+      ahead();
     },
     apply(choice) {
       if (gone()) return;

@@ -43,6 +43,7 @@ export default {
         spent = true;
         jerks++;
         drawn = Math.max(0, drawn - BACK);
+        g.failed();
         mg.error('jerk', { at: end });
       }
       const knot = clamp(drawn + (s.held && !spent ? Math.min(s.u, 0.99) / PULLS : 0));

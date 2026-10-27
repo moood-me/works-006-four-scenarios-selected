@@ -43,6 +43,7 @@ export default {
       if (on && Math.abs(a) >= BLOWN && !hit.has(k)) {
         hit.add(k);
         blown++;
+        g.failed();
         mg.error('off', { chip: true });
       }
       mg.plate.set({ fill: clamp(now / END), glow: lead.state.in ? 'good' : on ? 'bad' : 'idle' });

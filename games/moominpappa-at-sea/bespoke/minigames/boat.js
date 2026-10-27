@@ -38,6 +38,7 @@ export default {
       if (s.held && s.breath === 'out' && since >= GRACE && s.k !== jerked) {
         jerked = s.k;
         jerks++;
+        g.failed();
         mg.error('timing', { at: hull });
         g.mood('troll', 'surprised');
         back = 1.2;

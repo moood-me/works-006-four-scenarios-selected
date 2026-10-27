@@ -38,7 +38,7 @@ export default {
         const ok = hold.state.held;
         g.set('door_shake', ok ? HELD : LOOSE, 0.12);
         g.sound.wave(ok ? 0.7 : 1);
-        if (!ok) { gave++; mg.error('danger', { at: door }); }
+        if (!ok) { gave++; g.failed(); mg.error('danger', { at: door }); }
         still = now + 0.15;
       }
       if (still !== null && now >= still) { still = null; g.set('door_shake', 0, 0.6); }
