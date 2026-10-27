@@ -94,6 +94,11 @@ if (state !== "away") {
       c.stroke();
     }
     e.at(1.68, -1.3, "lantern");
+    // where the family sit in her (floor points: «on» her as she goes)
+    e.at(-1.0, -0.3, "seat_a");
+    e.at(-0.3, -0.3, "seat_b");
+    e.at(0.45, -0.3, "seat_c");
+    e.at(1.2, -0.5, "bow");
     c.restore();
   });
   // the rope from the bow down to a stone

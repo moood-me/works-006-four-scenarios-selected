@@ -94,6 +94,11 @@ def lighthouse(across, distance, **k):
             "box": [-5.03, -15.8, 5.03, 0], "shadow": True, "redraw": {"lighthouse_lit": 1}, **k}
 
 
+def hand_lantern(who):
+    """The lantern in someone's paw (the cast's part `lantern`): its light at their `flame`, on by `<who>_lantern`."""
+    return {"id": f"{who}_lantern", "at": f"{who}#flame", "on": f"{who}_lantern", "color": "#ffcf86", "strength": 1.4, "reach": 9}
+
+
 RAIN = {"id": "rain", "name": "Rain", "particles": {"kind": "rain", "amount": "storm", "count": 9000, "wind": 1.2}}
 
 
