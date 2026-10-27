@@ -1,53 +1,34 @@
+// The beach's mechanics: the island's lightning and beam; the pieces (lib.js `film`), played by `beat` through the
+// world's `beats`; and what the minigames move. Opened without a piece, the people stand where the play's keys say
+// (groke_at, troll_at): the Groke facing the lantern on the stone while it is there, else the lighthouse; the son
+// facing her (beside her, as she faces), the blanket by him.
 scene.kit.island.lightning(scene);
 scene.kit.island.beam(scene);
-// The beach's mechanics: where the Groke is (groke_at) and where the son stands (troll_at) put them there and turn
-// them — the Groke to the lantern on the stone while it is there, else to the lighthouse; the son to her — and lay the
-// blanket behind him; the sea-horses swim off when they go (seahorses → gone). Set when the scene opens, at once;
-// changed while it plays, the son walks there at his own pace and the Groke is put in her new place.
 const L = scene.lib;
-const groke = () => L.SEATS[scene.get('groke_at')] ?? L.SEATS.edge;
-const trollAt = () => {
-  const at = scene.get('troll_at');
-  if (at !== 'beside') return L.TROLL[at] ?? L.TROLL.far;
-  const [a, d] = groke();
-  return [a + L.BESIDE[0], d + L.BESIDE[1]];
+if (!scene.get('beat')) {
+  const [ga, gd] = L.SEATS[scene.get('groke_at')] ?? L.SEATS.edge;
+  const to = scene.get('lantern_stone') !== 'none' ? L.STONE : L.LIGHTHOUSE, gt = L.turnTo(ga, gd, to[0], to[1]);
+  const beside = scene.get('troll_at') === 'beside';
+  const [ta, td] = beside ? [ga + L.BESIDE[0], gd + L.BESIDE[1]] : L.TROLL[scene.get('troll_at')] ?? L.TROLL.near;
+  const tt = beside ? gt : L.turnTo(ta, td, ga, gd), b = L.BLANKET([ta, td]);
+  for (const [k, v] of [['groke_a', ga], ['groke_d', gd], ['groke_turn', gt], ['troll_a', ta], ['troll_d', td], ['troll_turn', tt],
+    ['blanket_a', b.blanket_a], ['blanket_d', b.blanket_d], ['seahorses_away', scene.get('seahorses') === 'gone' ? 1 : 0]]) scene.set(k, v);
+}
+scene.kit.beats.play(scene, L.film(scene));
+// «Следом» (follow, follow_at 0…1): the son down the dune's path to the stone, as far as `follow`; Papa down after him
+// from over the dune, as far as `follow_at` — each walks there at his own pace as the minigame moves them
+const put = (id, [a, d]) => { scene.set(`${id}_a`, a); scene.set(`${id}_d`, d); };
+const follow = () => put('troll', L.along(L.DOWN, scene.get('follow')));
+const followAt = () => put('papa', L.along(L.PAPA_DOWN.slice(0, 2), scene.get('follow_at')));
+// «Рядом» (walk 0…1, walk_at −1…1): the two up the way onto the dune's top, the son as far as `walk`, Papa beside him
+// on his right, as far ahead (+) or behind (−) of him as `walk_at` says (a metre at the most)
+const walk = () => {
+  const u = scene.get('walk'), [a, d] = L.along(L.UP, u), [a2, d2] = L.along(L.UP, Math.min(1, u + 0.05));
+  const l = Math.hypot(a2 - a, d2 - d) || 1, fa = (a2 - a) / l, fd = (d2 - d) / l, k = scene.get('walk_at');
+  put('troll', [a, d]);
+  put('papa', [a + fa * k + fd * 0.6, d + fd * k - fa * 0.6]);
 };
-// what the Groke faces: the lantern on the stone while it is there, else the lighthouse's lantern up on the knoll
-const grokeTurn = () => {
-  const [a, d] = groke(), to = scene.get('lantern_stone') !== 'none' ? L.STONE : L.LIGHTHOUSE;
-  return L.turnTo(a, d, to[0], to[1]);
-};
-const placeGroke = () => {
-  const [a, d] = groke();
-  scene.set('groke_a', a);
-  scene.set('groke_d', d);
-  scene.set('groke_turn', grokeTurn());
-};
-// the son faces her (beside her, he faces as she does); the blanket lies on the sand behind him
-const trollTurn = ([a, d]) => (scene.get('troll_at') === 'beside' ? grokeTurn() : L.turnTo(a, d, ...groke()));
-const placeBlanket = ([a, d], turn) => {
-  const t = turn * Math.PI / 180;
-  scene.set('blanket_a', a - Math.sin(t) * 0.75);
-  scene.set('blanket_d', d - Math.cos(t) * 0.75);
-};
-const placeTroll = walk => {
-  const p = trollAt(), turn = trollTurn(p);
-  placeBlanket(p, turn);
-  if (!walk) {
-    scene.set('troll_a', p[0]);
-    scene.set('troll_d', p[1]);
-    scene.set('troll_turn', turn);
-    return;
-  }
-  scene.sequence(async s => {
-    await s.person('troll').walk([p]);
-    await s.person('troll').turn(turn);
-  }, { name: 'troll_to' });
-};
-placeGroke();
-placeTroll(false);
-scene.set('seahorses_away', scene.get('seahorses') === 'gone' ? 1 : 0);
-scene.on('change', 'groke_at', () => { placeGroke(); if (scene.get('troll_at') === 'beside') placeTroll(false); });
-scene.on('change', 'lantern_stone', () => scene.set('groke_turn', grokeTurn()));
-scene.on('change', 'troll_at', () => placeTroll(true));
-scene.on('change', 'seahorses', v => { if (v === 'gone') scene.move('seahorses_away', 1, { over: 6, ease: 'in' }); else scene.set('seahorses_away', 0); });
+for (const [key, fn] of [['follow', follow], ['follow_at', followAt], ['walk', walk], ['walk_at', walk]]) {
+  scene.on('change', key, () => fn());
+  scene.on('move', key, () => fn());
+}

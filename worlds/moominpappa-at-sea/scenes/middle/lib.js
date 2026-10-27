@@ -43,4 +43,180 @@ const pineAt = (k, u) => {
 };
 // where the land meets the sea (the island's painters ask it)
 const shore = shoreOf(land, SEA, -60, 66, -30, 80);
-return { SEA, land, shore, POOL, RING, ROCK, ROPE, LIGHTHOUSE, PINES, pineAt };
+// which way one at [a, d] faces to look at [a2, d2] (a person's turn: 0 away from the viewer, 90 to the right)
+const turnTo = (a, d, a2, d2) => (Math.atan2(a2 - a, d2 - d) * 180 / Math.PI + 360) % 360;
+// ── the pieces (notes.md: «Pieces»; the world's `beats` plays them by `beat`) ──────────────────────────────
+// Where people come and go (across, distance): down the path from among the pines into the hollow; the place where Papa
+// looks round (the choice of his day); the clearing's edge; the pool's lip by the rock, facing the rope's way in; the
+// way the armful goes — from the pines on the left down through the ring and off to the right toward the landing.
+const PATH = [[0.9, 10], [0.4, 7.6]], LOOK_ROUND = [0.5, 5.2], EDGE = [-3, 4.4], LIP = [3.3, 5.4], MY_ROCK = [-3.4, 5.6];
+const ARMFUL = [[-4.6, 9.6], [-3.4, 7.2], [-1.8, 5.2], [0.6, 3.4], [3.2, 2.2], [6, 1.6]];
+const AT = (id, [a, d], turn, more = {}) => ({ [`${id}_a`]: a, [`${id}_d`]: d, [`${id}_turn`]: turn, [`${id}_do`]: 'stand',
+  [`${id}_with`]: null, [`${id}_look`]: null, [`${id}_gait`]: null, [`${id}_on`]: null, [`${id}_wear`]: null, ...more });
+const LOOP = motion => ({ motion, loop: true });
+const VIEW = { camera_target: null, camera_shot: null, camera_frame: null, camera_glide: 1.5, camera_x: 0, camera_z: 0, camera_yaw: 0, camera_h: 0, camera_look: 0 };
+// the camera brought nearer one at p: `dist` metres from them along the line the viewer sees them by, turned to them,
+// `h` metres lower, the gaze lowered `look` screen heights — the scene's camera put there (no operator: framing close it may stand in what is before them)
+const NEAR = ([a, d], dist, h = 0, look = 0) => {
+  const l = Math.hypot(a, d), k = Math.max(0, 1 - dist / l);
+  return { ...VIEW, camera_x: a * k, camera_z: d * k, camera_yaw: Math.atan2(a, d) * 180 / Math.PI, camera_h: -h, camera_look: look };
+};
+const CAM_KEYS = ['camera_x', 'camera_z', 'camera_yaw', 'camera_h', 'camera_look'];
+const dolly = (s, cam, over = 2.5) => s.all(...CAM_KEYS.map(k => s.move(k, cam[k], { over })));
+// a stone's place round the ring (k of 9): beside it, outside, where the son crouches to lay it
+const RING_SPOT = [RING.a + 0.4, RING.d - RING.r - 0.35];
+
+// The film, for the scene (its keys read as each piece begins). A piece's `from` puts what it does not move itself —
+// the people's places, what they do and hold, the camera, the scene's own keys; never the hour, the weather or who is
+// here (the game's).
+function film(scene) {
+  const get = k => scene.get(k);
+  const go = async (s, id, pts, turn, gait = null) => {
+    const p = s.person(id);
+    p.gait(gait);
+    await p.walk(pts);
+    p.gait(null);
+    if (turn != null) await p.turn(turn);
+  };
+  // lay the stones of the ring one by one, crouched at its edge (ring_n 0 → 9): a new ring, or a broken one laid back
+  const lay = async (s, again) => {
+    const troll = s.person('troll');
+    s.set('ring', again ? 'broken' : 'set');
+    s.set('ring_n', 0);
+    await go(s, 'troll', [RING_SPOT], turnTo(...RING_SPOT, RING.a, RING.d));
+    troll.look('ring#stones');
+    await troll.do('crouch');
+    troll.do('crouched', { loop: true });
+    for (let n = 1; n <= 9; n++) {
+      await s.wait(0.9);
+      s.set('ring_n', n);
+    }
+    s.set('ring', 'set');
+    await troll.do('crouch_rise');
+  };
+  const myBusy = () => (get('my_here') ? AT('my', MY_ROCK, 120, { my_do: LOOP('crouched'), my_mood: 'smile', my_look: [MY_ROCK[0] - 0.4, MY_ROCK[1] + 0.3, 0] }) : {});
+  return {
+    // 2.4: Papa comes down into the hollow and looks round — the pool, the pines, the paths; the pose for «День Папы»
+    day: {
+      from: () => ({ ...VIEW, ...AT('papa', PATH[0], turnTo(...PATH[0], ...LOOK_ROUND), { papa_mood: 'thinking' }) }),
+      run: async s => {
+        const papa = s.person('papa');
+        await go(s, 'papa', [PATH[1], LOOK_ROUND], 175);
+        papa.look('pool#water');
+        await s.wait(1.5);
+        papa.look('ground#path');
+        await s.wait(1.2);
+        papa.look(null);
+        await dolly(s, NEAR(LOOK_ROUND, 3.2));
+        s.tell('day:look');
+      },
+    },
+    // 2.3: the son down the path into the clearing; he lays the stones in a ring one by one; My busy on her rock
+    ring: {
+      from: () => ({ ...VIEW, ring: 'none', ring_n: 0, ...AT('troll', PATH[0], 200, { troll_mood: 'thinking' }), ...myBusy() }),
+      run: async s => {
+        const troll = s.person('troll');
+        await go(s, 'troll', [PATH[1]], null);
+        troll.look('ring#stones');
+        await lay(s, false);
+        await dolly(s, NEAR(RING_SPOT, 3.2, 0.2, 0.1));
+        s.tell('ring:set');
+        await s.wait(1.5);
+      },
+    },
+    // 2.4 «Омут»: Papa to the rock with the rope and its weight, ties it, stands at the lip paying it out — the pose for
+    // «Лот» (the minigame moves `rope`)
+    sound_ready: {
+      from: () => ({ ...VIEW, rope: 0, coil: false, ...AT('papa', PATH[0], 160, { papa_with: ['rope'], papa_mood: 'thinking' }) }),
+      run: async s => {
+        const papa = s.person('papa');
+        await go(s, 'papa', [PATH[1], LIP], turnTo(...LIP, ROPE.a, ROPE.d));
+        await papa.do('crouch');
+        await papa.do('crouch_rise');
+        papa.look('pool#water');
+        papa.do('lower_rope', { loop: true });
+        s.tell('sound_ready:ready');
+      },
+    },
+    // all the rope is out and there is no bottom: Papa looks into the pool; behind his back the pines creep
+    sound_after: {
+      after: 'sound_ready',
+      from: () => ({ ...VIEW, coil: false, ...AT('papa', LIP, turnTo(...LIP, ROPE.a, ROPE.d), { papa_with: ['rope'], papa_look: 'pool#water', papa_do: LOOP('lower_rope') }) }),
+      run: async s => {
+        const papa = s.person('papa');
+        await s.move('rope', 1, { over: 1.5 });
+        papa.do('stand');
+        papa.with(null);
+        papa.mood('surprised');
+        await dolly(s, NEAR(LIP, 3));
+        s.tell('sound_after:look');
+        await s.wait(1.5);
+        papa.mood('smile');
+        dolly(s, VIEW, 3);
+        await s.move('pines', Math.min(1, get('pines') + 0.4), { over: 6 });
+        s.tell('sound_after:pines');
+        await s.wait(1);
+      },
+    },
+    // 2.4 «Водоросли»: Papa comes down from the pines with the armful over his head; the son at the clearing's edge —
+    // the pose for «Охапка» (the minigame moves `sway`)
+    armful_in: {
+      from: () => ({ ...VIEW, ring: 'set', ring_n: 9, ...AT('papa', ARMFUL[0], turnTo(...ARMFUL[0], ...ARMFUL[1]), { papa_with: ['armful'], papa_mood: 'smile' }),
+        ...AT('troll', EDGE, turnTo(...EDGE, ...ARMFUL[1]), { troll_mood: 'neutral', troll_look: 'papa' }) }),
+      run: async s => {
+        await go(s, 'papa', [ARMFUL[1]], null, 'carry_high');
+        s.person('papa').do('hold_high', { loop: true });
+        s.tell('armful_in:ready');
+      },
+    },
+    // he walks straight through the ring and knocks it apart, and goes off toward the landing; the son looks at his back
+    armful_through: {
+      after: 'armful_in',
+      from: () => ({ ...VIEW, ring: 'set', ring_n: 9, ...AT('papa', ARMFUL[1], turnTo(...ARMFUL[1], ...ARMFUL[2]), { papa_with: ['armful'], papa_mood: 'smile', papa_do: LOOP('hold_high') }),
+        ...AT('troll', EDGE, turnTo(...EDGE, ...ARMFUL[1]), { troll_mood: 'neutral', troll_look: 'papa' }) }),
+      run: async s => {
+        const papa = s.person('papa'), troll = s.person('troll');
+        papa.gait('carry_high');
+        await papa.walk([ARMFUL[2]]);
+        s.set('ring', 'broken');
+        s.set('ring_n', 0);
+        troll.mood('sad');
+        s.tell('armful_through:kick');
+        await papa.walk(ARMFUL.slice(3));
+        papa.gait(null);
+        papa.here(false);
+        s.tell('armful_through:gone');
+        await s.wait(1);
+      },
+    },
+    // the son sets the stones back, one by one
+    regather: {
+      after: 'armful_through',
+      from: () => ({ ...VIEW, ring: 'broken', ring_n: 0, ...AT('troll', EDGE, 100, { troll_mood: 'sad' }) }),
+      run: async s => {
+        await lay(s, true);
+        s.tell('regather:done');
+        await s.wait(1);
+      },
+    },
+    // the common shots: the rock at the pool with the coiled rope; the ring one stone short
+    rope_shot: {
+      from: () => ({ ...NEAR([ROCK.a, ROCK.d], 4, 0, 0.1), coil: true, rope: 0 }),
+      run: async s => {
+        await s.wait(2);
+        s.tell('rope_shot:held');
+        await s.wait(2);
+      },
+    },
+    ring_shot: {
+      from: () => ({ ...NEAR([RING.a, RING.d], 3.4, 0, 0.2), ring: 'one_missing', ring_n: 9 }),
+      run: async s => {
+        await s.wait(2);
+        s.tell('ring_shot:held');
+        await s.wait(2);
+      },
+    },
+  };
+}
+
+return { SEA, land, shore, POOL, RING, ROCK, ROPE, LIGHTHOUSE, PINES, pineAt, turnTo, film, ARMFUL };

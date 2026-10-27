@@ -179,7 +179,8 @@
   ],
   "modules": [
     "cast",
-    "island"
+    "island",
+    "beats"
   ],
   "objects": [
     {
@@ -291,9 +292,9 @@
       "distance": 5.2,
       "shadow": true,
       "box": [
-        -1.1,
+        -2.6,
         -0.3,
-        1.1,
+        2.6,
         0.05
       ]
     },
@@ -535,7 +536,11 @@
         "who": "troll"
       },
       "across": -0.5,
-      "distance": 4.6
+      "distance": 4.6,
+      "place": {
+        "across": "troll_a",
+        "distance": "troll_d"
+      }
     },
     {
       "id": "papa",
@@ -545,7 +550,11 @@
         "who": "papa"
       },
       "across": 3.3,
-      "distance": 5.4
+      "distance": 5.4,
+      "place": {
+        "across": "papa_a",
+        "distance": "papa_d"
+      }
     },
     {
       "id": "mama",
@@ -555,7 +564,11 @@
         "who": "mama"
       },
       "across": 0.4,
-      "distance": 8.5
+      "distance": 8.5,
+      "place": {
+        "across": "mama_a",
+        "distance": "mama_d"
+      }
     },
     {
       "id": "my",
@@ -565,7 +578,11 @@
         "who": "my"
       },
       "across": -3.4,
-      "distance": 5.6
+      "distance": 5.6,
+      "place": {
+        "across": "my_a",
+        "distance": "my_d"
+      }
     },
     {
       "id": "rain",
@@ -591,8 +608,20 @@
     "beam_turn": 0,
     "pines": 0,
     "ring": "none",
+    "ring_n": 9,
     "rope": 0,
     "coil": false,
+    "sway": 0,
+    "beat": "",
+    "beat_next": "",
+    "troll_a": -0.5,
+    "troll_d": 4.6,
+    "papa_a": 3.3,
+    "papa_d": 5.4,
+    "mama_a": 0.4,
+    "mama_d": 8.5,
+    "my_a": -3.4,
+    "my_d": 5.6,
     "pine1_a": -3.6,
     "pine1_d": 7.6,
     "pine2_a": -2,
@@ -709,7 +738,86 @@
         "broken",
         "one_missing"
       ],
-      "means": "the son's ring of stones on the moss of his clearing: none; set — a whole ring; broken — kicked apart, scattered; one_missing — whole but for one stone"
+      "means": "the son's ring of stones on the moss of his clearing: none; set — the ring (ring_n of its stones laid); broken — kicked apart, scattered (ring_n of them laid back); one_missing — whole but for one stone"
+    },
+    "ring_n": {
+      "range": [
+        0,
+        9
+      ],
+      "means": "how many stones of the ring are in their places while it is laid (9 — all)"
+    },
+    "sway": {
+      "range": [
+        -1,
+        1
+      ],
+      "smooth": true,
+      "means": "«Охапка» (the minigame): the armful over Papa's head swaying, he turns under it"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (the world's beats: notes.md «Pieces»)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will play next (its cut made ready)"
+    },
+    "troll_a": {
+      "range": [
+        -20,
+        20
+      ],
+      "means": "the scene's own: where a person stands (metres) — the pieces'"
+    },
+    "troll_d": {
+      "range": [
+        -20,
+        20
+      ],
+      "means": "the scene's own: where a person stands (metres) — the pieces'"
+    },
+    "papa_a": {
+      "range": [
+        -20,
+        20
+      ],
+      "means": "the scene's own: where a person stands (metres) — the pieces'"
+    },
+    "papa_d": {
+      "range": [
+        -20,
+        20
+      ],
+      "means": "the scene's own: where a person stands (metres) — the pieces'"
+    },
+    "mama_a": {
+      "range": [
+        -20,
+        20
+      ],
+      "means": "the scene's own: where a person stands (metres) — the pieces'"
+    },
+    "mama_d": {
+      "range": [
+        -20,
+        20
+      ],
+      "means": "the scene's own: where a person stands (metres) — the pieces'"
+    },
+    "my_a": {
+      "range": [
+        -20,
+        20
+      ],
+      "means": "the scene's own: where a person stands (metres) — the pieces'"
+    },
+    "my_d": {
+      "range": [
+        -20,
+        20
+      ],
+      "means": "the scene's own: where a person stands (metres) — the pieces'"
     },
     "rope": {
       "range": [
