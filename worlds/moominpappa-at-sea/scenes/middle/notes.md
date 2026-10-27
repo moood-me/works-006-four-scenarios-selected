@@ -58,10 +58,43 @@ Seconds are estimates. Motions and parts are the cast's (package Л): the `rope`
 New keys for these (stage 5): `ring_n` 0…9 — how many stones of a set ring are there while it is laid (each stone a
 layer of `ring`, shown by it: no painting again); the act `sway`.
 
+## Pieces (stage 5: `lib.js` FILM, played by `beat` through the world's `beats`; the game says the lines at the moments)
+
+Seconds are estimates. Motions and parts are the cast's (package Л): the `rope` with its weight in the hands, the
+`armful`; `crouch`, `put_down` (a stone), `pull_rope`, `carry` (the armful high).
+
+- `day` (2.4, the afternoon, ≈ 8 s): Papa comes up into the hollow and looks round — the pool, the pines, the paths
+  down to the shore and to the cape; ends with him standing in the middle 4:3 (`papa#chest`): the pose for the choice
+  «День Папы» — `day:look`.
+- `ring` (2.3, day, ≈ 16 s): the son comes down the path into the clearing, looks round, and lays the stones in a ring
+  one by one, crouching (`ring` set, `ring_n` 0 → 9) — `ring:set` (his line); My on the granite on the left, busy
+  with her own (as `my_here` says). Ends with him standing over the ring.
+- `sound_ready` (2.4 «Омут», day, ≈ 10 s): Papa comes to the rock with the rope and its weight, ties it to the rock and
+  stands at the pool's lip holding it — `sound_ready:ready` (the pose for «Лот»: `pool#water` in the middle 4:3). The
+  minigame moves `rope`.
+- `sound_after` (after `sound_ready`, ≈ 12 s): all the rope is out (`rope` 1) and there is no bottom: Papa looks into
+  the pool (surprised, then smiling) — `sound_after:look`; behind his back the pines creep toward the lighthouse
+  (`pines` + 0.4 over ≈ 6 s) — `sound_after:pines`.
+- `armful_in` (2.4 «Водоросли», day, ≈ 6 s): Papa comes down the path with the armful above his head, not seeing his
+  feet; the son at the clearing's edge — `armful_in:ready` (the pose for «Охапка»). The minigame moves `sway`; he walks
+  on toward the ring as it plays.
+- `armful_through` (after `armful_in`, ≈ 10 s): he walks straight through the ring and knocks it apart (`ring` →
+  broken) — `armful_through:kick`; goes on and off to the right toward the landing; the son looks at his back —
+  `armful_through:gone`.
+- `regather` (after `armful_through`, ≈ 14 s): the son sets the stones back one by one (`ring` set, `ring_n` 0 → 9) —
+  `regather:done`.
+- `rope_shot` (common shots, «Омут», ≈ 4 s): the rock at the pool with the coiled rope (`coil`) — `rope_shot:held`.
+- `ring_shot` (common shots, «Сын: потом», ≈ 4 s): the ring in the clearing one stone short (`ring` one_missing) —
+  `ring_shot:held`.
+
+New keys for these (stage 5): `ring_n` 0…9 — how many stones of a set ring are there while it is laid (each stone a
+layer of `ring`, shown by it: no painting again); the act `sway`.
+
 ## Contract for the check
 
 ```json
 {"beats": {
+ "day": {"after": [], "tells": ["day:look"], "seconds": 8, "show": false},
  "ring": {"after": [], "tells": ["ring:set"], "seconds": 16, "show": false},
  "sound_ready": {"after": [], "tells": ["sound_ready:ready"], "seconds": 10, "show": false},
  "sound_after": {"after": ["sound_ready"], "tells": ["sound_after:look", "sound_after:pines"], "seconds": 12, "show": false},
