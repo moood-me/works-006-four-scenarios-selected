@@ -17,7 +17,8 @@ if (!scene.get('beat')) {
 scene.kit.beats.play(scene, L.film(scene));
 // «Следом» (follow, follow_at 0…1): the son down the dune's path to the stone, as far as `follow`; Papa down after him
 // from over the dune, as far as `follow_at` — each walks there at his own pace as the minigame moves them
-const put = (id, [a, d]) => { scene.set(`${id}_a`, a); scene.set(`${id}_d`, d); };
+// (each a walk at the person's own gait to where the act now says: a new one replaces the one going)
+const put = (id, p) => scene.person(id).walk([p]);
 const follow = () => put('troll', L.along(L.DOWN, scene.get('follow')));
 const followAt = () => put('papa', L.along(L.PAPA_DOWN.slice(0, 2), scene.get('follow_at')));
 // «Рядом» (walk 0…1, walk_at −1…1): the two up the way onto the dune's top, the son as far as `walk`, Papa beside him

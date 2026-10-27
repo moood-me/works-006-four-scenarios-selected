@@ -48,7 +48,9 @@ the camera moved, `scene.tell` at the moments). The camera is the scene's own mo
 viewer sees one by, turned to them; `dolly` over seconds, `cutTo` a shot made ready — the son's blush), not the
 operator: framing the seated Groke close the operator stands inside her (reported). `script.js` plays them
 (`beats.play`) and moves the people by the minigames' acts; `showcase.js` plays a selection, each piece in its play's
-keys. Seconds below are measured roughly on renders.
+keys. Seconds below are measured roughly on renders. The Groke sitting looks at the light she faces (her head up: her face
+reads), and the camera by her stands low (`NEAR` lowered, the gaze a little up). The minigames' acts walk the people
+(`walk` actions to where the act says, at their own gait).
 
 Seconds are estimates (the people at their own pace). Each piece's `from` sets what it does not move itself; a piece
 `after` another goes on from where that one ended. The people's motions and parts are the cast's (package Л):
@@ -119,7 +121,9 @@ the camera moved, `scene.tell` at the moments). The camera is the scene's own mo
 viewer sees one by, turned to them; `dolly` over seconds, `cutTo` a shot made ready — the son's blush), not the
 operator: framing the seated Groke close the operator stands inside her (reported). `script.js` plays them
 (`beats.play`) and moves the people by the minigames' acts; `showcase.js` plays a selection, each piece in its play's
-keys. Seconds below are measured roughly on renders.
+keys. Seconds below are measured roughly on renders. The Groke sitting looks at the light she faces (her head up: her face
+reads), and the camera by her stands low (`NEAR` lowered, the gaze a little up). The minigames' acts walk the people
+(`walk` actions to where the act says, at their own gait).
 
 Seconds are estimates (the people at their own pace). Each piece's `from` sets what it does not move itself; a piece
 `after` another goes on from where that one ended. The people's motions and parts are the cast's (package Л):

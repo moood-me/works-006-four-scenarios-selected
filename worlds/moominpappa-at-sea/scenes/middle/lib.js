@@ -50,7 +50,7 @@ const turnTo = (a, d, a2, d2) => (Math.atan2(a2 - a, d2 - d) * 180 / Math.PI + 3
 // looks round (the choice of his day); the clearing's edge; the pool's lip by the rock, facing the rope's way in; the
 // way the armful goes — from the pines on the left down through the ring and off to the right toward the landing.
 const PATH = [[0.9, 10], [0.4, 7.6]], LOOK_ROUND = [0.5, 5.2], EDGE = [-3, 4.4], LIP = [3.3, 5.4], MY_ROCK = [-3.4, 5.6];
-const ARMFUL = [[-4.6, 9.6], [-3.4, 7.2], [-1.8, 5.2], [0.6, 3.4], [3.2, 2.2], [6, 1.6]];
+const ARMFUL = [[-4.4, 8.8], [-3, 6.4], [-1.8, 5.2], [0.6, 3.4], [3.2, 2.2], [6, 1.6]];
 const AT = (id, [a, d], turn, more = {}) => ({ [`${id}_a`]: a, [`${id}_d`]: d, [`${id}_turn`]: turn, [`${id}_do`]: 'stand',
   [`${id}_with`]: null, [`${id}_look`]: null, [`${id}_gait`]: null, [`${id}_on`]: null, [`${id}_wear`]: null, ...more });
 const LOOP = motion => ({ motion, loop: true });
@@ -62,9 +62,11 @@ const NEAR = ([a, d], dist, h = 0, look = 0) => {
   return { ...VIEW, camera_x: a * k, camera_z: d * k, camera_yaw: Math.atan2(a, d) * 180 / Math.PI, camera_h: -h, camera_look: look };
 };
 const CAM_KEYS = ['camera_x', 'camera_z', 'camera_yaw', 'camera_h', 'camera_look'];
+// the armful's way through the clearing, framed nearer
+const ARMFUL_VIEW = NEAR([-2.4, 5.8], 4.6, 0, 0.02);
 const dolly = (s, cam, over = 2.5) => s.all(...CAM_KEYS.map(k => s.move(k, cam[k], { over })));
-// a stone's place round the ring (k of 9): beside it, outside, where the son crouches to lay it
-const RING_SPOT = [RING.a + 0.4, RING.d - RING.r - 0.35];
+// where the son crouches to lay the stones: at the ring's far side, facing the viewer across it
+const RING_SPOT = [RING.a + 0.3, RING.d + RING.r + 0.35];
 
 // The film, for the scene (its keys read as each piece begins). A piece's `from` puts what it does not move itself —
 // the people's places, what they do and hold, the camera, the scene's own keys; never the hour, the weather or who is
@@ -78,21 +80,23 @@ function film(scene) {
     p.gait(null);
     if (turn != null) await p.turn(turn);
   };
-  // lay the stones of the ring one by one, crouched at its edge (ring_n 0 → 9): a new ring, or a broken one laid back
-  const lay = async (s, again) => {
+  // lay the stones of the ring one by one, crouched at its far side (ring_n up to 9): a new ring, or a broken one laid
+  // back; `from` — how many are laid already (a piece may begin with him at it)
+  const lay = async (s, again, from = 0) => {
     const troll = s.person('troll');
-    s.set('ring', again ? 'broken' : 'set');
-    s.set('ring_n', 0);
-    await go(s, 'troll', [RING_SPOT], turnTo(...RING_SPOT, RING.a, RING.d));
-    troll.look('ring#stones');
-    await troll.do('crouch');
-    troll.do('crouched', { loop: true });
-    for (let n = 1; n <= 9; n++) {
-      await s.wait(0.9);
+    if (!from) {
+      s.set('ring', again ? 'broken' : 'set');
+      s.set('ring_n', 0);
+      await go(s, 'troll', [RING_SPOT], turnTo(...RING_SPOT, RING.a, RING.d));
+      troll.look('ring#stones');
+      await troll.do('crouch');
+      troll.do('crouched', { loop: true });
+    }
+    for (let n = from + 1; n <= 9; n++) {
+      await s.wait(0.45);
       s.set('ring_n', n);
     }
     s.set('ring', 'set');
-    await troll.do('crouch_rise');
   };
   const myBusy = () => (get('my_here') ? AT('my', MY_ROCK, 120, { my_do: LOOP('crouched'), my_mood: 'smile', my_look: [MY_ROCK[0] - 0.4, MY_ROCK[1] + 0.3, 0] }) : {});
   return {
@@ -113,14 +117,13 @@ function film(scene) {
     },
     // 2.3: the son down the path into the clearing; he lays the stones in a ring one by one; My busy on her rock
     ring: {
-      from: () => ({ ...VIEW, ring: 'none', ring_n: 0, ...AT('troll', PATH[0], 200, { troll_mood: 'thinking' }), ...myBusy() }),
+      from: () => ({ ...VIEW, ring: 'set', ring_n: 4, ...myBusy(),
+        ...AT('troll', RING_SPOT, turnTo(...RING_SPOT, RING.a, RING.d), { troll_mood: 'thinking', troll_look: 'ring#stones', troll_do: LOOP('crouched') }) }),
       run: async s => {
-        const troll = s.person('troll');
-        await go(s, 'troll', [PATH[1]], null);
-        troll.look('ring#stones');
-        await lay(s, false);
-        await dolly(s, NEAR(RING_SPOT, 3.2, 0.2, 0.1));
+        await lay(s, false, 4);
         s.tell('ring:set');
+        await s.person('troll').do('crouch_rise');
+        await dolly(s, NEAR(RING_SPOT, 3.2, 0.2, 0.1));
         await s.wait(1.5);
       },
     },
@@ -161,7 +164,7 @@ function film(scene) {
     // 2.4 «Водоросли»: Papa comes down from the pines with the armful over his head; the son at the clearing's edge —
     // the pose for «Охапка» (the minigame moves `sway`)
     armful_in: {
-      from: () => ({ ...VIEW, ring: 'set', ring_n: 9, ...AT('papa', ARMFUL[0], turnTo(...ARMFUL[0], ...ARMFUL[1]), { papa_with: ['armful'], papa_mood: 'smile' }),
+      from: () => ({ ...ARMFUL_VIEW, ring: 'set', ring_n: 9, ...AT('papa', ARMFUL[0], turnTo(...ARMFUL[0], ...ARMFUL[1]), { papa_with: ['armful'], papa_mood: 'smile' }),
         ...AT('troll', EDGE, turnTo(...EDGE, ...ARMFUL[1]), { troll_mood: 'neutral', troll_look: 'papa' }) }),
       run: async s => {
         await go(s, 'papa', [ARMFUL[1]], null, 'carry_high');
@@ -172,7 +175,7 @@ function film(scene) {
     // he walks straight through the ring and knocks it apart, and goes off toward the landing; the son looks at his back
     armful_through: {
       after: 'armful_in',
-      from: () => ({ ...VIEW, ring: 'set', ring_n: 9, ...AT('papa', ARMFUL[1], turnTo(...ARMFUL[1], ...ARMFUL[2]), { papa_with: ['armful'], papa_mood: 'smile', papa_do: LOOP('hold_high') }),
+      from: () => ({ ...ARMFUL_VIEW, ring: 'set', ring_n: 9, ...AT('papa', ARMFUL[1], turnTo(...ARMFUL[1], ...ARMFUL[2]), { papa_with: ['armful'], papa_mood: 'smile', papa_do: LOOP('hold_high') }),
         ...AT('troll', EDGE, turnTo(...EDGE, ...ARMFUL[1]), { troll_mood: 'neutral', troll_look: 'papa' }) }),
       run: async s => {
         const papa = s.person('papa'), troll = s.person('troll');
@@ -195,6 +198,7 @@ function film(scene) {
       from: () => ({ ...VIEW, ring: 'broken', ring_n: 0, ...AT('troll', EDGE, 100, { troll_mood: 'sad' }) }),
       run: async s => {
         await lay(s, true);
+        await s.person('troll').do('crouch_rise');
         s.tell('regather:done');
         await s.wait(1);
       },
