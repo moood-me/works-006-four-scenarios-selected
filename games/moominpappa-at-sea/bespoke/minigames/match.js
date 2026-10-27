@@ -25,7 +25,7 @@ export default {
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('A wick, a match, and a draught from the gallery.') });
     const send = keys(g);
-    settle(signal, () => { g.set('match', 1); g.set('match_out', 0); });
+    const over = settle(signal, () => { g.set('match', 1); g.set('match_out', 0); });
     send('match', 0);
     g.set('match_open', 1, 0.4);
     g.sound.strike();
@@ -60,6 +60,7 @@ export default {
     }
     send('match', 1);
     mg.snap({ at: flame });
+    over();
     await mg.end({ as: matches > 1 ? 'flawed' : 'clean' });
     return { matches };
   },

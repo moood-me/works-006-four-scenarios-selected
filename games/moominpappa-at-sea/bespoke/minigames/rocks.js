@@ -22,7 +22,7 @@ export default {
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('Rocks, foam, and a lantern in the wind.') });
     const send = keys(g);
-    settle(signal, () => g.set('cross', HOLDS));
+    const over = settle(signal, () => g.set('cross', HOLDS));
     send('cross', 0);
     mg.plate.set({ notches: Array.from({ length: HOLDS - 1 }, (_, i) => (i + 1) / HOLDS) });
     for (let n = 1; n <= HOLDS; n++) {
@@ -42,6 +42,7 @@ export default {
       papa.remove();
       g.sound.wave(0.8);
     }
+    over();
     await mg.end({ as: 'clean' });
     return {};
   },

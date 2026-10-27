@@ -24,7 +24,7 @@ export default {
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('A heavy boat, and two pulling.') });
     const send = keys(g);
-    settle(signal, () => g.set('boat_up', 1, 0.6));
+    const over = settle(signal, () => g.set('boat_up', 1, 0.6));
     send('boat_up', 0);
     const beat = 60 / BPM;
     const hull = mg.mark({ at: 'boat#boat', kind: 'ring' });
@@ -52,6 +52,7 @@ export default {
     send('boat_up', 1);
     mg.snap({ at: hull });
     g.sound.creak();
+    over();
     await mg.end({ as: jerks ? 'flawed' : 'clean' });
     return { jerks };
   },

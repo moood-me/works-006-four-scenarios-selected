@@ -10,7 +10,7 @@
 //   → { clouds }
 import { clamp, until, keys, teach, settle, pace } from './hands.js';
 
-const PULLS = 3, TEAR = 0.12;
+const PULLS = 3, TEAR = 0.1;
 const FAST = 1.6; // tears a second
 
 export default {
@@ -22,7 +22,7 @@ export default {
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('Dust by the floor, and a line under it.') });
     const send = keys(g);
-    settle(signal, () => g.set('wipe', 1, 0.5));
+    const over = settle(signal, () => g.set('wipe', 1, 0.5));
     send('wipe', 0);
     mg.plate.set({ notches: Array.from({ length: PULLS - 1 }, (_, i) => (i + 1) / PULLS) });
     const line = mg.mark({ at: 'wall_a#line27', kind: 'dash' });
@@ -50,6 +50,7 @@ export default {
     if (!done) return this.skipped;
     send('wipe', 1);
     mg.snap({ at: line });
+    over();
     await mg.end({ as: clouds ? 'flawed' : 'clean' });
     return { clouds };
   },

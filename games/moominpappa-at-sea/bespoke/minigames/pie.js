@@ -22,15 +22,16 @@ export function carrying({ bread = false } = {}) {
     title: tr('To the Cape'),
     about: 9,
     skipped: { wobbles: 0 },
-    points: [],
+    points: ['papa#chest'],
     keys: ['carry', 'carry_tilt'],
     async run(g, b, opts, signal) {
       const mg = g.minigame({ phrase: bread ? tr('Bread, and the rocks to the cape.') : tr('A pie, and the rocks to the cape.') });
       const send = keys(g);
-      settle(signal, () => { g.set('carry', 1, 0.8); g.set('carry_tilt', 0, 0.6); });
+      const over = settle(signal, () => { g.set('carry', 1, 0.8); g.set('carry_tilt', 0, 0.6); });
       send('carry', 0);
       send('carry_tilt', 0);
       const lead = mg.lead({ zone: { at: 0, width: ZONE }, steer: 'rate', release: 'stay', push: 0 });
+      mg.mark({ at: 'papa#chest', kind: 'ring', quiet: true }); // (no touch of its own: what is led)
       teach(b, mg, [lead]);
       let way = 0, wobbles = 0, tipped = false, stand = 0, walked = 0;
       const done = await until(mg, ({ dt }) => {
@@ -59,6 +60,7 @@ export function carrying({ bread = false } = {}) {
       if (!done) return this.skipped;
       send('carry', 1);
       g.set('carry_tilt', 0, 0.6);
+      over();
       await mg.end({ as: wobbles ? 'flawed' : 'clean' });
       return { wobbles };
     },
