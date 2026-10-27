@@ -12,15 +12,15 @@ Son»; the trees, their titles and rows are the game's (`bespoke/map.js`, in `be
 - **The camera** — panorama, span [0, 45]; `script.js` leads `camera_x` to the chapter `shown` (at once as it opens,
   over a second on a change; `come` — back to it).
 - **The points** — unseen, 12 m off, in a row at the frame's 0.28: `c0` the prologue over the valley, `c1` I over the
-  open sea, `c2` II by the island on the chart, `c3`–`c4` III–IV over the island's plan, `c5` the epilogue at the
-  plan's far side; `author` at the sheet's left edge.
-- No people, no music, no beats. The showcase goes chapter by chapter, the course pencilled in chapter I (about 20 s).
+  open sea, `c2` II by the island on the chart, `c3`–`c4` III–IV over the island's plan, `c5` the epilogue and `c6`
+  the finale at the plan's far side (12 chart units, 5.4 m, apart from `c2` on); `author` at the sheet's left edge.
+- No people, no music, no beats. The showcase goes chapter by chapter, the course pencilled in chapter I (about 25 s).
 
 ## Keys
 
 | Key | What | By default |
 | --- | --- | --- |
-| `shown` | the chapter the player is at (0 the prologue … 5 the epilogue) | 0 |
+| `shown` | the chapter the player is at (0 the prologue … 5 the epilogue, 6 the finale) | 0 |
 | `come` | each new value brings the view back to the chapter shown | 0 |
 | `route` | 0…1, smoothly: how far Papa's course is pencilled (0 the valley … 1 the island) | 0 |
 
@@ -28,7 +28,7 @@ Son»; the trees, their titles and rows are the game's (`bespoke/map.js`, in `be
 
 ```json
 {"beats": {},
- "points": ["c0", "c1", "c2", "c3", "c4", "c5", "author"],
+ "points": ["c0", "c1", "c2", "c3", "c4", "c5", "c6", "author"],
  "offers": [],
  "party": {},
  "keys": {"shown": 0, "come": 0, "route": 0}}
