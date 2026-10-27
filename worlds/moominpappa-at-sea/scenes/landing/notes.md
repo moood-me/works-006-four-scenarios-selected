@@ -68,8 +68,8 @@ are told as `<piece>:<moment>` — the game speaks its lines there. Where the pe
 
 ## Open for the game (stage 5)
 
-- `fisher_door`: from the water the door is hard to see — the knoll's rise and the pines that crept up hide it; the
-  camera stands on the cove's far rocks (to look at again when the cast's motions are in).
+- `fisher_door`: framed from the landing's side between the pines (the door and the Fisherman read), close when he lifts
+  his hand — not strictly from the water.
 - The pieces use the cast's stage-5 names (`cast.md`, pm/people): motions and parts not made yet stand in as standing;
   the render says which.
 - The game sets only the play's keys (the hour, the weather, `cleft`, `boat`, `beam`, `papa_shore`, `troll_at` by

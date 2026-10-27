@@ -114,7 +114,8 @@ function glideTo(s, values, over = 1.8) {
   s.set('camera_target', null);
   for (const k of ['camera_x', 'camera_z', 'camera_h', 'camera_yaw', 'camera_look']) s.move(k, values[k], { over, ease: 'inOut' });
 }
-async function knotClose(s) {
+async function knotClose(s, paws = 1) {
+  s.set('knot_paws', paws);
   s.set(KNOT_SHOT, 1);
   await s.wait(2.5);
   s.set(KNOT_SHOT, 0);
@@ -348,7 +349,7 @@ const FILM = {
       s.set('flash', 0.8);
       s.move('flash', 0, { over: 0.8, ease: 'out' });
       s.tell('lightning:knot');
-      await knotClose(s);
+      await knotClose(s, 0);
     },
   },
   // 4.4, otherwise — he says nothing; under the waves, the storm thinning toward dawn

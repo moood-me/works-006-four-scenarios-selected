@@ -188,7 +188,8 @@
   "modules": [
     "cast",
     "island",
-    "beats"
+    "beats",
+    "closeups"
   ],
   "objects": [
     {
@@ -500,6 +501,11 @@
       }
     },
     {
+      "id": "knot",
+      "name": "The knot close",
+      "insert": "knot_open"
+    },
+    {
       "id": "fisher",
       "name": "The Fisherman",
       "person": {
@@ -595,6 +601,7 @@
     "carry": 0,
     "knot": 0,
     "knot_open": 0,
+    "knot_paws": 1,
     "papa_lantern": 0,
     "beat": null,
     "beat_next": null,
@@ -780,6 +787,13 @@
       ],
       "smooth": true,
       "means": "the close-up of the knot open (the people package's closeups shot knot)"
+    },
+    "knot_paws": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the knot close: Papa's paws at the knot (1), or the net alone on the Fisherman's knees (0)"
     },
     "papa_lantern": {
       "range": [

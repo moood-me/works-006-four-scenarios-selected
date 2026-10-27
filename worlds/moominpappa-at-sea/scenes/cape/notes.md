@@ -64,8 +64,8 @@ are told as `<piece>:<moment>` — the game speaks its lines there. Where the pe
 
 ## Open for the game (stage 5)
 
-- The knot close needs the module `closeups` (pm/people has its names only): the pieces set `knot_open`; the insert
-  element `knot` goes in when the module is there.
+- The knot close is the people package's `closeups` shot `knot` (the insert element `knot`, `knot_open`; its pull is the
+  minigame's `knot`, `knot_paws` 0 in the lightning: the net alone on his knees).
 - The faces: the camera before the two on the cape's left, low (lib `FACES`, `FACES_CLOSE`); the way over the rocks
   from the right (`WAY_CAM`).
 - The knot close (`net_ask:knot`, `net_taken:knot`, `lightning:knot`) is the people package's close-up `knot`
