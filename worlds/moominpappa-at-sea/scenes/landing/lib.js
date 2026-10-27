@@ -510,9 +510,10 @@ const FILM = {
       await s.wait(1);
     },
   },
-  // «Boat» — seen from the water: the Fisherman with his net at the stone and the locked door; his hand after her
+  // «Boat» — as the boat goes: the Fisherman with his net at the stone and the locked door, seen between the pines; close
+  // as he lifts his hand after her
   fisher_door: {
-    from: () => ({ ...at('fisher', 'path', { fisher_with: ['net_shoulder'] }), ...CAM0, camera_x: -4.5, camera_z: 15, camera_h: 0.4, camera_yaw: 44, camera_look: 0.04 }),
+    from: () => ({ ...at('fisher', 'path', { fisher_with: ['net_shoulder'] }), ...cam('fisher', 'wide', [0.5, 0.55]) }),
     run: async s => {
       const fisher = s.person('fisher');
       await fisher.walk([[8.2, 28.2]]);
@@ -527,6 +528,7 @@ const FILM = {
       s.tell('fisher_door:palm');
       await s.wait(2.5);
       if (s.get('fisher_hand')) {
+        s.camera({ target: 'fisher', shot: 'medium', frame: [0.5, 0.5], glide: 2 });
         fisher.reach(null);
         await fisher.turn(200);
         fisher.look([-30, -20, 1]);
