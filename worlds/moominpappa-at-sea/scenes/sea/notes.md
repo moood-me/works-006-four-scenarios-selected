@@ -27,8 +27,8 @@ lighthouse's island astern.
   stern (`lib.trailNear`). No strip while she is not here.
 - **The lantern** — `lantern_at`: `bow` (burning on its bracket), `troll` (in the son's paws: its light from his right
   hand `troll#hand_r`; the bracket empty), `out` (on the bracket, dark).
-- **The island** — `island`: `none` (far out of sight: the night crossing), `ahead` (260 m before her bow — out of this
-  view, which looks aft), `behind` (230 m astern, seen over the stern: going home). The island is a card of pink granite
+- **The island** — `island`: `none` (far out of sight: the night crossing), `ahead` (260 m before her bow, seen in
+  `fore`), `behind` (230 m astern, seen over the stern: going home). The island is a card of pink granite
   backs (`isle`) with the island's lighthouse (`modules/island`, dark) on it; the Fisherman stands before its door
   (`fisher_on` `isle#step`) when the game has him here.
 - The script works out what the keys move: `isle_d`, `groke_a`, `groke_d`, `lantern_bow_on`, `lantern_troll_on`,
