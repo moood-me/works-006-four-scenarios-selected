@@ -198,6 +198,26 @@
       "on": "flash"
     },
     {
+      "id": "lamp_papa",
+      "at": "papa#flame",
+      "on": "papa_lamp",
+      "color": "#ffd08c",
+      "strength": 1.1,
+      "reach": 5,
+      "flicker": 0.1,
+      "glow": 0.2
+    },
+    {
+      "id": "lamp_troll",
+      "at": "troll#flame",
+      "on": "troll_lamp",
+      "color": "#ffd08c",
+      "strength": 1.1,
+      "reach": 5,
+      "flicker": 0.1,
+      "glow": 0.2
+    },
+    {
       "id": "glass_light",
       "of": "glazing",
       "daylight": 1
@@ -207,7 +227,8 @@
     "cast",
     "island",
     "lantern",
-    "beats"
+    "beats",
+    "closeups"
   ],
   "objects": [
     {
@@ -619,6 +640,11 @@
       "inside": true
     },
     {
+      "id": "match",
+      "name": "The match at the wick close",
+      "insert": "match_open"
+    },
+    {
       "id": "papa",
       "name": "Moominpappa",
       "person": {
@@ -688,6 +714,10 @@
     "smoke": 0,
     "beat": "",
     "beat_next": "",
+    "papa_lamp": 0,
+    "troll_lamp": 0,
+    "match_open": 0,
+    "match": 0,
     "papa_a": 0.8,
     "papa_d": 3.6,
     "my_a": -1.4,
@@ -857,6 +887,36 @@
     "beat": {
       "type": "string",
       "means": "the piece playing (modules/beats)"
+    },
+    "papa_lamp": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the lantern papa carries burns (its light at the hand)"
+    },
+    "troll_lamp": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the lantern troll carries burns (its light at the hand)"
+    },
+    "match_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up `match` open (modules/closeups)"
+    },
+    "match": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М3: the match brought to the wick (the close-up `match`)"
     },
     "beat_next": {
       "type": "string",

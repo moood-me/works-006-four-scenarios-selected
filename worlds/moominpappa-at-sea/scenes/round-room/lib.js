@@ -273,11 +273,18 @@ const PEOPLE = ["papa", "mama", "my", "troll"];
 const EYE = { gate: [...at(-3, 2.95), 1.35], line: [...at(-18, 2.6), 0.95], sill: [...at(WIN.mid - 14, 2.5), 1.5] };
 // the light at each hour (the party's: the pieces move it only where the step's own time passes before the eyes)
 function film(scene) {
+  // the lanterns carried lit: how much each burns (the light at its flame, `<id>_lamp`)
+  const LIT = { lantern: 1, lantern_low: 0.45 }, LAMPS = { papa_lamp: 1, troll_lamp: 1 };
   const kit = scene.kit;
   const loop = motion => ({ motion, loop: true });
   // someone standing at a place: [a, d, turn], doing a loop (stand by default), looking at something
-  const STAND = (id, [a, d, turn], more = {}) => ({ [`${id}_a`]: a, [`${id}_d`]: d, [`${id}_turn`]: turn, [`${id}_do`]: "stand",
-    [`${id}_on`]: null, [`${id}_with`]: null, [`${id}_reach`]: null, [`${id}_look`]: null, ...more });
+  const STAND = (id, [a, d, turn], more = {}) => {
+    const v = { [`${id}_a`]: a, [`${id}_d`]: d, [`${id}_turn`]: turn, [`${id}_do`]: "stand", [`${id}_on`]: null, [`${id}_with`]: null,
+      [`${id}_reach`]: null, [`${id}_look`]: null, ...more };
+    const lamp = (v[`${id}_with`] ?? []).find(x => x.startsWith("lantern"));
+    if (`${id}_lamp` in LAMPS) v[`${id}_lamp`] = lamp ? LIT[lamp] ?? 0 : 0;
+    return v;
+  };
   const SIT = (id, seat, more = {}) => {
     const [a, d, top, turn] = SEAT[seat];
     return STAND(id, [a, d, turn], { [`${id}_do`]: loop(top > 0 ? "seated" : "huddle"), [`${id}_on`]: top > 0 ? [a, d, top] : null, ...more });
@@ -326,6 +333,7 @@ function film(scene) {
     let v = values, face = {};
     if (values.__on) [v, face] = viewOf(values.__on, k => s.get(k));
     for (const [k, t] of Object.entries(face)) {
+      if (!k.endsWith("_turn")) continue;
       s.person(k.slice(0, -5)).turn(t);
       s.person(k.slice(0, -5)).look(null);
     }
@@ -358,6 +366,13 @@ function film(scene) {
     if (hold) await s.wait(hold);
   };
   const P = (s, id) => s.person(id);
+  // something in the hands: a lantern carried lit lights by the scene's light at its flame (`<id>_lamp`), out — not
+  const hold = (s, id, parts) => {
+    const p = s.person(id);
+    p.with(parts);
+    const lamp = parts && parts.find(x => x.startsWith("lantern"));
+    if (`${id}_lamp` in LAMPS) s.set(`${id}_lamp`, lamp ? LIT[lamp] ?? 0 : 0);
+  };
 
   const F = {
     // 1.5 Inside: Papa in at the door with the can, the others after him; he stops on the threshold
@@ -385,7 +400,7 @@ function film(scene) {
         papa.gait("carry_walk");
         await to(papa, SPOT.shelf);
         await papa.do("put_table");
-        papa.with(null);
+        hold(s, "papa", null);
         papa.gait(null);
         await walk(mama, SPOT.shelf.map((v, i) => (i === 0 ? v - 0.6 : v)));
         mama.look("shelf#paraffin");
@@ -413,7 +428,7 @@ function film(scene) {
         { ...ON("wall_a#log", "medium") }),
       run: async s => {
         const papa = P(s, "papa"), mama = P(s, "mama");
-        papa.with(["pencil"]);
+        hold(s, "papa", ["pencil"]);
         await to(papa, [...at(-34, 3.05), 326]);
         papa.reach({ r: "wall_a#log" });
         papa.do("write_high", { loop: true });
@@ -423,7 +438,7 @@ function film(scene) {
         papa.reach(null);
         await moment(s, "log_write:written", 4);
         cam(s, FROM(EYE.sill, POINTS["sill#garden"]));
-        mama.with(["brush"]);
+        hold(s, "mama", ["brush"]);
         await to(mama, [...at(WIN.mid - 2, 3.2), WIN.mid]);
         mama.reach({ r: "sill#garden" });
         await s.wait(1.5);
@@ -440,7 +455,7 @@ function film(scene) {
         mama.do("paint", { loop: true });
         await moment(s, "supper:sill", 3);
         mama.reach(null);
-        mama.with(["sewing"]);
+        hold(s, "mama", ["sewing"]);
         cam(s, WIDE);
         await walk(mama, SPOT.table_l);
         await sit(s, "mama", "stool");
@@ -459,14 +474,16 @@ function film(scene) {
       from: () => ROOM(SIT("mama", "stool", { mama_with: ["sewing"], mama_do: loop("sew") }), { ...ON("lantern#flame", "full") }),
       run: async s => {
         const mama = P(s, "mama"), papa = P(s, "papa");
-        await mama.do("seated_push");
+        mama.reach({ r: "lantern#flame" });
         await s.move("lantern_x", 0.45, { over: 1.2 });
+        mama.reach(null);
         await moment(s, "give:give1", 3);
         await walk(papa, SPOT.table_l.map((v, i) => (i === 0 ? v + 0.15 : v)));
         await s.move("lantern_x", 0, { over: 1.2 });
         await walk(papa, SPOT.stair);
-        await mama.do("seated_push");
+        mama.reach({ r: "lantern#flame" });
         await s.move("lantern_x", 0.45, { over: 1.2 });
+        mama.reach(null);
         await moment(s, "give:give2", 2.5);
         P(s, "troll").look("casement#window");
         cam(s, ON("troll", "medium"));
@@ -482,14 +499,14 @@ function film(scene) {
       from: () => ROOM(STAND("papa", SPOT.shelf), SIT("mama", "stool", { mama_with: ["sewing"] }), { lantern_x: 0.45, ...ON("papa", "medium") }),
       run: async s => {
         const papa = P(s, "papa");
-        papa.with(["can"]);
+        hold(s, "papa", ["can"]);
         await to(papa, [0.2, 5.5, 180]);
         papa.reach({ r: "lantern#flame" });
         await s.wait(1.5);
         s.set("paraffin", Math.max(0, (s.get("paraffin") ?? 3) - 1));
         papa.reach(null);
         await moment(s, "fill:poured", 1);
-        papa.with(null);
+        hold(s, "papa", null);
         await cam(s, ON("papa", "close"));
         await s.wait(0.5);
       },
@@ -501,12 +518,12 @@ function film(scene) {
       run: async s => {
         const papa = P(s, "papa");
         s.set("lantern_at", "none");
-        papa.with(["lantern"]);
+        hold(s, "papa", ["lantern"]);
         papa.gait("lantern_walk");
         await walk(papa, SPOT.stair);
         papa.here(false);
         papa.gait(null);
-        papa.with(null);
+        hold(s, "papa", null);
         P(s, "mama").do("seated");
         await moment(s, "n1_lamp:up", 3);
       },
@@ -521,11 +538,12 @@ function film(scene) {
         await to(papa, [-1.25, 4.8, 160]);
         papa.look("mama#hands");
         await cam(s, ON("mama#hands", "close"));
+        await s.move("needle_open", 1, { over: 0.6 });
       },
     },
     n1_mama_sat: {
       after: "n1_mama",
-      from: () => ROOM(SIT("mama", "stool"), STAND("papa", [-1.25, 4.8, 160]), { lantern_x: 0.45, ...ON("mama", "medium") }),
+      from: () => ROOM(SIT("mama", "stool"), STAND("papa", [-1.25, 4.8, 160]), { lantern_x: 0.45, needle_open: 0, ...ON("mama", "medium") }),
       run: async s => {
         const papa = P(s, "papa"), mama = P(s, "mama");
         await rise(s, "mama", "stool");
@@ -546,11 +564,11 @@ function film(scene) {
     n1_son: {
       after: "fill",
       from: () => ROOM(STAND("papa", SPOT.table_r), STAND("troll", [0.9, 4.0, 300]), SIT("mama", "stool", { mama_with: ["sewing"] }),
-        { lantern_x: 0.45, ...ON("troll", "medium") }),
+        { lantern_x: 0.45, handle_open: 0, ...ON("troll", "medium") }),
       run: async s => {
         const troll = P(s, "troll");
         s.set("lantern_at", "none");
-        troll.with(["lantern"]);
+        hold(s, "troll", ["lantern"]);
         troll.mood("sad");
         await moment(s, "n1_son:hand", 1.5);
         troll.gait("hand_walk");
@@ -595,13 +613,13 @@ function film(scene) {
         const papa = P(s, "papa"), troll = P(s, "troll");
         await walk(papa, SPOT.stair_step);
         await papa.do("put_table");
-        papa.with(null);
+        hold(s, "papa", null);
         s.set("lantern_at", "stair");
         await moment(s, "n1_step:set", 2);
         papa.here(false);
         await walk(troll, SPOT.stair_step);
         s.set("lantern_at", "none");
-        troll.with(["lantern_low"]);
+        hold(s, "troll", ["lantern_low"]);
         troll.gait("run");
         await s.move("door", 1, { over: 0.8 });
         await walk(troll, SPOT.door, SPOT.out);
@@ -618,7 +636,7 @@ function film(scene) {
         const troll = P(s, "troll"), papa = P(s, "papa");
         await walk(troll, SPOT.bunk);
         await troll.do("put_down");
-        troll.with(null);
+        hold(s, "troll", null);
         s.set("lantern_at", "bunk");
         s.set("flame", "low");
         await moment(s, "dawn_line:bunk", 2);
@@ -636,7 +654,7 @@ function film(scene) {
       run: async s => {
         const papa = P(s, "papa");
         s.set("lantern_at", "none");
-        papa.with(["lantern_frost"]);
+        hold(s, "papa", ["lantern_frost"]);
         await papa.do("shake_lantern");
         await moment(s, "dawn_stair:shake", 3);
       },
@@ -648,12 +666,20 @@ function film(scene) {
       run: async s => {
         const mama = P(s, "mama"), troll = P(s, "troll");
         await mama.do("startle");
-        mama.with(null);
+        hold(s, "mama", null);
         await walk(mama, [0.4, 4.85]);
         mama.reach({ r: "troll#hands", l: "troll#hands" });
         mama.do("rub_paws", { loop: true });
         P(s, "papa").look("troll#hands");
+        s.set("paws_rub", 0);
+        s.set("paws_thaw", 0);
+        await s.move("paws_open", 1, { over: 0.6 });
+        s.move("paws_rub", 1, { over: 1 });
+        s.move("paws_thaw", 1, { over: 4 });
         await moment(s, "morning:paws", 4);
+        await s.move("paws_open", 0, { over: 0.6 });
+        mama.reach(null);
+        mama.do("stand");
         P(s, "my").look("wall_a#gate");
         await cam(s, ON("wall_a#garden", 1.6), 2.5);
         await moment(s, "morning:wall", 4);
@@ -668,7 +694,7 @@ function film(scene) {
         mama.do("paint", { loop: true });
         await moment(s, "into_wall:branch", 3);
         mama.reach(null);
-        mama.with(null);
+        hold(s, "mama", null);
         await walk(mama, [...at(-11, 2.5)]);
         mama.look("wall_a#apple");
         if ((s.get("garden") ?? 0) <= 1) await mama.do("rub_eyes");
@@ -698,7 +724,6 @@ function film(scene) {
         await to(papa, SPOT.gate);
         papa.look("wall_mama#mama");
         papa.reach({ r: "wall_a#gate" });
-        papa.do("palm_wall", { loop: true });
         await cam(s, FROM(EYE.gate, [SPOT.gate[0], SPOT.gate[1], 1.1]));
         await moment(s, "empty_room:gate", 1);
       },
@@ -718,7 +743,7 @@ function film(scene) {
     // Ш2 "Calling", after "The Palm": Mama out at once; the brushes into the jar
     w_call: {
       after: "empty_room",
-      from: () => ROOM(STAND("papa", SPOT.gate, { papa_reach: { r: "wall_a#gate" }, papa_do: loop("palm_wall") }), { mama_here: false, wall_mama: 1,
+      from: () => ROOM(STAND("papa", SPOT.gate, { papa_reach: { r: "wall_a#gate" } }), { mama_here: false, wall_mama: 1,
         ...FROM(EYE.gate, [SPOT.gate[0], SPOT.gate[1], 1.1]) }),
       run: async s => {
         const papa = P(s, "papa"), mama = P(s, "mama");
@@ -767,14 +792,14 @@ function film(scene) {
         s.set("troll_a", SPOT.threshold[0]);
         s.set("troll_d", SPOT.threshold[1]);
         s.set("troll_turn", SPOT.threshold[2]);
-        troll.with(["stone"]);
+        hold(s, "troll", ["stone"]);
         troll.here(true);
         await s.move("door", 0.9, { over: 1 });
         cam(s, ON("troll", "medium"));
         await moment(s, "w_wait_son:son", 4);
         papa.do("lift_hand");
         await moment(s, "w_wait_son:hush", 3);
-        troll.with(null);
+        hold(s, "troll", null);
         s.set("stone", true);
         troll.here(false);
         await s.move("door", 0, { over: 1.2 });
@@ -800,7 +825,7 @@ function film(scene) {
     },
     // 3.5 Night 2, "Calling": Mama asleep at the table; the wick down; the boy's hand on the lantern
     n2_call: {
-      from: () => ROOM(SIT("mama", "bench_l", { mama_do: loop("doze_table") }), SIT("papa", "bench_r", { papa_do: loop("doze_table") }),
+      from: () => ROOM(SIT("mama", "bench_l", { mama_do: loop("doze") }), SIT("papa", "bench_r", { papa_do: loop("doze") }),
         STAND("troll", SPOT.bunk), { ...WIDE }),
       run: async s => {
         const papa = P(s, "papa"), troll = P(s, "troll");
@@ -809,7 +834,7 @@ function film(scene) {
         await s.wait(1);
         s.set("flame", "low");
         papa.reach(null);
-        papa.do("doze_table", { loop: true });
+        papa.do("doze", { loop: true });
         await walk(troll, [0.25, 3.95]);
         troll.turn(0);
         troll.reach({ r: "lantern#flame" });
@@ -936,14 +961,14 @@ function film(scene) {
         await papa.do("crouch_rise");
         papa.do("stir", { loop: true });
         await moment(s, "oil:fire", 3);
-        papa.with(["pot"]);
+        hold(s, "papa", ["pot"]);
         papa.gait("carry_walk");
         cam(s, WIDE);
         await walk(papa, SPOT.stair);
         papa.here(false);
         papa.gait(null);
         await moment(s, "oil:up", 3);
-        P(s, "mama").with(["bread"]);
+        hold(s, "mama", ["bread"]);
         await moment(s, "oil:bread", 3);
       },
     },
@@ -1004,10 +1029,8 @@ function film(scene) {
         mama.reach(null);
         await to(mama, SPOT.gate);
         mama.reach({ r: "wall_a#gate" });
-        mama.do("palm_wall", { loop: true });
         await moment(s, "storm_gate:gate", 2.5);
         mama.reach(null);
-        mama.do("stand");
         if (s.get("paints") === "green") await moment(s, "storm_gate:paints", 2);
       },
     },
@@ -1033,14 +1056,14 @@ function film(scene) {
       from: () => ROOM(STAND("papa", SPOT.table_r), STAND("mama", SPOT.table_l), STAND("my", SPOT.window_l), STAND("troll", SPOT.centre), { ...WIDE }),
       run: async s => {
         const papa = P(s, "papa");
-        papa.with(["can"]);
+        hold(s, "papa", ["can"]);
         papa.reach({ r: "lantern#flame" });
         await s.wait(1.2);
         s.set("paraffin", 0);
         s.set("lantern_at", "table");
         s.set("flame", "full");
         papa.reach(null);
-        papa.with(null);
+        hold(s, "papa", null);
         await moment(s, "st_door:fill", 2);
         papa.turn(270);
         await moment(s, "st_door:order", 3.5);
@@ -1088,12 +1111,12 @@ function film(scene) {
       run: async s => {
         const papa = P(s, "papa");
         await moment(s, "st_go:say", 5);
-        papa.with(["can"]);
+        hold(s, "papa", ["can"]);
         papa.reach({ r: "lantern#flame" });
         await s.wait(1);
         s.set("paraffin", 0);
         papa.reach(null);
-        papa.with(["lantern"]);
+        hold(s, "papa", ["lantern"]);
         s.set("lantern_at", "none");
         await moment(s, "st_go:fill", 2);
         papa.gait("lantern_walk");
@@ -1140,7 +1163,7 @@ function film(scene) {
           mama.gait("hand_walk");
           await walk(mama, [...at(31, 2.9)]);
           await mama.do("put_down");
-          mama.with(null);
+          hold(s, "mama", null);
           mama.gait(null);
           s.set("basket", true);
           cam(s, ON("basket#basket", "full"));
@@ -1155,7 +1178,7 @@ function film(scene) {
         const troll = P(s, "troll"), papa = P(s, "papa");
         if (s.get("stone")) {
           s.set("stone", false);
-          troll.with(["stone"]);
+          hold(s, "troll", ["stone"]);
         }
         await moment(s, "night3:door", 3);
         cam(s, ON("mama", "medium"));
@@ -1179,7 +1202,7 @@ function film(scene) {
         await walk(troll, SPOT.out);
         troll.here(false);
         await moment(s, "n3_go:out", 2);
-        mama.with(["blanket"]);
+        hold(s, "mama", ["blanket"]);
         mama.gait("carry_walk");
         await walk(mama, SPOT.door, SPOT.out);
         mama.here(false);
@@ -1197,7 +1220,7 @@ function film(scene) {
         s.set("troll_a", SPOT.threshold[0]);
         s.set("troll_d", SPOT.threshold[1]);
         s.set("troll_turn", SPOT.threshold[2]);
-        troll.with(["blanket_wrap", "rime_arms"]);
+        hold(s, "troll", ["blanket_wrap", "rime_arms"]);
         troll.here(true);
         await s.move("door", 0.9, { over: 1 });
         cam(s, ON("troll", "close"));
@@ -1207,8 +1230,14 @@ function film(scene) {
         await walk(mama, [-0.3, 5.3]);
         await sit(s, "mama", "bench_l");
         mama.reach({ r: "troll#hands", l: "troll#hands" });
-        mama.do("seated_rub", { loop: true });
+        s.set("paws_rub", 0);
+        s.set("paws_thaw", 0);
+        await s.move("paws_open", 1, { over: 0.6 });
+        s.move("paws_rub", 1, { over: 1 });
+        s.move("paws_thaw", 1, { over: 4 });
         await moment(s, "n3_dawn:rub", 3);
+        await s.move("paws_open", 0, { over: 0.6 });
+        mama.reach(null);
         s.set("cups", 1);
         s.set("tea", 1);
         cam(s, ON("cup#cup", "full"));
@@ -1235,8 +1264,8 @@ function film(scene) {
         const mama = P(s, "mama");
         await walk(mama, [...at(WIN.mid - 3, 2.95)]);
         await mama.do("tuck");
-        mama.with(null);
-        P(s, "troll").with(["blanket_wrap"]);
+        hold(s, "mama", null);
+        hold(s, "troll", ["blanket_wrap"]);
         await moment(s, "n3_cover:blanket", 3);
       },
     },
@@ -1271,11 +1300,11 @@ function film(scene) {
         const mama = P(s, "mama");
         await mama.do("pick_up");
         s.set("basket", false);
-        mama.with(["basket"]);
+        hold(s, "mama", ["basket"]);
         mama.gait("hand_walk");
         await walk(mama, SPOT.shelf);
         await mama.do("put_table");
-        mama.with(null);
+        hold(s, "mama", null);
         mama.gait(null);
         await moment(s, "unpack:unpack", 2);
       },
@@ -1311,7 +1340,7 @@ function film(scene) {
         const mama = P(s, "mama");
         await mama.do("pick_up");
         s.set("basket", false);
-        mama.with(["basket"]);
+        hold(s, "mama", ["basket"]);
         mama.gait("hand_walk");
         await s.move("door", 1, { over: 1 });
         await walk(mama, SPOT.door, SPOT.out);
@@ -1338,7 +1367,7 @@ function film(scene) {
         cam(s, ON("mama", "full"));
         await moment(s, "e_pie:pie", 4);
         await rise(s, "papa", "bench_r");
-        papa.with(["pie"]);
+        hold(s, "papa", ["pie"]);
         papa.gait("carry_walk");
         await s.move("door", 1, { over: 1 });
         await walk(papa, SPOT.door, SPOT.out);
@@ -1351,7 +1380,7 @@ function film(scene) {
       from: () => ROOM(SIT("mama", "bench_l"), { papa_here: false, troll_here: false, my_here: false, cups: 2, tea: 1, ...ON("cup#cup", "full") }),
       run: async s => {
         await moment(s, "e_home_was:cups", 2.5);
-        P(s, "mama").do("doze_table", { loop: true });
+        P(s, "mama").do("doze", { loop: true });
         await s.move("tea", 0, { over: 4 });
         s.set("papa_a", SPOT.threshold[0]);
         s.set("papa_d", SPOT.threshold[1]);
@@ -1367,7 +1396,6 @@ function film(scene) {
       run: async s => {
         const mama = P(s, "mama");
         mama.reach({ r: "wall_a#garden" });
-        mama.do("palm_wall", { loop: true });
         await moment(s, "e_home_away:veranda", 2.5);
         mama.here(false);
         await s.move("wall_mama", 1, { over: 1.5 });
@@ -1398,7 +1426,7 @@ function film(scene) {
         await moment(s, "e_late:my", 6);
         papa.look("wall_a#line27");
         await moment(s, "e_late:knot", 3);
-        P(s, "mama").with(["bread"]);
+        hold(s, "mama", ["bread"]);
         cam(s, ON("mama", "medium"));
         await moment(s, "e_late:bread", 3);
       },
@@ -1416,7 +1444,7 @@ function film(scene) {
           s.set("clouds", true);
           mama.reach(null);
         } else {
-          mama.with(["cup"]);
+          hold(s, "mama", ["cup"]);
           mama.look("wall_a#apple");
         }
         await moment(s, "e_stair:story", 6);

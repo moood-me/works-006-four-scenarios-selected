@@ -80,11 +80,18 @@ const GALLERY_WAY = [at(108, 2.3), at(108, RAIL - 0.35), at(90, RAIL - 0.35), at
 const COT_BED = [1.75, 4.3, 0.42];
 // eyes from beside: inside by the glass on the right, on Papa out on the gallery (raised over the beam's cone); by the
 // lamp's left, on whoever holds the lantern to the soot
-const EYE = { gallery: [...at(64, 1.7), 1.95], soot: [...at(-5, 1.2), 1.6] };
+const EYE = { gallery: [...at(64, 1.7), 1.95], soot: [...at(12, 0.5), 1.75] };
 function film(scene) {
+  // the lanterns carried lit: how much each burns (the light at its flame, `<id>_lamp`)
+  const LIT = { lantern: 1, lantern_low: 0.45 }, LAMPS = { papa_lamp: 1, troll_lamp: 1 };
   const loop = motion => ({ motion, loop: true });
-  const STAND = (id, [a, d, turn], more = {}) => ({ [`${id}_a`]: a, [`${id}_d`]: d, [`${id}_turn`]: turn, [`${id}_do`]: "stand",
-    [`${id}_on`]: null, [`${id}_with`]: null, [`${id}_reach`]: null, [`${id}_look`]: null, ...more });
+  const STAND = (id, [a, d, turn], more = {}) => {
+    const v = { [`${id}_a`]: a, [`${id}_d`]: d, [`${id}_turn`]: turn, [`${id}_do`]: "stand", [`${id}_on`]: null, [`${id}_with`]: null,
+      [`${id}_reach`]: null, [`${id}_look`]: null, ...more };
+    const lamp = (v[`${id}_with`] ?? []).find(x => x.startsWith("lantern"));
+    if (`${id}_lamp` in LAMPS) v[`${id}_lamp`] = lamp ? LIT[lamp] ?? 0 : 0;
+    return v;
+  };
   // the points the cameras look at: [across, distance, height]
   const POINTS = {
     "burner#lens": [...C, 1.4], "burner#wick": [...C, 1.35], "barrel#oil": [...at(-100, 2.2), 0.85], "soot#grooves": [...at(-36, RS), 1.75],
@@ -127,6 +134,7 @@ function film(scene) {
     let v = values, face = {};
     if (values.__on) [v, face] = viewOf(values.__on, k => s.get(k));
     for (const [k, t] of Object.entries(face)) {
+      if (!k.endsWith("_turn")) continue;
       s.person(k.slice(0, -5)).turn(t);
       s.person(k.slice(0, -5)).look(null);
     }
@@ -145,18 +153,25 @@ function film(scene) {
     if (hold) await s.wait(hold);
   };
   const P = (s, id) => s.person(id);
+  // something in the hands: a lantern carried lit lights by the scene's light at its flame (`<id>_lamp`), out — not
+  const hold = (s, id, parts) => {
+    const p = s.person(id);
+    p.with(parts);
+    const lamp = parts && parts.find(x => x.startsWith("lantern"));
+    if (`${id}_lamp` in LAMPS) s.set(`${id}_lamp`, lamp ? LIT[lamp] ?? 0 : 0);
+  };
   // Papa up through the hatch: seen first standing in it, then stepping out onto the boards
   const comeUp = async (s, spot, parts) => {
     const papa = P(s, "papa");
     s.set("papa_a", SPOT.hatch[0]);
     s.set("papa_d", SPOT.hatch[1]);
-    papa.with(parts);
+    hold(s, "papa", parts);
     papa.here(true);
     await walk(papa, SPOT.up);
     await to(papa, spot);
   };
   const strikeFlame = async (s, papa) => {
-    papa.with(["match"]);
+    hold(s, "papa", ["match"]);
     await papa.do("strike");
     papa.reach({ r: "burner#wick" });
   };
@@ -180,15 +195,17 @@ function film(scene) {
         await to(papa, SPOT.lamp);
         papa.look("burner#wick");
         await cam(s, ON("burner#wick", "medium"));
+        await s.move("match_open", 1, { over: 0.6 });
         await moment(s, "lamp_look:wick", 0.5);
       },
     },
     // 2.2 The flame smokes and goes out; My in the hatch
     smoke_out: {
       after: "lamp_look",
-      from: () => ROOM({ my_here: false, ...ON("burner#wick", "medium") }),
+      from: () => ROOM({ my_here: false, match_open: 0, ...ON("burner#wick", "medium") }),
       run: async s => {
         s.set("flame", "smoky");
+        s.set("match_open", 0);
         await s.wait(3);
         s.set("flame", "out");
         await moment(s, "smoke_out:out", 3);
@@ -227,7 +244,7 @@ function film(scene) {
         cam(s, ON("burner#wick", "medium"));
         await s.wait(2.5);
         s.set("flame", "out");
-        papa.with(["lantern"]);
+        hold(s, "papa", ["lantern"]);
         papa.reach(null);
         await moment(s, "n1_read:out", 3);
         papa.reach({ r: "sheets#sheet" });
@@ -235,7 +252,7 @@ function film(scene) {
         await s.wait(1);
         papa.reach(null);
         await papa.do("put_down");
-        papa.with(null);
+        hold(s, "papa", null);
         s.set("lantern_at", "floor");
         s.set("cot", "made");
         cam(s, WIDE);
@@ -300,7 +317,7 @@ function film(scene) {
         await strikeFlame(s, papa);
         await s.wait(2);
         papa.reach(null);
-        papa.with(null);
+        hold(s, "papa", null);
         papa.look("burner#wick");
         await s.wait(4);
         cam(s, ON("papa", "medium"));
@@ -333,7 +350,7 @@ function film(scene) {
         troll.here(false);
         s.set("lantern_at", "none");
         s.set("lantern_flame", "full");
-        papa.with(["lantern"]);
+        hold(s, "papa", ["lantern"]);
         await to(papa, SPOT.soot);
         papa.do("hold_lantern_side", { loop: true });
         await s.move("slant", 1, { over: 1.5 });
@@ -358,7 +375,7 @@ function film(scene) {
       run: async s => {
         const troll = P(s, "troll");
         s.set("lantern_at", "none");
-        troll.with(["lantern"]);
+        hold(s, "troll", ["lantern"]);
         await s.wait(1);
         troll.here(false);
         s.set("cot", s.get("cot") === "none" ? "none" : "empty");
@@ -371,7 +388,7 @@ function film(scene) {
       run: async s => {
         await comeUp(s, SPOT.lamp, ["pot"]);
         await P(s, "papa").do("put_down");
-        P(s, "papa").with(null);
+        hold(s, "papa", null);
         s.set("pot", true);
         await moment(s, "pot_up:set", 2);
       },
@@ -443,7 +460,7 @@ function film(scene) {
       run: async s => {
         await comeUp(s, SPOT.lamp, ["can"]);
         const papa = P(s, "papa");
-        papa.with(null);
+        hold(s, "papa", null);
         papa.reach({ r: "burner#wick" });
         s.set("flame", "blue");
         await cam(s, ON("burner#wick", "medium"));
@@ -502,7 +519,7 @@ function film(scene) {
         await strikeFlame(s, papa);
         s.set("flame", "lit");
         papa.reach(null);
-        papa.with(null);
+        hold(s, "papa", null);
         cam(s, ON("burner#lens", "full", HIGH));
         await moment(s, "e_light:lit", 3);
         await walk(papa, SPOT.up, SPOT.hatch);

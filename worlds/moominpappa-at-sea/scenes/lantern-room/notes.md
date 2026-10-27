@@ -31,6 +31,7 @@ gallery and its rail outside, the sea far below. Stage 4 (all the states, people
 - The script: the island's lightning, `smoke` from `flame`.
 - `tools/lantern_room.py` writes `scene.json` from the same numbers as `lib.js` (keep them the same) and copies the
   island's shaders.
+- **The pieces** (`lib.js` `film`, `script.js`, `showcase.js`; `modules/beats`): as the round room's. Where the lamp burns the eye is raised over the beam's cone (`HIGH`), or set from inside by the glass on Papa out on the gallery (`FROM`, `EYE.gallery`); the soot from beside the lamp (`EYE.soot`). The close-up `match` (М3: the pose of `lamp_look` opens it).
 
 ## The keys of the play
 

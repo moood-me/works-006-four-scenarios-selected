@@ -37,6 +37,7 @@ Stage 4 (all the states, people stand and breathe): every state is a key of the 
 - The script: the island's lightning (storm over a half), the door's turn, the lantern's place, `window_open`.
 - `tools/round_room.py` writes `scene.json` from the same numbers as `lib.js` (keep them the same) and copies the
   island's shaders.
+- **The pieces** (`lib.js` `film`, `script.js`, `showcase.js`; `modules/beats`): each piece's `from` sets the people's places (`<id>_a/_d`, the seats `SEAT`, the places `SPOT`), what they do and hold, and the camera; the game's party keys are the step's. The camera is set straight at a point (`POINTS`) or a head from the start's side (`ON`: close on someone turns them to it), or from an eye beside (`FROM`, `EYE`: Papa at the gate, at the line, the sill). A lantern carried lit lights from the hand (`lamp_papa`, `lamp_troll` at `<id>#flame`, on `<id>_lamp`). The close-ups (`modules/closeups`): `needle` (М5б: the pose of `n1_mama` opens it), `handle` (М5в: the mini-game opens it), `paws` (the rubbing in `morning`, `n3_dawn`).
 
 ## The keys of the play
 
