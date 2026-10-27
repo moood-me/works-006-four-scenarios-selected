@@ -1,11 +1,11 @@
 // М3 «The Match» (2.2, the lantern room, after the piece `lamp_look`: Papa at the burner), in the insert `match` (the
 // people package's closeups shot: Papa's paw bringing a lit match to the wick, the draught bending its flame — opened
-// by `match_open`): pull — a dashed ring on the match's flame (`match#flame`), its way to the wick (`match#wick`);
-// heavy: against the draught from the gallery it comes only while the finger pulls ahead of it. `match` — where the
-// match is on its way. Let go before the wick — the draught blows it out halfway (`match_out`, a mistake: let go
-// early); a moment later he strikes another (`strike`) and it is back at the start. At the wick (`match` ≥ THERE) — it
-// catches (`match_lit`), the insert closes: the end (clean; flawed if a match went out). The piece after it shows the
-// flame catching, smoking and going out.
+// by `match_open`; the piece opens it, the piece after it closes it): pull — a dashed ring on the match's flame
+// (`match#flame`), its way to the wick (`match#wick`); heavy: against the draught from the gallery it comes only while
+// the finger pulls ahead of it. `match` — where the match is on its way. Let go before the wick — the draught blows it
+// out halfway (a mistake: let go early); a moment later he strikes another and it is back at the start. At the wick
+// (`match` ≥ THERE) — the end (clean; flawed if a match went out); the piece after it (`smoke_out`): the flame
+// catches, smokes and goes out.
 //   What he does: Papa brings a match to the lamp's wick against the draught.
 //   What he wants: to light the lighthouse — the first time, at once.
 //   How it is for him: hope; a little showing off before My.
@@ -21,14 +21,12 @@ export default {
   about: 9,
   skipped: { matches: 1 },
   points: ['match#flame', 'match#wick'],
-  keys: ['match_open', 'match', 'match_lit', 'match_out'],
+  keys: ['match_open', 'match'],
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('A wick, a match, and a draught from the gallery.') });
     const send = keys(g);
-    settle(signal, () => { g.set('match_open', 0, 0.4); g.set('match', 1); g.set('match_out', 0); });
+    settle(signal, () => g.set('match', 1));
     send('match', 0);
-    send('match_lit', 0);
-    send('match_out', 0);
     g.set('match_open', 1, 0.4);
     g.sound.strike();
     const flame = mg.mark({ at: 'match#flame', kind: 'dash' });
@@ -38,7 +36,6 @@ export default {
     pull.on('release', ({ u }) => {
       if (u >= THERE || u < 0.05 || out) return;
       out = true;
-      send('match_out', 1);
       mg.error('early', { at: flame });
     });
     for (;;) {
@@ -55,16 +52,11 @@ export default {
       matches++;
       pull.set({ u: 0 });
       send('match', 0);
-      send('match_out', 0);
       g.sound.strike();
       out = false;
     }
     send('match', 1);
-    g.set('match_lit', 1, 0.8);
-    g.sound.flare(0.4);
     mg.snap({ at: flame });
-    if (!(await count(mg, 0.9))) return this.skipped;
-    g.set('match_open', 0, 0.4);
     await mg.end({ as: matches > 1 ? 'flawed' : 'clean' });
     return { matches };
   },
