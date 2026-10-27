@@ -41,4 +41,17 @@ if (n >= 0) {
     g.fill();
   }
 }
+// her box of paints left behind on the sill (the late «Лодка»)
+if (S.paints_left) {
+  g.fillStyle = "#5a4a3a";
+  g.fillRect(0.1, -0.22, 0.34, 0.16);
+  g.fillStyle = "#e9e1d2";
+  g.fillRect(0.12, -0.2, 0.3, 0.12);
+  P.petals.forEach((c, i) => {
+    g.fillStyle = c;
+    g.beginPath();
+    g.arc(0.16 + i * 0.07, -0.14, 0.022, 0, Math.PI * 2);
+    g.fill();
+  });
+}
 e.at(-0.1, 0.0, "garden");

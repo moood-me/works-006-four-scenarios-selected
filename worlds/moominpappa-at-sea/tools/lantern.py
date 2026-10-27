@@ -4,14 +4,16 @@ import os, shutil
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BOX = [-0.16, -0.48, 0.16, 0.03]
+BOX_BRACKET = [-0.16, -0.48, 0.16, 0.27]
 # its states, for a scene's "states" (the key's name is the scene's)
 FLAMES = ["full", "low", "out", "frost"]
 
 
-def element(id, name, across, distance, elevation=0, **k):
+def element(id, name, across, distance, elevation=0, bracket=False, **k):
     """The lantern standing at its foot (its code: elements/<id>.js calls the module's paint; its animate the
-    module's move; its shader copied by shader())."""
-    return {"id": id, "name": name, "across": across, "distance": distance, "elevation": elevation, "box": BOX,
+    module's move; its shader copied by shader()). bracket — on the iron bracket at a boat's bow (the paint's
+    `bracket: true`): its anchor the lantern's foot on the bracket's top. On a boat, give it `on` the boat."""
+    return {"id": id, "name": name, "across": across, "distance": distance, "elevation": elevation, "box": BOX_BRACKET if bracket else BOX,
             "uniforms": {"lit": 0}, **k}
 
 

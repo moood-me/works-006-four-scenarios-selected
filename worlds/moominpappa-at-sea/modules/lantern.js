@@ -7,14 +7,21 @@
 // how much the flame burns, by its state
 const FLAME = { full: 1, low: 0.45, out: 0, frost: 0 };
 // the box it paints in (metres round its foot) and where its flame is
-const BOX = [-0.16, -0.48, 0.16, 0.03], FLAME_AT = [0, -0.21];
+const BOX = [-0.16, -0.48, 0.16, 0.03], BOX_BRACKET = [-0.16, -0.48, 0.16, 0.27], FLAME_AT = [0, -0.21];
 
-// The lantern standing (on a table, a step, a stone, a boat's bow, the floor), its foot at the element's anchor.
+// The lantern standing (on a table, a step, a stone, the boards of a boat, the floor), its foot at the element's anchor.
 // opts: flame — 'full' | 'low' | 'out' | 'frost'; here — false: not here (nothing painted but its light, which its
-// move puts out). Its glow and light "flame" (the scene's light takes it: lights `of: "<id>#flame"`); its point
+// move puts out); bracket — standing on the iron bracket at a boat's bow (painted under its foot, box BOX_BRACKET; the
+// bracket stays when the lantern is not here). Its glow and light "flame" (the scene's light takes it: lights `of: "<id>#flame"`); its point
 // "<id>#flame".
 function paint(g, e, opts = {}) {
   const flame = opts.flame ?? 'full', here = opts.here ?? true;
+  if (opts.bracket) {
+    g.fillStyle = '#3a3632';
+    g.fillRect(-0.02, 0, 0.04, 0.24);
+    g.fillRect(-0.12, 0, 0.24, 0.025);
+    g.fillRect(-0.1, 0.22, 0.2, 0.03);
+  }
   if (here) {
     g.fillStyle = '#6f6a5e';
     g.beginPath();
@@ -88,4 +95,4 @@ function move(e, k) {
   e.uniform('lit', k);
 }
 
-return { FLAME, BOX, FLAME_AT, paint, move };
+return { FLAME, BOX, BOX_BRACKET, FLAME_AT, paint, move };

@@ -272,7 +272,8 @@ const SPOT = {
 const PEOPLE = ["papa", "mama", "my", "troll"];
 // eyes from beside: on Papa at the gate (his right profile); along the keeper's wall low (whoever is at the line); at
 // the sill from its right
-const EYE = { gate: [...at(-3, 2.95), 1.35], line: [...at(-18, 2.6), 0.95], sill: [...at(WIN.mid - 14, 2.5), 1.5] };
+// (and on the boy at the window from its right, past the table)
+const EYE = { gate: [...at(-3, 2.95), 1.35], line: [...at(-18, 2.6), 0.95], sill: [...at(WIN.mid - 14, 2.5), 1.5], window: [...at(WIN.mid + 30, 2.3), 1.4] };
 // the light at each hour (the party's: the pieces move it only where the step's own time passes before the eyes)
 function film(scene) {
   // the lanterns carried lit: how much each burns (the light at its flame, `<id>_lamp`)
@@ -571,6 +572,7 @@ function film(scene) {
       run: async s => {
         const troll = P(s, "troll");
         if (s.get("handle_open") > 0) await s.move("handle_open", 0, { over: 0.5 });
+        if (!s.get("son_given")) troll.look("papa");
         s.set("lantern_at", "none");
         hold(s, "troll", ["lantern"]);
         troll.mood("sad");
@@ -675,6 +677,7 @@ function film(scene) {
         mama.reach({ r: "troll#hands", l: "troll#hands" });
         mama.do("rub_paws", { loop: true });
         P(s, "papa").look("troll#hands");
+        if (s.get("son_look") === "up") troll.look("papa");
         s.set("paws_rub", 0);
         s.set("paws_thaw", 0);
         await s.move("paws_open", 1, { over: 0.6 });
@@ -842,7 +845,7 @@ function film(scene) {
         await walk(troll, [0.25, 3.95]);
         troll.turn(0);
         troll.reach({ r: "lantern#flame" });
-        await papa.do("wake");
+        s.set("eyes", 0);
         papa.look("troll#hands");
         await cam(s, ON("lantern#flame", "full"));
         await moment(s, "n2_call:hand", 0.5);
@@ -863,7 +866,7 @@ function film(scene) {
         await walk(troll, [0.25, 3.95]);
         troll.turn(0);
         troll.reach({ r: "lantern#flame" });
-        papa.do("huddle", { loop: true });
+        s.set("eyes", 0);
         papa.look("troll#hands");
         await cam(s, ON("lantern#flame", "full"));
         await moment(s, "n2_wait:hand", 0.5);
@@ -878,9 +881,17 @@ function film(scene) {
     },
     // 3.6 "Don't open your eyes": the boy still with the lantern, looking at his father — the pose for "Asleep"
     n2_sleep: {
+      after: ["n2_call", "n2_wait"],
       from: () => ROOM(STAND("troll", [0.25, 3.95, 300], { troll_with: ["lantern_low"], troll_do: loop("hold_lantern"), troll_look: "papa" }),
-        { lantern_at: "none", ...ON("troll", "medium") }),
+        SIT("papa", "bench_r", { papa_do: loop("doze") }), { lantern_at: "none", eyes: 0, ...ON("troll", "medium") }),
       run: async s => {
+        const troll = P(s, "troll");
+        troll.reach(null);
+        s.set("lantern_at", "none");
+        hold(s, "troll", ["lantern_low"]);
+        troll.do("hold_lantern", { loop: true });
+        troll.look("papa");
+        await cam(s, ON("troll", "medium"));
         await moment(s, "n2_sleep:still", 1);
       },
     },
@@ -900,25 +911,38 @@ function film(scene) {
     },
     // 3.6 "Put it back": he sets it down and stands at the window till dawn
     n2_put: {
-      from: () => ROOM(STAND("troll", [0.25, 3.95, 0], { troll_reach: { r: "lantern#flame" } }), { ...ON("troll", "medium") }),
+      after: ["n2_call", "n2_wait"],
+      from: () => ROOM(STAND("troll", [0.25, 3.95, 0], { troll_reach: { r: "lantern#flame" } }), SIT("papa", "bench_r"), { ...ON("troll", "medium") }),
       run: async s => {
         const troll = P(s, "troll");
+        // (Papa awake where he lay, looking at the boy's back)
+        s.set("eyes", 1);
         troll.reach(null);
         await moment(s, "n2_put:down", 2);
         await to(troll, SPOT.window);
-        cam(s, ON("troll", "full"));
+        cam(s, FROM(EYE.window, POINTS["casement#window"]));
         await moment(s, "n2_put:window", 3);
       },
     },
     // 3.6 "Follow": out after him
     n2_follow: {
+      after: ["n2_call", "n2_wait"],
       from: () => ROOM(STAND("troll", [0.25, 3.95, 0], { troll_with: ["lantern_low"] }), STAND("papa", SPOT.table_l), { lantern_at: "none", ...WIDE }),
       run: async s => {
         const troll = P(s, "troll"), papa = P(s, "papa");
+        troll.reach(null);
+        s.set("lantern_at", "none");
+        hold(s, "troll", ["lantern_low"]);
         troll.gait("lantern_walk");
         await s.move("door", 0.9, { over: 1 });
         await walk(troll, SPOT.door, SPOT.out);
         troll.here(false);
+        s.set("eyes", 1);
+        if (s.get("papa_on")) await rise(s, "papa", "bench_r");
+        else {
+          papa.on(null);
+          await papa.do("rise_floor");
+        }
         await walk(papa, SPOT.door, SPOT.out);
         papa.here(false);
         await moment(s, "n2_follow:out", 2);
@@ -989,6 +1013,8 @@ function film(scene) {
         for (const id of PEOPLE) P(s, id).look("door#door");
         await s.move("door", 0.05, { over: 0.8 });
         await moment(s, "storm:door", 3);
+        for (const id of PEOPLE) P(s, id).look("stair#hatch");
+        await moment(s, "storm:glass", 2.5);
         await cam(s, ON("casement#window", "full"));
         await moment(s, "storm:window", 0.5);
       },
@@ -1057,9 +1083,11 @@ function film(scene) {
     },
     // 4.4 Ш3 "The door": the last paraffin into the lantern, the order; the pose for "The Door"
     st_door: {
+      after: "storm_moon",
       from: () => ROOM(STAND("papa", SPOT.table_r), STAND("mama", SPOT.table_l), STAND("my", SPOT.window_l), STAND("troll", SPOT.centre), { ...WIDE }),
       run: async s => {
         const papa = P(s, "papa");
+        await walk(papa, SPOT.table_r);
         hold(s, "papa", ["can"]);
         papa.reach({ r: "lantern#flame" });
         await s.wait(1.2);
@@ -1111,10 +1139,12 @@ function film(scene) {
     },
     // 4.4 Ш3, Papa goes: the lines, the last paraffin, out at the door or up the hatch, Mama after him
     st_go: {
+      after: "storm_moon",
       from: () => ROOM(STAND("papa", SPOT.table_r), STAND("mama", SPOT.table_l), STAND("my", SPOT.window_l), STAND("troll", SPOT.centre), { ...WIDE }),
       run: async s => {
         const papa = P(s, "papa");
         await moment(s, "st_go:say", 5);
+        await walk(papa, SPOT.table_r);
         hold(s, "papa", ["can"]);
         papa.reach({ r: "lantern#flame" });
         await s.wait(1);
@@ -1158,11 +1188,16 @@ function film(scene) {
     },
     // 4.5 Calm: drips, the empty can, the flooded stove; Mama's basket by the door
     calm: {
-      from: () => ROOM(STAND("mama", SPOT.shelf, { mama_with: ["basket"] }), { papa_here: false, ...ON("stove#stove", "full") }),
+      from: () => ROOM(STAND("mama", SPOT.shelf), { papa_here: false, ...ON("stove#stove", "full") }),
       run: async s => {
+        const packed = s.get("basket") === true;
+        if (packed) {
+          s.set("basket", false);
+          hold(s, "mama", ["basket"]);
+        }
         s.set("drip", 1);
         await moment(s, "calm:drip", 3);
-        if (s.get("basket") !== true) {
+        if (packed) {
           const mama = P(s, "mama");
           mama.gait("hand_walk");
           await walk(mama, [...at(31, 2.9)]);
@@ -1184,6 +1219,12 @@ function film(scene) {
           s.set("stone", false);
           hold(s, "troll", ["stone"]);
         }
+        const look = s.get("son_look");
+        if (look === "papa") {
+          troll.look("papa");
+          await s.wait(1.2);
+        }
+        troll.look(look === "away" ? "door#door" : null);
         await moment(s, "night3:door", 3);
         cam(s, ON("mama", "medium"));
         await moment(s, "night3:mama", 6);
@@ -1255,9 +1296,12 @@ function film(scene) {
       run: async s => {
         const troll = P(s, "troll");
         P(s, "papa").reach(null);
-        if (s.get("troll_mood") !== "afraid") troll.look(null);
+        if (s.get("son_look") === "away") {
+          troll.mood("afraid");
+          troll.look("casement#window");
+        } else troll.look(null);
         await to(troll, SPOT.window);
-        cam(s, ON("troll", "full"));
+        cam(s, FROM(EYE.window, POINTS["casement#window"]));
         await moment(s, "n3_right:window", 3);
       },
     },
@@ -1333,8 +1377,11 @@ function film(scene) {
         await moment(s, "e_beam_my:my", 5);
         P(s, "my").look("casement#window");
         await moment(s, "e_beam_my:look", 2.5);
+        P(s, "my").look("casement#window");
         await cam(s, ON("casement#window", "full"), 2.5);
         await moment(s, "e_beam_my:window", 4);
+        // (held still on the window: the game cuts outside to the beam)
+        await s.wait(1);
       },
     },
     // Epilogue "The Boat": Mama carries her basket out
@@ -1459,19 +1506,20 @@ function film(scene) {
         my.reach({ r: "wall_a#keeper" });
         cam(s, ON("wall_a#keeper", 0.7));
         await moment(s, "e_stair:knot", 3);
-        await cam(s, ON("stair#stair", "full"), 2);
-      },
-    },
-    e_step: {
-      after: "e_stair",
-      from: () => ROOM(SIT("papa", "bench_r"), { troll_here: false, mama_here: false, my_here: false, ...ON("stair#stair", "full") }),
-      run: async s => {
         const papa = P(s, "papa");
         await rise(s, "papa", "bench_r");
         await walk(papa, SPOT.stair_step);
         papa.on(stairAt);
         papa.turn(STAIR.facing);
         papa.do("sit_step", { loop: true });
+        await cam(s, ON("stair#stair", "full"), 2);
+      },
+    },
+    e_step: {
+      after: "e_stair",
+      from: () => ROOM(STAND("papa", [...SPOT.stair_step.slice(0, 2), STAIR.facing], { papa_on: stairAt, papa_do: loop("sit_step") }),
+        { troll_here: false, mama_here: false, my_here: false, ...ON("stair#stair", "full") }),
+      run: async s => {
         await moment(s, "e_step:step", 4);
       },
     },

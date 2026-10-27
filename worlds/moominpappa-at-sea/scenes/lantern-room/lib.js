@@ -327,14 +327,13 @@ function film(scene) {
     // 3.5 "Walking": Papa asleep by the lamp; the boy in the hatch reaching for the lantern; the pose for 3.6
     n2_asleep: {
       from: () => ROOM(STAND("papa", [-0.4, 4.85, 200], { papa_do: loop("doze_floor") }), { my_here: false, troll_here: false, lantern_at: "floor",
-        slant: 0, ...WIDE }),
+        slant: 0, eyes: 0, ...WIDE }),
       run: async s => {
         const troll = P(s, "troll");
         await s.wait(2);
         troll.here(true);
         troll.reach({ r: "lantern#flame" });
         troll.look("lantern#flame");
-        await P(s, "papa").do("wake");
         P(s, "papa").look("troll");
         await cam(s, ON("lantern#flame", "full"));
         await moment(s, "n2_asleep:hatch", 0.5);
@@ -346,8 +345,11 @@ function film(scene) {
       from: () => ROOM(STAND("papa", [-0.4, 4.85, 200]), { my_here: false, lantern_at: "floor", ...WIDE }),
       run: async s => {
         const papa = P(s, "papa"), troll = P(s, "troll");
+        s.set("eyes", 1);
         troll.reach(null);
+        await walk(troll, SPOT.hatch_deep);
         troll.here(false);
+        await papa.do("rise_floor");
         s.set("lantern_at", "none");
         s.set("lantern_flame", "full");
         hold(s, "papa", ["lantern"]);
@@ -374,12 +376,32 @@ function film(scene) {
       from: () => ROOM(STAND("papa", [-0.4, 4.85, 200], { papa_do: loop("doze_floor") }), { my_here: false, lantern_at: "floor", ...WIDE }),
       run: async s => {
         const troll = P(s, "troll");
+        troll.reach(null);
         s.set("lantern_at", "none");
         hold(s, "troll", ["lantern"]);
-        await s.wait(1);
+        await walk(troll, SPOT.hatch_deep);
         troll.here(false);
         s.set("cot", s.get("cot") === "none" ? "none" : "empty");
         await moment(s, "n2_taken:gone", 3);
+      },
+    },
+    // 3.6 «Следом», by the lamp: the boy down the hatch with the lantern, Papa up off the floor and after him
+    n2_follow_up: {
+      after: "n2_asleep",
+      from: () => ROOM(STAND("papa", [-0.4, 4.85, 200], { papa_do: loop("doze_floor") }), { my_here: false, lantern_at: "floor", eyes: 1, ...WIDE }),
+      run: async s => {
+        const troll = P(s, "troll"), papa = P(s, "papa");
+        s.set("eyes", 1);
+        troll.reach(null);
+        s.set("lantern_at", "none");
+        hold(s, "troll", ["lantern"]);
+        await walk(troll, SPOT.hatch_deep);
+        troll.here(false);
+        await papa.do("rise_floor");
+        await walk(papa, SPOT.up, SPOT.hatch);
+        papa.here(false);
+        s.set("cot", s.get("cot") === "none" ? "none" : "empty");
+        await moment(s, "n2_follow_up:out", 2);
       },
     },
     // 4.2 (the showcase) the pot by the lamp
@@ -441,7 +463,7 @@ function film(scene) {
         const papa = P(s, "papa");
         s.set("flame", "blue");
         await s.wait(2.5);
-        s.set("flame", "lit");
+        s.set("flame", "flare");
         await s.wait(0.8);
         s.set("flame", "out");
         papa.reach(null);

@@ -139,7 +139,7 @@ spec = {
     "states": {
         **island.STATES,
         "lenses": {"range": [0, 1], "smooth": True, "means": "the lens drum: 0 murky … 1 wiped clean"},
-        "flame": {"values": ["out", "smoky", "blue", "lit"], "means": "the burner: out; a dull flame smoking; burning blue (warmed with paraffin, the oil not running yet); lit — the lamp burns and the drum turns"},
+        "flame": {"values": ["out", "smoky", "blue", "flare", "lit"], "means": "the burner: out; a dull flame smoking; burning blue (warmed with paraffin, the oil not running yet); flare — up a moment and dying (not lit: no beam); lit — the lamp burns, the drum turns, the beam goes out"},
         "slant": {"range": [0, 1], "smooth": True, "means": "the keeper's pencil under the soot: 0 only grooves … 1 legible in a light held slanting along the wall"},
         "sheets": {"range": [0, 2], "means": "sheets pinned by the lamp: «The Burner», then «The Pot» (one: the second nail bare)"},
         "pot": {"type": "boolean", "means": "the pot of warm oil wrapped in the frock coat, by the lamp"},

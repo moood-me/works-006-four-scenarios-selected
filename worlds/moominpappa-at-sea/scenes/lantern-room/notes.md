@@ -4,7 +4,7 @@ The lantern room at the top of the lighthouse: the lamp in the middle — its pe
 inside, its cap and vent —, the barrel of thick oil, the sooty wall by the burner with the keeper's pencil under the
 soot, the board by the lamp for the sheets Moominpappa pins up, the pot of warm oil in his frock coat, the camp bed
 along the glass, the hatch in the floor where the stair comes up, the glass all round the seaward side with the
-gallery and its rail outside, the sea far below. Stage 4 (all the states, people stand and breathe).
+gallery and its rail outside, the sea far below. Stage 5: every state a key of the play, the pieces (`film`, modules/beats), the showcase.
 
 ## How it is made
 
@@ -68,7 +68,8 @@ The scene's film in pieces (`modules/beats`: the game sets `beat`, the scene tel
 | `w_lamp` | 3.4 Ш2 «Гуляет» | Papa by the lamp till dusk: wiping the lenses, striking matches, talking to the burner; the light goes to dusk | dusk 0→1 | Papa by the lamp at dusk | dusk |
 | `n2_asleep` | 3.5 «Гуляет» | Papa asleep by the lamp (the lantern on the floor, its light straight on the soot: no grooves); the boy appears in the hatch and reaches for the lantern; the creak | lantern_at floor | the pose for 3.6 (lantern#flame) | hatch |
 | `n2_read` (after n2_asleep) | 3.6 «Положи», by the lamp | the boy sets the lantern down; Papa turns the wick up, holds it slanting by the soot, reads the next piece; the sheet | lantern_flame full, slant, sheets +1 | the sheet pinned | wall, read, sheet |
-| `n2_taken` (after n2_asleep) | 3.6 «Не открывать глаз» / «Следом», by the lamp | the boy goes down with the lantern (Papa after him: «Следом»); the camp bed stays empty | lantern_at none | the dark lantern room | gone |
+| `n2_taken` (after n2_asleep) | 3.6 «Не открывать глаз», by the lamp | the boy goes down with the lantern (Papa after him: «Следом»); the camp bed stays empty | lantern_at none | the dark lantern room | gone |
+| `n2_follow_up` (after n2_asleep) | 3.6 «Следом», by the lamp | the boy down the hatch with the lantern; Papa up off the floor and after him | lantern_at none, cot empty | the dark lantern room | out |
 | `pot_up` | 4.2 (the showcase) | Papa sets the pot wrapped in his frock coat by the lamp | pot | the pot by the lamp | set |
 | `st_gallery` | 4.4 Ш3 «Маяк» | Papa on the gallery shouting at the storm; a wave into the glass — it cracks; what is by the lamp is seen: the sheets (the empty place of the second), the pot or none, the cold barrel | gallery_glass cracked | Papa at the burner: the pose for М9а (burner#wick) | shout, wave, sheets, wick |
 | `st_lit` (after st_gallery) | 4.4 Ш3 «Маяк», two sheets | the warm oil runs, the flame rises, the lenses turn, the beam goes out through the glass; Papa on the gallery, wet, laughing (the camera where the beam does not sweep it) | flame lit | Papa on the gallery, the lamp burning | lit, laugh |
@@ -294,6 +295,16 @@ Keys of the mini-games (`acts`): `match` (М3, the match toward the wick 0…1),
     "shot_cot:seen"
    ],
    "seconds": 4,
+   "show": false
+  },
+  "n2_follow_up": {
+   "after": [
+    "n2_asleep"
+   ],
+   "tells": [
+    "n2_follow_up:out"
+   ],
+   "seconds": 10,
    "show": false
   }
  },
