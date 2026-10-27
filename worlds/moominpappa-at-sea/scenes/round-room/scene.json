@@ -429,25 +429,6 @@
       ]
     },
     {
-      "id": "beam",
-      "across": 0,
-      "distance": 3.8,
-      "elevation": 12,
-      "on": "beam",
-      "color": "#fff1c8",
-      "strength": 6,
-      "reach": 600,
-      "cone": {
-        "bearing": 0,
-        "height": -1,
-        "width": 10,
-        "soft": 0.35
-      },
-      "place": {
-        "bearing": "beam_turn"
-      }
-    },
-    {
       "id": "window_light",
       "of": "casement",
       "daylight": 1,

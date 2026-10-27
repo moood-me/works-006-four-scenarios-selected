@@ -52,7 +52,8 @@ cups — the plan's `cup_cold`, as a number the steam can be), `door` 0…1, `ba
 
 ## The beam
 
-The lighthouse's beam (`beam`, turned by `beam_turn` — modules/island `beam`): a cone from the lantern twelve metres over the room, seen in the haze through the window as it passes; the game sets `beam` (as on the landing and the cape).
+Not in this room: from the window the beam is seen only far out, faint (it shines from twelve metres over the room).
+Its passing in «Луч» is a cut to a scene with the lighthouse outside (the game's order of cuts).
 
 ## Open
 
@@ -105,7 +106,7 @@ The scene's film in pieces (`modules/beats`: the game sets `beat`, the scene tel
 | `n3_go` (after night3) | 4.7 «Пусть идёт» | the boy goes; Mama takes the blanket out and comes back; she stands at the window till morning, Papa behind her; at dawn the boy in the door in the blanket — «Она не страшная…»; Mama rubs his paws, sits by him, sets tea for Papa | door, dawn, cups 1 | Mama by the boy, Papa's tea | out, blanket, window, dawn, tea |
 | `n3_right` (after night3) | 4.7 «Мама права» | the boy at the window till dawn; Mama covers him with the blanket | dawn | the boy at the window under the blanket | window, blanket |
 | `n3_dune` (after night3) | 4.7 «Пойдём» | Papa and the boy go out; Mama sets two cups on the table, one goes cold; at dawn the boy passes Papa in the door without stopping | door, cups 2, tea 1→0, dawn | the cold cup | out, cups, pass |
-| `e_beam` | Эпилог «Луч» | Mama by the wall (by Ш2; «отвернулся» — the table empty, she under the apple tree); My on her belly at the wall reading the low lines — «Мне сегодня сорок…»; she looks out at the cape; the last frame: the light passing the window over the table | wall_mama, line27 stripe | the window and the table | wall, my, window |
+| `e_beam` | Эпилог «Луч» | Mama by the wall (by Ш2; «отвернулся» — the table empty, she under the apple tree); My on her belly at the wall reading the low lines — «Мне сегодня сорок…»; she looks out at the cape; the window over the table (the beam's passing — the game's cut outside) | wall_mama, line27 stripe | the window and the table | wall, my, window |
 | `e_basket` | Эпилог «Лодка» | Mama carries her basket out of the door (late: leaves her paints on the sill) | basket false, door | the empty room, the paints on the sill | out |
 | `e_pie` | Эпилог «Пирог», morning | Papa at the table telling the night on the cape; My; Mama bakes the pie on the dry driftwood | stove fire, firewood | the pie, the table | story, pie |
 | `e_home_was` | Эпилог «Пирог», Mama was (позвал, ждал) | Mama washes the tin, pours two cups and waits at the table; Papa comes back: she asleep on the bench, his cup cold beside her | cups 2, tea 1→0 | the cold cup (the last frame) | cups, back |
