@@ -649,7 +649,7 @@
     "lantern_at": "none",
     "lantern_flame": "full",
     "smoke": 0,
-    "papa_turn": 250,
+    "papa_turn": 205,
     "papa_look": "burner#wick",
     "papa_mood": "thinking",
     "my_turn": 120,

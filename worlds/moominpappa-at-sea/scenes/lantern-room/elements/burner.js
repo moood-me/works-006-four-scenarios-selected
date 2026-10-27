@@ -51,13 +51,13 @@ e.layer("flame", {}, c => {
   c.fill();
 });
 e.layer("blue", {}, c => {
-  const s = c.createRadialGradient(0, fy - 0.03, 0.005, 0, fy - 0.03, 0.07);
+  const s = c.createRadialGradient(0, fy - 0.05, 0.005, 0, fy - 0.05, 0.12);
   s.addColorStop(0, "rgba(200, 220, 255, 1)");
   s.addColorStop(0.6, "rgba(90, 130, 255, 0.85)");
   s.addColorStop(1, "rgba(60, 90, 220, 0)");
   c.fillStyle = s;
   c.beginPath();
-  c.ellipse(0, fy - 0.035, 0.05, 0.045, 0, 0, Math.PI * 2);
+  c.ellipse(0, fy - 0.06, 0.07, 0.09, 0, 0, Math.PI * 2);
   c.fill();
 });
 e.layer("grime", {}, c => {

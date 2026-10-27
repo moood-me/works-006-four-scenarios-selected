@@ -69,7 +69,7 @@ for l in far:
 # the island's light outside; how much of it comes into the room
 light = island.light(WIND)
 light["inside"] = 0.75
-for k, v in {"dawn": 0.8, "dusk": 0.8, "night": 0.85, "storm": 0.55}.items():
+for k, v in {"dawn": 0.8, "dusk": 0.8, "night": 0.85, "storm": 0.65}.items():
     light["looks"][k]["inside"] = v
 cheek = lambda t, face, h, deep: {"across": at(t, R + deep / 2)[0], "distance": at(t, R + deep / 2)[1], "elevation": h, "facing": r3(face)}
 person = lambda id, name, who, a, d, does=None: {"id": id, "name": name, "person": {"cast": "cast", "who": who, **({"does": does} if does else {})},

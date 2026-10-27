@@ -121,7 +121,7 @@ spec = {
         **island.STATE,
         "lenses": 0, "flame": "out", "slant": 0, "sheets": 0, "pot": False, "cot": "none", "gallery_glass": "whole",
         "lantern_at": "none", "lantern_flame": "full", "smoke": 0,
-        "papa_turn": 250, "papa_look": "burner#wick", "papa_mood": "thinking",
+        "papa_turn": 205, "papa_look": "burner#wick", "papa_mood": "thinking",
         "my_turn": 120, "my_look": "papa", "my_mood": "smile",
         "troll_turn": 130, "troll_look": "papa", "troll_mood": "neutral"},
     "states": {

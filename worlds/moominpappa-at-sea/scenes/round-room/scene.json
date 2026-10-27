@@ -97,7 +97,7 @@
           "sun_dusk": 0.3,
           "moon": 0.6
         },
-        "inside": 0.55
+        "inside": 0.65
       },
       "flash": {
         "ambient": 1.0,

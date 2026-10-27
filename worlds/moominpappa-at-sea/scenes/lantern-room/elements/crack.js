@@ -6,8 +6,8 @@ if (e.state.gallery_glass === "cracked") {
   g.beginPath();
   g.rect(-w, -L.H + 0.08, 2 * w, L.H - P - 0.14);
   g.clip();
-  g.strokeStyle = "rgba(236, 244, 250, 0.7)";
-  g.lineWidth = 0.004;
+  g.strokeStyle = "rgba(240, 246, 252, 0.95)";
+  g.lineWidth = 0.007;
   for (let i = 0; i < 9; i++) {
     const a = (i / 9) * Math.PI * 2 + e.rnd() * 0.4;
     let x = cx, y = cy;
