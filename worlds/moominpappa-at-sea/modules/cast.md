@@ -1,7 +1,7 @@
 # cast — the people of “Moominpappa at Sea”
 
 A module for scenes with people (elements with `person`: `{"cast": "cast", "who": …}`). In the scene's `modules`.
-7 looks, 57 motions, 33 parts. A part's lengths are a man's metres times `F.fit.h` (the height as a share of 1.76 m);
+7 looks, 58 motions, 33 parts. A part's lengths are a man's metres times `F.fit.h` (the height as a share of 1.76 m);
 what is carried is in real metres (the same lantern, cup, pie in any paw).
 
 ## Style
@@ -61,6 +61,7 @@ Made by Kimodo (`make_motion`), looked at on the Moomins' proportions (`look_at_
 | `hold_lantern_side` | loop | stands with the right paw up beside the head, the lantern at the wall (М5а, М5г) |
 | `sit_down` | once | sits down low onto a seat (`<id>_on` [across, distance, top]) and ends seated |
 | `seated` | loop | sits at rest |
+| `sit_step` | loop | sits on a stair's step, the feet down on a lower one, the forearms on the knees, looking ahead (Papa on the middle step, «Лестница»): `<id>_on` [across, distance, the step's top] — the feet go down to what is under them (the lower tread as a `walk` plane, else the floor as far as the legs reach) |
 | `rise` | once | gets up from a low seat and ends standing |
 | `sit_floor` / `rise_floor` | once | sits down on the ground, the knees drawn up / gets up from there (the Groke too) |
 | `sit_look` | loop | sits on the ground, looks into the distance (the Groke facing the lighthouse) |
