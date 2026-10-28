@@ -296,6 +296,14 @@
     "heard": false,
     "knock_broken": false,
     "weak": false,
+    "counted": false,
+    "shawl_lost": false,
+    "net_self": false,
+    "oar": false,
+    "parcel_long": false,
+    "pebble_hand": 0,
+    "sophia_grab": 0,
+    "lean": 0,
     "sign_smoke": "pocket",
     "sign_hat": "nail",
     "sign_bird": "none"
@@ -591,6 +599,50 @@
       "type": "boolean",
       "means": "the play's: «Постучу» broken"
     },
+    "net_self": {
+      "type": "boolean",
+      "means": "the play's (М3в's outcome): Papa untangles the net himself (net_after)"
+    },
+    "oar": {
+      "type": "boolean",
+      "means": "the play's (М3б's outcome): Eriksson pushes off with his oar (eriksson_off)"
+    },
+    "parcel_long": {
+      "type": "boolean",
+      "means": "the play's (М9а's outcome): the string snapped — Sophia sits on the pier (post_after)"
+    },
+    "pebble_hand": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М4 (the mini-game's): Grandmother's hand with the pebble out over the water"
+    },
+    "sophia_grab": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М8а, М2в (the mini-game's): Sophia grabs Grandmother's hand (past a half)"
+    },
+    "lean": {
+      "range": [
+        -1,
+        1
+      ],
+      "smooth": true,
+      "means": "М2в, М8а (the mini-game's): Grandmother's body after the arrow, −1 left … 1 right"
+    },
+    "counted": {
+      "type": "boolean",
+      "means": "the play's: «Софья знает» — Sophia counts Grandmother's steps"
+    },
+    "shawl_lost": {
+      "type": "boolean",
+      "means": "the play's: her shawl lost behind the tent («За палаткой»): from that dawn she is in the dress alone"
+    },
     "weak": {
       "type": "boolean",
       "means": "the play's: Grandmother's strength ≤ 2 (Papa sets her into the dinghy)"
@@ -751,7 +803,8 @@
         "porch",
         "rail",
         "path",
-        "past"
+        "past",
+        "away"
       ],
       "means": "where the cat is (lib.CAT): on the porch's landing, lying on its rail, on the path above the rock, on the rock past them; set while he walks (cat_pose walk), he goes there at his pace (cat:arrived told)"
     },

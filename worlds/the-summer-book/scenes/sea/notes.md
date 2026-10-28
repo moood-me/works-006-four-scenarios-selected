@@ -90,7 +90,8 @@ the ending's talk → `promise` → the last shot.
   didn't knock» — `shawl_talk:knock`; Grandmother says nothing — `shawl_talk:silent`; from the water Sophia sees by the cape, in a crevice above the water, a grey patch —
   `shawl_talk:patch` («What's that?» — «A stone»). (The game cuts to the cape for the last shot.)
 
-The play's keys the pieces read (`party`): the hour and the weather; where Sophia and Grandmother sit (`sophia_at`,
+The mini-games move `sway` and `lean` («Сидеть прямо»: Grandmother's body after the arrow) and «Держать» moves
+`island` (the island going away while she holds Sophia's hand). The play's keys the pieces read (`party`): the hour and the weather; where Sophia and Grandmother sit (`sophia_at`,
 `grandma_at`); `basket` (cat with «Кот: подарок»); `dinghy` (in tow; false at the start of «Вёсла»); `counted` («Софья
 знает»); `storm_mark` (`porch` · `blanket` · `notyou`); `song` («Гроза: одеяло»); `sign_hat` (`on` · `bag` · `nail`);
 `mama` (`gone` · `sky` · `moon`); `learned`, `nets` (`say` · `nothing` · `net`), `ask_mama` (the full «Вёсла» with
@@ -129,13 +130,13 @@ weather (the island's keyed mirror).
  "tent_talk": {"after": ["look_house", "cat_gift", "sky"], "tells": ["tent_talk:tell", "tent_talk:mama", "tent_talk:hand", "tent_talk:again", "tent_talk:once"], "seconds": 24, "show": false},
  "oars_boat": {"after": ["look_house", "cat_gift", "sky"], "tells": ["oars_boat:board", "oars_boat:tremble", "oars_boat:hand", "oars_boat:seat", "oars_boat:ask", "oars_boat:better", "oars_boat:tie", "oars_boat:count"], "seconds": 22, "show": false},
  "shawl_talk": {"after": ["look_house", "cat_gift", "sky"], "tells": ["shawl_talk:tell", "shawl_talk:papa", "shawl_talk:knock", "shawl_talk:silent", "shawl_talk:patch"], "seconds": 20, "show": false},
- "promise": {"after": ["window_talk", "tent_talk", "oars_boat", "shawl_talk"], "tells": ["promise:said", "promise:silent", "promise:away", "promise:whisper", "promise:point", "promise:looks"], "seconds": 14, "show": false},
+ "promise": {"after": ["window_talk", "tent_talk", "oars_boat", "shawl_talk", "sky"], "tells": ["promise:said", "promise:silent", "promise:away", "promise:whisper", "promise:point", "promise:looks"], "seconds": 14, "show": false},
  "window_last": {"after": ["window_talk", "promise"], "tells": ["window_last:narrator", "window_last:window"], "seconds": 12, "show": false},
- "oars_last": {"after": ["oars_boat", "promise"], "tells": ["oars_last:hands"], "seconds": 10, "show": false}},
+ "oars_last": {"after": ["oars_boat", "promise", "sky"], "tells": ["oars_last:hands"], "seconds": 10, "show": false}},
  "points": ["boat#seat", "boat#bow", "basket#lid", "cat#cat", "cat#back", "transom#cleat", "island#window", "island#cape", "island#pier", "new_house#windows", "sky#sun", "sky#sun_late", "sky#sun_dawn", "grandma#chest", "grandma#hand_l", "sophia#chest", "sophia#hand_r", "sophia#head", "papa#chest"],
  "offers": ["sophia#hand_r", "grandma#chest", "sophia#chest", "papa#chest"],
  "party": {"dawn": 0, "dusk": 0, "night": 0, "late": 0, "calm": 0, "storm": 0, "flash": 0, "fog": 0, "moon": 1, "grandma_at": "seat", "sophia_at": "beside", "basket": "shut", "dinghy": true, "counted": false, "storm_mark": "notyou", "song": false, "sign_hat": "nail", "mama": "gone", "learned": false, "nets": "say", "ask_mama": false, "late_form": false, "called": false, "knock": false, "grandma_here": true, "sophia_here": true, "papa_here": true},
- "acts": {"sway": {"values": [], "tells": []}, "flash": {"values": [], "tells": ["flash:strike"]}}}
+ "acts": {"sway": {"values": [], "tells": []}, "flash": {"values": [], "tells": ["flash:strike"]}, "lean": {"values": [], "tells": []}, "island": {"values": [], "tells": []}}}
 ```
 
 The last morning a game plays here is `late: 1, dawn: 1, fog: 0.6` (the showcase's); `fog` toward 0.85 as the island

@@ -64,17 +64,21 @@ function out() {
   scene.set('dinghy_d', d0 + (d1 - d0) * k);
   scene.set('dinghy_f', facing(a1 - a0, d1 - d0));
 }
-function dinghy() {
+function dinghy(was) {
   const st = scene.get('dinghy') ?? 'moored';
   if (st === 'moored') {
     const [a, d, f] = L.DINGHY.moored;
-    scene.set('dinghy_a', a);
-    scene.set('dinghy_d', d);
-    scene.set('dinghy_f', f);
+    // from its circles it rows in to the pier (a way, as the oars go); else it is there
+    if (was === 'circles') scene.path(['dinghy_a', 'dinghy_d', 'dinghy_f'], [[a + 0.8, d - 1.2, f + 20], [a, d, f]], { speed: 0.5 });
+    else {
+      scene.set('dinghy_a', a);
+      scene.set('dinghy_d', d);
+      scene.set('dinghy_f', f);
+    }
   } else if (st === 'out') out();
   else lap();
 }
-scene.on('change', 'dinghy', dinghy);
+scene.on('change', 'dinghy', (to, was) => dinghy(was));
 scene.on('change', 'dinghy_at', () => scene.get('dinghy') === 'out' && out());
 scene.on('move', 'dinghy_at', () => scene.get('dinghy') === 'out' && out());
 scene.every(LAP, lap);
@@ -117,12 +121,46 @@ scene.kit.beats.play(scene, L.film(scene));
 // М2в `step` — Grandmother steps down from the edge to knee-deep on the shelf, at her own pace
 // М8а `gust` — the wind's gusts on the porch (the look `gust`: the wind up, the rain driven)
 // М9а `parcel` — the parcel from Grandmother's hands into Sophia's (over a half: Sophia's)
+// М2а `pull` past 0.8, М2б `let` — Sophia leaning over the water; М4 `pebble_hand` — the hand with the pebble over the
+// water; `sophia_grab` — Sophia grabs her hand (М8а, М2в); `lean` — her body after the mini-game's arrow (М2в, М8а)
 const mix = (a, b, u) => a + (b - a) * u;
+let stepTo = null;
 const acts = {
   stems: u => scene.set('grandma_reach', { r: [mix(-5.75, -5.5, u), mix(13.75, 13.95, u), mix(0.4, 0.22, u)] }),
-  pull: u => scene.set('sophia_reach', { l: [mix(1.05, 0.6, u), mix(5.75, 5.9, u), mix(0.55, 0.75, u)] }),
-  let: u => scene.set('grandma_reach', u < 0.6 ? { r: 'sophia#shoulder_r' } : null),
-  step: u => scene.person('grandma').walk([[mix(L.SPOT.edge[0], L.PLACES.grandma.knee.at[0], u), mix(L.SPOT.edge[1], L.PLACES.grandma.knee.at[1], u)]]),
+  // (past 0.8 the wrist is let go: Sophia leans out over the water)
+  pull: u => {
+    scene.set('sophia_reach', { l: [mix(1.05, 0.6, u), mix(5.75, 5.9, u), mix(0.55, 0.75, u)] });
+    if (u > 0.8) {
+      scene.set('grandma_reach', null);
+      scene.set('sophia_do', 'lean_over');
+    }
+  },
+  // (Sophia leans on toward the shelf as the hand opens; past 0.6 it is off her shoulder)
+  let: u => {
+    scene.set('grandma_reach', u < 0.6 ? { r: 'sophia#shoulder_r' } : null);
+    scene.set('sophia_do', u > 0.2 ? 'lean_over' : null);
+  },
+  // М4: Grandmother's hand with the pebble out over the glass water
+  pebble_hand: u => scene.set('grandma_reach', { r: [mix(-0.5, 0.9, u), mix(6.4, 7.0, u), mix(0.55, 0.45, u)] }),
+  // М8а, М2в: Sophia grabs Grandmother's hand (past a half)
+  sophia_grab: u => scene.set('sophia_reach', u > 0.5 ? { r: 'grandma#hand_r', l: 'grandma#hand_r' } : null),
+  // М2в, М8а: Grandmother's body following the mini-game's arrow (−1 left … 1 right): turned that way off her place's
+  // facing, her arms out to the other side for balance
+  lean: u => {
+    const p = L.PLACES.grandma[scene.get('grandma_at')];
+    if (p) scene.set('grandma_turn', p.turn + 14 * u);
+    const a = scene.get('grandma_a') ?? 0;
+    const d = scene.get('grandma_d') ?? 0;
+    scene.set('grandma_reach', Math.abs(u) > 0.15 ? { r: [a + 0.7 - 0.4 * u, d - 0.2, 1.1], l: [a - 0.7 - 0.4 * u, d - 0.2, 1.1] } : null);
+  },
+  // (one walk to the end she is going to, at her own pace — down past a half, back up below it: no fits)
+  step: u => {
+    const to = u > 0.5 ? L.PLACES.grandma.knee.at : L.SPOT.edge;
+    if (stepTo !== to) {
+      stepTo = to;
+      scene.person('grandma').walk([to]);
+    }
+  },
   parcel: u => {
     scene.set('grandma_with', u < 0.5 ? ['parcel'] : null);
     scene.set('sophia_with', u < 0.5 ? null : ['parcel']);

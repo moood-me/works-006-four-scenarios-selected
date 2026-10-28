@@ -226,6 +226,7 @@
     "beat": "",
     "beat_next": "",
     "cat_bird": false,
+    "lean": 0,
     "counted": false,
     "storm_mark": "notyou",
     "song": false,
@@ -348,6 +349,14 @@
     "beat_next": {
       "type": "string",
       "means": "the piece the game will play next (its cut made ready)"
+    },
+    "lean": {
+      "range": [
+        -1,
+        1
+      ],
+      "smooth": true,
+      "means": "М11 «Сидеть прямо» (the mini-game's): Grandmother's body after the arrow, −1 left … 1 right"
     },
     "cat_bird": {
       "type": "boolean",
