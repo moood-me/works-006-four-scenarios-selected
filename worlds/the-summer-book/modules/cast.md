@@ -38,97 +38,117 @@ model).
 
 | id | kind | what | for | status |
 | --- | --- | --- | --- | --- |
-| `old_walk` | gait | Grandmother's slow old walk, small steps, a little bent | Grandmother (always hers: `person.gait`) | to make |
-| `lantern_walk` | gait | the old walk, the lantern held out before her in the left hand | Grandmother in the fog, the night path | to make |
+| `old_walk` | gait | Grandmother's slow old walk, small steps, a little bent | Grandmother (always hers: `person.gait`) | made |
+| `lantern_walk` | gait | the old walk, the lantern held out before her in the left hand | Grandmother in the fog, the night path | made |
+| `balance_walk` | gait | an old woman steps slowly and carefully over wet stones, the arms out a little for balance | Grandmother (the cape's `fog_way`, the stones) | made |
 | `walk_fast` | gait | a quick walk | Papa | made |
-| `lead_walk` | gait | a slow walk at an old woman's pace, the right arm a little out (she on it: both `_reach` hand to hand / to `#hand_l`) | Papa leading his mother | to make |
+| `lead_walk` | gait | a slow walk at an old woman's pace, the right arm a little out (she on it: both `_reach` hand to hand / to `#hand_l`) | Papa leading his mother | made |
 | `carry_walk` | gait | walks with something big in both arms before the chest (the camp bed, the bundle, the parcel) | Papa, anyone | made |
-| `run` | gait | a child's run | Sophia | to make |
+| `run` | gait | a child's run | Sophia | made |
 | `proud_walk` | gait | walks importantly, chest out, hands behind the back | Sophia («ours») | made |
 | `back_away` | gait | steps backwards slowly, facing as before | Sophia | made |
-| `sleepy_walk` | gait | a slow drowsy walk, the head down, led by the hand | Sophia at night | to make |
+| `sleepy_walk` | gait | a slow drowsy walk, the head down, led by the hand | Sophia at night | made |
 | `hands_behind` | loop | stands, hands behind the back | anyone | made |
 | `seated` | loop | sits at rest on a low seat, the hands on the knees | anyone (a thwart, a bench, Papa's cot, a step) | made |
-| `sit_stone` | loop | sits upright on a low seat, the hands together in the lap, the elbows in at her sides (remade: the old one read as elbows splayed, hands on the hips) | Grandmother (stone, stump, bed's edge, step) | made → remake |
+| `sit_stone` | loop | sits upright on a low seat, the hands together in the lap, the elbows in at her sides (remade: the old one read as elbows splayed, hands on the hips) | Grandmother (stone, stump, bed's edge, step) | made |
 | `sit_bench` | loop | an old man sits on a low bench, leaning forward, the forearms on the knees | Eriksson on his thwart | made |
 | `sit_look` | loop | sits on the ground, looks into the distance | Sophia | made |
 | `hug_knees` | loop | sits on the ground hugging the knees | Sophia | made |
 | `sit_ground` | loop | sits on the ground, the knees up, the arms on them | not Grandmother (the long skirt's engine limit, below) | made |
-| `sit_down` | once | sits down onto a low seat behind and ends seated (`go('sit_down', {to: SEAT, turn})`, then a seated loop) | anyone (Grandmother: the stone, the stump, the bed's edge, the step, the bench) | to make |
-| `sit_heavy` | once | sits down heavily, all at once, onto a low seat (dizzy) | Grandmother | to make |
+| `sit_down` | once | sits down onto a low seat behind and ends seated (`go('sit_down', {to: SEAT, turn})`, then a seated loop) | anyone (Grandmother: the stone, the stump, the bed's edge, the step, the bench) | made |
+| `sit_heavy` | once | sits down heavily, all at once, onto a low seat (dizzy) | Grandmother | made |
 | `rise` | once | gets up from a low seat and ends standing | anyone | made |
-| `rise_slow` | once | an old woman gets up slowly from a low seat, a hand pushing on what is beside her (`<id>_reach` to the rail, the trunk, the rock, the bed's edge) | Grandmother | to make |
-| `try_rise` | once | tries to get up from a low seat, cannot, sinks back seated | Grandmother | to make |
+| `rise_slow` | once | an old woman gets up slowly from a low seat, a hand pushing on what is beside her (`<id>_reach` to the rail, the trunk, the rock, the bed's edge) | Grandmother | made |
+| `try_rise` | once | tries to get up from a low seat, cannot, sinks back seated | Grandmother | **not made** (below) |
 | `sit_floor` | once | sits down on the floor / the ground, ends sitting with the knees up (then `hug_knees`, `sit_look`, `sit_threshold`) | Sophia; Grandmother only where the skirt is hidden | made |
-| `get_up` | once | gets up from sitting on the ground and ends standing | Sophia | to make |
+| `get_up` | once | gets up from sitting on the ground and ends standing | Sophia | made |
 | `crouch` | loop | crouched low, the hands working at the ground before her (the hole, the moss, the animals, the bottom drawer, laying stones) | Sophia, Papa | made |
-| `kneel` | loop | kneels upright on the ground | Sophia | to make |
-| `kneel_rise` | once | gets up from kneeling, ends standing | Sophia | to make |
+| `kneel` | loop | kneels upright on the ground | Sophia | made |
+| `kneel_rise` | once | gets up from kneeling, ends standing | Sophia | made |
 | `kneel_pray` | loop | kneels, the hands together before the chest, the head bowed | Sophia («Господи, пусть что-нибудь случится») | made |
-| `tie` | loop | kneeling, ties a knot low before her with both hands (the tent's peg) | Sophia | to make |
-| `pet` | loop | bent over low before her, stroking with the right hand (the sitting cat, a bed) | Sophia | to make |
+| `tie` | loop | kneeling, ties a knot low before her with both hands (the tent's peg) | Sophia | made |
+| `pet` | loop | bent over low before her, stroking with the right hand (the sitting cat, a bed) | Sophia | made |
 | `put_down` | once | bends down and sets something on the ground before her, straightens (`set_down`, `stoop`) | anyone | made |
 | `pick_up` | once | bends down and picks something up from the ground, straightens | anyone | made |
 | `put_table` | once | sets something down on a table before her | anyone | made |
 | `dizzy` | loop | seated, bent forward, the head down to the knees, the hands on them | Grandmother | made |
-| `sway` | loop | stands swaying, about to fall, a hand out (the ground swims); played once (`loop: false`) — one sway | Grandmother | to make |
-| `catch_breath` | once | standing, stops and catches her breath, a hand at the chest | Grandmother | to make |
-| `carve` | loop | seated, whittles a small piece of wood held in the left hand with a knife in the right, before the chest | Grandmother | to make |
-| `smoke` | loop | seated, smoking: the right hand to the mouth and down to the knee now and then | Grandmother | to make |
-| `strike` | once | seated, strikes a match and holds it up to a cigarette at the mouth | Grandmother | to make |
-| `put_out` | once | seated, leans to the side and stubs a cigarette out on the stone beside her | Grandmother | to make |
-| `pat_pocket` | once | standing, pats the pocket of the dress at the hip | Grandmother | to make |
-| `pull_away` | once | standing, pulls her arm away from someone at her side (her right) | Grandmother («Don't lead me like a cow») | to make |
-| `untangle` | loop | seated, working a tangle in a net on the knees with both hands | Grandmother | to make |
-| `throw` | once | seated, throws a small pebble forward underhand with the right hand | Grandmother, Sophia | to make |
-| `hold_rail` | loop | stands holding a rail before her with both hands in a wind, leaning into it | Grandmother | to make |
-| `hold_lantern` | loop | stands holding the lantern out before her, chest high, in the left hand | Grandmother, Papa | to make |
-| `raise_lamp` | once | lifts something held in both hands up before her to the head's height and holds it there (the lamp at the window) | Grandmother | to make |
-| `hold_pole` | loop | stands holding an upright pole before her with both hands | Grandmother | to make |
-| `step_down` | once | steps down carefully off a ledge, lower by about a knee's height, and stands (the water hides the legs) | Grandmother | to make |
-| `knock` | once | standing, knocks three times on something before her at the chest's height | Grandmother | to make |
-| `drape` | once | lays something (a shawl, a blanket, a jacket) round the shoulders of someone before her, with both hands | anyone | to make |
-| `shawl` | once | draws a shawl round her own shoulders with both hands | Grandmother | to make |
-| `cardigan` | once | puts on a cardigan | Grandmother | to make |
-| `cough` | once | coughs, a hand to the mouth | Grandmother | to make |
+| `sway` | loop | stands swaying, about to fall, a hand out (the ground swims); played once (`loop: false`) — one sway | Grandmother | made |
+| `catch_breath` | once | standing, stops and catches her breath, a hand at the chest | Grandmother | made |
+| `carve` | loop | seated, whittles a small piece of wood held in the left hand with a knife in the right, before the chest | Grandmother | made |
+| `smoke` | loop | seated, smoking: the right hand to the mouth and down to the knee now and then | Grandmother | made |
+| `strike` | once | seated, strikes a match and holds it up to a cigarette at the mouth | Grandmother | made |
+| `put_out` | once | seated, leans to the side and stubs a cigarette out on the stone beside her | Grandmother | made |
+| `pat_pocket` | once | standing, pats the pocket of the dress at the hip | Grandmother | made |
+| `pull_away` | once | standing, pulls her arm away from someone at her side (her right) | Grandmother («Don't lead me like a cow») | made |
+| `untangle` | loop | seated, working a tangle in a net on the knees with both hands | Grandmother | made |
+| `throw` | once | seated, throws a small pebble forward underhand with the right hand | Grandmother, Sophia | made |
+| `hold_rail` | loop | stands holding a rail before her with both hands in a wind, leaning into it | Grandmother | made |
+| `hold_lantern` | loop | stands holding the lantern out before her, chest high, in the left hand | Grandmother, Papa | made |
+| `raise_lamp` | once | lifts something held in both hands up before her to the head's height and holds it there (the lamp at the window) | Grandmother | made |
+| `hold_pole` | loop | stands holding an upright pole before her with both hands (the pole is the cape's own, at her hands — no part) | Grandmother | made |
+| `step_down` | once | steps down carefully off a ledge, lower by about a knee's height, and stands (the water hides the legs) | Grandmother | made |
+| `knock` | once | standing, knocks three times on something before her at the chest's height | Grandmother | made |
+| `drape` | once | lays something (a shawl, a blanket, a jacket) round the shoulders of someone before her, with both hands | anyone | made |
+| `shawl` | once | draws a shawl round her own shoulders with both hands | Grandmother | made |
+| `cardigan` | once | puts on a cardigan | Grandmother | made |
+| `cough` | once | coughs, a hand to the mouth | Grandmother | made |
 | `armchair` | loop | sits back in an armchair, the arms on its arms | Grandmother | made |
 | `doze` | loop | sits asleep in an armchair, the head sunk to the side | Grandmother | made |
 | `lie_bed` | loop | lies on the back, breathing (bed, cot) — `<id>_on` a point of the bed, `turn` the way the feet point | anyone | made |
-| `lie_side` | loop | lies on the side, the knees drawn up, the hands under the cheek (turned to the wall: Papa's `lie_wall`) | anyone | to make |
-| `sit_bed` | loop | sits up in bed, the legs out straight before her under the blanket | Grandmother, Sophia | to make |
-| `half_up` | loop | half up on an elbow in bed, the other hand held up | Sophia | to make |
-| `kneel_bed` | loop | kneels on a bed | Sophia | to make |
-| `sit_up` | once | from lying on the back sits up in bed | anyone | to make |
-| `lie_down` | once | from sitting in bed lies down on the back | anyone | to make |
-| `get_up_bed` | once | from sitting in bed swings the legs off and stands up beside it (Papa off his cot too) | anyone | to make |
-| `kneel_up` | once | from sitting in bed gets onto the knees on it | Sophia | to make |
-| `sigh` | once | lying, a long breath out | anyone | to make |
-| `sit_threshold` | loop | sits on the floor, the back against the jamb, the knees up | Sophia | to make |
-| `write` | loop | seated at a table, writing with the right hand | Papa | to make |
+| `lie_side` | loop | lies on the side, the knees drawn up, the hands under the cheek (turned to the wall: Papa's `lie_wall`) | anyone | made |
+| `sit_bed` | loop | sits up in bed, the legs out straight before her under the blanket | Grandmother, Sophia | **not made** (below) |
+| `half_up` | loop | half up on an elbow in bed, the other hand held up | Sophia | made |
+| `kneel_bed` | loop | kneels on a bed | Sophia | made |
+| `sit_up` | once | from lying on the back sits up in bed | anyone | **not made** (below) |
+| `lie_down` | once | from sitting in bed lies down on the back | anyone | made |
+| `get_up_bed` | once | from sitting in bed swings the legs off and stands up beside it (Papa off his cot too) | anyone | made |
+| `kneel_up` | once | from sitting in bed gets onto the knees on it | Sophia | **not made** (below) |
+| `sigh` | once | lying, a long breath out | anyone | made |
+| `sit_threshold` | loop | sits on the floor, the back against the jamb, the knees up | Sophia | made |
+| `write` | loop | seated at a table, writing with the right hand | Papa | made |
 | `eat` | loop | seated at a table, eating with a spoon (`chew`) | anyone | made |
-| `row` | loop | seated, rowing with two oars | Eriksson, Sophia | to make |
-| `splash` | loop | stands in water to the chest, laughing, slapping the water with both hands | Sophia (the sea hides her below it) | to make |
-| `stamp` | once | a child stamps a foot in anger | Sophia | to make |
-| `kick` | once | kicks lightly at the ground (the moss, the threshold) | Sophia | to make |
-| `hit_knee` | once | seated on the ground, hits her own knee with her fist | Sophia | to make |
-| `fists` | loop | stands, the fists clenched at her sides | Sophia | to make |
-| `count` | loop | seated on the ground, counting on her fingers aloud | Sophia | to make |
-| `nose_moss` | loop | lies on the belly, the face down close to the ground, looking | Sophia | to make |
-| `cry` | loop | seated, crying, the hands to the face | Sophia | to make |
-| `whisper` | loop | seated, leaning to the side, whispering | Sophia | to make |
-| `talk_sitting` | loop | seated, talking, the hands moving | Sophia | to make |
-| `wave` | once | waves up with the right hand | Sophia | to make |
-| `shove` | once | standing, shoves something before her away with both hands (the chair) | Grandmother | to make |
-| `lean_over` | loop | stands at an edge bent forward, looking down over it (the water) | Sophia | to make |
-| `shake` | once | seated, shakes someone's hands off hers with a jerk of both arms | Sophia (off the oars) | to make |
-| `fold_hands` | once | seated, folds her hands together before the chest — and lowers them to the lap | Sophia | to make |
-| `drink` | loop | seated, drinking from a mug in the right hand now and then | Papa | to make |
-| `untangle_fast` | loop | seated, working a tangle in a net on the knees with both hands, quickly | Papa | to make |
-| `kneeling` | loop | = `kneel` (the same motion under the shore's name) | Sophia | to make |
-| `rise_floor` | once | = `get_up` (the same motion under the sea's name) | Sophia | to make |
-| `make_bed` | once | smooths a blanket before her with both hands | Sophia | to make |
-| `sniff` | once | bends to smell something small held up in the hand | Sophia | to make |
-| `blow` | once | blows out a candle held before her | Sophia | to make |
+| `row` | loop | seated, rowing with two oars | Eriksson, Sophia | made |
+| `splash` | loop | stands in water to the chest, laughing, slapping the water with both hands | Sophia (the sea hides her below it) | **not made** (below) |
+| `stamp` | once | a child stamps a foot in anger | Sophia | made |
+| `kick` | once | kicks lightly at the ground (the moss, the threshold) | Sophia | made |
+| `hit_knee` | once | seated on the ground, hits her own knee with her fist | Sophia | made |
+| `fists` | loop | stands, the fists clenched at her sides | Sophia | made |
+| `count` | loop | seated on the ground, counting on her fingers aloud | Sophia | made |
+| `nose_moss` | loop | lies on the belly, the face down close to the ground, looking | Sophia | made |
+| `cry` | loop | seated, crying, the hands to the face | Sophia | made |
+| `whisper` | loop | seated, leaning to the side, whispering | Sophia | made |
+| `talk_sitting` | loop | seated, talking, the hands moving | Sophia | made |
+| `wave` | once | waves up with the right hand | Sophia | made |
+| `shove` | once | standing, shoves something before her away with both hands (the chair) | Grandmother | made |
+| `lean_over` | loop | stands at an edge bent forward, looking down over it (the water) | Sophia | made |
+| `shake` | once | seated, shakes someone's hands off hers with a jerk of both arms | Sophia (off the oars) | made |
+| `fold_hands` | once | seated, folds her hands together before the chest — and lowers them to the lap | Sophia | made |
+| `drink` | loop | seated, drinking from a mug in the right hand now and then | Papa | made |
+| `untangle_fast` | loop | seated, working a tangle in a net on the knees with both hands, quickly | Papa | made |
+| `kneeling` | loop | = `kneel` (the same motion under the shore's name) | Sophia | made |
+| `rise_floor` | once | = `get_up` (the same motion under the sea's name) | Sophia | made |
+| `make_bed` | once | smooths a blanket before her with both hands | Sophia | made |
+| `sniff` | once | bends to smell something small held up in the hand | Sophia | made |
+| `blow` | once | blows out a candle held before her | Sophia | made |
+
+**Not made** — the model, three tries each on these people, gave something else (Kimodo sits on a chair or on the
+ground, never in a bed with the legs out; it would not half rise and sink back; no splashing):
+
+- `try_rise` — every take stayed seated or sat down from standing: `rise_slow` stopped is not right either; play
+  `sit_stone` and let the face and the look say it (`<id>_mood` `tired`), or `rise_slow` and `sit_heavy` after it.
+- `sit_bed` (sitting up in bed, the legs out under the blanket), `sit_up` (from lying to sitting up), `kneel_up` (from
+  sitting in bed onto the knees) — on a ready cut: `lie_bed` / `lie_side` → `sit_stone` on the bed's edge
+  (`<id>_on` the edge) or `kneel` on the bed (`kneel_bed`); `get_up_bed` (from lying on the back to standing beside
+  it) and `lie_down` (from sitting on the floor to lying) are made.
+- `splash` (Sophia in the sea to the chest, slapping the water) — she stands (`fists` relaxed, or `stand`) with
+  `sophia_mood` `laugh`; the splashes are the scene's (the water's layer at `sophia#hands`).
+
+Made but worth knowing: `write` leans back a little in the chair (the hands before the chest; the desk's paper by
+`papa_reach`); `raise_lamp` lifts the hands above the head; `step_down` was seen on flat ground (the drop is the
+scene's relief under her); `old_walk` shuffles, the arms a little out; `lead_walk` is a plain slow walk (the arm by
+`_reach`). Remade after the scene check (2026-10-28): `hug_knees` (the arms round the shins), `crouch` (the knees
+together, the hands at the ground before the feet), `write` (bent forward to the desk); the cigarette made thicker so
+it reads at the scene's distance. Seen in a check scene (branch `sb/people-check`, never merged).
 
 Asked by other names (use these): `sit_bed` *as sitting down onto the bed's edge* (new house) — `sit_down` (then
 `sit_stone` on the bed's edge; `sit_bed` is sitting up *in* bed); `sit_cot` — `seated` on the cot; `lie_cot` —

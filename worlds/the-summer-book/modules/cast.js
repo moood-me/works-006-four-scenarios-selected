@@ -180,10 +180,10 @@ return {
       } },
       // a lit cigarette between the right hand's first two fingers, its ember glowing (the smoke is the scene's)
       cigarette: { name: 'cigarette', draw: F => {
-        const { add, mul, mix } = V(), g = hand(F, 'r'), at = mix(F.P('RightHandIndex2'), F.P('RightHandMiddle2'), 0.5), tip = add(at, mul(g.along, 0.045));
-        F.bar(add(at, mul(g.along, -0.025)), tip, 0.0032, 0.0032, [[0, WAX]], 5, g.across);
-        const ember = add(tip, mul(g.along, 0.004));
-        F.ball(ember, axesOf(g.along, g.across), [0.0045, 0.005, 0.0045], EMBER, 6);
+        const { add, mul, mix } = V(), g = hand(F, 'r'), at = mix(F.P('RightHandIndex2'), F.P('RightHandMiddle2'), 0.5), tip = add(at, mul(g.along, 0.055));
+        F.bar(add(at, mul(g.along, -0.03)), tip, 0.0045, 0.0045, [[0, WAX]], 6, g.across);
+        const ember = add(tip, mul(g.along, 0.005));
+        F.ball(ember, axesOf(g.along, g.across), [0.007, 0.008, 0.007], EMBER, 6);
         F.point('ember', ember);
       } },
       // ── in the hand ──
