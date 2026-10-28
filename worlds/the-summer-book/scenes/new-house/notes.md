@@ -36,9 +36,10 @@ the play; people stand and breathe (no motions of their own yet).
   moon is low over the sea a little left of ahead (bearing −14°, 4.5° up): from the room it is seen in the second big
   window, and it comes in only through the big windows (`through`: their four openings). `lantern` (its flame, while
   it is set down: `lantern_set`), `lantern_hand` (at `grandma#hand_l` while she holds it: `lantern_held`),
-  `cigarette` (the ember at `grandma#hand_r`). No daylight lights at the windows: with them the windows glowed from
-  outside (they were taken out; the inside share lights the room).
-- **People** (the world's `cast`, `inside`): `<id>_at` (`lib.PLACES`; the island's `places`; sitting by the script):
+  `cigarette` (the ember at `grandma#hand_r`). The day (or the night) at the windows: `sea_in`, `ver_in`, `left_in`,
+  `right_in` (`daylight`: the outside's light all round, coming in).
+- **People** (the world's `cast`; not marked `inside` — the engine has them inside while they stand on the house's
+  floor, which is): `<id>_at` (`lib.PLACES`; the island's `places`; sitting by the script):
   Grandmother — `path` (on the rock before the house), `sash` (at the veranda's window, her right hand on its lever),
   `veranda`, `door` (in the room by the doorway), `bed` (sitting on the bed's foot: `sit_stone`); Sophia — `path`,
   `sash`, `veranda`, `door`, `bed` (by Grandmother), `drawers`, `table` (by the seal). Nobody is here in the empty play
@@ -61,9 +62,6 @@ floor); the people's `<id>_here`, `<id>_mood`. The night at the house is `night:
 
 ## Open
 
-- **A person's `inside` is the element's, fixed** (engine): here they go from the rock outside into the room in one
-  scene. They are `inside` — so outside at night they take 0.7 of the outside light (the lantern in her hand lights
-  them), and by day outside they would be dim (the game has nobody here by day; the empty play has nobody).
 - The lantern in Grandmother's hand and the cigarette are only their lights (and the smoke) at her hands until the
   cast has them as parts (stage 5): then the lights go to the parts' points.
 - Grandmother sitting (`sit_stone`) holds her elbows out wide, her hands at her knees — the cast's motion (stage 5).

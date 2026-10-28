@@ -190,11 +190,12 @@ objects += [
     isle.RAIN,
 ]
 
-# the people (the world's cast), at their places (lib.js PLACES; the script puts them)
+# the people (the world's cast), at their places (lib.js PLACES; the script puts them); not marked inside: they are
+# inside while they stand on the house's floor (it is), outside on the rock
 PATH = {"grandma": ([-2.0, 6.2], 215), "sophia": ([-2.9, 5.5], 25)}
 for who in ("grandma", "sophia"):
     (a, d), turn = PATH[who]
-    objects.append(inside(id=who, name={"grandma": "Grandmother", "sophia": "Sophia"}[who], person={"cast": "cast", "who": who, "turn": turn},
+    objects.append(dict(id=who, name={"grandma": "Grandmother", "sophia": "Sophia"}[who], person={"cast": "cast", "who": who, "turn": turn},
                           across=a, distance=d, place={"across": f"{who}_a", "distance": f"{who}_d"}))
 
 # the light: the island's (the day as approved; the looks by the hour and the weather), the room's share of the light
@@ -211,6 +212,11 @@ for l in lights:
     if l["id"] == "moon":
         l["through"] = PANES
 lights += [
+    # the day (or the night) at the windows: the outside's light all round, coming in
+    {"id": "sea_in", "of": "win_sea", "daylight": True, "strength": 1},
+    {"id": "ver_in", "of": "glazing", "daylight": True, "strength": 0.8},
+    {"id": "left_in", "of": "win_left", "daylight": True, "strength": 0.5},
+    {"id": "right_in", "of": "win_right", "daylight": True, "strength": 0.5},
     # Grandmother's lantern: set down (its flame), or in her left hand; her cigarette's ember in her right
     {"id": "lantern", "of": "lantern#flame", "color": "#ffcf8e", "strength": 1.4, "reach": 6, "on": "lantern_set", "flicker": 0.08},
     {"id": "lantern_hand", "at": "grandma#hand_l", "color": "#ffcf8e", "strength": 1.4, "reach": 6, "on": "lantern_held", "flicker": 0.08,

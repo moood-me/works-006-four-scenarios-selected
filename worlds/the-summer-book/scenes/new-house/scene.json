@@ -276,6 +276,30 @@
       "on": "flash"
     },
     {
+      "id": "sea_in",
+      "of": "win_sea",
+      "daylight": true,
+      "strength": 1
+    },
+    {
+      "id": "ver_in",
+      "of": "glazing",
+      "daylight": true,
+      "strength": 0.8
+    },
+    {
+      "id": "left_in",
+      "of": "win_left",
+      "daylight": true,
+      "strength": 0.5
+    },
+    {
+      "id": "right_in",
+      "of": "win_right",
+      "daylight": true,
+      "strength": 0.5
+    },
+    {
       "id": "lantern",
       "of": "lantern#flame",
       "color": "#ffcf8e",
@@ -1617,7 +1641,6 @@
       }
     },
     {
-      "inside": true,
       "id": "grandma",
       "name": "Grandmother",
       "person": {
@@ -1633,7 +1656,6 @@
       }
     },
     {
-      "inside": true,
       "id": "sophia",
       "name": "Sophia",
       "person": {
