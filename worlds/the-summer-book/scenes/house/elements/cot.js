@@ -1,6 +1,6 @@
 // Papa's camp bed (`cot`: along the veranda's back wall, or in the room before the window onto the cape): a canvas
 // folding bed on crossed legs, made with a grey wool blanket and a white pillow at its left end. Metres from the middle
-// of its foot; 1.9 m long, 0.48 m high.
+// of its foot; 1.9 m long, 0.48 m high. The point `grip`: its frame's middle, where Papa takes it to carry it.
 g.fillStyle = '#7b6a55';
 for (const x of [-0.85, 0.85]) {
   g.save();
@@ -21,3 +21,4 @@ g.fillStyle = '#efede7';
 g.beginPath();
 g.ellipse(-0.76, -0.47, 0.17, 0.06, 0, 0, 6.2832);
 g.fill();
+e.at(0, -0.42, 'grip');

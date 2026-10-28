@@ -1,8 +1,10 @@
 // Papa's table top from above: worn pine boards running its length, and on it his work — loose sheets of drawing paper,
 // one with a pencil sketch of the shore, a pencil, a bottle of ink — and his coffee cup on its saucer (the point `cup`);
 // at supper (`supper`) the papers pushed to the far end, a linen runner, plates, bread on its board, butter, a jug of
-// milk. Metres from its middle, x across the table (the glazing on the left), y along it toward the viewer.
+// milk; on the last morning (`packed`) bare, everything carried out but his cup. Metres from its middle, x across the
+// table (the glazing on the left), y along it toward the viewer.
 const supper = !!e.state.supper;
+const packed = !!e.state.packed;
 g.fillStyle = '#b39b7b';
 g.fillRect(-0.375, -0.75, 0.75, 1.5);
 g.strokeStyle = 'rgba(120,98,72,0.45)';
@@ -27,7 +29,9 @@ const round = (x, y, r, color) => {
   g.arc(x, y, r, 0, 6.2832);
   g.fill();
 };
-if (supper) {
+if (packed) {
+  // (nothing on it)
+} else if (supper) {
   sheet(0, -0.55, 0.3, 0.38, 0.04);
   sheet(0.02, -0.56, 0.3, 0.38, -0.03);
   // the runner, the plates, the bread, the butter, the milk
@@ -73,7 +77,7 @@ if (supper) {
   g.restore();
 }
 // the ink bottle
-round(0.24, -0.62, 0.035, '#2e3a46');
+if (!packed) round(0.24, -0.62, 0.035, '#2e3a46');
 // his cup on its saucer, by his hand
 round(0.22, 0.48, 0.07, '#ecebe6');
 round(0.22, 0.48, 0.042, '#4c6478');

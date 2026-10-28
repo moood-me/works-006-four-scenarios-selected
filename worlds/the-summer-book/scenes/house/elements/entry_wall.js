@@ -1,5 +1,5 @@
 // The entry's far wall, seen through the second door: plain grey boards, the outer door to the porch (light at its
-// cracks), coats on wooden pegs, Papa's big storm lantern hanging on its hook, a broom. Facing back into the room
+// cracks), coats on wooden pegs, Papa's storm lantern hanging on its hook (while `storm_lantern`: not when taken), a broom. Facing back into the room
 // (its x runs toward the veranda, u = −z, −3.4…−0.6). Metres from the frame's z 0 at the floor.
 g.fillStyle = '#a7a39a';
 g.fillRect(-3.4, -2.4, 2.8, 2.42);
@@ -37,14 +37,16 @@ g.lineTo(-3.08, -0.85);
 g.lineTo(-2.75, -0.82);
 g.closePath();
 g.fill();
-// the storm lantern on its hook
+// the hook, and the storm lantern on it
 g.fillStyle = '#4a4c4e';
 g.fillRect(-0.94, -1.7, 0.012, 0.08);
-g.fillRect(-1.0, -1.62, 0.12, 0.02);
-g.fillStyle = 'rgba(214,220,214,0.9)';
-g.fillRect(-0.99, -1.6, 0.1, 0.16);
-g.fillStyle = '#4a4c4e';
-g.fillRect(-1.0, -1.44, 0.12, 0.04);
+if (e.state.storm_lantern !== false) {
+  g.fillRect(-1.0, -1.62, 0.12, 0.02);
+  g.fillStyle = 'rgba(214,220,214,0.9)';
+  g.fillRect(-0.99, -1.6, 0.1, 0.16);
+  g.fillStyle = '#4a4c4e';
+  g.fillRect(-1.0, -1.44, 0.12, 0.04);
+}
 // the broom
 g.strokeStyle = '#8b7556';
 g.lineWidth = 0.025;
