@@ -34,7 +34,7 @@ export default {
         await g.scene(SCENES.shore, { beat: 'post', here: ['grandma', 'sophia', 'papa', 'eriksson'], moods: { grandma: 'neutral', sophia: 'laugh', papa: 'thinking' }, keys: DAY });
         g.title(tr('August'));
       });
-      await g.play(parcel);
+      g.set('parcel_long', (await g.play(parcel)).long); // (held long: the string snaps, Sophia sits down on the pier)
       await piece(g, 'post_after', {
         ask: async () => {
           await g.say('eriksson', 'Will you put it up yourself?');

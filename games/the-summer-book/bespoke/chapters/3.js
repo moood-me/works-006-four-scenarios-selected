@@ -27,7 +27,8 @@ export default {
         await g.scene(SCENES.forest, { beat: 'swim', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'smile' }, keys: JULY });
         g.title(tr('The end of July'));
       });
-      await g.play(moss);
+      // (the horizon not kept: she sits longer, Sophia comes closer — the forest's `slips` in the fall)
+      g.mark('dizzy', (await g.play(moss)).slips > 0, null);
     },
     // 3.2: ⚑ whom to tell
     async g => {

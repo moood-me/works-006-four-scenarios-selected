@@ -99,7 +99,7 @@ export default {
         knees: () => g.say('grandma', 'Some other time'),
         look: () => g.say('eriksson', 'Don’t hold your girl back'),
       }, () => g.scene(SCENES.shore, { beat: 'eriksson', here: ['grandma', 'sophia', 'eriksson'], moods: { grandma: 'neutral', sophia: 'thinking', eriksson: 'neutral' }, keys: DAY }));
-      await g.play(push);
+      g.set('oar', (await g.play(push)).long); // (held long: Eriksson pushes off with his oar)
       await piece(g, 'eriksson_off', {
         ask: async () => {
           await g.say('sophia', 'What did he say?');
@@ -133,7 +133,7 @@ export default {
         await g.beat('nets_nothing');
       } else {
         await g.beat('net');
-        await g.play(net);
+        g.set('net_self', (await g.play(net)).jerks > 0); // (jerked: the knot tighter, Papa untangles it himself)
         on(g, 'net_after:together', () => g.sound.rustle());
         await piece(g, 'net_after', {
           thanks: () => g.say('papa', 'Thank you, Mamma'),

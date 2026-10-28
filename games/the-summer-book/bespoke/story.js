@@ -73,7 +73,7 @@ export function carry(folder, state) {
   switch (folder) {
     case SCENES.shore: return {
       shell: m.smoke === 'told', graves: c.bird === 'bury' ? 5 : 0, chair: knew && m.drops ? 'set' : 'none',
-      skirt: c.bottom !== 'go', knew, ask_back: s.sophia <= 1, heard: !!m.heard, knock_broken: f.knockBroken,
+      skirt: c.bottom !== 'go', knew, weak: s.strength <= 2, counted: c.head === 'sophia', shawl_lost: c.fog === 'behind', ask_back: s.sophia <= 1, heard: !!m.heard, knock_broken: f.knockBroken,
       hat: c.mama === 'moon' ? 'nail' : 'none',
       sign_smoke: c.smoke === 'secret' ? 'pouch' : c.smoke === 'tell' ? 'shell' : c.head === 'moss' ? 'packet' : 'pocket',
       sign_hat: c.mama === 'gone' ? 'on' : c.mama === 'sky' ? 'bag' : 'nail',
@@ -85,7 +85,7 @@ export function carry(folder, state) {
       sophia_hand: s.sophia <= 1, kick: c.night === 'knock', hold_hand: c.nets === 'net' && !knew, knew, sophia_knows: c.head === 'sophia',
     };
     case SCENES.forest: return {
-      animals: m.seal ? 5 : 4, flipper: !!m.flipper, pack: c.smoke !== 'quit' ? 'none' : m.someday === 'kept' ? 'taken' : 'in',
+      animals: m.seal ? 5 : 4, flipper: !!m.flipper, slips: !!m.dizzy, pack: c.smoke !== 'quit' ? 'none' : m.someday === 'kept' ? 'taken' : 'in',
       brave: s.sophia >= 3, sophia_back: c.mama === 'sky',
     };
     case SCENES.cape: return {
