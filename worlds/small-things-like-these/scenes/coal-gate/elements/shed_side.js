@@ -1,0 +1,31 @@
+// The coal shed's right side (on `shed`, its x running back from the front's corner, 0…2.6): the same grey-white
+// rubble, its top falling from 2.5 m at the front to 2.15 m at the back under the slates.
+g.save();
+g.beginPath();
+g.moveTo(0, 0.05);
+g.lineTo(0, -2.5);
+g.lineTo(2.6, -2.15);
+g.lineTo(2.6, 0.05);
+g.closePath();
+g.clip();
+e.lib.rubble(g, 42, 0, -2.5, 2.6, 2.55, "#a9a8a3", ["#bdbcb6", "#b6b5af", "#c3c2bc", "#b0afa9"], 0.19);
+const grime = g.createLinearGradient(0, 0, 0, -2.5);
+grime.addColorStop(0, "rgba(58, 56, 54, 0.5)");
+grime.addColorStop(1, "rgba(58, 56, 54, 0)");
+g.fillStyle = grime;
+g.fillRect(0, -2.5, 2.6, 2.55);
+g.restore();
+g.fillStyle = "#4a4d52";
+g.beginPath();
+g.moveTo(-0.08, -2.48);
+g.lineTo(-0.08, -2.78);
+g.lineTo(2.7, -2.4);
+g.lineTo(2.7, -2.12);
+g.closePath();
+g.fill();
+g.strokeStyle = "#e6ebef";
+g.lineWidth = 0.035;
+g.beginPath();
+g.moveTo(-0.08, -2.79);
+g.lineTo(2.7, -2.41);
+g.stroke();

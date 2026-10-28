@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Furlongs' Kitchen","translation":"Кухня Ферлонгов","where":"scenes/kitchen/scene.json title"},
+  {"text":"Thursday evening. Every coin in the tin was counted.","translation":"Вечер четверга. Каждая монета в жестянке на счету.","where":"scenes/kitchen/scene.json caption"}
+]}
