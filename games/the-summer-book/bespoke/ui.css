@@ -1,11 +1,10 @@
 /* The Summer Book — what the game draws over the scene: paper slips in the island's grey and pearl (warm paper, grey-blue
-   ink), the lamp's yellow for what is the player's. Stage 3: plates with “Next”, the stub mini-games' cards, the
-   label of a stand-in place, the scales, the map's row of leaves. */
+   ink), the lamp's yellow for what is the player's. The scales, the stub mini-games' cards, the map's leaves. */
 #layer { --paper: #f6efe0; --paper-edge: #d9ccb0; --ink: #2b3a4f; --ink-soft: #5b6b80; --sea: #6f8fb0; --lamp: #e9b949;
   --serif: Georgia, "Times New Roman", serif; }
 #layer .gauge, #layer .toasts, #layer .hint, #layer .title, #layer .card { pointer-events: none; }
 
-#layer .slip, #layer .plate, #layer .card, #layer .gauge .row, #layer .hint {
+#layer .slip, #layer .card, #layer .gauge .row, #layer .hint {
   box-sizing: border-box; color: var(--ink); font-family: var(--serif); background: var(--paper);
   border: 1px solid var(--paper-edge); border-radius: 4px; box-shadow: 0 6px 22px rgba(20, 30, 45, 0.28); }
 
@@ -30,17 +29,6 @@
 #layer .slip .arrows { font-weight: 700; }
 #layer .slip.gone { opacity: 0; translate: 0 -6px; }
 @keyframes sb-in { from { opacity: 0; translate: 0 6px; } }
-
-/* a plate with “Next”, low in the middle (over the speech's place: a plate is read, not heard) */
-#layer .plate { position: absolute; left: 50%; bottom: 20px; translate: -50% 0; width: min(640px, calc(100vw - 32px));
-  padding: 16px 20px 14px; z-index: 10; opacity: 0; transition: opacity 0.35s ease; }
-#layer .plate.on { opacity: 1; }
-#layer .plate .text { margin: 0 0 12px; font-size: 18px; line-height: 1.45; }
-#layer .plate h3 { margin: 0 0 8px; font-size: 15px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
-#layer .plate ul { margin: 0 0 12px; padding-left: 18px; font-size: 16px; line-height: 1.4; max-height: 46vh; overflow: auto; }
-#layer .plate .next { display: block; margin-left: auto; min-width: 110px; min-height: 44px; padding: 8px 18px; border: 0; border-radius: 22px;
-  background: var(--ink); color: var(--paper); font: 600 16px/1 var(--serif); cursor: pointer; }
-#layer .plate .next:hover { background: #3b5070; }
 
 /* a stub mini-game's card, high on the right under the plate of the language */
 #layer .card { position: absolute; top: 110px; right: 14px; width: min(340px, 44vw); padding: 10px 14px;

@@ -1,9 +1,13 @@
 // II. “The Calm” (scenario §5, 2.1–2.3). July, the sea like glass: the cat who does not love her, back to back, the
 // pebble, the empty new house — “At night. Some day”; Sophia’s prayer; Grandmother sits down on the way. ⚑ The bird on
 // the pillow (colours). The full moon — ⚑ the first hinge: “Where is Mama now?”
-// Reads: marks.smoke. Leaves: choices.bird, choices.mama, marks.cat, marks.mama, marks.someday, marks.notsoon, scales.
-import { SCENES } from '../story.js';
+// Scenes: the shore (calm, calm_after; graves; cat_rail; moon_path), the house (bird_pillow and its branches;
+// moon_window and its branches; hat_bed, sky_morning, cough).
+// Reads: nothing. Leaves: choices.bird, choices.mama, marks.someday, marks.notsoon, marks.cat, marks.mama, scales.
+import { SCENES, hour, piece, on } from '../story.js';
 import { pebble, palm, hand, door } from '../minigames/all.js';
+
+const DAY = hour('day'), NIGHT = hour('night');
 
 export default {
   number: 'II', title: tr('The Calm'),
@@ -13,44 +17,46 @@ export default {
     { id: 'mama', title: tr('Where is Mama now?'), weight: '⚑', options: [{ id: 'gone', label: tr('“She isn’t here any more”') }, { id: 'sky', label: tr('“In heaven. She sees you”') }, { id: 'moon', label: tr('Take her out to the water') }] },
   ],
   steps: [
-    // 2.1: the calm
+    // 2.1: the calm (the dead calm is silence: no bed)
     async g => {
-      await g.scene(SCENES.shore, { here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'smile' }, keys: { calm: 1, grandma_at: 'warm', sophia_at: 'warm' } });
+      g.beds({});
+      await piece(g, 'calm', {
+        gone: async () => {
+          g.mood('sophia', 'sad');
+          await g.say('sophia', 'Why doesn’t he love me? I feed him');
+          await g.say('grandma', 'What do you think?');
+          g.mood('sophia', 'angry');
+          await g.say('sophia', 'Don’t ask back!');
+          g.mood('grandma', 'angry');
+          await g.say('grandma', 'Then don’t ask me anything either!');
+        },
+      }, () => g.scene(SCENES.shore, { beat: 'calm', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'smile' }, keys: { ...DAY, calm: 1 } }));
       g.title(tr('July'));
-      await g.plate(tr('Heat; the sea like glass, not a sound. Grandmother and Sophia sit on the warm rock. Mappe the cat walks past; Sophia reaches for him with both hands — he goes away before she touches him, without looking back.'));
-      g.mood('sophia', 'sad');
-      await g.say('sophia', 'Why doesn’t he love me? I feed him');
-      await g.say('grandma', 'What do you think?');
-      g.mood('sophia', 'angry');
-      await g.say('sophia', 'Don’t ask back!');
-      g.mood('grandma', 'angry');
-      await g.say('grandma', 'Then don’t ask me anything either!');
-      await g.plate(tr('Grandmother is cross herself, like a little girl, and moves round to sit with her back to her. They sit back to back and sulk.'));
       await g.play(pebble);
-      g.mood('grandma', 'neutral');
-      await g.plate(tr('The rings spread and die away; nothing else happens. Then, without turning round, Grandmother holds a second pebble out behind her. Sophia takes it and throws it too.'));
-      g.mood('sophia', 'smile');
-      await g.plate(tr('Over the forest you can see the roof of the new house on the other side of the island, its windows black, empty all summer.'));
-      await g.say('sophia', 'Let’s climb in there!');
-      await g.say('grandma', 'At night. Some day');
-      await g.say('sophia', 'Promise?');
-      g.mood('grandma', 'smile');
-      await g.say('grandma', 'We’ll see');
-      g.mark('someday', 'given', tr('Half a promise: the new house, “at night, some day.”'));
-      await g.wait(10000); // (the silence)
-      g.mood('sophia', 'thinking');
-      await g.plate(tr('Sophia gets on her knees.'));
-      await g.say('sophia', 'God, let something happen. Something big');
-      g.set('grandma_at', 'gate');
-      g.set('papa_at', 'veranda');
-      g.here('papa', true);
-      await g.plate(tr('Grandmother hears it and says nothing. On the way to the house she suddenly sits down on the stone by the gate, for two seconds, and gets up. In the window Papa raises his head from his papers and looks. Sophia does not see: she runs on ahead.'));
+      on(g, 'calm_after:second', () => g.sound.splash(0.25));
+      await piece(g, 'calm_after', {
+        still: async () => g.mood('grandma', 'neutral'),
+        roof: async () => {
+          g.mood('sophia', 'smile');
+          await g.say('sophia', 'Let’s climb in there!');
+          await g.say('grandma', 'At night. Some day');
+          await g.say('sophia', 'Promise?');
+          g.mood('grandma', 'smile');
+          await g.say('grandma', 'We’ll see');
+          g.mark('someday', 'given', tr('Half a promise: the new house, “at night, some day.”'));
+        },
+        pray: async () => {
+          g.mood('sophia', 'thinking');
+          await g.say('sophia', 'God, let something happen. Something big');
+        },
+      });
     },
     // 2.2: ⚑ the bird on the pillow
     async g => {
-      await g.scene(SCENES.house, { here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'angry' }, keys: { view: 'room', bird: true, grandma_at: 'bed', sophia_at: 'bed' } });
-      await g.plate(tr('Morning. On Sophia’s pillow, a dead bird; beside it the cat sits and waits.'));
-      await g.say('sophia', 'Murderer! I hate you!');
+      g.beds({ sea_in: 0.25 });
+      await piece(g, 'bird_pillow', {
+        shout: () => g.say('sophia', 'Murderer! I hate you!'),
+      }, () => g.scene(SCENES.house, { beat: 'bird_pillow', here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'angry' }, keys: DAY }));
       const bird = await g.choose('bird', { 'pillow#pillow': [
         { id: 'gift', label: tr('“He brought it for you. A present. He doesn’t know any other way”') },
         { id: 'bury', label: tr('“Let’s go and bury it”') },
@@ -59,36 +65,36 @@ export default {
       if (bird === 'gift') {
         await g.say('grandma', 'He brought it for you. A present. He doesn’t know any other way');
         g.mood('sophia', 'thinking');
-        await g.plate(tr('Sophia looks at the cat for a long time. Then, for the first time, she strokes him, carefully; the cat puts up with it and does not go. She puts the bird in an old tea box.'));
-        g.set('bird', false);
-        g.set('teabox', true);
-        g.set('bird', true);
-        await g.plate(tr('Next morning there is a new bird on the pillow, and the cat sits beside it and waits. Without a word, wrinkling her nose, Sophia puts it with two fingers into the same box.'));
+        on(g, 'gift:stroke', () => g.sound.purr(4));
+        await g.beat('gift');
+        await g.scene(SCENES.house, { beat: 'gift_again', here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'disgusted' }, keys: DAY });
+        await g.beat('gift_again');
       } else if (bird === 'bury') {
         await g.say('grandma', 'Let’s go and bury it');
-        await g.scene(SCENES.shore, { here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'thinking' }, keys: { graves: 1, grandma_at: 'path', sophia_at: 'graves' } });
-        await g.plate(tr('On the shore, a hole in the sand between the stones. Grandmother carves a bird out of a chip of wood and sets it on top.'));
-        await g.say('sophia_song', 'Mm… la-a, la-la… mm-mm… la-a-a', 'sophia');
-        await g.say('sophia', 'Where is it now?');
-        await g.say('grandma', 'Here');
-        await g.plate(tr('Sophia lays a shell on top. From that day she buries everything dead she finds — a fly, a fish head, a dry crab — and each time she holds out a chip of wood to Grandmother without a word. Grandmother carves bird after bird; a row of little graves with shells grows on the shore.'));
+        g.beds({ sea: 0.35 });
+        await piece(g, 'graves', {
+          song: () => g.say('sophia_song', 'Mm… la-a, la-la… mm-mm… la-a-a', 'sophia'),
+          here: async () => {
+            await g.say('sophia', 'Where is it now?');
+            await g.say('grandma', 'Here');
+          },
+        }, () => g.scene(SCENES.shore, { beat: 'graves', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'thinking' }, keys: DAY }, { cut: true }));
       } else {
         await g.say('grandma', 'I’ll clear it away. And him — out of the door');
-        g.set('bird', false);
-        await g.plate(tr('Quickly Grandmother wraps the bird in a pillowcase and carries it away, so that Sophia does not look at it any more. From that day the cat is put out for the night; he sleeps on the veranda rail and does not ask to come in.'));
+        await g.beat('bird_out');
+        g.beds({ sea: 0.3 });
+        await g.scene(SCENES.shore, { beat: 'cat_rail', here: [], keys: hour('dusk') });
+        await g.beat('cat_rail');
       }
       g.apply('bird');
     },
     // 2.3: the full moon; ⚑ Where is Mama now?
     async g => {
-      await g.scene(SCENES.house, { here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'sad' },
-        keys: { night: 1, view: 'window', grandma_at: 'bed', sophia_at: 'window' } });
-      await g.plate(tr('Night, a full moon. Sophia stands at the window in her nightdress.'));
-      await g.say('sophia', 'Grandmother. The moon’s in the water');
-      await g.plate(tr('Grandmother sits up in bed. Sophia, not turning round:'));
-      await g.say('sophia', 'And where is Mama now?');
-      g.set('view', 'face');
-      await g.plate(tr('Behind the glass door, on the veranda, Papa’s camp bed stops creaking: he is not asleep. Sophia’s face, close, in the moonlight.'));
+      g.beds({ sea_in: 0.2 });
+      await piece(g, 'moon_window', {
+        water: () => g.say('sophia', 'Grandmother. The moon’s in the water'),
+        sit: () => g.say('sophia', 'And where is Mama now?'),
+      }, () => g.scene(SCENES.house, { beat: 'moon_window', here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'sad', papa: 'sad' }, keys: NIGHT }));
       const mama = await g.choose('mama', { 'sophia#chest': [
         { id: 'gone', label: tr('“I don’t know. She isn’t here any more. That’s for ever”') },
         { id: 'sky', label: tr('“In heaven. And she sees you”') },
@@ -96,48 +102,52 @@ export default {
       ] });
       if (mama === 'gone') {
         await g.say('grandma', 'I don’t know. She isn’t here any more. That’s for ever');
-        g.mood('sophia', 'angry');
-        await g.say('sophia', 'You’re lying');
-        await g.say('grandma', 'No');
-        g.mood('sophia', 'sad');
-        g.set('view', 'room');
-        g.set('sophia_at', 'bed');
-        await g.plate(tr('Silence. Then Sophia cries — loudly, for the first time this summer — and goes from the window to her own bed and sits on its edge with her back to Grandmother. On the veranda Papa gets up and goes out on the porch, closing the door quietly.'));
-        await g.plate(tr('Grandmother cannot hug. She moves to the edge of her own bed, very near.'));
+        await piece(g, 'gone', {
+          lie: async () => {
+            g.mood('sophia', 'angry');
+            await g.say('sophia', 'You’re lying');
+            await g.say('grandma', 'No');
+          },
+          cry: async () => g.mood('sophia', 'sad'),
+          papa: async () => g.sound.door(),
+        });
         await g.play(palm);
-        await g.plate(tr('Sophia comes over to her by herself and goes quiet.'));
-        await g.scene(SCENES.house, { here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'sad', papa: 'sad' },
-          keys: { view: 'room', hat: 'bed', grandma_at: 'bed', sophia_at: 'bed', papa_at: 'doorway' } });
-        await g.plate(tr('In the morning the hat is not on its nail: it is on Sophia’s bed. Papa sees it from the doorway, stands a long time, does not touch it, and sits down at his table with his back to the room. All day Sophia does not talk to Grandmother.'));
+        await g.beat('gone_near');
+        await g.scene(SCENES.house, { beat: 'hat_bed', here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'sad', papa: 'sad' }, keys: DAY });
+        await g.beat('hat_bed');
       } else if (mama === 'sky') {
         await g.say('grandma', 'In heaven. And she sees you');
         g.mood('sophia', 'thinking');
-        await g.say('sophia', 'Does she see the moon too?');
-        await g.say('grandma', 'The moon too');
-        await g.say('sophia', 'And you won’t go away? You said soon');
-        await g.say('grandma', 'Soon is how old people say it. The way you say it, not soon');
-        g.mood('sophia', 'smile');
-        await g.plate(tr('Sophia waves to the moon. On the veranda Papa breathes out, long.'));
-        g.set('view', 'room');
-        g.set('sophia_at', 'bed');
+        await piece(g, 'sky', {
+          moon: async () => {
+            await g.say('sophia', 'Does she see the moon too?');
+            await g.say('grandma', 'The moon too');
+          },
+          soon: async () => {
+            await g.say('sophia', 'And you won’t go away? You said soon');
+            await g.say('grandma', 'Soon is how old people say it. The way you say it, not soon');
+          },
+          wave: async () => g.mood('sophia', 'smile'),
+        });
         await g.play(hand);
-        await g.plate(tr('In the morning Sophia makes her bed herself and whispers to Grandmother:'));
-        await g.say('sophia', 'Mama sees');
-        await g.plate(tr('All day she is cheerful and sings. The hat is on its nail; Sophia walks round it.'));
+        await piece(g, 'sky_morning', {
+          whisper: () => g.say('sophia', 'Mama sees'),
+        }, () => g.scene(SCENES.house, { beat: 'sky_morning', here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'smile', papa: 'neutral' }, keys: DAY }));
       } else {
-        g.set('view', 'door');
-        g.set('grandma_at', 'door2');
-        g.set('sophia_at', 'door2');
+        await g.beat('to_door');
         await g.play(door);
-        g.set('creak', 1);
-        await g.scene(SCENES.shore, { here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'thinking' }, keys: { night: 1, grandma_at: 'water', sophia_at: 'water' } });
-        await g.plate(tr('Night on the rocks; the moon’s path comes right up to their feet.'));
-        await g.say('sophia', 'And Mama…');
-        await g.say('grandma', 'Look');
-        await g.plate(tr('They look. It is cold; Grandmother puts her shawl round Sophia and stays in her cardigan. On the veranda Papa does not come out.'));
-        await g.plate(tr('In the morning:'));
-        await g.say('papa', 'Mamma, it’s cold at night');
-        await g.plate(tr('Grandmother coughs.'));
+        await g.beat('door_out');
+        g.beds({ sea: 0.3 });
+        await piece(g, 'moon_path', {
+          path: async () => {
+            await g.say('sophia', 'And Mama…');
+            await g.say('grandma', 'Look');
+          },
+        }, () => g.scene(SCENES.shore, { beat: 'moon_path', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'thinking' }, keys: NIGHT }, { cut: true }));
+        g.beds({ sea_in: 0.25 });
+        await piece(g, 'cough', {
+          said: () => g.say('papa', 'Mamma, it’s cold at night'),
+        }, () => g.scene(SCENES.house, { beat: 'cough', here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'tired', papa: 'neutral' }, keys: DAY }));
       }
       g.apply('mama');
     },

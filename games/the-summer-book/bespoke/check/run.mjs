@@ -6,13 +6,16 @@
 // again for each of the choice's options (the chapter's `choices`), so every combination of the nine choices is played
 // to its end (3⁸ × 4 = 26 244 plays), each step on the state the steps before left.
 // Read of the world: each scene's scene.json (its people, its keys' values) and the block “Contract for the check” that
-// ends its notes.md — {points, offers, party, acts}; each is checked against its scene.json.
+// ends its notes.md — {beats, points, offers, party, acts}; each is checked against its scene.json.
 // Checked on every path, as it is played: the scenes the steps open are the game's SCENES and the world's, and have the
 // people they name (persons of the scene, named in its contract); every key a step opens a scene with (what the play
 // has done to the place — story.js carry — and the step's own) is in the contract's party, and every key it sets is in
 // its party or acts, with a value the scene's states allow; a choice's points are in the contract's offers, a
-// minigame's point in its points or offers — a person's, only while they are there; every line is said by one of
-// people.json; a choice offered is one of the chapter's list with the same options; nothing breaks. The map (game.js):
+// minigame's point in its points or offers — a person's, only while they are there; every scene is opened on one of its
+// pieces, each piece is one of its beats (not `show: true`), a piece not opening the scene comes after one of its
+// `after`, or next in the scene's table, or the one beat_next named; a moment waited for is one of its piece's
+// `tells`, and its piece plays; a bed named is one of sound.js; every line is said by one of people.json — someone of
+// the scene shown not brought by the step said over a point given; a choice offered is one of the chapter's list with the same options; nothing breaks. The map (game.js):
 // its keys shown and come, a point for each chapter and the author's. At each path's end: exactly one finale was played (its title),
 // and it is the one facts gives — by the rule of the scenario (§3: the third hinge decides, full or late by the first
 // two; behind the tent — the shawl); the scales are whole numbers within their bounds; the play's PLAYS (game.js) end as
@@ -37,6 +40,7 @@ globalThis.tr = Object.assign(fill, { n: (n, one, other, p) => fill(n === 1 ? on
 const PEOPLE = JSON.parse(readFileSync(join(game, 'people.json'), 'utf8'));
 const { ENDINGS, SCALES, SCENES: FOLDERS, carry, facts, context } = await load('story.js');
 const { jump } = await load('jump.js');
+const { unheard, BED_NAMES } = await load('sound.js');
 const { CHAPTERS, PLAYS, fresh } = await load('game.js');
 
 // --- what does not match: text → the number of paths it was met on
@@ -66,6 +70,15 @@ for (const folder of Object.values(FOLDERS).filter(f => f !== FOLDERS.map)) {
     if (!Array.isArray(c.points) || !Array.isArray(c.offers ?? []) || typeof c.party !== 'object') throw new Error('not {points, offers, party}');
     c.offers ??= [];
     c.acts ??= {};
+    c.beats ??= {};
+    for (const a of Object.values(c.acts)) a.tells ??= [];
+    for (const [name, beat] of Object.entries(c.beats)) {
+      beat.after ??= [];
+      beat.tells ??= [];
+      for (const a of beat.after) if (!(a in c.beats)) miss(`${notes}: the piece “${name}” comes after “${a}”, which is not there`);
+      for (const t of beat.tells) if (t.split(':')[0] !== name) miss(`${notes}: the piece “${name}”: its moment “${t}” is not named “${name}:<moment>”`);
+    }
+    scene.order = Object.keys(c.beats);
     scene.contract = c;
   } catch (e) {
     miss(`${notes}: the contract not read: ${e.message}`);
@@ -124,11 +137,34 @@ const lines = new Map(); // `${who}\n${text}` → {who, text}
 // a step played unseen on `state` (its choices made as they say, the first offered where they say nothing) → {state,
 // made: the choice it made, titles: the titles it showed}
 async function step(c, s, state, where) {
-  const j = jump(Infinity);
-  const g = context(b, view, hub, structuredClone(state), j);
+  const j = jump(Infinity, unheard());
+  // (the choices of a play the author's map goes by lie under those made, as game.js lays them: carry sees only these)
+  const st = structuredClone(state);
+  st.choices = Object.assign(Object.create(Object.getPrototypeOf(state.choices)), st.choices);
+  const g = context(b, view, hub, st, j);
   let folder = null, present = new Set();
   const made = [], titles = [];
-  const { scene, say, choose, play, title, here, set } = g;
+  const { scene, say, choose, play, title, here, set, beat, told, beds } = g;
+  // the piece shown: {last: the piece begun last, opening: the one the scene was opened on, not taken up yet, next:
+  // beat_next set}; the moments waited for whose piece has not begun yet
+  let cur = null, pending = [];
+  const begins = (name, opening) => {
+    const sc = SCENES.get(folder), c = sc?.contract;
+    if (!c) return;
+    const piece = c.beats[name];
+    if (!piece) miss(`${where}: no piece “${name}” in the scene “${folder}”`);
+    else if (piece.show === true) miss(`${where}: the piece “${name}” of the scene “${folder}” is the showcase's only (show: true)`);
+    if (piece && !opening && cur.last && !piece.after.includes(cur.last)) {
+      const next = sc.order[sc.order.indexOf(cur.last) + 1];
+      if (name !== next && cur.next !== name) miss(`${where}: “${folder}”: ${cur.last} → ${name}, a cut not by the table and without beat_next`);
+    }
+    cur.next = null;
+    cur.last = name;
+    for (const text of pending.filter(t => t.split(':')[0] === name)) {
+      if (piece && !piece.tells.includes(text)) miss(`${where}: the piece “${name}” of the scene “${folder}” has no moment “${text}”`);
+    }
+    pending = pending.filter(t => t.split(':')[0] !== name);
+  };
   // a key the step opens the shown scene with or sets: in its contract's party (set — or its acts), its value allowed
   const key = (k, v, set = false) => {
     const sc = SCENES.get(folder), c = sc?.contract;
@@ -142,13 +178,38 @@ async function step(c, s, state, where) {
     if (!Object.values(FOLDERS).includes(f)) miss(`${where}: the scene “${f}” is not in the game's SCENES`);
     present = new Set(o.here ?? []);
     for (const id of present) person(f, id, where);
+    for (const id of Object.keys(o.moods ?? {})) person(f, id, where);
     for (const [k, v] of Object.entries({ ...carry(f, g.state), ...(o.keys ?? {}) })) key(k, v);
+    cur = { last: null, opening: o.beat ?? null, next: null };
+    if (o.beat) begins(o.beat, true);
+    else miss(`${where}: the scene “${f}” opened on no piece`);
     return scene(f, o, x);
   };
+  g.beat = (name, how) => {
+    if (!cur) miss(`${where}: the piece “${name}” before any scene`);
+    else if (cur.opening !== name) begins(name, false);
+    if (cur) cur.opening = null;
+    return beat(name, how);
+  };
+  g.told = (text, ms) => {
+    const c = SCENES.get(folder)?.contract;
+    if (!text.startsWith('beat:') && !Object.values(c?.acts ?? {}).some(a => a.tells.includes(text))) pending.push(text);
+    return told(text, ms);
+  };
+  g.beds = (levels, seconds) => {
+    for (const name of Object.keys(levels ?? {})) if (!BED_NAMES.includes(name)) miss(`${where}: g.beds — no bed “${name}” in sound.js`);
+    return beds(levels, seconds);
+  };
   g.here = (id, on) => { person(folder, id, where); if (on) present.add(id); else present.delete(id); return here(id, on); };
-  g.set = (k, v) => { key(k, v, true); return set(k, v); };
+  g.set = (k, v) => {
+    if (k === 'beat_next') { if (cur) cur.next = v; }
+    else key(k, v, true);
+    return set(k, v);
+  };
   g.say = (who, text, at) => {
     if (!PEOPLE[who]) miss(`${where}: “${text}” — said by “${who}”, no one of people.json`);
+    // (someone of the shown scene the step has not brought in — a piece brought them: said over them, `at` given)
+    else if (at === undefined && SCENES.get(folder)?.people.has(who) && !present.has(who)) miss(`${where}: “${text}” — said as the narrator by “${who}”, of the scene “${folder}” but not here for the step (give at)`);
     lines.set(`${who}\n${text}`, { who, text });
     return say(who, text, at);
   };
@@ -166,6 +227,7 @@ async function step(c, s, state, where) {
   let broke = null;
   await Promise.race([CHAPTERS[c].steps[s](g).catch(e => { broke = e; }), j.idle]);
   if (broke) miss(`${where}: the step broke: ${broke.message}`);
+  for (const text of pending) miss(`${where}: the moment “${text}” waited for — its piece never played`);
   return { state: g.state, made, titles };
 }
 // (a stub's point: as stub.js was given it)
@@ -216,7 +278,7 @@ await walk(0, fresh(), { titles: [] });
 const NAMED = { 'The Window': 'window', 'The Tent': 'tent', 'The Oars': 'oars', 'The Shawl on the Stone': 'shawl' };
 for (const p of PLAYS) {
   let state = fresh();
-  for (const [c, s] of STEPS) state = (await step(c, s, { ...state, choices: { ...p.choices, ...state.choices } }, p.label)).state;
+  for (const [c, s] of STEPS) state = (await step(c, s, { ...state, choices: Object.assign(Object.create(p.choices), { ...state.choices }) }, p.label)).state;
   const f = facts(state), named = Object.entries(NAMED).find(([head]) => p.label.startsWith(head))?.[1];
   if (named !== f.ending) miss(`PLAYS “${p.label}” ends in “${f.ending}” (${f.form})`);
   if (/\blate\b/.test(p.label) !== (f.form === 'late')) miss(`PLAYS “${p.label}”: the form is ${f.form}`);
