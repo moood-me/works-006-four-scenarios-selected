@@ -10,10 +10,10 @@
 //     to get her breath (`rest`, long enough to sit down and breathe), whatever the hands do, and goes on.
 // Balance — lead anywhere, one track for the whole way, the arrow the lantern (or her body, in the dark) tilting on
 // the wet stones; a quiet ring on the next stone (`path#stone<n>`), its arc of danger how far it tilts. Kept steady
-// KEEP s — she steps on to it (`step` n: the scene walks her there at her pace and tells `step:stone<n>`; meanwhile
+// KEEP s (the finger leading, the arrow in the zone) — she steps on to it (the snap on the stone) (`step` n: the scene walks her there at her pace and tells `step:stone<n>`; meanwhile
 // the scene's turn — the marks hidden); tilted too far — a slip (a mistake: the scene shows it, she catches herself).
 // She starts at the first stone (`step` 1). Each stone ends by its count all the same (STONE s from the first touch —
-// the scenario's way out by time), and never touched for ALONE s she goes on by herself. At the last stone — the end
+// the scenario's way out by time; then flawed), and never touched for ALONE s she goes on by herself. At the last stone — the end
 // (clean; flawed if she slipped); the piece after it goes on from there.
 //   What she does: Grandmother goes down the wet stones at night — to the other side of the island with the child, or
 //     to the tent in the fog.
@@ -23,7 +23,7 @@
 //   → { slips }
 import { clamp, until, keys, teach, settle, wobble } from './hands.js';
 
-const KEEP = 1.6, STONE = 7, ALONE = 12, OFF = 0.9, PUSH = 0.6;
+const KEEP = 3, STONE = 10, ALONE = 12, OFF = 0.9, PUSH = 0.6;
 // s the rest is held (`rest` true; the scene walks her to the low stone by hers and sits her — it tells no moment —,
 // then false: she rises slowly and is back): after a slip in the dark; to get her breath at the second stone
 const REST = 7.5, BREATH = 7.5;
@@ -62,7 +62,7 @@ export function path({ title, phrase, about, slip, short = () => false, breath =
       // phase: 'steady' (kept steady toward stone n) → 'walk' (stepping to it, the scene's turn) → 'there' (reached)
       // → the next stone; 'rest' — sat down (`why`: 'slip' — back to steadying for the same stone; 'breath' — on)
       let n = 2, ring = null, phase = 'steady', why = null, kept = 0, slips = 0, begun = null, from = mg.t;
-      let till = 0, caught = 0, dip = Infinity, grabbed = Infinity, rested = false;
+      let till = 0, caught = 0, dip = Infinity, grabbed = Infinity, rested = false, lapsed = 0;
       const touch = mg.on('down', () => { begun ??= mg.t; });
       const aim = () => { ring = mg.mark({ at: `path#stone${n}`, kind: 'ring', quiet: true, danger: 0 }); };
       aim();
@@ -103,14 +103,15 @@ export function path({ title, phrase, about, slip, short = () => false, breath =
             if (slip === 'rest') { sit('slip', REST, t); return false; }
           }
           lead.set({ push: begun == null ? 0 : t < caught ? -Math.sign(s.arrow) * 1.6 * Math.min(1, Math.abs(s.arrow) * 4) : wobble(t - begun, PUSH, n) });
-          if (begun != null && s.in) kept += dt;
+          if (s.held && s.in) kept += dt;
           if (slip === 'sway') send('lantern_sway', clamp(Math.abs(s.arrow)));
           if (body) send('balance', clamp(s.arrow, -1, 1));
           ring.set({ danger: clamp(Math.abs(s.arrow) / OFF) });
-          mg.plate.set({ fill: clamp((n - 2 + clamp(kept / KEEP)) / (last - 1)), glow: begun == null ? 'idle' : s.in ? 'good' : 'bad' });
+          mg.plate.set({ fill: clamp((n - 2 + clamp(kept / KEEP)) / (last - 1)), glow: !s.held ? 'idle' : s.in ? 'good' : 'bad' });
           const alone = begun == null && t - t00 >= ALONE, late = begun != null && t - Math.max(from, begun) >= STONE;
           if (kept >= KEEP || alone || late) {
             if (slip === 'sway') send('lantern_sway', 0);
+            if (kept >= KEEP) mg.snap({ at: ring }); else if (late) lapsed++;
             go();
           }
         } else if (phase === 'there') {
@@ -138,7 +139,7 @@ export function path({ title, phrase, about, slip, short = () => false, breath =
       mg.sceneTurn(false);
       if (body) g.set('balance', 0, 0.6);
       over();
-      await mg.end({ as: slips ? 'flawed' : 'clean' });
+      await mg.end({ as: begun == null ? 'neutral' : slips || lapsed ? 'flawed' : 'clean' });
       return { slips };
     },
   };

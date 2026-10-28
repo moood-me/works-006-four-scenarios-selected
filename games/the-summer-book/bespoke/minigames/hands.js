@@ -37,12 +37,13 @@
 //     done LIMIT s after the first touch — the rest comes by itself (SELF s). → {jerks, self: it came by itself} | null
 //   balance(g, b, mg, {at, seconds, keep, width, push, frame, slip}) — “balance” (lead anywhere, steered: the arrow is
 //     what tilts — a lantern, a cup, a horizon, a body — and `push(t)` what tilts it, from the first touch on): a
-//     quiet ring on the thing (`at`), its arc of danger how far the arrow is off; frame({arrow, in, t, dt, on}) each
+//     quiet ring on the thing (`at`), its arc of danger how far the arrow is off; frame({arrow, in, held, t, dt, on}) each
 //     frame (on — touched yet); the arrow at OFF or beyond — slip() once (a mistake), and the arrow brought back to the middle (she has
-//     caught herself). Ends when the arrow has been kept in the zone `keep` s (keep null — by the count `seconds`
-//     alone), or at `seconds` from the first touch (never touched for ALONE s — over too). The bar — the time kept in
-//     the zone (bar(u) — where it stands on the plate, for a balance that is one step of several). → {slips, kept: the
-//     share of the time in the zone} | null
+//     caught herself). Kept counts only while the finger leads and the arrow is in the zone. Ends when it has been kept
+//     `keep` s (keep null — by the count `seconds` alone), or at `seconds` from the first touch (never touched for ALONE
+//     s — over too). The bar — the time kept (bar(u) — where it stands on the plate, for a balance that is one step of
+//     several); kept well (GOOD of it) — the snap on the thing. → {slips, kept: the share kept, alone: never touched,
+//     as: how it ends — neutral (never touched), flawed (slipped or kept too little), clean} | null
 export const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 export const until = (mg, fn) => new Promise(ok => {
   const offs = [mg.on('frame', e => { if (fn(e)) { offs.forEach(f => f()); ok(true); } }), mg.on('end', () => { offs.forEach(f => f()); ok(false); })];
@@ -209,7 +210,7 @@ export async function slowly(g, b, mg, { at, pulls = 3, frame = () => {}, jerk =
   return { jerks, self: self != null };
 }
 
-const OFF = 0.9;
+const OFF = 0.9, GOOD = 0.6; // (a balance played well: kept in the zone, the finger on it, this share of the time)
 export async function balance(g, b, mg, { at, seconds, keep: need = null, width = 0.45, push = () => 0, frame = () => {}, slip = () => {}, bar = u => u }) {
   const lead = mg.lead({ zone: { at: 0, width }, steer: 'rate', release: 'stay', push: 0 });
   const mark = mg.mark({ at, kind: 'ring', quiet: true, danger: 0 });
@@ -228,18 +229,20 @@ export async function balance(g, b, mg, { at, seconds, keep: need = null, width 
     }
     // (caught herself: the arrow pushed back to the middle for a moment)
     lead.set({ push: begun == null ? 0 : t < caught ? -Math.sign(s.arrow) * 1.6 * Math.min(1, Math.abs(s.arrow) * 4) : push(now) });
-    if (begun != null && s.in) kept += dt;
+    if (s.held && s.in) kept += dt;
     mark.set({ danger: clamp(Math.abs(s.arrow) / OFF) });
-    frame({ arrow: s.arrow, in: s.in, t: now, dt, on: begun != null });
-    mg.plate.set({ fill: bar(clamp(kept / (need ?? seconds))), glow: begun == null ? 'idle' : s.in ? 'good' : 'bad' });
+    frame({ arrow: s.arrow, in: s.in, held: s.held, t: now, dt, on: begun != null });
+    mg.plate.set({ fill: bar(clamp(kept / (need ?? seconds))), glow: !s.held ? 'idle' : s.in ? 'good' : 'bad' });
     return (need != null && kept >= need) || (begun != null && now >= seconds) || (begun == null && t - t00 >= ALONE);
   });
   touch();
   taught.remove();
   if (!done) return null;
+  const share = begun == null ? 0 : clamp(kept / Math.max(1e-6, need ?? seconds));
+  if (share >= GOOD) mg.snap({ at: mark });
   mark.remove();
   lead.remove();
-  return { slips, kept: begun == null ? 1 : clamp(kept / Math.max(1e-6, mg.t - begun)) };
+  return { slips, kept: share, alone: begun == null, as: begun == null ? 'neutral' : slips || share < GOOD ? 'flawed' : 'clean' };
 }
 // a tilt that comes and goes, side to side: strength at its height
 export const wobble = (t, strength, seed = 0) => strength * (0.65 * Math.sin(1.1 * t + seed) + 0.35 * Math.sin(2.7 * t + 2 * seed));

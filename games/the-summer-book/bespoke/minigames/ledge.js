@@ -26,8 +26,8 @@ export default {
     send('step', 0);
     let down = 0, grabbed = 0; // (grabbed: s left of Sophia's hold on her, after a slip)
     const r = await balance(g, b, mg, { at: 'rock#ledge', seconds: SECONDS, keep: KEEP, push: t => wobble(t, PUSH, 0.4),
-      frame: ({ in: kept, on, dt, arrow }) => {
-        if (kept && on) down = clamp(down + dt / KEEP);
+      frame: ({ in: kept, held, dt, arrow }) => {
+        if (kept && held) down = clamp(down + dt / KEEP);
         send('step', Math.floor(down * STAGES + 1e-6) / STAGES);
         send('lean', arrow);
         if (grabbed > 0 && (grabbed -= dt) <= 0) g.set('sophia_grab', 0, 0.6);
@@ -40,7 +40,7 @@ export default {
     g.mood('sophia', 'laugh');
     if (!(await count(mg, 0.6))) return this.skipped;
     over();
-    await mg.end({ as: r.slips ? 'flawed' : 'clean' });
+    await mg.end({ as: r.as });
     return { slips: r.slips };
   },
 };
