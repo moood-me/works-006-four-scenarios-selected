@@ -527,6 +527,13 @@ function film(scene) {
       from: () => ROOM(STAND("papa", SPOT.write, { papa_with: ["book"], papa_do: loop("hold"), papa_look: "papa#page" }), { my_here: false,
         troll_here: false, flame: "lit", lenses: 1, ...FROM(EYE.writing, [SPOT.write[0], SPOT.write[1], 0.9]) }),
       run: async s => {
+        // (his words come while the beam looks away from him, out over the sea on the other side: his face not washed
+        // white by it — the beam's bearing from the lamp, `beam_turn`, round the far side of his)
+        const away = (((Math.atan2(SPOT.write[0] - C[0], SPOT.write[1] - C[1]) / DEG + 180) % 360) + 360) % 360;
+        await s.until(() => {
+          const t = (((s.get("beam_turn") ?? 0) % 360) + 360) % 360;
+          return Math.abs(((t - away + 540) % 360) - 180) < 30;
+        });
         await moment(s, "e_write:write", 5);
         P(s, "my").here(true);
         P(s, "my").look("papa");
