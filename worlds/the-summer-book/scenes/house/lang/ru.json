@@ -1,4 +1,14 @@
-{"strings": [
-  {"text":"The House","translation":"Дом","where":"scenes/house/scene.json title"},
-  {"text":"Morning on the glazed veranda; the sea in every pane.","translation":"Утро на застеклённой веранде; в каждом стекле — море.","where":"scenes/house/scene.json caption"}
-]}
+{
+ "strings": [
+  {
+   "text": "The House",
+   "translation": "Дом",
+   "where": "scenes/house/scene.json title"
+  },
+  {
+   "text": "Morning on the glazed veranda; the sea in every pane.",
+   "translation": "Утро на застеклённой веранде; в каждом стекле — море.",
+   "where": "scenes/house/scene.json caption"
+  }
+ ]
+}
