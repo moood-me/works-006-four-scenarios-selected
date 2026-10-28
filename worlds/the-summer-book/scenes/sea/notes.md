@@ -32,7 +32,7 @@ the boat's frame), or framing a point (`camera_target`). Where the people sit is
 by Sophia's scale, §8 — in `party`); the island's going (`island`), the swell (`sway`) are the pieces'. All in the last
 morning's light (`late`, `dawn`, `fog` 0.6 → 0.85 as the island goes).
 
-- `aboard` (every ending but «Палатка», ≈ 8 s): the big boat off the far rock, everyone in their seats, the things,
+- `aboard` («Окно», «Платок», ≈ 8 s): the big boat off the far rock, everyone in their seats, the things,
   the basket (`basket`), the dinghy in tow (`dinghy`); the motor starts, the island begins to go (`island` 0.15 →
   0.25) — `aboard:motor`; with `counted` Sophia's lips move: she counted Grandmother's steps into the boat —
   `aboard:count`.
@@ -47,7 +47,13 @@ morning's light (`late`, `dawn`, `fog` 0.6 → 0.85 as the island goes).
 - `swell` («Платок», ≈ 4 s): out on the swell, the boat pitching (`sway` up); Grandmother on her thwart. Ends in the
   pose of М11 «Сидеть прямо» (`grandma#chest`): the mini-game moves `sway` (the swell she sits upright against).
 - `motor` (every ending, the second step, ≈ 6 s): the motor; the island going by on the right (`island` → 0.45) —
-  `motor:go`. (The game then cuts to the shore's `from_water` and the new house from the sea, and back.)
+  `motor:go`. (The game then cuts to the shore's `from_water` and the new house's `from_sea`, and back.)
+- `look_house` (every ending without the new house, after the new house's `from_sea`, ≈ 6 s): Sophia looks back a long
+  time at the black windows of that house as long as they can be seen (`new_house#windows`) — `look_house:look`.
+
+The second step of an ending, in this order (the game cuts with `beat_next`; each of these opens with its own `from`
+when what comes before it was not played): `motor` → (the shore, the new house) → `look_house` → `cat_gift` → `sky` →
+the ending's talk → `promise` → the last shot.
 - `cat_gift` (`basket` cat, ≈ 12 s): the cat on the basket beside Sophia, a dead bird at his paws — `cat_gift:bird`;
   wrinkling her nose she drops it overboard with two fingers — `cat_gift:over`; strokes him (`sophia_reach` →
   `cat#back`); he puts up with it and looks at the water — `cat_gift:stroke`.
@@ -74,13 +80,14 @@ morning's light (`late`, `dawn`, `fog` 0.6 → 0.85 as the island goes).
   `nets` — «Mamma?» — «I'll tell you later» / «Nothing to tell» / he holds her hand on the gunwale, as the net's end —
   `oars_boat:hand`); Sophia sits down by her scale — `oars_boat:seat`; with `ask_mama` — `oars_boat:ask` («Did Mama
   row like that?»), a long silence — `oars_boat:better` («Better»); else Papa takes the dinghy's oars from Sophia and
-  ties it astern (`dinghy` → true) — `oars_boat:tie`.
+  ties it astern (`dinghy` → true) — `oars_boat:tie`; with `counted` Sophia, watching Papa help her in, counts
+  soundlessly with her lips — `oars_boat:count`.
 - `oars_last` («Вёсла», ≈ 10 s): the island going into the white (`island` → 1, `fog` → 0.85); the last shot by
   Sophia's place — Grandmother's empty hands on her knees and Sophia ahead on the bow / beside her, facing forward /
   Sophia's hand in hers and the bow empty — `oars_last:hands`.
 - `shawl_talk` («Платок», ≈ 20 s): Sophia tells — haltingly to Papa (`called`), or everyone how she slept alone —
-  `shawl_talk:tell`; with `knock` «You didn't knock» — `shawl_talk:knock`; Grandmother says nothing —
-  `shawl_talk:silent`; from the water Sophia sees by the cape, in a crevice above the water, a grey patch —
+  `shawl_talk:tell`; with `called` Papa looks at his mother and says nothing — `shawl_talk:papa`; with `knock` «You
+  didn't knock» — `shawl_talk:knock`; Grandmother says nothing — `shawl_talk:silent`; from the water Sophia sees by the cape, in a crevice above the water, a grey patch —
   `shawl_talk:patch` («What's that?» — «A stone»). (The game cuts to the cape for the last shot.)
 
 The play's keys the pieces read (`party`): the hour and the weather; where Sophia and Grandmother sit (`sophia_at`,
@@ -97,18 +104,19 @@ after it), «Сидеть прямо» moves `sway`.
  "aboard": {"after": [], "tells": ["aboard:motor", "aboard:count"], "seconds": 8, "show": false},
  "come_over": {"after": [], "tells": ["come_over:sat"], "seconds": 10, "show": false},
  "hand_in_hand": {"after": [], "tells": [], "seconds": 3, "show": false},
- "eyes_closed": {"after": [], "tells": ["eyes_closed:smile"], "seconds": 10, "show": false},
+ "eyes_closed": {"after": ["come_over", "hand_in_hand"], "tells": ["eyes_closed:smile"], "seconds": 10, "show": false},
  "swell": {"after": [], "tells": [], "seconds": 4, "show": false},
  "motor": {"after": [], "tells": ["motor:go"], "seconds": 6, "show": false},
- "cat_gift": {"after": [], "tells": ["cat_gift:bird", "cat_gift:over", "cat_gift:stroke"], "seconds": 12, "show": false},
- "sky": {"after": [], "tells": ["sky:sign"], "seconds": 5, "show": false},
- "window_talk": {"after": [], "tells": ["window_talk:look", "window_talk:said", "window_talk:papa", "window_talk:sophia", "window_talk:song"], "seconds": 22, "show": false},
+ "look_house": {"after": [], "tells": ["look_house:look"], "seconds": 6, "show": false},
+ "cat_gift": {"after": ["look_house"], "tells": ["cat_gift:bird", "cat_gift:over", "cat_gift:stroke"], "seconds": 12, "show": false},
+ "sky": {"after": ["look_house", "cat_gift"], "tells": ["sky:sign"], "seconds": 5, "show": false},
+ "window_talk": {"after": ["look_house", "cat_gift", "sky"], "tells": ["window_talk:look", "window_talk:said", "window_talk:papa", "window_talk:sophia", "window_talk:song"], "seconds": 22, "show": false},
+ "tent_talk": {"after": ["look_house", "cat_gift", "sky"], "tells": ["tent_talk:tell", "tent_talk:mama", "tent_talk:hand", "tent_talk:again", "tent_talk:once"], "seconds": 24, "show": false},
+ "oars_boat": {"after": ["look_house", "cat_gift", "sky"], "tells": ["oars_boat:board", "oars_boat:tremble", "oars_boat:hand", "oars_boat:seat", "oars_boat:ask", "oars_boat:better", "oars_boat:tie", "oars_boat:count"], "seconds": 22, "show": false},
+ "shawl_talk": {"after": ["look_house", "cat_gift", "sky"], "tells": ["shawl_talk:tell", "shawl_talk:papa", "shawl_talk:knock", "shawl_talk:silent", "shawl_talk:patch"], "seconds": 20, "show": false},
  "promise": {"after": ["window_talk", "tent_talk", "oars_boat", "shawl_talk"], "tells": ["promise:said", "promise:silent", "promise:away", "promise:whisper", "promise:point", "promise:looks"], "seconds": 14, "show": false},
  "window_last": {"after": ["window_talk", "promise"], "tells": ["window_last:narrator", "window_last:window"], "seconds": 12, "show": false},
- "tent_talk": {"after": [], "tells": ["tent_talk:tell", "tent_talk:mama", "tent_talk:hand", "tent_talk:again", "tent_talk:once"], "seconds": 24, "show": false},
- "oars_boat": {"after": [], "tells": ["oars_boat:board", "oars_boat:tremble", "oars_boat:hand", "oars_boat:seat", "oars_boat:ask", "oars_boat:better", "oars_boat:tie"], "seconds": 22, "show": false},
- "oars_last": {"after": ["oars_boat", "promise"], "tells": ["oars_last:hands"], "seconds": 10, "show": false},
- "shawl_talk": {"after": [], "tells": ["shawl_talk:tell", "shawl_talk:knock", "shawl_talk:silent", "shawl_talk:patch"], "seconds": 20, "show": false}},
+ "oars_last": {"after": ["oars_boat", "promise"], "tells": ["oars_last:hands"], "seconds": 10, "show": false}},
  "points": ["boat#seat", "boat#bow", "basket#lid", "cat#cat", "cat#back", "transom#cleat", "island#window", "island#cape", "island#pier", "new_house#windows", "sky#sun", "sky#sun_late", "sky#sun_dawn", "grandma#chest", "grandma#hand_l", "sophia#chest", "sophia#hand_r", "sophia#head", "papa#chest"],
  "offers": ["sophia#hand_r", "grandma#chest", "sophia#chest", "papa#chest"],
  "party": {"dawn": 0, "dusk": 0, "night": 0, "late": 0, "calm": 0, "storm": 0, "flash": 0, "fog": 0, "moon": 1, "grandma_at": "seat", "sophia_at": "beside", "basket": "shut", "dinghy": true, "counted": false, "storm_mark": "notyou", "song": false, "sign_hat": "nail", "mama": "gone", "learned": false, "nets": "say", "ask_mama": false, "late_form": false, "called": false, "knock": false, "grandma_here": true, "sophia_here": true, "papa_here": true},

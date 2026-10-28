@@ -103,6 +103,9 @@ sets them, except where `party` says.
   gunwale (`rowboat#gunwale`): the mini-game moves `rowboat` (down from 1: the boat pushed off).
 - `eriksson_off` (after М3б, ≈ 12 s): he rows away without a word, the boat turning (`rowboat` → 0) —
   `eriksson_off:gone`; Sophia looks up at Grandmother — `eriksson_off:ask` («What did he say?» — «That he's old»).
+- `shell` (1.3 «Скажи ему», the morning after the supper, ≈ 8 s): morning; on the porch's rail the big shell ashtray
+  (`shell` false → true) — `shell:shell`; Grandmother smokes by it, and Papa behind the veranda's glass looks at her over
+  his papers (`papa_at` veranda) — `shell:look`.
 - `nets` (1.5, dusk, ≈ 16 s): Papa sits at the pier's root untangling the net (`net`, `untangle`); Grandmother comes
   down with a mug of coffee, gives it to him — `nets:coffee`; sits down beside him on a stone at the pier's root (a
   stone the scene adds; `sit_stone`)
@@ -135,17 +138,20 @@ sets them, except where `party` says.
   carves a bird from a chip (`carve`, the knife, Л) and sets it on the grave (`graves` 0 → 1) — `graves:bird`; Sophia
   sings something of her own — `graves:song`; «Where is it now?» — «Here» — `graves:here`; she lays a shell on top —
   `graves:shell`; the summer passes over it: the row grows (cuts: `graves` 2 … 5) — `graves:row`.
+- `cat_rail` (2.2 «За дверь», evening, ≈ 6 s): the door shut; the cat asleep on the porch's rail (`cat_at` rail,
+  `cat_pose` lie); he does not ask to come in — `cat_rail:rail`.
 - `moon_path` (Ш1 «Луна», night, full moon, ≈ 22 s): Grandmother and Sophia come out onto the rocks and stand at the
   water (`water`); the moon's path comes right up to their feet — `moon_path:path` («And Mama…» — «Look»); they look;
   it is cold: Grandmother puts her shawl round Sophia (`drape`; the shawl from her look to Sophia's, Л) —
   `moon_path:shawl`; on the veranda, dark, Papa does not come out — `moon_path:veranda`.
-- `cough` (after `moon_path` through black, morning, ≈ 8 s): Grandmother on the porch's step in her cardigan, Papa in
-  the door — `cough:said` («Mamma, it's cold at night»); she coughs — `cough:cough`.
 
 **Chapter III**
 - `home_late` (3.3 «Никто не знает», night, `boat_out`, ≈ 16 s): Grandmother comes home slowly up the path, sits
   down on the porch's step and does not get up for a long time (`step`) — `home_late:sat`; Papa's lantern still out on
   the water — `home_late:lantern`; Sophia — `home_late:crazy` («You're crazy!» — «Yes»).
+- `step_beside` (3.2 «Беги за папой» with «Сеть», after the forest's `lead_home` through black, ≈ 12 s): Grandmother on
+  the porch's step (`step`); Papa sits down beside her without a word, as at the nets then — `step_beside:sat`; and sits
+  till she gets up by herself — `step_beside:up`.
 - `rail` (3.4 «На крыльцо», night storm, ≈ 5 s): they come out on the porch into the rain under the white sky, both
   take hold of the rail. Ends in the pose of М8а «Перила» (`porch#rail`): the mini-game moves `gust` (the wind's
   gusts at them: hair, the hem, the rain driven).
@@ -174,10 +180,11 @@ sets them, except where `party` says.
   shoves it away (`chair` shoved; it scrapes) — `gate:shove`; sits down again on the stone — `gate:sat2`; Eriksson
   looks at the empty chair — `gate:chair` («They've tied you up» — «I tied myself»); he pushes off (`rowboat` → 0) —
   `gate:off`.
-- `foot` (4.1, not `knew`, strength ≥ 2, ≈ 14 s): she goes down to the pier, takes hold of the gunwale, puts her foot
+- `foot` (4.1, not `knew`, strength ≥ 2, ≈ 16 s): Eriksson calls once — `foot:call` («Will you come out to the
+  nets?»); she goes down to the pier, takes hold of the gunwale, puts her foot
   on the thwart — `foot:on` — and takes it off — `foot:off` («Some other time» — «There aren't many other times…»);
   he pushes off — `foot:gone`.
-- `porch_stay` (4.1, not `knew`, strength ≤ 1, ≈ 14 s): she does not get up from the porch's step, only looks at the
+- `porch_stay` (4.1, not `knew`, strength ≤ 1, ≈ 16 s): Eriksson calls once — `porch_stay:call`; she does not get up from the porch's step, only looks at the
   boat — `porch_stay:look` («Off you go»); Eriksson looks at her a long time and pushes off without a word —
   `porch_stay:gone`; Papa behind the veranda's glass sees it — `porch_stay:papa`.
 - `porch_dawn` (Ш3, «Идти» without `knew` and «За палаткой», dawn in thin fog, ≈ 8 s): Grandmother on the porch's
@@ -186,7 +193,8 @@ sets them, except where `party` says.
   the jacket, Л) and looks at her wet hem — `jacket:hem` («You were there» — «Don't tell her»).
 - `learns` (after `porch_dawn` or `jacket`, ≈ 6–12 s — «Когда Папа узнаёт», by `nets` read by the game): Papa beside
   her — `learns:said` (his line, her answer); with `net` he takes her hand as she sits and holds it (`_reach` both) —
-  `learns:hand`.
+  `learns:hand`; Sophia beside them (when she is here) — `learns:sophia` (with «Софья знает»: «I didn't tell. She told
+  me not to»; Papa looks at his mother).
 - `run_to` (after `learns` or `jacket`, ≈ 10 s): he raises his eyes to the cape — the fog thinning — and goes; Sophia
   comes running down the path and sees Grandmother on the step — `run_to:sees`. Then by the play (the game chooses):
 - `count` («Софья знает», ≈ 20 s): Sophia stops, her lips white, grabs Papa's sleeve with both hands (Papa back) —
@@ -197,7 +205,14 @@ sets them, except where `party` says.
   Grandmother say nothing — `hem:silent`; Sophia hits her on the knee with her fist and at once clings to her hem with
   both hands — `hem:cling`.
 - `alone` (Sophia did not call, ≈ 12 s): Sophia — `alone:said` («I was alone! All night!…») and stops: Grandmother
-  does not get up to meet her — `alone:stop`; she sits beside her on the step and takes her sleeve — `alone:sleeve`.
+  does not get up to meet her — `alone:stop`; she sits beside her on the step and takes her sleeve — `alone:sleeve`;
+  later in the day (a cut within the piece) — `alone:later` (with «Постучу»: «You didn't knock!»); in the evening
+  Sophia brings her coffee herself (the mug) — `alone:coffee`.
+- `called_porch` (Ш3 «Лампа», Sophia called, morning, after the cape's `out_of_white`, ≈ 20 s): the porch — Sophia,
+  Papa, Grandmother; Sophia — `called_porch:said` («I called!», with «Постучу» «And you didn't knock!»); Papa raises his
+  eyes to his mother — `called_porch:eyes` («I heard»); Sophia — `called_porch:hate` («I hate you!») and runs off onto
+  the pier and sits there (`sophia_at` pier, seated); Papa, quietly — `called_porch:woken` («You could have woken me» —
+  «You would have gone»).
 
 **Epilogue** (31 August, `late`, `dawn`, thin fog `fog` 0.6, `big_boat`, `luggage`)
 - `last_morning` (≈ 8 s): the things by the pier; the big boat by the far rock, the gangway; everyone at the pier —
@@ -220,7 +235,8 @@ sets them, except where `party` says.
   `catch:stop` («Well, hold me…»). Ends in the pose of М11 «Сходни».
 - `tent_walk` («Палатка», after the game's cut from `cape`, ≈ 10 s, by strength): he carries the things and does not
   look at her; she steps in by herself / leaning on Sophia's hand or his arm, he lifts her in / she walks by herself
-  step by step, everyone waits — `tent_walk:board`; with `knock_broken` Sophia does not take her hand at first, then
+  step by step, everyone waits — `tent_walk:board`; with `counted` Sophia counts her steps soundlessly with her lips —
+  `tent_walk:count`; with `knock_broken` Sophia does not take her hand at first, then
   does — `tent_walk:hand`.
 - `shawl_walk` («Платок», ≈ 14 s): Grandmother on the porch in Papa's jacket (`grandma_wear`) — `shawl_walk:jacket`
   («Where's your shawl?» — «I lost it»); she goes to the boat (her strength's way in it) — `shawl_walk:there`; on the
@@ -273,27 +289,30 @@ hat on its nail or not (`from_water`); `skirt` — Sophia holds Grandmother's sk
  "nets_nothing": {"after": ["nets"], "tells": ["nets_nothing:fast", "nets_nothing:watch"], "seconds": 10, "show": false},
  "net": {"after": ["nets"], "tells": [], "seconds": 3, "show": false},
  "net_after": {"after": ["net"], "tells": ["net_after:together", "net_after:thanks", "net_after:ask", "net_after:alone"], "seconds": 16, "show": false},
+ "shell": {"after": [], "tells": ["shell:shell", "shell:look"], "seconds": 8, "show": false},
  "calm": {"after": [], "tells": ["calm:cat", "calm:gone", "calm:back"], "seconds": 30, "show": false},
  "calm_after": {"after": ["calm"], "tells": ["calm_after:still", "calm_after:second", "calm_after:roof", "calm_after:silence", "calm_after:pray", "calm_after:stone", "calm_after:papa", "calm_after:run"], "seconds": 34, "show": false},
  "graves": {"after": [], "tells": ["graves:bird", "graves:song", "graves:here", "graves:shell", "graves:row"], "seconds": 22, "show": false},
+ "cat_rail": {"after": [], "tells": ["cat_rail:rail"], "seconds": 6, "show": false},
  "moon_path": {"after": [], "tells": ["moon_path:path", "moon_path:shawl", "moon_path:veranda"], "seconds": 22, "show": false},
- "cough": {"after": [], "tells": ["cough:said", "cough:cough"], "seconds": 8, "show": false},
  "home_late": {"after": [], "tells": ["home_late:sat", "home_late:lantern", "home_late:crazy"], "seconds": 16, "show": false},
+ "step_beside": {"after": [], "tells": ["step_beside:sat", "step_beside:up"], "seconds": 12, "show": false},
  "rail": {"after": [], "tells": [], "seconds": 5, "show": false},
  "rail_after": {"after": ["rail"], "tells": ["rail_after:shriek", "rail_after:sky", "rail_after:creak", "rail_after:papa", "rail_after:blanket"], "seconds": 16, "show": false},
  "circles": {"after": [], "tells": ["circles:straight", "circles:tent", "circles:list", "circles:turn"], "seconds": 18, "show": false},
  "post": {"after": [], "tells": ["post:in", "post:grab"], "seconds": 18, "show": false},
  "post_after": {"after": ["post"], "tells": ["post_after:ask"], "seconds": 6, "show": false},
- "gate": {"after": ["post_after"], "tells": ["gate:sat", "gate:call", "gate:up", "gate:papa", "gate:shove", "gate:sat2", "gate:chair", "gate:off"], "seconds": 30, "show": false},
- "foot": {"after": ["post_after"], "tells": ["foot:on", "foot:off", "foot:gone"], "seconds": 14, "show": false},
- "porch_stay": {"after": ["post_after"], "tells": ["porch_stay:look", "porch_stay:gone", "porch_stay:papa"], "seconds": 14, "show": false},
+ "gate": {"after": [], "tells": ["gate:sat", "gate:call", "gate:up", "gate:papa", "gate:shove", "gate:sat2", "gate:chair", "gate:off"], "seconds": 30, "show": false},
+ "foot": {"after": ["post_after"], "tells": ["foot:call", "foot:on", "foot:off", "foot:gone"], "seconds": 16, "show": false},
+ "porch_stay": {"after": ["post_after"], "tells": ["porch_stay:call", "porch_stay:look", "porch_stay:gone", "porch_stay:papa"], "seconds": 16, "show": false},
+ "called_porch": {"after": [], "tells": ["called_porch:said", "called_porch:eyes", "called_porch:hate", "called_porch:woken"], "seconds": 20, "show": false},
  "porch_dawn": {"after": [], "tells": ["porch_dawn:sat"], "seconds": 8, "show": false},
  "jacket": {"after": ["porch_dawn"], "tells": ["jacket:hem"], "seconds": 12, "show": false},
- "learns": {"after": ["porch_dawn", "jacket"], "tells": ["learns:said", "learns:hand"], "seconds": 9, "show": false},
+ "learns": {"after": ["porch_dawn", "jacket"], "tells": ["learns:said", "learns:hand", "learns:sophia"], "seconds": 9, "show": false},
  "run_to": {"after": ["learns", "jacket"], "tells": ["run_to:sees"], "seconds": 10, "show": false},
  "count": {"after": ["run_to"], "tells": ["count:sleeve", "count:look", "count:count", "count:in"], "seconds": 20, "show": false},
  "hem": {"after": ["run_to"], "tells": ["hem:said", "hem:silent", "hem:cling"], "seconds": 12, "show": false},
- "alone": {"after": ["run_to"], "tells": ["alone:said", "alone:stop", "alone:sleeve"], "seconds": 12, "show": false},
+ "alone": {"after": ["run_to"], "tells": ["alone:said", "alone:stop", "alone:sleeve", "alone:later", "alone:coffee"], "seconds": 12, "show": false},
  "last_morning": {"after": [], "tells": ["last_morning:boat"], "seconds": 8, "show": false},
  "signs": {"after": ["last_morning"], "tells": ["signs:smoke", "signs:hat", "signs:bird"], "seconds": 10, "show": false},
  "walk_self": {"after": ["signs"], "tells": ["walk_self:there"], "seconds": 10, "show": false},
@@ -301,7 +320,7 @@ hat on its nail or not (`from_water`); `skirt` — Sophia holds Grandmother's sk
  "walk_slow": {"after": ["signs"], "tells": ["walk_slow:stones", "walk_slow:there"], "seconds": 24, "show": false},
  "elbow": {"after": ["walk_self", "walk_arm", "walk_slow"], "tells": ["elbow:taken"], "seconds": 6, "show": false},
  "catch": {"after": ["walk_self", "walk_arm", "walk_slow"], "tells": ["catch:behind", "catch:look", "catch:stop"], "seconds": 10, "show": false},
- "tent_walk": {"after": [], "tells": ["tent_walk:board", "tent_walk:hand"], "seconds": 10, "show": false},
+ "tent_walk": {"after": [], "tells": ["tent_walk:board", "tent_walk:count", "tent_walk:hand"], "seconds": 10, "show": false},
  "shawl_walk": {"after": ["signs"], "tells": ["shawl_walk:jacket", "shawl_walk:there", "shawl_walk:doctor"], "seconds": 14, "show": false},
  "dinghy_board": {"after": ["signs"], "tells": ["dinghy_board:oars", "dinghy_board:stern", "dinghy_board:bow_in", "dinghy_board:hold", "dinghy_board:hand", "dinghy_board:push", "dinghy_board:sophia", "dinghy_board:shake"], "seconds": 25, "show": false},
  "oars_after": {"after": ["dinghy_board"], "tells": ["oars_after:straight", "oars_after:hand", "oars_after:there"], "seconds": 18, "show": false},
