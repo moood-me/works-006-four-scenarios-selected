@@ -30,6 +30,16 @@ return {
       body: { height: 1.02, thick: 1.0, shoulders: 1.0 },
       colors: { skin: '#d2ab8f', hair: '#4a3a2e', top: '#56635b', bottom: '#5b5e63', shoes: '#2b2826' },
     },
+    // Eriksson: an old fisherman from the far skerries, Grandmother's age, square and weathered: a dark cap, grey hair
+    // under it, a cream fisherman's sweater, dark trousers, sea boots; he never comes ashore — he sits on his boat's
+    // thwart (`sit_bench`)
+    eriksson: {
+      kind: 'shapes', style: 'summer', who: 'man', garment: 'none', hair: 'short', hat: 'cap',
+      body: { height: 0.95, thick: 1.08, shoulders: 1.04 },
+      colors: {
+        skin: '#b98468', hair: '#b4afa6', top: '#d9d1bd', bottom: '#3c3f45', shoes: '#26282b', hat: '#2e3440',
+      },
+    },
   },
   shapes: {
     // the world's style: the engine's flat geometry — straight edges, plain colours, lit by the scene; faces readable
