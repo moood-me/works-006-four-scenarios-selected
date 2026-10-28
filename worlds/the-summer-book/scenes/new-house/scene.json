@@ -310,7 +310,7 @@
     },
     {
       "id": "lantern_hand",
-      "at": "grandma#hand_l",
+      "at": "grandma#flame",
       "color": "#ffcf8e",
       "strength": 1.4,
       "reach": 6,
@@ -320,7 +320,7 @@
     },
     {
       "id": "cigarette",
-      "at": "grandma#hand_r",
+      "at": "grandma#ember",
       "color": "#ff9050",
       "strength": 0.6,
       "reach": 1,
@@ -564,7 +564,7 @@
         1
       ],
       "smooth": true,
-      "means": "Grandmother's cigarette alight in her right hand: its ember and its thin smoke"
+      "means": "Grandmother's cigarette alight (the cast's part in her right hand): its ember and its thin smoke"
     },
     "lantern": {
       "values": [
@@ -580,7 +580,7 @@
         0,
         1
       ],
-      "means": "the script's own: the lantern's light in her hand (from lantern)"
+      "means": "the script's own: the lantern's light in her hand (while the cast's lantern is in it: grandma_with)"
     },
     "lantern_set": {
       "range": [
@@ -652,7 +652,8 @@
         "fade": 0,
         "rough": 0.25,
         "ripple": 0.12
-      }
+      },
+      "water": true
     },
     {
       "id": "islet",
@@ -1623,7 +1624,7 @@
       "name": "The cigarette's smoke",
       "particles": {
         "kind": "smoke",
-        "at": "grandma#hand_r",
+        "at": "grandma#ember",
         "amount": "cigarette",
         "rate": 2.5,
         "size": [

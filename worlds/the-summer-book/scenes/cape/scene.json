@@ -205,12 +205,23 @@
       "strength": 1,
       "reach": 3,
       "on": "window"
+    },
+    {
+      "id": "hand_lamp",
+      "at": "grandma#flame",
+      "color": "#ffc98a",
+      "strength": 1.1,
+      "reach": 3.5,
+      "on": "lamp_lit",
+      "flicker": 0.12
     }
   ],
   "modules": [
     "cast",
     "isle",
-    "cat"
+    "cat",
+    "beats",
+    "closeups"
   ],
   "state": {
     "dawn": 0,
@@ -231,7 +242,19 @@
     "flap": "open",
     "shawl": "none",
     "stones": false,
+    "stones_laid": 0,
     "from": "land",
+    "knocks": false,
+    "lamp_hand": true,
+    "weak": false,
+    "sophia_night": "whisper",
+    "step": 0,
+    "lantern_dip": 0,
+    "lamp_lit": 0,
+    "rest": false,
+    "balance": 0,
+    "palm_open": 0,
+    "palm_near": 0.6,
     "grandma_at": "stand",
     "sophia_at": "tent",
     "papa_at": "by",
@@ -330,15 +353,18 @@
     "grandma_at": {
       "values": [
         "stand",
+        "top",
         "pole",
         "stone1",
         "stone2",
         "stone3",
+        "rest",
         "half",
         "door",
+        "inside",
         "behind"
       ],
-      "means": "where Grandmother is (the scene's places, lib.PLACES: stand, pole, stone1, stone2, stone3, half, door, behind); set, put there at once"
+      "means": "where Grandmother is (the scene's places, lib.PLACES: stand, top, pole, stone1, stone2, stone3, rest, half, door, inside, behind); set, put there at once"
     },
     "grandma_a": {
       "range": [
@@ -360,13 +386,19 @@
     },
     "sophia_at": {
       "values": [
+        "parcel",
         "tent",
         "tie",
+        "pet",
         "door",
+        "lie",
         "inside",
-        "path"
+        "path",
+        "by_half",
+        "half",
+        "top"
       ],
-      "means": "where Sophia is (the scene's places, lib.PLACES: tent, tie, door, inside, path); set, put there at once"
+      "means": "where Sophia is (the scene's places, lib.PLACES: parcel, tent, tie, pet, door, lie, inside, path, by_half, half, top); set, put there at once"
     },
     "sophia_a": {
       "range": [
@@ -388,11 +420,16 @@
     },
     "papa_at": {
       "values": [
+        "top",
+        "path",
         "by",
+        "lamp",
+        "mother",
         "peg",
-        "path"
+        "half",
+        "door"
       ],
-      "means": "where Papa is (the scene's places, lib.PLACES: by, peg, path); set, put there at once"
+      "means": "where Papa is (the scene's places, lib.PLACES: top, path, by, lamp, mother, peg, half, door); set, put there at once"
     },
     "papa_a": {
       "range": [
@@ -469,6 +506,93 @@
       "type": "boolean",
       "means": "the last morning: stones laid round the tent's edges"
     },
+    "stones_laid": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own: the stones being laid one by one in a piece (the front's to 0.3, then the side's)"
+    },
+    "knocks": {
+      "type": "boolean",
+      "means": "the play's: «I'll knock at midnight, three times» was promised — at the door she knocks three times (else she stoops to it: «It's me»)"
+    },
+    "lamp_hand": {
+      "type": "boolean",
+      "means": "the play's: Grandmother goes down to the tent in the fog with the lantern (its light a warm circle on her and the stones), or without it, by the moonlit fog"
+    },
+    "weak": {
+      "type": "boolean",
+      "means": "the play's: her strength at 1 or less — on the way behind the tent she sits down to get her breath"
+    },
+    "sophia_night": {
+      "values": [
+        "cry",
+        "whisper",
+        "huddle"
+      ],
+      "means": "the play's: Sophia alone at the flap under the moon — cries, then goes quiet; whispers and lies down; sits on, huddled, all night"
+    },
+    "step": {
+      "range": [
+        0,
+        3
+      ],
+      "means": "the fog and dark minigames: the stone of the path Grandmother walks to (1…3), at her pace; step:stone<n> told on arrival"
+    },
+    "lantern_dip": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the fog minigame's flaw: the lantern in her hand guttering (0 alight … 1 nearly out)"
+    },
+    "lamp_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own: Grandmother's lantern alight in her hand (from grandma_with and lantern_dip)"
+    },
+    "rest": {
+      "type": "boolean",
+      "means": "the fog and dark minigames (during fog_way): true — Grandmother sits down where she stands (by the first stone on its low stone, at the second on the halfway stone seat:0); false — she gets up and goes on, back on the stone"
+    },
+    "balance": {
+      "range": [
+        -1,
+        1
+      ],
+      "smooth": true,
+      "means": "the fog and dark minigames (during fog_way): how far Grandmother tips on the wet stones, as the minigame's arrow — −1 to her left … 1 to her right; past a little she puts a hand out that way for balance (0: steady)"
+    },
+    "palm_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М10г «knock»: the close-up of her palm by the tent's canvas open (0 closed … 1 open)"
+    },
+    "palm_near": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the palm close-up: how near her palm is to the canvas (1 touching it)"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (the module beats; the game names it, notes.md «Pieces»)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game goes to next (its cut made ready)"
+    },
     "from": {
       "values": [
         "land",
@@ -481,9 +605,11 @@
       "values": [
         "tent",
         "door",
-        "rock"
+        "rock",
+        "off",
+        "fog"
       ],
-      "means": "where the cat is (lib.CAT): by the tent's front, at its door, on the rock nearer; set while he walks (cat_pose walk), he goes there at his pace (cat:arrived told)"
+      "means": "where the cat is (lib.CAT): by the tent's front, at its door, on the rock nearer, over the rocks out of sight, behind the tent's back in the fog; set while he walks (cat_pose walk), he goes there at his pace (cat:arrived told)"
     },
     "cat_pose": {
       "values": [
@@ -562,7 +688,8 @@
         "fade": 0,
         "rough": 0.25,
         "ripple": 0.15
-      }
+      },
+      "water": true
     },
     {
       "id": "fog_wall",
@@ -890,6 +1017,19 @@
           "distance": 8.513,
           "elevation": -0.1,
           "flip": true
+        },
+        {
+          "across": -0.85,
+          "distance": 5.75,
+          "elevation": -0.1,
+          "scale": 0.9
+        },
+        {
+          "across": -3.0,
+          "distance": 11.15,
+          "elevation": -0.1,
+          "scale": 0.85,
+          "flip": true
         }
       ]
     },
@@ -1184,6 +1324,11 @@
         "count": 9000,
         "wind": 1.2
       }
+    },
+    {
+      "id": "palm",
+      "name": "Her palm by the glowing canvas, close",
+      "insert": "palm_open"
     }
   ],
   "music": {

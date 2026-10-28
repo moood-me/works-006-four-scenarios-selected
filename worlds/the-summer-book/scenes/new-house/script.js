@@ -1,9 +1,9 @@
 // The new house's mechanics, all from the state (a scene opened again goes on as it was): the island's weather (the
 // thick fog's look, the storm's lightning); the people at their places (`<id>_at`: lib.PLACES — Grandmother sitting on
 // the bed's foot as the place says); the veranda's window leaf turned by `sash`; the drawers pulled one after another
-// by `drawers`; Grandmother's lantern — in her hand (its light at her left hand), on the table, on the floor, or none;
-// the view (`view`: a cut to where the camera looks from, all its keys set, nothing left over from another view); the
-// pieces the game plays (`beat`: the module beats).
+// by `drawers`; Grandmother's lantern — in her hand (the cast's part: its light at its flame while she has it), on the
+// table, on the floor, or none; the view (`view`: a cut to where the camera looks from, all its keys set, nothing left
+// over from another view); the pieces the game plays (`beat`: the module beats).
 const L = scene.lib;
 const isle = scene.kit.isle;
 isle.weather(scene);
@@ -35,11 +35,12 @@ for (const [k, f] of [['sash', sash], ['drawers', drawers]]) {
   f();
 }
 
-// the lantern: its light in Grandmother's hand, or the lantern standing where it is set
+// the lantern: its light in Grandmother's hand while the cast's lantern is in it, or the lantern standing where it is set
+const held = () => scene.set('lantern_held', (scene.get('grandma_with') ?? []).includes('lantern') ? 1 : 0);
+scene.on('change', 'grandma_with', held);
+held();
 const lantern = () => {
-  const at = scene.get('lantern');
-  scene.set('lantern_held', at === 'hand' ? 1 : 0);
-  const p = L.LANTERN[at];
+  const p = L.LANTERN[scene.get('lantern')];
   scene.set('lantern_set', p ? 1 : 0);
   if (!p) return;
   scene.set('lantern_x', p[0]);

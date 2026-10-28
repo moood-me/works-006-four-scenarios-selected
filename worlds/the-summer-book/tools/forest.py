@@ -37,7 +37,7 @@ music = {"prompts": [{"text": t, "weight": w} for t, w in MUSIC_PROMPTS], "bpm":
 # the left; the moon behind the viewer (its light from there); the lightning out to sea
 SUN, LATE, DAWN, BOLT = [A * 0.78, -0.1], [A * 0.88, 0.14], [A * 0.95, 0.3], [A * 0.35, 0.02]
 STUMP, TRUNK = (0.7, 3.8), (-1.5, 4.8)
-FIRST = {"grandma": ([-0.9, 3.5], 160), "sophia": ([0.3, 2.9], 200)}
+FIRST = {"grandma": ([-0.9, 3.5], 160), "sophia": ([0.3, 2.9], 200), "papa": ([-5.4, 3.0], 90)}
 
 
 def copies(rows):
@@ -78,18 +78,31 @@ objects = [
      "across": FIRST["grandma"][0][0], "distance": FIRST["grandma"][0][1], "place": {"across": "grandma_a", "distance": "grandma_d"}},
     {"id": "sophia", "name": "Sophia", "person": {"cast": "cast", "who": "sophia", "turn": FIRST["sophia"][1]},
      "across": FIRST["sophia"][0][0], "distance": FIRST["sophia"][0][1], "place": {"across": "sophia_a", "distance": "sophia_d"}},
+    {"id": "papa", "name": "Papa", "person": {"cast": "cast", "who": "papa", "turn": FIRST["papa"][1]},
+     "across": FIRST["papa"][0][0], "distance": FIRST["papa"][0][1], "place": {"across": "papa_a", "distance": "papa_d"}},
+    # the thin smoke of Grandmother's cigarette (the cast's part: from its ember), while she has it
+    {"id": "smoke", "name": "The cigarette's smoke", "particles": {"kind": "smoke", "at": "grandma#ember", "amount": "smoking", "rate": 2.5,
+     "size": [0.02, 0.25], "speed": [0.04, 0.12], "life": [2.5, 4.5], "opacity": 0.3}},
     isle.RAIN,
+    # the knife minigame's close-up (the world's closeups, modules/closeups.md): opened by `knife_open`
+    {"id": "knife", "name": "Her hands carving, close", "insert": "knife_open"},
 ]
 
 lights = isle.lights(("sky#sun", "#ffefd8", 1.3), ("sky#sun_late", "#ffe2b8", 1.25), ("sky#sun_dawn", "#ffeedd", 1.0),
                      ([300, 5], "#f3d6c6", 0.5), ([200, 40], "#c4d2f2", 0.8), [20, 30]) + [
-    {"id": "far_lamp", "of": "far_boat#lamp", "color": "#ffcf86", "strength": 1.4, "reach": 14, "on": "boat_out"}]
+    {"id": "far_lamp", "of": "far_boat#lamp", "color": "#ffcf86", "strength": 1.4, "reach": 14, "on": "boat_out"},
+    # the cast's parts in Grandmother's hands: the lantern's flame, the struck match's
+    {"id": "hand_lamp", "at": "grandma#flame", "color": "#ffc98a", "strength": 1.1, "reach": 3.5, "on": "lamp_lit", "flicker": 0.12},
+    {"id": "match", "at": "grandma#flame", "color": "#ffc070", "strength": 0.7, "reach": 1.2, "on": "match_lit", "flicker": 0.3}]
 
 # the empty play: a June day in the clearing, Grandmother and Sophia in it, four animals in the moss (the seal not
 # carved yet), the crack empty, no band
 state = {**isle.STATE, "animals": 4, "pack": "none", "band": 0, "spin": 0, "boat_out": False,
-         "grandma_at": "clearing", "sophia_at": "clearing",
-         "grandma_a": FIRST["grandma"][0][0], "grandma_d": FIRST["grandma"][0][1], "sophia_a": FIRST["sophia"][0][0], "sophia_d": FIRST["sophia"][0][1]}
+         "grandma_at": "clearing", "sophia_at": "clearing", "papa_at": "edge", "papa_here": False,
+         "grandma_a": FIRST["grandma"][0][0], "grandma_d": FIRST["grandma"][0][1], "sophia_a": FIRST["sophia"][0][0], "sophia_d": FIRST["sophia"][0][1],
+         "papa_a": FIRST["papa"][0][0], "papa_d": FIRST["papa"][0][1],
+         "brave": False, "sophia_back": False, "step": 0, "lantern_sway": 0, "grab": False, "lamp_lit": 0,
+         "flipper": False, "slips": False, "knife_open": 0, "carve": 0, "knife_flaw": 0, "match_lit": 0, "smoking": 0}
 
 
 def placed(id, who, places):
@@ -100,8 +113,25 @@ def placed(id, who, places):
 
 
 states = {**isle.STATES,
-          **placed("grandma", "Grandmother", ["clearing", "stump", "trunk", "moss", "path1", "path2", "path3"]),
-          **placed("sophia", "Sophia", ["clearing", "moss", "stump", "crevice", "path1"]),
+          **placed("grandma", "Grandmother", ["clearing", "edge", "stump", "up", "trunk", "crevice", "moss", "path1", "path2", "path3", "far"]),
+          **placed("sophia", "Sophia", ["clearing", "edge", "moss", "animals", "stump", "behind", "near", "beside", "nose", "aside", "trees", "crevice",
+                                       "path1", "path2", "path3", "far"]),
+          **placed("papa", "Papa", ["edge", "lift"]),
+          "brave": {"type": "boolean", "means": "the play's: Sophia at 3 or more — by her fallen grandmother she does not cry out: she comes quickly, squats and looks into her face"},
+          "sophia_back": {"type": "boolean", "means": "the play's: «Mamma: sky» — Sophia first steps back, fists clenched («You said — not soon!»)"},
+          "step": {"range": [0, 3], "means": "the stones minigame: the stone of the path the two walk to (1…3), at their pace; step:stone<n> told on Grandmother's arrival"},
+          "lantern_sway": {"range": [0, 1], "smooth": True, "means": "the stones minigame's flaw: the lantern swinging in her hand, its light wavering"},
+          "grab": {"type": "boolean", "means": "the stones minigame's flaw: Sophia catches Grandmother by the skirt"},
+          "lamp_lit": {"range": [0, 1], "smooth": True, "means": "the scene's own: Grandmother's lantern alight in her hand (from grandma_with and lantern_sway)"},
+          "match_lit": {"range": [0, 1], "smooth": True, "means": "the scene's own: a struck match in Grandmother's hand (from grandma_with)"},
+          "smoking": {"range": [0, 1], "smooth": True, "means": "the scene's own: Grandmother's cigarette alight, its thin smoke (from grandma_with)"},
+          "slips": {"type": "boolean", "means": "the play's: the moss minigame (М6) flawed — in fall she sits bowed longer before Sophia comes, and Sophia comes closer (her hand on Grandmother's shoulder)"},
+          "flipper": {"type": "boolean", "means": "the play's: the knife jerked in 1.2 — the carved seal has one flipper (the seal in the moss so; knife_flaw shows it too while the step goes on)"},
+          "knife_open": {"range": [0, 1], "smooth": True, "means": "М3 «knife»: the close-up of her hands carving open (0 closed … 1 open)"},
+          "carve": {"range": [0, 1], "smooth": True, "means": "the knife close-up: the driftwood becoming a seal (0 a rough log … 1 the seal)"},
+          "knife_flaw": {"range": [0, 1], "means": "the knife close-up: 1 — a jerk, one flipper split off (the seal has one flipper); 0 — whole"},
+          "beat": {"type": "string", "means": "the piece playing (the module beats; the game names it, notes.md «Pieces»)"},
+          "beat_next": {"type": "string", "means": "the piece the game goes to next (its cut made ready)"},
           "animals": {"range": [0, 5], "means": "how many wooden animals lie in the moss by the stump: a horse, a bird, a dog, a cow, and the fifth — the seal carved this June"},
           "pack": {"values": ["none", "in", "taken"], "means": "the packet of cigarettes in the boulder's crack: not there; pushed in, its corner showing; taken out again (the moss scuffed)"},
           "band": {"range": [0, 1], "smooth": True, "means": "the close end of July: a heavy grey band along the horizon (0 none, 1 full)"},
@@ -116,7 +146,7 @@ spec = {
     "camera": {"mode": "picture"},
     "light": isle.light(WIND),
     "lights": lights,
-    "modules": ["cast", "isle"],
+    "modules": ["cast", "isle", "beats", "closeups"],
     "state": state,
     "states": states,
     "objects": objects,

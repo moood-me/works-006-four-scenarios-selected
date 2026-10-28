@@ -1,6 +1,6 @@
 // The crevice in the cape's sea face behind the tent: a low wall of granite out of the water, a dark cleft slanting
 // down it, and in the cleft a ledge just over the water — seen only from the sea (the card faces it; from the land the
-// tent stands before it). Grandmother's shawl on the ledge (painted there by `shawl: ledge`). Metres from its
+// tent stands before it). Grandmother's shawl on the ledge (seen by `shawl: ledge`). Metres from its
 // foot on the water; 1 m long, 0.55 m high (drawn at K of the numbers below). Its point `shawl` (on the ledge).
 const K = 0.42;
 g.save();
@@ -39,8 +39,9 @@ g.lineTo(0.0, -0.34);
 g.closePath();
 g.fill();
 g.restore();
-// the shawl, grey wool, crumpled on the ledge, a corner hanging down over its edge
-if (e.state.shawl === 'ledge') e.layer('shawl', {}, c => {
+// the shawl, grey wool, crumpled on the ledge, a corner hanging down over its edge (a layer painted once: its animate
+// shows it — it slips there in a piece)
+e.layer('shawl', {}, c => {
   c.scale(K, K);
   c.fillStyle = '#a7a6a0';
   c.beginPath();

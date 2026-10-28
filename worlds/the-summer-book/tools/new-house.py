@@ -185,7 +185,7 @@ objects += [
     inside(id="seal", name="The wooden seal", across=0.55, distance=16.05, elevation=FLOOR + 0.74, height=0.17, box=[-0.2, -0.17, 0.2, 0.01]),
     inside(id="lantern", name="Grandmother's lantern, set down", across=1.15, distance=15.9, elevation=FLOOR + 0.74, height=0.36,
            box=[-0.12, -0.4, 0.12, 0.01], place={"across": "lantern_x", "distance": "lantern_z", "elevation": "lantern_e"}),
-    inside(id="smoke", name="The cigarette's smoke", particles={"kind": "smoke", "at": "grandma#hand_r", "amount": "cigarette", "rate": 2.5,
+    inside(id="smoke", name="The cigarette's smoke", particles={"kind": "smoke", "at": "grandma#ember", "amount": "cigarette", "rate": 2.5,
            "size": [0.02, 0.25], "speed": [0.04, 0.12], "life": [2.5, 4.5], "opacity": 0.3}),
     isle.RAIN,
 ]
@@ -217,11 +217,11 @@ lights += [
     {"id": "ver_in", "of": "glazing", "daylight": True, "strength": 0.8},
     {"id": "left_in", "of": "win_left", "daylight": True, "strength": 0.5},
     {"id": "right_in", "of": "win_right", "daylight": True, "strength": 0.5},
-    # Grandmother's lantern: set down (its flame), or in her left hand; her cigarette's ember in her right
+    # Grandmother's lantern: set down (its flame), or in her left hand (the cast's part: its flame); her cigarette's ember
     {"id": "lantern", "of": "lantern#flame", "color": "#ffcf8e", "strength": 1.4, "reach": 6, "on": "lantern_set", "flicker": 0.08},
-    {"id": "lantern_hand", "at": "grandma#hand_l", "color": "#ffcf8e", "strength": 1.4, "reach": 6, "on": "lantern_held", "flicker": 0.08,
+    {"id": "lantern_hand", "at": "grandma#flame", "color": "#ffcf8e", "strength": 1.4, "reach": 6, "on": "lantern_held", "flicker": 0.08,
      "glow": 0.12},
-    {"id": "cigarette", "at": "grandma#hand_r", "color": "#ff9050", "strength": 0.6, "reach": 1, "on": "cigarette", "flicker": 0.35, "glow": 0.03},
+    {"id": "cigarette", "at": "grandma#ember", "color": "#ff9050", "strength": 0.6, "reach": 1, "on": "cigarette", "flicker": 0.35, "glow": 0.03},
 ]
 
 
@@ -241,9 +241,9 @@ states = {**isle.STATES,
           "drawers": {"range": [0, 1], "smooth": True, "means": "the chest of drawers' drawers pulled out one after another, the top first: 0 all shut … 1 all three out (empty, clean)"},
           **{f"drawer{k}_x": {"type": "number", "means": f"the script's own: where drawer {k}'s front is (across, from drawers)"} for k in (1, 2, 3)},
           "seal": {"type": "boolean", "means": "the wooden seal Sophia left lying on the table (seen through the big windows from the sea too)"},
-          "cigarette": {"range": [0, 1], "smooth": True, "means": "Grandmother's cigarette alight in her right hand: its ember and its thin smoke"},
+          "cigarette": {"range": [0, 1], "smooth": True, "means": "Grandmother's cigarette alight (the cast's part in her right hand): its ember and its thin smoke"},
           "lantern": {"values": ["none", "hand", "table", "floor"], "means": "Grandmother's storm lantern: not here · alight in her left hand · set on the table · set on the floor before her at the bed's foot"},
-          "lantern_held": {"range": [0, 1], "means": "the script's own: the lantern's light in her hand (from lantern)"},
+          "lantern_held": {"range": [0, 1], "means": "the script's own: the lantern's light in her hand (while the cast's lantern is in it: grandma_with)"},
           "lantern_set": {"range": [0, 1], "means": "the script's own: the lantern set down, alight (from lantern)"},
           "lantern_x": {"type": "number", "means": "the script's own: where the lantern is set (from lantern)"},
           "lantern_z": {"type": "number", "means": "the script's own: where the lantern is set"},

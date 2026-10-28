@@ -77,9 +77,11 @@ const PLACES = {
 };
 
 // the views (`view`): where the camera stands (x, z), how high the eye is over the sea level's datum (the start's rock
-// is 0), which way it looks — as the camera's keys from the start (camera_h: the eye's height less 1.7 m over the land
-// under it)
-const V = (x, z, eye, yaw, look = 0) => ({ camera_x: x, camera_z: z, camera_h: eye - 1.7 - ground(x, z), camera_yaw: yaw, camera_look: look });
+// is 0), which way it looks — as the camera's keys from the start (camera_h: the eye's height less 1.7 m over what the
+// engine stands the eye on there: the room's floor inside the house, the sea's surface over the water, else the rock —
+// so a glide over the water keeps its height over the water)
+const under = (x, z) => (Math.abs(x) <= HOUSE.inX && z >= HOUSE.inZ0 && z <= HOUSE.inZ1 ? ground(x, z) + HOUSE.floor : Math.max(ground(x, z), WATER));
+const V = (x, z, eye, yaw, look = 0) => ({ camera_x: x, camera_z: z, camera_h: eye - 1.7 - under(x, z), camera_yaw: yaw, camera_look: look });
 const VIEW = {
   // outside on the rock at night, from the front's left: the veranda's glazing and its window, the long side's big
   // black windows
@@ -140,14 +142,14 @@ function drawerIn(g) {
 // ── the pieces (stage 5: notes.md «Pieces»; the module beats) ─────────────────────────────────────────────────────
 // Each piece's `from`: where its people are and what they do (at), its camera (every camera key: nothing left over from
 // the shot before), its own keys. The game sets only the play's keys (the hour of the step, `seal` in the epilogue).
-// Motions the cast has not yet (package Л) are marked «motion:» where they go; till then the pose is set at once.
+// The people's motions and parts are the cast's (package Л): a motion it has not made yet stands in (the engine's).
 const stand = { motion: 'stand', loop: true };
 function at(id, place, more = {}) {
   const p = PLACES[id][place];
   return {
     [`${id}_here`]: true, [`${id}_at`]: place, [`${id}_placed`]: place, [`${id}_a`]: p.at[0], [`${id}_d`]: p.at[1],
     [`${id}_on`]: p.on ?? null, [`${id}_turn`]: p.turn, [`${id}_do`]: p.do ?? stand, [`${id}_look`]: p.look ?? null,
-    [`${id}_reach`]: p.reach ?? null, [`${id}_gait`]: null, ...more,
+    [`${id}_reach`]: p.reach ?? null, [`${id}_gait`]: null, [`${id}_with`]: null, ...more,
   };
 }
 const CAM0 = { camera_target: null, camera_shot: 'full', camera_frame: null, camera_glide: 1.5, camera_x: 0, camera_z: 0, camera_h: 0, camera_yaw: 0, camera_look: 0, camera_pitch: 0, camera_roll: 0 };
@@ -185,7 +187,7 @@ const ROOM_MID = [0.7, 13.4];
 const FILM = {
   // 3.3 «moss» — out of the dead trees onto the rock, the lantern in her hand; the veranda's window is not locked
   window: {
-    from: () => ({ ...NIGHT, ...at('grandma', 'path', { grandma_a: -2.6, grandma_d: 3.6, grandma_turn: 10, grandma_look: 'front' }),
+    from: () => ({ ...NIGHT, ...at('grandma', 'path', { grandma_a: -2.6, grandma_d: 3.6, grandma_turn: 10, grandma_look: 'front', grandma_with: ['lantern'] }),
       ...at('sophia', 'path', { sophia_a: -3.4, sophia_d: 3.2, sophia_turn: 15, sophia_look: 'front' }), lantern: 'hand', seal: false, ...view('out') }),
     run: async s => {
       const grandma = s.person('grandma');
@@ -209,7 +211,8 @@ const FILM = {
   },
   // 3.3 «moss» — inside (the climbing in is not shown: a cut): new, clean, the moon in the big windows; she sits on the bed's foot
   inside: {
-    from: () => ({ ...NIGHT, sash: 1, ...at('grandma', 'door'), ...at('sophia', 'door', { sophia_look: 'win_sea' }), lantern: 'hand', seal: false, ...ROOM_IN }),
+    from: () => ({ ...NIGHT, sash: 1, ...at('grandma', 'door', { grandma_with: ['lantern'] }), ...at('sophia', 'door', { sophia_look: 'win_sea' }), lantern: 'hand',
+      seal: false, ...ROOM_IN }),
     run: async s => {
       const grandma = s.person('grandma');
       const sophia = s.person('sophia');
@@ -218,9 +221,11 @@ const FILM = {
       sophia.walk([ROOM_MID]);
       await grandma.walk([BEDSIDE]);
       await grandma.turn(PLACES.grandma.bed.turn);
-      // motion: a bend to set the lantern on the floor at her feet (Л)
+      // the lantern set on the floor at her feet; she sits down onto the bed's foot
+      await grandma.do('put_down');
+      grandma.with(null);
       s.set('lantern', 'floor');
-      // motion: sitting down onto the bed's edge, done once (Л: sit_bed); till then seated at once
+      await grandma.do('sit_down');
       grandma.on(SEAT);
       grandma.do('sit_stone', { loop: true });
       grandma.look('sophia');
@@ -234,22 +239,30 @@ const FILM = {
     from: () => ({ ...NIGHT, sash: 1, ...at('grandma', 'bed'), ...at('sophia', 'door', { sophia_a: ROOM_MID[0], sophia_d: ROOM_MID[1], sophia_look: 'win_sea' }),
       lantern: 'floor', seal: false, ...SMOKE_CAM }),
     run: async s => {
+      const grandma = s.person('grandma');
       glideTo(s, SMOKE_CAM, 2.5);
-      // motion: the packet out of the pocket, a cigarette out of it (Л: parts pack, cigarette)
-      await s.wait(2);
+      // the packet out of her pocket, a cigarette out of it; a match struck and held to it; she smokes, seated
+      await s.wait(1);
+      grandma.with(['packet']);
+      grandma.look('grandma#packet');
+      await s.wait(1);
       s.tell('smoke:packet');
-      await s.wait(2.5);
-      // motion: a match struck and held to it (Л: strike, part match)
+      await s.wait(1.5);
+      grandma.with(['packet', 'cigarette']);
+      await s.wait(1);
+      grandma.with(['cigarette', 'match']);
       await s.move('cigarette', 1, { over: 0.8 });
+      grandma.with(['cigarette']);
+      grandma.look('sophia');
       s.tell('smoke:lit');
-      // motion: smoking, the hand to the mouth now and then (Л: smoke, seated)
       await s.wait(2.5);
     },
   },
   // 3.3 «moss» — Sophia pulls the drawers out one after another, takes nothing, turns to Grandmother («Nobody has died here»)
   drawers: {
     after: 'smoke',
-    from: () => ({ ...NIGHT, sash: 1, cigarette: 1, ...at('grandma', 'bed'), ...at('sophia', 'door', { sophia_a: ROOM_MID[0], sophia_d: ROOM_MID[1], sophia_look: 'win_sea' }),
+    from: () => ({ ...NIGHT, sash: 1, cigarette: 1, ...at('grandma', 'bed', { grandma_with: ['cigarette'] }),
+      ...at('sophia', 'door', { sophia_a: ROOM_MID[0], sophia_d: ROOM_MID[1], sophia_look: 'win_sea' }),
       lantern: 'floor', seal: false, ...DRAWER_CAM }),
     run: async s => {
       const sophia = s.person('sophia');
@@ -276,7 +289,8 @@ const FILM = {
   // 3.3 «moss» — Grandmother looks at her, close; a pause; «Come on» — she gets up with the lantern
   look: {
     after: 'drawers',
-    from: () => ({ ...NIGHT, sash: 1, drawers: 1, cigarette: 1, ...at('grandma', 'bed'), ...at('sophia', 'drawers', { sophia_turn: 235, sophia_look: 'grandma' }),
+    from: () => ({ ...NIGHT, sash: 1, drawers: 1, cigarette: 1, ...at('grandma', 'bed', { grandma_with: ['cigarette'] }),
+      ...at('sophia', 'drawers', { sophia_turn: 235, sophia_look: 'grandma' }),
       lantern: 'floor', seal: false, ...FACE_CAM }),
     run: async s => {
       const grandma = s.person('grandma');
@@ -286,14 +300,18 @@ const FILM = {
       s.tell('look:face');
       await s.wait(3);
       await s.move('cigarette', 0, { over: 0.6 });
-      // motion: up from the bed, slowly, a hand on its edge (Л: rise_slow); till then on her feet at once
-      grandma.on(null);
-      grandma.do('stand', { loop: true });
-      s.set('grandma_a', BEDSIDE[0]);
-      s.set('grandma_d', BEDSIDE[1]);
-      // motion: the lantern taken up from the floor (Л)
-      s.set('lantern', 'hand');
+      grandma.with(null);
+      // a cut back to the room; there she gets up slowly, steps to the lantern and takes it up
       await cutTo(s, ROOM_IN);
+      grandma.on(null);
+      await grandma.do('rise_slow');
+      await grandma.walk([BEDSIDE]);
+      await grandma.turn(200);
+      grandma.look('lantern#lantern');
+      await grandma.do('pick_up');
+      s.set('lantern', 'hand');
+      grandma.with(['lantern']);
+      grandma.look('sophia');
       s.tell('look:up');
       await s.wait(2);
     },
@@ -301,7 +319,8 @@ const FILM = {
   // 3.3 «moss» — going, Sophia lays the wooden seal on the table; they go out; the room empty, the seal in the moonlight
   seal: {
     after: 'look',
-    from: () => ({ ...NIGHT, sash: 1, drawers: 1, ...at('grandma', 'door', { grandma_a: BEDSIDE[0], grandma_d: BEDSIDE[1], grandma_turn: 200, grandma_look: 'sophia' }),
+    from: () => ({ ...NIGHT, sash: 1, drawers: 1, ...at('grandma', 'door', { grandma_a: BEDSIDE[0], grandma_d: BEDSIDE[1], grandma_turn: 200, grandma_look: 'sophia',
+      grandma_with: ['lantern'] }),
       ...at('sophia', 'drawers', { sophia_turn: 235, sophia_look: 'grandma' }), lantern: 'hand', seal: false, ...TABLE_CAM }),
     run: async s => {
       const grandma = s.person('grandma');
@@ -310,9 +329,12 @@ const FILM = {
       await sophia.walk([PLACES.sophia.table.at]);
       await sophia.turn(PLACES.sophia.table.turn);
       sophia.look('table#seal');
-      // motion: the seal out of her pocket and laid down (Л: part seal)
+      // the seal out of her pocket, in her hand, laid on the table
+      sophia.with(['seal']);
+      await s.wait(0.8);
       sophia.reach({ r: 'table#seal' });
       await s.wait(1.2);
+      sophia.with(null);
       s.set('seal', true);
       sophia.reach(null);
       s.tell('seal:left');

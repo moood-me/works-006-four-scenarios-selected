@@ -11,6 +11,13 @@ A = 16 / 9
 
 # the common keys: where they start (the empty play: a June day, a full moon, the sea as it is, no fog) and what they are
 STATE = {"dawn": 0, "dusk": 0, "night": 0, "late": 0, "calm": 0, "storm": 0, "flash": 0, "fog": 0, "fog_air": 0, "moon": 1}
+# the sea's mirror following the weather (a scene whose sea plane takes it: sea(..., mirror=...) — its script calls
+# weather(scene, lib.MIRROR)); the base its lib's MIRROR, the defaults here those of a still day
+MIRROR_STATES = {
+    "mirror_strength": {"range": [0, 1], "smooth": True, "means": "the scene's own (the island's script sets it from storm): how strongly the sea mirrors"},
+    "mirror_rough": {"range": [0, 1], "smooth": True, "means": "the scene's own (from calm and storm): how rough the sea's mirror is"},
+    "mirror_ripple": {"range": [0, 1], "smooth": True, "means": "the scene's own (from calm and storm): the small waves breaking the sea's mirror"},
+}
 STATES = {
     "dawn": {"range": [0, 1], "smooth": True, "means": "the June dawn: the sun just up, veiled, low (0 — the day)"},
     "dusk": {"range": [0, 1], "smooth": True, "means": "the dusk: the sun just gone, the afterglow low (0 — the day); over dawn"},
@@ -99,7 +106,10 @@ def sky(folder, low, sun, late, dawn, dusk_x, night_x, bolt, moon=None, band_x=A
 
 def sea(folder, elevation, reflect, centre=(0, 2000), size=(6000, 4000), clear=()):
     """The sea plane, its code and animate written into the scene's elements/: centred at `centre` [across,
-    distance], `size` [width, depth] metres, at the scene's sea level; `reflect` its mirror (the scene's own); `clear` —
+    distance], `size` [width, depth] metres, at the scene's sea level (`water`: the eye riding over it stays 1.7 m over
+    it, not over the sea floor); `reflect` its mirror (the scene's own numbers —
+    or keyed: {"strength": "mirror_strength", "rough": "mirror_rough", "ripple": "mirror_ripple", "fade": …}, the
+    weather moving them: MIRROR_STATES, the script's weather(scene, lib.MIRROR)); `clear` —
     [[across, distance, rx, rz], …] where the water is clear over the rock. Its foam runs along the scene's lib.edge
     ([[across, distance], …] on the waterline)."""
     el = os.path.join(folder, "elements")
@@ -109,7 +119,27 @@ def sea(folder, elevation, reflect, centre=(0, 2000), size=(6000, 4000), clear=(
     _write(os.path.join(el, "sea.animate.js"), "// the calm and the storm on the sea's layers (modules/isle.md) — written by tools/isle.py\n"
            "e.kit.isle.seaMove(e);\n")
     return {"id": "sea", "name": "Sea", "plane": True, "across": centre[0], "distance": centre[1], "elevation": elevation,
-            "width": size[0], "depth": size[1], "reflect": reflect}
+            "width": size[0], "depth": size[1], "reflect": reflect, "water": True}
+
+
+def mirror_state(base):
+    """The keyed mirror's keys where they start (a still day): its base {strength, rough, ripple}."""
+    return {"mirror_strength": base["strength"], "mirror_rough": base["rough"], "mirror_ripple": base["ripple"]}
+
+
+KEYED = {"strength": "mirror_strength", "rough": "mirror_rough", "ripple": "mirror_ripple"}
+
+
+def lib_value(root, scene, name):
+    """A value of the scene's lib (what JSON carries of it: its MIRROR, its PLACES), read by node from
+    scenes/<scene>/lib.js."""
+    import subprocess
+    code = ("const fs = require('fs');"
+            "const anim = { clamp: (v, a, b) => Math.min(b, Math.max(a, v)) };"
+            "const lib = new Function('anim', 'kit', fs.readFileSync(process.argv[1], 'utf8'))(anim, {});"
+            "process.stdout.write(JSON.stringify(lib[process.argv[2]]));")
+    out = subprocess.run(["node", "-e", code, os.path.join(root, "scenes", scene, "lib.js"), name], capture_output=True, text=True, check=True).stdout
+    return json.loads(out)
 
 
 RAIN = {"id": "rain", "name": "Rain", "particles": {"kind": "rain", "amount": "storm", "count": 9000, "wind": 1.2}}

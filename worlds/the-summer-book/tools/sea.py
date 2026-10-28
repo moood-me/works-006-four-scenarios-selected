@@ -53,7 +53,7 @@ SUN, LATE, DAWN, BOLT = [A * 0.22, 0.02], [A * 0.15, 0.18], [A * 0.2, 0.3], [A *
 
 objects = [
     isle.sky(folder, 0.42, SUN, LATE, DAWN, A * 0.85, A * 0.4, BOLT),
-    isle.sea(folder, WATER, {"strength": 0.45, "fade": 0, "rough": 0.25, "ripple": 0.2}, centre=(0, 1500), size=(6000, 5000)),
+    isle.sea(folder, WATER, {**isle.KEYED, "fade": 0}, centre=(0, 1500), size=(6000, 5000)),
     {"id": "skerry", "name": "Skerries", "across": 120, "distance": 300, "onLand": False, "elevation": WATER, "height": 5,
      "box": [-20.5, -5.4, 20.5, 0.7], "copies": [{"across": 120, "distance": 300}, {"across": -170, "distance": 420, "scale": 1.3, "flip": True},
                                                 {"across": 40, "distance": 520, "scale": 0.8}]},
@@ -83,10 +83,11 @@ objects = [
      "depth": 0.32, "copies": [{"across": 0, "distance": -0.2}, {"across": 0, "distance": 1.9}, {"across": 0, "distance": 3.9}], "shadow": True},
     {"id": "thwart_face", "name": "The thwarts' fronts", "on": "hull", "across": 0, "distance": -0.36, "facing": 180, "height": 0.42,
      "box": [-1.25, -0.45, 1.25, 0.03], "copies": [{"across": 0, "distance": -0.36}, {"across": 0, "distance": 1.74}, {"across": 0, "distance": 3.74}]},
-    on_boat("basket", "The basket", 0.95, -0.9, [-0.4, -0.95, 0.4, 0.03], 0.6, facing=180),
+    on_boat("basket", "The basket", -0.85, -0.9, [-0.4, -0.95, 0.4, 0.03], 0.6, facing=180),
     # the cat Mappe on the basket's lid (the world's cat: seen while `basket` is cat)
-    {"id": "cat", "name": "Mappe, the cat", "on": "hull", "across": 0.95, "distance": -0.9, "elevation": 0.47, "height": 0.5,
+    {"id": "cat", "name": "Mappe, the cat", "on": "hull", "across": -0.85, "distance": -0.9, "elevation": 0.47, "height": 0.5,
      "box": [-0.46, -0.56, 0.46, 0.03], "shadow": True},
+    on_boat("bird", "The last present", -0.68, -0.95, [-0.12, -0.08, 0.12, 0.01], 0.08, facing=180, elevation=0.47),
     on_boat("bundles", "The things", -0.7, 2.4, [-0.55, -0.75, 0.6, 0.03], 0.7, facing=180),
     on_boat("dinghy", "The dinghy in tow", -2.8, 13, [-0.85, -1.0, 0.85, 0.2], 0.6, facing=180, elevation=-DECK),
     person("grandma", "Grandmother", "grandma", 0.45, 0.2),
@@ -106,14 +107,33 @@ def placed(id, who, places):
             f"{id}_placed": {"type": "string", "means": f"the scene's own: the place {who} was last put at"}}
 
 
-state = {**isle.STATE,
+MIRROR = isle.lib_value(root, "sea", "MIRROR")
+PLACES = isle.lib_value(root, "sea", "PLACES")
+state = {**isle.STATE, **isle.mirror_state(MIRROR),
          "island": 0, "sway": 0, "basket": "shut", "dinghy": True, "boat_d": BOAT_D, "boat_pitch": 0,
          "grandma_at": "seat", "sophia_at": "beside", "papa_at": "stern",
-         "grandma_a": 0.45, "grandma_d": 0.2, "sophia_a": -0.4, "sophia_d": 0.25, "papa_a": 0.55, "papa_d": 3.8}
-states = {**isle.STATES,
-          **placed("grandma", "Grandmother", ["seat", "hand"]),
-          **placed("sophia", "Sophia", ["bow", "beside", "hand"]),
-          **placed("papa", "Papa", ["stern"]),
+         "grandma_a": 0.45, "grandma_d": 0.2, "sophia_a": -0.4, "sophia_d": 0.25, "papa_a": 0.55, "papa_d": 3.8,
+         "beat": "", "beat_next": "", "cat_bird": False, "lean": 0, "counted": False, "storm_mark": "notyou", "song": False, "sign_hat": "nail",
+         "mama": "gone", "learned": False, "nets": "say", "ask_mama": False, "late_form": False, "called": False, "knock": False}
+states = {**isle.STATES, **isle.MIRROR_STATES,
+          "beat": {"type": "string", "means": "the piece playing (notes.md «Pieces»)"},
+          "beat_next": {"type": "string", "means": "the piece the game will play next (its cut made ready)"},
+          "lean": {"range": [-1, 1], "smooth": True, "means": "М11 «Сидеть прямо» (the mini-game's): Grandmother's body after the arrow, −1 left … 1 right"},
+          "cat_bird": {"type": "boolean", "means": "the scene's own: the dead bird at the cat's paws on the basket (cat_gift)"},
+          "counted": {"type": "boolean", "means": "the play's: «Софья знает» — Sophia counted Grandmother's steps"},
+          "storm_mark": {"values": ["porch", "blanket", "notyou"], "means": "the play's: the storm's choice (the sky's gesture)"},
+          "song": {"type": "boolean", "means": "the play's: «Гроза: одеяло» — Grandmother hums the song"},
+          "sign_hat": {"values": ["on", "bag", "nail"], "means": "the play's: where the hat is (Grandmother's look in «Окно»)"},
+          "mama": {"values": ["gone", "sky", "moon"], "means": "the play's: the first hinge (the promise's lines)"},
+          "learned": {"type": "boolean", "means": "the play's: Papa learned before the last morning"},
+          "nets": {"values": ["say", "nothing", "net"], "means": "the play's: «Сети» (how Papa asks at the big boat)"},
+          "ask_mama": {"type": "boolean", "means": "the play's: the full «Вёсла» with «Мама: нет» — «Did Mama row like that?»"},
+          "late_form": {"type": "boolean", "means": "the play's: the ending's late form («Why only once?»)"},
+          "called": {"type": "boolean", "means": "the play's: Sophia called in the fog night"},
+          "knock": {"type": "boolean", "means": "the play's: «Постучу» broken and Sophia did not call"},
+          **placed("grandma", "Grandmother", list(PLACES["grandma"])),
+          **placed("sophia", "Sophia", list(PLACES["sophia"])),
+          **placed("papa", "Papa", list(PLACES["papa"])),
           "island": {"range": [0, 1], "smooth": True, "means": "how far the boat has gone from the island: 0 just off its far rock, 1 out at sea, the island gone into the white"},
           "sway": {"range": [0, 1], "smooth": True, "means": "how hard the boat pitches on the swell (0 hardly, 1 hard: «Платок», sitting upright)"},
           "basket": {"values": ["cat", "shut"], "means": "the basket in the bow: the cat Mappe sitting on its lid (the world's cat), or shut with him in it"},
@@ -129,7 +149,7 @@ spec = {
     "camera": {"mode": "picture", "on": "eye"},
     "light": isle.light(WIND),
     "lights": lights,
-    "modules": ["cast", "isle", "cat"],
+    "modules": ["cast", "isle", "cat", "beats"],
     "state": state,
     "states": states,
     "objects": objects,
