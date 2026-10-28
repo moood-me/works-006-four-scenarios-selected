@@ -1,14 +1,14 @@
 // The wooden animals in the moss by the stump, carved by Grandmother through the summers: a horse, a bird, a dog, a cow
-// — and the seal, made this June (the fifth). As many as `animals` says (between steps, or once as the seal is laid
-// there). Pale wood, a little silvered. Side-on, metres from the middle of their foot; 1.2 m along the moss.
-const n = e.state.animals ?? 0;
+// — and the seal, made this June (the fifth). Each a layer painted once (`a0`…`a4`): its animate shows as many as
+// `animals` says (the seal laid there in a piece). Pale wood, a little silvered. Side-on, metres from the middle of
+// their foot; 1.2 m along the moss.
 const WOOD = '#c9b48e';
-const fig = (k, draw) => {
-  if (k < n) draw();
-};
-g.fillStyle = WOOD;
+const fig = (k, draw) => e.layer(`a${k}`, {}, c => {
+  c.fillStyle = WOOD;
+  draw(c);
+});
 // a horse
-fig(0, () => {
+fig(0, g => {
   g.beginPath();
   g.ellipse(-0.5, -0.1, 0.07, 0.035, 0, 0, 6.2832);
   g.fill();
@@ -23,7 +23,7 @@ fig(0, () => {
   g.fill();
 });
 // a bird
-fig(1, () => {
+fig(1, g => {
   g.beginPath();
   g.ellipse(-0.25, -0.035, 0.04, 0.025, -0.2, 0, 6.2832);
   g.fill();
@@ -32,7 +32,7 @@ fig(1, () => {
   g.fill();
 });
 // a dog
-fig(2, () => {
+fig(2, g => {
   g.beginPath();
   g.ellipse(-0.02, -0.07, 0.055, 0.03, 0, 0, 6.2832);
   g.fill();
@@ -43,7 +43,7 @@ fig(2, () => {
   g.fill();
 });
 // a cow
-fig(3, () => {
+fig(3, g => {
   g.beginPath();
   g.ellipse(0.25, -0.08, 0.07, 0.04, 0, 0, 6.2832);
   g.fill();
@@ -54,7 +54,7 @@ fig(3, () => {
   g.fill();
 });
 // the seal: lying, its head up, the newest, whitest wood
-fig(4, () => {
+fig(4, g => {
   g.fillStyle = '#ddcba6';
   g.beginPath();
   g.moveTo(0.42, -0.005);

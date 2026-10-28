@@ -193,11 +193,21 @@
       "strength": 1.4,
       "reach": 14,
       "on": "boat_out"
+    },
+    {
+      "id": "hand_lamp",
+      "at": "grandma#hand_r",
+      "color": "#ffc98a",
+      "strength": 1.1,
+      "reach": 3.5,
+      "on": "lamp_lit",
+      "flicker": 0.12
     }
   ],
   "modules": [
     "cast",
-    "isle"
+    "isle",
+    "beats"
   ],
   "state": {
     "dawn": 0,
@@ -217,10 +227,20 @@
     "boat_out": false,
     "grandma_at": "clearing",
     "sophia_at": "clearing",
+    "papa_at": "edge",
+    "papa_here": false,
     "grandma_a": -0.9,
     "grandma_d": 3.5,
     "sophia_a": 0.3,
-    "sophia_d": 2.9
+    "sophia_d": 2.9,
+    "papa_a": -5.4,
+    "papa_d": 3.0,
+    "brave": false,
+    "sophia_back": false,
+    "step": 0,
+    "lantern_sway": 0,
+    "grab": false,
+    "lamp_lit": 0
   },
   "states": {
     "dawn": {
@@ -304,14 +324,18 @@
     "grandma_at": {
       "values": [
         "clearing",
+        "edge",
         "stump",
+        "up",
         "trunk",
+        "crevice",
         "moss",
         "path1",
         "path2",
-        "path3"
+        "path3",
+        "far"
       ],
-      "means": "where Grandmother is (the scene's places, lib.PLACES: clearing, stump, trunk, moss, path1, path2, path3); set, put there at once"
+      "means": "where Grandmother is (the scene's places, lib.PLACES: clearing, edge, stump, up, trunk, crevice, moss, path1, path2, path3, far); set, put there at once"
     },
     "grandma_a": {
       "range": [
@@ -334,12 +358,23 @@
     "sophia_at": {
       "values": [
         "clearing",
+        "edge",
         "moss",
+        "animals",
         "stump",
+        "behind",
+        "near",
+        "beside",
+        "nose",
+        "aside",
+        "trees",
         "crevice",
-        "path1"
+        "path1",
+        "path2",
+        "path3",
+        "far"
       ],
-      "means": "where Sophia is (the scene's places, lib.PLACES: clearing, moss, stump, crevice, path1); set, put there at once"
+      "means": "where Sophia is (the scene's places, lib.PLACES: clearing, edge, moss, animals, stump, behind, near, beside, nose, aside, trees, crevice, path1, path2, path3, far); set, put there at once"
     },
     "sophia_a": {
       "range": [
@@ -358,6 +393,74 @@
     "sophia_placed": {
       "type": "string",
       "means": "the scene's own: the place Sophia was last put at"
+    },
+    "papa_at": {
+      "values": [
+        "edge",
+        "lift"
+      ],
+      "means": "where Papa is (the scene's places, lib.PLACES: edge, lift); set, put there at once"
+    },
+    "papa_a": {
+      "range": [
+        -12,
+        12
+      ],
+      "means": "the scene's own: where Papa stands (across, metres), set from papa_at; a piece walks them"
+    },
+    "papa_d": {
+      "range": [
+        0,
+        30
+      ],
+      "means": "the scene's own: where Papa stands (distance, metres), set from papa_at; a piece walks them"
+    },
+    "papa_placed": {
+      "type": "string",
+      "means": "the scene's own: the place Papa was last put at"
+    },
+    "brave": {
+      "type": "boolean",
+      "means": "the play's: Sophia at 3 or more — by her fallen grandmother she does not cry out: she comes quickly, squats and looks into her face"
+    },
+    "sophia_back": {
+      "type": "boolean",
+      "means": "the play's: «Mamma: sky» — Sophia first steps back, fists clenched («You said — not soon!»)"
+    },
+    "step": {
+      "range": [
+        0,
+        3
+      ],
+      "means": "the stones minigame: the stone of the path the two walk to (1…3), at their pace; step:stone<n> told on Grandmother's arrival"
+    },
+    "lantern_sway": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the stones minigame's flaw: the lantern swinging in her hand, its light wavering"
+    },
+    "grab": {
+      "type": "boolean",
+      "means": "the stones minigame's flaw: Sophia catches Grandmother by the skirt"
+    },
+    "lamp_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own: Grandmother's lantern alight in her hand (from grandma_with and lantern_sway)"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (the module beats; the game names it, notes.md «Pieces»)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game goes to next (its cut made ready)"
     },
     "animals": {
       "range": [
@@ -858,6 +961,21 @@
       "place": {
         "across": "sophia_a",
         "distance": "sophia_d"
+      }
+    },
+    {
+      "id": "papa",
+      "name": "Papa",
+      "person": {
+        "cast": "cast",
+        "who": "papa",
+        "turn": 90
+      },
+      "across": -5.4,
+      "distance": 3.0,
+      "place": {
+        "across": "papa_a",
+        "distance": "papa_d"
       }
     },
     {
