@@ -32,6 +32,7 @@ export default {
     // 1.2: the forest; the knife; the palm on the trunk
     async g => {
       g.beds({ wind: 0.3, trees: 0.4 });
+      on(g, 'carve:sat', () => g.sound.knife());
       await g.scene(SCENES.forest, { beat: 'carve', here: ['grandma', 'sophia'], moods: { grandma: 'thinking', sophia: 'smile' }, keys: DAY });
       await g.beat('carve');
       // (one flipper split off: the insert shows it, and the seal in the moss at the end of July — the forest's `flipper`)
@@ -109,6 +110,7 @@ export default {
     // 1.5: the nets in the evening; ⚑ “tell me, if anything”
     async g => {
       g.beds({ sea: 0.35 });
+      on(g, 'nets:coffee', () => g.sound.cup());
       await piece(g, 'nets', {
         sat: async () => {
           await g.say('papa', 'Mamma. Tell me, if anything');
@@ -123,6 +125,7 @@ export default {
       ] });
       if (nets === 'say') {
         await g.say('grandma', 'I’ll tell you');
+        on(g, 'nets_say:cup', () => g.sound.cup());
         await g.beat('nets_say');
       } else if (nets === 'nothing') {
         await g.say('grandma', 'There’s nothing to tell');

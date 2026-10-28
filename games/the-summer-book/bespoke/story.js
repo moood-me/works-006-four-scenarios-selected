@@ -36,7 +36,7 @@
 //     the signal aborts when it is skipped (the page's ⏭, where it may be skipped) or the step is left; → its result
 //   g.minigame({phrase}) — inside a minigame's run: the language's mini-game begun; g.failed() — a mistake made in it:
 //     from then on the page's ⏭ may skip it (a mini-game the player has not seen may be skipped once they failed it,
-//     or after SKIPPABLE s); g.card(title, gesture, text) — a stub's card beside it (minigames/stub.js), gone with it
+//     or after SKIPPABLE s)
 //   g.apply(choice) — what the option chosen does, by EFFECTS: the scales, then each mark
 //   g.scale(name, delta) — a scale moves; the player sees which way (the gauge, the words)
 //   g.gauge(name) — the scale is shown from now on; its one line of what it means said once
@@ -396,12 +396,6 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       if (!playing || playing.skippable) return;
       playing.skippable = true;
       ahead();
-    },
-    card(title, gesture, text) {
-      if (!playing) throw new Error('g.card: only inside a minigame (g.play)');
-      const off = view.card(title, gesture, text);
-      playing.signal.addEventListener('abort', off);
-      return off;
     },
     apply(choice) {
       if (gone()) return;

@@ -59,6 +59,16 @@ export const PLAYS = [
   { label: 'The Shawl on the Stone — she called, the knock promised', choices: { bottom: 'hold', smoke: 'secret', nets: 'say', bird: 'gift', mama: 'sky', head: 'sophia', storm: 'blanket', night: 'knock', fog: 'behind' } },
   { label: 'The Shawl on the Stone — alone all night', choices: { bottom: 'go', smoke: 'tell', nets: 'nothing', bird: 'bury', mama: 'gone', head: 'moss', storm: 'notyou', night: 'scared', fog: 'behind' } },
 ];
+// the promises (scenario §9, §11): the chapter they are given in, the mark that follows them, what was said, what came
+// of it by the mark's value
+const PROMISES = [
+  { chapter: 1, key: 'say', said: tr('“I’ll tell you”'), came: { given: tr('Papa is waiting'), kept: tr('You told him'), broken: tr('He learnt it himself') } },
+  { chapter: 2, key: 'someday', said: tr('“At night. Some day”'), came: { given: tr('Not yet'), kept: tr('You climbed into the new house at night') } },
+  { chapter: 2, key: 'notsoon', said: tr('“Not soon”'), came: { given: tr('She remembered it') } },
+  { chapter: 3, key: 'nottell', said: tr('Sophia: “I won’t tell Papa”'), came: { given: tr('She kept it') } },
+  { chapter: 4, key: 'hear', said: tr('“I’ll hear you”'), came: { given: tr('She did not call'), kept: tr('She called, and you came'), papa: tr('She called, and Papa came'), broken: tr('She called. Nobody came') } },
+  { chapter: 4, key: 'knock', said: tr('“At midnight I’ll knock”'), came: { given: tr('Not yet'), kept: tr('You knocked'), shout: tr('You shouted instead'), broken: tr('You did not knock. She waited') } },
+];
 export const fresh = () => ({
   chapter: 0, step: 0, scales: Object.fromEntries(Object.entries(SCALES).map(([k, s]) => [k, s.start])),
   shown: {}, marks: {}, choices: {},
@@ -108,7 +118,7 @@ export default async function (b) {
   const ended = () => b.ended({ ending: facts(kept).ending });
 
   for (let after = {}; ;) {
-    const to = await map(after);
+    const to = after.on ? 'main' : await map(after);
     after = {};
     wake(); // (a touch: the page may be heard from now on)
     if (to === 'drop') { replay = null; continue; }
@@ -124,7 +134,8 @@ export default async function (b) {
     const done = kept.chapter;
     await onward();
     if (kept.chapter === END) ended();
-    after = { reveal: done };
+    // (no map between the prologue and chapter I, nor between IV and the epilogue: on at once)
+    after = done === 0 || done === EPILOGUE - 1 ? { on: true } : { reveal: done };
   }
 
   // the run being played (the replay, else the main run), step by step to its chapter's end → 'done'; or till ☰ →
@@ -185,9 +196,9 @@ export default async function (b) {
     b.menu(null);
     b.hush();
     view.quiet();
-    view.gauge(null);
+    view.gauge(replay ? replay.run : kept); // (how things stand, in the corner)
     beds({ sea_in: 0.2 }, 2); // (the drawing on Papa's table, the sea beyond the veranda's glass)
-    await b.show(SCENES.map, { state: { shown: Math.min(replay ? replay.run.chapter : kept.chapter, EPILOGUE) }, captions: false });
+    await b.show(SCENES.map, { state: { shown: Math.min(reveal ?? (replay ? replay.run.chapter : kept.chapter), EPILOGUE) }, captions: false });
     const drawn = trees(b, sky(), { grow: reveal, author: !!author });
     const notice = replay?.done && anew() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};
     let asked = null; // (an option that would leave the replay: asked again)
@@ -261,9 +272,14 @@ export default async function (b) {
       const all = rows(c, reached ? kept.choices : {}, tried ? re.choices : {});
       const shown = i < kept.chapter && !tried ? all : all.filter(r => r.options.some(o => o.state !== 'unseen'));
       return { number: c.number, title: c.title, kind,
-        rows: i === EPILOGUE ? shown.concat(finale()) : shown,
+        rows: i === EPILOGUE ? shown.concat(finale()) : i <= kept.chapter ? shown.concat(promised(i)) : shown,
         go: i === kept.chapter ? (kept.step || kept.chapter ? tr('continue\nthe game') : tr('start\nthe game')) : null, replay: tried && !replay.done, badge: tried };
     });
+  }
+  // the promises given in chapter i, each a row: what was promised, what came of it (as the main run has it)
+  function promised(i) {
+    return PROMISES.filter(p => p.chapter === i && kept.marks[p.key])
+      .map(p => ({ title: p.said, weight: '', options: [{ label: p.came[kept.marks[p.key]] ?? p.came.given, state: 'chosen' }] }));
   }
   // the epilogue's last row, once the play is played through: how it ended — its endings, the one it came to chosen
   function finale() {

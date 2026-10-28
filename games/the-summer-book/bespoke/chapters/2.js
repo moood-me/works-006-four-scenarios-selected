@@ -30,8 +30,10 @@ export default {
           g.mood('grandma', 'angry');
           await g.say('grandma', 'Then don’t ask me anything either!');
         },
-      }, () => g.scene(SCENES.shore, { beat: 'calm', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'smile' }, keys: { ...DAY, calm: 1 } }));
-      g.title(tr('July'));
+      }, async () => {
+        await g.scene(SCENES.shore, { beat: 'calm', here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'smile' }, keys: { ...DAY, calm: 1 } });
+        g.title(tr('July'));
+      });
       await g.play(pebble);
       on(g, 'calm_after:second', () => g.sound.splash(0.25));
       await piece(g, 'calm_after', {
@@ -72,6 +74,7 @@ export default {
       } else if (bird === 'bury') {
         await g.say('grandma', 'Let’s go and bury it');
         g.beds({ sea: 0.35 });
+        on(g, 'graves:bird', () => g.sound.knife());
         await piece(g, 'graves', {
           song: () => g.say('sophia_song', 'Mm… la-a, la-la… mm-mm… la-a-a', 'sophia'),
           here: async () => {
@@ -136,7 +139,10 @@ export default {
         }, () => g.scene(SCENES.house, { beat: 'sky_morning', here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'smile', papa: 'neutral' }, keys: { ...DAY, slips: slips > 0 } }));
       } else {
         await g.beat('to_door');
-        if ((await g.play(door)).creaked) g.sound.cough(); // (it creaked: Papa coughs on the veranda)
+        // the door's creak (the motif of the night: again in the fog), slow — and if it creaked aloud, Papa coughs
+        const { creaked } = await g.play(door);
+        g.sound.creak({ slow: !creaked });
+        if (creaked) g.sound.cough();
         await g.beat('door_out');
         g.beds({ sea: 0.3 });
         await piece(g, 'moon_path', {
@@ -146,6 +152,7 @@ export default {
           },
         }, () => g.scene(SCENES.shore, { beat: 'moon_path', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'thinking' }, keys: NIGHT }, { cut: true }));
         g.beds({ sea_in: 0.25 });
+        on(g, 'cough:cough', () => g.sound.cough({ wall: false }));
         await piece(g, 'cough', {
           said: () => g.say('papa', 'Mamma, it’s cold at night'),
         }, () => g.scene(SCENES.house, { beat: 'cough', here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'tired', papa: 'neutral' }, keys: DAY }));

@@ -4,7 +4,6 @@
 //     met — its name, its two ends and the pips between them; null — none (the map, the epilogue)
 //   view.toast(text, kind, arrows) — a slip in the corner: 'scale' (a scale moved: its side and arrows), 'rule' (what
 //     a scale means, the first time), 'mark' (remembered); three at most
-//   view.card(title, gesture, text) — the card of a stub mini-game, high on the right: what it will be; → takes it away
 //   view.hint(text) — one line low in the middle; → a function that takes it away
 //   view.title(text, {signal}) — words in the middle of the frame; → once they have gone (9 s)
 //   view.quiet() — what a chapter left showing (its slips, its hint) taken away: the map comes
@@ -50,15 +49,6 @@ export function ui(layer) {
       const stay = kind === 'rule' ? 8000 : 5000;
       setTimeout(() => slip.classList.add('gone'), stay);
       setTimeout(() => slip.remove(), stay + 1200);
-    },
-    card(title, gesture, text) {
-      const c = el('div', 'card', layer);
-      const head = el('p', 'head', c);
-      el('b', '', head).textContent = title;
-      el('span', 'gesture', head).textContent = gesture;
-      el('p', 'text', c).textContent = text;
-      el('p', 'stub', c).textContent = tr('A mini-game to be: for now, press the mark.');
-      return () => c.remove();
     },
     hint(text) {
       hinted();

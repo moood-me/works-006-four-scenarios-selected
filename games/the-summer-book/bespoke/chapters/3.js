@@ -23,9 +23,10 @@ export default {
     // 3.1: the forest spins
     async g => {
       g.beds({ wind: 0.2, trees: 0.5 });
-      await piece(g, 'swim', { up: async () => g.mood('grandma', 'tired') },
-        () => g.scene(SCENES.forest, { beat: 'swim', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'smile' }, keys: JULY }));
-      g.title(tr('The end of July'));
+      await piece(g, 'swim', { up: async () => g.mood('grandma', 'tired') }, async () => {
+        await g.scene(SCENES.forest, { beat: 'swim', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'smile' }, keys: JULY });
+        g.title(tr('The end of July'));
+      });
       await g.play(moss);
     },
     // 3.2: ⚑ whom to tell
@@ -175,13 +176,16 @@ export default {
         on(g, 'porch_go:out', () => g.sound.creak());
         await g.beat('porch_go');
         g.beds({ sea: 0.4, storm: 1 });
-        await g.scene(SCENES.shore, { beat: 'rail', here: f.knew ? ['grandma', 'sophia', 'papa'] : ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'laugh' }, keys: { ...hour('night'), storm: 1 } }, { cut: true });
+        await g.scene(SCENES.shore, { beat: 'rail', here: ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'laugh' }, keys: { ...hour('night'), storm: 1 } }, { cut: true });
         g.each('flash:strike', () => g.sound.thunder(1));
         await g.beat('rail');
         await g.play(rail);
         await piece(g, 'rail_after', {
           sky: () => g.say('grandma', 'It isn’t you. It’s the sky. Look at it'),
-          creak: async () => g.sound.creak(),
+          creak: async () => {
+            g.sound.creak();
+            if (f.knew) g.here('papa', true); // (he comes out with the blanket)
+          },
           ...(f.knew ? { papa: () => g.say('papa', 'Mamma. Indoors') } : {}),
         });
         if (!f.knew) {
