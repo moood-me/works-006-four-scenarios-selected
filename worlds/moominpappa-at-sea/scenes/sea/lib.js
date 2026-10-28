@@ -78,8 +78,9 @@ async function cutTo(s, shot) {
 }
 // the pose for М2 «Румпель»: over Papa's back at the tiller to the bow and the star, the camera still
 const TILLER = () => VIEWS.fore;
-// the pose for ⚑ boat: Papa at the tiller medium, the lantern burning on the bow beyond him
-const CHOICE = () => VIEWS.behind;
+// the pose for ⚑ boat: over Papa at the tiller to the bow, the lantern burning on its bracket in the middle of the frame,
+// nothing before it (lantern#flame), the top of the frame free for the plate
+const CHOICE = () => VIEWS.fore;
 const FILM = {
   // 1.1: the night crossing — Papa's star; the son sees the strip and the eyes, edges up to Mama, looks back again
   night: {

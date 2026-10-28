@@ -146,8 +146,9 @@ async function cutTo(s, shot) {
 }
 // П.1–П.3: Mama at the stove, the children by the stream, the Groke far off on the beach; the house's window lit early
 const GARDEN = () => ({ ...PLACE0, jam: 1, lamps: 0.5, ...at('mama', 'stove'), ...at('troll', 'stream'), ...at('my', 'stream'), ...at('groke', 'beach') });
-// the pose for М1: Papa beside the moss, the moss (apple#moss) in the middle of 4:3
-const LADLE = () => cam('papa', 'wide', [0.65, 0.55]);
+// the pose for М1: Papa beside the moss, the moss (apple#moss) in the middle of 4:3, above the subtitles' band (Papa's
+// head high in the frame, the ground before him in its middle)
+const LADLE = () => cam('papa', 'wide', [0.62, 0.3]);
 const FILM = {
   // П.1: the garden at the end of August; Papa strolls along the path to the apple tree
   garden: {

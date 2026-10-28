@@ -80,7 +80,8 @@ toward the bow) and in the pieces' own close shots of it (`lantern`); in `aft` i
 - `glance` (≈ 10 s, by a cut): Papa sees where his son is looking and glances round (`fore`, Papa close) — `glance:strip`
   (his «The moon's path. Pretty»); `aft` over his shoulder: the strip and, beside it, the moon's path; Papa turns back
   to look ahead, the eyes behind him unseen — `glance:ahead` («The eyes he does not see…»). Ends: Papa medium by the
-  tiller, the lantern burning on the bow beyond him — the pose for the choice `boat` (`tiller#grip`).
+  tiller, the lantern burning on the bow beyond him — the pose for the choice `boat` (`fore`: the lantern in the middle
+  of the frame, unoccluded — `lantern#flame`).
 - `douse` (≈ 14 s, after `glance`): Papa reaches forward and puts the lantern out (`lantern_at` "out") — `douse:out`;
   `aft`, wide: the boat goes on by moonlight, the strip and the Groke in it fall behind, far astern, out of sight in
   the dark (`trail` 0.4 → −1.5 over 9 s) — `douse:gone`; Mama wakes in the dark and lifts her head — `douse:wake` («Where are we?» …). Ends: Mama awake, moonlit.
@@ -121,7 +122,7 @@ toward the bow) and in the pieces' own close shots of it (`lantern`); in `aft` i
   "last": {"after": ["home"], "tells": ["last:far"], "seconds": 8, "show": false}
  },
  "points": ["papa", "mama", "troll", "my", "groke", "lantern#flame", "tiller#grip", "star", "strip", "lighthouse#door", "handle#troll", "paws#paws"],
- "offers": ["tiller#grip", "star"],
+ "offers": ["tiller#grip", "lantern#flame", "star"],
  "party": {"moon": 0.6, "calm": 0, "glance": "sea"},
  "acts": {"heading": {"values": [], "tells": []}, "wave": {"values": [], "tells": []}}}
 ```

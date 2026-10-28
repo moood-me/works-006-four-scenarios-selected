@@ -40,7 +40,7 @@ lighthouse.update({'on': 'isle', 'elevation': 6.1})
 
 objects = [
     island.sky(0.6, (-0.35, 0.42), 1.95, -0.15, round=True),
-    {'id': 'star', 'name': 'The star Papa steers by', 'sky': True, 'box': [round(16 / 9 / 2 + math.pi - 0.18, 3), 0.15, round(16 / 9 / 2 + math.pi - 0.08, 3), 0.25]},
+    {'id': 'star', 'name': 'The star Papa steers by', 'sky': True, 'box': [round(16 / 9 / 2 - math.pi + 0.18, 3), 0.35, round(16 / 9 / 2 - math.pi + 0.28, 3), 0.45]},
     island.sea(0, {'strength': 0.2, 'fade': 0, 'rough': 0.55, 'ripple': 0.4}, round=True),
     {'id': 'boat', 'name': 'The boat Adventure', 'unseen': True, 'across': 0, 'distance': 0, 'elevation': 0, 'onLand': False,
      'facing': 180, 'height': 0.1, 'box': [-0.05, -0.1, 0.05, 0], 'place': {'facing': 'boat_facing', 'tilt': 'boat_pitch'}},
