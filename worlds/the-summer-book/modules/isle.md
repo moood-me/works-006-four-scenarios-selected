@@ -40,7 +40,7 @@ A scene's generator (`tools/<scene>.py`, run `python -B tools/<scene>.py <world>
 
 The scene's `script.js` calls `scene.kit.isle.weather(scene)` (`fog_air` from `fog`; the storm's lightning) and, for
 its people, `scene.kit.isle.places(scene, PLACES)`: each person stands where `<id>_at` names — `PLACES[id][name] =
-{at: [across, distance], turn, look, reach}`, the person's `"place": {"across": "<id>_a", "distance": "<id>_d"}`; set
+{at: [across, distance], turn, look, reach, on, do}` (`on` — a seat, `[across, distance, elevation]` or `{on: element, at: […]}`, carried with it; `do` — a motion of the cast; unless said, their own `does`), the person's `"place": {"across": "<id>_a", "distance": "<id>_d"}`; set
 at once when `<id>_at` changes, and on opening only if it differs from `<id>_placed`. A scene declares `<id>_at`,
 `<id>_a`, `<id>_d`, `<id>_placed` in its `states` (`tools/shore.py` `placed()`).
 

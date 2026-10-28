@@ -6,18 +6,20 @@ const WATER = 0;
 const ground = () => -30;
 const edge = [];
 for (let a = -110; a <= 85; a += 1.5) edge.push([a, 81.5]);
-// the people's places in the boat (the island's places(): `<id>_at`), in the boat's frame, facing the bow (the way it goes)
+// the people's places in the boat (the island's places(): `<id>_at`), in the boat's frame, facing the bow (the way it
+// goes): seated on the thwarts (`on` the hull, the seat's top 0.42 m over the deck), Sophia on the bow on the deck
+const SEAT = 0.42;
 const PLACES = {
   grandma: {
-    seat: { at: [0.45, 0.2], turn: 180 },
-    hand: { at: [0.45, 0.2], turn: 180, reach: { l: 'sophia#hand_r' } },
+    seat: { at: [0.45, 0.1], turn: 180, on: { on: 'hull', at: [0.45, -0.2, SEAT] }, do: 'sit_stone' },
+    hand: { at: [0.45, 0.1], turn: 180, on: { on: 'hull', at: [0.45, -0.2, SEAT] }, do: 'sit_stone', reach: { l: 'sophia#hand_r' } },
   },
   sophia: {
-    bow: { at: [-0.2, -1.2], turn: 180 },
-    beside: { at: [-0.4, 0.25], turn: 180 },
-    hand: { at: [-0.05, 0.3], turn: 180, look: 'grandma', reach: { r: 'grandma#hand_l' } },
+    bow: { at: [-0.2, -0.9], turn: 180, do: 'sit_look' },
+    beside: { at: [-0.4, 0.1], turn: 180, on: { on: 'hull', at: [-0.4, -0.2, SEAT] }, do: 'seated' },
+    hand: { at: [-0.1, 0.1], turn: 180, on: { on: 'hull', at: [-0.1, -0.2, SEAT] }, do: 'seated', look: 'grandma', reach: { r: 'grandma#hand_l' } },
   },
-  papa: { stern: { at: [-0.75, 3.9], turn: 180, look: 'grandma' } },
+  papa: { stern: { at: [-0.75, 3.7], turn: 180, on: { on: 'hull', at: [-0.75, 3.9, SEAT] }, do: 'seated', look: 'grandma' } },
 };
 // the boat's side seen from inside (its x along the side, from the bow's corner aft; up from the deck): grey-white
 // planking, a few ribs, the dark gunwale; `len` long, 0.75 m to the gunwale

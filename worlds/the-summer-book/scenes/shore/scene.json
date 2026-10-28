@@ -194,7 +194,8 @@
   ],
   "modules": [
     "cast",
-    "isle"
+    "isle",
+    "cat"
   ],
   "state": {
     "dawn": 0,
@@ -235,7 +236,24 @@
     "dinghy_d": 14.6,
     "dinghy_f": 180,
     "big_boat": false,
-    "luggage": false
+    "luggage": false,
+    "hat": "nail",
+    "cat_at": "porch",
+    "cat_pose": "sit",
+    "cat_a": -6.09,
+    "cat_d": 13.97,
+    "cat_e": 0.62,
+    "cat_dir": 1,
+    "eriksson_here": false,
+    "eriksson_on": {
+      "on": "rowboat",
+      "at": [
+        -0.2,
+        0.3,
+        0.45
+      ]
+    },
+    "eriksson_look": "grandma"
   },
   "states": {
     "dawn": {
@@ -327,9 +345,12 @@
         "peonies",
         "pier",
         "net",
-        "gangway"
+        "gangway",
+        "step",
+        "knee",
+        "dinghy"
       ],
-      "means": "where Grandmother stands (the scene's places, lib.PLACES: water, ledge, warm, path, gate, porch, peonies, pier, net, gangway); set, put there at once"
+      "means": "where Grandmother stands (the scene's places, lib.PLACES: water, ledge, warm, path, gate, porch, peonies, pier, net, gangway, step, knee, dinghy); set, put there at once"
     },
     "grandma_a": {
       "range": [
@@ -358,9 +379,10 @@
         "graves",
         "porch",
         "pier",
-        "gangway"
+        "gangway",
+        "dinghy"
       ],
-      "means": "where Sophia stands (the scene's places, lib.PLACES: water, edge, shelf, warm, graves, porch, pier, gangway); set, put there at once"
+      "means": "where Sophia stands (the scene's places, lib.PLACES: water, edge, shelf, warm, graves, porch, pier, gangway, dinghy); set, put there at once"
     },
     "sophia_a": {
       "range": [
@@ -387,9 +409,10 @@
         "porch",
         "pier",
         "net",
-        "gangway"
+        "gangway",
+        "dinghy"
       ],
-      "means": "where Papa stands (the scene's places, lib.PLACES: lawn, veranda, porch, pier, net, gangway); set, put there at once"
+      "means": "where Papa stands (the scene's places, lib.PLACES: lawn, veranda, porch, pier, net, gangway, dinghy); set, put there at once"
     },
     "papa_a": {
       "range": [
@@ -408,6 +431,63 @@
     "papa_placed": {
       "type": "string",
       "means": "the scene's own: the place Papa was last put at"
+    },
+    "hat": {
+      "values": [
+        "nail",
+        "none"
+      ],
+      "means": "the straw hat on its nail by the room's door, seen through the veranda's glass (the house's own hat; from the water)"
+    },
+    "cat_at": {
+      "values": [
+        "porch",
+        "rail",
+        "path",
+        "past"
+      ],
+      "means": "where the cat is (lib.CAT): on the porch's landing, lying on its rail, on the path above the rock, on the rock past them; set while he walks (cat_pose walk), he goes there at his pace (cat:arrived told)"
+    },
+    "cat_pose": {
+      "values": [
+        "sit",
+        "lie",
+        "walk",
+        "none"
+      ],
+      "means": "what the cat does: sits, lies, walks; none, not here"
+    },
+    "cat_a": {
+      "range": [
+        -12,
+        12
+      ],
+      "means": "the scene's own: where the cat is (across)"
+    },
+    "cat_d": {
+      "range": [
+        0,
+        30
+      ],
+      "means": "the scene's own: where the cat is (distance)"
+    },
+    "cat_e": {
+      "range": [
+        0,
+        2
+      ],
+      "means": "the scene's own: how high the cat is over the land (the porch, its rail)"
+    },
+    "cat_dir": {
+      "values": [
+        1,
+        -1
+      ],
+      "means": "the scene's own: which way the cat faces (1 right, -1 left)"
+    },
+    "cat_placed": {
+      "type": "string",
+      "means": "the scene's own: the place the cat was last put at"
     },
     "rowboat": {
       "range": [
@@ -789,17 +869,22 @@
     {
       "id": "cat",
       "name": "Mappe, the cat",
-      "on": "house",
-      "across": 1.85,
-      "distance": -0.95,
-      "elevation": 0.55,
-      "height": 0.45,
+      "across": -6.09,
+      "distance": 13.97,
+      "elevation": 0.62,
+      "height": 0.5,
       "box": [
-        -0.3,
-        -0.48,
-        0.3,
+        -0.46,
+        -0.56,
+        0.46,
         0.03
-      ]
+      ],
+      "shadow": true,
+      "place": {
+        "across": "cat_a",
+        "distance": "cat_d",
+        "elevation": "cat_e"
+      }
     },
     {
       "id": "peony",
@@ -1382,6 +1467,18 @@
         "across": "papa_a",
         "distance": "papa_d"
       }
+    },
+    {
+      "id": "eriksson",
+      "name": "Eriksson",
+      "person": {
+        "cast": "cast",
+        "who": "eriksson",
+        "turn": 270,
+        "does": "sit_bench"
+      },
+      "across": 70,
+      "distance": 30
     },
     {
       "id": "rain",

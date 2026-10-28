@@ -1,6 +1,7 @@
 // The veranda seen through its glass from outside: its back wall — the house's wall, boarded, painted a pale grey-green
 // gone dim —, the glass door into the room on the right, a shelf of books, and Papa's table under the windows with his
-// papers in piles and the lamp. Darker toward the ceiling. Metres from the middle of its foot; 3.4 m wide, 3 m high.
+// papers in piles and the lamp; by the door, on its nail, the straw hat (`hat`: nail — there; none — gone). Darker
+// toward the ceiling. Metres from the middle of its foot; 3.4 m wide, 3 m high.
 const W = 1.7;
 g.fillStyle = '#9da39a';
 g.fillRect(-W, -3.0, 2 * W, 3.05);
@@ -24,6 +25,22 @@ g.fillStyle = '#6d7a7c';
 g.fillRect(0.82, -2.05, 0.66, 1.2);
 g.fillStyle = '#5d6264';
 g.fillRect(0.82, -0.8, 0.66, 0.75);
+// the straw hat on its nail by the door
+if ((e.state.hat ?? 'nail') === 'nail') {
+  g.fillStyle = '#4f4a44';
+  g.fillRect(0.6, -1.95, 0.025, 0.04);
+  g.fillStyle = '#d8c48c';
+  g.beginPath();
+  g.ellipse(0.61, -1.72, 0.2, 0.05, 0, 0, 6.2832);
+  g.fill();
+  g.fillStyle = '#cdb878';
+  g.beginPath();
+  g.ellipse(0.61, -1.8, 0.11, 0.09, 0, Math.PI, 0);
+  g.fill();
+  g.fillStyle = '#8a5a3c';
+  g.fillRect(0.5, -1.77, 0.22, 0.025);
+  e.at(0.61, -1.78, 'hat');
+}
 // a shelf of books
 g.fillStyle = '#7c6a58';
 g.fillRect(-1.5, -2.05, 1.0, 0.04);

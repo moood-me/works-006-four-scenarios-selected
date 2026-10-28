@@ -61,6 +61,9 @@ const PLACES = {
     pier: { at: [7.2, 16.0], turn: 95, look: 'rowboat#gunwale' },
     net: { at: [4.6, 15.95], turn: 120, look: 'papa' },
     gangway: { at: [-4.1, 26.5], turn: 120, look: 'gangway#rail' },
+    step: { at: [-6.35, 13.4], turn: 200, on: [-6.35, 13.62, 0.2], do: 'sit_stone' },
+    knee: { at: [1.45, 5.6], turn: 230, look: 'sophia' },
+    dinghy: { at: [1.6, 14.6], turn: 90, on: { on: 'dinghy', at: [-0.75, 0.25, 0.3] }, do: 'sit_stone' },
   },
   sophia: {
     water: { at: [0.68, 4.27], turn: 150, look: 'grandma', reach: { r: 'grandma#hand_l' } },
@@ -71,6 +74,7 @@ const PLACES = {
     porch: { at: [-6.2, 13.4], turn: 200 },
     pier: { at: [6.5, 16.0], turn: 95, look: 'rowboat#gunwale' },
     gangway: { at: [-4.6, 26.1], turn: 120 },
+    dinghy: { at: [1.6, 14.6], turn: 270, on: { on: 'dinghy', at: [0.05, 0.25, 0.3] }, do: 'seated' },
   },
   papa: {
     lawn: { at: [-3, 8], turn: 150, look: 'grandma', reach: { r: [-2.893, 7.715, 1.15], l: [-2.807, 7.765, 1.15] } },
@@ -79,11 +83,21 @@ const PLACES = {
     pier: { at: [1.0, 15.95], turn: 120 },
     net: { at: [5.6, 16.05], turn: 200, look: 'net#knot' },
     gangway: { at: [-3.4, 26.8], turn: 110 },
+    dinghy: { at: [1.6, 14.6], turn: 90, on: { on: 'dinghy', at: [0.8, 0.25, 0.3] }, do: 'seated' },
   },
+};
+// the cat's places (cat_at): [across, distance, elevation over the land] and which way he faces (1 right, −1 left) —
+// on the porch's landing, lying on its rail, on the path above the rock (where he comes from), on the rock past the
+// two of them (where he goes)
+const CAT = {
+  porch: { at: [-6.09, 13.97, 0.62], dir: 1 },
+  rail: { at: [-6.87, 14.53, 1.48], dir: 1 },
+  path: { at: [-2.6, 7.9, 0], dir: 1 },
+  past: { at: [1.0, 9.4, 0], dir: 1 },
 };
 // Eriksson's boat: from far out on the right, out of sight (rowboat 0), along the shore to the pier's end (1)
 const ROWBOAT = [[70, 30], [30, 19], [10.6, 14.9]];
 // the dinghy: moored by the pier's root; its circles before the rock (centre, radius); its way out along the shore
 // to the gangway (dinghy_at 0 → 1)
 const DINGHY = { moored: [1.6, 14.6, 180], circle: [4.0, 12.0, 1.5], out: [[1.6, 14.6], [2.8, 19], [2.4, 23], [-0.6, 26.2]] };
-return { WATER, SHELF, coast, ground, shore, sm, edge, PLACES, ROWBOAT, DINGHY };
+return { WATER, SHELF, coast, ground, shore, sm, edge, PLACES, ROWBOAT, DINGHY, CAT };

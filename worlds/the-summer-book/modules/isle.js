@@ -329,10 +329,11 @@ function weather(scene) {
   });
 }
 
-// For a scene's script: each person of `PLACES` stands where `<id>_at` names — PLACES[id][name]: {at: [across,
-// distance], turn, look, reach} — their place's keys `<id>_a`, `<id>_d` (the person's "place"), `<id>_turn`,
-// `<id>_look`, `<id>_reach` set at once. Put again only when `<id>_at` asks another place than `<id>_placed`: a scene
-// opened again goes on as it was, and what a piece set since stays.
+// For a scene's script: each person of `PLACES` is where `<id>_at` names — PLACES[id][name]: {at: [across,
+// distance], turn, look, reach, on (a seat: [across, distance, elevation] or {on: element, at: [...]}), do (what they
+// do there: a motion of the cast; unless said, their own `does`)} — their place's keys `<id>_a`, `<id>_d` (the person's "place"),
+// `<id>_turn`, `<id>_look`, `<id>_reach`, `<id>_on`, `<id>_do` set at once. Put again only when `<id>_at` asks another
+// place than `<id>_placed`: a scene opened again goes on as it was, and what a piece set since stays.
 function places(scene, PLACES) {
   const put = id => {
     const at = scene.get(`${id}_at`);
@@ -347,6 +348,8 @@ function places(scene, PLACES) {
     scene.set(`${id}_turn`, p.turn);
     scene.set(`${id}_look`, p.look ?? null);
     scene.set(`${id}_reach`, p.reach ?? null);
+    scene.set(`${id}_on`, p.on ?? null);
+    scene.set(`${id}_do`, p.do ?? null);
     scene.set(`${id}_placed`, at);
   };
   for (const id in PLACES) {
