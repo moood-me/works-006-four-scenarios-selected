@@ -1,9 +1,11 @@
 // Moominpappa's sea chart: an old printed chart of the gulf he keeps at home, gone over in his pencil and a little
 // watercolour — the coast of the valley on the left, the open sea with its compass rose and soundings, far out on the
-// right a dot of an island with a lighthouse (ringed in pencil), and in its corner the printed plan of that island at a
-// large scale. Painted in the chart's own units (W × H, x right, y down): the caller scales and places it. The scene
+// right a dot of an island with a lighthouse (ringed in pencil), the printed plan of that island at a large scale, and
+// past it more open sea and the chart's cartouche. Painted in the chart's own units (W × H, x right, y down): the
+// caller scales and places it. (The drawing is laid out OX units in from the left edge — the valley's hinterland
+// before it; what is exported is in the chart's units.) The scene
 // `chart` hangs it as the play's map; the valley's insert `chart` shows it on the veranda table under the lamp.
-const W = 100, H = 28;
+const W = 140, H = 28, OX = 20;
 const hash = (n, seed) => anim.hash(n, seed);
 // the valley's coast, from the top edge down to the bottom; the land lies left of it
 const COAST = [[16.5, 0], [18, 2.2], [17.2, 4.4], [19.6, 6.2], [21.4, 8.6], [20.2, 10.8], [18, 12.2], [15.8, 13.2], [15.1, 14.6],
@@ -23,7 +25,7 @@ const PLAN = [[71, 18.6], [72.6, 16.8], [74.4, 13.4], [76.8, 10.4], [79.6, 8.6],
 const PLACES = { lighthouse: [84.6, 11.6], landing: [79.6, 20.6], cape: [71.4, 18.9], pool: [80.6, 14.6], shore: [92.2, 15.6] };
 // Papa's course, from the valley's bay to the island: a curve, as pencilled
 const FROM = [16.4, 15.4], C1 = [30, 20.5], C2 = [46, 8.2], TO = [58.6, 13.6];
-function course(t) {
+function courseIn(t) {
   const u = 1 - t;
   return [u * u * u * FROM[0] + 3 * u * u * t * C1[0] + 3 * u * t * t * C2[0] + t * t * t * TO[0],
     u * u * u * FROM[1] + 3 * u * u * t * C1[1] + 3 * u * t * t * C2[1] + t * t * t * TO[1]];
@@ -151,16 +153,17 @@ function paint(g, opts) {
   // the paper: yellowed, stains, the folds it has been kept in
   g.fillStyle = '#ece0bf';
   g.fillRect(0, 0, W, H);
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 40; i++) {
     wash(g, W * hash(i, 11), H * hash(i, 12), 2 + 6 * hash(i, 13), '160, 120, 70', 0.05 + 0.07 * hash(i, 14));
   }
+  g.translate(OX, 0);
   // the open sea washed in thin blue, deeper away from the coasts
-  for (let i = 0; i < 46; i++) {
-    const x = 20 + 78 * hash(i, 21), y = H * hash(i, 22);
+  for (let i = 0; i < 62; i++) {
+    const x = 20 + 98 * hash(i, 21), y = H * hash(i, 22);
     wash(g, x, y, 4 + 5 * hash(i, 23), '150, 186, 204', 0.12 + 0.1 * hash(i, 24));
   }
   // the land of the valley: its ochre and green, the sea darker along its coast
-  const land = [...COAST, [0, 28], [0, 0]];
+  const land = [...COAST, [-OX, 28], [-OX, 0]];
   waterline(g, COAST, false);
   for (const [x, y, r] of ISLETS) {
     const pts = [];
@@ -182,8 +185,8 @@ function paint(g, opts) {
   g.save();
   poly(g, land, true);
   g.clip();
-  for (let i = 0; i < 26; i++) {
-    wash(g, 20 * hash(i, 41), H * hash(i, 42), 1.5 + 3 * hash(i, 43), hash(i, 44) < 0.6 ? '130, 160, 90' : '200, 150, 80', 0.3);
+  for (let i = 0; i < 40; i++) {
+    wash(g, -OX + (OX + 20) * hash(i, 41), H * hash(i, 42), 1.5 + 3 * hash(i, 43), hash(i, 44) < 0.6 ? '130, 160, 90' : '200, 150, 80', 0.3);
   }
   g.restore();
   g.strokeStyle = SEPIA;
@@ -192,7 +195,12 @@ function paint(g, opts) {
   g.stroke();
   // the hills and the Lonely Mountains, the woods, the river, the house
   for (const [x, y, s] of [[3, 4.6, 1.4], [5.6, 3.2, 1.2], [8, 5, 1], [2.4, 8.4, 0.9], [4.2, 23.8, 1.2], [7, 25.4, 1], [2.4, 26.4, 0.8],
-    [11.8, 3, 0.8]]) hill(g, x, y, s);
+    [11.8, 3, 0.8], [-17, 5, 1.6], [-13.5, 3.4, 1.4], [-10, 5.6, 1.2], [-15.5, 9.5, 1.3], [-6.5, 3.6, 1.1], [-3, 6.2, 1], [-16, 22, 1.5],
+    [-11.5, 24.4, 1.2], [-6, 25.6, 1], [-12, 15.5, 1]]) hill(g, x, y, s);
+  for (let i = 0; i < 30; i++) {
+    const x = -18 + 18 * hash(i, 54), y = 10 + 11 * hash(i, 55);
+    tree(g, x, y, 0.35 + 0.2 * hash(i, 56));
+  }
   for (let i = 0; i < 26; i++) {
     const x = 4 + 13 * hash(i, 51), y = 9 + 13 * hash(i, 52);
     if (Math.abs(y - (14.2 + (x - 13) * 0.42)) < 1.2) continue;
@@ -356,25 +364,70 @@ function paint(g, opts) {
   g.fillStyle = SEPIA;
   g.font = 'italic 1.1px Georgia, serif';
   g.fillText(tr('The Lighthouse Island'), (x0 + x1) / 2, y0 + 1.5);
+  // past the plan, more open sea: soundings, waves; the chart's cartouche with its title and a scale of miles
+  soundings(g, 40, 101, 2, 118, 26, 151, () => false);
+  g.strokeStyle = 'rgba(70, 96, 120, 0.45)';
+  g.lineWidth = 0.05;
+  for (let i = 0; i < 40; i++) {
+    const x = 101 + 17 * hash(i, 161), y = 1.5 + 25 * hash(i, 162);
+    if (x > 103 && x < 117 && y > 15 && y < 25.5) continue;
+    g.beginPath();
+    g.moveTo(x - 0.5, y);
+    g.quadraticCurveTo(x - 0.25, y - 0.28, x, y);
+    g.quadraticCurveTo(x + 0.25, y + 0.28, x + 0.5, y);
+    g.stroke();
+  }
+  g.fillStyle = '#f1e7cc';
+  g.fillRect(103.5, 16, 13.5, 9);
+  frame(g, 103.5, 16, 117, 25);
+  g.fillStyle = SEPIA;
+  g.font = 'italic 1.3px Georgia, serif';
+  g.fillText(tr('Chart of the Gulf'), 110.25, 19.2);
+  g.strokeStyle = SEPIA;
+  g.lineWidth = 0.08;
+  g.beginPath();
+  g.moveTo(106, 22.6);
+  g.lineTo(114.5, 22.6);
+  g.stroke();
+  for (let k = 0; k <= 4; k++) {
+    g.fillStyle = k % 2 ? '#ece0bf' : SEPIA;
+    if (k < 4) g.fillRect(106 + k * 2.125, 22.35, 2.125, 0.25);
+  }
   // Papa's course, in pencil dashes
-  if (o.course) courseLine(g);
+  if (o.course) courseDraw(g);
   // the chart's border
-  frame(g, 0.6, 0.6, W - 0.6, H - 0.6);
+  frame(g, 0.6 - OX, 0.6, W - OX - 0.6, H - 0.6);
   g.restore();
 }
-// Papa's course as a pencilled dashed line
-function courseLine(g) {
+// Papa's course as a pencilled dashed line (in the drawing's own units)
+function courseDraw(g) {
   g.strokeStyle = PENCIL;
   g.lineWidth = 0.13;
   g.lineCap = 'round';
   g.setLineDash([0.7, 0.5]);
   g.beginPath();
   for (let i = 0; i <= 60; i++) {
-    const [x, y] = course(i / 60);
+    const [x, y] = courseIn(i / 60);
     if (i) g.lineTo(x, y);
     else g.moveTo(x, y);
   }
   g.stroke();
   g.setLineDash([]);
 }
-return { W, H, ISLAND, PLACES, INSET, course, courseLine, paint };
+// …in the chart's units
+function courseLine(g) {
+  g.save();
+  g.translate(OX, 0);
+  courseDraw(g);
+  g.restore();
+}
+// the course's point at t, the island, its plan's places and frame — in the chart's units
+const course = t => {
+  const [x, y] = courseIn(t);
+  return [x + OX, y];
+};
+const out = ([x, y]) => [x + OX, y];
+return {
+  W, H, ISLAND: out(ISLAND), PLACES: Object.fromEntries(Object.entries(PLACES).map(([k, p]) => [k, out(p)])),
+  INSET: [INSET[0] + OX, INSET[1], INSET[2] + OX, INSET[3]], course, courseLine, paint,
+};

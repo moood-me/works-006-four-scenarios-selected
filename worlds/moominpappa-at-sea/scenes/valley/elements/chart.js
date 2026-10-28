@@ -13,7 +13,7 @@ for (let y = -0.05; y < 1.05; y += 0.12) {
   g.fillRect(-0.4, y + 0.116, A + 0.8, 0.004);
 }
 // the chart, a little askew: chart units → the insert's (its point (CX, CY) at (OX, OY), S a unit, turned by T)
-const S = 0.036, T = -0.035, CX = 56, CY = 14, OX = A / 2 + 0.06, OY = 0.5;
+const S = 0.036, T = -0.035, CX = C.ISLAND[0] - 4, CY = 14, OX = A / 2 + 0.06, OY = 0.5;
 const to = (x, y) => [OX + S * (Math.cos(T) * (x - CX) - Math.sin(T) * (y - CY)), OY + S * (Math.sin(T) * (x - CX) + Math.cos(T) * (y - CY))];
 g.save();
 g.translate(OX, OY);
@@ -26,7 +26,7 @@ C.paint(g, { course: false });
 // his pencil and his dividers
 g.fillStyle = '#c9a23a';
 g.save();
-g.translate(44, 22.5);
+g.translate(C.ISLAND[0] - 16, 22.5);
 g.rotate(-0.5);
 g.fillRect(-5, -0.22, 9, 0.44);
 g.fillStyle = '#e8c9a0';
@@ -46,14 +46,15 @@ g.strokeStyle = '#8c8f94';
 g.lineWidth = 0.22;
 g.lineCap = 'round';
 g.beginPath();
-g.moveTo(66.5, 4);
-g.lineTo(69.5, 11);
-g.moveTo(66.5, 4);
-g.lineTo(63.2, 10.6);
+const dv = C.ISLAND[0] + 6.5;
+g.moveTo(dv, 4);
+g.lineTo(dv + 3, 11);
+g.moveTo(dv, 4);
+g.lineTo(dv - 3.3, 10.6);
 g.stroke();
 g.fillStyle = '#a9adb3';
 g.beginPath();
-g.arc(66.5, 4, 0.45, 0, Math.PI * 2);
+g.arc(dv, 4, 0.45, 0, Math.PI * 2);
 g.fill();
 g.restore();
 // the lamp's light: a warm pool on the paper from the lamp beyond the frame's top right, the edges dim

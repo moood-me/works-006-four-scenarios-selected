@@ -6,9 +6,10 @@ A module for the scenes that show Moominpappa's chart: the play's map (`chart`) 
 An old printed chart of the gulf in watercolour and pencil: the valley's coast on the left (hills, woods, the river,
 the blue house, «Moominvalley»), the open sea with its compass rose, rhumb lines, soundings and pencilled waves, far
 out on the right the island with its lighthouse ringed in Papa's pencil, and in the right part the printed plan of the
-island at a large scale (the lighthouse, the pines, the pool, the sand, reefs; «The Lighthouse Island»).
+island at a large scale (the lighthouse, the pines, the pool, the sand, reefs; «The Lighthouse Island»); the valley's
+hinterland on the far left, more open sea and the cartouche («Chart of the Gulf») on the far right.
 
-- `W`, `H` — its size in its own units (100 × 28; x right, y down). The caller scales and places it.
+- `W`, `H` — its size in its own units (140 × 28; x right, y down). The caller scales and places it.
 - `paint(g, {course})` — paints the whole chart into `g` in its units (clipped to it); `course: true` — Papa's course
   pencilled on it too.
 - `courseLine(g)` — Papa's course alone, in pencil dashes (a layer the map's shader shows as far as `route`).

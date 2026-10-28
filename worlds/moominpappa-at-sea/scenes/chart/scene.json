@@ -6,8 +6,8 @@
   "camera": {
     "mode": "panorama",
     "span": [
-      0,
-      45
+      14.715,
+      48.285
     ]
   },
   "light": {
@@ -20,7 +20,7 @@
     "shown": 0,
     "come": 0,
     "route": 0,
-    "camera_x": 3.6
+    "camera_x": 14.715
   },
   "states": {
     "shown": {
@@ -59,7 +59,7 @@
       "box": [
         0,
         -12.6,
-        45.0,
+        63.0,
         0
       ],
       "uniforms": {
@@ -70,7 +70,7 @@
       "id": "c0",
       "name": "Chapter",
       "unseen": true,
-      "across": 3.6,
+      "across": 14.715,
       "distance": 12,
       "elevation": 8.72,
       "height": 0.1,
@@ -85,7 +85,7 @@
       "id": "c1",
       "name": "Chapter",
       "unseen": true,
-      "across": 14.4,
+      "across": 20.295,
       "distance": 12,
       "elevation": 8.72,
       "height": 0.1,
@@ -100,7 +100,7 @@
       "id": "c2",
       "name": "Chapter",
       "unseen": true,
-      "across": 22.05,
+      "across": 25.92,
       "distance": 12,
       "elevation": 8.72,
       "height": 0.1,
@@ -115,7 +115,7 @@
       "id": "c3",
       "name": "Chapter",
       "unseen": true,
-      "across": 27.45,
+      "across": 31.5,
       "distance": 12,
       "elevation": 8.72,
       "height": 0.1,
@@ -130,7 +130,7 @@
       "id": "c4",
       "name": "Chapter",
       "unseen": true,
-      "across": 32.85,
+      "across": 37.08,
       "distance": 12,
       "elevation": 8.72,
       "height": 0.1,
@@ -145,7 +145,7 @@
       "id": "c5",
       "name": "Chapter",
       "unseen": true,
-      "across": 38.25,
+      "across": 42.705,
       "distance": 12,
       "elevation": 8.72,
       "height": 0.1,
@@ -160,7 +160,7 @@
       "id": "c6",
       "name": "Chapter",
       "unseen": true,
-      "across": 43.65,
+      "across": 48.285,
       "distance": 12,
       "elevation": 8.72,
       "height": 0.1,
@@ -175,7 +175,7 @@
       "id": "author",
       "name": "The author's sign",
       "unseen": true,
-      "across": 0.4,
+      "across": 9,
       "distance": 12,
       "elevation": 8.72,
       "height": 0.1,

@@ -3,5 +3,6 @@
   {"text":"N","context":"the compass rose: north","translation":"С","where":"modules/chart.js"},
   {"text":"The Open Sea","translation":"Открытое море","where":"modules/chart.js"},
   {"text":"Lighthouse","translation":"Маяк","where":"modules/chart.js"},
-  {"text":"The Lighthouse Island","translation":"Остров маяка","where":"modules/chart.js"}
+  {"text":"The Lighthouse Island","translation":"Остров маяка","where":"modules/chart.js"},
+  {"text":"Chart of the Gulf","translation":"Карта залива","where":"modules/chart.js"}
 ]}
