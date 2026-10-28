@@ -1,0 +1,116 @@
+/* Small Things Like These — what the game draws over the scene: plain paper slips in the town's winter (white paper,
+   coal-dark ink, frost blue), the mustard of Bill's coat for what is the player's. Stage 3: plates with “Next”, the stub
+   mini-games' cards, the label of a stand-in place, the scales, the map's row of leaves. */
+#layer { --paper: #f3f1ec; --paper-edge: #cfcac0; --ink: #22272f; --ink-soft: #5a616c; --frost: #6d84a3; --coat: #c9962e;
+  --serif: Georgia, "Times New Roman", serif; }
+#layer .gauge, #layer .toasts, #layer .where, #layer .hint, #layer .title, #layer .card { pointer-events: none; }
+
+#layer .slip, #layer .plate, #layer .card, #layer .where, #layer .gauge .row, #layer .hint {
+  box-sizing: border-box; color: var(--ink); font-family: var(--serif); background: var(--paper);
+  border: 1px solid var(--paper-edge); border-radius: 4px; box-shadow: 0 6px 22px rgba(20, 30, 45, 0.28); }
+
+/* the scales, low on the left */
+#layer .gauge { position: absolute; left: 14px; bottom: 64px; display: flex; flex-direction: column; gap: 6px; }
+#layer .gauge .row { display: grid; grid-template-columns: auto auto auto; align-items: center; gap: 10px; padding: 5px 12px;
+  font-size: 15px; opacity: 0.94; }
+#layer .gauge .name { color: var(--ink-soft); }
+#layer .gauge .pips { display: flex; gap: 4px; }
+#layer .gauge .pips i { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--frost); }
+#layer .gauge .pips i.on { background: var(--frost); }
+#layer .gauge .value { font-weight: 700; min-width: 1ch; }
+
+/* the slips, high on the right */
+#layer .toasts { position: absolute; top: 64px; right: 14px; display: flex; flex-direction: column;
+  align-items: flex-end; gap: 8px; }
+#layer .slip { margin: 0; padding: 7px 14px 8px; max-width: min(360px, 46vw); font-size: 16px; line-height: 1.3;
+  transition: opacity 1.2s ease, translate 1.2s ease; animation: st-in 0.5s ease-out; }
+#layer .slip.rule { font-style: italic; }
+#layer .slip.mark { border-left: 4px solid var(--frost); }
+#layer .slip.scale { border-left: 4px solid var(--coat); }
+#layer .slip .arrows { font-weight: 700; }
+#layer .slip.gone { opacity: 0; translate: 0 -6px; }
+@keyframes st-in { from { opacity: 0; translate: 0 6px; } }
+
+/* where it really happens, high on the left */
+#layer .where { position: absolute; top: 64px; left: 14px; margin: 0; padding: 6px 12px;
+  max-width: min(420px, 60vw); font-size: 14px; font-style: italic; color: var(--ink-soft); opacity: 0.92; }
+#layer .where[hidden] { display: none; }
+
+/* a plate with “Next”, low in the middle (over the speech's place: a plate is read, not heard) */
+#layer .plate { position: absolute; left: 50%; bottom: 20px; translate: -50% 0; width: min(640px, calc(100vw - 32px));
+  padding: 16px 20px 14px; z-index: 10; opacity: 0; transition: opacity 0.35s ease; }
+#layer .plate.on { opacity: 1; }
+#layer .plate .text { margin: 0 0 12px; font-size: 18px; line-height: 1.45; }
+#layer .plate h3 { margin: 0 0 8px; font-size: 15px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
+#layer .plate ul { margin: 0 0 12px; padding-left: 18px; font-size: 16px; line-height: 1.4; max-height: 46vh; overflow: auto; }
+#layer .plate .next { display: block; margin-left: auto; min-width: 110px; min-height: 44px; padding: 8px 18px; border: 0; border-radius: 22px;
+  background: var(--ink); color: var(--paper); font: 600 16px/1 var(--serif); cursor: pointer; }
+#layer .plate .next:hover { background: #3b5070; }
+
+/* a stub mini-game's card, high on the right under the plate of the language */
+#layer .card { position: absolute; top: 110px; right: 14px; width: min(340px, 44vw); padding: 10px 14px;
+  border-top: 4px solid var(--coat); }
+#layer .card .head { margin: 0 0 6px; display: flex; justify-content: space-between; gap: 10px; font-size: 16px; }
+#layer .card .gesture { color: var(--ink-soft); font-style: italic; }
+#layer .card .text { margin: 0 0 6px; font-size: 15px; line-height: 1.4; }
+#layer .card .stub { margin: 0; font-size: 13px; color: var(--ink-soft); }
+
+#layer .hint { position: absolute; bottom: 20px; left: 50%; translate: -50% 0; margin: 0; padding: 6px 16px; max-width: 80vw; font-size: 15px; }
+
+#layer .title { position: absolute; inset: 0; display: grid; place-items: center; padding: 0 5vw; text-align: center; opacity: 0;
+  transition: opacity 1.6s ease; }
+#layer .title .words { font: italic clamp(40px, 10vh, 104px)/1.1 var(--serif); color: var(--paper); text-shadow: 0 2px 18px rgba(20, 30, 45, 0.6); }
+#layer .title.on { opacity: 1; }
+
+/* the author's map */
+#layer .author-map { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; padding: 64px 16px 16px;
+  background: rgba(20, 30, 45, 0.5); }
+#layer .author-map[hidden] { display: none; }
+#layer .author-panel { position: relative; box-sizing: border-box; width: min(1100px, 100%); max-height: calc(100vh - 80px); overflow: auto;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 18px 22px; padding: 22px 26px 26px; border-radius: 4px;
+  color: var(--ink); background: var(--paper); box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5); font: 16px/1.35 var(--serif); }
+#layer .author-panel .close { position: absolute; top: 10px; right: 12px; width: 44px; height: 44px; border: 0; background: none; color: inherit; cursor: pointer; }
+#layer .author-panel .as { grid-column: 1 / -1; padding-right: 48px; }
+#layer .author-panel .as select { font: inherit; color: inherit; background: #fff; border: 1px solid var(--paper-edge); border-radius: 3px; padding: 4px 8px; }
+#layer .author-panel section { display: flex; flex-direction: column; gap: 2px; }
+#layer .author-panel h3 { margin: 0 0 6px; font-size: 16px; color: var(--ink-soft); }
+#layer .author-panel section button { border: 0; border-radius: 3px; padding: 6px 10px; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+#layer .author-panel section button:hover { background: rgba(43, 58, 79, 0.08); }
+#layer .author-panel section button.here { background: rgba(43, 58, 79, 0.16); }
+#layer .author-panel .minigames { display: flex; flex-direction: column; }
+#layer .author-panel section button.minigame { padding: 3px 10px 3px 24px; font-size: 14px; }
+
+/* the map (map.js): a row of paper leaves over the coal gate, scrolled sideways */
+#underlay .map { --paper: #f3f1ec; --paper-edge: #cfcac0; --ink: #22272f; --ink-soft: #5a616c; --pencil: #8d97a4; --coat: #c9962e;
+  position: absolute; inset: 0; font-family: Georgia, "Times New Roman", serif; }
+#underlay .map .strip { position: absolute; left: 0; right: 0; top: 70px; bottom: 24px; display: flex;
+  align-items: flex-start; gap: 18px; padding: 0 24px; overflow-x: auto; overflow-y: hidden; pointer-events: auto; scrollbar-width: thin; }
+#underlay .map .leaf { position: relative; flex: 0 0 auto; box-sizing: border-box; width: min(300px, 78vw); max-height: 100%; overflow-y: auto;
+  padding: 14px 16px 16px; color: var(--ink); background: var(--paper); border: 1px solid var(--paper-edge); border-radius: 4px;
+  box-shadow: 0 8px 26px rgba(20, 30, 45, 0.3); }
+#underlay .map .leaf.future { width: 120px; opacity: 0.7; }
+#underlay .map .leaf.here, #underlay .map .leaf.next { border-top: 4px solid var(--coat); }
+#underlay .map button { font: inherit; color: inherit; background: none; border: 0; padding: 0; text-align: left; cursor: default; }
+#underlay .map .can { cursor: pointer; }
+#underlay .map .can:hover { color: #3b5070; }
+#underlay .map .head { display: flex; flex-direction: column; gap: 2px; width: 100%; min-height: 44px; margin-bottom: 10px; }
+#underlay .map .num { font-size: 13px; letter-spacing: 0.2em; color: var(--ink-soft); }
+#underlay .map .title { font-size: 21px; line-height: 1.2; }
+#underlay .map .rows { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+#underlay .map .leaf.grow .row { animation: st-row 0.8s ease-out both; animation-delay: calc(var(--k) * 0.6s); }
+@keyframes st-row { from { opacity: 0; translate: 0 -6px; } }
+#underlay .map .q { display: flex; align-items: center; gap: 8px; min-height: 30px; font-size: 14px; color: var(--ink-soft); }
+#underlay .map .q .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink-soft); flex: 0 0 auto; }
+#underlay .map .q.can .dot { background: var(--coat); box-shadow: 0 0 0 4px rgba(201, 150, 46, 0.3); }
+#underlay .map .opts { margin: 2px 0 0 17px; padding: 0; list-style: none; font-size: 15px; line-height: 1.3; }
+#underlay .map .opt.chosen, #underlay .map .opt.both { color: var(--ink); font-weight: 700; }
+#underlay .map .opt.tried { color: #3a6ea5; font-style: italic; }
+#underlay .map .opt.open { color: var(--pencil); }
+#underlay .map .opt.unseen { height: 0.9em; border-bottom: 1px dotted var(--paper-edge); width: 60%; }
+#underlay .map .go { display: block; margin-top: 14px; min-height: 44px; padding: 8px 14px; border-radius: 22px; background: var(--ink); color: var(--paper);
+  white-space: pre-line; text-align: center; width: 100%; }
+#underlay .map .go.replay { background: #3a6ea5; }
+#underlay .map .go.can:hover { background: #3b5070; color: var(--paper); }
+#underlay .map .badge { position: absolute; top: -10px; right: 12px; padding: 3px 10px; border-radius: 10px; background: #3a6ea5; color: var(--paper); font-size: 13px; }
+#underlay .map .author { flex: 0 0 auto; align-self: center; min-height: 44px; padding: 10px 14px; border-radius: 4px; background: var(--paper);
+  border: 1px dashed var(--ink-soft); font-size: 14px; color: var(--ink-soft); }
