@@ -59,7 +59,7 @@
         "inside": 0.8
       },
       "night": {
-        "ambient": 0.5,
+        "ambient": 0.64,
         "ambientColor": "#9cb0e0",
         "bounce": 0.6,
         "haze": 0.05,
@@ -116,7 +116,7 @@
       "strength": 1.2,
       "reach": 6,
       "flicker": 0.1,
-      "glow": 0.2
+      "glow": 0.1
     },
     {
       "id": "fire",
@@ -312,7 +312,7 @@
       "id": "moon",
       "from": "sky#moon",
       "color": "#cdd8ff",
-      "strength": 0.9,
+      "strength": 1.8,
       "on": "night",
       "through": [
         [

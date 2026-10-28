@@ -70,11 +70,16 @@ carried = [{"id": f"lamp_{who}", "at": f"{who}#flame", "on": f"{who}_lamp", "col
 far = island.lights(([18, 38], "#fff1dc", 1.3), ([8, 7], "#ffe0c2", 1.3), [38, 6], [9, 4], lantern=False)
 for l in far:
     l["through"] = panes
+    # (the moon comes in strong at the window and the door: the room by night clearly seen)
+    if l["id"] == "moon":
+        l["strength"] = 1.8
 # the island's light outside; how much of it comes into the room
 light = island.light(WIND)
 light["inside"] = 0.75
 # (no beam here: the lighthouse's beam is the lantern room's and the outside scenes')
 light["looks"]["storm"]["lights"].pop("beam", None)
+# the moonlit room: lighter than the night outside's ambient, still night (Pavel: faces read clearly)
+light["looks"]["night"]["ambient"] = 0.64
 for k, v in {"dawn": 0.8, "dusk": 0.8, "night": 1.0, "storm": 0.8}.items():
     light["looks"][k]["inside"] = v
 cheek = lambda t, face, h, deep: {"across": at(t, R + deep / 2)[0], "distance": at(t, R + deep / 2)[1], "elevation": h, "facing": r3(face)}
@@ -91,7 +96,7 @@ spec = {
     "camera": {"mode": "picture"},
     "light": light,
     "lights": [
-        lantern.light("lamp", "lantern#flame"),
+        {**lantern.light("lamp", "lantern#flame"), "glow": 0.1},
         {"id": "fire", "of": "stove#fire", "color": "#ff9a50", "strength": 1, "reach": 3.5, "flicker": 0.35},
         *far,
         *carried,
