@@ -29,11 +29,9 @@ export default {
       const f = facts(g.state);
       g.beds({ sea: 0.45 });
       await piece(g, 'post', {
+        in: async () => g.title(tr('August')),
         grab: () => g.say('sophia', 'Is it mine?'),
-      }, async () => {
-        await g.scene(SCENES.shore, { beat: 'post', here: ['grandma', 'sophia', 'papa', 'eriksson'], moods: { grandma: 'neutral', sophia: 'laugh', papa: 'thinking' }, keys: DAY });
-        g.title(tr('August'));
-      });
+      }, () => g.scene(SCENES.shore, { beat: 'post', here: ['grandma', 'sophia', 'papa', 'eriksson'], moods: { grandma: 'neutral', sophia: 'laugh', papa: 'thinking' }, keys: DAY }));
       g.set('parcel_long', (await g.play(parcel)).long); // (held long: the string snaps, Sophia sits down on the pier)
       await piece(g, 'post_after', {
         ask: async () => {

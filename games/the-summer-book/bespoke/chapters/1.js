@@ -21,12 +21,12 @@ export default {
     async g => {
       g.beds({ sea_in: 0.3 });
       await piece(g, 'morning', {
+        hat: async () => g.title(tr('June')),
         knife: async () => {
           await g.say('papa', 'Mamma, don’t go far');
           await g.say('grandma', 'I won’t');
         },
       }, () => g.scene(SCENES.house, { beat: 'morning', here: ['papa', 'grandma', 'sophia'], moods: { papa: 'thinking', grandma: 'neutral', sophia: 'sad' }, keys: DAY }));
-      g.title(tr('June'));
       await g.beat('morning_go');
     },
     // 1.2: the forest; the knife; the palm on the trunk
@@ -118,7 +118,7 @@ export default {
           await g.say('papa', 'I’m not going to be the last to know any more');
         },
       }, () => g.scene(SCENES.shore, { beat: 'nets', here: ['papa', 'grandma'], moods: { papa: 'thinking', grandma: 'neutral' }, keys: DUSK }));
-      const nets = await g.choose('nets', { 'grandma#chest': [
+      const nets = await g.choose('nets', { 'net#knot': [
         { id: 'say', label: tr('“I’ll tell you”') },
         { id: 'nothing', label: tr('“There’s nothing to tell”') },
         { id: 'net', label: tr('Take the other end of the net without a word') },

@@ -23,10 +23,8 @@ export default {
     // 3.1: the forest spins
     async g => {
       g.beds({ wind: 0.2, trees: 0.5 });
-      await piece(g, 'swim', { up: async () => g.mood('grandma', 'tired') }, async () => {
-        await g.scene(SCENES.forest, { beat: 'swim', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'smile' }, keys: JULY });
-        g.title(tr('The end of July'));
-      });
+      await piece(g, 'swim', { animals: async () => g.title(tr('The end of July')), up: async () => g.mood('grandma', 'tired') },
+        () => g.scene(SCENES.forest, { beat: 'swim', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'smile' }, keys: JULY }));
       // (the horizon not kept: she sits longer, Sophia comes closer — the forest's `slips` in the fall)
       g.mark('dizzy', (await g.play(moss)).slips > 0, null);
     },
@@ -37,7 +35,7 @@ export default {
       await piece(g, 'fall', {
         near: () => (f.sophia >= 3 ? undefined : g.say('sophia', 'What’s wrong?!')),
       }, () => g.scene(SCENES.forest, { beat: 'fall', here: ['grandma', 'sophia'], moods: { grandma: 'tired', sophia: 'afraid' }, keys: JULY }, { cut: true }));
-      const head = await g.choose('head', { 'sophia#chest': [
+      const head = await g.choose('head', { 'stump#seat': [
         { id: 'papa', label: tr('“Run for Papa”') },
         { id: 'sophia', label: tr('“It’s my head. I’m old. Some day I’ll sit down like this — and not get up. Then run for Papa. Not today”') },
         { id: 'moss', label: tr('“I’m looking at the moss. Sit down — you’ll see what it’s like”') },

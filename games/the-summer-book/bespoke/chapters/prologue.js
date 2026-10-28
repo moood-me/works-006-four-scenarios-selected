@@ -19,11 +19,11 @@ export default {
     async g => {
       g.beds({ sea: 0.35 });
       await piece(g, 'peonies', {
-        start: () => g.say('narrator', 'This spring Sophia’s mother died. That summer, as always, they lived on the island: Papa, Sophia and Grandmother'),
-      }, async () => {
-        await g.scene(SCENES.shore, { beat: 'peonies', here: ['grandma'], moods: { grandma: 'thinking' }, keys: DAWN });
-        g.title(tr('The Summer Book'));
-      });
+        start: async () => {
+          g.title(tr('The Summer Book'));
+          await g.say('narrator', 'This spring Sophia’s mother died. That summer, as always, they lived on the island: Papa, Sophia and Grandmother');
+        },
+      }, () => g.scene(SCENES.shore, { beat: 'peonies', here: ['grandma'], moods: { grandma: 'thinking' }, keys: DAWN }));
       await g.play(peonies);
       g.here('sophia', true);
       await piece(g, 'teeth', {

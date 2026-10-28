@@ -130,6 +130,7 @@ export default async function (b) {
     if ((await play()) === 'away') continue;
     if (replay) {
       replay.done = true;
+      if (replay.run.chapter === EPILOGUE) await closing(replay.run);
       after = { reveal: replay.run.chapter };
       continue;
     }
@@ -137,17 +138,18 @@ export default async function (b) {
     await onward();
     if (kept.chapter === END) {
       ended();
-      await closing();
+      await closing(kept);
     }
     // (no map between the prologue and chapter I, nor between IV and the epilogue: on at once)
     after = done === 0 || done === EPILOGUE - 1 ? { on: true } : { reveal: done };
   }
 
-  // the play played through: the last shot goes to black, the ending's name over it; the map comes out of the black
-  async function closing() {
+  // the play played through (the main run, or a replay of the epilogue: its run): the last shot goes to black, the
+  // ending's name over it; the map comes out of the black
+  async function closing(r) {
     b.menu(null);
     await b.fade(1, 2);
-    const f = facts(kept);
+    const f = facts(r);
     await view.title(ENDINGS.find(e => e.id === f.ending).label);
     closed = true;
   }

@@ -27,21 +27,20 @@ export default {
       g.beds({ sea: 0.4 });
       if (f.ending === 'tent') {
         await piece(g, 'peg', {
-          peg: () => g.say('papa', 'The winter will carry it off', 'papa'),
+          peg: async () => {
+            g.title(label);
+            await g.say('papa', 'The winter will carry it off', 'papa');
+          },
           mine: () => g.say('sophia', 'It won’t. It’s mine'),
-        }, async () => {
-          await g.scene(SCENES.cape, { beat: 'peg', here: ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'neutral' }, keys: MORNING });
-          g.title(label);
-        });
+        }, () => g.scene(SCENES.cape, { beat: 'peg', here: ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'neutral' }, keys: MORNING }));
         await piece(g, 'weigh', {
           winter: () => (f.knew ? g.say('papa', 'You’ll winter with us. The doctor will come every week', 'papa')
             : g.say('papa', 'You’ll winter with us. The doctor will come', 'papa')),
         });
       }
       // the signs of the play (§9), in every ending: the pouch, the shell or the pocket; the hat; the graves or the basket
-      await g.scene(SCENES.shore, { beat: 'last_morning', here: ALL, moods: { grandma: 'neutral', sophia: 'neutral', papa: 'neutral' }, keys: SHORE }, { cut: f.ending === 'tent' });
-      if (f.ending !== 'tent') g.title(label);
-      await g.beat('last_morning');
+      await piece(g, 'last_morning', { boat: async () => (f.ending === 'tent' ? undefined : g.title(label)) },
+        () => g.scene(SCENES.shore, { beat: 'last_morning', here: ALL, moods: { grandma: 'neutral', sophia: 'neutral', papa: 'neutral' }, keys: SHORE }, { cut: f.ending === 'tent' }));
       if (f.bird === 'out') on(g, 'signs:bird', () => g.sound.hiss()); // (the cat in the basket)
       await g.beat('signs');
       if (f.mama === 'moon') {

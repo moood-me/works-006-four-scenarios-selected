@@ -21,6 +21,7 @@ export default {
     async g => {
       g.beds({});
       await piece(g, 'calm', {
+        cat: async () => g.title(tr('July')),
         gone: async () => {
           g.mood('sophia', 'sad');
           await g.say('sophia', 'Why doesn’t he love me? I feed him');
@@ -30,10 +31,7 @@ export default {
           g.mood('grandma', 'angry');
           await g.say('grandma', 'Then don’t ask me anything either!');
         },
-      }, async () => {
-        await g.scene(SCENES.shore, { beat: 'calm', here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'smile' }, keys: { ...DAY, calm: 1 } });
-        g.title(tr('July'));
-      });
+      }, () => g.scene(SCENES.shore, { beat: 'calm', here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'smile' }, keys: { ...DAY, calm: 1 } }));
       await g.play(pebble);
       on(g, 'calm_after:second', () => g.sound.splash(0.25));
       await piece(g, 'calm_after', {
