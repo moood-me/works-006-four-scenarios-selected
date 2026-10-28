@@ -118,6 +118,7 @@ export default async function (b) {
   const away = () => new Promise(ok => b.menu(() => ok('away')));
   const ended = () => b.ended({ ending: facts(kept).ending });
 
+  let closed = false; // (the play just played through: the map comes out of the black)
   for (let after = {}; ;) {
     const to = after.on ? 'main' : await map(after);
     after = {};
@@ -150,7 +151,6 @@ export default async function (b) {
     await view.title(ENDINGS.find(e => e.id === f.ending).label);
     closed = true;
   }
-  let closed = false; // (the map to come out of the black)
 
   // the run being played (the replay, else the main run), step by step to its chapter's end → 'done'; or till ☰ →
   // 'away'
