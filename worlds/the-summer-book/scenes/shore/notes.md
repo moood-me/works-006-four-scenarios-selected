@@ -2,8 +2,9 @@
 
 The first scene of «The Summer Book» (C1 of the game's scenario): the island's smooth granite sloping into a still
 pale sea, the white-boarded house with its glazed veranda, peonies by the porch, the pier and the moored boat, wind-bent
-pines on the crown. A June dawn, pearl-grey, the sun just up and veiled, low on the right (the sky marks `sky#sun`; the
-scene's one far light comes from it).
+pines on the crown. Its sea, sky, granite, pines, mist and the hour and the weather are the island's (`modules/isle.md`); the generator
+is `tools/shore.py` (it writes `scene.json`, `elements/sky.*`, `elements/sea.*`). The approved look is `dawn: 1`
+(a June dawn, pearl-grey, the sun just up and veiled, low on the right: `sky#sun_dawn`).
 
 - The land is `lib.ground` (relief.js): `coast(z)` is the line of the rock at a distance, `shore(z)` where the sea meets
   it. `rock` is the draped plane that paints it (granite, the wet band, cracks, lichen, grass inland, the worn path).

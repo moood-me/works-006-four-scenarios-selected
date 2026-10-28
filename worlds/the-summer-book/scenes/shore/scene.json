@@ -7,32 +7,196 @@
     "mode": "picture"
   },
   "light": {
-    "ambient": 0.68,
-    "ambientColor": "#e4e7ea",
-    "bounce": 0.5,
-    "haze": 0.12,
-    "hazeColor": "#d8dbda",
-    "vignette": 0.2,
+    "ambient": 0.8,
+    "ambientColor": "#ebe6de",
+    "bounce": 0.6,
+    "haze": 0.05,
+    "hazeColor": "#e6e1d8",
+    "hazeGlow": 0.3,
+    "shafts": 0.6,
+    "tint": "#fff2e0",
+    "tintStrength": 0,
+    "saturation": 1.05,
+    "vignette": 0.25,
     "grain": 0.06,
     "wind": [
       1,
       0.3,
       0.4
     ],
-    "saturation": 1.1
+    "looks": {
+      "late": {
+        "ambient": 0.78,
+        "ambientColor": "#eee4d4",
+        "bounce": 0.6,
+        "haze": 0.07,
+        "hazeColor": "#e4dccd",
+        "hazeGlow": 0.3,
+        "shafts": 0.55,
+        "tint": "#ffd9a6",
+        "tintStrength": 0.07,
+        "saturation": 1.0,
+        "vignette": 0.25,
+        "grain": 0.06,
+        "lights": {
+          "sun": 0
+        }
+      },
+      "dawn": {
+        "ambient": 0.68,
+        "ambientColor": "#e4e7ea",
+        "bounce": 0.5,
+        "haze": 0.12,
+        "hazeColor": "#d8dbda",
+        "hazeGlow": 0,
+        "shafts": 0,
+        "tintStrength": 0,
+        "saturation": 1.1,
+        "vignette": 0.2,
+        "grain": 0.06,
+        "lights": {
+          "sun": 0,
+          "sun_late": 0
+        }
+      },
+      "dusk": {
+        "ambient": 0.82,
+        "ambientColor": "#ebe5e0",
+        "bounce": 0.5,
+        "haze": 0.1,
+        "hazeColor": "#d8d5d4",
+        "hazeGlow": 0.9,
+        "shafts": 0.2,
+        "tintStrength": 0,
+        "saturation": 1.05,
+        "vignette": 0.25,
+        "grain": 0.07,
+        "lights": {
+          "sun": 0,
+          "sun_late": 0,
+          "sun_dawn": 0
+        }
+      },
+      "night": {
+        "ambient": 0.64,
+        "ambientColor": "#8a9bc8",
+        "bounce": 0.5,
+        "haze": 0.16,
+        "hazeColor": "#8794b4",
+        "hazeGlow": 1.2,
+        "shafts": 0.35,
+        "tint": "#a2b2d8",
+        "tintStrength": 0.06,
+        "saturation": 0.85,
+        "vignette": 0.25,
+        "grain": 0.07,
+        "lights": {
+          "sun": 0,
+          "sun_late": 0,
+          "sun_dawn": 0,
+          "sun_dusk": 0
+        }
+      },
+      "fog_air": {
+        "haze": 0.6,
+        "hazeColor": "#dde1e5",
+        "hazeGlow": 1.3,
+        "shafts": 0.45,
+        "saturation": 0.85
+      },
+      "storm": {
+        "haze": 0.24,
+        "hazeColor": "#b9c0c8",
+        "hazeGlow": 0.5,
+        "shafts": 0.05,
+        "tint": "#c6d2de",
+        "tintStrength": 0.06,
+        "saturation": 0.78,
+        "wind": [
+          1,
+          0.3,
+          2.4
+        ],
+        "lights": {
+          "sun": 0,
+          "sun_late": 0,
+          "sun_dawn": 0,
+          "sun_dusk": 0,
+          "moon": 0.25
+        }
+      },
+      "flash": {
+        "ambient": 0.95,
+        "ambientColor": "#e8eeff",
+        "brightness": 1.12,
+        "saturation": 0.7
+      }
+    }
   },
   "lights": [
     {
       "id": "sun",
+      "from": "sky#sun",
+      "color": "#ffefd8",
+      "strength": 1.3
+    },
+    {
+      "id": "sun_late",
+      "from": "sky#sun_late",
+      "color": "#ffe2b8",
+      "strength": 1.25,
+      "on": "late"
+    },
+    {
+      "id": "sun_dawn",
+      "from": "sky#sun_dawn",
       "color": "#ffeedd",
       "strength": 1.0,
-      "from": "sky#sun"
+      "on": "dawn"
+    },
+    {
+      "id": "sun_dusk",
+      "from": [
+        300,
+        5
+      ],
+      "color": "#f3d6c6",
+      "strength": 0.5,
+      "on": "dusk"
+    },
+    {
+      "id": "moon",
+      "from": "sky#moon",
+      "color": "#c4d2f2",
+      "strength": 0.8,
+      "on": "night"
+    },
+    {
+      "id": "flash",
+      "from": [
+        -30,
+        30
+      ],
+      "color": "#e8eeff",
+      "strength": 1.8,
+      "on": "flash"
     }
   ],
   "modules": [
-    "cast"
+    "cast",
+    "isle"
   ],
   "state": {
+    "dawn": 0,
+    "dusk": 0,
+    "night": 0,
+    "late": 0,
+    "calm": 0,
+    "storm": 0,
+    "flash": 0,
+    "fog": 0,
+    "fog_air": 0,
+    "moon": 1,
     "grandma_look": [
       8,
       5,
@@ -62,11 +226,113 @@
       "l": "sophia#hand_r"
     }
   },
+  "states": {
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the June dawn: the sun just up, veiled, low (0 — the day)"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dusk: the sun just gone, the afterglow low (0 — the day); over dawn"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the moonlit night (0 — the day): blue, light enough for faces; over dawn and dusk"
+    },
+    "late": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "August: the sun lower, the light warmer, the grass burnt (0 — June); changes between steps"
+    },
+    "calm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dead calm of July: the sea glass, not a streak on it"
+    },
+    "storm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the thunderstorm: a white-grey sky and its heavy clouds, grey light, rain, wind, crests and foam; over a half — lightning now and then (flash:strike told)"
+    },
+    "flash": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "lightning: the sky and everything lit white a moment (the storm's script and the game's moments)"
+    },
+    "fog": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the fog: up to a half its banks coming in over the water (0.5 — its wall on the horizon, banks over the sea); over a half the island in it — the air white, things gone in tens of metres"
+    },
+    "fog_air": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (the island's script sets it from fog): the thick fog's look"
+    },
+    "moon": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the moon's phase: 0 a thin crescent … 1 full (changes between steps; seen by night)"
+    }
+  },
   "objects": [
     {
       "id": "sky",
       "name": "Sky",
-      "sky": true
+      "sky": true,
+      "uniforms": {
+        "low": 0.42,
+        "band_x": 0.8888888888888888,
+        "sun_x": 1.1733333333333333,
+        "sun_y": 0.02,
+        "late_x": 1.5288888888888887,
+        "late_y": 0.2,
+        "dawn_x": 1.3866666666666667,
+        "dawn_y": 0.3,
+        "dusk_x": 0.21333333333333332,
+        "night_x": 1.031111111111111,
+        "moon_x": 1.031111111111111,
+        "moon_y": 0.2,
+        "dawn": 0,
+        "dusk": 0,
+        "night": 0,
+        "late": 0,
+        "storm": 0,
+        "flash": 0,
+        "fog": 0,
+        "phase": 1
+      }
     },
     {
       "id": "sea",
@@ -237,7 +503,7 @@
       "height": 4.8,
       "box": [
         -2.95,
-        -5.0,
+        -5,
         2.95,
         0.4
       ],
@@ -337,7 +603,7 @@
       "height": 0.85,
       "box": [
         -0.75,
-        -1.0,
+        -1,
         0.75,
         0.05
       ],
@@ -454,7 +720,7 @@
       "box": [
         -2.4,
         -0.95,
-        2.0,
+        2,
         0.2
       ]
     },
@@ -465,9 +731,9 @@
       "distance": 3.4,
       "height": 0.9,
       "box": [
-        -1.0,
-        -1.0,
-        1.0,
+        -1,
+        -1,
+        1,
         0.1
       ],
       "shadow": true,
@@ -488,7 +754,7 @@
           "scale": 1.3
         },
         {
-          "across": -5.0,
+          "across": -5,
           "distance": 9.5,
           "scale": 0.8
         }
@@ -522,7 +788,7 @@
         {
           "across": -2.6,
           "distance": 5.2,
-          "scale": 1.0,
+          "scale": 1,
           "flip": false
         },
         {
@@ -533,7 +799,7 @@
         },
         {
           "across": -1.3,
-          "distance": 7.0,
+          "distance": 7,
           "scale": 0.8,
           "flip": false
         },
@@ -544,13 +810,13 @@
           "flip": true
         },
         {
-          "across": -2.0,
+          "across": -2,
           "distance": 10.8,
-          "scale": 1.0,
+          "scale": 1,
           "flip": false
         },
         {
-          "across": 0.0,
+          "across": 0,
           "distance": 12.6,
           "scale": 1.1,
           "flip": true
@@ -568,9 +834,9 @@
           "flip": true
         },
         {
-          "across": -3.0,
+          "across": -3,
           "distance": 6.6,
-          "scale": 1.0,
+          "scale": 1,
           "flip": false
         },
         {
@@ -590,7 +856,7 @@
         "turn": 150
       },
       "across": 0.2,
-      "distance": 4.0
+      "distance": 4
     },
     {
       "id": "sophia",
@@ -613,6 +879,16 @@
       },
       "across": -3,
       "distance": 8
+    },
+    {
+      "id": "rain",
+      "name": "Rain",
+      "particles": {
+        "kind": "rain",
+        "amount": "storm",
+        "count": 9000,
+        "wind": 1.2
+      }
     }
   ],
   "music": {

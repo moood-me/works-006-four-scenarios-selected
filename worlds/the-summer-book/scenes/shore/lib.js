@@ -35,4 +35,7 @@ function shore(z) {
   }
   return (a + b) / 2;
 }
-return { WATER, coast, ground, shore, sm };
+// the waterline, [[across, distance], …] (the island's sea washes it in a storm)
+const edge = [];
+for (let z = -4; z <= 60; z += 0.4) edge.push([shore(z), z]);
+return { WATER, coast, ground, shore, sm, edge };
