@@ -1,0 +1,14 @@
+{
+  "type": "bespoke",
+  "title": "Moominpappa at Sea",
+  "description": "The end of August: everything in the valley is done, and Moominpappa takes his family to a bare island with a dark lighthouse. Each of them looks for a place of their own there — and each finds a loneliness. Whom does Papa notice, and whom does he miss?",
+  "line": "A bare island, a dark lighthouse, one lantern for the whole family — and whom will Papa give it to?",
+  "source": "after the novel by Tove Jansson",
+  "genres": {
+    "drama": 70,
+    "relationships": 70,
+    "immersion": 40
+  },
+  "world": "pavel--moominpappa-at-sea",
+  "scenes": []
+}
