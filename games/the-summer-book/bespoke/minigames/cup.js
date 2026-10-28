@@ -1,8 +1,8 @@
 // М7а «The Cup» (3.3 «papa», the veranda at dusk, after the piece `doctor`: «I've written to the doctor…», her cup over
 // the table): balance — lead anywhere, the arrow the cup in her hands (`tilt` −1…1, tipping as the arrow goes), tilted
 // by the hand that trembles while he talks; a quiet ring on the cup (`table#cup`), its arc of danger how far it tips.
-// Tipped too far — coffee spills (a mistake; Papa sees her hand). It ends by its count (SECONDS from the first touch:
-// clean; flawed if it spilt), the cup set level; the piece after it: «All right. Only don't put a chair for me by the
+// Tipped too far — coffee spills (a mistake; Papa sees her hand). It ends by its count (SECONDS from the first touch;
+// the bar — the time it was kept level by the finger: clean if most of it; flawed if it spilt or was let go), the cup set level; the piece after it: «All right. Only don't put a chair for me by the
 // gate».
 //   What she does: Grandmother holds her cup level while her son tells her she is to winter in town.
 //   What she wants: to keep a straight face — not to show what his words do.
@@ -30,7 +30,7 @@ export default {
     if (!r) return this.skipped;
     g.set('tilt', 0, 0.5);
     over();
-    await mg.end({ as: r.slips ? 'flawed' : 'clean' });
+    await mg.end({ as: r.as });
     return { spilt: r.slips };
   },
 };

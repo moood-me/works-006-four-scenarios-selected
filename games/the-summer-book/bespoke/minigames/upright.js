@@ -2,7 +2,8 @@
 // out on the swell, Grandmother on her thwart): balance — lead anywhere, the arrow her body in the rocking boat (`lean`), pushed
 // by the swell (`sway` — the swell, rising and falling with the push); a quiet ring on her (`grandma#chest`), its arc of
 // danger how far she leans. Leant too far — she sways (a mistake; she catches herself). It ends by its count (SECONDS
-// from the first touch; the scenario gives it no colour of its own): the end (neutral); the swell eases.
+// from the first touch; the bar — the time kept upright by the finger; the scenario gives it no colour of its own, the
+// plate's end says how it went); the swell eases.
 //   What she does: Grandmother sits upright in the rocking boat, the island going into the fog behind.
 //   What she wants: to sit straight — tired, wrapped in his jacket, not to be held.
 //   How it is for her: the shawl left on the rock; the night behind the tent in her bones; the doctor in town.
@@ -32,7 +33,7 @@ export default {
     g.set('sway', 0.4, 1.5);
     g.set('lean', 0, 0.6);
     over();
-    await mg.end({ as: 'neutral' });
+    await mg.end({ as: r.as });
     return { slips: r.slips };
   },
 };
