@@ -7,66 +7,538 @@
     "mode": "picture"
   },
   "light": {
-    "ambient": 0.68,
-    "ambientColor": "#e4e7ea",
-    "bounce": 0.5,
-    "haze": 0.12,
-    "hazeColor": "#d8dbda",
-    "vignette": 0.2,
+    "ambient": 0.8,
+    "ambientColor": "#ebe6de",
+    "bounce": 0.6,
+    "haze": 0.05,
+    "hazeColor": "#e6e1d8",
+    "hazeGlow": 0.3,
+    "shafts": 0.6,
+    "tint": "#fff2e0",
+    "tintStrength": 0,
+    "saturation": 1.05,
+    "vignette": 0.25,
     "grain": 0.06,
     "wind": [
       1,
       0.3,
       0.4
     ],
-    "saturation": 1.1
+    "looks": {
+      "late": {
+        "ambient": 0.78,
+        "ambientColor": "#eee4d4",
+        "bounce": 0.6,
+        "haze": 0.07,
+        "hazeColor": "#e4dccd",
+        "hazeGlow": 0.3,
+        "shafts": 0.55,
+        "tint": "#ffd9a6",
+        "tintStrength": 0.07,
+        "saturation": 1.0,
+        "vignette": 0.25,
+        "grain": 0.06,
+        "lights": {
+          "sun": 0
+        }
+      },
+      "dawn": {
+        "ambient": 0.68,
+        "ambientColor": "#e4e7ea",
+        "bounce": 0.5,
+        "haze": 0.12,
+        "hazeColor": "#d8dbda",
+        "hazeGlow": 0,
+        "shafts": 0,
+        "tintStrength": 0,
+        "saturation": 1.1,
+        "vignette": 0.2,
+        "grain": 0.06,
+        "lights": {
+          "sun": 0,
+          "sun_late": 0
+        }
+      },
+      "dusk": {
+        "ambient": 0.82,
+        "ambientColor": "#ebe5e0",
+        "bounce": 0.5,
+        "haze": 0.1,
+        "hazeColor": "#d8d5d4",
+        "hazeGlow": 0.9,
+        "shafts": 0.2,
+        "tintStrength": 0,
+        "saturation": 1.05,
+        "vignette": 0.25,
+        "grain": 0.07,
+        "lights": {
+          "sun": 0,
+          "sun_late": 0,
+          "sun_dawn": 0
+        }
+      },
+      "night": {
+        "ambient": 0.64,
+        "ambientColor": "#8a9bc8",
+        "bounce": 0.5,
+        "haze": 0.16,
+        "hazeColor": "#8794b4",
+        "hazeGlow": 1.2,
+        "shafts": 0.35,
+        "tint": "#a2b2d8",
+        "tintStrength": 0.06,
+        "saturation": 0.85,
+        "vignette": 0.25,
+        "grain": 0.07,
+        "lights": {
+          "sun": 0,
+          "sun_late": 0,
+          "sun_dawn": 0,
+          "sun_dusk": 0
+        }
+      },
+      "fog_air": {
+        "haze": 0.6,
+        "hazeColor": "#dde1e5",
+        "hazeGlow": 1.3,
+        "shafts": 0.45,
+        "saturation": 0.85
+      },
+      "storm": {
+        "ambient": 0.74,
+        "ambientColor": "#c4ccd8",
+        "haze": 0.24,
+        "hazeColor": "#b9c0c8",
+        "hazeGlow": 0.5,
+        "shafts": 0.05,
+        "tint": "#c6d2de",
+        "tintStrength": 0.06,
+        "saturation": 0.78,
+        "wind": [
+          1,
+          0.3,
+          2.4
+        ],
+        "lights": {
+          "sun": 0,
+          "sun_late": 0,
+          "sun_dawn": 0,
+          "sun_dusk": 0,
+          "moon": 0.25
+        }
+      },
+      "flash": {
+        "ambient": 0.95,
+        "ambientColor": "#e8eeff",
+        "brightness": 1.12,
+        "saturation": 0.7
+      }
+    }
   },
   "lights": [
     {
       "id": "sun",
+      "from": "sky#sun",
+      "color": "#ffefd8",
+      "strength": 1.3
+    },
+    {
+      "id": "sun_late",
+      "from": "sky#sun_late",
+      "color": "#ffe2b8",
+      "strength": 1.25,
+      "on": "late"
+    },
+    {
+      "id": "sun_dawn",
+      "from": "sky#sun_dawn",
       "color": "#ffeedd",
       "strength": 1.0,
-      "from": "sky#sun"
+      "on": "dawn"
+    },
+    {
+      "id": "sun_dusk",
+      "from": [
+        300,
+        5
+      ],
+      "color": "#f3d6c6",
+      "strength": 0.5,
+      "on": "dusk"
+    },
+    {
+      "id": "moon",
+      "from": "sky#moon",
+      "color": "#c4d2f2",
+      "strength": 0.8,
+      "on": "night"
+    },
+    {
+      "id": "flash",
+      "from": [
+        -30,
+        30
+      ],
+      "color": "#e8eeff",
+      "strength": 1.8,
+      "on": "flash"
+    },
+    {
+      "id": "far_lamp",
+      "of": "far_boat#lamp",
+      "color": "#ffcf86",
+      "strength": 1.4,
+      "reach": 14,
+      "on": "boat_out"
     }
   ],
   "modules": [
-    "cast"
+    "cast",
+    "isle"
   ],
   "state": {
-    "grandma_look": [
-      8,
-      5,
-      0.2
-    ],
-    "sophia_look": "grandma",
-    "sophia_reach": {
-      "r": "grandma#hand_l"
-    },
-    "papa_look": "grandma",
+    "dawn": 0,
+    "dusk": 0,
+    "night": 0,
+    "late": 0,
+    "calm": 0,
+    "storm": 0,
+    "flash": 0,
+    "fog": 0,
+    "fog_air": 0,
+    "moon": 1,
+    "grandma_at": "water",
+    "sophia_at": "water",
+    "papa_at": "lawn",
     "papa_with": [
       "mug"
     ],
-    "papa_reach": {
-      "r": [
-        -2.893,
-        7.715,
-        1.15
+    "grandma_a": 0.2,
+    "grandma_d": 4,
+    "sophia_a": 0.68,
+    "sophia_d": 4.27,
+    "papa_a": -3,
+    "papa_d": 8,
+    "rowboat": 0,
+    "rowboat_a": 70,
+    "rowboat_d": 30,
+    "rowboat_f": 180,
+    "net": false,
+    "chair": "none",
+    "shell": false,
+    "graves": 0,
+    "weed": false,
+    "boat_out": false,
+    "dinghy": "moored",
+    "dinghy_at": 0,
+    "dinghy_a": 1.6,
+    "dinghy_d": 14.6,
+    "dinghy_f": 180,
+    "big_boat": false,
+    "luggage": false
+  },
+  "states": {
+    "dawn": {
+      "range": [
+        0,
+        1
       ],
-      "l": [
-        -2.807,
-        7.765,
-        1.15
-      ]
+      "smooth": true,
+      "means": "the June dawn: the sun just up, veiled, low (0 — the day)"
     },
-    "grandma_reach": {
-      "l": "sophia#hand_r"
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dusk: the sun just gone, the afterglow low (0 — the day); over dawn"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the moonlit night (0 — the day): blue, light enough for faces; over dawn and dusk"
+    },
+    "late": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "August: the sun lower, the light warmer, the grass burnt (0 — June); changes between steps"
+    },
+    "calm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dead calm of July: the sea glass, not a streak on it"
+    },
+    "storm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the thunderstorm: a white-grey sky and its heavy clouds, grey light, rain, wind, crests and foam; over a half — lightning now and then (flash:strike told)"
+    },
+    "flash": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "lightning: the sky and everything lit white a moment (the storm's script and the game's moments)"
+    },
+    "fog": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the fog: up to a half its banks coming in over the water (0.5 — its wall on the horizon, banks over the sea); over a half the island in it — the air white, things gone in tens of metres"
+    },
+    "fog_air": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (the island's script sets it from fog): the thick fog's look"
+    },
+    "moon": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the moon's phase: 0 a thin crescent … 1 full (changes between steps; seen by night)"
+    },
+    "grandma_at": {
+      "values": [
+        "water",
+        "ledge",
+        "warm",
+        "path",
+        "gate",
+        "porch",
+        "peonies",
+        "pier",
+        "net",
+        "gangway"
+      ],
+      "means": "where Grandmother stands (the scene's places, lib.PLACES: water, ledge, warm, path, gate, porch, peonies, pier, net, gangway); set, put there at once"
+    },
+    "grandma_a": {
+      "range": [
+        -12,
+        12
+      ],
+      "means": "the scene's own: where Grandmother stands (across, metres), set from grandma_at; a piece walks them"
+    },
+    "grandma_d": {
+      "range": [
+        0,
+        30
+      ],
+      "means": "the scene's own: where Grandmother stands (distance, metres), set from grandma_at; a piece walks them"
+    },
+    "grandma_placed": {
+      "type": "string",
+      "means": "the scene's own: the place Grandmother was last put at"
+    },
+    "sophia_at": {
+      "values": [
+        "water",
+        "edge",
+        "shelf",
+        "warm",
+        "graves",
+        "porch",
+        "pier",
+        "gangway"
+      ],
+      "means": "where Sophia stands (the scene's places, lib.PLACES: water, edge, shelf, warm, graves, porch, pier, gangway); set, put there at once"
+    },
+    "sophia_a": {
+      "range": [
+        -12,
+        12
+      ],
+      "means": "the scene's own: where Sophia stands (across, metres), set from sophia_at; a piece walks them"
+    },
+    "sophia_d": {
+      "range": [
+        0,
+        30
+      ],
+      "means": "the scene's own: where Sophia stands (distance, metres), set from sophia_at; a piece walks them"
+    },
+    "sophia_placed": {
+      "type": "string",
+      "means": "the scene's own: the place Sophia was last put at"
+    },
+    "papa_at": {
+      "values": [
+        "lawn",
+        "veranda",
+        "porch",
+        "pier",
+        "net",
+        "gangway"
+      ],
+      "means": "where Papa stands (the scene's places, lib.PLACES: lawn, veranda, porch, pier, net, gangway); set, put there at once"
+    },
+    "papa_a": {
+      "range": [
+        -12,
+        12
+      ],
+      "means": "the scene's own: where Papa stands (across, metres), set from papa_at; a piece walks them"
+    },
+    "papa_d": {
+      "range": [
+        0,
+        30
+      ],
+      "means": "the scene's own: where Papa stands (distance, metres), set from papa_at; a piece walks them"
+    },
+    "papa_placed": {
+      "type": "string",
+      "means": "the scene's own: the place Papa was last put at"
+    },
+    "rowboat": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "Eriksson's boat: 0 not here (far out on the right, gone in the haze), 1 alongside the pier's end; moved up he rows in, down he rows away (the boat turns round at the pier first)"
+    },
+    "rowboat_a": {
+      "range": [
+        0,
+        75
+      ],
+      "means": "the scene's own: where Eriksson's boat is (across), set from rowboat"
+    },
+    "rowboat_d": {
+      "range": [
+        10,
+        35
+      ],
+      "means": "the scene's own: where Eriksson's boat is (distance), set from rowboat"
+    },
+    "rowboat_f": {
+      "range": [
+        -360,
+        360
+      ],
+      "means": "the scene's own: which way Eriksson's boat faces, turned round as he leaves"
+    },
+    "net": {
+      "type": "boolean",
+      "means": "the evening at the nets: Papa's net heaped on the pier by the boat, a length of it drawn out, tangled"
+    },
+    "chair": {
+      "values": [
+        "none",
+        "set",
+        "shoved"
+      ],
+      "means": "the chair by the gate: not there; set upright beside it (Papa put it there); shoved askew on the stones"
+    },
+    "shell": {
+      "type": "boolean",
+      "means": "the big white shell on the porch's rail: the ashtray (Papa put it there)"
+    },
+    "graves": {
+      "range": [
+        0,
+        5
+      ],
+      "means": "how many little graves there are in the sand between the stones, each a shell and a wooden bird (0: the sand bare)"
+    },
+    "weed": {
+      "type": "boolean",
+      "means": "the morning after the storm: wrack thrown up along the wet band of the rock"
+    },
+    "boat_out": {
+      "type": "boolean",
+      "means": "by night: the family's boat out at the nets far on the water, Papa's lantern its one warm light; not at the pier"
+    },
+    "dinghy": {
+      "values": [
+        "moored",
+        "circles",
+        "out"
+      ],
+      "means": "the dinghy: moored by the pier's root; going round in circles before the rock (Sophia rowing: her place the pieces'); out along the shore toward the big boat, as far as dinghy_at"
+    },
+    "dinghy_at": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "how far along the shore toward the big boat the dinghy is (dinghy out): 0 off the pier, 1 at the gangway"
+    },
+    "dinghy_a": {
+      "range": [
+        -2,
+        8
+      ],
+      "means": "the scene's own: where the dinghy is (across)"
+    },
+    "dinghy_d": {
+      "range": [
+        8,
+        30
+      ],
+      "means": "the scene's own: where the dinghy is (distance)"
+    },
+    "dinghy_f": {
+      "type": "number",
+      "means": "the scene's own: which way the dinghy faces (degrees)"
+    },
+    "big_boat": {
+      "type": "boolean",
+      "means": "the last morning: the big motor boat lying off the far rock, the gangway with its rail laid to it"
+    },
+    "luggage": {
+      "type": "boolean",
+      "means": "the last morning: the things carried down by the pier (kitbag, basket, suitcase, the plaid)"
     }
   },
   "objects": [
     {
       "id": "sky",
       "name": "Sky",
-      "sky": true
+      "sky": true,
+      "uniforms": {
+        "low": 0.42,
+        "band_x": 0.8888888888888888,
+        "sun_x": 1.1733333333333333,
+        "sun_y": 0.02,
+        "late_x": 1.5288888888888887,
+        "late_y": 0.2,
+        "dawn_x": 1.3866666666666667,
+        "dawn_y": 0.3,
+        "dusk_x": 0.21333333333333332,
+        "night_x": 1.031111111111111,
+        "moon_x": 1.031111111111111,
+        "moon_y": 0.2,
+        "dawn": 0,
+        "dusk": 0,
+        "night": 0,
+        "late": 0,
+        "storm": 0,
+        "flash": 0,
+        "fog": 0,
+        "phase": 1
+      }
     },
     {
       "id": "sea",
@@ -237,7 +709,7 @@
       "height": 4.8,
       "box": [
         -2.95,
-        -5.0,
+        -5,
         2.95,
         0.4
       ],
@@ -308,8 +780,8 @@
       "facing": 180,
       "height": 1.5,
       "box": [
-        -0.75,
-        -1.5,
+        -0.9,
+        -1.7,
         0.75,
         0.05
       ]
@@ -337,7 +809,7 @@
       "height": 0.85,
       "box": [
         -0.75,
-        -1.0,
+        -1,
         0.75,
         0.05
       ],
@@ -454,7 +926,7 @@
       "box": [
         -2.4,
         -0.95,
-        2.0,
+        2,
         0.2
       ]
     },
@@ -465,9 +937,9 @@
       "distance": 3.4,
       "height": 0.9,
       "box": [
-        -1.0,
-        -1.0,
-        1.0,
+        -1,
+        -1,
+        1,
         0.1
       ],
       "shadow": true,
@@ -488,7 +960,7 @@
           "scale": 1.3
         },
         {
-          "across": -5.0,
+          "across": -5,
           "distance": 9.5,
           "scale": 0.8
         }
@@ -522,7 +994,7 @@
         {
           "across": -2.6,
           "distance": 5.2,
-          "scale": 1.0,
+          "scale": 1,
           "flip": false
         },
         {
@@ -533,7 +1005,7 @@
         },
         {
           "across": -1.3,
-          "distance": 7.0,
+          "distance": 7,
           "scale": 0.8,
           "flip": false
         },
@@ -544,13 +1016,13 @@
           "flip": true
         },
         {
-          "across": -2.0,
+          "across": -2,
           "distance": 10.8,
-          "scale": 1.0,
+          "scale": 1,
           "flip": false
         },
         {
-          "across": 0.0,
+          "across": 0,
           "distance": 12.6,
           "scale": 1.1,
           "flip": true
@@ -568,15 +1040,300 @@
           "flip": true
         },
         {
-          "across": -3.0,
+          "across": -3,
           "distance": 6.6,
-          "scale": 1.0,
+          "scale": 1,
           "flip": false
         },
         {
           "across": -2.4,
           "distance": 8.3,
           "scale": 1.1,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "veranda_in",
+      "name": "The veranda, through its glass",
+      "on": "house",
+      "across": -0.7,
+      "distance": 1.9,
+      "facing": 180,
+      "height": 3,
+      "box": [
+        -1.75,
+        -3.05,
+        1.75,
+        0.05
+      ]
+    },
+    {
+      "id": "far_roof",
+      "name": "The new house over the trees, far off",
+      "across": -13,
+      "distance": 125,
+      "onLand": false,
+      "elevation": -0.55,
+      "height": 9,
+      "box": [
+        -11.2,
+        -9.3,
+        12,
+        0.6
+      ]
+    },
+    {
+      "id": "gate",
+      "name": "The gate and its stone",
+      "across": -4.9,
+      "distance": 11.9,
+      "height": 1.1,
+      "box": [
+        -1.7,
+        -1.15,
+        2.4,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "chair",
+      "name": "The chair by the gate",
+      "across": -4.1,
+      "distance": 11.0,
+      "height": 0.95,
+      "box": [
+        -0.6,
+        -1.05,
+        0.75,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "graves",
+      "name": "The graves",
+      "across": -1.9,
+      "distance": 9.4,
+      "height": 0.3,
+      "box": [
+        -1.35,
+        -0.42,
+        1.35,
+        0.05
+      ]
+    },
+    {
+      "id": "weed",
+      "name": "Wrack on the rock",
+      "across": 0.6,
+      "distance": 7,
+      "height": 0.15,
+      "box": [
+        -0.9,
+        -0.28,
+        0.95,
+        0.05
+      ],
+      "copies": [
+        {
+          "across": 0.55,
+          "distance": 7.2,
+          "scale": 1,
+          "flip": false
+        },
+        {
+          "across": 0.05,
+          "distance": 8.1,
+          "scale": 1.2,
+          "flip": true
+        },
+        {
+          "across": -0.35,
+          "distance": 10.2,
+          "scale": 0.9,
+          "flip": false
+        },
+        {
+          "across": -0.15,
+          "distance": 11.6,
+          "scale": 1.1,
+          "flip": true
+        },
+        {
+          "across": -0.4,
+          "distance": 13.1,
+          "scale": 1,
+          "flip": false
+        }
+      ]
+    },
+    {
+      "id": "net",
+      "name": "Papa's net",
+      "across": 6.4,
+      "distance": 16.1,
+      "onLand": false,
+      "elevation": -0.15,
+      "height": 0.4,
+      "box": [
+        -0.75,
+        -0.65,
+        1.4,
+        0.03
+      ]
+    },
+    {
+      "id": "luggage",
+      "name": "The things by the pier",
+      "across": -2.2,
+      "distance": 14.8,
+      "height": 0.7,
+      "box": [
+        -0.95,
+        -0.75,
+        1.0,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "rowboat",
+      "name": "Eriksson's boat",
+      "across": 70,
+      "distance": 30,
+      "onLand": false,
+      "elevation": -0.55,
+      "facing": 180,
+      "height": 1,
+      "box": [
+        -2.4,
+        -1.1,
+        2.8,
+        0.25
+      ],
+      "place": {
+        "across": "rowboat_a",
+        "distance": "rowboat_d",
+        "facing": "rowboat_f"
+      }
+    },
+    {
+      "id": "dinghy",
+      "name": "The dinghy",
+      "across": 1.6,
+      "distance": 14.6,
+      "onLand": false,
+      "elevation": -0.55,
+      "facing": 180,
+      "height": 0.7,
+      "box": [
+        -1.9,
+        -0.85,
+        1.3,
+        0.25
+      ],
+      "place": {
+        "across": "dinghy_a",
+        "distance": "dinghy_d",
+        "facing": "dinghy_f"
+      }
+    },
+    {
+      "id": "big_boat",
+      "name": "The big boat",
+      "across": 2.2,
+      "distance": 27.6,
+      "onLand": false,
+      "elevation": -0.55,
+      "height": 4.5,
+      "box": [
+        -4.6,
+        -4.6,
+        4.8,
+        0.3
+      ]
+    },
+    {
+      "id": "gangway",
+      "name": "The gangway",
+      "across": -3.7,
+      "distance": 27.0,
+      "height": 1.3,
+      "box": [
+        -0.1,
+        -1.35,
+        2.3,
+        0.12
+      ]
+    },
+    {
+      "id": "far_boat",
+      "name": "The boat out at the nets",
+      "across": 60,
+      "distance": 160,
+      "onLand": false,
+      "elevation": -0.55,
+      "height": 1.8,
+      "box": [
+        -2,
+        -1.9,
+        2,
+        0.2
+      ]
+    },
+    {
+      "id": "fog_wall",
+      "name": "The fog's wall",
+      "across": 300,
+      "distance": 1400,
+      "onLand": false,
+      "elevation": -0.55,
+      "height": 56,
+      "box": [
+        -900,
+        -58,
+        900,
+        2
+      ]
+    },
+    {
+      "id": "fog_far",
+      "name": "Fog over the water",
+      "across": 40,
+      "distance": 140,
+      "onLand": false,
+      "elevation": -0.55,
+      "height": 10,
+      "box": [
+        -200,
+        -10,
+        200,
+        1
+      ]
+    },
+    {
+      "id": "fog_near",
+      "name": "The island in the fog",
+      "across": 6,
+      "distance": 24,
+      "height": 9,
+      "box": [
+        -80,
+        -9,
+        80,
+        1
+      ],
+      "copies": [
+        {
+          "across": 6,
+          "distance": 24
+        },
+        {
+          "across": -4,
+          "distance": 12,
+          "scale": 0.6,
           "flip": true
         }
       ]
@@ -590,7 +1347,11 @@
         "turn": 150
       },
       "across": 0.2,
-      "distance": 4.0
+      "distance": 4,
+      "place": {
+        "across": "grandma_a",
+        "distance": "grandma_d"
+      }
     },
     {
       "id": "sophia",
@@ -601,7 +1362,11 @@
         "turn": 150
       },
       "across": 0.68,
-      "distance": 4.27
+      "distance": 4.27,
+      "place": {
+        "across": "sophia_a",
+        "distance": "sophia_d"
+      }
     },
     {
       "id": "papa",
@@ -612,7 +1377,21 @@
         "turn": 150
       },
       "across": -3,
-      "distance": 8
+      "distance": 8,
+      "place": {
+        "across": "papa_a",
+        "distance": "papa_d"
+      }
+    },
+    {
+      "id": "rain",
+      "name": "Rain",
+      "particles": {
+        "kind": "rain",
+        "amount": "storm",
+        "count": 9000,
+        "wind": 1.2
+      }
     }
   ],
   "music": {
