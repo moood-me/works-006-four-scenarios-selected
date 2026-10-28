@@ -7,47 +7,167 @@
     "mode": "picture"
   },
   "light": {
-    "ambient": 0.82,
-    "ambientColor": "#ebe5e0",
-    "bounce": 0.5,
-    "haze": 0.1,
-    "hazeColor": "#d8d5d4",
-    "hazeGlow": 0.9,
-    "shafts": 0.2,
+    "ambient": 0.8,
+    "ambientColor": "#ebe6de",
+    "bounce": 0.6,
+    "haze": 0.05,
+    "hazeColor": "#e6e1d8",
+    "hazeGlow": 0.3,
+    "shafts": 0.6,
+    "tint": "#fff2e0",
+    "tintStrength": 0,
+    "saturation": 1.05,
     "vignette": 0.25,
-    "grain": 0.07,
+    "grain": 0.06,
     "wind": [
       -1,
       0.4,
       0.5
     ],
-    "saturation": 1.05,
     "looks": {
+      "late": {
+        "ambient": 0.78,
+        "ambientColor": "#eee4d4",
+        "bounce": 0.6,
+        "haze": 0.07,
+        "hazeColor": "#e4dccd",
+        "hazeGlow": 0.3,
+        "shafts": 0.55,
+        "tint": "#ffd9a6",
+        "tintStrength": 0.07,
+        "saturation": 1.0,
+        "vignette": 0.25,
+        "grain": 0.06,
+        "lights": {
+          "sun": 0
+        }
+      },
+      "dawn": {
+        "ambient": 0.68,
+        "ambientColor": "#e4e7ea",
+        "bounce": 0.5,
+        "haze": 0.12,
+        "hazeColor": "#d8dbda",
+        "hazeGlow": 0,
+        "shafts": 0,
+        "tintStrength": 0,
+        "saturation": 1.1,
+        "vignette": 0.2,
+        "grain": 0.06,
+        "lights": {
+          "sun": 0,
+          "sun_late": 0
+        }
+      },
+      "dusk": {
+        "ambient": 0.82,
+        "ambientColor": "#ebe5e0",
+        "bounce": 0.5,
+        "haze": 0.1,
+        "hazeColor": "#d8d5d4",
+        "hazeGlow": 0.9,
+        "shafts": 0.2,
+        "tintStrength": 0,
+        "saturation": 1.05,
+        "vignette": 0.25,
+        "grain": 0.07,
+        "lights": {
+          "sun": 0,
+          "sun_late": 0,
+          "sun_dawn": 0
+        }
+      },
       "night": {
         "ambient": 0.64,
         "ambientColor": "#8a9bc8",
+        "bounce": 0.5,
         "haze": 0.16,
         "hazeColor": "#8794b4",
         "hazeGlow": 1.2,
         "shafts": 0.35,
-        "saturation": 0.85,
         "tint": "#a2b2d8",
         "tintStrength": 0.06,
+        "saturation": 0.85,
+        "vignette": 0.25,
+        "grain": 0.07,
         "lights": {
-          "afterglow": 0
+          "sun": 0,
+          "sun_late": 0,
+          "sun_dawn": 0,
+          "sun_dusk": 0
         }
+      },
+      "fog_air": {
+        "haze": 0.6,
+        "hazeColor": "#dde1e5",
+        "hazeGlow": 1.3,
+        "shafts": 0.45,
+        "saturation": 0.85,
+        "lights": {
+          "candle": 0.4
+        }
+      },
+      "storm": {
+        "ambient": 0.74,
+        "ambientColor": "#c4ccd8",
+        "haze": 0.24,
+        "hazeColor": "#b9c0c8",
+        "hazeGlow": 0.5,
+        "shafts": 0.05,
+        "tint": "#c6d2de",
+        "tintStrength": 0.06,
+        "saturation": 0.78,
+        "wind": [
+          -1,
+          0.4,
+          2.4
+        ],
+        "lights": {
+          "sun": 0,
+          "sun_late": 0,
+          "sun_dawn": 0,
+          "sun_dusk": 0,
+          "moon": 0.25
+        }
+      },
+      "flash": {
+        "ambient": 0.95,
+        "ambientColor": "#e8eeff",
+        "brightness": 1.12,
+        "saturation": 0.7
       }
     }
   },
   "lights": [
     {
-      "id": "afterglow",
+      "id": "sun",
+      "from": "sky#sun",
+      "color": "#ffefd8",
+      "strength": 1.3
+    },
+    {
+      "id": "sun_late",
+      "from": "sky#sun_late",
+      "color": "#ffe2b8",
+      "strength": 1.25,
+      "on": "late"
+    },
+    {
+      "id": "sun_dawn",
+      "from": "sky#sun_dawn",
+      "color": "#ffeedd",
+      "strength": 1.0,
+      "on": "dawn"
+    },
+    {
+      "id": "sun_dusk",
       "from": [
         300,
         5
       ],
       "color": "#f3d6c6",
-      "strength": 0.5
+      "strength": 0.5,
+      "on": "dusk"
     },
     {
       "id": "moon",
@@ -60,10 +180,20 @@
       "on": "night"
     },
     {
+      "id": "flash",
+      "from": [
+        30,
+        30
+      ],
+      "color": "#e8eeff",
+      "strength": 1.8,
+      "on": "flash"
+    },
+    {
       "id": "candle",
       "of": "lantern#flame",
       "color": "#ffc27a",
-      "strength": 1.8,
+      "strength": 2.6,
       "reach": 3.5,
       "on": "candle",
       "flicker": 0.15
@@ -78,28 +208,101 @@
     }
   ],
   "modules": [
-    "cast"
+    "cast",
+    "isle",
+    "cat"
   ],
   "state": {
-    "night": 1,
-    "fog": 0.5,
-    "candle": 1,
-    "window": 1,
-    "grandma_look": [
-      6,
-      1,
-      0
-    ],
-    "sophia_look": "grandma"
+    "dawn": 0,
+    "dusk": 0,
+    "night": 0,
+    "late": 0,
+    "calm": 0,
+    "storm": 0,
+    "flash": 0,
+    "fog": 0,
+    "fog_air": 0,
+    "moon": 1,
+    "candle": 0,
+    "window": 0,
+    "tent": "up",
+    "lean": 0,
+    "tent_tilt": 0,
+    "flap": "open",
+    "shawl": "none",
+    "stones": false,
+    "from": "land",
+    "grandma_at": "stand",
+    "sophia_at": "tent",
+    "papa_at": "by",
+    "papa_here": false,
+    "grandma_a": -0.4,
+    "grandma_d": 4.4,
+    "sophia_a": 1.4,
+    "sophia_d": 5.6,
+    "papa_a": 0.573,
+    "papa_d": 6.78,
+    "cat_at": "tent",
+    "cat_pose": "none",
+    "cat_a": 2.871,
+    "cat_d": 5.965,
+    "cat_dir": -1
   },
   "states": {
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the June dawn: the sun just up, veiled, low (0 — the day)"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dusk: the sun just gone, the afterglow low (0 — the day); over dawn"
+    },
     "night": {
       "range": [
         0,
         1
       ],
       "smooth": true,
-      "means": "0 — the August dusk, the sun just gone; 1 — the moonlit night (the moon behind the viewer, over the island)"
+      "means": "the moonlit night (0 — the day): blue, light enough for faces; over dawn and dusk"
+    },
+    "late": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "August: the sun lower, the light warmer, the grass burnt (0 — June); changes between steps"
+    },
+    "calm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dead calm of July: the sea glass, not a streak on it"
+    },
+    "storm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the thunderstorm: a white-grey sky and its heavy clouds, grey light, rain, wind, crests and foam; over a half — lightning now and then (flash:strike told)"
+    },
+    "flash": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "lightning: the sky and everything lit white a moment (the storm's script and the game's moments)"
     },
     "fog": {
       "range": [
@@ -107,7 +310,107 @@
         1
       ],
       "smooth": true,
-      "means": "the fog drifting in over the water: 0 — only its wall on the horizon, 1 — thick white banks over the sea before the cape"
+      "means": "the fog: up to a half its banks coming in over the water (0.5 — its wall on the horizon, banks over the sea); over a half the island in it — the air white, things gone in tens of metres"
+    },
+    "fog_air": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (the island's script sets it from fog): the thick fog's look"
+    },
+    "moon": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the moon's phase: 0 a thin crescent … 1 full (changes between steps; seen by night)"
+    },
+    "grandma_at": {
+      "values": [
+        "stand",
+        "pole",
+        "stone1",
+        "stone2",
+        "stone3",
+        "half",
+        "door",
+        "behind"
+      ],
+      "means": "where Grandmother is (the scene's places, lib.PLACES: stand, pole, stone1, stone2, stone3, half, door, behind); set, put there at once"
+    },
+    "grandma_a": {
+      "range": [
+        -12,
+        12
+      ],
+      "means": "the scene's own: where Grandmother stands (across, metres), set from grandma_at; a piece walks them"
+    },
+    "grandma_d": {
+      "range": [
+        0,
+        30
+      ],
+      "means": "the scene's own: where Grandmother stands (distance, metres), set from grandma_at; a piece walks them"
+    },
+    "grandma_placed": {
+      "type": "string",
+      "means": "the scene's own: the place Grandmother was last put at"
+    },
+    "sophia_at": {
+      "values": [
+        "tent",
+        "tie",
+        "door",
+        "inside",
+        "path"
+      ],
+      "means": "where Sophia is (the scene's places, lib.PLACES: tent, tie, door, inside, path); set, put there at once"
+    },
+    "sophia_a": {
+      "range": [
+        -12,
+        12
+      ],
+      "means": "the scene's own: where Sophia stands (across, metres), set from sophia_at; a piece walks them"
+    },
+    "sophia_d": {
+      "range": [
+        0,
+        30
+      ],
+      "means": "the scene's own: where Sophia stands (distance, metres), set from sophia_at; a piece walks them"
+    },
+    "sophia_placed": {
+      "type": "string",
+      "means": "the scene's own: the place Sophia was last put at"
+    },
+    "papa_at": {
+      "values": [
+        "by",
+        "peg",
+        "path"
+      ],
+      "means": "where Papa is (the scene's places, lib.PLACES: by, peg, path); set, put there at once"
+    },
+    "papa_a": {
+      "range": [
+        -12,
+        12
+      ],
+      "means": "the scene's own: where Papa stands (across, metres), set from papa_at; a piece walks them"
+    },
+    "papa_d": {
+      "range": [
+        0,
+        30
+      ],
+      "means": "the scene's own: where Papa stands (distance, metres), set from papa_at; a piece walks them"
+    },
+    "papa_placed": {
+      "type": "string",
+      "means": "the scene's own: the place Papa was last put at"
     },
     "candle": {
       "range": [
@@ -115,7 +418,7 @@
         1
       ],
       "smooth": true,
-      "means": "the candle in the lantern inside the tent: 0 out, 1 burning — the canvas glows with it"
+      "means": "the candle in the lantern at the back of the tent: 0 out, 1 burning — the canvas glows with it"
     },
     "window": {
       "range": [
@@ -124,13 +427,126 @@
       ],
       "smooth": true,
       "means": "the lamp behind Grandmother's window in the far house: 0 dark, 1 lit"
+    },
+    "tent": {
+      "values": [
+        "parcel",
+        "pole",
+        "up"
+      ],
+      "means": "the tent: in its parcel on the rock (as Eriksson brought it); its pole stood up, the canvas slack; standing"
+    },
+    "lean": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "how crooked the tent stands: 0 straight, 1 leaning back (the pole trembled as it went up)"
+    },
+    "tent_tilt": {
+      "range": [
+        0,
+        9
+      ],
+      "means": "the scene's own: the tent's lean in degrees, set from lean"
+    },
+    "flap": {
+      "values": [
+        "open",
+        "shut"
+      ],
+      "means": "the tent's door: its flaps thrown back and tied; laced shut (whoever sits inside between the candle and it is a shadow on it)"
+    },
+    "shawl": {
+      "values": [
+        "none",
+        "ledge"
+      ],
+      "means": "Grandmother's shawl: not here; slipped into the crevice, lying on its ledge over the water (seen from the sea)"
+    },
+    "stones": {
+      "type": "boolean",
+      "means": "the last morning: stones laid round the tent's edges"
+    },
+    "from": {
+      "values": [
+        "land",
+        "sea",
+        "side"
+      ],
+      "means": "where the camera is (a cut): on the rock as the scene starts; out on the water, looking back at the cape (the tent's back, the crevice and its ledge); up the path on the left, looking across the tent to the sea (whoever sits behind it)"
+    },
+    "cat_at": {
+      "values": [
+        "tent",
+        "door",
+        "rock"
+      ],
+      "means": "where the cat is (lib.CAT): by the tent's front, at its door, on the rock nearer; set while he walks (cat_pose walk), he goes there at his pace (cat:arrived told)"
+    },
+    "cat_pose": {
+      "values": [
+        "sit",
+        "lie",
+        "walk",
+        "none"
+      ],
+      "means": "what the cat does: sits, lies, walks; none — not here"
+    },
+    "cat_a": {
+      "range": [
+        -12,
+        12
+      ],
+      "means": "the scene's own: where the cat is (across)"
+    },
+    "cat_d": {
+      "range": [
+        0,
+        30
+      ],
+      "means": "the scene's own: where the cat is (distance)"
+    },
+    "cat_dir": {
+      "values": [
+        1,
+        -1
+      ],
+      "means": "the scene's own: which way the cat faces (1 right, -1 left)"
+    },
+    "cat_placed": {
+      "type": "string",
+      "means": "the scene's own: the place the cat was last put at"
     }
   },
   "objects": [
     {
       "id": "sky",
       "name": "Sky",
-      "sky": true
+      "sky": true,
+      "uniforms": {
+        "low": 0.45,
+        "band_x": 0.8888888888888888,
+        "sun_x": 1.4222222222222223,
+        "sun_y": -0.12,
+        "late_x": 1.5999999999999999,
+        "late_y": 0.14,
+        "dawn_x": 1.6888888888888887,
+        "dawn_y": 0.31,
+        "dusk_x": 0.21333333333333332,
+        "night_x": 1.1555555555555554,
+        "moon_x": -1,
+        "moon_y": -1,
+        "dawn": 0,
+        "dusk": 0,
+        "night": 0,
+        "late": 0,
+        "storm": 0,
+        "flash": 0,
+        "fog": 0,
+        "phase": 1
+      }
     },
     {
       "id": "sea",
@@ -149,7 +565,7 @@
       }
     },
     {
-      "id": "fog_bank",
+      "id": "fog_wall",
       "name": "The fog's wall on the horizon",
       "across": 300,
       "distance": 1400,
@@ -196,7 +612,7 @@
       ]
     },
     {
-      "id": "mist",
+      "id": "fog_far",
       "name": "Fog over the water",
       "across": 60,
       "distance": 140,
@@ -442,12 +858,67 @@
       ]
     },
     {
+      "id": "path",
+      "name": "The wet stones of the path",
+      "plane": true,
+      "drape": true,
+      "across": -1.75,
+      "distance": 8.4,
+      "width": 5,
+      "depth": 6.4
+    },
+    {
+      "id": "seat",
+      "name": "Low stones to sit on",
+      "across": -1.6,
+      "distance": 9.6,
+      "box": [
+        -1.2,
+        -0.45,
+        1.2,
+        0
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": -1.6,
+          "distance": 9.6,
+          "elevation": -0.1
+        },
+        {
+          "across": 2.458,
+          "distance": 8.513,
+          "elevation": -0.1,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "ledge",
+      "name": "The crevice and its ledge",
+      "across": 3.35,
+      "distance": 9.2,
+      "onLand": false,
+      "elevation": -0.83,
+      "facing": 114,
+      "height": 0.55,
+      "box": [
+        -0.56,
+        -0.6,
+        0.56,
+        0.06
+      ]
+    },
+    {
       "id": "tent",
       "name": "Sophia's tent",
       "unseen": true,
       "across": 2.4,
       "distance": 6.6,
-      "facing": 215
+      "facing": 215,
+      "place": {
+        "tilt": "tent_tilt"
+      }
     },
     {
       "id": "tent_floor",
@@ -523,8 +994,8 @@
       "id": "lantern",
       "name": "The candle lantern",
       "on": "tent",
-      "across": 0.12,
-      "distance": 0.35,
+      "across": 0.15,
+      "distance": 1.5,
       "elevation": 0.02,
       "height": 0.32,
       "box": [
@@ -533,6 +1004,121 @@
         0.1,
         0.02
       ]
+    },
+    {
+      "id": "peg",
+      "name": "The guy rope and its peg",
+      "on": "tent",
+      "facing": 90,
+      "height": 1.2,
+      "box": [
+        -1.0,
+        -1.2,
+        0.05,
+        0.05
+      ]
+    },
+    {
+      "id": "stones_side",
+      "name": "Stones along the tent's side",
+      "on": "tent",
+      "across": 0.84,
+      "facing": 90,
+      "height": 0.2,
+      "box": [
+        -0.05,
+        -0.25,
+        1.98,
+        0.03
+      ]
+    },
+    {
+      "id": "stones_front",
+      "name": "Stones along the tent's front",
+      "on": "tent",
+      "distance": -0.05,
+      "facing": 180,
+      "height": 0.2,
+      "box": [
+        -0.85,
+        -0.22,
+        0.85,
+        0.03
+      ]
+    },
+    {
+      "id": "parcel",
+      "name": "The tent in its parcel",
+      "on": "tent",
+      "across": 0.1,
+      "distance": 0.6,
+      "facing": 180,
+      "height": 0.3,
+      "box": [
+        -0.85,
+        -0.32,
+        0.85,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "pole",
+      "name": "The pole stood up, the canvas slack",
+      "on": "tent",
+      "facing": 180,
+      "height": 1.25,
+      "box": [
+        -0.9,
+        -1.3,
+        0.9,
+        0.05
+      ],
+      "translucent": 0.4,
+      "shadow": true
+    },
+    {
+      "id": "fog_near",
+      "name": "The cape in the fog",
+      "across": 4,
+      "distance": 22,
+      "height": 9,
+      "box": [
+        -80,
+        -9,
+        80,
+        1
+      ],
+      "copies": [
+        {
+          "across": 4,
+          "distance": 22
+        },
+        {
+          "across": -2,
+          "distance": 12.5,
+          "scale": 0.6,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "cat",
+      "name": "Mappe, the cat",
+      "across": 2.871,
+      "distance": 5.965,
+      "height": 0.5,
+      "box": [
+        -0.46,
+        -0.56,
+        0.46,
+        0.03
+      ],
+      "shadow": true,
+      "place": {
+        "across": "cat_a",
+        "distance": "cat_d"
+      }
     },
     {
       "id": "grandma",
@@ -544,7 +1130,11 @@
         "does": "hands_behind"
       },
       "across": -0.4,
-      "distance": 4.4
+      "distance": 4.4,
+      "place": {
+        "across": "grandma_a",
+        "distance": "grandma_d"
+      }
     },
     {
       "id": "sophia",
@@ -555,7 +1145,45 @@
         "turn": 200
       },
       "across": 1.4,
-      "distance": 5.6
+      "distance": 5.6,
+      "place": {
+        "across": "sophia_a",
+        "distance": "sophia_d"
+      },
+      "shadow": {
+        "light": "candle",
+        "onto": [
+          "tent_front",
+          "tent_back",
+          "tent_slope_r",
+          "tent_slope_l"
+        ]
+      }
+    },
+    {
+      "id": "papa",
+      "name": "Papa",
+      "person": {
+        "cast": "cast",
+        "who": "papa",
+        "turn": 185
+      },
+      "across": 0.573,
+      "distance": 6.78,
+      "place": {
+        "across": "papa_a",
+        "distance": "papa_d"
+      }
+    },
+    {
+      "id": "rain",
+      "name": "Rain",
+      "particles": {
+        "kind": "rain",
+        "amount": "storm",
+        "count": 9000,
+        "wind": 1.2
+      }
     }
   ],
   "music": {
