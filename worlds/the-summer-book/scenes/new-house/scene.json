@@ -331,7 +331,8 @@
   ],
   "modules": [
     "cast",
-    "isle"
+    "isle",
+    "beats"
   ],
   "state": {
     "dawn": 0,
@@ -367,6 +368,8 @@
     "lantern_x": 1.15,
     "lantern_z": 15.9,
     "lantern_e": 1.19,
+    "beat": null,
+    "beat_next": null,
     "camera_x": -7.5,
     "camera_z": 2.5,
     "camera_h": -0.0204,
@@ -597,6 +600,14 @@
     "lantern_e": {
       "type": "number",
       "means": "the script's own: the height it is set at"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (the module beats; the game names it)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game goes to next (its cut made ready)"
     }
   },
   "objects": [

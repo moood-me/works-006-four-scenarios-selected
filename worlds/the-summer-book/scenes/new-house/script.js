@@ -2,7 +2,8 @@
 // thick fog's look, the storm's lightning); the people at their places (`<id>_at`: lib.PLACES — Grandmother sitting on
 // the bed's foot as the place says); the veranda's window leaf turned by `sash`; the drawers pulled one after another
 // by `drawers`; Grandmother's lantern — in her hand (its light at her left hand), on the table, on the floor, or none;
-// the view (`view`: a cut to where the camera looks from, all its keys set, nothing left over from another view).
+// the view (`view`: a cut to where the camera looks from, all its keys set, nothing left over from another view); the
+// pieces the game plays (`beat`: the module beats).
 const L = scene.lib;
 const isle = scene.kit.isle;
 isle.weather(scene);
@@ -48,7 +49,7 @@ const lantern = () => {
 scene.on('change', 'lantern', lantern);
 lantern();
 
-// the view: a cut, every camera key set
+// the view (the stage-4 stills; the pieces set the camera themselves): a cut, every camera key set
 const view = () => {
   const v = L.VIEW[scene.get('view')];
   if (!v) {
@@ -59,3 +60,6 @@ const view = () => {
 };
 scene.on('change', 'view', view);
 view();
+
+// the pieces (lib.js FILM): the game names one in `beat`
+scene.kit.beats.play(scene, L.FILM);

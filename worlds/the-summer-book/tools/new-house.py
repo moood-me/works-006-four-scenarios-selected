@@ -247,7 +247,9 @@ states = {**isle.STATES,
           "lantern_set": {"range": [0, 1], "means": "the script's own: the lantern set down, alight (from lantern)"},
           "lantern_x": {"type": "number", "means": "the script's own: where the lantern is set (from lantern)"},
           "lantern_z": {"type": "number", "means": "the script's own: where the lantern is set"},
-          "lantern_e": {"type": "number", "means": "the script's own: the height it is set at"}}
+          "lantern_e": {"type": "number", "means": "the script's own: the height it is set at"},
+          "beat": {"type": "string", "means": "the piece playing (the module beats; the game names it)"},
+          "beat_next": {"type": "string", "means": "the piece the game goes to next (its cut made ready)"}}
 
 # the empty play: a June day on the rock before the new house, Grandmother and Sophia come out of the forest, the
 # window shut, nothing touched — and nobody there by day (the game brings them, at night)
@@ -255,7 +257,7 @@ state = {**isle.STATE, "view": "out", "grandma_at": "path", "sophia_at": "path",
          "grandma_a": PATH["grandma"][0][0], "grandma_d": PATH["grandma"][0][1], "sophia_a": PATH["sophia"][0][0], "sophia_d": PATH["sophia"][0][1],
          "sash": 0, "sash_f": 180, "drawers": 0, **{f"drawer{k}_x": 2.43 for k in (1, 2, 3)}, "seal": False, "cigarette": 0,
          "lantern": "none", "lantern_held": 0, "lantern_set": 0, "lantern_x": 1.15, "lantern_z": 15.9, "lantern_e": FLOOR + 0.74,
-         **OUT}
+         "beat": None, "beat_next": None, **OUT}
 
 spec = {
     "engine": 3,
@@ -265,7 +267,7 @@ spec = {
     "camera": {"mode": "picture"},
     "light": light,
     "lights": lights,
-    "modules": ["cast", "isle"],
+    "modules": ["cast", "isle", "beats"],
     "state": state,
     "states": states,
     "objects": objects,
