@@ -25,7 +25,7 @@ export default {
     const over = settle(signal, () => g.set('spin', 0.3, 0.8));
     send('spin', 0.7);
     const r = await balance(g, b, mg, { at: 'grandma#chest', seconds: SECONDS, push: t => wobble(t, PUSH, 1.3),
-      frame: ({ arrow, on, t }) => send('spin', on ? clamp(0.2 + 0.8 * Math.abs(arrow)) : 0.6 + 0.1 * Math.sin(2 * t)),
+      frame: ({ arrow, on, shown, t }) => send('spin', on || shown ? clamp(0.2 + 0.8 * Math.abs(arrow)) : 0.6 + 0.1 * Math.sin(2 * t)),
       slip: () => g.mood('sophia', 'afraid') });
     if (!r) return this.skipped;
     over();

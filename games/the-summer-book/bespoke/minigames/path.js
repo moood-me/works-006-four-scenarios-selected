@@ -21,7 +21,7 @@
 //   How it is for her: the stones slippery, the legs old, the light small; going all the same.
 //   What the player feels: keeping the light steady, stone by stone.
 //   → { slips }
-import { clamp, until, keys, teach, settle, wobble } from './hands.js';
+import { clamp, until, keys, teachLead, settle, wobble } from './hands.js';
 
 const KEEP = 3, STONE = 10, ALONE = 12, OFF = 0.9, PUSH = 0.6;
 // s the rest is held (`rest` true; the scene walks her to the low stone by hers and sits her — it tells no moment —,
@@ -57,7 +57,7 @@ export function path({ title, phrase, about, slip, short = () => false, breath =
       mg.plate.set({ notches: last > 2 ? [0.5] : [] });
       const lead = mg.lead({ zone: { at: 0, width: 0.45 }, steer: 'rate', release: 'stay', push: 0 });
       // (the ghost shows the leading only while there is something to lead: not while the scene walks or she sits)
-      let taught = teach(b, mg, [lead]);
+      let taught = teachLead(mg, lead);
       const quiet = () => { taught?.remove(); taught = null; };
       // phase: 'steady' (kept steady toward stone n) → 'walk' (stepping to it, the scene's turn) → 'there' (reached)
       // → the next stone; 'rest' — sat down (`why`: 'slip' — back to steadying for the same stone; 'breath' — on)
@@ -104,9 +104,11 @@ export function path({ title, phrase, about, slip, short = () => false, breath =
           }
           lead.set({ push: begun == null ? 0 : t < caught ? -Math.sign(s.arrow) * 1.6 * Math.min(1, Math.abs(s.arrow) * 4) : wobble(t - begun, PUSH, n) });
           if (s.held && s.in) kept += dt;
-          if (slip === 'sway') send('lantern_sway', clamp(Math.abs(s.arrow)));
-          if (body) send('balance', clamp(s.arrow, -1, 1));
-          ring.set({ danger: clamp(Math.abs(s.arrow) / OFF) });
+          // (the ghost leading: the lantern and her body move with its knob, as with a finger)
+          const arrow = taught?.arrow() ?? s.arrow;
+          if (slip === 'sway') send('lantern_sway', clamp(Math.abs(arrow)));
+          if (body) send('balance', clamp(arrow, -1, 1));
+          ring.set({ danger: clamp(Math.abs(arrow) / OFF) });
           mg.plate.set({ fill: clamp((n - 2 + clamp(kept / KEEP)) / (last - 1)), glow: !s.held ? 'idle' : s.in ? 'good' : 'bad' });
           const alone = begun == null && t - t00 >= ALONE, late = begun != null && t - Math.max(from, begun) >= STONE;
           if (kept >= KEEP || alone || late) {
@@ -122,13 +124,13 @@ export function path({ title, phrase, about, slip, short = () => false, breath =
           kept = 0;
           from = t;
           mg.sceneTurn(false);
-          taught = teach(b, mg, [lead]);
+          taught = teachLead(mg, lead);
           aim();
         } else if (phase === 'rest' && t >= till) {
           g.set('rest', false);
           mg.plate.set({ phrase });
           if (why === 'breath') phase = 'there';
-          else { phase = 'steady'; mg.sceneTurn(false); taught = teach(b, mg, [lead]); from = t; kept = 0; }
+          else { phase = 'steady'; mg.sceneTurn(false); taught = teachLead(mg, lead); from = t; kept = 0; }
         }
         return false;
       });

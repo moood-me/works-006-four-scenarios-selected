@@ -37,8 +37,8 @@
 //     done LIMIT s after the first touch — the rest comes by itself (SELF s). → {jerks, self: it came by itself} | null
 //   balance(g, b, mg, {at, seconds, keep, width, push, frame, slip}) — “balance” (lead anywhere, steered: the arrow is
 //     what tilts — a lantern, a cup, a horizon, a body — and `push(t)` what tilts it, from the first touch on): a
-//     quiet ring on the thing (`at`), its arc of danger how far the arrow is off; frame({arrow, in, held, t, dt, on}) each
-//     frame (on — touched yet); the arrow at OFF or beyond — slip() once (a mistake), and the arrow brought back to the middle (she has
+//     quiet ring on the thing (`at`), its arc of danger how far the arrow is off; frame({arrow, in, held, t, dt, on, shown}) each
+//     frame (on — touched yet; shown — the ghost is leading: the arrow its knob's, teachLead); the arrow at OFF or beyond — slip() once (a mistake), and the arrow brought back to the middle (she has
 //     caught herself). Kept counts only while the finger leads and the arrow is in the zone. Ends when it has been kept
 //     `keep` s (keep null — by the count `seconds` alone), or at `seconds` from the first touch (never touched for ALONE
 //     s — over too). The bar — the time kept (bar(u) — where it stands on the plate, for a balance that is one step of
@@ -57,6 +57,38 @@ export function keys(g) {
   };
 }
 export const teach = (b, mg, gestures) => b.minigame.tricks.teach(mg, gestures, { still: [2, 4] });
+// the lead's showing (as teach: at once, then after 2 s still, then every 4), with what it moves: while the ghost leads,
+// arrow() is where its knob is (the language's lead.demo: right 0.6, left 0.5, back to the middle — gestures.js), so
+// the game drives the scene with it as with the finger; null — not showing
+const KNOB = [[0, 0], [0.5, 0], [1.2, 0.6], [2.2, -0.5], [2.8, 0]]; // s from the showing's start, the knob
+export function teachLead(mg, lead) {
+  let show = null, t0 = null, idle = 0, shown = false, pressed = false, gone = false;
+  const go = () => {
+    const s = mg.show({ gestures: [lead] });
+    if (s.dead) { gone = true; return; }
+    show = s;
+    s.on('start', () => { t0 = mg.t; });
+    s.finished.then(() => { if (show === s) { show = null; t0 = null; shown = true; idle = 0; } });
+  };
+  go();
+  const offs = [
+    mg.on('down', () => { idle = 0; shown = true; pressed = true; }),
+    mg.on('up', () => { idle = 0; pressed = false; }),
+    mg.on('frame', ({ dt }) => { if (show || gone || pressed) return; idle += dt; if (idle >= (shown ? 4 : 2)) go(); }),
+  ];
+  return {
+    arrow() {
+      if (t0 == null) return null;
+      const k = mg.t - t0;
+      for (let i = 1; i < KNOB.length; i++) {
+        const [a, u] = KNOB[i - 1], [b2, v] = KNOB[i];
+        if (k <= b2) return u + (v - u) * clamp((k - a) / (b2 - a));
+      }
+      return 0;
+    },
+    remove() { gone = true; show?.remove(); offs.forEach(f => f()); },
+  };
+}
 export function pace(tau = 0.25) {
   let v = 0, was = null;
   return {
@@ -214,7 +246,7 @@ const OFF = 0.9, GOOD = 0.6; // (a balance played well: kept in the zone, the fi
 export async function balance(g, b, mg, { at, seconds, keep: need = null, width = 0.45, push = () => 0, frame = () => {}, slip = () => {}, bar = u => u }) {
   const lead = mg.lead({ zone: { at: 0, width }, steer: 'rate', release: 'stay', push: 0 });
   const mark = mg.mark({ at, kind: 'ring', quiet: true, danger: 0 });
-  const taught = teach(b, mg, [lead]);
+  const taught = teachLead(mg, lead);
   let begun = null, kept = 0, slips = 0, caught = 0;
   const touch = mg.on('down', () => { begun ??= mg.t; });
   const t00 = mg.t;
@@ -230,8 +262,10 @@ export async function balance(g, b, mg, { at, seconds, keep: need = null, width 
     // (caught herself: the arrow pushed back to the middle for a moment)
     lead.set({ push: begun == null ? 0 : t < caught ? -Math.sign(s.arrow) * 1.6 * Math.min(1, Math.abs(s.arrow) * 4) : push(now) });
     if (s.held && s.in) kept += dt;
-    mark.set({ danger: clamp(Math.abs(s.arrow) / OFF) });
-    frame({ arrow: s.arrow, in: s.in, held: s.held, t: now, dt, on: begun != null });
+    // (the ghost leading: the scene moves with its knob, as with a finger)
+    const shown = taught.arrow(), arrow = shown ?? s.arrow;
+    mark.set({ danger: clamp(Math.abs(arrow) / OFF) });
+    frame({ arrow, in: shown != null ? Math.abs(arrow) <= width / 2 : s.in, held: s.held, t: now, dt, on: begun != null, shown: shown != null });
     mg.plate.set({ fill: bar(clamp(kept / (need ?? seconds))), glow: !s.held ? 'idle' : s.in ? 'good' : 'bad' });
     return (need != null && kept >= need) || (begun != null && now >= seconds) || (begun == null && t - t00 >= ALONE);
   });
