@@ -1,7 +1,7 @@
 // М11 «The Beam» (the finale «The Beam», the lantern room, after the piece `e_write`: Papa on the gallery, the lamp
 // burning): touch nothing — SECONDS of the play's time, counted whatever the hands do; the language's sign of it, the
-// ghost's hands off, from the first second and again every AGAIN s and after any touch (a touch changes nothing); a
-// light on what is watched (`at`: the lamp turning — `burner#lens`), no touch of its own; the bar fills with the time.
+// ghost's hands off, from the first second and over and over (GAP s between), shown anew at once after any touch (a
+// touch changes nothing); the bar fills with the time.
 // The beam goes round by itself (the scene's). The count out — the end (neutral); the
 // game cuts after it to the beam passing each of them.
 // М11 «The Stair» (stair.js) — the same at the middle of the stair.
@@ -12,24 +12,30 @@
 //   → {}
 import { until } from './hands.js';
 
-const AGAIN = 4; // s: the hands-off sign shown again
+const GAP = 0.6; // s between the hands-off signs
 
-// still({title, phrase, seconds, at}) → a minigame of touching nothing; at — what is watched (a light on it), or none
-export function still({ title, phrase, seconds, about, at = null }) {
+// still({title, phrase, seconds}) → a minigame of touching nothing
+export function still({ title, phrase, seconds, about }) {
   return {
     title, about,
     skipped: {},
-    points: at ? [at] : [],
+    points: [],
     keys: [],
     async run(g, b, opts, signal) {
       const mg = g.minigame({ phrase });
-      if (at) mg.mark({ at, kind: 'light' });
-      let sign = mg.show({ handsOff: true }), last = mg.t;
-      const again = () => { sign?.remove(); sign = mg.show({ handsOff: true }); last = mg.t; };
+      // (the sign over and over: the next GAP s after one has run; a touch stops it — shown anew as the finger lifts)
+      let sign = null, next = mg.t;
+      const again = () => {
+        sign?.remove();
+        sign = mg.show({ handsOff: true });
+        const it = sign;
+        next = Infinity;
+        it.finished.then(() => { if (sign === it) next = mg.t + GAP; });
+      };
       mg.on('up', again);
       const t0 = mg.t;
       const done = await until(mg, ({ t }) => {
-        if (t - last >= AGAIN) again();
+        if (t >= next) again();
         mg.plate.set({ fill: Math.min(1, (t - t0) / seconds), glow: 'idle' });
         return t - t0 >= seconds;
       });
@@ -40,4 +46,4 @@ export function still({ title, phrase, seconds, about, at = null }) {
   };
 }
 
-export default still({ title: tr('The Beam'), phrase: tr('The beam goes round.'), seconds: 8, about: 8, at: 'burner#lens' });
+export default still({ title: tr('The Beam'), phrase: tr('The beam goes round.'), seconds: 8, about: 8 });

@@ -10,7 +10,7 @@
 //   → { early: how many times let go too soon }
 import { clamp, until, keys, teach, settle } from './hands.js';
 
-const SECONDS = 3, DRAIN = 2.5;
+const SECONDS = 3, DRAIN = 5;
 
 export default {
   title: tr('The Ladle'),
@@ -27,8 +27,11 @@ export default {
     const hold = mg.hold({ on: fire, seconds: SECONDS, drain: DRAIN });
     teach(b, mg, [hold]);
     let early = 0;
+    // (let go before it is full — a click, as a first touch so often is: the ghost shows the holding again at once,
+    // and the fill ebbs slowly, so the touch is seen to have counted)
     hold.on('up', () => {
       const f = hold.state.fill;
+      if (f < 1) mg.show({ gestures: [hold] });
       if (f <= 0.15 || f >= 1) return;
       early++;
       g.failed();
