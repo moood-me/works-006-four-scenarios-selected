@@ -45,7 +45,7 @@ In the scene's `modules` — `closeups`. The insert's element — its id the sho
 | `string` | shore (М9а `parcel`) | the parcel's brown paper and its string, Grandmother's hands holding it out, Sophia's at the string's bow | `pull` 0…1 (0) — the bow pulled, the string loose, the paper opening (`parcel`) | `string#bow` |
 | `palm` | cape (М10г `knock`) | the tent's canvas from behind by night, glowing faintly; Grandmother's old palm close to it, not touching | `near` 0…1 (0.6) — the palm's nearness to the canvas (1 touching); `knock` 0…3 (0) — knocks given (the knuckles to the cloth and back each whole step) | `palm#palm` |
 | `oars` | shore (М11 `oars`) | the dinghy's oars' handles, Sophia's small hands on them, Grandmother's old hands over hers | `let` 0…1 (0) — Grandmother's hands lift off and away (М11) | `oars#hands` |
-| `rail` | shore (М11 `gangway`) | the gangway's wooden rail in the fog, Grandmother's hand on it | `let` 0…1 (0) — the hand opens and leaves the rail | `rail#hand` |
+| `rail` | shore (М11 `gangway`) | the gangway's hand rail in the fog — a rope on posts, as the shore's gangway —, Grandmother's hand on the rope | `let` 0…1 (0) — the hand opens and leaves the rail | `rail#hand` |
 
 The shot's name with no point (`knot`, `palm`, …) — the main thing in it.
 
@@ -73,7 +73,7 @@ In the shot's units: the frame's height, the origin in the frame's middle, y dow
 | `string#bow` (= `string`) | (0, −0.07) |
 | `palm#palm` (= `palm`) | (0, −0.04) |
 | `oars#hands` (= `oars`) | (0, 0.03) |
-| `rail#hand` (= `rail`) | (0.02, 0.04) → (−0.04, −0.16) as it leaves (`let` 0.3…1) |
+| `rail#hand` (= `rail`) | (0.02, 0.045) → (−0.04, −0.155) as it leaves (`let` 0.3…1) |
 
 ## Layers (what `live` moves)
 
@@ -106,4 +106,4 @@ is open nothing is painted anew.
 
 A trial spec with the fourteen inserts (`sheets/sb-closeups/closeups-trial.json` beside the world's clones, not a
 scene of the world; `gen.cjs` makes it), rendered on the GPU: every shot in the middle of its fields, then at their
-starts and ends (16:9), and `palm`, `oars`, `match` at 21:9.
+starts and ends (16:9), and `palm`, `oars`, `match`, `rail` at 21:9.

@@ -6,7 +6,7 @@
 // the two beds by moonlight, her open palm, Sophia's hand coming into it), `breast` (Sophia's palm on her breast in
 // the candle's light), `sleeve` (Sophia's fingers on Grandmother's sleeve, letting go), `string` (the parcel's bow
 // pulled), `palm` (Grandmother's palm by the tent's glowing canvas at night, knocking), `oars` (Sophia's hands on the
-// oars, Grandmother's over them, lifting away), `rail` (her hand leaving the gangway's rail in the fog). No faces.
+// oars, Grandmother's over them, lifting away), `rail` (her hand leaving the gangway's rope rail in the fog). No faces.
 // Human hands: Grandmother's thin and old, the knuckles big, out of her dark-blue sleeve; Sophia's small, a child's,
 // sunburnt. Painted in the world's flat way: straight-edged shapes in quiet colours, each lit side a plain lighter
 // facet; their light is painted (the pearl-grey day, the moon's blue, a candle's or a match's warm).
@@ -986,17 +986,25 @@ function liveOars(L, now) {
   L.at(...P.Hd);
 }
 
-// ── rail ── the gangway to the big boat in the fog: its wooden rail across the frame rising to the right, the posts
-// under it, the boat's grey side looming in the white; Grandmother's hand on the rail. `let`: the hand opens and
-// leaves the rail.
+// ── rail ── the gangway to the big boat in the fog: its hand rail a rope on grey wooden posts, rising to the right
+// across the frame and sagging between them, the boat's grey side looming in the white; Grandmother's hand on the
+// rope. `let`: the hand opens and leaves the rope.
 const RAIL = (() => {
-  const A = [-1.45, 0.36], Bp = [1.45, -0.26], Rh = [0.02, 0.04];
+  const A = [-1.45, 0.32], Bp = [1.45, -0.3], POSTS = [-2.75, -0.95, 0.85, 2.65], SAG = 0.04;
   const ang = Math.atan2(Bp[1] - A[1], Bp[0] - A[0]);
+  const line0 = (x) => A[1] + ((x - A[0]) / (Bp[0] - A[0])) * (Bp[1] - A[1]);
+  // the rope: the line from post top to post top, sagging between them
+  const ropeY = (x) => {
+    let k = 0;
+    while (k < POSTS.length - 2 && x > POSTS[k + 1]) k++;
+    const u = clamp((x - POSTS[k]) / (POSTS[k + 1] - POSTS[k]), 0, 1);
+    return line0(x) + SAG * 4 * u * (1 - u);
+  };
+  const Rh = [0.02, ropeY(0.02)];
   const light = { dir: [-0.3, -1], colour: '#f4f4f2', k: 0.3 };
-  const o = (curl, thumb, spread) => placed({ who: 'grandma', L: 0.34, light, curl, thumb, spread, side: 1, angle: ang - Math.PI / 2 }, [0.62, 0], add2(Rh, [0, -0.01]));
-  return { A, Bp, Rh, ang, light, shut: o([0.8, 0.82, 0.85, 0.85], 0.5, 0), open: o([0.08, 0.08, 0.1, 0.15], 0.05, 0.3) };
+  const o = (curl, thumb, spread) => placed({ who: 'grandma', L: 0.34, light, curl, thumb, spread, side: 1, angle: ang - Math.PI / 2 }, [0.55, 0], add2(Rh, [0, -0.005]));
+  return { A, Bp, POSTS, ropeY, Rh, ang, light, shut: o([0.82, 0.84, 0.86, 0.86], 0.55, 0), open: o([0.08, 0.08, 0.1, 0.15], 0.05, 0.3) };
 })();
-const railY = (x) => RAIL.A[1] + ((x - RAIL.A[0]) / (RAIL.Bp[0] - RAIL.A[0])) * (RAIL.Bp[1] - RAIL.A[1]);
 function paintRail(g, C) {
   const P = RAIL, rnd = C.e.rnd;
   // the fog: white going grey toward the water; the big boat's side a dim shape up to the right
@@ -1006,13 +1014,19 @@ function paintRail(g, C) {
   C.layer('fog', [0, 0], FULL, (g2) => {
     for (let i = 0; i < 8; i++) { const x = -W + 0.4 * i, y = -0.35 + 0.12 * (i % 4); poly(g2, [[x, y], [x + 0.9, y - 0.03], [x + 1.0, y + 0.06], [x - 0.05, y + 0.08]], rgba('#f4f5f3', 0.2)); }
   }, { drift: [0.02, 0] });
-  // the gangway's grey planks below, the posts, the rail
+  // the gangway's grey planks below; the posts (as the shore's gangway: grey wood) with the rope over their tops
   poly(g, [[-W, 0.5], [W, 0.06], [W, H], [-W, H]], '#8f8880');
-  for (let x = -1.2; x < 1.3; x += 0.42) poly(g, [[x - 0.018, railY(x)], [x + 0.018, railY(x)], [x + 0.018, H], [x - 0.018, H]], '#8c857a', rgba('#4a443c', 0.6), 0.004);
-  const d = unit(sub2(P.Bp, P.A)), n = [-d[1], d[0]];
-  poly(g, [add2(P.A, mul2(n, -0.03)), add2(P.Bp, mul2(n, -0.03)), add2(P.Bp, mul2(n, 0.03)), add2(P.A, mul2(n, 0.03))], '#9c958a', rgba('#4a443c', 0.7), 0.004);
-  poly(g, [add2(P.A, mul2(n, -0.03)), add2(P.Bp, mul2(n, -0.03)), P.Bp, P.A], '#b8b2a6');
-  for (let i = 0; i < 6; i++) line(g, ...add2(P.A, mul2(d, 0.4 + 0.45 * i)), ...add2(P.A, mul2(d, 0.6 + 0.45 * i)), 0.003, rgba('#6b655c', 0.5));
+  for (const x of P.POSTS) {
+    const y = P.ropeY(x);
+    poly(g, [[x - 0.03, y - 0.03], [x + 0.03, y - 0.03], [x + 0.03, H], [x - 0.03, H]], '#7a7168', rgba('#4a443c', 0.6), 0.004);
+    poly(g, [[x - 0.03, y - 0.03], [x - 0.005, y - 0.03], [x - 0.005, H], [x - 0.03, H]], '#8c8378');
+  }
+  const pts = [];
+  for (let x = -W - 0.05; x <= W + 0.05; x += 0.05) pts.push([x, P.ropeY(x)]);
+  polyline(g, pts, 0.026, '#8a7f6a');
+  polyline(g, pts, 0.018, '#b8ab92');
+  // its lay: short twists along it
+  for (let x = -W; x <= W; x += 0.035) { const y = P.ropeY(x); line(g, x - 0.008, y - 0.008, x + 0.008, y + 0.008, 0.003, rgba('#7a6f5a', 0.7)); }
   C.layer('shut', P.Rh, [-0.5, -0.4, W, H + 0.3], (g2) => hand(g2, P.shut, rnd));
   C.layer('open', P.Rh, [-0.5, -0.4, W, H + 0.3], (g2) => hand(g2, P.open, rnd));
   C.layer('mist', [0, 0], FULL, (g2) => { g2.fillStyle = rgba('#eef0ee', 1); g2.fillRect(-W, -H, 2 * W, 2 * H); });
