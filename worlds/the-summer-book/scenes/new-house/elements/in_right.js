@@ -1,0 +1,21 @@
+// The right wall from inside, the veranda's and the room's: the same new panels and skirting, the two windows cut out
+// (the veranda's x 2.3…3.3, the room's −0.2…1.2: x = 12.8 − distance); the chest of drawers stands against it.
+// Metres from the wall's middle at the floor.
+g.fillStyle = '#ecebe5';
+g.fillRect(-3.7, -2.62, 7.4, 2.64);
+g.strokeStyle = 'rgba(196,194,186,0.5)';
+g.lineWidth = 0.008;
+g.beginPath();
+for (let x = -3.68 + 0.6; x < 3.68; x += 0.6) {
+  g.moveTo(x, -2.6);
+  g.lineTo(x, -0.1);
+}
+g.stroke();
+g.fillStyle = '#d9c7a6';
+g.fillRect(-3.7, -0.1, 7.4, 0.1);
+g.fillStyle = 'rgba(170,166,158,0.45)';
+g.fillRect(1.76, -2.62, 0.08, 2.62);
+g.globalCompositeOperation = 'destination-out';
+g.fillRect(2.3, -2.1, 1.0, 1.4);
+g.fillRect(-0.2, -2.1, 1.4, 1.4);
+g.globalCompositeOperation = 'source-over';
