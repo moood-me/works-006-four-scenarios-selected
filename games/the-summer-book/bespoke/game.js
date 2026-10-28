@@ -8,8 +8,9 @@
 // Stage 4 (rpg docs/writing-games-v2/game-stages.md): the play whole on the world's own scenes, people standing, each
 // step with its keys (story.js); what the film would show — plates with “Next”; the mini-games — stubs
 // (minigames/stub.js).
-//   The map of the play (moood/docs/agents/games.md §2), till the world has its map, a row of leaves over the shore (map.js) — the
-// world has no map's scene yet. What can be done on it is its own drawing — pressed, the language's mark opens there,
+//   The map of the play (moood/docs/agents/games.md §2): a leaf for each chapter hung at its point over “The map”,
+// the island as Papa drew it (map.js); the finale — the epilogue's leaf's last row. What can be done on it is its own
+// drawing — pressed, the language's mark opens there,
 // born open (story.js hub.ask): the main run's pointer — “Start”, “Continue” (from the beginning of the step it stopped
 // in); a chapter played — “Replay the chapter”; each fork the main run reached in it — “Replay from here”. The play
 // begins on the map, comes to it after each chapter, by ☰ (the step going on is left — played again from its
@@ -175,14 +176,15 @@ export default async function (b) {
     return keep({ ...on, steps: { ...pick(kept.steps, j => j < i), [i]: steps, [i + 1]: [on] }, seen: kept.seen });
   }
 
-  // the map, over the shore at dawn. What brought the play here: a chapter played through (reveal: its rows come one
-  // by one). → what was picked: an option's id, or {jump} — the author's map
+  // the map, over Papa's drawing of the island: the view at the chapter the play is at (the epilogue once it is played
+  // through). What brought the play here: a chapter played through (reveal: its rows come one by one). → what was
+  // picked: an option's id, or {jump} — the author's map
   async function map({ reveal = null }) {
     b.menu(null);
     b.hush();
     view.quiet();
     view.gauge(null);
-    await b.show(SCENES.shore, { state: { grandma_here: false, sophia_here: false, papa_here: false }, captions: false });
+    await b.show(SCENES.map, { state: { shown: Math.min(replay ? replay.run.chapter : kept.chapter, EPILOGUE) }, captions: false });
     const drawn = trees(b, sky(), { grow: reveal, author: !!author });
     const notice = replay?.done && anew() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};
     let asked = null; // (an option that would leave the replay: asked again)
@@ -254,17 +256,18 @@ export default async function (b) {
       const tried = re?.chapter === i;
       const kind = i === (re ? re.chapter : kept.chapter) ? 'here' : i < kept.chapter ? 'played' : i === kept.chapter ? 'next' : 'future';
       const all = rows(c, reached ? kept.choices : {}, tried ? re.choices : {});
-      return { number: c.number, title: c.title, kind, rows: i < kept.chapter && !tried ? all : all.filter(r => r.options.some(o => o.state !== 'unseen')),
+      const shown = i < kept.chapter && !tried ? all : all.filter(r => r.options.some(o => o.state !== 'unseen'));
+      return { number: c.number, title: c.title, kind,
+        rows: i === EPILOGUE ? shown.concat(finale()) : shown,
         go: i === kept.chapter ? (kept.step || kept.chapter ? tr('continue\nthe game') : tr('start\nthe game')) : null, replay: tried && !replay.done, badge: tried };
-    }).concat(finale());
+    });
   }
-  // after the epilogue: how the play ended — its endings, the one it came to chosen
+  // the epilogue's last row, once the play is played through: how it ended — its endings, the one it came to chosen
   function finale() {
-    const title = tr('Finale');
-    if (kept.chapter < END) return { number: title, title, kind: 'future', rows: [], go: null };
+    if (kept.chapter < END) return [];
     const f = facts(kept);
-    return { number: '', title, kind: 'end', rows: [{ title: f.form === 'late' ? tr('decided late') : tr('in full'), weight: '⚑',
-      options: ENDINGS.map(e => ({ label: e.label, state: e.id === f.ending ? 'chosen' : 'open' })) }], go: null };
+    return [{ title: f.form === 'late' ? tr('Finale: decided late') : tr('Finale: in full'), weight: '⚑',
+      options: ENDINGS.map(e => ({ label: e.label, state: e.id === f.ending ? 'chosen' : 'open' })) }];
   }
 }
 

@@ -12,7 +12,8 @@
 // has done to the place — story.js carry — and the step's own) is in the contract's party, and every key it sets is in
 // its party or acts, with a value the scene's states allow; a choice's points are in the contract's offers, a
 // minigame's point in its points or offers — a person's, only while they are there; every line is said by one of
-// people.json; a choice offered is one of the chapter's list with the same options; nothing breaks. At each path's end: exactly one finale was played (its title),
+// people.json; a choice offered is one of the chapter's list with the same options; nothing breaks. The map (game.js):
+// its keys shown and come, a point for each chapter and the author's. At each path's end: exactly one finale was played (its title),
 // and it is the one facts gives — by the rule of the scenario (§3: the third hinge decides, full or late by the first
 // two; behind the tent — the shawl); the scales are whole numbers within their bounds; the play's PLAYS (game.js) end as
 // their labels say.
@@ -52,7 +53,7 @@ function contract(notes) {
   return JSON.parse(block[1]);
 }
 const SCENES = new Map();
-for (const folder of Object.values(FOLDERS)) {
+for (const folder of Object.values(FOLDERS).filter(f => f !== FOLDERS.map)) {
   const file = join(world, 'scenes', folder, 'scene.json'), notes = `scenes/${folder}/notes.md`;
   if (!existsSync(file)) { miss(`SCENES: the world has no scene “${folder}”`); continue; }
   const spec = JSON.parse(readFileSync(file, 'utf8'));
@@ -76,6 +77,15 @@ for (const folder of Object.values(FOLDERS)) {
   // (a person's engine keys, <id>_here and <id>_mood, are no scene's states)
   const own = k => !/^(\w+)_(here|mood)$/.test(k) || !scene.people.has(k.replace(/_(here|mood)$/, ''));
   for (const k of [...Object.keys(c.party), ...Object.keys(c.acts)]) if (own(k) && !(k in scene.states)) miss(`${notes}: the key “${k}” is not in its scene.json's states`);
+}
+// the map (game.js): its contract's keys shown, come, a point for each chapter and the author's
+{
+  const notes = `scenes/${FOLDERS.map}/notes.md`;
+  try {
+    const c = contract(readFileSync(join(world, notes), 'utf8'));
+    for (const k of ['shown', 'come']) if (!(k in (c.keys ?? {}))) miss(`${notes}: no key “${k}”`);
+    for (const p of [...CHAPTERS.map((_, i) => `c${i}`), 'author']) if (!c.points.includes(p)) miss(`${notes}: no point “${p}”`);
+  } catch (e) { miss(`${notes}: the contract not read: ${e.message}`); }
 }
 const b = {
   specOf: async folder => {

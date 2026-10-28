@@ -3,9 +3,9 @@
    label of a stand-in place, the scales, the map's row of leaves. */
 #layer { --paper: #f6efe0; --paper-edge: #d9ccb0; --ink: #2b3a4f; --ink-soft: #5b6b80; --sea: #6f8fb0; --lamp: #e9b949;
   --serif: Georgia, "Times New Roman", serif; }
-#layer .gauge, #layer .toasts, #layer .where, #layer .hint, #layer .title, #layer .card { pointer-events: none; }
+#layer .gauge, #layer .toasts, #layer .hint, #layer .title, #layer .card { pointer-events: none; }
 
-#layer .slip, #layer .plate, #layer .card, #layer .where, #layer .gauge .row, #layer .hint {
+#layer .slip, #layer .plate, #layer .card, #layer .gauge .row, #layer .hint {
   box-sizing: border-box; color: var(--ink); font-family: var(--serif); background: var(--paper);
   border: 1px solid var(--paper-edge); border-radius: 4px; box-shadow: 0 6px 22px rgba(20, 30, 45, 0.28); }
 
@@ -30,11 +30,6 @@
 #layer .slip .arrows { font-weight: 700; }
 #layer .slip.gone { opacity: 0; translate: 0 -6px; }
 @keyframes sb-in { from { opacity: 0; translate: 0 6px; } }
-
-/* where it really happens, high on the left */
-#layer .where { position: absolute; top: 64px; left: 14px; margin: 0; padding: 6px 12px;
-  max-width: min(420px, 60vw); font-size: 14px; font-style: italic; color: var(--ink-soft); opacity: 0.92; }
-#layer .where[hidden] { display: none; }
 
 /* a plate with “Next”, low in the middle (over the speech's place: a plate is read, not heard) */
 #layer .plate { position: absolute; left: 50%; bottom: 20px; translate: -50% 0; width: min(640px, calc(100vw - 32px));
@@ -80,18 +75,25 @@
 #layer .author-panel .minigames { display: flex; flex-direction: column; }
 #layer .author-panel section button.minigame { padding: 3px 10px 3px 24px; font-size: 14px; }
 
-/* the map (map.js): a row of paper leaves over the shore, scrolled sideways */
+/* the map (map.js): paper leaves hung at the chapters' points over Papa’s drawing of the island (sizes for a frame 900 px high: the stand
+   scales them); only what is offered takes a touch, the rest is the scene's */
 #underlay .map { --paper: #f6efe0; --paper-edge: #d9ccb0; --ink: #2b3a4f; --ink-soft: #5b6b80; --pencil: #8d97a4; --lamp: #e9b949;
-  position: absolute; inset: 0; font-family: Georgia, "Times New Roman", serif; }
-#underlay .map .strip { position: absolute; left: 0; right: 0; top: 70px; bottom: 24px; display: flex;
-  align-items: flex-start; gap: 18px; padding: 0 24px; overflow-x: auto; overflow-y: hidden; pointer-events: auto; scrollbar-width: thin; }
-#underlay .map .leaf { position: relative; flex: 0 0 auto; box-sizing: border-box; width: min(300px, 78vw); max-height: 100%; overflow-y: auto;
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none; font-family: Georgia, "Times New Roman", serif; }
+#underlay .map .stand { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+#underlay .map .stand[hidden] { display: none; }
+#underlay .map .leaf { position: absolute; top: 0; box-sizing: border-box; width: 300px;
   padding: 14px 16px 16px; color: var(--ink); background: var(--paper); border: 1px solid var(--paper-edge); border-radius: 4px;
   box-shadow: 0 8px 26px rgba(20, 30, 45, 0.3); }
 #underlay .map .leaf.future { width: 120px; opacity: 0.7; }
+/* the pin it hangs by, at its chapter's point on the chart */
+#underlay .map .leaf:not(.sign)::before { content: ""; position: absolute; left: 50%; top: -7px; width: 14px; height: 14px; margin-left: -7px;
+  border-radius: 50%; background: radial-gradient(circle at 35% 35%, #f3d98a, #b8862f 60%, #7a5418); box-shadow: 0 2px 3px rgba(20, 30, 45, 0.35); }
+#underlay .map .leaf:not(.sign) { transform-origin: 50% 0; rotate: -0.6deg; }
+#underlay .map .leaf.here, #underlay .map .leaf.next { rotate: 0deg; }
+#underlay .map .leaf.sign { width: auto; padding: 0; background: none; border: 0; box-shadow: none; }
 #underlay .map .leaf.here, #underlay .map .leaf.next { border-top: 4px solid var(--lamp); }
 #underlay .map button { font: inherit; color: inherit; background: none; border: 0; padding: 0; text-align: left; cursor: default; }
-#underlay .map .can { cursor: pointer; }
+#underlay .map .can { pointer-events: auto; cursor: pointer; }
 #underlay .map .can:hover { color: #3b5070; }
 #underlay .map .head { display: flex; flex-direction: column; gap: 2px; width: 100%; min-height: 44px; margin-bottom: 10px; }
 #underlay .map .num { font-size: 13px; letter-spacing: 0.2em; color: var(--ink-soft); }
@@ -112,5 +114,5 @@
 #underlay .map .go.replay { background: #3a6ea5; }
 #underlay .map .go.can:hover { background: #3b5070; color: var(--paper); }
 #underlay .map .badge { position: absolute; top: -10px; right: 12px; padding: 3px 10px; border-radius: 10px; background: #3a6ea5; color: var(--paper); font-size: 13px; }
-#underlay .map .author { flex: 0 0 auto; align-self: center; min-height: 44px; padding: 10px 14px; border-radius: 4px; background: var(--paper);
+#underlay .map .author { white-space: nowrap; min-height: 44px; padding: 10px 14px; border-radius: 4px; background: var(--paper);
   border: 1px dashed var(--ink-soft); font-size: 14px; color: var(--ink-soft); }

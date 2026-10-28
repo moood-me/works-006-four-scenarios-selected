@@ -7,8 +7,7 @@
 // branch of the game (check/run.mjs).
 //   jump(target) → j
 //   j.on — unseen still; j.plays — the minigames played so far
-//   j.scene(folder, state, where) — the scene shown now (what it did in the one before: forgotten); j.shown —
-//     {folder, state, where}
+//   j.scene(folder, state) — the scene shown now (what it did in the one before: forgotten); j.shown — {folder, state}
 //   j.did(change) — [key, value]; j.values — the shown scene's values as the step set them
 //   j.sleep(ms) — on the step's own clock: the seconds go by as nothing else is left to do now
 //   j.then — what to give the scene; j.later(fn) — fn once it is seen (a choice that the play didn't make: offered)
@@ -37,7 +36,7 @@ export function jump(target) {
   };
   const j = {
     on: true, target, plays: [], shown: null, then: [], values: {}, idle,
-    scene(folder, state, where) { j.shown = { folder, state, where }; j.then = []; j.values = { ...state }; },
+    scene(folder, state) { j.shown = { folder, state }; j.then = []; j.values = { ...state }; },
     did(change) {
       j.then.push(change);
       j.values[change[0]] = change[1];

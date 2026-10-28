@@ -2,7 +2,6 @@
 // Grandmother falls in front of the girl — ⚑ the second hinge: whom to tell about her head; the evening as it decides
 // (the doctor; the candle and the palm; the new house at night); the storm Sophia prayed for — ⚑ what to give her
 // (colours); the morning after: “I want a tent.”
-// Stand-in: the new house — the house (the world's `new-house` is still to come).
 // Reads: choices.nets, marks.mama, marks.smoke, scales.sophia. Leaves: choices.head, choices.storm, marks.knows,
 // marks.nottell, marks.say, marks.someday, marks.storm, scales.
 import { SCENES, facts } from '../story.js';
@@ -119,18 +118,29 @@ export default {
         await g.plate(tr('Late evening, almost night. Papa is out in the boat by the nets, his lantern far off on the water. Grandmother and Sophia go through the forest with a lantern to the other side.'));
         await g.play(stones);
         g.set('grandma_at', 'path3');
-        await g.scene(SCENES.house, { here: ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'surprised' }, keys: { night: 1, view: 'room', grandma_at: 'bed', sophia_at: 'bed' },
-          where: tr('In truth: the new house on the other side of the island, at night — big black windows; inside, everything new and clean.') });
-        await g.plate(tr('The window of the new house’s veranda is not locked. Inside everything is new, clean, smelling of paint. Grandmother sits down on the wide owner’s bed and lights a cigarette.'));
+        await g.scene(SCENES.newHouse, { here: ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'surprised' },
+          keys: { night: 1, view: 'out', grandma_at: 'sash', sophia_at: 'sash', lantern: 'hand' } });
+        g.set('sash', 1);
+        await g.plate(tr('The window of the new house’s veranda is not locked.'));
+        await g.scene(SCENES.newHouse, { here: ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'surprised' },
+          keys: { night: 1, view: 'room', sash: 1, grandma_at: 'bed', sophia_at: 'bed', lantern: 'floor' } }, { cut: true });
+        await g.plate(f.smoke === 'quit'
+          ? tr('Inside everything is new, clean, smelling of paint. Grandmother sits down on the wide owner’s bed. First she takes out of the crevice that very packet:')
+          : tr('Inside everything is new, clean, smelling of paint. Grandmother sits down on the wide owner’s bed and lights a cigarette.'));
         if (f.smoke === 'quit') {
-          await g.plate(tr('First she takes out of the crevice that very packet:'));
           await g.say('grandma', 'For an occasion like this');
+          await g.plate(tr('And she lights a cigarette.'));
         }
+        g.set('cigarette', 1);
+        g.set('sophia_at', 'drawers');
+        g.set('drawers', 1);
         await g.plate(tr('Sophia opens all the drawers and takes nothing.'));
         g.mood('sophia', 'thinking');
         await g.say('sophia', 'Nobody has died here');
         await g.plate(tr('Grandmother looks at her. A pause.'));
         await g.say('grandma', 'Come on');
+        g.set('sophia_at', 'table');
+        g.set('seal', true);
         await g.plate(tr('Going, Sophia leaves the wooden seal on the table.'));
         await g.scene(SCENES.shore, { here: ['grandma', 'sophia'], moods: { grandma: 'tired', sophia: 'laugh' }, keys: { night: 1, boat_out: true, grandma_at: 'porch', sophia_at: 'porch' } });
         await g.plate(tr('Grandmother walks home slowly, sits down on the porch and does not get up for a long time; Papa’s lantern is still out on the water.'));

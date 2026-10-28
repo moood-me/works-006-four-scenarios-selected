@@ -5,15 +5,13 @@
 // stand and breathe; each step opens its scene with the keys of the play (the hour and the weather of the island, where
 // each one is, what the play has done to the place: carry). What the scenario's film would show is still a plate with
 // “Next” (g.plate, g.sheet); a mini-game is its stub — a mark to press and a card saying what it will be
-// (minigames/stub.js); a place the world has not got yet — the people in one of its scenes and a label saying where it
-// really is. The truth of each scene's keys and points is its notes.md, “Contract for the check”.
+// (minigames/stub.js). The truth of each scene's keys and points is its notes.md, “Contract for the check”.
 //   g.state — what the play carries: {scales, shown, marks, choices} (game.js); what follows from it: facts(g.state)
 //   g.signal — aborts when the step is left
-//   g.scene(folder, {here, moods, where, keys}, {cut}) — that scene of the world, full-screen: of its people only `here`
+//   g.scene(folder, {here, moods, keys}, {cut}) — that scene of the world, full-screen: of its people only `here`
 //     (ids) are there (`<id>_here`, the engine's key), their faces as `moods` say ({id: mood}); then what the play has
 //     done to the place (carry), then `keys` — the step's (the hour, the weather, where each one is: its contract's
-//     party); `where` — a label in the corner, where this really happens (none: the place is the scene's own). Always
-//     opened anew
+//     party). Always opened anew
 //   g.here(id, on) — someone of the shown scene comes or goes (in one cut); g.mood(id, mood) — their face
 //   g.set(key, value) — one of the shown scene's own keys (in one cut)
 //   g.wait(ms) — time of the game's own (a pause)
@@ -42,8 +40,8 @@
 // (a dry run: game.js, check/run.mjs): then nothing of it is said, shown or heard, a plate goes by at once, and a
 // minigame gives its `skipped`.
 
-// the world's scenes the game plays, by their folders (the shore — also the map's background, game.js)
-export const SCENES = { shore: 'shore', house: 'house', forest: 'forest', cape: 'cape', sea: 'sea' };
+// the world's scenes the game plays, by their folders; `map` — the background of the play's map (game.js)
+export const SCENES = { shore: 'shore', house: 'house', forest: 'forest', newHouse: 'new-house', cape: 'cape', sea: 'sea', map: 'map' };
 
 // What the play has done to a place (scenario §9, the marks), as the keys of its scene's party: the shell ashtray on the
 // rail and the row of little graves on the shore; the hat, the tea box, the drops and Papa's camp bed in the house; the
@@ -203,7 +201,6 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
     view.gauge(state);
     if (shown) {
       await alive(b.show(shown.folder, { state: shown.state, captions: false, then }));
-      view.where(shown.where);
     }
     ahead();
   })());
@@ -218,7 +215,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
   const g = {
     state,
     signal: left.signal,
-    async scene(folder, { here = [], moods = {}, where = null, keys = {} } = {}, { cut = false } = {}) {
+    async scene(folder, { here = [], moods = {}, keys = {} } = {}, { cut = false } = {}) {
       if (gone()) return never;
       const spec = await alive(unseen() ? j.real(b.specOf(folder)) : b.specOf(folder));
       people = new Set((spec.objects ?? []).filter(o => o.person).map(o => o.id));
@@ -228,14 +225,12 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       for (const id of people) st[`${id}_here`] = present.has(id);
       for (const [id, mood] of Object.entries(moods)) st[`${id}_mood`] = mood;
       Object.assign(st, carry(folder, state), keys);
-      if (unseen()) { j.scene(folder, st, where); return; }
+      if (unseen()) { j.scene(folder, st); return; }
       showing = true;
       try {
         if (fast) await alive(land());
         hub.withdraw();
-        view.where(null);
         await alive(b.show(folder, { state: st, captions: false, fade: !cut }));
-        view.where(where);
       } finally { showing = false; }
     },
     set(key, value) {
@@ -363,7 +358,6 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       left.abort();
       hub.withdraw();
       b.hush();
-      view.where(null);
     },
   };
   if (j && j.target < Infinity) j.idle.then(seen);

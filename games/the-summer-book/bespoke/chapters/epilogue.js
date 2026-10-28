@@ -154,14 +154,19 @@ export default {
       else shots.push(tr('The gate.'));
       shots.push(tr('The empty veranda rail.'));
       if (f.bird === 'bury') shots.push(tr('The shore: the row of little graves with wooden birds.'));
-      if (f.house) shots.push(tr('From the sea, the big windows of the new house on the other side; in the window, on the table, a wooden seal.'));
-      else shots.push(tr('From the sea, the black windows of the new house on the other side; Sophia looks at them a long time, as long as they can be seen.'));
       if (f.bird === 'gift') shots.push(tr('In the boat the cat is already sitting on a basket beside Sophia — how he came, nobody saw; at his paws a dead bird, the last present. Wrinkling her nose, Sophia drops it overboard with two fingers, then strokes him; he puts up with it and looks at the water.'));
       if (f.storm === 'porch') shots.push(tr('Sophia looks up at the grey sky and laughs.'));
       else if (f.storm === 'blanket') shots.push(tr('Papa covers the two of them with one blanket.'));
       else shots.push(tr('By habit Sophia folds her hands — and lowers them, asking for nothing.'));
       if (f.head === 'sophia') shots.push(tr('Sophia watched Grandmother step into the boat and counted her steps soundlessly with her lips.'));
       await g.sheet(tr('From the water'), shots);
+      // the new house from the sea, by the night there (§10): the seal on its table, or the black windows Sophia looks at
+      await g.scene(SCENES.newHouse, { here: [], keys: { ...MORNING, view: f.house ? 'seal' : 'sea', seal: f.house } }, { cut: true });
+      await g.plate(f.house
+        ? tr('From the sea, the big windows of the new house on the other side; in the window, on the table, a wooden seal.')
+        : tr('From the sea, the black windows of the new house on the other side; Sophia looks at them a long time, as long as they can be seen.'));
+      await g.scene(SCENES.sea, { here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'neutral', papa: 'neutral' },
+        keys: { ...MORNING, island: 0.6, basket: f.bird === 'gift' ? 'cat' : 'shut', ...seats(f), papa_at: 'stern' } }, { cut: true });
       if (f.ending === 'window') {
         if (f.mama === 'sky') await g.plate(tr('Grandmother looks at Papa’s bag, where the hat is,'));
         else if (f.mama === 'gone') await g.plate(tr('Grandmother looks at the hat on Sophia,'));
