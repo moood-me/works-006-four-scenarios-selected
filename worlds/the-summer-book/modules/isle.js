@@ -303,15 +303,33 @@ function fogMove(e, by) {
 }
 
 // ── the island's scripts ──────────────────────────────────────────────
-// For a scene's script: the weather's own mechanics. `fog_air` (the look of the thick fog: the air white) follows
-// `fog` — its second half; while `storm` is over a half, now and then a flash — `flash` up at once and down over a
+// For a scene's script: the weather's own mechanics. The sea's mirror follows the weather — `mirror_strength`,
+// `mirror_rough`, `mirror_ripple` (the sea plane's "reflect" names them) from the scene's own mirror `base` ({strength,
+// rough, ripple}: its lib's MIRROR; none — its mirror its own numbers): glass in a calm (no ripple, little roughness), broken in a storm (rough, rippled,
+// fainter). `fog_air` (the look of the thick fog: the air white) follows `fog` — its second half; while `storm` is over a half, now and then a flash — `flash` up at once and down over a
 // moment, sometimes twice —, the more often the stronger the storm, each strike told (`flash:strike`: the game's
 // thunder). A game's own flashes set `flash` the same way.
-function weather(scene) {
+function weather(scene, base) {
   const air = () => scene.set('fog_air', fogK(scene.get('fog') ?? 0));
   scene.on('change', 'fog', air);
   scene.on('move', 'fog', air);
   air();
+  // (a scene whose sea's mirror is its own numbers passes no base: nothing to follow)
+  const mirror = () => {
+    const storm = scene.get('storm') ?? 0;
+    const calm = scene.get('calm') ?? 0;
+    const mix = (x, y, u) => x + (y - x) * u;
+    scene.set('mirror_strength', base.strength * (1 - 0.45 * storm));
+    scene.set('mirror_rough', mix(base.rough * (1 - 0.6 * calm), 0.75, storm));
+    scene.set('mirror_ripple', mix(base.ripple * (1 - calm), 0.9, storm));
+  };
+  if (base) {
+    for (const k of ['storm', 'calm']) {
+      scene.on('change', k, mirror);
+      scene.on('move', k, mirror);
+    }
+    mirror();
+  }
   let next = 0;
   scene.every(0.25, () => {
     const s = scene.get('storm') ?? 0;

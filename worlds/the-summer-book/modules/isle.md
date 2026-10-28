@@ -38,7 +38,7 @@ A scene's generator (`tools/<scene>.py`, run `python -B tools/<scene>.py <world>
   waterline: the storm's foam). `clear` — where the water is clear over the rock under it (the bottom seen).
 - `RAIN` — rain on `storm`; `STATE`, `STATES`; `write_json(path, spec)` (UTF-8, `\n`).
 
-The scene's `script.js` calls `scene.kit.isle.weather(scene)` (`fog_air` from `fog`; the storm's lightning) and, for
+The scene's `script.js` calls `scene.kit.isle.weather(scene, lib.MIRROR)` (`fog_air` from `fog`; the storm's lightning; the sea's mirror — `mirror_strength`, `mirror_rough`, `mirror_ripple` from the base `MIRROR` of its lib: glass in a calm, rough and rippled in a storm; the sea plane names the keys: `sea(..., {**KEYED, "fade": 0})`, `MIRROR_STATES`, `mirror_state(base)`; without a base the mirror is the plane's own numbers) and, for
 its people, `scene.kit.isle.places(scene, PLACES)`: each person stands where `<id>_at` names — `PLACES[id][name] =
 {at: [across, distance], turn, look, reach, on, do}` (`on` — a seat, `[across, distance, elevation]` or `{on: element, at: […]}`, carried with it; `do` — a motion of the cast; unless said, their own `does`), the person's `"place": {"across": "<id>_a", "distance": "<id>_d"}`; set
 at once when `<id>_at` changes, and on opening only if it differs from `<id>_placed`. A scene declares `<id>_at`,
@@ -64,7 +64,6 @@ at once when `<id>_at` changes, and on opening only if it differs from `<id>_pla
 - An anchor the camera rides that has no `facing`, standing on something that tilts, is turned by the engine to face
   the start's eye — which is itself: its direction is undefined and flips with the tilt (the camera looked the wrong
   way). Give such an anchor its own `facing` (the sea's `eye`: 180) (reported).
-- A mirror's `strength`, `rough`, `ripple` are fixed numbers, not keys: the storm's sea mirrors as the calm one does,
-  only its crests, foam and the grey sky it mirrors tell it (reported).
+- A mirror's `strength`, `rough`, `ripple` take state keys now (the engine, 2026-10-28): the sea follows the weather.
 
 Used by: `shore`, `sea`.

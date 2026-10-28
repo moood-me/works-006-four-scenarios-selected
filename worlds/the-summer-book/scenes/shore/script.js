@@ -1,11 +1,12 @@
 // The shore's mechanics, all from the state (a scene opened again goes on as it was): the island's weather (the thick
-// fog's look, the storm's lightning); the people at their places (`<id>_at`: lib.PLACES); Eriksson's boat along its
+// fog's look, the storm's lightning, the sea's mirror); the pieces (lib.film, played by `beat` through the world's
+// `beats`); what the mini-games' keys show (below); the people at their places (`<id>_at`: lib.PLACES); Eriksson's boat along its
 // way by `rowboat` (turned round at the pier as he leaves); the dinghy moored, going round in circles, or out along the
 // shore by `dinghy_at`; the cat at his place (`cat_at`: lib.CAT — walking, he goes there at his pace and tells
 // `cat:arrived`).
 const L = scene.lib;
 const isle = scene.kit.isle;
-isle.weather(scene);
+isle.weather(scene, L.MIRROR);
 isle.places(scene, L.PLACES);
 const deg = r => (r * 180) / Math.PI;
 // a point along a quadratic curve through three points (u 0…1)
@@ -105,3 +106,29 @@ async function cat() {
 }
 scene.on('change', 'cat_at', cat);
 cat();
+
+// the pieces: the game sets `beat` (and `beat_next`)
+scene.kit.beats.play(scene, L.film(scene));
+
+// What the mini-games move, shown by the scene (each from its key, at once or as it moves):
+// М1 `stems` — Grandmother's hand goes in among the peony's stems
+// М2а `pull` — Sophia pulls her hand from Grandmother's (her hand drawn back from the wrist's hold)
+// М2б `let` — the shoulder goes from under the hand: Sophia leans on toward the shelf
+// М2в `step` — Grandmother steps down from the edge to knee-deep on the shelf, at her own pace
+// М8а `gust` — the wind's gusts on the porch (the look `gust`: the wind up, the rain driven)
+// М9а `parcel` — the parcel from Grandmother's hands into Sophia's (over a half: Sophia's)
+const mix = (a, b, u) => a + (b - a) * u;
+const acts = {
+  stems: u => scene.set('grandma_reach', { r: [mix(-5.75, -5.5, u), mix(13.75, 13.95, u), mix(0.4, 0.22, u)] }),
+  pull: u => scene.set('sophia_reach', { l: [mix(1.05, 0.6, u), mix(5.75, 5.9, u), mix(0.55, 0.75, u)] }),
+  let: u => scene.set('grandma_reach', u < 0.6 ? { r: 'sophia#shoulder_r' } : null),
+  step: u => scene.person('grandma').walk([[mix(L.SPOT.edge[0], L.PLACES.grandma.knee.at[0], u), mix(L.SPOT.edge[1], L.PLACES.grandma.knee.at[1], u)]]),
+  parcel: u => {
+    scene.set('grandma_with', u < 0.5 ? ['parcel'] : null);
+    scene.set('sophia_with', u < 0.5 ? null : ['parcel']);
+  },
+};
+for (const [key, fn] of Object.entries(acts)) {
+  scene.on('change', key, () => fn(scene.get(key) ?? 0));
+  scene.on('move', key, () => fn(scene.get(key) ?? 0));
+}

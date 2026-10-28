@@ -191,7 +191,8 @@
   "modules": [
     "cast",
     "isle",
-    "cat"
+    "cat",
+    "beats"
   ],
   "state": {
     "dawn": 0,
@@ -204,6 +205,9 @@
     "fog": 0,
     "fog_air": 0,
     "moon": 1,
+    "mirror_strength": 0.45,
+    "mirror_rough": 0.25,
+    "mirror_ripple": 0.2,
     "island": 0,
     "sway": 0,
     "basket": "shut",
@@ -218,7 +222,21 @@
     "sophia_a": -0.4,
     "sophia_d": 0.25,
     "papa_a": 0.55,
-    "papa_d": 3.8
+    "papa_d": 3.8,
+    "beat": "",
+    "beat_next": "",
+    "cat_bird": false,
+    "counted": false,
+    "storm_mark": "notyou",
+    "song": false,
+    "sign_hat": "nail",
+    "mama": "gone",
+    "learned": false,
+    "nets": "say",
+    "ask_mama": false,
+    "late_form": false,
+    "called": false,
+    "knock": false
   },
   "states": {
     "dawn": {
@@ -298,6 +316,102 @@
         1
       ],
       "means": "the moon's phase: 0 a thin crescent … 1 full (changes between steps; seen by night)"
+    },
+    "mirror_strength": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (the island's script sets it from storm): how strongly the sea mirrors"
+    },
+    "mirror_rough": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (from calm and storm): how rough the sea's mirror is"
+    },
+    "mirror_ripple": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (from calm and storm): the small waves breaking the sea's mirror"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (notes.md «Pieces»)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will play next (its cut made ready)"
+    },
+    "cat_bird": {
+      "type": "boolean",
+      "means": "the scene's own: the dead bird at the cat's paws on the basket (cat_gift)"
+    },
+    "counted": {
+      "type": "boolean",
+      "means": "the play's: «Софья знает» — Sophia counted Grandmother's steps"
+    },
+    "storm_mark": {
+      "values": [
+        "porch",
+        "blanket",
+        "notyou"
+      ],
+      "means": "the play's: the storm's choice (the sky's gesture)"
+    },
+    "song": {
+      "type": "boolean",
+      "means": "the play's: «Гроза: одеяло» — Grandmother hums the song"
+    },
+    "sign_hat": {
+      "values": [
+        "on",
+        "bag",
+        "nail"
+      ],
+      "means": "the play's: where the hat is (Grandmother's look in «Окно»)"
+    },
+    "mama": {
+      "values": [
+        "gone",
+        "sky",
+        "moon"
+      ],
+      "means": "the play's: the first hinge (the promise's lines)"
+    },
+    "learned": {
+      "type": "boolean",
+      "means": "the play's: Papa learned before the last morning"
+    },
+    "nets": {
+      "values": [
+        "say",
+        "nothing",
+        "net"
+      ],
+      "means": "the play's: «Сети» (how Papa asks at the big boat)"
+    },
+    "ask_mama": {
+      "type": "boolean",
+      "means": "the play's: the full «Вёсла» with «Мама: нет» — «Did Mama row like that?»"
+    },
+    "late_form": {
+      "type": "boolean",
+      "means": "the play's: the ending's late form («Why only once?»)"
+    },
+    "called": {
+      "type": "boolean",
+      "means": "the play's: Sophia called in the fog night"
+    },
+    "knock": {
+      "type": "boolean",
+      "means": "the play's: «Постучу» broken and Sophia did not call"
     },
     "grandma_at": {
       "values": [
@@ -454,10 +568,10 @@
       "width": 6000,
       "depth": 5000,
       "reflect": {
-        "strength": 0.45,
-        "fade": 0,
-        "rough": 0.25,
-        "ripple": 0.2
+        "strength": "mirror_strength",
+        "rough": "mirror_rough",
+        "ripple": "mirror_ripple",
+        "fade": 0
       }
     },
     {
@@ -760,7 +874,7 @@
       "id": "basket",
       "name": "The basket",
       "on": "hull",
-      "across": 0.95,
+      "across": -0.85,
       "distance": -0.9,
       "height": 0.6,
       "box": [
@@ -775,7 +889,7 @@
       "id": "cat",
       "name": "Mappe, the cat",
       "on": "hull",
-      "across": 0.95,
+      "across": -0.85,
       "distance": -0.9,
       "elevation": 0.47,
       "height": 0.5,
@@ -786,6 +900,22 @@
         0.03
       ],
       "shadow": true
+    },
+    {
+      "id": "bird",
+      "name": "The last present",
+      "on": "hull",
+      "across": -0.68,
+      "distance": -0.95,
+      "height": 0.08,
+      "box": [
+        -0.12,
+        -0.08,
+        0.12,
+        0.01
+      ],
+      "facing": 180,
+      "elevation": 0.47
     },
     {
       "id": "bundles",
