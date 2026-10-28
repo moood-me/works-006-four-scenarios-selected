@@ -39,11 +39,14 @@ def copies(rows):
 
 # the sky: the day's sun high on the right, August's lower, the June dawn's just up on the right (as approved); the
 # afterglow far on the left; the full moon ahead over the sea, its path coming to the rock; the lightning out to sea
+# Eriksson's boat: far out on the right (rowboat 0) -> alongside the pier's end (1); the dinghy moored by the pier's root
+ROWBOAT = [[70, 30], [10.6, 14.9]]
+DINGHY = [1.6, 14.6]
 SUN, LATE, DAWN, MOON, BOLT = [A * 0.66, 0.02], [A * 0.86, 0.2], [A * 0.78, 0.3], [A * 0.58, 0.2], [A * 0.32, 0.02]
 
 objects = [
     isle.sky(folder, 0.42, SUN, LATE, DAWN, A * 0.12, A * 0.58, BOLT, moon=MOON),
-    isle.sea(folder, WATER, {"strength": 0.5, "fade": 0, "rough": 0.1, "ripple": 0.1}),
+    isle.sea(folder, WATER, {"strength": 0.5, "fade": 0, "rough": 0.1, "ripple": 0.1}, clear=[[2.5, 5.9, 1.15, 1.0]]),
     {"id": "islet", "name": "Wooded islet", "across": 320, "distance": 700, "onLand": False, "elevation": WATER, "height": 14,
      "box": [-46, -15, 46, 0.7], "copies": [{"across": 320, "distance": 700}, {"across": -260, "distance": 950, "scale": 1.3, "flip": True}]},
     {"id": "skerry", "name": "Skerry", "across": -40, "distance": 260, "onLand": False, "elevation": WATER, "height": 5,
@@ -64,7 +67,7 @@ objects = [
     {"id": "roof_l", "name": "Roof, the far slope", "plane": True, "on": "house", "across": -1.375, "distance": 3, "elevation": 3.81, "width": 6.5,
      "depth": 3.39, "rotation": 90, "tilt": -35.8},
     {"id": "chimney", "name": "Chimney", "on": "house", "across": -0.8, "distance": 2.5, "height": 5.8, "box": [-0.4, -5.9, 0.4, 0.05]},
-    {"id": "porch", "name": "Porch", "on": "house", "across": 1.6, "distance": -0.7, "facing": 180, "height": 1.5, "box": [-0.75, -1.5, 0.75, 0.05]},
+    {"id": "porch", "name": "Porch", "on": "house", "across": 1.6, "distance": -0.7, "facing": 180, "height": 1.5, "box": [-0.9, -1.7, 0.75, 0.05]},
     {"id": "cat", "name": "Mappe, the cat", "on": "house", "across": 1.85, "distance": -0.95, "elevation": 0.55, "height": 0.45, "box": [-0.3, -0.48, 0.3, 0.03]},
     {"id": "peony", "name": "Peonies", "across": -9.56, "distance": 15.4, "height": 0.85, "box": [-0.75, -1, 0.75, 0.05],
      "copies": [{"across": -9.56, "distance": 15.4}, {"across": -7.21, "distance": 14.54, "scale": 0.9, "flip": True}, {"across": -5.58, "distance": 13.9, "scale": 1.05}]},
@@ -80,18 +83,82 @@ objects = [
      "copies": copies([(-1.8, 3.3, 0.8, False), (0.4, 3.2, 0.9, True), (-2.6, 5.2, 1, False), (0.3, 6.3, 1.1, True), (-1.3, 7, 0.8, False),
                        (-0.6, 9.5, 0.9, True), (-2, 10.8, 1, False), (0, 12.6, 1.1, True), (-1.6, 13.4, 0.8, False), (-0.9, 2.8, 0.9, True),
                        (-3, 6.6, 1, False), (-2.4, 8.3, 1.1, True)])},
-    {"id": "grandma", "name": "Grandmother", "person": {"cast": "cast", "who": "grandma", "turn": 150}, "across": 0.2, "distance": 4},
-    {"id": "sophia", "name": "Sophia", "person": {"cast": "cast", "who": "sophia", "turn": 150}, "across": 0.68, "distance": 4.27},
-    {"id": "papa", "name": "Papa", "person": {"cast": "cast", "who": "papa", "turn": 150}, "across": -3, "distance": 8},
+    {"id": "veranda_in", "name": "The veranda, through its glass", "on": "house", "across": -0.7, "distance": 1.9, "facing": 180, "height": 3,
+     "box": [-1.75, -3.05, 1.75, 0.05]},
+    {"id": "far_roof", "name": "The new house over the trees, far off", "across": -13, "distance": 125, "onLand": False, "elevation": WATER, "height": 9,
+     "box": [-11.2, -9.3, 12, 0.6]},
+    {"id": "gate", "name": "The gate and its stone", "across": -4.9, "distance": 11.9, "height": 1.1, "box": [-1.7, -1.15, 2.4, 0.05], "shadow": True},
+    {"id": "chair", "name": "The chair by the gate", "across": -4.1, "distance": 11.0, "height": 0.95, "box": [-0.6, -1.05, 0.75, 0.05], "shadow": True},
+    {"id": "graves", "name": "The graves", "across": -1.9, "distance": 9.4, "height": 0.3, "box": [-1.35, -0.42, 1.35, 0.05]},
+    {"id": "weed", "name": "Wrack on the rock", "across": 0.6, "distance": 7, "height": 0.15, "box": [-0.9, -0.28, 0.95, 0.05],
+     "copies": copies([(0.55, 7.2, 1, False), (0.05, 8.1, 1.2, True), (-0.35, 10.2, 0.9, False), (-0.15, 11.6, 1.1, True), (-0.4, 13.1, 1, False)])},
+    {"id": "net", "name": "Papa's net", "across": 6.4, "distance": 16.1, "onLand": False, "elevation": -0.15, "height": 0.4, "box": [-0.75, -0.65, 1.4, 0.03]},
+    {"id": "luggage", "name": "The things by the pier", "across": -2.2, "distance": 14.8, "height": 0.7, "box": [-0.95, -0.75, 1.0, 0.05], "shadow": True},
+    {"id": "rowboat", "name": "Eriksson's boat", "across": ROWBOAT[0][0], "distance": ROWBOAT[0][1], "onLand": False, "elevation": WATER, "facing": 180,
+     "height": 1, "box": [-2.4, -1.1, 2.8, 0.25], "place": {"across": "rowboat_a", "distance": "rowboat_d", "facing": "rowboat_f"}},
+    {"id": "dinghy", "name": "The dinghy", "across": DINGHY[0], "distance": DINGHY[1], "onLand": False, "elevation": WATER, "facing": 180,
+     "height": 0.7, "box": [-1.9, -0.85, 1.3, 0.25], "place": {"across": "dinghy_a", "distance": "dinghy_d", "facing": "dinghy_f"}},
+    {"id": "big_boat", "name": "The big boat", "across": 2.2, "distance": 27.6, "onLand": False, "elevation": WATER, "height": 4.5,
+     "box": [-4.6, -4.6, 4.8, 0.3]},
+    {"id": "gangway", "name": "The gangway", "across": -3.7, "distance": 27.0, "height": 1.3, "box": [-0.1, -1.35, 2.3, 0.12]},
+    {"id": "far_boat", "name": "The boat out at the nets", "across": 60, "distance": 160, "onLand": False, "elevation": WATER, "height": 1.8,
+     "box": [-2, -1.9, 2, 0.2]},
+    {"id": "fog_wall", "name": "The fog's wall", "across": 300, "distance": 1400, "onLand": False, "elevation": WATER, "height": 56, "box": [-900, -58, 900, 2]},
+    {"id": "fog_far", "name": "Fog over the water", "across": 40, "distance": 140, "onLand": False, "elevation": WATER, "height": 10, "box": [-200, -10, 200, 1]},
+    {"id": "fog_near", "name": "The island in the fog", "across": 6, "distance": 24, "height": 9, "box": [-80, -9, 80, 1],
+     "copies": [{"across": 6, "distance": 24}, {"across": -4, "distance": 12, "scale": 0.6, "flip": True}]},
+    {"id": "grandma", "name": "Grandmother", "person": {"cast": "cast", "who": "grandma", "turn": 150}, "across": 0.2, "distance": 4,
+     "place": {"across": "grandma_a", "distance": "grandma_d"}},
+    {"id": "sophia", "name": "Sophia", "person": {"cast": "cast", "who": "sophia", "turn": 150}, "across": 0.68, "distance": 4.27,
+     "place": {"across": "sophia_a", "distance": "sophia_d"}},
+    {"id": "papa", "name": "Papa", "person": {"cast": "cast", "who": "papa", "turn": 150}, "across": -3, "distance": 8,
+     "place": {"across": "papa_a", "distance": "papa_d"}},
     isle.RAIN,
 ]
 
 lights = isle.lights(("sky#sun", "#ffefd8", 1.3), ("sky#sun_late", "#ffe2b8", 1.25), ("sky#sun_dawn", "#ffeedd", 1.0),
-                     ([300, 5], "#f3d6c6", 0.5), ("sky#moon", "#c4d2f2", 0.8), [-30, 30])
+                     ([300, 5], "#f3d6c6", 0.5), ("sky#moon", "#c4d2f2", 0.8), [-30, 30]) + [
+    {"id": "far_lamp", "of": "far_boat#lamp", "color": "#ffcf86", "strength": 1.4, "reach": 14, "on": "boat_out"}]
 
+# the empty play: a June day, everyone where the approved look has them (Grandmother and Sophia hand in hand at the
+# water's edge, Papa on the grass with his mug: lib.PLACES), nothing of the later summer out
 state = {**isle.STATE,
-         "grandma_look": [8, 5, 0.2], "sophia_look": "grandma", "sophia_reach": {"r": "grandma#hand_l"}, "papa_look": "grandma",
-         "papa_with": ["mug"], "papa_reach": {"r": [-2.893, 7.715, 1.15], "l": [-2.807, 7.765, 1.15]}, "grandma_reach": {"l": "sophia#hand_r"}}
+         "grandma_at": "water", "sophia_at": "water", "papa_at": "lawn", "papa_with": ["mug"],
+         "grandma_a": 0.2, "grandma_d": 4, "sophia_a": 0.68, "sophia_d": 4.27, "papa_a": -3, "papa_d": 8,
+         "rowboat": 0, "rowboat_a": ROWBOAT[0][0], "rowboat_d": ROWBOAT[0][1], "rowboat_f": 180,
+         "net": False, "chair": "none", "shell": False, "graves": 0, "weed": False, "boat_out": False,
+         "dinghy": "moored", "dinghy_at": 0, "dinghy_a": DINGHY[0], "dinghy_d": DINGHY[1], "dinghy_f": 180,
+         "big_boat": False, "luggage": False}
+
+
+def placed(id, who, places):
+    return {f"{id}_at": {"values": places, "means": f"where {who} stands (the scene's places, lib.PLACES: {', '.join(places)}); set, put there at once"},
+            f"{id}_a": {"range": [-12, 12], "means": f"the scene's own: where {who} stands (across, metres), set from {id}_at; a piece walks them"},
+            f"{id}_d": {"range": [0, 30], "means": f"the scene's own: where {who} stands (distance, metres), set from {id}_at; a piece walks them"},
+            f"{id}_placed": {"type": "string", "means": f"the scene's own: the place {who} was last put at"}}
+
+
+states = {**isle.STATES,
+          **placed("grandma", "Grandmother", ["water", "ledge", "warm", "path", "gate", "porch", "peonies", "pier", "net", "gangway"]),
+          **placed("sophia", "Sophia", ["water", "edge", "shelf", "warm", "graves", "porch", "pier", "gangway"]),
+          **placed("papa", "Papa", ["lawn", "veranda", "porch", "pier", "net", "gangway"]),
+          "rowboat": {"range": [0, 1], "smooth": True, "means": "Eriksson's boat: 0 not here (far out on the right, gone in the haze), 1 alongside the pier's end; moved up he rows in, down he rows away (the boat turns round at the pier first)"},
+          "rowboat_a": {"range": [0, 75], "means": "the scene's own: where Eriksson's boat is (across), set from rowboat"},
+          "rowboat_d": {"range": [10, 35], "means": "the scene's own: where Eriksson's boat is (distance), set from rowboat"},
+          "rowboat_f": {"range": [-360, 360], "means": "the scene's own: which way Eriksson's boat faces, turned round as he leaves"},
+          "net": {"type": "boolean", "means": "the evening at the nets: Papa's net heaped on the pier by the boat, a length of it drawn out, tangled"},
+          "chair": {"values": ["none", "set", "shoved"], "means": "the chair by the gate: not there; set upright beside it (Papa put it there); shoved askew on the stones"},
+          "shell": {"type": "boolean", "means": "the big white shell on the porch's rail: the ashtray (Papa put it there)"},
+          "graves": {"range": [0, 5], "means": "how many little graves there are in the sand between the stones, each a shell and a wooden bird (0: the sand bare)"},
+          "weed": {"type": "boolean", "means": "the morning after the storm: wrack thrown up along the wet band of the rock"},
+          "boat_out": {"type": "boolean", "means": "by night: the family's boat out at the nets far on the water, Papa's lantern its one warm light; not at the pier"},
+          "dinghy": {"values": ["moored", "circles", "out"], "means": "the dinghy: moored by the pier's root; going round in circles before the rock (Sophia rowing: her place the pieces'); out along the shore toward the big boat, as far as dinghy_at"},
+          "dinghy_at": {"range": [0, 1], "smooth": True, "means": "how far along the shore toward the big boat the dinghy is (dinghy out): 0 off the pier, 1 at the gangway"},
+          "dinghy_a": {"range": [-2, 8], "means": "the scene's own: where the dinghy is (across)"},
+          "dinghy_d": {"range": [8, 30], "means": "the scene's own: where the dinghy is (distance)"},
+          "dinghy_f": {"type": "number", "means": "the scene's own: which way the dinghy faces (degrees)"},
+          "big_boat": {"type": "boolean", "means": "the last morning: the big motor boat lying off the far rock, the gangway with its rail laid to it"},
+          "luggage": {"type": "boolean", "means": "the last morning: the things carried down by the pier (kitbag, basket, suitcase, the plaid)"}}
 
 spec = {
     "engine": 3,
@@ -103,7 +170,7 @@ spec = {
     "lights": lights,
     "modules": ["cast", "isle"],
     "state": state,
-    "states": dict(isle.STATES),
+    "states": states,
     "objects": objects,
     "music": music,
 }

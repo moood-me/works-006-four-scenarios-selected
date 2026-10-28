@@ -1,6 +1,8 @@
 // The rowing boat moored at the pier's end: a small clinker-built boat, white gone grey, a dark rubbing strake, two oars
 // laid along the thwarts; seen side-on, bow to the right. It rides the still water (the layer `hull`, rocked by animate).
-// Metres from the middle of its waterline; 3.6 m long.
+// Metres from the middle of its waterline; 3.6 m long. Not here while it is out at the nets by night (`boat_out`: the
+// far boat, `far_boat`).
+if (e.state.boat_out) return;
 e.layer('hull', { pivot: [0, 0] }, c => {
   c.fillStyle = '#d6d3cc';
   c.beginPath();

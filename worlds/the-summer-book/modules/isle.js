@@ -187,8 +187,8 @@ function sea(g, e, o) {
     g.translate(X(a), Y(d));
     g.scale(rx, rz);
     const r = g.createRadialGradient(0, 0, 0, 0, 0, 1);
-    r.addColorStop(0, 'rgba(0,0,0,0.72)');
-    r.addColorStop(0.6, 'rgba(0,0,0,0.5)');
+    r.addColorStop(0, 'rgba(0,0,0,0.6)');
+    r.addColorStop(0.5, 'rgba(0,0,0,0.35)');
     r.addColorStop(1, 'rgba(0,0,0,0)');
     g.fillStyle = r;
     g.beginPath();
@@ -327,6 +327,32 @@ function weather(scene) {
       });
     }
   });
+}
+
+// For a scene's script: each person of `PLACES` stands where `<id>_at` names — PLACES[id][name]: {at: [across,
+// distance], turn, look, reach} — their place's keys `<id>_a`, `<id>_d` (the person's "place"), `<id>_turn`,
+// `<id>_look`, `<id>_reach` set at once. Put again only when `<id>_at` asks another place than `<id>_placed`: a scene
+// opened again goes on as it was, and what a piece set since stays.
+function places(scene, PLACES) {
+  const put = id => {
+    const at = scene.get(`${id}_at`);
+    const p = PLACES[id][at];
+    if (!p) {
+      scene.warn(`${id}_at: no place "${at}" — the places: ${Object.keys(PLACES[id]).join(', ')}`);
+      return;
+    }
+    if (scene.get(`${id}_placed`) === at) return;
+    scene.set(`${id}_a`, p.at[0]);
+    scene.set(`${id}_d`, p.at[1]);
+    scene.set(`${id}_turn`, p.turn);
+    scene.set(`${id}_look`, p.look ?? null);
+    scene.set(`${id}_reach`, p.reach ?? null);
+    scene.set(`${id}_placed`, at);
+  };
+  for (const id in PLACES) {
+    scene.on('change', `${id}_at`, () => put(id));
+    put(id);
+  }
 }
 
 // ── the granite ───────────────────────────────────────────────────────
@@ -529,4 +555,4 @@ function islet(g, e) {
   g.fillRect(-45, 0, 90, 0.6);
 }
 
-return { sm, fogK, glow, soft, sky, skyMove, sea, seaMove, mist, wall, fogMove, weather, granite, pine, juniper, tuft, skerry, islet };
+return { sm, fogK, glow, soft, sky, skyMove, sea, seaMove, mist, wall, fogMove, weather, places, granite, pine, juniper, tuft, skerry, islet };

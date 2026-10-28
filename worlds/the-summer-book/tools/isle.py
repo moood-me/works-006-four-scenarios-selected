@@ -52,7 +52,7 @@ def light(wind, **extra):
         # the thick fog: white air, glowing round every light and under the moon
         "fog_air": {"haze": 0.6, "hazeColor": "#dde1e5", "hazeGlow": 1.3, "shafts": 0.45, "saturation": 0.85},
         # the storm: light, white-grey, no sun; the wind up
-        "storm": {"haze": 0.24, "hazeColor": "#b9c0c8", "hazeGlow": 0.5, "shafts": 0.05, "tint": "#c6d2de", "tintStrength": 0.06,
+        "storm": {"ambient": 0.74, "ambientColor": "#c4ccd8", "haze": 0.24, "hazeColor": "#b9c0c8", "hazeGlow": 0.5, "shafts": 0.05, "tint": "#c6d2de", "tintStrength": 0.06,
                   "saturation": 0.78, "wind": [wind[0], wind[1], 2.4],
                   "lights": {"sun": 0, "sun_late": 0, "sun_dawn": 0, "sun_dusk": 0, "moon": 0.25}},
         "flash": {"ambient": 0.95, "ambientColor": "#e8eeff", "brightness": 1.12, "saturation": 0.7},

@@ -60,4 +60,4 @@ The scene's `script.js` calls `scene.kit.isle.weather(scene)` (`fog_air` from `f
 - A mirror's `strength`, `rough`, `ripple` are fixed numbers, not keys: the storm's sea mirrors as the calm one does,
   only its crests, foam and the grey sky it mirrors tell it (reported).
 
-Used by: `shore`.
+Used by: `shore`, `sea`.

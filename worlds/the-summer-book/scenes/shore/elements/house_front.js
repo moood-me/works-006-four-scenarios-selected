@@ -1,5 +1,5 @@
 // The house's gable end, turned toward the sea: weathered white boards, the glazed veranda across the ground floor
-// (small panes in white frames; behind the glass Papa's table, his papers, the lamp), the door on the right with the
+// (small panes in white frames, their glass clear: behind it the veranda — `veranda_in` — and whoever is in it), the door on the right with the
 // porch before it, a small window in the gable, dark barge boards. Metres from the middle of its foot; 5 m wide,
 // 3 m to the eaves, 4.8 m to the ridge.
 const W = 2.5;
@@ -57,36 +57,25 @@ const COLS = 8;
 const ROWS = 3;
 const pw = (VX1 - VX0) / COLS;
 const ph = (VY1 - VY0) / ROWS;
+// the panes: the frame's white cut away and the glass laid thin, the veranda seen through it
+const clear = g.createLinearGradient(0, VY0, 0, VY1);
+clear.addColorStop(0, 'rgba(185,198,203,0.32)');
+clear.addColorStop(1, 'rgba(120,136,142,0.16)');
 for (let i = 0; i < COLS; i++) {
   for (let j = 0; j < ROWS; j++) {
-    g.fillStyle = glass;
-    g.fillRect(VX0 + i * pw + 0.035, VY0 + j * ph + 0.035, pw - 0.07, ph - 0.07);
+    const x = VX0 + i * pw + 0.035;
+    const y = VY0 + j * ph + 0.035;
+    g.clearRect(x, y, pw - 0.07, ph - 0.07);
+    g.fillStyle = clear;
+    g.fillRect(x, y, pw - 0.07, ph - 0.07);
   }
 }
-// behind the glass: Papa's table under the window, the papers on it, a lamp; seen dimly
 g.save();
 g.beginPath();
 for (let i = 0; i < COLS; i++) {
   for (let j = 0; j < ROWS; j++) g.rect(VX0 + i * pw + 0.035, VY0 + j * ph + 0.035, pw - 0.07, ph - 0.07);
 }
 g.clip();
-g.globalAlpha = 0.55;
-g.fillStyle = '#4d5559';
-g.fillRect(-2.0, -1.12, 2.0, 0.06);
-g.fillRect(-1.9, -1.06, 0.05, 0.3);
-g.fillRect(-0.1, -1.06, 0.05, 0.3);
-g.fillStyle = '#e8e4da';
-g.fillRect(-1.6, -1.17, 0.35, 0.05);
-g.fillRect(-1.15, -1.16, 0.28, 0.04);
-g.fillStyle = '#5a5f5c';
-g.fillRect(-0.45, -1.5, 0.03, 0.38);
-g.beginPath();
-g.moveTo(-0.62, -1.5);
-g.lineTo(-0.26, -1.5);
-g.lineTo(-0.36, -1.68);
-g.lineTo(-0.52, -1.68);
-g.closePath();
-g.fill();
 // the sky's reflection: a pale slanting sheen across the panes
 g.globalAlpha = 0.35;
 g.fillStyle = '#e4eaec';
