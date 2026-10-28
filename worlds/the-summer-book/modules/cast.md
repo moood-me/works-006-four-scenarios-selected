@@ -85,7 +85,7 @@ model).
 | `hold_rail` | loop | stands holding a rail before her with both hands in a wind, leaning into it | Grandmother | made |
 | `hold_lantern` | loop | stands holding the lantern out before her, chest high, in the left hand | Grandmother, Papa | made |
 | `raise_lamp` | once | lifts something held in both hands up before her to the head's height and holds it there (the lamp at the window) | Grandmother | made |
-| `hold_pole` | loop | stands holding an upright pole before her with both hands | Grandmother | made |
+| `hold_pole` | loop | stands holding an upright pole before her with both hands (the pole is the cape's own, at her hands — no part) | Grandmother | made |
 | `step_down` | once | steps down carefully off a ledge, lower by about a knee's height, and stands (the water hides the legs) | Grandmother | made |
 | `knock` | once | standing, knocks three times on something before her at the chest's height | Grandmother | made |
 | `drape` | once | lays something (a shawl, a blanket, a jacket) round the shoulders of someone before her, with both hands | anyone | made |
@@ -146,7 +146,9 @@ ground, never in a bed with the legs out; it would not half rise and sink back; 
 Made but worth knowing: `write` leans back a little in the chair (the hands before the chest; the desk's paper by
 `papa_reach`); `raise_lamp` lifts the hands above the head; `step_down` was seen on flat ground (the drop is the
 scene's relief under her); `old_walk` shuffles, the arms a little out; `lead_walk` is a plain slow walk (the arm by
-`_reach`).
+`_reach`). Remade after the scene check (2026-10-28): `hug_knees` (the arms round the shins), `crouch` (the knees
+together, the hands at the ground before the feet), `write` (bent forward to the desk); the cigarette made thicker so
+it reads at the scene's distance. Seen in a check scene (branch `sb/people-check`, never merged).
 
 Asked by other names (use these): `sit_bed` *as sitting down onto the bed's edge* (new house) — `sit_down` (then
 `sit_stone` on the bed's edge; `sit_bed` is sitting up *in* bed); `sit_cot` — `seated` on the cot; `lie_cot` —
