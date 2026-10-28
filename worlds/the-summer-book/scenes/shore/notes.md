@@ -42,7 +42,7 @@ wind-bent pines on the crown. Its sea, sky, granite, pines, mist, fog and the ho
 - The showcase (`showcase.js`) runs the summer: dawn, the shelf, Eriksson, the calm, the nets, the moon, the storm,
   the morning after, August, the last morning, the fog by night.
 
-## Pieces (stage 5; the contract — their code comes after the seams are read)
+## Pieces (stage 5)
 
 How they will be made, as «Папа и море»'s: `lib.js` `film(scene)` — each piece's `from` (the people's places by
 `PLACES`, the cat's, the camera, the scene's own keys — never the hour, the weather, who is here, or what the play
@@ -268,6 +268,31 @@ hat on its nail or not (`from_water`); `skirt` — Sophia holds Grandmother's sk
 `sign_bird` (`graves` · `basket` · `none`) — the last morning's gestures; who is here (`<id>_here`). The mini-games move
 `stems`, `pull`, `let`, `step`, `rowboat`, `knot`, `rings`, `gust`, `parcel`, `dinghy_at` (the scene shows each — stage
 5 adds them to its `states`; the gangway's М11 moves nothing: her palm leaves the rail).
+
+## The pieces' code (stage 5)
+
+`lib.js` `film(scene)` — each piece's `from` (places by `PLACES`, the camera, the scene's own keys) and `run`; played
+by the world's `beats` (`modules/beats.js`, «Папа и море»'s, unchanged) from `script.js`; `showcase.js` plays a
+selection in its play's keys. The camera: the scene's own moved nearer (`NEAR` — along the line the viewer sees them
+by; over the water the eye kept 1.25 m over it, `LIFT`), out over the water (`OFF`), or the operator on a person or a
+point where the line to them is clear (`SHOT`); each choice's pose frames the chooser's face with the point in the
+middle 4:3; each mini-game's pose its point there. People walk at their gaits (`go`); seated places put at once where
+they stand. The mini-games' keys are shown by the scene (`script.js`: `stems`, `pull`, `let`, `step`, `parcel`;
+`knot` — the net's tangle, `rings` — the rings on the glass, `gust` — the look, `rowboat`, `dinghy_at` — the boats).
+The sea's mirror follows the weather (the island's keyed mirror: rough and rippled in the storm, glass in the calm).
+
+### What the pieces need from the people (package Л) — named in the code, taken as they land
+
+- Motions: Grandmother `rise_slow` (holding on — the rail, a hand), `shove` (the chair), `carve` (loop, sitting),
+  `drape` (a shawl, a blanket, a jacket round someone); gait `old_walk`. Sophia `lean_over` (over the water), `stamp`,
+  `throw` (a pebble, sitting), `kneel_pray` and `kneeling` (loop), `hit_knee`, `shake` (hands off the oars), `row`
+  (sitting, in the dinghy: now `seated`); gait `run`. Papa `drink`, `untangle` and `untangle_fast` (loops, sitting: now
+  `seated`), `write` (the list), `drape`. Eriksson `row` (sitting).
+- Parts: `cigarette`, `knife` and `chip`, `shawl` (on Sophia), `blanket`, `list`, `parcel`, `jacket`, `bundle`, `hat`,
+  `shell`, `basket`; `mug` is there. Looks: Grandmother without her shawl (`grandma_wear`), the straw hat on Sophia
+  (`sophia_wear`).
+- Close-ups (`closeups`): the teeth in the peonies, the stems, the hands on the gunwale, the knot, Grandmother's hands
+  shaking on the rock, the string of the parcel, the palm on the gangway's rail, the hands on the oars.
 
 ## Contract for the check
 

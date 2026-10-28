@@ -23,7 +23,7 @@ hour and the weather are the island's (`modules/isle.md`); the generator is `too
   cat Mappe is the world's `cat` on the basket's lid while `basket` is cat.
 - The showcase: leaving, Sophia on the bow and the cat, the swell and the hands, the island gone.
 
-## Pieces (stage 5; the contract — their code comes after the seams are read)
+## Pieces (stage 5)
 
 Made as the shore's (`lib.js` `film(scene)`, `from` and `run`, the world's `beats`; the game says the lines at the
 moments and plays the mini-games between pieces; a piece ends in the pose of what follows it). The camera is the
@@ -96,6 +96,20 @@ The play's keys the pieces read (`party`): the hour and the weather; where Sophi
 `mama` (`gone` · `sky` · `moon`); `learned`, `nets` (`say` · `nothing` · `net`), `ask_mama` (the full «Вёсла» with
 «Мама: нет»); `late_form`; `called`, `knock`. The mini-games: «Держать» moves nothing (the island goes on in the piece
 after it), «Сидеть прямо» moves `sway`.
+
+## The pieces' code (stage 5)
+
+`lib.js` `film(scene)`, played by the world's `beats` from `script.js`; `showcase.js` a selection in its play's keys.
+The camera rides the eye in the bow; the pieces move it in the boat's frame toward the faces (`BNEAR`: `CLOSE`,
+`MEDIUM`, `HANDS`), or turn it toward the island's window, the cape, the new house (`YAW`). The operator is not used
+inside the boat: framing someone seated there it stands behind them or inside the thwart. The sea's mirror follows the
+weather (the island's keyed mirror).
+
+### What the pieces need from the people (package Л)
+
+- Motions: Sophia `rise_floor` (up from the deck), `fold_hands`; Papa `drape` (the blanket), `tie` (the dinghy's
+  painter at the stern). Grandmother with her eyes closed (`eyes_closed`: a face of the cast's).
+- Parts: `blanket`. The dead bird is the scene's (`bird`, `cat_bird`).
 
 ## Contract for the check
 

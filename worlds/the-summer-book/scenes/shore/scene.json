@@ -132,6 +132,14 @@
         "ambientColor": "#e8eeff",
         "brightness": 1.12,
         "saturation": 0.7
+      },
+      "gust": {
+        "wind": [
+          1,
+          0.3,
+          3.4
+        ],
+        "haze": 0.3
       }
     }
   },
@@ -195,7 +203,8 @@
   "modules": [
     "cast",
     "isle",
-    "cat"
+    "cat",
+    "beats"
   ],
   "state": {
     "dawn": 0,
@@ -208,6 +217,9 @@
     "fog": 0,
     "fog_air": 0,
     "moon": 1,
+    "mirror_strength": 0.5,
+    "mirror_rough": 0.1,
+    "mirror_ripple": 0.1,
     "grandma_at": "water",
     "sophia_at": "water",
     "papa_at": "lawn",
@@ -253,7 +265,27 @@
         0.45
       ]
     },
-    "eriksson_look": "grandma"
+    "eriksson_look": "grandma",
+    "stems": 0,
+    "pull": 0,
+    "let": 0,
+    "step": 0,
+    "knot": 0,
+    "rings": 0,
+    "gust": 0,
+    "parcel": 0,
+    "splash": 0,
+    "beat": "",
+    "beat_next": "",
+    "skirt": true,
+    "knew": false,
+    "ask_back": false,
+    "heard": false,
+    "knock_broken": false,
+    "weak": false,
+    "sign_smoke": "pocket",
+    "sign_hat": "nail",
+    "sign_bird": "none"
   },
   "states": {
     "dawn": {
@@ -334,23 +366,176 @@
       ],
       "means": "the moon's phase: 0 a thin crescent … 1 full (changes between steps; seen by night)"
     },
+    "mirror_strength": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (the island's script sets it from storm): how strongly the sea mirrors"
+    },
+    "mirror_rough": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (from calm and storm): how rough the sea's mirror is"
+    },
+    "mirror_ripple": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (from calm and storm): the small waves breaking the sea's mirror"
+    },
+    "stems": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М1 «Пионы» (the mini-game's): Grandmother's hand in among the peony's stems, 0 at them … 1 deep in"
+    },
+    "pull": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М2а «Рука» (the mini-game's): how far Sophia pulls her hand away"
+    },
+    "let": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М2б «Плечо» (the mini-game's): the shoulder going from under Grandmother's hand"
+    },
+    "step": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М2в «Уступ» (the mini-game's): Grandmother's way down from the edge to knee-deep on the shelf; she walks there"
+    },
+    "knot": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М3в «Сеть» (the mini-game's): the net's tangle loosened"
+    },
+    "rings": {
+      "type": "number",
+      "means": "М4 «Камешек» (the mini-game's, and the pieces'): pebbles thrown — each one up, rings spread on the glass"
+    },
+    "gust": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М8а «Перила» (the mini-game's): the storm's gust at the porch (the look gust)"
+    },
+    "parcel": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М9а «Свёрток» (the mini-game's): the parcel from Grandmother's hands (0) into Sophia's (1)"
+    },
+    "splash": {
+      "type": "number",
+      "means": "the scene's own: each change a splash where Sophia goes into the water"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (notes.md «Pieces»)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will play next (its cut made ready)"
+    },
+    "skirt": {
+      "type": "boolean",
+      "means": "the play's: Sophia holds Grandmother's skirt at the pier (not «Вода: отпустила»)"
+    },
+    "knew": {
+      "type": "boolean",
+      "means": "the play's: Papa knows (3.4, 4.1, the oars)"
+    },
+    "ask_back": {
+      "type": "boolean",
+      "means": "the play's: Sophia ≤ 1 — she turns to Grandmother (3.5)"
+    },
+    "heard": {
+      "type": "boolean",
+      "means": "the play's: Papa heard «Слышала» (the oars: he sits in the dinghy's bow)"
+    },
+    "knock_broken": {
+      "type": "boolean",
+      "means": "the play's: «Постучу» broken"
+    },
+    "weak": {
+      "type": "boolean",
+      "means": "the play's: Grandmother's strength ≤ 2 (Papa sets her into the dinghy)"
+    },
+    "sign_smoke": {
+      "values": [
+        "pouch",
+        "shell",
+        "packet",
+        "pocket"
+      ],
+      "means": "the play's: the last morning's gesture of the cigarettes"
+    },
+    "sign_hat": {
+      "values": [
+        "on",
+        "bag",
+        "nail"
+      ],
+      "means": "the play's: the last morning's gesture of the hat"
+    },
+    "sign_bird": {
+      "values": [
+        "graves",
+        "basket",
+        "none"
+      ],
+      "means": "the play's: the last morning's gesture of the bird"
+    },
     "grandma_at": {
       "values": [
         "water",
         "ledge",
         "warm",
+        "warm_back",
+        "edge_sit",
         "path",
         "gate",
         "porch",
         "peonies",
         "pier",
         "net",
+        "stone",
+        "chair",
+        "landing",
+        "pier_back",
+        "pier_root",
+        "graves",
         "gangway",
         "step",
         "knee",
         "dinghy"
       ],
-      "means": "where Grandmother stands (the scene's places, lib.PLACES: water, ledge, warm, path, gate, porch, peonies, pier, net, gangway, step, knee, dinghy); set, put there at once"
+      "means": "where Grandmother stands (the scene's places, lib.PLACES: water, ledge, warm, warm_back, edge_sit, path, gate, porch, peonies, pier, net, stone, chair, landing, pier_back, pier_root, graves, gangway, step, knee, dinghy); set, put there at once"
     },
     "grandma_a": {
       "range": [
@@ -376,13 +561,20 @@
         "edge",
         "shelf",
         "warm",
+        "edge_sit",
         "graves",
+        "pier_edge",
+        "landing",
+        "step_by",
+        "pier_sit",
+        "pier_root",
+        "bundle",
         "porch",
         "pier",
         "gangway",
         "dinghy"
       ],
-      "means": "where Sophia stands (the scene's places, lib.PLACES: water, edge, shelf, warm, graves, porch, pier, gangway, dinghy); set, put there at once"
+      "means": "where Sophia stands (the scene's places, lib.PLACES: water, edge, shelf, warm, edge_sit, graves, pier_edge, landing, step_by, pier_sit, pier_root, bundle, porch, pier, gangway, dinghy); set, put there at once"
     },
     "sophia_a": {
       "range": [
@@ -409,10 +601,16 @@
         "porch",
         "pier",
         "net",
+        "door_in",
+        "landing_rail",
+        "step",
+        "step_by",
+        "step_by_stand",
+        "pier_root",
         "gangway",
         "dinghy"
       ],
-      "means": "where Papa stands (the scene's places, lib.PLACES: lawn, veranda, porch, pier, net, gangway, dinghy); set, put there at once"
+      "means": "where Papa stands (the scene's places, lib.PLACES: lawn, veranda, porch, pier, net, door_in, landing_rail, step, step_by, step_by_stand, pier_root, gangway, dinghy); set, put there at once"
     },
     "papa_a": {
       "range": [
@@ -630,10 +828,36 @@
       "width": 6000,
       "depth": 4000,
       "reflect": {
-        "strength": 0.5,
-        "fade": 0,
-        "rough": 0.1,
-        "ripple": 0.1
+        "strength": "mirror_strength",
+        "rough": "mirror_rough",
+        "ripple": "mirror_ripple",
+        "fade": 0
+      }
+    },
+    {
+      "id": "rings",
+      "name": "Rings on the water",
+      "plane": true,
+      "across": 2.4,
+      "distance": 7.6,
+      "elevation": -0.54,
+      "width": 4,
+      "depth": 4
+    },
+    {
+      "id": "splash",
+      "name": "Splash",
+      "particles": {
+        "kind": "splashes",
+        "at": [
+          2.6,
+          5.8,
+          0.74
+        ],
+        "burst": {
+          "on": "splash",
+          "count": 70
+        }
       }
     },
     {
@@ -1257,10 +1481,8 @@
     {
       "id": "net",
       "name": "Papa's net",
-      "across": 6.4,
-      "distance": 16.1,
-      "onLand": false,
-      "elevation": -0.15,
+      "across": -1.75,
+      "distance": 13.85,
       "height": 0.4,
       "box": [
         -0.75,
@@ -1268,6 +1490,33 @@
         1.4,
         0.03
       ]
+    },
+    {
+      "id": "net_stones",
+      "name": "Two stones at the pier's root",
+      "across": -1.6,
+      "distance": 14.4,
+      "height": 0.45,
+      "box": [
+        -0.95,
+        -0.45,
+        0.95,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "porch_deck",
+      "name": "The porch's landing",
+      "plane": true,
+      "walk": true,
+      "unseen": true,
+      "on": "house",
+      "across": 1.6,
+      "distance": -1.0,
+      "elevation": 0.55,
+      "width": 1.3,
+      "depth": 0.6
     },
     {
       "id": "luggage",
