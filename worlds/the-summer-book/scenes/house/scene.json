@@ -79,7 +79,7 @@
         }
       },
       "night": {
-        "ambient": 0.64,
+        "ambient": 0.82,
         "ambientColor": "#8a9bc8",
         "bounce": 0.5,
         "haze": 0.16,
@@ -97,7 +97,7 @@
           "sun_dawn": 0,
           "sun_dusk": 0
         },
-        "inside": 0.85
+        "inside": 1
       },
       "fog_air": {
         "haze": 0.6,

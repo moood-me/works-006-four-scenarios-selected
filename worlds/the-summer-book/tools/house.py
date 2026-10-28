@@ -183,9 +183,11 @@ objects = [
 ]
 
 # the light: the island's (the day as approved; the looks by the hour and the weather), the room's share of the light
-# outside; at night a little more of it inside, so that faces read by the moon and the windows
+# outside; at night all of it inside and the night's air a little lighter, so that faces read by the moon and the
+# windows (night still: blue, the lamp and the candle the only warm)
 light = isle.light(WIND, inside=0.6)
-light["looks"]["night"]["inside"] = 0.85
+light["looks"]["night"]["inside"] = 1
+light["looks"]["night"]["ambient"] = 0.82
 # the thick fog's air is one for the whole scene, the room too: its glow round the lamp held down a little (isle.md)
 light["looks"]["fog_air"]["hazeGlow"] = 0.8
 
