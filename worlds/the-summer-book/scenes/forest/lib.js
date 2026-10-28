@@ -135,7 +135,7 @@ const SHOTS = {
   // Grandmother standing by the stump (the moss minigame: grandma#chest), Sophia with the animals
   swim: aim([-0.2, 0.6, 1.4], [0.5, 3.4, 0.8], 0.5, 0.5),
   // close: Sophia's face over her, Grandmother bowed on the stump (the choice `head`: sophia#chest)
-  face: aim([0.55, 2.75, 1.0], [1.15, 4.1, 0.8], 0.5, 0.42),
+  face: aim([1.9, 2.7, 1.0], [1.2, 4.15, 0.6], 0.55, 0.45),
   // Papa and his mother by the stump
   lift: aim([0.6, 1.6, 1.4], [0.45, 3.7, 1.2], 0.5, 0.42),
   // low on the beetle in the moss
@@ -231,14 +231,14 @@ const FILM = {
     run: async s => {
       const gm = s.person('grandma');
       s.tell('carve:trees');
-      await s.wait(2);
+      await s.wait(1);
       glideTo(s, SHOTS.carve, 4);
       await goTo(s, 'grandma', 'stump', [], { sit: 'sit_down' });
       gm.with(['knife', 'driftwood']);
       gm.do('carve', { loop: true });
       gm.look('grandma#hands');
       s.tell('carve:sat');
-      await s.wait(1.5);
+      await s.wait(0.5);
     },
   },
   // 1.2 — the seal is done; Sophia takes it from her hand and sets it in the moss with the others (`animals` 4 → 5)
@@ -270,7 +270,7 @@ const FILM = {
       s.set('animals', 5);
       so.do('crouch', { loop: true });
       s.tell('seal_set:forest');
-      await s.wait(3);
+      await s.wait(1.5);
     },
   },
   // 1.2 — Grandmother gets up, goes to the trunk, reaches for the dry branch — and stands still, her palm on the trunk,
@@ -293,10 +293,9 @@ const FILM = {
       s.tell('trunk:still');
       await s.wait(3);
       gm.mood(mood ?? 'neutral');
-      glideTo(s, SHOTS.animals, 3);
-      await goTo(s, 'grandma', 'stump', [], { sit: 'sit_down' });
-      gm.do('carve', { loop: true });
-      gm.look('grandma#hands');
+      // a ready cut: she is back on the stump, carving again
+      gm.reach(null);
+      await cutTo(s, { ...at('grandma', 'stump', { grandma_do: loop('carve'), grandma_look: 'grandma#hands', grandma_with: ['knife'] }), ...SHOTS.animals });
       s.tell('trunk:back');
       await s.wait(1);
     },

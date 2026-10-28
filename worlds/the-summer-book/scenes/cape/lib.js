@@ -214,7 +214,7 @@ const SHOTS = {
   // up the path: whoever goes up, out of sight behind the boulder
   up: aim([0.9, 2.0, 1.6], [-2.4, 10.0, 0.9], 0.5, 0.48),
   // the door at dusk: Sophia sitting in it, Grandmother before her, low on the two faces (the choice: sophia#chest)
-  goodnight: aim([0.95, 4.5, 0.95], [2.0, 6.45, 1.0], 0.5, 0.47),
+  goodnight: aim([1.1, 4.8, 0.9], [2.0, 6.45, 0.85], 0.5, 0.47),
   // from the door's side: Sophia's back, Grandmother going up the path
   leave: aim([3.4, 4.3, 1.25], [-1.5, 10.0, 0.9], 0.5, 0.45),
   // over Grandmother's shoulder at the second stone, down to Sophia at the door
@@ -229,6 +229,8 @@ const SHOTS = {
   in_tent: aim([1.75, 5.05, 0.75], [2.7, 7.4, 0.35], 0.5, 0.5),
   // the stones and the tent, wide: going up the path
   stones: aim([1.1, 2.3, 1.6], [-0.2, 8.4, 0.7], 0.5, 0.48),
+  // the morning: Papa coming down to the stones, Sophia up from the tent to meet him, the empty tent by them
+  meet: aim([2.2, 3.0, 1.5], [0.0, 7.8, 0.9], 0.5, 0.48),
   // Grandmother on the halfway stone, her face
   half: aim([0.1, 7.4, 1.15], [-1.5, 9.5, 0.9], 0.5, 0.42),
   // from behind her on the halfway stone down to the tent
@@ -365,23 +367,22 @@ const FILM = {
     from: () => ({ ...at('grandma', 'pole'), ...at('sophia', 'tie'), ...at('papa', 'top'), papa_here: false, ...CAT_OFF, ...UP, tent: 'pole', ...SHOTS.pole }),
     run: async s => {
       const papa = s.person('papa');
-      await cutTo(s, { tent: 'up', ...SHOTS.path });
-      papa.here(true);
-      papa.with(['lantern']);
-      const down = goTo(s, 'papa', 'lamp', [S1, S2, S3]);
+      // a ready cut: the tent up, Papa already on the highest stone with the lantern, coming down
+      await cutTo(s, { tent: 'up', ...at('papa', 'path', { papa_with: ['lantern'] }), papa_here: true, ...SHOTS.path });
+      const down = goTo(s, 'papa', 'lamp', [S2, S3]);
       await s.wait(1);
       s.tell('law:lantern');
       await s.all(goTo(s, 'grandma', 'stand'), goTo(s, 'sophia', 'tent'), down);
       await papa.do('put_down');
       papa.with(null);
       s.move('candle', 1, { over: 2, ease: 'out' });
+      // the law said as the candle is lit, while he steps back beside the tent
+      s.person('sophia').look('papa');
+      s.tell('law:law');
+      glideTo(s, SHOTS.law, 2);
       await goTo(s, 'papa', 'by');
       papa.look('sophia');
-      s.person('sophia').look('papa');
-      glideTo(s, SHOTS.law, 2);
-      await s.wait(1.5);
-      s.tell('law:law');
-      await s.wait(5);
+      await s.wait(3.5);
       glideTo(s, SHOTS.window, 3);
       await s.wait(2.5);
       s.tell('law:window');
@@ -817,7 +818,7 @@ const FILM = {
   // 4.5 «lamp» — the morning: the fog thinning, Papa comes down the stones; out of the white Sophia comes up to meet him,
   // wet, by herself, and goes on past him up the path; he looks at the empty tent
   out_of_white: {
-    from: () => ({ ...at('grandma', 'top'), ...at('sophia', 'door'), ...at('papa', 'top'), papa_here: true, ...CAT_OFF, ...UP, ...SHOTS.stones }),
+    from: () => ({ ...at('grandma', 'top'), ...at('sophia', 'door'), ...at('papa', 'top'), papa_here: true, ...CAT_OFF, ...UP, ...SHOTS.meet }),
     run: async s => {
       const papa = s.person('papa');
       s.move('fog', 0.4, { over: 8 });
