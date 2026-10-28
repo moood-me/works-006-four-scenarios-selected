@@ -75,6 +75,8 @@ const SPOT = {
   lamp: [0.62, 3.55, 305], soot: [...at(-36, 1.95), 324], barrel: [-1.75, 3.35, 290], hatch: [HATCH.a + 0.25, HATCH.d, 120],
   hatch_deep: [HATCH.a - 0.23, HATCH.d - 0.02, 130], up: [-0.95, 4.25, 120], cot: [1.3, 4.2, 90], door_in: [...at(108, 2.3), 288],
   gallery: [...at(40, RAIL - 0.35), 40],
+  // (writing his book on the gallery's right side, where the room's view sees him over the parapet, half turned to it)
+  write: [...at(78, RAIL - 0.4), 235],
 };
 const GALLERY_WAY = [at(108, 2.3), at(108, RAIL - 0.35), at(90, RAIL - 0.35), at(72, RAIL - 0.35), at(56, RAIL - 0.35), at(40, RAIL - 0.35)];
 const COT_BED = [1.75, 4.3, 0.42];
@@ -520,8 +522,8 @@ function film(scene) {
     },
     // Epilogue "The Beam": Papa writing on the gallery, the lamp burning; ("in a week") My in the hatch
     e_write: {
-      from: () => ROOM(STAND("papa", SPOT.gallery, { papa_with: ["book"], papa_do: loop("seated_write") }), { my_here: false, troll_here: false,
-        flame: "lit", lenses: 1, ...FROM(EYE.gallery, [SPOT.gallery[0], SPOT.gallery[1], 1.05]) }),
+      from: () => ROOM(STAND("papa", SPOT.write, { papa_with: ["book"], papa_do: loop("hold"), papa_look: "papa#page" }), { my_here: false,
+        troll_here: false, flame: "lit", lenses: 1, ...FROM(EYE.lamp, [1.0, 4.8, 1.3]) }),
       run: async s => {
         await moment(s, "e_write:write", 5);
         P(s, "my").here(true);
@@ -530,7 +532,7 @@ function film(scene) {
         await moment(s, "e_write:my", 5);
         // the pose of «Луч» (watch, don't touch): the lit lamp turning, the beam out through the glass, Papa writing on
         // the gallery beyond it — the eye raised over the beam's cone, the frame's top left free
-        await cam(s, FROM(EYE.lamp, [0.6, 5.0, 1.3]), 2);
+        await cam(s, FROM(EYE.lamp, [1.0, 4.8, 1.3]), 2);
       },
     },
     // Epilogue "The Stair", the late "Pie": the pot warmed, the lamp lit by his matchbox, and down without staying
