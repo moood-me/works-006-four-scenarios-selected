@@ -208,7 +208,7 @@
     },
     {
       "id": "hand_lamp",
-      "at": "grandma#hand_r",
+      "at": "grandma#flame",
       "color": "#ffc98a",
       "strength": 1.1,
       "reach": 3.5,
@@ -220,7 +220,8 @@
     "cast",
     "isle",
     "cat",
-    "beats"
+    "beats",
+    "closeups"
   ],
   "state": {
     "dawn": 0,
@@ -250,6 +251,9 @@
     "step": 0,
     "lantern_dip": 0,
     "lamp_lit": 0,
+    "rest": false,
+    "palm_open": 0,
+    "palm_near": 0.6,
     "grandma_at": "stand",
     "sophia_at": "tent",
     "papa_at": "by",
@@ -551,6 +555,26 @@
       ],
       "smooth": true,
       "means": "the scene's own: Grandmother's lantern alight in her hand (from grandma_with and lantern_dip)"
+    },
+    "rest": {
+      "type": "boolean",
+      "means": "the fog and dark minigames (during fog_way): true — Grandmother sits down where she stands (by the first stone on its low stone, at the second on the halfway stone seat:0); false — she gets up and goes on, back on the stone"
+    },
+    "palm_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М10г «knock»: the close-up of her palm by the tent's canvas open (0 closed … 1 open)"
+    },
+    "palm_near": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the palm close-up: how near her palm is to the canvas (1 touching it)"
     },
     "beat": {
       "type": "string",
@@ -990,6 +1014,13 @@
           "distance": 5.75,
           "elevation": -0.1,
           "scale": 0.9
+        },
+        {
+          "across": -3.0,
+          "distance": 11.15,
+          "elevation": -0.1,
+          "scale": 0.85,
+          "flip": true
         }
       ]
     },
@@ -1284,6 +1315,11 @@
         "count": 9000,
         "wind": 1.2
       }
+    },
+    {
+      "id": "palm",
+      "name": "Her palm by the glowing canvas, close",
+      "insert": "palm_open"
     }
   ],
   "music": {

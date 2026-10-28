@@ -55,7 +55,14 @@ are `modules/isle` (`tools/isle.py`).
   it is the people's part, its light `grandma_lantern` at her hand); his big lantern's light `papa_lantern` at his
   hand; the camp bed carried before him (`cot_carried`: it follows his place and turn); `packed` (the last morning:
   the table bare); the points `beds#cover`, `cot#grip`, `drops#bottle`. People are not marked `inside`: the engine has
-  them inside on the house's floors, outside on the rock (`light_back`).
+  them inside on the house's floors, outside on the rock (`light_back`). The lights of what is in the hands are at the
+  cast's parts' points: `candle` at `sophia#flame`, `grandma_lantern` at `grandma#flame`, `papa_lantern` at
+  `papa#flame`.
+- **The minigames' close-ups** (the world's `closeups`, `modules/closeups.md`): the inserts `gap` (`gap_open`; its
+  `gap_palm` 0…1 — Grandmother's palm on the blanket, 1 at first; `gap_hand` 0…1 — Sophia's hand come into it; the
+  point `gap#palm`) for М5а/М5б, `breast` (`breast_open`, `breast_flicker`; `breast#palm`) for М7б, `sleeve`
+  (`sleeve_open`, `sleeve_let`; `sleeve#fingers`) for М8в. Each painted once by the module (`elements/<shot>.js`), its
+  animate the module's `live`; the minigame opens and shuts it and moves its keys.
 - **The script** (`script.js`): the pieces (`scene.kit.beats.play(scene, lib.film(scene))`); the island's weather;
   `hat`, `lamp` (+ `lamp_up`), `drops_at`, `cot` (+ `cot_carried`, following Papa) → their places; `casement`,
   `creak`, `far_light_at` → the turns and the place (the script's own keys, in `states`). Stage 4's `view` and
@@ -76,11 +83,12 @@ are `modules/isle` (`tools/isle.py`).
 Common (the island's): `dawn`, `dusk`, `night`, `late`, `calm`, `storm`, `flash`, `fog`, `moon`. The play's (the
 game's, `party` below): `hat` (nail · bed · none), `teabox`, `drops` (none · full · empty), `cot` (veranda · room),
 the variants `papa_watch`, `secret`, `cat`, `take_lantern`, `sophia_hand`, `kick`, `hold_hand`, `knew`,
-`sophia_knows`, `wall`; the people's `<id>_here`, `<id>_mood`; `beat`, `beat_next`. The pieces' own: `bird`, `lamp`
+`sophia_knows`, `wall`, `slips` (М5а/М5б flawed: Sophia does not come at once); the people's `<id>_here`, `<id>_mood`; `beat`, `beat_next`. The pieces' own: `bird`, `lamp`
 (none · table · window · burnt · bed), `lamp_lit`, `lamp_up`, `supper`, `packed`, `candle`, `casement`, `creak`,
 `tent_light`, `far_light`, `far_light_at`, `under`, `cover`, `cup`, `tilt`, `drops_at`, `storm_lantern`,
 `grandma_lantern`, `papa_lantern`, `cot_carried`, `cat_pose`, `cat_dir` (the minigames move `creak`, `tilt`, `cover`,
-`lamp_up`). The play's variant once called `papa_look` is `papa_watch`: `papa_look` is Papa's own look (a person's
+`lamp_up`, and the inserts' `gap_open`, `gap_palm`, `gap_hand`, `breast_open`, `breast_flicker`, `sleeve_open`,
+`sleeve_let`). The play's variant once called `papa_look` is `papa_watch`: `papa_look` is Papa's own look (a person's
 key).
 
 ## What changed for the game (stage 3 → 4)
@@ -180,8 +188,10 @@ How every piece is made (the mistakes «Папа и море» made, not to make
   on the blanket between the beds. Ends: the pose of М5а — her palm by `beds#gap`, the two backs half turned (seen
   from the beds' foot on the left), the camera still. Moments: `gone:lie` — at the window (the game: «You're lying» — «No»); `gone:cry` — Sophia at her
   bed; `gone:papa` — Papa gone; `gone:near` — Grandmother on her bed's edge (the game: «Grandmother cannot hug…»).
-- `gone_near` (≈ 6 s). After `gone` (and the minigame). Sophia comes over to her by herself, sits close against her and
-  goes quiet. Ends: the two on Grandmother's bed's edge. Moments: `gone_near:quiet`.
+- `gone_near` (≈ 6 s; with `slips` ≈ 11). After `gone` (and the minigame). Sophia comes over to her by herself, sits close
+  against her (a seated loop, looking at her) and goes quiet; with `slips` (the palm was taken away in М5а) not at once:
+  she cries on a while, looks round at her, away, and only then comes. Ends: the two on Grandmother's bed's edge.
+  Moments: `gone_near:quiet`.
 - `hat_bed` (Ш1 «gone», the morning, ≈ 14 s). Morning: the hat not on its nail — on Sophia's bed; Papa in the doorway
   sees it, stands a long time, does not touch it, and goes to sit at his table with his back to the room; Grandmother
   and Sophia apart in the room. Keys: hat (the play's: bed). From: Papa coming to the doorway from the veranda,
@@ -193,8 +203,9 @@ How every piece is made (the mistakes «Папа и море» made, not to make
   edge and takes her hand between the beds. Ends: the pose of М5б — the two hands at `beds#gap`, Sophia's face on
   her pillow. Moments: `sky:moon` («Does she see the moon too?» — «The moon too»); `sky:soon` («And you won't go
   away?…» — «Soon is how old people say it…»); `sky:wave` — Sophia waves; `sky:breath` — Papa breathes out.
-- `sky_morning` (≈ 12 s). Morning: Sophia makes her bed herself and whispers to Grandmother; then on the veranda,
-  singing, she walks round the hat on its nail. From: Sophia by her bed, Grandmother sitting on hers. Ends: Sophia
+- `sky_morning` (≈ 12 s; with `slips` ≈ 15). Morning: Sophia makes her bed herself and whispers to Grandmother — with
+  `slips` (her hand let go in М5б) not at once: she stands by her bed, looks at her, down, and then goes to her —; then
+  on the veranda, singing, she walks round the hat on its nail. From: Sophia by her bed, Grandmother sitting on hers. Ends: Sophia
   past the hat. Moments: `sky_morning:whisper` («Mama sees»); `sky_morning:hat` — she walks round the hat.
 - `to_door` (Ш1 «moon», ≈ 8 s). After `moon_window`. Grandmother gets up slowly, takes Sophia by the hand and leads her to
   the second door; her hand on its handle, Sophia's hand in her other. Ends: the pose of М5в — `door2#handle` in the
@@ -355,7 +366,8 @@ the shore's `from_water:door`); 2.2 «bury» and 3.4 «porch» go on on the shor
 
 - **The play's keys** the game sets (`g.scene`): the island's hour and weather; `hat`, `teabox`, `drops`, `cot` (the
   summer's things, by the marks, as `carry` does now); `papa_watch`, `secret`, `cat`, `take_lantern`, `sophia_hand`,
-  `kick`, `hold_hand`, `knew`, `sophia_knows`, `wall` (the variants above); who is here and the moods. (`papa_watch`
+  `kick`, `hold_hand`, `knew`, `sophia_knows`, `wall`, `slips` (the variants above; `slips` — М5а or М5б flawed, as
+  the minigame returns it: true when it is more than 0); who is here and the moods. (`papa_watch`
   was `papa_look` in the contract before: that is Papa's own look, a person's key.) No `view`, no `<id>_at`, no
   `bird`, `lamp`, `lamp_lit`, `candle`, `casement`, `creak`, `tent_light`, `far_light*`, `supper` from the game any
   more — they are the pieces' (the scene has no `view` or `<id>_at` now).
@@ -370,9 +382,16 @@ the shore's `from_water:door`); 2.2 «bury» and 3.4 «porch» go on on the shor
 - The minigames' keys here: `creak` (М5в «door» — the second door's leaf, 0…1), `tilt` (М7а «cup» — the cup in her
   hands, −1…1), `cover` (М8б «blanket» — the blanket's edge, 0…1), `lamp_up` (М10б «lamp» — the lamp at the glass,
   0…1; not `lamp`, which here is where the lamp is). Their points: `door2#handle`, `table#cup`, `beds#cover`,
-  `lamp#lamp`; М5а/М5б `beds#gap`, М7б and М8в `grandma#chest`, М10в `lamp#lamp`.
-- **For the people's package (Л)** — the house's pieces call these; until they are in the cast a motion done once is
-  2 s of standing (the engine's warning), a loop is standing, `go` does not walk (the person is then put on the seat):
+  `lamp#lamp`; М10в `lamp#lamp`. In the inserts (above): М5а/М5б `gap#palm` (`gap_open`, `gap_palm`, `gap_hand`), М7б
+  `breast#palm` (`breast_open`, `breast_flicker`), М8в `sleeve#fingers` (`sleeve_open`, `sleeve_let`); the pieces
+  before them end in their poses (`beds#gap`, `grandma#chest`) and open none.
+- **The people's package (Л)** is in (`modules/cast.md`): the pieces use its names — `eat` (was `chew`), `get_up_bed`
+  for Papa off his cot (was `get_up_cot`), `lie_side` (was `lie_wall`: Papa face to the wall), moving along a bed
+  seated (`shift`) a seated loop slid there without steps (`lib` `shift`), Sophia pressed against her (`lean`) a seated
+  loop and a look; the parts `lantern` (the storm lantern off its hook, in her left hand; the scene's key
+  `storm_lantern` is still the one on the hook), `blanket_fold` (Papa carrying the blanket) → `blanket` (on her); Papa
+  catches her by the elbow (`grandma#elbow_l`). What is not made yet (the motions «to make») stands in: a motion done
+  once is 2 s of standing (the engine's warning), a loop is standing, `go` does not walk. What the pieces asked for:
   - motions done once: `sit_down`, `rise` (onto and off a low seat: a bed's edge, the bench, Papa's chair, the
     armchair), `sit_floor` (onto the floor, the back to the jamb), `sit_up` (from lying on the back to sitting up in
     bed), `lie_down` (from sitting in bed to lying), `get_up_bed` (from sitting in bed onto the feet beside it — it
@@ -393,22 +412,20 @@ the shore's `from_water:door`); 2.2 «bury» and 3.4 «porch» go on on the shor
   - gaits: `old_walk` (Grandmother's slow old walk), `run` (Sophia's), `carry_walk` (Papa carrying the camp bed).
   - A lying motion's `turn` is the way the feet point (`lie_side`: the way the face looks); a seated one's — the way
     the knees point.
-  - Parts (`<id>_with`): `knife`, `pouch` (Grandmother's), `bird` (a dead bird held in two fingers), `pillowcase`
-    (the bird wrapped in it), `candle` (Sophia's: its light `candle` is at `sophia#hand_r`), `parcel`, `storm_lantern`
-    (Grandmother's, lit: the light `grandma_lantern` at her right hand), `big_lantern` (Papa's: `papa_lantern`),
-    `cardigan`, `plaid` (the blanket Papa lays over her: his to carry, then hers to wear), `drops` (the little brown
-    bottle). Grandmother's cup is the scene's (`cup`), the lamp is the scene's (moved with her hands on it).
-  - Closeups (package Л): «palm on the blanket between the beds» (М5а), «Sophia's palm on her breast with the candle»
-    (М7б), «fingers on the sleeve» (М8в).
-- **The people's points have no elbow**: Papa catches her by the arm at her hand (`grandma#hand_l`) — an elbow point
-  (`LeftForeArm`'s end) would be right (engine, people).
+  - Parts (`<id>_with`, all made): `knife`, `pouch` (Grandmother's), `bird` (a dead bird held in two fingers),
+    `pillowcase` (the bird wrapped in it), `candle` (Sophia's: its light `candle` at `sophia#flame`), `parcel`,
+    `lantern` (the storm lantern, Grandmother's, lit: the light `grandma_lantern` at `grandma#flame`), `big_lantern`
+    (Papa's: `papa_lantern` at `papa#flame`), `cardigan`, `blanket_fold` → `blanket` (the blanket Papa lays over her:
+    his to carry, then hers to wear), `drops` (the little brown bottle). Grandmother's cup is the scene's (`cup`), the
+    lamp is the scene's (moved with her hands on it).
+  - Closeups: in the scene (`gap`, `breast`, `sleeve`: above).
 
 ## Contract for the check
 
 ```json
 {"beats": {"hat_dawn": {"after": [], "tells": ["hat_dawn:hat", "hat_dawn:papa"], "seconds": 7, "show": false}, "morning": {"after": [], "tells": ["morning:hat", "morning:knife"], "seconds": 14, "show": false}, "morning_go": {"after": ["morning"], "tells": ["morning_go:door"], "seconds": 6, "show": false}, "supper_table": {"after": [], "tells": ["supper_table:sat", "supper_table:look"], "seconds": 12, "show": false}, "bird_pillow": {"after": [], "tells": ["bird_pillow:seen", "bird_pillow:shout"], "seconds": 10, "show": false}, "gift": {"after": ["bird_pillow"], "tells": ["gift:look", "gift:stroke", "gift:box"], "seconds": 14, "show": false}, "gift_again": {"after": [], "tells": ["gift_again:bird", "gift_again:box"], "seconds": 9, "show": false}, "bird_out": {"after": ["bird_pillow"], "tells": ["bird_out:wrapped", "bird_out:gone"], "seconds": 9, "show": false}, "moon_window": {"after": [], "tells": ["moon_window:water", "moon_window:sit", "moon_window:cot", "moon_window:face"], "seconds": 16, "show": false}, "gone": {"after": ["moon_window"], "tells": ["gone:lie", "gone:cry", "gone:papa", "gone:near"], "seconds": 16, "show": false}, "gone_near": {"after": ["gone"], "tells": ["gone_near:quiet"], "seconds": 6, "show": false}, "hat_bed": {"after": [], "tells": ["hat_bed:hat", "hat_bed:papa", "hat_bed:back"], "seconds": 14, "show": false}, "sky": {"after": ["moon_window"], "tells": ["sky:moon", "sky:soon", "sky:wave", "sky:breath"], "seconds": 14, "show": false}, "sky_morning": {"after": [], "tells": ["sky_morning:whisper", "sky_morning:hat"], "seconds": 12, "show": false}, "to_door": {"after": ["moon_window"], "tells": ["to_door:hand"], "seconds": 8, "show": false}, "door_out": {"after": ["to_door"], "tells": ["door_out:gone"], "seconds": 5, "show": false}, "cough": {"after": [], "tells": ["cough:said", "cough:cough"], "seconds": 8, "show": false}, "doctor": {"after": [], "tells": ["doctor:said"], "seconds": 10, "show": false}, "doctor_after": {"after": ["doctor"], "tells": ["doctor_after:chair", "doctor_after:cant", "doctor_after:gone"], "seconds": 12, "show": false}, "palm_night": {"after": [], "tells": ["palm_night:up", "palm_night:palm"], "seconds": 12, "show": false}, "not_today": {"after": ["palm_night"], "tells": ["not_today:whisper", "not_today:out"], "seconds": 7, "show": false}, "thunder": {"after": [], "tells": ["thunder:up", "thunder:asked"], "seconds": 12, "show": false}, "porch_go": {"after": ["thunder"], "tells": ["porch_go:out"], "seconds": 7, "show": false}, "storm_cot": {"after": [], "tells": ["storm_cot:up", "storm_cot:wall"], "seconds": 8, "show": false}, "under": {"after": ["thunder"], "tells": ["under:under"], "seconds": 8, "show": false}, "song": {"after": ["under"], "tells": ["song:sing", "song:asleep", "song:papa", "song:sat"], "seconds": 16, "show": false}, "notyou": {"after": ["thunder"], "tells": ["notyou:clutch"], "seconds": 6, "show": false}, "notyou_after": {"after": ["notyou"], "tells": ["notyou_after:ask", "notyou_after:wall"], "seconds": 10, "show": false}, "sniff": {"after": [], "tells": ["sniff:sniff"], "seconds": 9, "show": false}, "doctor_list": {"after": [], "tells": ["doctor_list:write"], "seconds": 7, "show": false}, "night_window": {"after": [], "tells": ["night_window:tent", "night_window:fog", "night_window:out"], "seconds": 20, "show": false}, "night_face": {"after": ["night_window"], "tells": ["night_face:cat", "night_face:face"], "seconds": 10, "show": false}, "go_out": {"after": ["night_face"], "tells": ["go_out:door", "go_out:gone"], "seconds": 9, "show": false}, "wake": {"after": ["night_face"], "tells": ["wake:woke", "wake:sit", "wake:gone"], "seconds": 12, "show": false}, "shine": {"after": ["wake"], "tells": ["shine:raise"], "seconds": 8, "show": false}, "light_back": {"after": ["shine"], "tells": ["light_back:light", "light_back:near"], "seconds": 14, "show": false}, "back_in": {"after": ["light_back"], "tells": ["back_in:threshold", "back_in:wall"], "seconds": 8, "show": false}, "elbow": {"after": ["back_in"], "tells": ["elbow:sway", "elbow:caught", "elbow:sat", "elbow:sophia"], "seconds": 12, "show": false}, "papa_came": {"after": [], "tells": ["papa_came:said", "papa_came:follows"], "seconds": 8, "show": false}, "lamp_window": {"after": ["night_face"], "tells": ["lamp_window:set"], "seconds": 7, "show": false}, "lamp_higher": {"after": ["lamp_window"], "tells": ["lamp_higher:raise"], "seconds": 6, "show": false}, "chair_dawn": {"after": [], "tells": ["chair_dawn:cover", "chair_dawn:lamp", "chair_dawn:drops"], "seconds": 16, "show": false}, "breakfast": {"after": [], "tells": ["breakfast:lamp", "breakfast:knock"], "seconds": 10, "show": false}, "cot_moved": {"after": [], "tells": ["cot_moved:carry", "cot_moved:set"], "seconds": 12, "show": false}, "evening_wall": {"after": [], "tells": ["evening_wall:said", "evening_wall:wall"], "seconds": 8, "show": false}, "hat_leave": {"after": [], "tells": ["hat_leave:touch"], "seconds": 6, "show": false}},
- "points": ["back_wall#doorway", "glazing#window", "hat#hat", "room#window", "beds#gap", "beds#cover", "pillow#pillow", "door2#handle", "lamp#lamp", "table#cup", "armchair#seat", "tent#tent", "far_lantern#lantern", "sky#moon", "cat#cat", "cat#back", "grandma", "sophia", "papa", "grandma#chest", "sophia#chest", "papa#chest"],
- "offers": ["grandma#chest", "sophia#chest", "papa#chest", "pillow#pillow", "beds#gap", "beds#cover", "door2#handle", "table#cup", "lamp#lamp", "room#window", "hat#hat", "back_wall#doorway"],
- "party": {"dawn": 0, "dusk": 0, "night": 0, "late": 0, "calm": 0, "storm": 0, "flash": 0, "fog": 0, "moon": 1, "hat": "nail", "teabox": false, "drops": "none", "cot": "veranda", "papa_watch": false, "secret": false, "cat": false, "take_lantern": true, "sophia_hand": false, "kick": false, "hold_hand": false, "knew": false, "sophia_knows": false, "wall": false},
- "acts": {"flash": {"values": [], "tells": ["flash:strike"]}, "creak": {"values": [], "tells": []}, "tilt": {"values": [], "tells": []}, "cover": {"values": [], "tells": []}, "lamp_up": {"values": [], "tells": []}}}
+ "points": ["back_wall#doorway", "glazing#window", "hat#hat", "room#window", "beds#gap", "beds#cover", "pillow#pillow", "door2#handle", "lamp#lamp", "table#cup", "armchair#seat", "tent#tent", "far_lantern#lantern", "sky#moon", "cat#cat", "cat#back", "grandma", "sophia", "papa", "grandma#chest", "sophia#chest", "papa#chest", "gap#palm", "breast#palm", "sleeve#fingers"],
+ "offers": ["grandma#chest", "sophia#chest", "papa#chest", "pillow#pillow", "beds#gap", "beds#cover", "door2#handle", "table#cup", "lamp#lamp", "room#window", "hat#hat", "back_wall#doorway", "gap#palm", "breast#palm", "sleeve#fingers"],
+ "party": {"dawn": 0, "dusk": 0, "night": 0, "late": 0, "calm": 0, "storm": 0, "flash": 0, "fog": 0, "moon": 1, "hat": "nail", "teabox": false, "drops": "none", "cot": "veranda", "papa_watch": false, "secret": false, "cat": false, "take_lantern": true, "sophia_hand": false, "kick": false, "hold_hand": false, "knew": false, "sophia_knows": false, "wall": false, "slips": false},
+ "acts": {"flash": {"values": [], "tells": ["flash:strike"]}, "creak": {"values": [], "tells": []}, "tilt": {"values": [], "tells": []}, "cover": {"values": [], "tells": []}, "lamp_up": {"values": [], "tells": []}, "gap_open": {"values": [], "tells": []}, "gap_palm": {"values": [], "tells": []}, "gap_hand": {"values": [], "tells": []}, "breast_open": {"values": [], "tells": []}, "breast_flicker": {"values": [], "tells": []}, "sleeve_open": {"values": [], "tells": []}, "sleeve_let": {"values": [], "tells": []}}}
 ```

@@ -1,17 +1,20 @@
 // The forest's mechanics, all from the state (a scene opened again goes on as it was): the island's weather (the
 // thick fog's look); the people at their places (`<id>_at`: lib.PLACES, put by the island's `places`); Grandmother's
-// lantern alight in her hand (`lamp_lit`: while she carries it, swinging dimmer as `lantern_sway` says); the stones
-// minigame's `step` walking the two along the path and its `grab` (Sophia catching her skirt); the pieces (lib.FILM,
-// the module beats).
+// lantern alight in her hand (`lamp_lit`: while she carries it, swinging dimmer as `lantern_sway` says), the match
+// and the cigarette's smoke (`match_lit`, `smoking`: while she has them); the stones minigame's `step` walking the two
+// along the path and its `grab` (Sophia catching her skirt); the pieces (lib.FILM, the module beats).
 const L = scene.lib;
 const isle = scene.kit.isle;
 isle.weather(scene);
 isle.places(scene, L.PLACES);
 
-// Grandmother's lantern: alight while it is in her hand, its light wavering as the minigame swings it
+// Grandmother's lantern: alight while it is in her hand, its light wavering as the minigame swings it; the struck match
+// and the cigarette's smoke while she has them (the cast's parts: the lights at their points)
 const lamp = () => {
-  const held = (scene.get('grandma_with') ?? []).includes('lantern');
-  scene.set('lamp_lit', held ? 1 - 0.4 * (scene.get('lantern_sway') ?? 0) : 0);
+  const has = scene.get('grandma_with') ?? [];
+  scene.set('lamp_lit', has.includes('lantern') ? 1 - 0.4 * (scene.get('lantern_sway') ?? 0) : 0);
+  scene.set('match_lit', has.includes('match') ? 1 : 0);
+  scene.set('smoking', has.includes('cigarette') ? 1 : 0);
 };
 scene.on('change', 'grandma_with', lamp);
 scene.on('change', 'lantern_sway', lamp);
