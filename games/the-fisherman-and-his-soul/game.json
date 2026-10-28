@@ -1,0 +1,14 @@
+{
+  "type": "bespoke",
+  "title": "The Fisherman and his Soul",
+  "description": "A young fisherman nets a little mermaid and loves her. To go down to her he must send his soul away — and the soul goes into the world without a heart, wearing his face. Every choice is between the one he loves and the one he was.",
+  "line": "To love her wholly he cuts away his soul — and the soul learns from the world without a heart.",
+  "source": "after the fairy tale by Oscar Wilde",
+  "genres": {
+    "drama": 70,
+    "relationships": 70,
+    "immersion": 40
+  },
+  "world": "pavel--the-fisherman-and-his-soul",
+  "scenes": []
+}
