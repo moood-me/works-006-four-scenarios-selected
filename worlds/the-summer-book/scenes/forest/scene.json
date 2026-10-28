@@ -1,0 +1,1157 @@
+{
+  "engine": 3,
+  "title": "The Magic Forest",
+  "caption": "The island's crown: moss, grey stone and dead trees twisted by the wind.",
+  "horizon": 0.42,
+  "camera": {
+    "mode": "picture"
+  },
+  "light": {
+    "ambient": 0.8,
+    "ambientColor": "#ebe6de",
+    "bounce": 0.6,
+    "haze": 0.05,
+    "hazeColor": "#e6e1d8",
+    "hazeGlow": 0.3,
+    "shafts": 0.6,
+    "tint": "#fff2e0",
+    "tintStrength": 0,
+    "saturation": 1.05,
+    "vignette": 0.25,
+    "grain": 0.06,
+    "wind": [
+      0.8,
+      0.5,
+      0.45
+    ],
+    "looks": {
+      "late": {
+        "ambient": 0.78,
+        "ambientColor": "#eee4d4",
+        "bounce": 0.6,
+        "haze": 0.07,
+        "hazeColor": "#e4dccd",
+        "hazeGlow": 0.3,
+        "shafts": 0.55,
+        "tint": "#ffd9a6",
+        "tintStrength": 0.07,
+        "saturation": 1.0,
+        "vignette": 0.25,
+        "grain": 0.06,
+        "lights": {
+          "sun": 0
+        }
+      },
+      "dawn": {
+        "ambient": 0.68,
+        "ambientColor": "#e4e7ea",
+        "bounce": 0.5,
+        "haze": 0.12,
+        "hazeColor": "#d8dbda",
+        "hazeGlow": 0,
+        "shafts": 0,
+        "tintStrength": 0,
+        "saturation": 1.1,
+        "vignette": 0.2,
+        "grain": 0.06,
+        "lights": {
+          "sun": 0,
+          "sun_late": 0
+        }
+      },
+      "dusk": {
+        "ambient": 0.82,
+        "ambientColor": "#ebe5e0",
+        "bounce": 0.5,
+        "haze": 0.1,
+        "hazeColor": "#d8d5d4",
+        "hazeGlow": 0.9,
+        "shafts": 0.2,
+        "tintStrength": 0,
+        "saturation": 1.05,
+        "vignette": 0.25,
+        "grain": 0.07,
+        "lights": {
+          "sun": 0,
+          "sun_late": 0,
+          "sun_dawn": 0
+        }
+      },
+      "night": {
+        "ambient": 0.64,
+        "ambientColor": "#8a9bc8",
+        "bounce": 0.5,
+        "haze": 0.16,
+        "hazeColor": "#8794b4",
+        "hazeGlow": 1.2,
+        "shafts": 0.35,
+        "tint": "#a2b2d8",
+        "tintStrength": 0.06,
+        "saturation": 0.85,
+        "vignette": 0.25,
+        "grain": 0.07,
+        "lights": {
+          "sun": 0,
+          "sun_late": 0,
+          "sun_dawn": 0,
+          "sun_dusk": 0
+        }
+      },
+      "fog_air": {
+        "haze": 0.6,
+        "hazeColor": "#dde1e5",
+        "hazeGlow": 1.3,
+        "shafts": 0.45,
+        "saturation": 0.85
+      },
+      "storm": {
+        "ambient": 0.74,
+        "ambientColor": "#c4ccd8",
+        "haze": 0.24,
+        "hazeColor": "#b9c0c8",
+        "hazeGlow": 0.5,
+        "shafts": 0.05,
+        "tint": "#c6d2de",
+        "tintStrength": 0.06,
+        "saturation": 0.78,
+        "wind": [
+          0.8,
+          0.5,
+          2.4
+        ],
+        "lights": {
+          "sun": 0,
+          "sun_late": 0,
+          "sun_dawn": 0,
+          "sun_dusk": 0,
+          "moon": 0.25
+        }
+      },
+      "flash": {
+        "ambient": 0.95,
+        "ambientColor": "#e8eeff",
+        "brightness": 1.12,
+        "saturation": 0.7
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "sun",
+      "from": "sky#sun",
+      "color": "#ffefd8",
+      "strength": 1.3
+    },
+    {
+      "id": "sun_late",
+      "from": "sky#sun_late",
+      "color": "#ffe2b8",
+      "strength": 1.25,
+      "on": "late"
+    },
+    {
+      "id": "sun_dawn",
+      "from": "sky#sun_dawn",
+      "color": "#ffeedd",
+      "strength": 1.0,
+      "on": "dawn"
+    },
+    {
+      "id": "sun_dusk",
+      "from": [
+        300,
+        5
+      ],
+      "color": "#f3d6c6",
+      "strength": 0.5,
+      "on": "dusk"
+    },
+    {
+      "id": "moon",
+      "from": [
+        200,
+        40
+      ],
+      "color": "#c4d2f2",
+      "strength": 0.8,
+      "on": "night"
+    },
+    {
+      "id": "flash",
+      "from": [
+        20,
+        30
+      ],
+      "color": "#e8eeff",
+      "strength": 1.8,
+      "on": "flash"
+    },
+    {
+      "id": "far_lamp",
+      "of": "far_boat#lamp",
+      "color": "#ffcf86",
+      "strength": 1.4,
+      "reach": 14,
+      "on": "boat_out"
+    },
+    {
+      "id": "hand_lamp",
+      "at": "grandma#flame",
+      "color": "#ffc98a",
+      "strength": 1.1,
+      "reach": 3.5,
+      "on": "lamp_lit",
+      "flicker": 0.12
+    },
+    {
+      "id": "match",
+      "at": "grandma#flame",
+      "color": "#ffc070",
+      "strength": 0.7,
+      "reach": 1.2,
+      "on": "match_lit",
+      "flicker": 0.3
+    }
+  ],
+  "modules": [
+    "cast",
+    "isle",
+    "beats",
+    "closeups"
+  ],
+  "state": {
+    "dawn": 0,
+    "dusk": 0,
+    "night": 0,
+    "late": 0,
+    "calm": 0,
+    "storm": 0,
+    "flash": 0,
+    "fog": 0,
+    "fog_air": 0,
+    "moon": 1,
+    "animals": 4,
+    "pack": "none",
+    "band": 0,
+    "spin": 0,
+    "boat_out": false,
+    "grandma_at": "clearing",
+    "sophia_at": "clearing",
+    "papa_at": "edge",
+    "papa_here": false,
+    "grandma_a": -0.9,
+    "grandma_d": 3.5,
+    "sophia_a": 0.3,
+    "sophia_d": 2.9,
+    "papa_a": -5.4,
+    "papa_d": 3.0,
+    "brave": false,
+    "sophia_back": false,
+    "step": 0,
+    "lantern_sway": 0,
+    "grab": false,
+    "lamp_lit": 0,
+    "flipper": false,
+    "slips": false,
+    "knife_open": 0,
+    "carve": 0,
+    "knife_flaw": 0,
+    "match_lit": 0,
+    "smoking": 0
+  },
+  "states": {
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the June dawn: the sun just up, veiled, low (0 — the day)"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dusk: the sun just gone, the afterglow low (0 — the day); over dawn"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the moonlit night (0 — the day): blue, light enough for faces; over dawn and dusk"
+    },
+    "late": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "August: the sun lower, the light warmer, the grass burnt (0 — June); changes between steps"
+    },
+    "calm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dead calm of July: the sea glass, not a streak on it"
+    },
+    "storm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the thunderstorm: a white-grey sky and its heavy clouds, grey light, rain, wind, crests and foam; over a half — lightning now and then (flash:strike told)"
+    },
+    "flash": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "lightning: the sky and everything lit white a moment (the storm's script and the game's moments)"
+    },
+    "fog": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the fog: up to a half its banks coming in over the water (0.5 — its wall on the horizon, banks over the sea); over a half the island in it — the air white, things gone in tens of metres"
+    },
+    "fog_air": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (the island's script sets it from fog): the thick fog's look"
+    },
+    "moon": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the moon's phase: 0 a thin crescent … 1 full (changes between steps; seen by night)"
+    },
+    "grandma_at": {
+      "values": [
+        "clearing",
+        "edge",
+        "stump",
+        "up",
+        "trunk",
+        "crevice",
+        "moss",
+        "path1",
+        "path2",
+        "path3",
+        "far"
+      ],
+      "means": "where Grandmother is (the scene's places, lib.PLACES: clearing, edge, stump, up, trunk, crevice, moss, path1, path2, path3, far); set, put there at once"
+    },
+    "grandma_a": {
+      "range": [
+        -12,
+        12
+      ],
+      "means": "the scene's own: where Grandmother stands (across, metres), set from grandma_at; a piece walks them"
+    },
+    "grandma_d": {
+      "range": [
+        0,
+        30
+      ],
+      "means": "the scene's own: where Grandmother stands (distance, metres), set from grandma_at; a piece walks them"
+    },
+    "grandma_placed": {
+      "type": "string",
+      "means": "the scene's own: the place Grandmother was last put at"
+    },
+    "sophia_at": {
+      "values": [
+        "clearing",
+        "edge",
+        "moss",
+        "animals",
+        "stump",
+        "behind",
+        "near",
+        "beside",
+        "nose",
+        "aside",
+        "trees",
+        "crevice",
+        "path1",
+        "path2",
+        "path3",
+        "far"
+      ],
+      "means": "where Sophia is (the scene's places, lib.PLACES: clearing, edge, moss, animals, stump, behind, near, beside, nose, aside, trees, crevice, path1, path2, path3, far); set, put there at once"
+    },
+    "sophia_a": {
+      "range": [
+        -12,
+        12
+      ],
+      "means": "the scene's own: where Sophia stands (across, metres), set from sophia_at; a piece walks them"
+    },
+    "sophia_d": {
+      "range": [
+        0,
+        30
+      ],
+      "means": "the scene's own: where Sophia stands (distance, metres), set from sophia_at; a piece walks them"
+    },
+    "sophia_placed": {
+      "type": "string",
+      "means": "the scene's own: the place Sophia was last put at"
+    },
+    "papa_at": {
+      "values": [
+        "edge",
+        "lift"
+      ],
+      "means": "where Papa is (the scene's places, lib.PLACES: edge, lift); set, put there at once"
+    },
+    "papa_a": {
+      "range": [
+        -12,
+        12
+      ],
+      "means": "the scene's own: where Papa stands (across, metres), set from papa_at; a piece walks them"
+    },
+    "papa_d": {
+      "range": [
+        0,
+        30
+      ],
+      "means": "the scene's own: where Papa stands (distance, metres), set from papa_at; a piece walks them"
+    },
+    "papa_placed": {
+      "type": "string",
+      "means": "the scene's own: the place Papa was last put at"
+    },
+    "brave": {
+      "type": "boolean",
+      "means": "the play's: Sophia at 3 or more — by her fallen grandmother she does not cry out: she comes quickly, squats and looks into her face"
+    },
+    "sophia_back": {
+      "type": "boolean",
+      "means": "the play's: «Mamma: sky» — Sophia first steps back, fists clenched («You said — not soon!»)"
+    },
+    "step": {
+      "range": [
+        0,
+        3
+      ],
+      "means": "the stones minigame: the stone of the path the two walk to (1…3), at their pace; step:stone<n> told on Grandmother's arrival"
+    },
+    "lantern_sway": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the stones minigame's flaw: the lantern swinging in her hand, its light wavering"
+    },
+    "grab": {
+      "type": "boolean",
+      "means": "the stones minigame's flaw: Sophia catches Grandmother by the skirt"
+    },
+    "lamp_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own: Grandmother's lantern alight in her hand (from grandma_with and lantern_sway)"
+    },
+    "match_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own: a struck match in Grandmother's hand (from grandma_with)"
+    },
+    "smoking": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own: Grandmother's cigarette alight, its thin smoke (from grandma_with)"
+    },
+    "slips": {
+      "type": "boolean",
+      "means": "the play's: the moss minigame (М6) flawed — in fall she sits bowed longer before Sophia comes, and Sophia comes closer (her hand on Grandmother's shoulder)"
+    },
+    "flipper": {
+      "type": "boolean",
+      "means": "the play's: the knife jerked in 1.2 — the carved seal has one flipper (the seal in the moss so; knife_flaw shows it too while the step goes on)"
+    },
+    "knife_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М3 «knife»: the close-up of her hands carving open (0 closed … 1 open)"
+    },
+    "carve": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the knife close-up: the driftwood becoming a seal (0 a rough log … 1 the seal)"
+    },
+    "knife_flaw": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the knife close-up: 1 — a jerk, one flipper split off (the seal has one flipper); 0 — whole"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (the module beats; the game names it, notes.md «Pieces»)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game goes to next (its cut made ready)"
+    },
+    "animals": {
+      "range": [
+        0,
+        5
+      ],
+      "means": "how many wooden animals lie in the moss by the stump: a horse, a bird, a dog, a cow, and the fifth — the seal carved this June"
+    },
+    "pack": {
+      "values": [
+        "none",
+        "in",
+        "taken"
+      ],
+      "means": "the packet of cigarettes in the boulder's crack: not there; pushed in, its corner showing; taken out again (the moss scuffed)"
+    },
+    "band": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close end of July: a heavy grey band along the horizon (0 none, 1 full)"
+    },
+    "spin": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the forest spinning before a dizzy eye: the trees wheel about their feet (0 still, 1 the most)"
+    },
+    "boat_out": {
+      "type": "boolean",
+      "means": "by night: the family's boat out at the nets far on the water, Papa's lantern its one warm light between the trees"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Sky",
+      "sky": true,
+      "uniforms": {
+        "low": 0.42,
+        "band_x": 0.8888888888888888,
+        "sun_x": 1.3866666666666667,
+        "sun_y": -0.1,
+        "late_x": 1.5644444444444443,
+        "late_y": 0.14,
+        "dawn_x": 1.6888888888888887,
+        "dawn_y": 0.3,
+        "dusk_x": 0.21333333333333332,
+        "night_x": 1.0666666666666667,
+        "moon_x": -1,
+        "moon_y": -1,
+        "dawn": 0,
+        "dusk": 0,
+        "night": 0,
+        "late": 0,
+        "storm": 0,
+        "flash": 0,
+        "fog": 0,
+        "phase": 1
+      }
+    },
+    {
+      "id": "sea",
+      "name": "Sea",
+      "plane": true,
+      "across": 0,
+      "distance": 2000,
+      "elevation": -4,
+      "width": 6000,
+      "depth": 4000,
+      "reflect": {
+        "strength": 0.4,
+        "fade": 0,
+        "rough": 0.3,
+        "ripple": 0.15
+      },
+      "water": true
+    },
+    {
+      "id": "band",
+      "name": "The grey band on the horizon",
+      "across": 0,
+      "distance": 1500,
+      "onLand": false,
+      "elevation": -4,
+      "height": 80,
+      "box": [
+        -4000,
+        -84,
+        4000,
+        2
+      ]
+    },
+    {
+      "id": "fog_wall",
+      "name": "The fog's wall on the horizon",
+      "across": 200,
+      "distance": 1400,
+      "onLand": false,
+      "elevation": -4,
+      "height": 56,
+      "box": [
+        -900,
+        -58,
+        900,
+        2
+      ]
+    },
+    {
+      "id": "skerry",
+      "name": "Skerries",
+      "across": -60,
+      "distance": 420,
+      "onLand": false,
+      "elevation": -4,
+      "height": 5,
+      "box": [
+        -20.5,
+        -5.4,
+        20.5,
+        0.7
+      ],
+      "copies": [
+        {
+          "across": -60,
+          "distance": 420
+        },
+        {
+          "across": 140,
+          "distance": 560,
+          "scale": 1.3,
+          "flip": true
+        },
+        {
+          "across": 40,
+          "distance": 300,
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "id": "far_boat",
+      "name": "The family's boat out at the nets",
+      "across": 3,
+      "distance": 230,
+      "onLand": false,
+      "elevation": -4,
+      "height": 1.8,
+      "box": [
+        -2,
+        -1.9,
+        2,
+        0.2
+      ]
+    },
+    {
+      "id": "moss",
+      "name": "The clearing's moss and granite",
+      "plane": true,
+      "drape": true,
+      "across": 0,
+      "distance": 30,
+      "width": 80,
+      "depth": 90
+    },
+    {
+      "id": "path",
+      "name": "The path to the other side",
+      "plane": true,
+      "drape": true,
+      "across": -1.9,
+      "distance": 10,
+      "width": 4.4,
+      "depth": 10
+    },
+    {
+      "id": "pine",
+      "name": "Living pines far off",
+      "across": -16,
+      "distance": 34,
+      "height": 9,
+      "box": [
+        -2.2,
+        -9.3,
+        3.6,
+        0.3
+      ],
+      "copies": [
+        {
+          "across": -16,
+          "distance": 34,
+          "scale": 1.0,
+          "flip": false
+        },
+        {
+          "across": 13,
+          "distance": 31,
+          "scale": 0.9,
+          "flip": true
+        },
+        {
+          "across": 19,
+          "distance": 38,
+          "scale": 1.1,
+          "flip": false
+        }
+      ]
+    },
+    {
+      "id": "deadtree",
+      "name": "Dead trees",
+      "across": -4.5,
+      "distance": 7,
+      "height": 6,
+      "box": [
+        -2.4,
+        -6.6,
+        3.6,
+        0.3
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": -4.5,
+          "distance": 7,
+          "scale": 1.1,
+          "flip": false
+        },
+        {
+          "across": 3.8,
+          "distance": 8.5,
+          "scale": 0.9,
+          "flip": true
+        },
+        {
+          "across": 6.2,
+          "distance": 12,
+          "scale": 1.2,
+          "flip": false
+        },
+        {
+          "across": -7,
+          "distance": 12.5,
+          "scale": 1.0,
+          "flip": true
+        },
+        {
+          "across": 1.6,
+          "distance": 14.5,
+          "scale": 0.8,
+          "flip": false
+        },
+        {
+          "across": -2.8,
+          "distance": 17,
+          "scale": 1.1,
+          "flip": true
+        },
+        {
+          "across": 9,
+          "distance": 16,
+          "scale": 1.0,
+          "flip": false
+        },
+        {
+          "across": -11,
+          "distance": 9,
+          "scale": 1.2,
+          "flip": false
+        }
+      ]
+    },
+    {
+      "id": "snag",
+      "name": "Broken dead trees",
+      "across": -6.2,
+      "distance": 5.2,
+      "height": 3.6,
+      "box": [
+        -2.2,
+        -4.1,
+        1.8,
+        0.3
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": -6.2,
+          "distance": 5.2,
+          "scale": 1.0,
+          "flip": false
+        },
+        {
+          "across": 8,
+          "distance": 9,
+          "scale": 1.1,
+          "flip": true
+        },
+        {
+          "across": 4.6,
+          "distance": 15.5,
+          "scale": 0.9,
+          "flip": false
+        },
+        {
+          "across": -9,
+          "distance": 15,
+          "scale": 1.0,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "trunk",
+      "name": "The big dead trunk",
+      "across": -1.5,
+      "distance": 4.8,
+      "height": 7,
+      "box": [
+        -2.6,
+        -7.6,
+        3.8,
+        0.3
+      ],
+      "shadow": true
+    },
+    {
+      "id": "juniper",
+      "name": "Junipers",
+      "across": 3.4,
+      "distance": 4.4,
+      "height": 0.9,
+      "box": [
+        -1.0,
+        -1.0,
+        1.0,
+        0.1
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": 3.4,
+          "distance": 4.4,
+          "scale": 0.8,
+          "flip": false
+        },
+        {
+          "across": -3.6,
+          "distance": 9.6,
+          "scale": 1.1,
+          "flip": true
+        },
+        {
+          "across": 5.2,
+          "distance": 10.5,
+          "scale": 1.0,
+          "flip": false
+        }
+      ]
+    },
+    {
+      "id": "tuft",
+      "name": "Grass in the moss",
+      "across": -1.6,
+      "distance": 2.8,
+      "height": 0.4,
+      "box": [
+        -0.25,
+        -0.5,
+        0.25,
+        0.05
+      ],
+      "copies": [
+        {
+          "across": -1.6,
+          "distance": 2.8,
+          "scale": 0.9,
+          "flip": false
+        },
+        {
+          "across": 1.9,
+          "distance": 2.6,
+          "scale": 0.8,
+          "flip": true
+        },
+        {
+          "across": -2.6,
+          "distance": 4.2,
+          "scale": 1.0,
+          "flip": false
+        },
+        {
+          "across": 2.4,
+          "distance": 6.8,
+          "scale": 1.1,
+          "flip": true
+        },
+        {
+          "across": -0.6,
+          "distance": 6.6,
+          "scale": 0.9,
+          "flip": false
+        }
+      ]
+    },
+    {
+      "id": "stump",
+      "name": "The stump",
+      "across": 0.7,
+      "distance": 3.8,
+      "box": [
+        -0.9,
+        -0.44,
+        0.9,
+        0
+      ],
+      "shadow": true
+    },
+    {
+      "id": "animals",
+      "name": "The wooden animals in the moss",
+      "across": -0.1,
+      "distance": 3.25,
+      "height": 0.2,
+      "box": [
+        -0.62,
+        -0.22,
+        0.65,
+        0.03
+      ]
+    },
+    {
+      "id": "crevice",
+      "name": "The boulder with the crack",
+      "across": 2.6,
+      "distance": 5.9,
+      "box": [
+        -1.5,
+        -0.7,
+        1.5,
+        0
+      ],
+      "shadow": true
+    },
+    {
+      "id": "fog_near",
+      "name": "The forest in the fog",
+      "across": 0,
+      "distance": 22,
+      "height": 9,
+      "box": [
+        -80,
+        -9,
+        80,
+        1
+      ],
+      "copies": [
+        {
+          "across": 0,
+          "distance": 22
+        },
+        {
+          "across": -3,
+          "distance": 12,
+          "scale": 0.6,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "grandma",
+      "name": "Grandmother",
+      "person": {
+        "cast": "cast",
+        "who": "grandma",
+        "turn": 160
+      },
+      "across": -0.9,
+      "distance": 3.5,
+      "place": {
+        "across": "grandma_a",
+        "distance": "grandma_d"
+      }
+    },
+    {
+      "id": "sophia",
+      "name": "Sophia",
+      "person": {
+        "cast": "cast",
+        "who": "sophia",
+        "turn": 200
+      },
+      "across": 0.3,
+      "distance": 2.9,
+      "place": {
+        "across": "sophia_a",
+        "distance": "sophia_d"
+      }
+    },
+    {
+      "id": "papa",
+      "name": "Papa",
+      "person": {
+        "cast": "cast",
+        "who": "papa",
+        "turn": 90
+      },
+      "across": -5.4,
+      "distance": 3.0,
+      "place": {
+        "across": "papa_a",
+        "distance": "papa_d"
+      }
+    },
+    {
+      "id": "smoke",
+      "name": "The cigarette's smoke",
+      "particles": {
+        "kind": "smoke",
+        "at": "grandma#ember",
+        "amount": "smoking",
+        "rate": 2.5,
+        "size": [
+          0.02,
+          0.25
+        ],
+        "speed": [
+          0.04,
+          0.12
+        ],
+        "life": [
+          2.5,
+          4.5
+        ],
+        "opacity": 0.3
+      }
+    },
+    {
+      "id": "rain",
+      "name": "Rain",
+      "particles": {
+        "kind": "rain",
+        "amount": "storm",
+        "count": 9000,
+        "wind": 1.2
+      }
+    },
+    {
+      "id": "knife",
+      "name": "Her hands carving, close",
+      "insert": "knife_open"
+    }
+  ],
+  "music": {
+    "prompts": [
+      {
+        "text": "Celesta and music box notes, childlike and a little sad",
+        "weight": 1.1
+      },
+      {
+        "text": "Kantele plucked softly, Finnish archipelago, open fifths, airy",
+        "weight": 0.9
+      },
+      {
+        "text": "Wooden creaks and dry wind textures among dead trees, sparse, mostly silence",
+        "weight": 0.6
+      },
+      {
+        "text": "Low cello long tones, tender and grave, an old woman remembering",
+        "weight": 0.4
+      },
+      {
+        "text": "Sparse solo piano, slow and unhurried, with long silences, like light on still water",
+        "weight": 0
+      },
+      {
+        "text": "Nordic folk melody on a single wooden flute, distant and breathy, over a soft drone",
+        "weight": 0
+      },
+      {
+        "text": "Gentle nylon-string guitar picking, quiet and intimate, a summer afternoon",
+        "weight": 0
+      },
+      {
+        "text": "Warm ambient pads with slow swells, heavy and close before a storm",
+        "weight": 0
+      },
+      {
+        "text": "Glass harmonica shimmer, cold clear air, high and fragile",
+        "weight": 0
+      },
+      {
+        "text": "Solo accordion, slow waltz, faded and wistful, far away across the water",
+        "weight": 0
+      },
+      {
+        "text": "Soft string quartet, chamber music, restrained and bittersweet",
+        "weight": 0
+      },
+      {
+        "text": "Minimalist marimba patterns, gentle and repeating, like small waves",
+        "weight": 0
+      },
+      {
+        "text": "Harmonium chords breathing slowly, a quiet chapel by the sea",
+        "weight": 0
+      },
+      {
+        "text": "Clarinet in its low register, dry and humorous, a little crooked tune",
+        "weight": 0
+      },
+      {
+        "text": "Felt piano with tape hiss, close and soft, lullaby feel",
+        "weight": 0
+      },
+      {
+        "text": "Harp arpeggios, slow, luminous, a moonlit night",
+        "weight": 0
+      }
+    ],
+    "bpm": 62,
+    "density": 0.25,
+    "brightness": 0.4,
+    "scale": "G_MAJOR_E_MINOR"
+  }
+}

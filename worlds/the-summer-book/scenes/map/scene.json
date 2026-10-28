@@ -1,0 +1,160 @@
+{
+  "engine": 3,
+  "title": "The Map",
+  "caption": "",
+  "horizon": 0.865,
+  "camera": {
+    "mode": "panorama",
+    "span": [
+      14.7,
+      42.7
+    ]
+  },
+  "light": {
+    "grain": 0.08,
+    "vignette": 0.3,
+    "tint": "#e2bf86",
+    "tintStrength": 0.04
+  },
+  "state": {
+    "shown": 0,
+    "come": 0,
+    "camera_x": 14.7
+  },
+  "states": {
+    "shown": {
+      "type": "number",
+      "means": "the chapter the player is at (0 the prologue … 4 the fourth, 5 the epilogue): the view goes to its point c<i> (camera_x)"
+    },
+    "come": {
+      "type": "number",
+      "means": "each new value brings the view back to the chapter shown (camera_x), the player's drag with it"
+    }
+  },
+  "objects": [
+    {
+      "id": "desk",
+      "name": "Papa's table under the sheet",
+      "sky": true
+    },
+    {
+      "id": "sheet",
+      "name": "Papa's drawing of the island",
+      "across": 0,
+      "distance": 12.6,
+      "facing": 180,
+      "onLand": false,
+      "box": [
+        0,
+        -12.6,
+        57.4,
+        0
+      ]
+    },
+    {
+      "id": "c0",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 14.7,
+      "distance": 12,
+      "elevation": 8.72,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c1",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 20.3,
+      "distance": 12,
+      "elevation": 8.72,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c2",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 25.9,
+      "distance": 12,
+      "elevation": 8.72,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c3",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 31.5,
+      "distance": 12,
+      "elevation": 8.72,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c4",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 37.1,
+      "distance": 12,
+      "elevation": 8.72,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c5",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 42.7,
+      "distance": 12,
+      "elevation": 8.72,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "author",
+      "name": "The author's sign",
+      "unseen": true,
+      "across": 8.5,
+      "distance": 12,
+      "elevation": 8.72,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,312 @@
+# Writes scenes/house/scene.json (and the island's sky and sea beside it): the house (С2) — the glazed veranda and,
+# through its glass door, the room with the two beds and the window onto the cape, the second door to the entry; round
+# the house the island's rock, the sea, and from the room's window the long back of granite down to the cape with
+# Sophia's tent. Its elements and where they stand, its light by the hour (the island's: tools/isle.py), its lights,
+# its people, its keys. The house's frame (x along the back wall, z away behind it) is lib.js's — keep the numbers the
+# same. Run from anywhere: python -B tools/house.py <the world's root>
+import sys, os, math
+sys.path.insert(0, os.path.join(sys.argv[1], "tools"))
+import isle
+
+root = sys.argv[1]
+folder = os.path.join(root, "scenes", "house")
+A = isle.A
+WATER = -4.4
+WIND = [1, 0.3, 0.3]
+
+# the house's frame (lib.js): the veranda's far corner, facing 225
+CX, CZ, K = -0.6, 7.0, math.sqrt(0.5)
+def wa(x, z): return CX + K * (x + z)
+def wd(x, z): return CZ + K * (z - x)
+# the cape: where the tent stands (lib.js T), and the way from it to the house
+T = (22.4, 71.3)
+W = (wa(0.3, 3.8), wd(0.3, 3.8))
+RA, RD = T[0] - W[0], T[1] - W[1]
+RL = math.hypot(RA, RD)
+TENT_F = math.degrees(math.atan2(-RA, -RD)) % 360          # the tent's front faces the house
+NX, ND = math.sin(math.radians(TENT_F)), math.cos(math.radians(TENT_F))
+
+MUSIC_PROMPTS = [
+    ("Sparse solo piano, slow and unhurried, with long silences, like light on still water", 1.2),
+    ("Gentle nylon-string guitar picking, quiet and intimate, a summer morning by the sea", 0.8),
+    ("Clarinet in its low register, dry and humorous, a little crooked tune", 0.5),
+    ("Celesta and music box notes, childlike and a little sad", 0.4),
+    ("Nordic folk melody on a single wooden flute, distant and breathy, over a soft drone", 0),
+    ("Warm ambient pads with slow swells, pearl-grey and calm, barely moving", 0),
+    ("Low cello long tones, tender and grave, an old woman remembering", 0),
+    ("Kantele plucked softly, Finnish archipelago, open fifths, airy", 0),
+    ("Solo accordion, slow waltz, faded and wistful, far away across the water", 0),
+    ("Soft string quartet, chamber music, restrained and bittersweet", 0),
+    ("Glass harmonica shimmer, cold clear air, high and fragile", 0),
+    ("Minimalist marimba patterns, gentle and repeating, like small waves", 0),
+    ("Harmonium chords breathing slowly, a quiet chapel by the sea", 0),
+    ("Felt piano with tape hiss, close and soft, lullaby feel", 0),
+    ("Ticking clock and pencil on paper textures, a quiet working room, sparse", 0),
+    ("Harp arpeggios, slow, luminous, early summer morning", 0),
+]
+music = {"prompts": [{"text": t, "weight": w} for t, w in MUSIC_PROMPTS], "bpm": 66, "density": 0.25, "brightness": 0.5,
+         "scale": "G_MAJOR_E_MINOR"}
+
+# the sky (stage heights, looking ahead): the day's sun high on the left, over the veranda's glazing (as approved);
+# August's lower there; the dawn's out over the cape, low on the right; the afterglow far left; the full moon low over
+# the sea beyond the cape, seen in the room's window (bearing 22°); the lightning out to sea on the left
+SUN, LATE, DAWN, MOON, BOLT = [A * 0.2, -0.1], [A * 0.16, 0.12], [A * 0.5 + 1.0, 0.33], [A * 0.5 + 0.384, 0.29], [A * 0.3, 0.02]
+
+def on(x, z, y=0, **f):
+    """an element of the house, on its frame"""
+    return {"inside": True, "on": "veranda", "across": x, "distance": z, **({"elevation": y} if y else {}), **f}
+
+# junipers along the cape's back, a few metres off its middle
+def along(u, v):
+    a = W[0] + RA * u + RD / RL * v
+    d = W[1] + RD * u - RA / RL * v
+    return round(a, 2), round(d, 2)
+JUNIPERS = [(0.15, -4.5, 1.1), (0.22, 5, 0.9), (0.38, -6, 1.3), (0.47, 4.5, 1.0), (0.63, -5, 1.2), (0.71, 6.5, 0.9),
+            (0.84, -3.5, 1.0), (0.9, 4, 1.2)]
+
+# the window onto the cape: its opening in the world (the moon and the dawn come in only through it), the floor 0.3 m
+# over the land
+WIN = [[wa(x, 3.8), wd(x, 3.8), y + 0.3] for x, y in ((-0.25, 0.82), (0.85, 0.82), (0.85, 2.0), (-0.25, 2.0))]
+WIN = [[round(v, 3) for v in p] for p in WIN]
+
+objects = [
+    isle.sky(folder, 0.42, SUN, LATE, DAWN, -0.16, MOON[0], BOLT, moon=MOON),
+    isle.sea(folder, WATER, {"strength": 0.5, "fade": 0, "rough": 0.1, "ripple": 0.1}),
+    {"id": "islet", "name": "Wooded islets", "across": -320, "distance": 700, "onLand": False, "elevation": WATER, "height": 14,
+     "box": [-46, -15, 46, 0.7], "copies": [{"across": -320, "distance": 700}, {"across": -150, "distance": 950, "scale": 1.3, "flip": True},
+                                            {"across": 380, "distance": 820, "scale": 1.1}]},
+    {"id": "skerry", "name": "Skerries", "across": -180, "distance": 300, "onLand": False, "elevation": WATER, "height": 5,
+     "box": [-20.5, -5.4, 20.5, 0.7], "copies": [{"across": -180, "distance": 300}, {"across": -420, "distance": 520, "scale": 1.3, "flip": True},
+                                                {"across": -90, "distance": 240, "scale": 0.6}, {"across": -30, "distance": 420, "scale": 0.8},
+                                                {"across": 150, "distance": 380, "scale": 0.9, "flip": True}]},
+    {"id": "mist", "name": "Mist on the water", "across": 120, "distance": 320, "onLand": False, "elevation": WATER, "height": 18,
+     "box": [-800, -16, 800, 2]},
+    {"id": "fog_wall", "name": "The fog's wall on the horizon", "across": 200, "distance": 1300, "onLand": False, "elevation": WATER,
+     "height": 56, "box": [-900, -58, 900, 2]},
+    {"id": "outside", "name": "The rock round the house and down to the cape", "plane": True, "drape": True, "across": 0, "distance": 38,
+     "width": 80, "depth": 84},
+    {"id": "juniper", "name": "Junipers on the cape's back", "height": 0.9, "box": [-1, -1, 1, 0.1], "shadow": True,
+     **dict(zip(("across", "distance"), along(*JUNIPERS[0][:2]))),
+     "copies": [{**dict(zip(("across", "distance"), along(u, v))), "scale": s, **({"flip": True} if i % 2 else {})} for i, (u, v, s) in enumerate(JUNIPERS)]},
+    {"id": "tent", "name": "Sophia's tent on the cape", "across": T[0], "distance": T[1], "facing": round(TENT_F, 1), "height": 1.25,
+     "box": [-0.95, -1.3, 0.95, 0.05], "translucent": 0.6, "shadow": True, "flicker": 0.15},
+    {"id": "far_lantern", "name": "Papa's lantern out in the night", "across": W[0], "distance": W[1], "elevation": 1.0, "height": 0.3,
+     "box": [-0.1, -0.32, 0.1, 0.02], "place": {"across": "far_a", "distance": "far_d"}},
+
+    # the veranda (stage 2's)
+    {"id": "veranda", "name": "The veranda", "unseen": True, "across": CX, "distance": CZ, "facing": 225, "elevation": 0.3},
+    on(3.2, -3.2, id="floor", name="The veranda's floor", plane=True, walk=True, width=6.4, depth=6.4),
+    on(3.2, 0, 2.6, id="ceiling", name="The veranda's ceiling", facing=180, tilt=-90, height=6.4, box=[-3.2, -6.4, 3.2, 0.05]),
+    on(0, 0, id="side_wall", name="The glazed wall, under and over its windows", facing=90, height=2.6, box=[-6.4, -2.62, 0, 0.02]),
+    on(0, 0, 0.8, id="glazing", name="The veranda's windows", facing=90, height=1.45, box=[-6.4, -1.45, 0, 0]),
+    on(0, 0, id="back_wall", name="The house's wall, the doorway to the room", facing=180, height=2.6, box=[0, -2.62, 6.4, 0.02]),
+    on(1.3, -0.02, id="door", name="The glass door to the room", shadow=True, facing=250, height=2.05, box=[0, -2.05, 0.85, 0.02]),
+    on(2.45, -0.03, 1.38, id="hat", name="The straw hat", facing=180, height=0.4, box=[-0.25, -0.42, 0.25, 0.06],
+       place={"across": "hat_x", "distance": "hat_z", "elevation": "hat_e", "tilt": "hat_t"}),
+    on(0.45, -1.7, 0.74, id="table", name="Papa's table", plane=True, shadow=True, width=0.75, depth=1.5),
+    on(0.82, -1.7, id="table_legs", name="The table's legs", facing=90, height=0.74, box=[-0.76, -0.76, 0.76, 0.02]),
+    on(0.45, -1.25, 0.74, id="table_things", name="The coffee pot, the pencils", shadow=True, facing=135, height=0.3, box=[-0.32, -0.3, 0.3, 0.01]),
+    on(1.2, -2.5, id="chair", name="Papa's chair", shadow=True, facing=135, height=0.95, box=[-0.28, -0.97, 0.3, 0.02]),
+    on(4.6, -0.45, id="cot", name="Papa's camp bed", shadow=True, facing=180, height=0.5, box=[-1.0, -0.5, 1.0, 0.02],
+       place={"across": "cot_x", "distance": "cot_z", "facing": "cot_f", "elevation": "cot_e"}),
+    # the bench along the table's room side (stage 5: Grandmother and Sophia sit at the table); Grandmother's cup in her
+    # hands (its animate keeps it there)
+    on(1.17, -1.45, id="bench", name="The bench at the table", shadow=True, facing=90, height=0.44, box=[-0.6, -0.46, 0.6, 0.02]),
+    on(0.75, -2.0, 0.74, id="cup", name="Grandmother's cup", facing=0, height=0.1, box=[-0.6, -0.8, 0.6, 0.3]),
+    {**on(0, -0.02, id="house_out", name="The house's front beyond the glazing", facing=180, height=2.8, box=[-2.85, -2.8, 0, 0.35]), "inside": False},
+
+    # the room
+    on(0, 3.8, id="room", name="The room's far wall, the window onto the cape", facing=180, height=2.6, box=[-2.75, -2.62, 2.35, 0.02]),
+    on(0, 0.1, id="room_near", name="The room's near wall, the doorway", facing=0, height=2.6, box=[-2.35, -2.62, 2.75, 0.02]),
+    on(1.3, 0, id="jamb", name="The doorway's jambs", facing=90, height=2.07, box=[0, -2.07, 0.1, 0.0],
+       copies=[{"across": 1.3, "distance": 0, "facing": 90}, {"across": 2.15, "distance": 0, "facing": 270, "flip": True}]),
+    on(1.725, 0, 2.07, id="lintel", name="The doorway's head", facing=0, tilt=-90, height=0.1, box=[-0.425, -0.1, 0.425, 0]),
+    on(-2.7, 0, id="room_left", name="The room's left wall", facing=90, height=2.6, box=[0.05, -2.62, 3.85, 0.02]),
+    on(2.3, 0, id="room_right", name="The room's right wall, the second door", facing=270, height=2.6, box=[-3.85, -2.62, -0.05, 0.02]),
+    on(-0.2, 0.1, 2.6, id="room_ceiling", name="The room's ceiling", facing=0, tilt=-90, height=3.8, box=[-2.6, -3.85, 2.6, 0.05]),
+    on(-0.2, 1.95, id="room_floor", name="The room's floor", plane=True, walk=True, width=5.1, depth=3.85),
+    on(2.3, 2.4, id="door2", name="The second door, the creaking one", shadow=True, facing=270, height=2.0, box=[0, -2.0, 0.85, 0.0],
+       place={"facing": "door2_f"}),
+    on(3.15, 2.0, id="entry_floor", name="The entry's floor", plane=True, walk=True, width=1.7, depth=2.8),
+    on(3.95, 0, id="entry_wall", name="The entry's far wall, the door to the porch", facing=270, height=2.4, box=[-3.4, -2.4, -0.6, 0.02]),
+    on(3.15, 0.6, id="entry_side", name="The entry's side walls", facing=0, height=2.4, box=[-0.85, -2.4, 0.85, 0.02],
+       copies=[{"across": 3.15, "distance": 0.6, "facing": 0}, {"across": 3.15, "distance": 3.4, "facing": 180}]),
+    on(-1.725, 2.79, 0.5, id="beds", name="Grandmother's and Sophia's beds", plane=True, shadow=True, width=1.85, depth=1.98),
+    on(-1.175, 3.5, 0.54, id="pillow", name="Sophia's pillow", plane=True, width=0.6, depth=0.42),
+    on(-2.2, 1.8, id="bed_foot", name="The beds' feet", shadow=True, facing=180, height=0.85, box=[-0.5, -0.92, 0.5, 0.02]),
+    on(-0.8, 2.1, id="bed_side", name="The beds' sides", facing=90, height=0.85, box=[-0.02, -0.9, 1.7, 0.02]),
+    on(-1.7, 3.76, id="bed_head", name="The beds' heads", facing=180, height=1.0, box=[-0.97, -1.08, 0.92, 0.02]),
+    on(-0.52, 3.42, id="stand", name="The night table", shadow=True, facing=180, height=0.62, box=[-0.21, -0.64, 0.21, 0.02]),
+    on(-0.52, 3.6, 0.62, id="stand_top", name="The night table's top", plane=True, width=0.4, depth=0.36),
+    on(-0.52, 3.6, 0.62, id="lamp", name="Grandmother's lamp", shadow=True, facing=180, height=0.42, box=[-0.07, -0.44, 0.07, 0.01],
+       flicker=0.06, place={"across": "lamp_x", "distance": "lamp_z", "elevation": "lamp_e"}),
+    on(0.3, 3.71, 0.82, id="sill", name="The window's sill", plane=True, width=1.3, depth=0.2),
+    on(0.3, 3.8, 0.82, id="room_window", name="The window onto the cape", facing=180, height=1.24, box=[-0.62, -1.26, 0.62, 0.02]),
+    on(0.025, 3.83, 0.82, id="room_glass", name="The window's left pane", facing=180, height=1.18, box=[-0.275, -1.18, 0.275, 0],
+       glass={"strength": 0.55}),
+    on(0.85, 3.8, 0.82, id="casement", name="The window's right leaf, which opens", facing=180, height=1.18, box=[-0.56, -1.19, 0.01, 0.01],
+       place={"facing": "casement_f"}),
+    on(0.62, 3.72, 0.82, id="drops", name="The doctor's drops", facing=180, height=0.12, box=[-0.03, -0.13, 0.03, 0.005],
+       place={"across": "drops_x", "distance": "drops_z", "elevation": "drops_e"}),
+    on(-0.62, 2.35, id="teabox", name="The tea box", facing=140, height=0.13, box=[-0.1, -0.14, 0.1, 0.01]),
+    on(1.35, 3.2, id="armchair", name="The armchair by the window", shadow=True, facing=195, height=1.05, box=[-0.5, -1.08, 0.46, 0.02]),
+    # the blanket pulled over the two in Grandmother's bed (3.4 «blanket»), seen from the room's side
+    on(-1.75, 2.775, 0.48, id="blanket", name="The blanket over the two", facing=90, height=0.56, box=[-0.82, -0.58, 0.82, 0.04],
+       translucent=0.5),
+    # the cat (the world's: modules/cat), where the pieces put him
+    on(-0.95, 3.15, 0.54, id="cat", name="Mappe, the cat", height=0.5, box=[-0.46, -0.56, 0.46, 0.03], shadow=True,
+       place={"across": "cat_x", "distance": "cat_z", "elevation": "cat_y"}),
+
+    # the air
+    {"id": "dust", "name": "Dust in the sunlight", "inside": True, "particles": {"kind": "dust", "at": [-1.52, 4.38, 1.7], "source": [2.5, 2.5, 1.2]}},
+    {"id": "rain_w", "name": "Rain beyond the glazing", "particles": {"kind": "rain", "amount": "storm", "count": 5000, "wind": 1.2, "area": [-80, -5.3, -40, 120]}},
+    {"id": "rain_n", "name": "Rain beyond the room", "particles": {"kind": "rain", "amount": "storm", "count": 5000, "wind": 1.2, "area": [-5.3, 80, 12, 120]}},
+    {"id": "rain_e", "name": "Rain beside the house", "particles": {"kind": "rain", "amount": "storm", "count": 3000, "wind": 1.2, "area": [7, 80, -40, 12]}},
+    {"id": "glazing_drops", "name": "Rain running down the glazing", "on": "glazing", "across": -3.2, "elevation": 0.72, "distance": -0.02,
+     "particles": {"kind": "drops", "source": [6.2, 0, 1.3], "flat": True, "rate": 6, "amount": "storm"}},
+    {"id": "window_drops", "name": "Rain running down the window", "on": "room_window", "elevation": 0.6, "distance": -0.03,
+     "particles": {"kind": "drops", "source": [1.0, 0, 1.1], "flat": True, "rate": 2, "amount": "storm"}},
+
+    # the people (the world's cast): where the pieces put them (lib.js film). Not marked inside: the engine has them
+    # inside while they stand on the house's floors, outside on the rock (light_back)
+    {"id": "papa", "name": "Papa", "person": {"cast": "cast", "who": "papa", "turn": 150}, "across": -0.954, "distance": 4.95,
+     "place": {"across": "papa_a", "distance": "papa_d"}},
+    {"id": "grandma", "name": "Grandmother", "person": {"cast": "cast", "who": "grandma", "turn": 175}, "across": 0.036,
+     "distance": 4.384, "place": {"across": "grandma_a", "distance": "grandma_d"}},
+    {"id": "sophia", "name": "Sophia", "person": {"cast": "cast", "who": "sophia", "turn": 190}, "across": 0.39,
+     "distance": 3.606, "place": {"across": "sophia_a", "distance": "sophia_d"}},
+
+    # the minigames' close-ups (the world's closeups, modules/closeups.md): each opened by its `<shot>_open`
+    {"id": "gap", "name": "The gap between the beds, close", "insert": "gap_open"},
+    {"id": "breast", "name": "Sophia's palm on her breast, close", "insert": "breast_open"},
+    {"id": "sleeve", "name": "Sophia's fingers on the sleeve, close", "insert": "sleeve_open"},
+]
+
+# the light: the island's (the day as approved; the looks by the hour and the weather), the room's share of the light
+# outside; at night all of it inside and the night's air a little lighter, so that faces read by the moon and the
+# windows (night still: blue, the lamp and the candle the only warm)
+light = isle.light(WIND, inside=0.6)
+light["looks"]["night"]["inside"] = 1
+light["looks"]["night"]["ambient"] = 0.82
+# the thick fog's air is one for the whole scene, the room too: its glow round the lamp held down a little (isle.md)
+light["looks"]["fog_air"]["hazeGlow"] = 0.8
+
+lights = isle.lights(("sky#sun", "#ffefd8", 1.3), ("sky#sun_late", "#ffe2b8", 1.25), ("sky#sun_dawn", "#ffeedd", 1.0),
+                     ([-60, 5], "#f3d6c6", 0.5), ("sky#moon", "#c4d2f2", 0.9), [-33, 30])
+THROUGH = {"sun": ["glazing"], "sun_late": ["glazing"], "sun_dusk": ["glazing"], "sun_dawn": [WIN], "moon": [WIN]}
+for l in lights:
+    if l["id"] in THROUGH:
+        l["through"] = THROUGH[l["id"]]
+lights += [
+    # the day (or the night) at the veranda's glazing and at the room's window
+    {"id": "sky_in", "of": "glazing", "daylight": True, "strength": 1},
+    {"id": "win_in", "of": "room_window", "daylight": True, "strength": 0.7},
+    # Grandmother's lamp; Sophia's candle in her hand (the cast's part: the light at its flame); Papa's lantern out in the night (the tent's candle is its glow)
+    {"id": "lamp", "of": "lamp#flame", "color": "#ffcf8e", "strength": 1.2, "reach": 3.5, "flicker": 0.06},
+    {"id": "candle", "at": "sophia#flame", "color": "#ffc98a", "strength": 1.1, "reach": 3, "on": "candle", "flicker": 0.15},
+    {"id": "far_lantern", "of": "far_lantern#flame", "color": "#ffd08e", "strength": 1.6, "reach": 6},
+    # the storm lantern in Grandmother's hand, Papa's big lantern in his (the lanterns themselves are the people's parts:
+    # the lights at their flames)
+    {"id": "grandma_lantern", "at": "grandma#flame", "color": "#ffd08e", "strength": 1.3, "reach": 5, "on": "grandma_lantern", "flicker": 0.1},
+    {"id": "papa_lantern", "at": "papa#flame", "color": "#ffd08e", "strength": 1.5, "reach": 6, "on": "papa_lantern", "flicker": 0.1},
+]
+
+# the keys: the island's, the play's (the game sets them) and the house's own (its pieces move them); where they start is
+# the empty play (a June morning on the veranda)
+states = dict(isle.STATES)
+states.update({
+    "beat": {"type": "string", "means": "the piece playing (modules/beats; notes.md «Pieces»)"},
+    "beat_next": {"type": "string", "means": "the piece the game plays next (modules/beats: made ready ahead)"},
+    # the play's
+    "hat": {"values": ["nail", "bed", "none"], "means": "the straw hat: on its nail by the glass door · on Sophia's bed · gone"},
+    "teabox": {"type": "boolean", "means": "the tea box on the floor by Sophia's bed (the cat's birds in it)"},
+    "drops": {"values": ["none", "full", "empty"], "means": "the doctor's drops: none yet · a full bottle · an empty one"},
+    "cot": {"values": ["veranda", "room"], "means": "Papa's camp bed: along the veranda's back wall · in the room before the window onto the cape"},
+    "papa_watch": {"type": "boolean", "means": "1.1 «water: together»: Papa raises his head and watches Grandmother go"},
+    "secret": {"type": "boolean", "means": "1.3 «secret»: at supper Sophia turns and looks at Grandmother"},
+    "cat": {"type": "boolean", "means": "2.2 «gift»: the cat comes to Grandmother's sill on the fog's night"},
+    "take_lantern": {"type": "boolean", "means": "Ш3 «go»: Grandmother takes Papa's storm lantern (else, «behind», her shawl)"},
+    "sophia_hand": {"type": "boolean", "means": "Ш3 «papa»: Sophia comes back holding Papa's hand, asleep on her feet (else by herself, cross)"},
+    "kick": {"type": "boolean", "means": "Ш3 «papa»: «I'll knock» promised — Sophia kicks the threshold"},
+    "hold_hand": {"type": "boolean", "means": "«nets: net», Papa not knowing: in the armchair he holds her hand"},
+    "knew": {"type": "boolean", "means": "Papa knows (from the forest): at dawn he looks at the burnt-out lamp, sets the drops by her"},
+    "sophia_knows": {"type": "boolean", "means": "«Sophia knows»: at dawn Sophia raises herself on her bed («I didn't tell…»)"},
+    "wall": {"type": "boolean", "means": "«behind»: Sophia called — she lies down face to the wall (else she only says it)"},
+    "slips": {"type": "boolean", "means": "М5а «palm» / М5б «hand» flawed: Sophia does not come at once — she waits, looks, then comes (gone_near, sky_morning)"},
+    # the house's own
+    "bird": {"type": "boolean", "means": "a dead bird on Sophia's pillow"},
+    "lamp": {"values": ["none", "table", "window", "burnt", "bed"], "means": "Grandmother's lamp: not in the room · on the night table · in the window · burnt out in the window (the chimney sooted) · under the blanket on Grandmother's bed"},
+    "lamp_lit": {"range": [0, 1], "smooth": True, "means": "the lamp alight"},
+    "lamp_up": {"range": [0, 1], "smooth": True, "means": "М10б «lamp»: the lamp lifted at the glass in her hands (0 on the sill … 1 high)"},
+    "supper": {"type": "boolean", "means": "a meal laid on Papa's table"},
+    "packed": {"type": "boolean", "means": "the last morning: the table bare, everything carried out"},
+    "candle": {"range": [0, 1], "smooth": True, "means": "a candle alight in Sophia's right hand (its light)"},
+    "casement": {"range": [0, 1], "smooth": True, "means": "the window's right leaf: 0 shut … 1 open (out over the rock)"},
+    "creak": {"range": [0, 1], "smooth": True, "means": "the second door: 0 shut … 1 open (into the entry) — М5в «door»"},
+    "tent_light": {"range": [0, 1], "smooth": True, "means": "the candle in Sophia's tent on the cape: the canvas glowing"},
+    "far_light": {"range": [0, 1], "smooth": True, "means": "Papa's big lantern out in the night (seen from the window): 0 none … 1 alight"},
+    "far_light_at": {"range": [0, 1], "smooth": True, "means": "where Papa's lantern is: 0 by the house's corner … 1 at the tent"},
+    "under": {"range": [0, 1], "smooth": True, "means": "the blanket pulled over the two in Grandmother's bed: seen"},
+    "cover": {"range": [0, 1], "smooth": True, "means": "М8б «blanket»: its edge held up (1) … sagging over them (0)"},
+    "cup": {"type": "boolean", "means": "Grandmother's cup in her hands"},
+    "tilt": {"range": [-1, 1], "smooth": True, "means": "М7а «cup»: the cup tipped in her hands"},
+    "drops_at": {"values": ["sill", "held", "chair"], "means": "the drops: on the sill · in a hand · on the floor by the armchair"},
+    "storm_lantern": {"type": "boolean", "means": "Papa's storm lantern on its hook in the entry (false: taken)"},
+    "grandma_lantern": {"range": [0, 1], "smooth": True, "means": "the storm lantern alight in Grandmother's hand"},
+    "papa_lantern": {"range": [0, 1], "smooth": True, "means": "Papa's big lantern alight in his hand"},
+    "cot_carried": {"type": "boolean", "means": "the camp bed carried before Papa"},
+    "cat_pose": {"values": ["sit", "lie", "walk", "none"], "means": "the cat (modules/cat): sitting · lying · walking · not here"},
+    # the minigames' close-ups (modules/closeups.md)
+    "gap_open": {"range": [0, 1], "smooth": True, "means": "М5а «palm», М5б «hand»: the close-up of the gap between the beds open (0 closed … 1 open)"},
+    "gap_palm": {"range": [0, 1], "smooth": True, "means": "the gap close-up: Grandmother's palm lying open on the blanket (0 taken away … 1 there)"},
+    "gap_hand": {"range": [0, 1], "smooth": True, "means": "the gap close-up: Sophia's hand come over the gap into Grandmother's (0 not yet … 1 in hers)"},
+    "breast_open": {"range": [0, 1], "smooth": True, "means": "М7б «still»: the close-up of Sophia's palm on Grandmother's breast open"},
+    "breast_flicker": {"range": [0, 1], "smooth": True, "means": "the breast close-up: the candle's flame stirring (0 still)"},
+    "sleeve_open": {"range": [0, 1], "smooth": True, "means": "М8в «sleeve»: the close-up of Sophia's fingers on Grandmother's sleeve open"},
+    "sleeve_let": {"range": [0, 1], "smooth": True, "means": "the sleeve close-up: the fingers open and let go (0 holding … 1 gone)"},
+    "cat_dir": {"values": [1, -1], "means": "the cat faces right (1, as painted) or left"},
+})
+for k, m in [("cat_x", "the cat's place (the house's frame)"), ("cat_z", "the cat's place"), ("cat_y", "the cat's height over the floor"),
+             ("hat_x", "the hat's place (from hat)"), ("hat_z", "the hat's place"), ("hat_e", "the hat's height"), ("hat_t", "the hat's tilt"),
+             ("lamp_x", "the lamp's place (from lamp; moved with her hands)"), ("lamp_z", "the lamp's place"), ("lamp_e", "the lamp's height (lifted by lamp_up)"),
+             ("drops_x", "the drops' place (from drops_at)"), ("drops_z", "the drops' place"), ("drops_e", "the drops' height"),
+             ("cot_x", "the camp bed's place (from cot; carried)"), ("cot_z", "the camp bed's place"), ("cot_f", "the camp bed's turn"),
+             ("cot_e", "the camp bed lifted, carried"), ("casement_f", "the window leaf's turn, degrees (from casement)"),
+             ("door2_f", "the second door's turn, degrees (from creak)"), ("far_a", "Papa's lantern's place (from far_light_at)"),
+             ("far_d", "Papa's lantern's place")]:
+    states[k] = {"type": "number", "means": f"the script's own: {m}"}
+for who in ("grandma", "sophia", "papa"):
+    states[f"{who}_a"] = {"type": "number", "means": f"where {who} stands, across (the pieces')"}
+    states[f"{who}_d"] = {"type": "number", "means": f"where {who} stands, distance (the pieces')"}
+
+state = {**isle.STATE, "hat": "nail", "teabox": False, "drops": "none", "cot": "veranda", "papa_watch": False, "secret": False, "cat": False,
+         "take_lantern": True, "sophia_hand": False, "kick": False, "hold_hand": False, "knew": False, "sophia_knows": False, "wall": False,
+         "slips": False, "gap_open": 0, "gap_palm": 1, "gap_hand": 0, "breast_open": 0, "breast_flicker": 0, "sleeve_open": 0, "sleeve_let": 0,
+         "bird": False, "lamp": "table", "lamp_lit": 0, "lamp_up": 0, "supper": False, "packed": False, "candle": 0, "casement": 0, "creak": 0,
+         "tent_light": 0, "far_light": 0, "far_light_at": 0, "under": 0, "cover": 1, "cup": False, "tilt": 0, "drops_at": "sill",
+         "storm_lantern": True, "grandma_lantern": 0, "papa_lantern": 0, "cot_carried": False, "cat_pose": "none", "cat_dir": 1,
+         "cat_x": -0.95, "cat_z": 3.15, "cat_y": 0.54,
+         "grandma_a": 0.036, "grandma_d": 4.384, "sophia_a": 0.39, "sophia_d": 3.606, "papa_a": -0.954, "papa_d": 4.95,
+         "hat_x": 2.45, "hat_z": -0.03, "hat_e": 1.38, "hat_t": 0, "lamp_x": -0.52, "lamp_z": 3.6, "lamp_e": 0.6,
+         "drops_x": 0.62, "drops_z": 3.72, "drops_e": 0.82,
+         "cot_x": 4.6, "cot_z": -0.45, "cot_f": 180, "cot_e": 0, "casement_f": 180, "door2_f": 270, "far_a": round(W[0], 3), "far_d": round(W[1], 3),
+         # stage 2's: Papa with his mug, looking at Grandmother; she at Sophia; Sophia under the hat, her hand in hers
+         "papa_look": "grandma", "papa_with": ["mug"], "papa_reach": {"r": [-0.795, 4.691, 1.45], "l": [-0.727, 4.749, 1.45]},
+         "grandma_look": "sophia", "sophia_look": [0.25, 2.9, 0.3], "sophia_reach": {"r": "grandma#hand_l"}}
+
+spec = {
+    "engine": 3,
+    "title": "The House",
+    "caption": "Morning on the glazed veranda; the sea in every pane.",
+    "horizon": 0.42,
+    "camera": {"mode": "picture"},
+    "light": light,
+    "lights": lights,
+    "modules": ["cast", "isle", "beats", "cat", "closeups"],
+    "state": state,
+    "states": states,
+    "objects": objects,
+    "music": music,
+}
+isle.write_json(os.path.join(folder, "scene.json"), spec)
+print("tent facing", round(TENT_F, 1), "window", WIN)

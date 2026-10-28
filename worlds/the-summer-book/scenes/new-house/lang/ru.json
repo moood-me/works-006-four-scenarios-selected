@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The New House","translation":"Чужой дом","where":"scenes/new-house/scene.json title"},
+  {"text":"On the far side of the island, a new house nobody comes to: big black windows over the sea.","translation":"На той стороне острова — новый дом, куда никто не приезжает: большие чёрные окна над морем.","where":"scenes/new-house/scene.json caption"}
+]}

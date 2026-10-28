@@ -1,0 +1,14 @@
+{
+ "strings": [
+  {
+   "text": "The Magic Forest",
+   "translation": "Волшебный лес",
+   "where": "scenes/forest/scene.json title"
+  },
+  {
+   "text": "The island's crown: moss, grey stone and dead trees twisted by the wind.",
+   "translation": "Макушка острова: мох, серый камень и мёртвые деревья, скрученные ветром.",
+   "where": "scenes/forest/scene.json caption"
+  }
+ ]
+}

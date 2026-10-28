@@ -1,0 +1,1088 @@
+{
+  "engine": 3,
+  "title": "At Sea",
+  "caption": "The last morning of August. The island goes into the fog.",
+  "horizon": 0.42,
+  "camera": {
+    "mode": "picture",
+    "on": "eye"
+  },
+  "light": {
+    "ambient": 0.8,
+    "ambientColor": "#ebe6de",
+    "bounce": 0.6,
+    "haze": 0.05,
+    "hazeColor": "#e6e1d8",
+    "hazeGlow": 0.3,
+    "shafts": 0.6,
+    "tint": "#fff2e0",
+    "tintStrength": 0,
+    "saturation": 1.05,
+    "vignette": 0.25,
+    "grain": 0.06,
+    "wind": [
+      -1,
+      0.4,
+      0.5
+    ],
+    "looks": {
+      "late": {
+        "ambient": 0.78,
+        "ambientColor": "#eee4d4",
+        "bounce": 0.6,
+        "haze": 0.07,
+        "hazeColor": "#e4dccd",
+        "hazeGlow": 0.3,
+        "shafts": 0.55,
+        "tint": "#ffd9a6",
+        "tintStrength": 0.07,
+        "saturation": 1.0,
+        "vignette": 0.25,
+        "grain": 0.06,
+        "lights": {
+          "sun": 0
+        }
+      },
+      "dawn": {
+        "ambient": 0.68,
+        "ambientColor": "#e4e7ea",
+        "bounce": 0.5,
+        "haze": 0.12,
+        "hazeColor": "#d8dbda",
+        "hazeGlow": 0,
+        "shafts": 0,
+        "tintStrength": 0,
+        "saturation": 1.1,
+        "vignette": 0.2,
+        "grain": 0.06,
+        "lights": {
+          "sun": 0,
+          "sun_late": 0
+        }
+      },
+      "dusk": {
+        "ambient": 0.82,
+        "ambientColor": "#ebe5e0",
+        "bounce": 0.5,
+        "haze": 0.1,
+        "hazeColor": "#d8d5d4",
+        "hazeGlow": 0.9,
+        "shafts": 0.2,
+        "tintStrength": 0,
+        "saturation": 1.05,
+        "vignette": 0.25,
+        "grain": 0.07,
+        "lights": {
+          "sun": 0,
+          "sun_late": 0,
+          "sun_dawn": 0
+        }
+      },
+      "night": {
+        "ambient": 0.64,
+        "ambientColor": "#8a9bc8",
+        "bounce": 0.5,
+        "haze": 0.16,
+        "hazeColor": "#8794b4",
+        "hazeGlow": 1.2,
+        "shafts": 0.35,
+        "tint": "#a2b2d8",
+        "tintStrength": 0.06,
+        "saturation": 0.85,
+        "vignette": 0.25,
+        "grain": 0.07,
+        "lights": {
+          "sun": 0,
+          "sun_late": 0,
+          "sun_dawn": 0,
+          "sun_dusk": 0
+        }
+      },
+      "fog_air": {
+        "haze": 0.6,
+        "hazeColor": "#dde1e5",
+        "hazeGlow": 1.3,
+        "shafts": 0.45,
+        "saturation": 0.85
+      },
+      "storm": {
+        "ambient": 0.74,
+        "ambientColor": "#c4ccd8",
+        "haze": 0.24,
+        "hazeColor": "#b9c0c8",
+        "hazeGlow": 0.5,
+        "shafts": 0.05,
+        "tint": "#c6d2de",
+        "tintStrength": 0.06,
+        "saturation": 0.78,
+        "wind": [
+          -1,
+          0.4,
+          2.4
+        ],
+        "lights": {
+          "sun": 0,
+          "sun_late": 0,
+          "sun_dawn": 0,
+          "sun_dusk": 0,
+          "moon": 0.25
+        }
+      },
+      "flash": {
+        "ambient": 0.95,
+        "ambientColor": "#e8eeff",
+        "brightness": 1.12,
+        "saturation": 0.7
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "sun",
+      "from": "sky#sun",
+      "color": "#ffefd8",
+      "strength": 1.3
+    },
+    {
+      "id": "sun_late",
+      "from": "sky#sun_late",
+      "color": "#ffe2b8",
+      "strength": 1.25,
+      "on": "late"
+    },
+    {
+      "id": "sun_dawn",
+      "from": "sky#sun_dawn",
+      "color": "#ffeedd",
+      "strength": 1.0,
+      "on": "dawn"
+    },
+    {
+      "id": "sun_dusk",
+      "from": [
+        60,
+        5
+      ],
+      "color": "#f3d6c6",
+      "strength": 0.5,
+      "on": "dusk"
+    },
+    {
+      "id": "moon",
+      "from": [
+        200,
+        38
+      ],
+      "color": "#c4d2f2",
+      "strength": 0.8,
+      "on": "night"
+    },
+    {
+      "id": "flash",
+      "from": [
+        30,
+        30
+      ],
+      "color": "#e8eeff",
+      "strength": 1.8,
+      "on": "flash"
+    }
+  ],
+  "modules": [
+    "cast",
+    "isle",
+    "cat",
+    "beats"
+  ],
+  "state": {
+    "dawn": 0,
+    "dusk": 0,
+    "night": 0,
+    "late": 0,
+    "calm": 0,
+    "storm": 0,
+    "flash": 0,
+    "fog": 0,
+    "fog_air": 0,
+    "moon": 1,
+    "mirror_strength": 0.45,
+    "mirror_rough": 0.25,
+    "mirror_ripple": 0.2,
+    "island": 0,
+    "sway": 0,
+    "basket": "shut",
+    "dinghy": true,
+    "boat_d": 6.6,
+    "boat_pitch": 0,
+    "grandma_at": "seat",
+    "sophia_at": "beside",
+    "papa_at": "stern",
+    "grandma_a": 0.45,
+    "grandma_d": 0.2,
+    "sophia_a": -0.4,
+    "sophia_d": 0.25,
+    "papa_a": 0.55,
+    "papa_d": 3.8,
+    "beat": "",
+    "beat_next": "",
+    "cat_bird": false,
+    "lean": 0,
+    "counted": false,
+    "storm_mark": "notyou",
+    "song": false,
+    "sign_hat": "nail",
+    "mama": "gone",
+    "learned": false,
+    "nets": "say",
+    "ask_mama": false,
+    "late_form": false,
+    "called": false,
+    "knock": false
+  },
+  "states": {
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the June dawn: the sun just up, veiled, low (0 — the day)"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dusk: the sun just gone, the afterglow low (0 — the day); over dawn"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the moonlit night (0 — the day): blue, light enough for faces; over dawn and dusk"
+    },
+    "late": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "August: the sun lower, the light warmer, the grass burnt (0 — June); changes between steps"
+    },
+    "calm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dead calm of July: the sea glass, not a streak on it"
+    },
+    "storm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the thunderstorm: a white-grey sky and its heavy clouds, grey light, rain, wind, crests and foam; over a half — lightning now and then (flash:strike told)"
+    },
+    "flash": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "lightning: the sky and everything lit white a moment (the storm's script and the game's moments)"
+    },
+    "fog": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the fog: up to a half its banks coming in over the water (0.5 — its wall on the horizon, banks over the sea); over a half the island in it — the air white, things gone in tens of metres"
+    },
+    "fog_air": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (the island's script sets it from fog): the thick fog's look"
+    },
+    "moon": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the moon's phase: 0 a thin crescent … 1 full (changes between steps; seen by night)"
+    },
+    "mirror_strength": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (the island's script sets it from storm): how strongly the sea mirrors"
+    },
+    "mirror_rough": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (from calm and storm): how rough the sea's mirror is"
+    },
+    "mirror_ripple": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (from calm and storm): the small waves breaking the sea's mirror"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (notes.md «Pieces»)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will play next (its cut made ready)"
+    },
+    "lean": {
+      "range": [
+        -1,
+        1
+      ],
+      "smooth": true,
+      "means": "М11 «Сидеть прямо» (the mini-game's): Grandmother's body after the arrow, −1 left … 1 right"
+    },
+    "cat_bird": {
+      "type": "boolean",
+      "means": "the scene's own: the dead bird at the cat's paws on the basket (cat_gift)"
+    },
+    "counted": {
+      "type": "boolean",
+      "means": "the play's: «Софья знает» — Sophia counted Grandmother's steps"
+    },
+    "storm_mark": {
+      "values": [
+        "porch",
+        "blanket",
+        "notyou"
+      ],
+      "means": "the play's: the storm's choice (the sky's gesture)"
+    },
+    "song": {
+      "type": "boolean",
+      "means": "the play's: «Гроза: одеяло» — Grandmother hums the song"
+    },
+    "sign_hat": {
+      "values": [
+        "on",
+        "bag",
+        "nail"
+      ],
+      "means": "the play's: where the hat is (Grandmother's look in «Окно»)"
+    },
+    "mama": {
+      "values": [
+        "gone",
+        "sky",
+        "moon"
+      ],
+      "means": "the play's: the first hinge (the promise's lines)"
+    },
+    "learned": {
+      "type": "boolean",
+      "means": "the play's: Papa learned before the last morning"
+    },
+    "nets": {
+      "values": [
+        "say",
+        "nothing",
+        "net"
+      ],
+      "means": "the play's: «Сети» (how Papa asks at the big boat)"
+    },
+    "ask_mama": {
+      "type": "boolean",
+      "means": "the play's: the full «Вёсла» with «Мама: нет» — «Did Mama row like that?»"
+    },
+    "late_form": {
+      "type": "boolean",
+      "means": "the play's: the ending's late form («Why only once?»)"
+    },
+    "called": {
+      "type": "boolean",
+      "means": "the play's: Sophia called in the fog night"
+    },
+    "knock": {
+      "type": "boolean",
+      "means": "the play's: «Постучу» broken and Sophia did not call"
+    },
+    "grandma_at": {
+      "values": [
+        "seat",
+        "hand"
+      ],
+      "means": "where Grandmother is in the boat (lib.PLACES: seat, hand); set, put there at once"
+    },
+    "grandma_a": {
+      "range": [
+        -1.3,
+        1.3
+      ],
+      "means": "the scene's own: where Grandmother stands across the boat, set from grandma_at"
+    },
+    "grandma_d": {
+      "range": [
+        -4.4,
+        4.4
+      ],
+      "means": "the scene's own: where Grandmother stands along the boat, set from grandma_at"
+    },
+    "grandma_placed": {
+      "type": "string",
+      "means": "the scene's own: the place Grandmother was last put at"
+    },
+    "sophia_at": {
+      "values": [
+        "bow",
+        "beside",
+        "hand"
+      ],
+      "means": "where Sophia is in the boat (lib.PLACES: bow, beside, hand); set, put there at once"
+    },
+    "sophia_a": {
+      "range": [
+        -1.3,
+        1.3
+      ],
+      "means": "the scene's own: where Sophia stands across the boat, set from sophia_at"
+    },
+    "sophia_d": {
+      "range": [
+        -4.4,
+        4.4
+      ],
+      "means": "the scene's own: where Sophia stands along the boat, set from sophia_at"
+    },
+    "sophia_placed": {
+      "type": "string",
+      "means": "the scene's own: the place Sophia was last put at"
+    },
+    "papa_at": {
+      "values": [
+        "stern"
+      ],
+      "means": "where Papa is in the boat (lib.PLACES: stern); set, put there at once"
+    },
+    "papa_a": {
+      "range": [
+        -1.3,
+        1.3
+      ],
+      "means": "the scene's own: where Papa stands across the boat, set from papa_at"
+    },
+    "papa_d": {
+      "range": [
+        -4.4,
+        4.4
+      ],
+      "means": "the scene's own: where Papa stands along the boat, set from papa_at"
+    },
+    "papa_placed": {
+      "type": "string",
+      "means": "the scene's own: the place Papa was last put at"
+    },
+    "island": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "how far the boat has gone from the island: 0 just off its far rock, 1 out at sea, the island gone into the white"
+    },
+    "sway": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "how hard the boat pitches on the swell (0 hardly, 1 hard: «Платок», sitting upright)"
+    },
+    "basket": {
+      "values": [
+        "cat",
+        "shut"
+      ],
+      "means": "the basket in the bow: the cat Mappe sitting on its lid (the world's cat), or shut with him in it"
+    },
+    "dinghy": {
+      "type": "boolean",
+      "means": "the dinghy in tow behind the stern"
+    },
+    "boat_d": {
+      "range": [
+        -360,
+        10
+      ],
+      "means": "the scene's own: where the boat is (distance), set from island"
+    },
+    "boat_pitch": {
+      "range": [
+        -8,
+        8
+      ],
+      "means": "the scene's own: the boat's pitch now (degrees), moved by sway"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Sky",
+      "sky": true,
+      "uniforms": {
+        "low": 0.42,
+        "band_x": 0.8888888888888888,
+        "sun_x": 0.3911111111111111,
+        "sun_y": 0.02,
+        "late_x": 0.26666666666666666,
+        "late_y": 0.18,
+        "dawn_x": 0.35555555555555557,
+        "dawn_y": 0.3,
+        "dusk_x": 1.511111111111111,
+        "night_x": 0.7111111111111111,
+        "moon_x": -1,
+        "moon_y": -1,
+        "dawn": 0,
+        "dusk": 0,
+        "night": 0,
+        "late": 0,
+        "storm": 0,
+        "flash": 0,
+        "fog": 0,
+        "phase": 1
+      }
+    },
+    {
+      "id": "sea",
+      "name": "Sea",
+      "plane": true,
+      "across": 0,
+      "distance": 1500,
+      "elevation": 0,
+      "width": 6000,
+      "depth": 5000,
+      "reflect": {
+        "strength": "mirror_strength",
+        "rough": "mirror_rough",
+        "ripple": "mirror_ripple",
+        "fade": 0
+      },
+      "water": true
+    },
+    {
+      "id": "skerry",
+      "name": "Skerries",
+      "across": 120,
+      "distance": 300,
+      "onLand": false,
+      "elevation": 0,
+      "height": 5,
+      "box": [
+        -20.5,
+        -5.4,
+        20.5,
+        0.7
+      ],
+      "copies": [
+        {
+          "across": 120,
+          "distance": 300
+        },
+        {
+          "across": -170,
+          "distance": 420,
+          "scale": 1.3,
+          "flip": true
+        },
+        {
+          "across": 40,
+          "distance": 520,
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "id": "fog_wall",
+      "name": "The fog's wall",
+      "across": 0,
+      "distance": 1200,
+      "onLand": false,
+      "elevation": 0,
+      "height": 56,
+      "box": [
+        -900,
+        -58,
+        900,
+        2
+      ]
+    },
+    {
+      "id": "new_house",
+      "name": "The new house on the island's far side",
+      "across": -92,
+      "distance": 112,
+      "onLand": false,
+      "elevation": 0,
+      "height": 9,
+      "box": [
+        -12,
+        -9.3,
+        12,
+        0.6
+      ]
+    },
+    {
+      "id": "island",
+      "name": "The island",
+      "across": -12,
+      "distance": 82,
+      "onLand": false,
+      "elevation": 0,
+      "height": 22,
+      "box": [
+        -100,
+        -23,
+        100,
+        1
+      ]
+    },
+    {
+      "id": "fog_far",
+      "name": "Fog over the water",
+      "across": -10,
+      "distance": 70,
+      "onLand": false,
+      "elevation": 0,
+      "height": 10,
+      "box": [
+        -200,
+        -10,
+        200,
+        1
+      ]
+    },
+    {
+      "id": "fog_near",
+      "name": "Fog close round the boat",
+      "across": 0,
+      "distance": 30,
+      "onLand": false,
+      "elevation": 0,
+      "height": 9,
+      "box": [
+        -80,
+        -9,
+        80,
+        1
+      ],
+      "copies": [
+        {
+          "across": 0,
+          "distance": 30
+        },
+        {
+          "across": -20,
+          "distance": 8,
+          "scale": 0.7,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "hull",
+      "name": "The big boat",
+      "unseen": true,
+      "across": 0,
+      "distance": 6.6,
+      "elevation": 0.35,
+      "onLand": false,
+      "place": {
+        "distance": "boat_d",
+        "tilt": "boat_pitch"
+      }
+    },
+    {
+      "id": "boat",
+      "name": "The big boat's deck",
+      "plane": true,
+      "walk": true,
+      "on": "hull",
+      "width": 2.5,
+      "depth": 8.8
+    },
+    {
+      "id": "eye",
+      "name": "In the bow",
+      "unseen": true,
+      "on": "hull",
+      "distance": -3.2,
+      "elevation": -0.35,
+      "facing": 180
+    },
+    {
+      "id": "side_l",
+      "name": "The boat's side, port",
+      "on": "hull",
+      "across": -1.25,
+      "distance": -2.4,
+      "height": 0.8,
+      "box": [
+        -0.05,
+        -0.8,
+        6.85,
+        0.15
+      ],
+      "facing": 90
+    },
+    {
+      "id": "side_r",
+      "name": "The boat's side, starboard",
+      "on": "hull",
+      "across": 1.25,
+      "distance": 4.4,
+      "height": 0.8,
+      "box": [
+        -0.05,
+        -0.8,
+        6.85,
+        0.15
+      ],
+      "facing": 270
+    },
+    {
+      "id": "bow_l",
+      "name": "The bow, port",
+      "on": "hull",
+      "across": -1.25,
+      "distance": -2.4,
+      "height": 0.85,
+      "box": [
+        -0.05,
+        -0.85,
+        2.4,
+        0.15
+      ],
+      "facing": 238
+    },
+    {
+      "id": "bow_r",
+      "name": "The bow, starboard",
+      "on": "hull",
+      "across": 0,
+      "distance": -4.4,
+      "height": 0.85,
+      "box": [
+        -0.05,
+        -0.85,
+        2.4,
+        0.15
+      ],
+      "facing": 122
+    },
+    {
+      "id": "transom",
+      "name": "The stern",
+      "on": "hull",
+      "across": 0,
+      "distance": 4.4,
+      "height": 0.8,
+      "box": [
+        -1.3,
+        -1.05,
+        1.3,
+        0.15
+      ],
+      "facing": 180
+    },
+    {
+      "id": "engine",
+      "name": "The engine's housing",
+      "on": "hull",
+      "across": 0,
+      "distance": 3.0,
+      "height": 0.75,
+      "box": [
+        -0.55,
+        -1.0,
+        0.6,
+        0.05
+      ],
+      "facing": 180,
+      "shadow": true
+    },
+    {
+      "id": "thwart",
+      "name": "The thwarts",
+      "plane": true,
+      "on": "hull",
+      "across": 0,
+      "distance": -0.2,
+      "elevation": 0.42,
+      "width": 2.4,
+      "depth": 0.32,
+      "copies": [
+        {
+          "across": 0,
+          "distance": -0.2
+        },
+        {
+          "across": 0,
+          "distance": 1.9
+        },
+        {
+          "across": 0,
+          "distance": 3.9
+        }
+      ],
+      "shadow": true
+    },
+    {
+      "id": "thwart_face",
+      "name": "The thwarts' fronts",
+      "on": "hull",
+      "across": 0,
+      "distance": -0.36,
+      "facing": 180,
+      "height": 0.42,
+      "box": [
+        -1.25,
+        -0.45,
+        1.25,
+        0.03
+      ],
+      "copies": [
+        {
+          "across": 0,
+          "distance": -0.36
+        },
+        {
+          "across": 0,
+          "distance": 1.74
+        },
+        {
+          "across": 0,
+          "distance": 3.74
+        }
+      ]
+    },
+    {
+      "id": "basket",
+      "name": "The basket",
+      "on": "hull",
+      "across": -0.85,
+      "distance": -0.9,
+      "height": 0.6,
+      "box": [
+        -0.4,
+        -0.95,
+        0.4,
+        0.03
+      ],
+      "facing": 180
+    },
+    {
+      "id": "cat",
+      "name": "Mappe, the cat",
+      "on": "hull",
+      "across": -0.85,
+      "distance": -0.9,
+      "elevation": 0.47,
+      "height": 0.5,
+      "box": [
+        -0.46,
+        -0.56,
+        0.46,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "bird",
+      "name": "The last present",
+      "on": "hull",
+      "across": -0.68,
+      "distance": -0.95,
+      "height": 0.08,
+      "box": [
+        -0.12,
+        -0.08,
+        0.12,
+        0.01
+      ],
+      "facing": 180,
+      "elevation": 0.47
+    },
+    {
+      "id": "bundles",
+      "name": "The things",
+      "on": "hull",
+      "across": -0.7,
+      "distance": 2.4,
+      "height": 0.7,
+      "box": [
+        -0.55,
+        -0.75,
+        0.6,
+        0.03
+      ],
+      "facing": 180
+    },
+    {
+      "id": "dinghy",
+      "name": "The dinghy in tow",
+      "on": "hull",
+      "across": -2.8,
+      "distance": 13,
+      "height": 0.6,
+      "box": [
+        -0.85,
+        -1.0,
+        0.85,
+        0.2
+      ],
+      "facing": 180,
+      "elevation": -0.35
+    },
+    {
+      "id": "grandma",
+      "name": "Grandmother",
+      "on": "boat",
+      "person": {
+        "cast": "cast",
+        "who": "grandma",
+        "turn": 180
+      },
+      "across": 0.45,
+      "distance": 0.2,
+      "place": {
+        "across": "grandma_a",
+        "distance": "grandma_d"
+      }
+    },
+    {
+      "id": "sophia",
+      "name": "Sophia",
+      "on": "boat",
+      "person": {
+        "cast": "cast",
+        "who": "sophia",
+        "turn": 180
+      },
+      "across": -0.4,
+      "distance": 0.25,
+      "place": {
+        "across": "sophia_a",
+        "distance": "sophia_d"
+      }
+    },
+    {
+      "id": "papa",
+      "name": "Papa",
+      "on": "boat",
+      "person": {
+        "cast": "cast",
+        "who": "papa",
+        "turn": 180
+      },
+      "across": -0.75,
+      "distance": 3.9,
+      "place": {
+        "across": "papa_a",
+        "distance": "papa_d"
+      }
+    },
+    {
+      "id": "rain",
+      "name": "Rain",
+      "particles": {
+        "kind": "rain",
+        "amount": "storm",
+        "count": 9000,
+        "wind": 1.2
+      }
+    }
+  ],
+  "music": {
+    "prompts": [
+      {
+        "text": "Sparse solo piano, slow and unhurried, with long silences, like light on still water",
+        "weight": 0.8
+      },
+      {
+        "text": "Distant church bell and sea wind textures, sparse, mostly silence",
+        "weight": 1.0
+      },
+      {
+        "text": "Low cello long tones, tender and grave, an old woman remembering",
+        "weight": 0.7
+      },
+      {
+        "text": "Warm ambient pads with slow swells, pearl-grey and calm, barely moving",
+        "weight": 0.6
+      },
+      {
+        "text": "Nordic folk melody on a single wooden flute, distant and breathy, over a soft drone",
+        "weight": 0.3
+      },
+      {
+        "text": "Kantele plucked softly, Finnish archipelago, open fifths, airy",
+        "weight": 0
+      },
+      {
+        "text": "Solo accordion, slow waltz, faded and wistful, far away across the water",
+        "weight": 0
+      },
+      {
+        "text": "Soft string quartet, chamber music, restrained and bittersweet",
+        "weight": 0
+      },
+      {
+        "text": "Glass harmonica shimmer, cold clear air, high and fragile",
+        "weight": 0
+      },
+      {
+        "text": "Harmonium chords breathing slowly, a quiet chapel by the sea",
+        "weight": 0
+      },
+      {
+        "text": "Felt piano with tape hiss, close and soft, lullaby feel",
+        "weight": 0
+      },
+      {
+        "text": "Low diesel engine hum far off, steady, under soft sustained strings",
+        "weight": 0.4
+      },
+      {
+        "text": "Celesta and music box notes, childlike and a little sad",
+        "weight": 0
+      },
+      {
+        "text": "Harp arpeggios, slow, luminous, early summer dawn",
+        "weight": 0
+      },
+      {
+        "text": "Clarinet in its low register, dry and humorous, a little crooked tune",
+        "weight": 0
+      }
+    ],
+    "bpm": 60,
+    "density": 0.2,
+    "brightness": 0.4,
+    "scale": "G_MAJOR_E_MINOR"
+  }
+}

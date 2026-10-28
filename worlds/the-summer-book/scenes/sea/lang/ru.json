@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"At Sea","translation":"В море","where":"scenes/sea/scene.json title"},
+  {"text":"The last morning of August. The island goes into the fog.","translation":"Последнее утро августа. Остров уходит в туман.","where":"scenes/sea/scene.json caption"}
+]}
