@@ -8,7 +8,7 @@
 // hand_in_hand, eyes_closed, swell; motor, look_house, cat_gift, sky, the talks, promise, window_last, oars_last), the new
 // house (from_sea). Eriksson is not here.
 // Reads: everything (facts, marks). Leaves: nothing.
-import { SCENES, facts, hour, piece } from '../story.js';
+import { SCENES, facts, hour, piece, on } from '../story.js';
 import { gangway, hold, oars, upright } from '../minigames/all.js';
 
 const MORNING = hour('dawn', { late: true, fog: 0.6 });
@@ -45,6 +45,7 @@ export default {
       await g.scene(SCENES.shore, { beat: 'last_morning', here: ALL, moods: { grandma: 'neutral', sophia: 'neutral', papa: 'neutral' }, keys: SHORE });
       g.title(f.ending === 'window' ? tr('The Window') : f.ending === 'oars' ? tr('The Oars') : tr('The Shawl on the Stone'));
       await g.beat('last_morning');
+      if (f.bird === 'out') on(g, 'signs:bird', () => g.sound.hiss()); // (the cat in the basket)
       await g.beat('signs');
       if (f.mama === 'moon') {
         g.beds({ sea_in: 0.3 });
