@@ -44,7 +44,7 @@ export function path({ title, phrase, about, slip, short = () => false, breath =
       const last = short(g.state) ? 2 : 3, rests = breath(g.state);
       const over = settle(signal, () => {
         g.set('step', last);
-        if (slip === 'sway') g.set('lantern_sway', 0, 0.6);
+        if (slip === 'sway') { g.set('lantern_sway', 0, 0.6); g.set('grab', false); }
         if (slip === 'dip') g.set('lantern_dip', 0, 0.6);
         if (slip === 'rest') g.set('rest', false);
       });
@@ -54,11 +54,13 @@ export function path({ title, phrase, about, slip, short = () => false, breath =
       if (slip === 'rest') g.set('rest', false);
       mg.plate.set({ notches: last > 2 ? [0.5] : [] });
       const lead = mg.lead({ zone: { at: 0, width: 0.45 }, steer: 'rate', release: 'stay', push: 0 });
-      teach(b, mg, [lead]);
+      // (the ghost shows the leading only while there is something to lead: not while the scene walks or she sits)
+      let taught = teach(b, mg, [lead]);
+      const quiet = () => { taught?.remove(); taught = null; };
       // phase: 'steady' (kept steady toward stone n) → 'walk' (stepping to it, the scene's turn) → 'there' (reached)
       // → the next stone; 'rest' — sat down (`why`: 'slip' — back to steadying for the same stone; 'breath' — on)
       let n = 2, ring = null, phase = 'steady', why = null, kept = 0, slips = 0, begun = null, from = mg.t;
-      let till = 0, caught = 0, dip = Infinity, rested = false;
+      let till = 0, caught = 0, dip = Infinity, grabbed = Infinity, rested = false;
       const touch = mg.on('down', () => { begun ??= mg.t; });
       const aim = () => { ring = mg.mark({ at: `path#stone${n}`, kind: 'ring', quiet: true, danger: 0 }); };
       aim();
@@ -68,22 +70,31 @@ export function path({ title, phrase, about, slip, short = () => false, breath =
         ring.remove();
         ring = null;
         mg.sceneTurn(true);
+        quiet();
         lead.set({ push: 0 });
         send('step', n);
         g.told(`step:stone${n}`, WALK).then(() => { if (phase === 'walk') phase = 'there'; });
       };
-      const sit = (reason, s, t) => { phase = 'rest'; why = reason; till = t + s; mg.sceneTurn(true); lead.set({ push: 0 }); g.set('rest', true); };
+      const sit = (reason, s, t) => {
+        phase = 'rest'; why = reason; till = t + s;
+        mg.sceneTurn(true);
+        quiet();
+        lead.set({ push: 0 });
+        g.set('rest', true);
+        mg.plate.set({ phrase: tr('She sits down on a low stone to get her breath.') });
+      };
       const t00 = mg.t;
       const done = await until(mg, ({ t, dt }) => {
         const s = lead.state;
         if (t >= dip) { dip = Infinity; g.set('lantern_dip', 0, 0.8); }
+        if (t >= grabbed) { grabbed = Infinity; g.set('grab', false); g.mood('sophia', 'neutral'); }
         if (phase === 'steady') {
           if (Math.abs(s.arrow) >= OFF && t >= caught) {
             slips++;
             caught = t + 1.2;
             g.failed();
             mg.error('off', { at: ring, chip: true });
-            if (slip === 'sway') { g.set('grab', true); g.mood('sophia', 'afraid'); }
+            if (slip === 'sway') { g.set('grab', true); g.mood('sophia', 'afraid'); grabbed = t + 1.2; }
             if (slip === 'dip') { g.set('lantern_dip', 1, 0.2); dip = t + 0.6; }
             if (slip === 'rest') { sit('slip', REST, t); return false; }
           }
@@ -105,16 +116,20 @@ export function path({ title, phrase, about, slip, short = () => false, breath =
           kept = 0;
           from = t;
           mg.sceneTurn(false);
+          taught = teach(b, mg, [lead]);
           aim();
         } else if (phase === 'rest' && t >= till) {
           g.set('rest', false);
+          mg.plate.set({ phrase });
           if (why === 'breath') phase = 'there';
-          else { phase = 'steady'; mg.sceneTurn(false); from = t; kept = 0; }
+          else { phase = 'steady'; mg.sceneTurn(false); taught = teach(b, mg, [lead]); from = t; kept = 0; }
         }
         return false;
       });
       touch();
+      quiet();
       if (!done) return this.skipped;
+      if (slip === 'sway' && grabbed !== Infinity) { g.set('grab', false); g.mood('sophia', 'neutral'); }
       mg.sceneTurn(false);
       over();
       await mg.end({ as: slips ? 'flawed' : 'clean' });

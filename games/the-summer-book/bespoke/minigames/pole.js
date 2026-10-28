@@ -9,7 +9,7 @@
 //   How it is for her: her arms tired; the child busy and proud.
 //   What the player feels: holding still while someone else does the work.
 //   → { lean: how crooked the tent stands, 0…1 }
-import { clamp, until, keys, teach } from './hands.js';
+import { clamp, until, keys, teach, settle } from './hands.js';
 
 const SECONDS = 8, SHAKE = 32, LEAN = 0.35, ALONE = 12;
 
@@ -23,6 +23,8 @@ export default {
     const mg = g.minigame({ phrase: tr('A pole on bare rock, and a girl tying knots.') });
     const send = keys(g);
     send('lean', 0);
+    // (skipped: the plain good outcome — the tent straight, whatever trembled before)
+    const over = settle(signal, () => g.set('lean', 0, 0.4));
     const grip = mg.mark({ at: 'pole#grip', kind: 'groove' });
     const hold = mg.hold({ on: grip, seconds: 0.8, drain: 1.2 });
     teach(b, mg, [hold]);
@@ -55,6 +57,7 @@ export default {
     offs.forEach(f => f());
     if (!done) return this.skipped;
     mg.snap({ at: grip });
+    over();
     await mg.end({ as: lean ? 'flawed' : 'clean' });
     if (lean) await g.say('sophia', 'That’s how it should be');
     return { lean };

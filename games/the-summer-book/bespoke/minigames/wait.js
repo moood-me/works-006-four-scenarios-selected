@@ -1,7 +1,7 @@
 // М10в «Waiting» (Ш3 «lamp», the room in the fog at night, after the piece `lamp_window`: the lamp in the window, her
 // face by it, the cape white below): touch nothing — SECONDS of the play's time, counted whatever the hands do; the
-// language's sign of it (the ghost's hands off) from the first second and over and over. A touch — her hand jerks toward
-// the door and comes back (a quiet mistake; the count goes on). The count out — the end (neutral); the game cuts after
+// language's sign of it (the ghost's hands off) from the first second and over and over. A touch — a quiet mistake (the
+// count goes on). The count out — the end (neutral); the game cuts after
 // it to Sophia at the folded-back flap under the moon.
 //   What she does: Grandmother sits at the window with the lamp and does not go.
 //   What she wants: to let the child have her night — not to step in.
