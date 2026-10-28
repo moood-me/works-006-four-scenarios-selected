@@ -1,0 +1,1078 @@
+{
+  "engine": 3,
+  "title": "The Middle of the Island",
+  "caption": "Among the pines, a clearing, and a pool so black it seems to have no bottom.",
+  "horizon": 0.42,
+  "camera": {
+    "mode": "picture"
+  },
+  "light": {
+    "ambient": 0.62,
+    "ambientColor": "#c9d2e4",
+    "bounce": 0.55,
+    "haze": 0.04,
+    "hazeColor": "#eadcc6",
+    "hazeGlow": 0,
+    "shafts": 0.3,
+    "tint": "#ffd9a6",
+    "tintStrength": 0.07,
+    "vignette": 0.24,
+    "grain": 0.08,
+    "saturation": 1.08,
+    "wind": [
+      0.6,
+      -1,
+      0.7
+    ],
+    "looks": {
+      "dawn": {
+        "ambient": 0.68,
+        "ambientColor": "#dfe6ef",
+        "bounce": 0.55,
+        "haze": 0.035,
+        "hazeColor": "#e3e1e0",
+        "hazeGlow": 0,
+        "shafts": 0,
+        "tint": "#f6dccb",
+        "tintStrength": 0.05,
+        "vignette": 0.22,
+        "grain": 0.08,
+        "saturation": 1.08,
+        "lights": {
+          "sun": 0
+        }
+      },
+      "dusk": {
+        "ambient": 0.6,
+        "ambientColor": "#cdbfdc",
+        "haze": 0.05,
+        "hazeColor": "#e8c4b4",
+        "hazeGlow": 0.3,
+        "shafts": 0.25,
+        "tint": "#ffb48c",
+        "tintStrength": 0.1,
+        "saturation": 1.05,
+        "lights": {
+          "sun": 0
+        }
+      },
+      "night": {
+        "ambient": 0.5,
+        "ambientColor": "#9cb0e0",
+        "bounce": 0.6,
+        "haze": 0.05,
+        "hazeColor": "#5f7299",
+        "hazeGlow": 0.6,
+        "shafts": 0.35,
+        "tint": "#a8bcff",
+        "tintStrength": 0.1,
+        "saturation": 0.8,
+        "vignette": 0.26,
+        "lights": {
+          "sun": 0,
+          "sun_dawn": 0,
+          "sun_dusk": 0
+        }
+      },
+      "storm": {
+        "ambient": 0.6,
+        "ambientColor": "#bcc6d0",
+        "haze": 0.13,
+        "hazeColor": "#9ea9b3",
+        "shafts": 0.1,
+        "tint": "#c4d4e4",
+        "tintStrength": 0.08,
+        "saturation": 0.8,
+        "wind": [
+          0.6,
+          -1,
+          2.4
+        ],
+        "lights": {
+          "sun": 0.25,
+          "sun_dawn": 0.3,
+          "sun_dusk": 0.3,
+          "moon": 0.6,
+          "beam": 0.4
+        }
+      },
+      "flash": {
+        "ambient": 0.9,
+        "ambientColor": "#e6ecff",
+        "brightness": 1.1,
+        "saturation": 0.75
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "sun",
+      "from": [
+        150,
+        45
+      ],
+      "color": "#fff0dc",
+      "strength": 1.35
+    },
+    {
+      "id": "sun_dawn",
+      "from": [
+        -90,
+        12
+      ],
+      "color": "#ffe0c2",
+      "strength": 1.3,
+      "on": "dawn"
+    },
+    {
+      "id": "sun_dusk",
+      "from": [
+        100,
+        5
+      ],
+      "color": "#ffb486",
+      "strength": 1.3,
+      "on": "dusk"
+    },
+    {
+      "id": "moon",
+      "from": "sky#moon",
+      "color": "#cdd8ff",
+      "strength": 0.9,
+      "on": "night"
+    },
+    {
+      "id": "flash",
+      "from": [
+        -30,
+        25
+      ],
+      "color": "#e8eeff",
+      "strength": 1.8,
+      "on": "flash"
+    },
+    {
+      "id": "lantern",
+      "of": "lighthouse#lantern",
+      "on": "lighthouse_lit",
+      "color": "#ffd27e",
+      "strength": 2.5,
+      "reach": 40
+    },
+    {
+      "id": "window",
+      "of": "lighthouse#window",
+      "on": "room_lit",
+      "color": "#ffcf86",
+      "strength": 1.2,
+      "reach": 10
+    },
+    {
+      "id": "beam",
+      "of": "lighthouse#beam",
+      "on": "beam",
+      "color": "#fff1c8",
+      "strength": 6,
+      "reach": 600,
+      "cone": {
+        "bearing": 0,
+        "height": -1,
+        "width": 10,
+        "soft": 0.35
+      },
+      "place": {
+        "bearing": "beam_turn",
+        "height": "beam_tilt"
+      }
+    }
+  ],
+  "modules": [
+    "cast",
+    "island",
+    "beats"
+  ],
+  "objects": [
+    {
+      "id": "sky",
+      "name": "The sky",
+      "sky": true,
+      "uniforms": {
+        "low": 0.55,
+        "day_x": 1.2,
+        "day_y": 0.3,
+        "dawn_x": -0.2,
+        "dusk_x": 1.95,
+        "dawn": 0,
+        "dusk": 0,
+        "night": 0,
+        "storm": 0,
+        "flash": 0
+      }
+    },
+    {
+      "id": "sea",
+      "name": "The sea",
+      "plane": true,
+      "across": 0,
+      "distance": 1450,
+      "width": 2400,
+      "depth": 3000,
+      "elevation": -4.5,
+      "reflect": {
+        "strength": 0.2,
+        "fade": 0,
+        "rough": 0.55,
+        "ripple": 0.4
+      },
+      "uniforms": {
+        "storm": 0,
+        "calm": 0
+      }
+    },
+    {
+      "id": "ground",
+      "name": "The island's middle",
+      "plane": true,
+      "drape": true,
+      "across": 3,
+      "distance": 30,
+      "width": 100,
+      "depth": 100
+    },
+    {
+      "id": "pool",
+      "name": "The black pool",
+      "plane": true,
+      "across": 1.7,
+      "distance": 6.2,
+      "elevation": -0.425,
+      "width": 4.8,
+      "depth": 4.8,
+      "reflect": {
+        "strength": 0.3,
+        "fade": 0,
+        "rough": 0.08,
+        "ripple": 0.15
+      }
+    },
+    {
+      "id": "rock",
+      "name": "The rock at the pool's lip",
+      "across": 3.8,
+      "distance": 6.1,
+      "shadow": true,
+      "box": [
+        -1.9,
+        -0.8,
+        1.9,
+        0
+      ]
+    },
+    {
+      "id": "coil",
+      "name": "The rope coiled on the rock",
+      "across": 3.8,
+      "distance": 6.1,
+      "elevation": 0.6,
+      "box": [
+        -0.25,
+        -0.2,
+        0.25,
+        0.05
+      ]
+    },
+    {
+      "id": "rope",
+      "name": "The rope let down into the pool",
+      "across": 2.5,
+      "distance": 5.7,
+      "elevation": 0.227,
+      "box": [
+        -0.4,
+        -0.85,
+        0.7,
+        0.1
+      ]
+    },
+    {
+      "id": "ring",
+      "name": "The son's ring of stones",
+      "across": -1.8,
+      "distance": 5.2,
+      "shadow": true,
+      "box": [
+        -2.6,
+        -0.3,
+        2.6,
+        0.05
+      ]
+    },
+    {
+      "id": "lighthouse",
+      "name": "The lighthouse",
+      "across": 2,
+      "distance": 44,
+      "elevation": -0.45,
+      "box": [
+        -5.03,
+        -15.8,
+        5.03,
+        0
+      ],
+      "shadow": true,
+      "redraw": {
+        "lighthouse_lit": 1,
+        "room_lit": 1
+      }
+    },
+    {
+      "id": "steps",
+      "name": "Steps to the lighthouse door",
+      "across": 2,
+      "distance": 41.4,
+      "box": [
+        -0.8,
+        -0.55,
+        0.8,
+        0.05
+      ]
+    },
+    {
+      "id": "pines",
+      "name": "Island pines",
+      "box": [
+        -1.9,
+        -3.75,
+        1.75,
+        0.1
+      ],
+      "shadow": true,
+      "across": -2,
+      "distance": 38,
+      "copies": [
+        {
+          "across": -4,
+          "distance": 38,
+          "scale": 1,
+          "flip": false
+        },
+        {
+          "across": 7,
+          "distance": 40,
+          "scale": 0.9,
+          "flip": true
+        },
+        {
+          "across": 9.5,
+          "distance": 33,
+          "scale": 1.1,
+          "flip": false
+        },
+        {
+          "across": -7.5,
+          "distance": 28,
+          "scale": 0.85,
+          "flip": true
+        },
+        {
+          "across": 12,
+          "distance": 24,
+          "scale": 1,
+          "flip": false
+        },
+        {
+          "across": -11,
+          "distance": 20,
+          "scale": 1.15,
+          "flip": false
+        },
+        {
+          "across": 13,
+          "distance": 15,
+          "scale": 0.9,
+          "flip": true
+        },
+        {
+          "across": -12,
+          "distance": 13,
+          "scale": 1,
+          "flip": true
+        },
+        {
+          "across": 5.5,
+          "distance": 50,
+          "scale": 0.8,
+          "flip": false
+        },
+        {
+          "across": -1.5,
+          "distance": 47,
+          "scale": 0.9,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "pine1",
+      "name": "A creeping pine (1)",
+      "code": "e.kit.island.pine(g, e);",
+      "box": [
+        -1.9,
+        -3.75,
+        1.75,
+        0.1
+      ],
+      "shadow": true,
+      "across": -3.6,
+      "distance": 7.6,
+      "place": {
+        "across": "pine1_a",
+        "distance": "pine1_d"
+      }
+    },
+    {
+      "id": "pine2",
+      "name": "A creeping pine (2)",
+      "code": "e.kit.island.pine(g, e);",
+      "box": [
+        -1.9,
+        -3.75,
+        1.75,
+        0.1
+      ],
+      "shadow": true,
+      "across": -2,
+      "distance": 9.4,
+      "place": {
+        "across": "pine2_a",
+        "distance": "pine2_d"
+      }
+    },
+    {
+      "id": "pine3",
+      "name": "A creeping pine (3)",
+      "code": "e.kit.island.pine(g, e);",
+      "box": [
+        -1.9,
+        -3.75,
+        1.75,
+        0.1
+      ],
+      "shadow": true,
+      "across": 5.4,
+      "distance": 9.6,
+      "place": {
+        "across": "pine3_a",
+        "distance": "pine3_d"
+      }
+    },
+    {
+      "id": "pine4",
+      "name": "A creeping pine (4)",
+      "code": "e.kit.island.pine(g, e);",
+      "box": [
+        -1.9,
+        -3.75,
+        1.75,
+        0.1
+      ],
+      "shadow": true,
+      "across": 0.8,
+      "distance": 10.8,
+      "place": {
+        "across": "pine4_a",
+        "distance": "pine4_d"
+      }
+    },
+    {
+      "id": "pine5",
+      "name": "A creeping pine (5)",
+      "code": "e.kit.island.pine(g, e);",
+      "box": [
+        -1.9,
+        -3.75,
+        1.75,
+        0.1
+      ],
+      "shadow": true,
+      "across": -5.4,
+      "distance": 10.4,
+      "place": {
+        "across": "pine5_a",
+        "distance": "pine5_d"
+      }
+    },
+    {
+      "id": "pine6",
+      "name": "A creeping pine (6)",
+      "code": "e.kit.island.pine(g, e);",
+      "box": [
+        -1.9,
+        -3.75,
+        1.75,
+        0.1
+      ],
+      "shadow": true,
+      "across": 3.4,
+      "distance": 12.6,
+      "place": {
+        "across": "pine6_a",
+        "distance": "pine6_d"
+      }
+    },
+    {
+      "id": "pine7",
+      "name": "A creeping pine (7)",
+      "code": "e.kit.island.pine(g, e);",
+      "box": [
+        -1.9,
+        -3.75,
+        1.75,
+        0.1
+      ],
+      "shadow": true,
+      "across": -1.2,
+      "distance": 14,
+      "place": {
+        "across": "pine7_a",
+        "distance": "pine7_d"
+      }
+    },
+    {
+      "id": "troll",
+      "name": "Moomintroll",
+      "person": {
+        "cast": "cast",
+        "who": "troll"
+      },
+      "across": -0.5,
+      "distance": 4.6,
+      "place": {
+        "across": "troll_a",
+        "distance": "troll_d"
+      }
+    },
+    {
+      "id": "papa",
+      "name": "Moominpappa",
+      "person": {
+        "cast": "cast",
+        "who": "papa"
+      },
+      "across": 3.3,
+      "distance": 5.4,
+      "place": {
+        "across": "papa_a",
+        "distance": "papa_d"
+      }
+    },
+    {
+      "id": "mama",
+      "name": "Moominmamma",
+      "person": {
+        "cast": "cast",
+        "who": "mama"
+      },
+      "across": 0.4,
+      "distance": 8.5,
+      "place": {
+        "across": "mama_a",
+        "distance": "mama_d"
+      }
+    },
+    {
+      "id": "my",
+      "name": "Little My",
+      "person": {
+        "cast": "cast",
+        "who": "my"
+      },
+      "across": -3.4,
+      "distance": 5.6,
+      "place": {
+        "across": "my_a",
+        "distance": "my_d"
+      }
+    },
+    {
+      "id": "spill",
+      "name": "Weed sliding off the armful",
+      "particles": {
+        "kind": "leaves",
+        "at": "papa#armful",
+        "burst": {
+          "on": "spill",
+          "count": 40,
+          "over": 0.4
+        },
+        "rate": 0,
+        "size": [
+          0.1,
+          0.08
+        ],
+        "colors": [
+          "#4e6a3a",
+          "#6b7f45",
+          "#5a4a30",
+          "#3f5a33"
+        ],
+        "speed": [
+          0.4,
+          1.4
+        ],
+        "spread": 70,
+        "gravity": 6,
+        "ground": "stop",
+        "settle": 6
+      }
+    },
+    {
+      "id": "rain",
+      "name": "Rain",
+      "particles": {
+        "kind": "rain",
+        "amount": "storm",
+        "count": 9000,
+        "wind": 1.2
+      }
+    }
+  ],
+  "state": {
+    "dawn": 0,
+    "dusk": 0,
+    "night": 0,
+    "moon": 0.6,
+    "storm": 0,
+    "calm": 0,
+    "flash": 0,
+    "lighthouse_lit": 0,
+    "beam": 0,
+    "beam_turn": 0,
+    "beam_tilt": -1,
+    "room_lit": 0,
+    "pines": 0,
+    "ring": "none",
+    "ring_n": 9,
+    "rope": 0,
+    "coil": false,
+    "sway": 0,
+    "armful_way": 0,
+    "spill": 0,
+    "beat": "",
+    "beat_next": "",
+    "troll_a": -0.5,
+    "troll_d": 4.6,
+    "papa_a": 3.3,
+    "papa_d": 5.4,
+    "mama_a": 0.4,
+    "mama_d": 8.5,
+    "my_a": -3.4,
+    "my_d": 5.6,
+    "pine1_a": -3.6,
+    "pine1_d": 7.6,
+    "pine2_a": -2,
+    "pine2_d": 9.4,
+    "pine3_a": 5.4,
+    "pine3_d": 9.6,
+    "pine4_a": 0.8,
+    "pine4_d": 10.8,
+    "pine5_a": -5.4,
+    "pine5_d": 10.4,
+    "pine6_a": 3.4,
+    "pine6_d": 12.6,
+    "pine7_a": -1.2,
+    "pine7_d": 14,
+    "papa_here": false,
+    "mama_here": false,
+    "my_here": false,
+    "troll_turn": 295,
+    "troll_look": "ring#stones",
+    "troll_mood": "thinking",
+    "papa_turn": 290,
+    "papa_look": "pool#water",
+    "mama_turn": 200,
+    "my_turn": 120
+  },
+  "states": {
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dawn's light and sky (0 — the day)"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dusk's light and sky, the afterglow (0 — the day); may move before the eyes"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the moonlit night (0 — the day); over dawn and dusk"
+    },
+    "moon": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the moon's phase: 0 a thin crescent … 1 full (changes between steps; seen by night)"
+    },
+    "storm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the storm: grey light and sky, its clouds, many quick crests, rain, wind; over a half — lightning now and then"
+    },
+    "calm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the sea calm: few crests, slow (a still night)"
+    },
+    "flash": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "lightning: the sky and everything lit white a moment (the storm's script and the game's moments)"
+    },
+    "lighthouse_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lighthouse's lamp burns: the lantern's glass warm, its light and glow"
+    },
+    "beam": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lighthouse's beam: 0 none … 1 full; while on, the island's script turns it (seen in the air by night, at dusk, in a storm)"
+    },
+    "beam_turn": {
+      "type": "number",
+      "means": "the beam's bearing, degrees (the island's script turns it on and on while beam is on)"
+    },
+    "room_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the round room's window on the tower lit from within (seen from outside)"
+    },
+    "beam_tilt": {
+      "range": [
+        -60,
+        10
+      ],
+      "smooth": true,
+      "means": "the beam's height, degrees (−1 a little down, out to sea; a piece tilts it down onto someone «in the beam»)"
+    },
+    "pines": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the pines about the clearing creep toward the lighthouse: 0 where they stood when the family came, 1 three and a half metres nearer it (from chapter to chapter; may move before the eyes)"
+    },
+    "ring": {
+      "values": [
+        "none",
+        "set",
+        "broken",
+        "one_missing"
+      ],
+      "means": "the son's ring of stones on the moss of his clearing: none; set — the ring (ring_n of its stones laid); broken — kicked apart, scattered (ring_n of them laid back); one_missing — whole but for one stone"
+    },
+    "ring_n": {
+      "range": [
+        0,
+        9
+      ],
+      "means": "how many stones of the ring are in their places while it is laid (9 — all)"
+    },
+    "sway": {
+      "range": [
+        -1,
+        1
+      ],
+      "smooth": true,
+      "means": "«Охапка» (the minigame): the armful over Papa's head swaying, he turns under it; leaned over to the edge, some weed slides off"
+    },
+    "armful_way": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "«Охапка» (the minigame): how far along his way to the ring Papa has carried the armful; he walks there"
+    },
+    "spill": {
+      "type": "number",
+      "means": "the scene's own: how many times weed has slid off the armful (each time a burst of it)"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (the world's beats: notes.md «Pieces»)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will play next (its cut made ready)"
+    },
+    "troll_a": {
+      "range": [
+        -20,
+        20
+      ],
+      "means": "the scene's own: where a person stands (metres) — the pieces'"
+    },
+    "troll_d": {
+      "range": [
+        -20,
+        20
+      ],
+      "means": "the scene's own: where a person stands (metres) — the pieces'"
+    },
+    "papa_a": {
+      "range": [
+        -20,
+        20
+      ],
+      "means": "the scene's own: where a person stands (metres) — the pieces'"
+    },
+    "papa_d": {
+      "range": [
+        -20,
+        20
+      ],
+      "means": "the scene's own: where a person stands (metres) — the pieces'"
+    },
+    "mama_a": {
+      "range": [
+        -20,
+        20
+      ],
+      "means": "the scene's own: where a person stands (metres) — the pieces'"
+    },
+    "mama_d": {
+      "range": [
+        -20,
+        20
+      ],
+      "means": "the scene's own: where a person stands (metres) — the pieces'"
+    },
+    "my_a": {
+      "range": [
+        -20,
+        20
+      ],
+      "means": "the scene's own: where a person stands (metres) — the pieces'"
+    },
+    "my_d": {
+      "range": [
+        -20,
+        20
+      ],
+      "means": "the scene's own: where a person stands (metres) — the pieces'"
+    },
+    "rope": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the rope with its weight let down into the pool from the rock: 0 none of it … 1 all of it (its coil on the rock smaller); while it moves it trembles and rings spread on the water"
+    },
+    "coil": {
+      "type": "boolean",
+      "means": "the rope pulled up and coiled on the rock at the pool's lip (after the sounding)"
+    },
+    "pine1_a": {
+      "range": [
+        -20,
+        60
+      ],
+      "means": "the scene's own: where a creeping pine stands (metres) — set from pines"
+    },
+    "pine1_d": {
+      "range": [
+        -20,
+        60
+      ],
+      "means": "the scene's own: where a creeping pine stands (metres) — set from pines"
+    },
+    "pine2_a": {
+      "range": [
+        -20,
+        60
+      ],
+      "means": "the scene's own: where a creeping pine stands (metres) — set from pines"
+    },
+    "pine2_d": {
+      "range": [
+        -20,
+        60
+      ],
+      "means": "the scene's own: where a creeping pine stands (metres) — set from pines"
+    },
+    "pine3_a": {
+      "range": [
+        -20,
+        60
+      ],
+      "means": "the scene's own: where a creeping pine stands (metres) — set from pines"
+    },
+    "pine3_d": {
+      "range": [
+        -20,
+        60
+      ],
+      "means": "the scene's own: where a creeping pine stands (metres) — set from pines"
+    },
+    "pine4_a": {
+      "range": [
+        -20,
+        60
+      ],
+      "means": "the scene's own: where a creeping pine stands (metres) — set from pines"
+    },
+    "pine4_d": {
+      "range": [
+        -20,
+        60
+      ],
+      "means": "the scene's own: where a creeping pine stands (metres) — set from pines"
+    },
+    "pine5_a": {
+      "range": [
+        -20,
+        60
+      ],
+      "means": "the scene's own: where a creeping pine stands (metres) — set from pines"
+    },
+    "pine5_d": {
+      "range": [
+        -20,
+        60
+      ],
+      "means": "the scene's own: where a creeping pine stands (metres) — set from pines"
+    },
+    "pine6_a": {
+      "range": [
+        -20,
+        60
+      ],
+      "means": "the scene's own: where a creeping pine stands (metres) — set from pines"
+    },
+    "pine6_d": {
+      "range": [
+        -20,
+        60
+      ],
+      "means": "the scene's own: where a creeping pine stands (metres) — set from pines"
+    },
+    "pine7_a": {
+      "range": [
+        -20,
+        60
+      ],
+      "means": "the scene's own: where a creeping pine stands (metres) — set from pines"
+    },
+    "pine7_d": {
+      "range": [
+        -20,
+        60
+      ],
+      "means": "the scene's own: where a creeping pine stands (metres) — set from pines"
+    }
+  },
+  "music": {
+    "prompts": [
+      {
+        "text": "Solo nylon-string guitar picking a slow, plain northern folk tune, close and intimate, sea wind behind it",
+        "weight": 0.8
+      },
+      {
+        "text": "Soft accordion holding long quiet chords, a little out of breath, a Finnish summer evening by the shore",
+        "weight": 0
+      },
+      {
+        "text": "Sparse felt piano, three notes and a long pause, cold clear morning air, gentle melancholy",
+        "weight": 0.4
+      },
+      {
+        "text": "A small clarinet melody, wistful and a little comic, like a story told to a child, over a bowed double bass",
+        "weight": 0
+      },
+      {
+        "text": "Glassy harmonium drones with the hiss of waves on granite, slow and wide, almost still",
+        "weight": 0
+      },
+      {
+        "text": "Music box playing a lullaby slightly out of tune, far away, nostalgic",
+        "weight": 0
+      },
+      {
+        "text": "Solo cello, long low phrases, lonely lighthouse at dawn, restrained and warm",
+        "weight": 0
+      },
+      {
+        "text": "Kantele plucked softly, open fifths, Nordic folk, bright and bare",
+        "weight": 1.0
+      },
+      {
+        "text": "Brushed snare and upright bass, a slow cheerful waltz, a family on a boat trip",
+        "weight": 0
+      },
+      {
+        "text": "Whistled melody over a ukulele, light-hearted, a proud father setting out on an adventure",
+        "weight": 0
+      },
+      {
+        "text": "Strings swelling slowly into a wide open chord, the sea and the sky, hopeful and sad at once",
+        "weight": 0
+      },
+      {
+        "text": "Wind chimes and low synth pad, the bare island at night, the moon on the water",
+        "weight": 0
+      },
+      {
+        "text": "Tin whistle and frame drum, a storm coming up over the sea, restless",
+        "weight": 0
+      },
+      {
+        "text": "A celesta and a flute, an imaginary garden painted on a wall, bees and summer warmth",
+        "weight": 0
+      },
+      {
+        "text": "Low drone of a foghorn-like brass note under thin high violins, a dark lighthouse, waiting",
+        "weight": 0.5
+      },
+      {
+        "text": "Children's choir humming wordlessly, very far off, a memory of a valley",
+        "weight": 0
+      }
+    ],
+    "bpm": 66,
+    "density": 0.25,
+    "brightness": 0.5,
+    "scale": "D_MAJOR_B_MINOR"
+  }
+}

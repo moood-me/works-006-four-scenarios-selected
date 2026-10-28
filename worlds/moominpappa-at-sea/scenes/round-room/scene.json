@@ -1,0 +1,1892 @@
+{
+  "engine": 3,
+  "title": "The Round Room",
+  "caption": "The round room at the foot of the lighthouse.",
+  "horizon": 0.4,
+  "camera": {
+    "mode": "picture"
+  },
+  "light": {
+    "ambient": 0.62,
+    "ambientColor": "#c9d2e4",
+    "bounce": 0.55,
+    "haze": 0.04,
+    "hazeColor": "#eadcc6",
+    "hazeGlow": 0,
+    "shafts": 0.3,
+    "tint": "#ffd9a6",
+    "tintStrength": 0.07,
+    "vignette": 0.24,
+    "grain": 0.08,
+    "saturation": 1.08,
+    "wind": [
+      1,
+      0.2,
+      1.1
+    ],
+    "looks": {
+      "dawn": {
+        "ambient": 0.68,
+        "ambientColor": "#dfe6ef",
+        "bounce": 0.55,
+        "haze": 0.035,
+        "hazeColor": "#e3e1e0",
+        "hazeGlow": 0,
+        "shafts": 0,
+        "tint": "#f6dccb",
+        "tintStrength": 0.05,
+        "vignette": 0.22,
+        "grain": 0.08,
+        "saturation": 1.08,
+        "lights": {
+          "sun": 0
+        },
+        "inside": 0.8
+      },
+      "dusk": {
+        "ambient": 0.6,
+        "ambientColor": "#cdbfdc",
+        "haze": 0.05,
+        "hazeColor": "#e8c4b4",
+        "hazeGlow": 0.3,
+        "shafts": 0.25,
+        "tint": "#ffb48c",
+        "tintStrength": 0.1,
+        "saturation": 1.05,
+        "lights": {
+          "sun": 0
+        },
+        "inside": 0.8
+      },
+      "night": {
+        "ambient": 0.64,
+        "ambientColor": "#9cb0e0",
+        "bounce": 0.6,
+        "haze": 0.05,
+        "hazeColor": "#5f7299",
+        "hazeGlow": 0.6,
+        "shafts": 0.35,
+        "tint": "#a8bcff",
+        "tintStrength": 0.1,
+        "saturation": 0.8,
+        "vignette": 0.26,
+        "lights": {
+          "sun": 0,
+          "sun_dawn": 0,
+          "sun_dusk": 0
+        },
+        "inside": 1.0
+      },
+      "storm": {
+        "ambient": 0.6,
+        "ambientColor": "#bcc6d0",
+        "haze": 0.13,
+        "hazeColor": "#9ea9b3",
+        "shafts": 0.1,
+        "tint": "#c4d4e4",
+        "tintStrength": 0.08,
+        "saturation": 0.8,
+        "wind": [
+          1,
+          0.2,
+          2.4
+        ],
+        "lights": {
+          "sun": 0.25,
+          "sun_dawn": 0.3,
+          "sun_dusk": 0.3,
+          "moon": 0.6
+        },
+        "inside": 0.8
+      },
+      "flash": {
+        "ambient": 0.9,
+        "ambientColor": "#e6ecff",
+        "brightness": 1.1,
+        "saturation": 0.75
+      }
+    },
+    "inside": 0.75
+  },
+  "lights": [
+    {
+      "id": "lamp",
+      "of": "lantern#flame",
+      "color": "#ffd08c",
+      "strength": 1.2,
+      "reach": 6,
+      "flicker": 0.1,
+      "glow": 0.1
+    },
+    {
+      "id": "fire",
+      "of": "stove#fire",
+      "color": "#ff9a50",
+      "strength": 1,
+      "reach": 3.5,
+      "flicker": 0.35
+    },
+    {
+      "id": "sun",
+      "from": [
+        18,
+        38
+      ],
+      "color": "#fff1dc",
+      "strength": 1.3,
+      "through": [
+        [
+          [
+            1.048,
+            7.867,
+            0.65
+          ],
+          [
+            2.321,
+            7.3,
+            0.65
+          ],
+          [
+            2.321,
+            7.3,
+            2.3
+          ],
+          [
+            1.048,
+            7.867,
+            2.3
+          ]
+        ],
+        [
+          [
+            2.47,
+            7.197,
+            0
+          ],
+          [
+            3.309,
+            6.387,
+            0
+          ],
+          [
+            3.309,
+            6.387,
+            1.33
+          ],
+          [
+            2.918,
+            6.821,
+            1.83
+          ],
+          [
+            2.47,
+            7.197,
+            1.33
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "sun_dawn",
+      "from": [
+        8,
+        7
+      ],
+      "color": "#ffe0c2",
+      "strength": 1.3,
+      "on": "dawn",
+      "through": [
+        [
+          [
+            1.048,
+            7.867,
+            0.65
+          ],
+          [
+            2.321,
+            7.3,
+            0.65
+          ],
+          [
+            2.321,
+            7.3,
+            2.3
+          ],
+          [
+            1.048,
+            7.867,
+            2.3
+          ]
+        ],
+        [
+          [
+            2.47,
+            7.197,
+            0
+          ],
+          [
+            3.309,
+            6.387,
+            0
+          ],
+          [
+            3.309,
+            6.387,
+            1.33
+          ],
+          [
+            2.918,
+            6.821,
+            1.83
+          ],
+          [
+            2.47,
+            7.197,
+            1.33
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "sun_dusk",
+      "from": [
+        38,
+        6
+      ],
+      "color": "#ffb486",
+      "strength": 1.3,
+      "on": "dusk",
+      "through": [
+        [
+          [
+            1.048,
+            7.867,
+            0.65
+          ],
+          [
+            2.321,
+            7.3,
+            0.65
+          ],
+          [
+            2.321,
+            7.3,
+            2.3
+          ],
+          [
+            1.048,
+            7.867,
+            2.3
+          ]
+        ],
+        [
+          [
+            2.47,
+            7.197,
+            0
+          ],
+          [
+            3.309,
+            6.387,
+            0
+          ],
+          [
+            3.309,
+            6.387,
+            1.33
+          ],
+          [
+            2.918,
+            6.821,
+            1.83
+          ],
+          [
+            2.47,
+            7.197,
+            1.33
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "moon",
+      "from": "sky#moon",
+      "color": "#cdd8ff",
+      "strength": 1.8,
+      "on": "night",
+      "through": [
+        [
+          [
+            1.048,
+            7.867,
+            0.65
+          ],
+          [
+            2.321,
+            7.3,
+            0.65
+          ],
+          [
+            2.321,
+            7.3,
+            2.3
+          ],
+          [
+            1.048,
+            7.867,
+            2.3
+          ]
+        ],
+        [
+          [
+            2.47,
+            7.197,
+            0
+          ],
+          [
+            3.309,
+            6.387,
+            0
+          ],
+          [
+            3.309,
+            6.387,
+            1.33
+          ],
+          [
+            2.918,
+            6.821,
+            1.83
+          ],
+          [
+            2.47,
+            7.197,
+            1.33
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "flash",
+      "from": [
+        9,
+        4
+      ],
+      "color": "#e8eeff",
+      "strength": 1.8,
+      "on": "flash",
+      "through": [
+        [
+          [
+            1.048,
+            7.867,
+            0.65
+          ],
+          [
+            2.321,
+            7.3,
+            0.65
+          ],
+          [
+            2.321,
+            7.3,
+            2.3
+          ],
+          [
+            1.048,
+            7.867,
+            2.3
+          ]
+        ],
+        [
+          [
+            2.47,
+            7.197,
+            0
+          ],
+          [
+            3.309,
+            6.387,
+            0
+          ],
+          [
+            3.309,
+            6.387,
+            1.33
+          ],
+          [
+            2.918,
+            6.821,
+            1.83
+          ],
+          [
+            2.47,
+            7.197,
+            1.33
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "lamp_papa",
+      "at": "papa#flame",
+      "on": "papa_lamp",
+      "color": "#ffd08c",
+      "strength": 1.1,
+      "reach": 5,
+      "flicker": 0.1,
+      "glow": 0.2
+    },
+    {
+      "id": "lamp_troll",
+      "at": "troll#flame",
+      "on": "troll_lamp",
+      "color": "#ffd08c",
+      "strength": 1.1,
+      "reach": 5,
+      "flicker": 0.1,
+      "glow": 0.2
+    },
+    {
+      "id": "window_light",
+      "of": "casement",
+      "daylight": 1,
+      "on": "window_open"
+    },
+    {
+      "id": "door_light",
+      "of": "door",
+      "daylight": 1,
+      "on": "door"
+    }
+  ],
+  "modules": [
+    "cast",
+    "island",
+    "lantern",
+    "beats",
+    "closeups"
+  ],
+  "objects": [
+    {
+      "id": "sky",
+      "name": "The sky",
+      "sky": true,
+      "uniforms": {
+        "low": 0.41,
+        "day_x": 0.2,
+        "day_y": -0.3,
+        "dawn_x": 1.03,
+        "dusk_x": 1.67,
+        "dawn": 0,
+        "dusk": 0,
+        "night": 0,
+        "storm": 0,
+        "flash": 0
+      }
+    },
+    {
+      "id": "sea",
+      "name": "The sea",
+      "plane": true,
+      "across": 0,
+      "distance": 1450,
+      "width": 2400,
+      "depth": 3000,
+      "elevation": -5,
+      "reflect": {
+        "strength": 0.2,
+        "fade": 0,
+        "rough": 0.6,
+        "ripple": 0.4
+      },
+      "uniforms": {
+        "storm": 0,
+        "calm": 0
+      }
+    },
+    {
+      "id": "granite",
+      "name": "The lighthouse's knoll",
+      "plane": true,
+      "drape": true,
+      "across": 14,
+      "distance": 22,
+      "width": 44,
+      "depth": 44
+    },
+    {
+      "id": "cape",
+      "name": "The Fisherman's cape, far off",
+      "plane": true,
+      "drape": true,
+      "across": 23,
+      "distance": 112,
+      "width": 56,
+      "depth": 46
+    },
+    {
+      "id": "porch",
+      "name": "The top step outside",
+      "plane": true,
+      "across": 3.23,
+      "distance": 7.145,
+      "elevation": -0.03,
+      "width": 1.4,
+      "depth": 0.9,
+      "rotation": -44
+    },
+    {
+      "id": "floor",
+      "name": "The floor",
+      "plane": true,
+      "across": 0,
+      "distance": 3.8,
+      "elevation": 0.01,
+      "width": 7.4,
+      "depth": 7.4,
+      "inside": true
+    },
+    {
+      "id": "puddles",
+      "name": "The sea on the floor",
+      "plane": true,
+      "across": 0,
+      "distance": 3.8,
+      "elevation": 0.014,
+      "width": 7.4,
+      "depth": 7.4,
+      "inside": true,
+      "reflect": {
+        "strength": 0.6,
+        "fade": 3,
+        "rough": 0.15,
+        "ripple": 0.2
+      }
+    },
+    {
+      "id": "ceiling",
+      "name": "The ceiling",
+      "plane": true,
+      "across": 0,
+      "distance": 3.8,
+      "elevation": 3.6,
+      "width": 7.4,
+      "depth": 7.4,
+      "tilt": 180,
+      "inside": true
+    },
+    {
+      "id": "wall_a",
+      "name": "The wall, left of the window",
+      "across": -3.333,
+      "distance": 5.162,
+      "facing": 112.225,
+      "box": [
+        -5.1665,
+        -3.6,
+        5.1665,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "wall_b",
+      "name": "The wall between the window and the door",
+      "across": 2.054,
+      "distance": 6.757,
+      "facing": 214.783,
+      "box": [
+        -0.0775,
+        -3.6,
+        0.0775,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "wall_c",
+      "name": "The wall, right of the door",
+      "across": 3.534,
+      "distance": 3.114,
+      "facing": 280.992,
+      "box": [
+        -3.0795,
+        -3.6,
+        3.0795,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "win_low",
+      "name": "The wall under the window",
+      "across": 1.464,
+      "distance": 7.089,
+      "facing": 204.0,
+      "box": [
+        -0.6,
+        -0.65,
+        0.6,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "win_top",
+      "name": "The wall over the window",
+      "across": 1.464,
+      "distance": 7.089,
+      "facing": 204.0,
+      "elevation": 2.3,
+      "box": [
+        -0.6,
+        -1.3,
+        0.6,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "reveal",
+      "name": "The window's cheeks",
+      "box": [
+        -0.3,
+        -1.65,
+        0.3,
+        0
+      ],
+      "inside": true,
+      "copies": [
+        {
+          "across": 0.973,
+          "distance": 7.577,
+          "elevation": 0.65,
+          "facing": 104.451
+        },
+        {
+          "across": 2.155,
+          "distance": 7.05,
+          "elevation": 0.65,
+          "facing": 303.549
+        }
+      ]
+    },
+    {
+      "id": "sill",
+      "name": "The windowsill",
+      "plane": true,
+      "across": 1.586,
+      "distance": 7.363,
+      "elevation": 0.65,
+      "width": 1.2,
+      "depth": 0.6,
+      "rotation": -24,
+      "inside": true
+    },
+    {
+      "id": "jar",
+      "name": "The jar with the brushes",
+      "across": 1.875,
+      "distance": 7.048,
+      "facing": 204,
+      "elevation": 0.65,
+      "box": [
+        -0.08,
+        -0.36,
+        0.08,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "casement",
+      "name": "The window",
+      "across": 1.676,
+      "distance": 7.564,
+      "facing": 204,
+      "elevation": 0.65,
+      "box": [
+        -0.6,
+        -1.65,
+        0.6,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "pane_rain",
+      "name": "Rain running down the window",
+      "on": "casement",
+      "distance": 0.03,
+      "elevation": 0.82,
+      "particles": {
+        "kind": "drops",
+        "source": [
+          1.1,
+          0,
+          1.5
+        ],
+        "rate": 5,
+        "amount": "storm"
+      }
+    },
+    {
+      "id": "shutters",
+      "name": "The shutters",
+      "across": 1.725,
+      "distance": 7.673,
+      "facing": 204,
+      "elevation": 0.6,
+      "shadow": true,
+      "box": [
+        -0.6699999999999999,
+        -1.77,
+        0.6699999999999999,
+        0.02
+      ]
+    },
+    {
+      "id": "door_top",
+      "name": "The wall over the door",
+      "across": 2.477,
+      "distance": 6.365,
+      "facing": 224,
+      "box": [
+        -0.5,
+        -3.6,
+        0.5,
+        -1.32
+      ],
+      "inside": true
+    },
+    {
+      "id": "door_reveal",
+      "name": "The doorway's reveal",
+      "across": 2.477,
+      "distance": 6.365,
+      "facing": 224,
+      "box": [
+        -2.115,
+        -0.6,
+        2.115,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "threshold",
+      "name": "The threshold",
+      "plane": true,
+      "across": 2.685,
+      "distance": 6.58,
+      "elevation": 0.025,
+      "width": 1.0,
+      "depth": 0.6,
+      "rotation": -44,
+      "inside": true
+    },
+    {
+      "id": "door",
+      "name": "The doorway",
+      "across": 2.47,
+      "distance": 6.357,
+      "facing": 224,
+      "box": [
+        -0.62,
+        -1.9500000000000002,
+        0.62,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "door_leaf",
+      "name": "The door",
+      "across": 2.117,
+      "distance": 6.712,
+      "facing": 224,
+      "place": {
+        "facing": "door_f"
+      },
+      "shadow": true,
+      "box": [
+        -0.01,
+        -1.84,
+        1.01,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "basket",
+      "name": "Moominmamma's basket",
+      "across": 1.648,
+      "distance": 6.543,
+      "shadow": true,
+      "box": [
+        -0.28,
+        -0.66,
+        0.28,
+        0.03
+      ],
+      "inside": true
+    },
+    {
+      "id": "stone",
+      "name": "The boy's stone",
+      "across": 2.733,
+      "distance": 5.823,
+      "box": [
+        -0.12,
+        -0.12,
+        0.12,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "stair_tread",
+      "name": "The stair's lower tread",
+      "plane": true,
+      "unseen": true,
+      "walk": true,
+      "across": -2.17,
+      "distance": 5.754,
+      "elevation": 1.588,
+      "width": 0.5,
+      "depth": 0.5,
+      "rotation": -48
+    },
+    {
+      "id": "stair",
+      "name": "The stair to the hatch",
+      "across": -2.452,
+      "distance": 6.008,
+      "facing": 132,
+      "shadow": true,
+      "box": [
+        -1.25,
+        -3.65,
+        1.25,
+        0.03
+      ],
+      "inside": true
+    },
+    {
+      "id": "shelf",
+      "name": "The shelf with the paraffin",
+      "across": 0.364,
+      "distance": 7.261,
+      "facing": 186,
+      "elevation": 1.85,
+      "shadow": true,
+      "box": [
+        -0.5,
+        -0.5,
+        0.5,
+        0.2
+      ],
+      "inside": true
+    },
+    {
+      "id": "stove",
+      "name": "The stove",
+      "across": 2.874,
+      "distance": 4.961,
+      "shadow": true,
+      "box": [
+        -0.4,
+        -3.65,
+        0.8,
+        0.05
+      ],
+      "inside": true
+    },
+    {
+      "id": "stove_steam",
+      "name": "Steam off the flooded stove",
+      "inside": true,
+      "particles": {
+        "kind": "smoke",
+        "at": "stove#hob",
+        "color": "#eef0f2",
+        "rate": 14,
+        "size": [
+          0.15,
+          1.2
+        ],
+        "speed": [
+          0.4,
+          0.8
+        ],
+        "life": [
+          3,
+          5
+        ],
+        "opacity": 0.5,
+        "shadow": 0.2,
+        "amount": "steam"
+      }
+    },
+    {
+      "id": "drip",
+      "name": "Drips from the ceiling",
+      "across": 1.6,
+      "distance": 5.2,
+      "elevation": 3.5500000000000003,
+      "inside": true,
+      "particles": {
+        "kind": "splashes",
+        "source": [
+          1.8,
+          1.8,
+          0
+        ],
+        "rate": 1.2,
+        "life": [
+          0.9,
+          1.2
+        ],
+        "direction": [
+          0,
+          0,
+          -1
+        ],
+        "spread": 3,
+        "speed": [
+          0.1,
+          0.3
+        ],
+        "gravity": 9.8,
+        "shape": "drop",
+        "size": [
+          0.012,
+          0.012
+        ],
+        "ground": "splash",
+        "settle": 0.15,
+        "amount": "drip"
+      }
+    },
+    {
+      "id": "spill_splash",
+      "name": "Paraffin splashed on the threshold",
+      "inside": true,
+      "particles": {
+        "kind": "splashes",
+        "at": "door#threshold",
+        "color": "#e8e2c8",
+        "burst": {
+          "on": "spill",
+          "count": 26,
+          "over": 0.08
+        }
+      }
+    },
+    {
+      "id": "dust_puff",
+      "name": "The dust off the line",
+      "inside": true,
+      "particles": {
+        "kind": "puff",
+        "at": "wall_a#line27",
+        "color": "#c9c1ae",
+        "burst": {
+          "on": "dust_cloud",
+          "count": 30,
+          "over": 0.1
+        }
+      }
+    },
+    {
+      "id": "bunks",
+      "name": "The bunks",
+      "across": -3.169,
+      "distance": 3.355,
+      "facing": 82,
+      "shadow": true,
+      "box": [
+        -1.05,
+        -1.8,
+        1.05,
+        0.03
+      ],
+      "inside": true
+    },
+    {
+      "id": "table",
+      "name": "The table",
+      "plane": true,
+      "across": 0,
+      "distance": 4.45,
+      "elevation": 0.72,
+      "width": 1.5,
+      "depth": 0.8,
+      "inside": true
+    },
+    {
+      "id": "table_legs",
+      "name": "The table's legs",
+      "across": 0,
+      "distance": 4.45,
+      "facing": 180,
+      "shadow": true,
+      "box": [
+        -0.85,
+        -0.76,
+        0.85,
+        0.05
+      ],
+      "inside": true
+    },
+    {
+      "id": "lantern",
+      "name": "The storm lantern",
+      "across": 0.12,
+      "distance": 4.4,
+      "elevation": 0.72,
+      "box": [
+        -0.16,
+        -0.48,
+        0.16,
+        0.03
+      ],
+      "uniforms": {
+        "lit": 0
+      },
+      "inside": true,
+      "place": {
+        "across": "lantern_a",
+        "distance": "lantern_d",
+        "elevation": "lantern_e"
+      }
+    },
+    {
+      "id": "cup",
+      "name": "The cups",
+      "across": -0.42,
+      "distance": 4.3,
+      "elevation": 0.72,
+      "box": [
+        -0.07,
+        -0.12,
+        0.3,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "tea_steam",
+      "name": "Steam over the tea",
+      "inside": true,
+      "particles": {
+        "kind": "smoke",
+        "at": "cup#cup",
+        "color": "#f4f4f2",
+        "rate": 3,
+        "size": [
+          0.03,
+          0.18
+        ],
+        "speed": [
+          0.08,
+          0.15
+        ],
+        "life": [
+          2,
+          3
+        ],
+        "opacity": 0.25,
+        "gravity": -0.1,
+        "shadow": 0,
+        "amount": "tea"
+      }
+    },
+    {
+      "id": "wall_mama",
+      "name": "Moominmamma in her garden",
+      "across": -0.653,
+      "distance": 7.325,
+      "facing": 169.5,
+      "elevation": 1.0,
+      "box": [
+        -0.22,
+        -0.42,
+        0.28,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "bench",
+      "name": "The bench",
+      "across": 0.03,
+      "distance": 5.15,
+      "shadow": true,
+      "box": [
+        -0.85,
+        -0.5,
+        0.85,
+        0.03
+      ],
+      "inside": true
+    },
+    {
+      "id": "stool",
+      "name": "Moominmamma's stool",
+      "across": -1.05,
+      "distance": 4.25,
+      "shadow": true,
+      "box": [
+        -0.22,
+        -0.5,
+        0.22,
+        0.03
+      ],
+      "inside": true
+    },
+    {
+      "id": "handbag",
+      "name": "Moominmamma's handbag",
+      "across": -1.45,
+      "distance": 4.0,
+      "facing": 200,
+      "shadow": true,
+      "box": [
+        -0.25,
+        -0.4,
+        0.25,
+        0.03
+      ],
+      "inside": true
+    },
+    {
+      "id": "motes",
+      "name": "Dust in the light",
+      "across": 1.4,
+      "distance": 6.1,
+      "elevation": 0.9,
+      "inside": true,
+      "particles": {
+        "kind": "dust",
+        "source": [
+          1.6,
+          1.6,
+          1.4
+        ]
+      }
+    },
+    {
+      "id": "needle",
+      "name": "Mama's needle close",
+      "insert": "needle_open"
+    },
+    {
+      "id": "handle",
+      "name": "The lantern's handle close",
+      "insert": "handle_open"
+    },
+    {
+      "id": "paws",
+      "name": "The boy's paws close",
+      "insert": "paws_open"
+    },
+    {
+      "id": "papa",
+      "name": "Moominpappa",
+      "person": {
+        "cast": "cast",
+        "who": "papa",
+        "does": "hands_behind"
+      },
+      "across": -2.7,
+      "distance": 4.6,
+      "place": {
+        "across": "papa_a",
+        "distance": "papa_d"
+      },
+      "inside": true
+    },
+    {
+      "id": "mama",
+      "name": "Moominmamma",
+      "person": {
+        "cast": "cast",
+        "who": "mama",
+        "does": "seated"
+      },
+      "across": -1.05,
+      "distance": 4.25,
+      "place": {
+        "across": "mama_a",
+        "distance": "mama_d"
+      },
+      "inside": true
+    },
+    {
+      "id": "my",
+      "name": "Little My",
+      "person": {
+        "cast": "cast",
+        "who": "my",
+        "does": "seated"
+      },
+      "across": 0.78,
+      "distance": 4.6,
+      "place": {
+        "across": "my_a",
+        "distance": "my_d"
+      },
+      "inside": true
+    },
+    {
+      "id": "troll",
+      "name": "Moomintroll",
+      "person": {
+        "cast": "cast",
+        "who": "troll"
+      },
+      "across": 1.302,
+      "distance": 6.723,
+      "place": {
+        "across": "troll_a",
+        "distance": "troll_d"
+      },
+      "inside": true
+    }
+  ],
+  "state": {
+    "dawn": 0,
+    "dusk": 0,
+    "night": 0,
+    "moon": 0.6,
+    "storm": 0,
+    "calm": 0,
+    "flash": 0,
+    "lighthouse_lit": 0,
+    "beam": 0,
+    "beam_turn": 0,
+    "beam_tilt": -1,
+    "room_lit": 0,
+    "garden": -1,
+    "paints": "green",
+    "wall_mama": 0,
+    "wall_grass": false,
+    "apple_leaves": true,
+    "clouds": false,
+    "line27": "dust",
+    "log": 0,
+    "log_depth": false,
+    "sill": -1,
+    "brushes": "sill",
+    "lantern_at": "table",
+    "flame": "full",
+    "paraffin": 3,
+    "stove": "cold",
+    "firewood": true,
+    "steam": 0,
+    "cups": 0,
+    "tea": 0,
+    "door": 0,
+    "basket": false,
+    "stone": false,
+    "shutters": false,
+    "wet": false,
+    "drip": 0,
+    "door_f": 224,
+    "lantern_a": 0.12,
+    "lantern_d": 4.4,
+    "lantern_e": 0.72,
+    "window_open": 1,
+    "lantern_x": 0,
+    "papa_lamp": 0,
+    "troll_lamp": 0,
+    "needle_open": 0,
+    "handle_open": 0,
+    "paws_open": 0,
+    "paws_rub": 0,
+    "paws_thaw": 0,
+    "spill": 0,
+    "dust_cloud": 0,
+    "son_look": "none",
+    "son_given": false,
+    "paints_left": false,
+    "thread": 0,
+    "give": 0,
+    "can_sway": 0,
+    "wipe": 0,
+    "eyes": 1,
+    "door_shake": 0,
+    "mama_to": "papa",
+    "beat": "",
+    "beat_next": "",
+    "papa_a": -2.7,
+    "mama_a": -1.05,
+    "my_a": 0.78,
+    "troll_a": 1.302,
+    "papa_d": 4.6,
+    "mama_d": 4.25,
+    "my_d": 4.6,
+    "troll_d": 6.723,
+    "papa_turn": 120,
+    "papa_look": [
+      0,
+      4.45,
+      0.9
+    ],
+    "papa_mood": "thinking",
+    "mama_on": [
+      -1.05,
+      4.25,
+      0.45
+    ],
+    "mama_turn": 115,
+    "mama_look": [
+      0,
+      4.45,
+      0.9
+    ],
+    "mama_mood": "smile",
+    "my_on": [
+      0.78,
+      4.6,
+      0.72
+    ],
+    "my_turn": 250,
+    "my_look": "papa",
+    "my_mood": "smile",
+    "troll_turn": 24,
+    "troll_look": [
+      4.881,
+      14.763,
+      0.4
+    ],
+    "troll_mood": "thinking"
+  },
+  "states": {
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dawn's light and sky (0 — the day)"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dusk's light and sky, the afterglow (0 — the day); may move before the eyes"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the moonlit night (0 — the day); over dawn and dusk"
+    },
+    "moon": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the moon's phase: 0 a thin crescent … 1 full (changes between steps; seen by night)"
+    },
+    "storm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the storm: grey light and sky, its clouds, many quick crests, rain, wind; over a half — lightning now and then"
+    },
+    "calm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the sea calm: few crests, slow (a still night)"
+    },
+    "flash": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "lightning: the sky and everything lit white a moment (the storm's script and the game's moments)"
+    },
+    "lighthouse_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lighthouse's lamp burns: the lantern's glass warm, its light and glow"
+    },
+    "beam": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lighthouse's beam: 0 none … 1 full; while on, the island's script turns it (seen in the air by night, at dusk, in a storm)"
+    },
+    "beam_turn": {
+      "type": "number",
+      "means": "the beam's bearing, degrees (the island's script turns it on and on while beam is on)"
+    },
+    "room_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the round room's window on the tower lit from within (seen from outside)"
+    },
+    "beam_tilt": {
+      "range": [
+        -60,
+        10
+      ],
+      "smooth": true,
+      "means": "the beam's height, degrees (−1 a little down, out to sea; a piece tilts it down onto someone «in the beam»)"
+    },
+    "garden": {
+      "range": [
+        -1,
+        4
+      ],
+      "means": "Moominmamma's garden on the wall: −1 the bare wall; 0 the apple tree, the veranda, the stream, the boy, My and herself with her basket, half washed in, a gate with little Papa at it; 1 coloured in (little Papa still at the gate); 2 the path, bushes, more flowers; 3 apples, beds of flowers; 4 whole, her sky behind it"
+    },
+    "paints": {
+      "values": [
+        "green",
+        "red_blue"
+      ],
+      "means": "her paints, on the sill and the wall: her own greens, or the red lead and frame blue from the store"
+    },
+    "wall_mama": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "Moominmamma in her garden under the apple tree: 0 not there … 1 there"
+    },
+    "wall_grass": {
+      "type": "boolean",
+      "means": "the grass under the apple tree pressed where she sat"
+    },
+    "apple_leaves": {
+      "type": "boolean",
+      "means": "the apple tree has its last leaves (false: its top bare, never finished)"
+    },
+    "clouds": {
+      "type": "boolean",
+      "means": "clouds painted over the apple tree"
+    },
+    "line27": {
+      "values": [
+        "dust",
+        "clean",
+        "stripe",
+        "next"
+      ],
+      "means": "the line of the 27th of August low by the floor: under the dust; wiped clean; clean, a finger's stripe through the dust under it; clean, and the next line under it too"
+    },
+    "log": {
+      "range": [
+        0,
+        2
+      ],
+      "means": "Moominpappa's log on the keeper's wall: 0 none; 1 «23 August. Arrived.» across «Nobody again»; 2 and «27 August. Calm.»"
+    },
+    "log_depth": {
+      "type": "boolean",
+      "means": "his line «Depth: more than the rope.»"
+    },
+    "sill": {
+      "range": [
+        -1,
+        4
+      ],
+      "means": "Moominmamma's painted garden on the sill: −1 bare; 0 her first stem; 1–4 that many flowers by it"
+    },
+    "brushes": {
+      "values": [
+        "sill",
+        "jar"
+      ],
+      "means": "her brush laid on the sill by her paint, or her brushes put away in the jar"
+    },
+    "lantern_at": {
+      "values": [
+        "table",
+        "stair",
+        "bunk",
+        "none"
+      ],
+      "means": "where the storm lantern stands: the table's middle, the stair's middle tread, the floor by the boy's bunk, not in the room"
+    },
+    "flame": {
+      "values": [
+        "full",
+        "low",
+        "out",
+        "frost"
+      ],
+      "means": "the lantern's flame: full, turned low, out (empty), out and white with rime"
+    },
+    "paraffin": {
+      "range": [
+        0,
+        3
+      ],
+      "means": "measures of paraffin left in the can (strokes on its label; 0 its cap off)"
+    },
+    "stove": {
+      "values": [
+        "cold",
+        "fire",
+        "flooded"
+      ],
+      "means": "the stove: cold; a fire in it; flooded by the sea down its pipe"
+    },
+    "firewood": {
+      "type": "boolean",
+      "means": "the driftwood bundle by the stove full (false: two sticks left)"
+    },
+    "steam": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "steam off the flooded stove"
+    },
+    "cups": {
+      "range": [
+        0,
+        2
+      ],
+      "means": "cups on the table"
+    },
+    "tea": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "steam over the cups: 1 hot tea … 0 gone cold"
+    },
+    "door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the door: 0 shut … 1 wide open into the room"
+    },
+    "basket": {
+      "type": "boolean",
+      "means": "Moominmamma's basket packed by the door"
+    },
+    "stone": {
+      "type": "boolean",
+      "means": "the boy's stone left just inside the door"
+    },
+    "shutters": {
+      "type": "boolean",
+      "means": "the window's shutters shut and tied"
+    },
+    "wet": {
+      "type": "boolean",
+      "means": "the sea come in lies on the floor"
+    },
+    "drip": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "drips from the ceiling after the storm"
+    },
+    "door_f": {
+      "type": "number",
+      "means": "the door leaf's turn, degrees — the script sets it from door"
+    },
+    "lantern_a": {
+      "type": "number",
+      "means": "the lantern's place, across — the script sets it from lantern_at"
+    },
+    "lantern_d": {
+      "type": "number",
+      "means": "the lantern's place, distance — the script sets it from lantern_at"
+    },
+    "lantern_e": {
+      "type": "number",
+      "means": "the lantern's place, elevation — the script sets it from lantern_at"
+    },
+    "window_open": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the window lets the day in (0 behind the shutters) — the script sets it from shutters"
+    },
+    "papa_lamp": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the lantern papa carries burns (its light at the hand)"
+    },
+    "troll_lamp": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the lantern troll carries burns (its light at the hand)"
+    },
+    "needle_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up `needle` open (modules/closeups)"
+    },
+    "handle_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up `handle` open (modules/closeups)"
+    },
+    "paws_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up `paws` open (modules/closeups)"
+    },
+    "paws_rub": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up `paws`: Mama's paws rubbing his"
+    },
+    "paws_thaw": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up `paws`: the rime going"
+    },
+    "thread": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М5б: the thread to the needle's eye and through (the close-up `needle`)"
+    },
+    "give": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М5в: Papa's paw opening on the handle, the boy's closing (the close-up `handle`)"
+    },
+    "son_look": {
+      "values": [
+        "none",
+        "papa",
+        "up",
+        "away"
+      ],
+      "means": "how the boy looks at Papa (the game's, by its marks): papa — he knows Papa knows (night 3: a look at Papa first, then the door); up — after «не спрошу» (3.1: he lifts his eyes to Papa a moment); away — closed to him (night 3: he does not look at Papa; «Мама права»: trembling at the window)"
+    },
+    "son_given": {
+      "type": "boolean",
+      "means": "«Сын: отец дал» (the lantern given him at sea): at Ш1 «Сыну» he takes it without looking up at Papa in surprise"
+    },
+    "paints_left": {
+      "type": "boolean",
+      "means": "Mama's paint box left on the sill (the late «Лодка»)"
+    },
+    "spill": {
+      "type": "number",
+      "means": "М2б: paraffin splashed over the threshold — each change, a splash (the mini-game counts it up)"
+    },
+    "dust_cloud": {
+      "type": "number",
+      "means": "М6в: the dust wiped too hard — each change, a cloud of it off the line (the mini-game counts it up)"
+    },
+    "can_sway": {
+      "range": [
+        -1,
+        1
+      ],
+      "smooth": true,
+      "means": "М2б: the can's sway as he carries it"
+    },
+    "wipe": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М6в: the dust wiped along the line"
+    },
+    "eyes": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М7а «Спит»: Papa's eyes — 0 shut, asleep (on a seat or on the floor); 1 open, on the boy"
+    },
+    "door_shake": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М9б: the door's blow"
+    },
+    "lantern_x": {
+      "type": "number",
+      "means": "the lantern moved along the table from its middle, metres (the piece «Бери, бери»)"
+    },
+    "mama_to": {
+      "values": [
+        "papa",
+        "apple"
+      ],
+      "means": "whom Mama tells «I want to go home» at the door in the storm: Papa, or the painted apple tree (Ш2 «Гуляет»)"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (modules/beats)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game plays next (modules/beats: made ready ahead)"
+    },
+    "papa_a": {
+      "type": "number",
+      "means": "where papa stands, across"
+    },
+    "mama_a": {
+      "type": "number",
+      "means": "where mama stands, across"
+    },
+    "my_a": {
+      "type": "number",
+      "means": "where my stands, across"
+    },
+    "troll_a": {
+      "type": "number",
+      "means": "where troll stands, across"
+    },
+    "papa_d": {
+      "type": "number",
+      "means": "where papa stands, distance"
+    },
+    "mama_d": {
+      "type": "number",
+      "means": "where mama stands, distance"
+    },
+    "my_d": {
+      "type": "number",
+      "means": "where my stands, distance"
+    },
+    "troll_d": {
+      "type": "number",
+      "means": "where troll stands, distance"
+    }
+  },
+  "music": {
+    "prompts": [
+      {
+        "text": "Solo nylon-string guitar picking a slow, plain northern folk tune, close and intimate, sea wind behind it",
+        "weight": 0.5
+      },
+      {
+        "text": "Soft accordion holding long quiet chords, a little out of breath, a Finnish summer evening by the shore",
+        "weight": 0.6
+      },
+      {
+        "text": "Sparse felt piano, three notes and a long pause, cold clear morning air, gentle melancholy",
+        "weight": 0.8
+      },
+      {
+        "text": "A small clarinet melody, wistful and a little comic, like a story told to a child, over a bowed double bass",
+        "weight": 0
+      },
+      {
+        "text": "Glassy harmonium drones with the hiss of waves on granite, slow and wide, almost still",
+        "weight": 0
+      },
+      {
+        "text": "Music box playing a lullaby slightly out of tune, far away, nostalgic",
+        "weight": 0
+      },
+      {
+        "text": "Solo cello, long low phrases, lonely lighthouse at dawn, restrained and warm",
+        "weight": 0
+      },
+      {
+        "text": "Kantele plucked softly, open fifths, Nordic folk, bright and bare",
+        "weight": 0
+      },
+      {
+        "text": "Brushed snare and upright bass, a slow cheerful waltz, a family on a boat trip",
+        "weight": 0
+      },
+      {
+        "text": "Whistled melody over a ukulele, light-hearted, a proud father setting out on an adventure",
+        "weight": 0
+      },
+      {
+        "text": "Strings swelling slowly into a wide open chord, the sea and the sky, hopeful and sad at once",
+        "weight": 0
+      },
+      {
+        "text": "Wind chimes and low synth pad, the bare island at night, the moon on the water",
+        "weight": 0.9
+      },
+      {
+        "text": "Tin whistle and frame drum, a storm coming up over the sea, restless",
+        "weight": 0
+      },
+      {
+        "text": "A celesta and a flute, an imaginary garden painted on a wall, bees and summer warmth",
+        "weight": 0.3
+      },
+      {
+        "text": "Low drone of a foghorn-like brass note under thin high violins, a dark lighthouse, waiting",
+        "weight": 0
+      },
+      {
+        "text": "Children's choir humming wordlessly, very far off, a memory of a valley",
+        "weight": 0
+      }
+    ],
+    "bpm": 66,
+    "density": 0.25,
+    "brightness": 0.35,
+    "scale": "D_MAJOR_B_MINOR"
+  }
+}

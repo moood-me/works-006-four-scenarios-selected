@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Beach","translation":"Берег","where":"scenes/shore/scene.json title"},
+  {"text":"The sand by the water. At night the Groke comes here and sits facing the lights.","translation":"Песок у воды. Ночью сюда приходит Морра и садится лицом к огням.","where":"scenes/shore/scene.json caption"}
+]}

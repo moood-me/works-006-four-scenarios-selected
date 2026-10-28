@@ -1,0 +1,10 @@
+{
+  "title": "Moominpappa at Sea",
+  "description": "A bare pink-granite island far out in a grey-blue sea, an unlit lighthouse, a few frightened black pines. After Tove Jansson: a family that came to find its place, each finding a loneliness of their own.",
+  "themes": {
+    "sea": 50,
+    "fairy tale": 30,
+    "family": 20
+  },
+  "main": "landing"
+}

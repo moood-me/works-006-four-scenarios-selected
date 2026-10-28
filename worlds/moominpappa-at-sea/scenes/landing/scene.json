@@ -1,0 +1,1245 @@
+{
+  "engine": 3,
+  "title": "The Landing Rocks",
+  "caption": "Dawn on the island. The lighthouse is dark, and the door is locked.",
+  "horizon": 0.52,
+  "camera": {
+    "mode": "picture"
+  },
+  "light": {
+    "ambient": 0.62,
+    "ambientColor": "#c9d2e4",
+    "bounce": 0.55,
+    "haze": 0.04,
+    "hazeColor": "#eadcc6",
+    "hazeGlow": 0,
+    "shafts": 0.3,
+    "tint": "#ffd9a6",
+    "tintStrength": 0.07,
+    "vignette": 0.24,
+    "grain": 0.08,
+    "saturation": 1.08,
+    "wind": [
+      0.6,
+      -1,
+      0.9
+    ],
+    "looks": {
+      "dawn": {
+        "ambient": 0.68,
+        "ambientColor": "#dfe6ef",
+        "bounce": 0.55,
+        "haze": 0.035,
+        "hazeColor": "#e3e1e0",
+        "hazeGlow": 0,
+        "shafts": 0,
+        "tint": "#f6dccb",
+        "tintStrength": 0.05,
+        "vignette": 0.22,
+        "grain": 0.08,
+        "saturation": 1.08,
+        "lights": {
+          "sun": 0
+        }
+      },
+      "dusk": {
+        "ambient": 0.6,
+        "ambientColor": "#cdbfdc",
+        "haze": 0.05,
+        "hazeColor": "#e8c4b4",
+        "hazeGlow": 0.3,
+        "shafts": 0.25,
+        "tint": "#ffb48c",
+        "tintStrength": 0.1,
+        "saturation": 1.05,
+        "lights": {
+          "sun": 0
+        }
+      },
+      "night": {
+        "ambient": 0.5,
+        "ambientColor": "#9cb0e0",
+        "bounce": 0.6,
+        "haze": 0.05,
+        "hazeColor": "#5f7299",
+        "hazeGlow": 0.6,
+        "shafts": 0.35,
+        "tint": "#a8bcff",
+        "tintStrength": 0.1,
+        "saturation": 0.8,
+        "vignette": 0.26,
+        "lights": {
+          "sun": 0,
+          "sun_dawn": 0,
+          "sun_dusk": 0
+        }
+      },
+      "storm": {
+        "ambient": 0.6,
+        "ambientColor": "#bcc6d0",
+        "haze": 0.13,
+        "hazeColor": "#9ea9b3",
+        "shafts": 0.1,
+        "tint": "#c4d4e4",
+        "tintStrength": 0.08,
+        "saturation": 0.8,
+        "wind": [
+          0.6,
+          -1,
+          2.4
+        ],
+        "lights": {
+          "sun": 0.25,
+          "sun_dawn": 0.3,
+          "sun_dusk": 0.3,
+          "moon": 0.6,
+          "beam": 0.4
+        }
+      },
+      "flash": {
+        "ambient": 0.9,
+        "ambientColor": "#e6ecff",
+        "brightness": 1.1,
+        "saturation": 0.75
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "sun",
+      "from": [
+        -140,
+        42
+      ],
+      "color": "#ffe6c8",
+      "strength": 1.45
+    },
+    {
+      "id": "sun_dawn",
+      "from": [
+        -125,
+        15
+      ],
+      "color": "#ffe0c2",
+      "strength": 1.35,
+      "on": "dawn"
+    },
+    {
+      "id": "sun_dusk",
+      "from": [
+        100,
+        4
+      ],
+      "color": "#ffb486",
+      "strength": 1.3,
+      "on": "dusk"
+    },
+    {
+      "id": "moon",
+      "from": "sky#moon",
+      "color": "#cdd8ff",
+      "strength": 0.9,
+      "on": "night"
+    },
+    {
+      "id": "flash",
+      "from": [
+        -30,
+        25
+      ],
+      "color": "#e8eeff",
+      "strength": 1.8,
+      "on": "flash"
+    },
+    {
+      "id": "lantern",
+      "of": "lighthouse#lantern",
+      "on": "lighthouse_lit",
+      "color": "#ffd27e",
+      "strength": 2.5,
+      "reach": 40
+    },
+    {
+      "id": "window",
+      "of": "lighthouse#window",
+      "on": "room_lit",
+      "color": "#ffcf86",
+      "strength": 1.2,
+      "reach": 10
+    },
+    {
+      "id": "beam",
+      "of": "lighthouse#beam",
+      "on": "beam",
+      "color": "#fff1c8",
+      "strength": 6,
+      "reach": 600,
+      "cone": {
+        "bearing": 0,
+        "height": -1,
+        "width": 10,
+        "soft": 0.35
+      },
+      "place": {
+        "bearing": "beam_turn",
+        "height": "beam_tilt"
+      }
+    },
+    {
+      "id": "papa_lantern",
+      "at": "papa#flame",
+      "on": "papa_lantern",
+      "color": "#ffcf86",
+      "strength": 1.4,
+      "reach": 9
+    }
+  ],
+  "modules": [
+    "cast",
+    "island",
+    "beats",
+    "closeups",
+    "lantern"
+  ],
+  "objects": [
+    {
+      "id": "sky",
+      "name": "The sky",
+      "sky": true,
+      "uniforms": {
+        "low": 0.64,
+        "day_x": -0.35,
+        "day_y": 0.42,
+        "dawn_x": -0.15,
+        "dusk_x": 1.95,
+        "dawn": 0,
+        "dusk": 0,
+        "night": 0,
+        "storm": 0,
+        "flash": 0
+      }
+    },
+    {
+      "id": "sea",
+      "name": "The sea",
+      "plane": true,
+      "across": 0,
+      "distance": 1450,
+      "width": 2400,
+      "depth": 3000,
+      "elevation": -1.3,
+      "reflect": {
+        "strength": 0.18,
+        "fade": 0,
+        "rough": 0.55,
+        "ripple": 0.4
+      },
+      "uniforms": {
+        "storm": 0,
+        "calm": 0
+      }
+    },
+    {
+      "id": "cape",
+      "name": "The Fisherman's cape",
+      "across": -95,
+      "distance": 230,
+      "elevation": -1.35,
+      "onLand": false,
+      "box": [
+        -61,
+        -5,
+        31,
+        0.5
+      ]
+    },
+    {
+      "id": "granite",
+      "name": "The island's granite",
+      "plane": true,
+      "drape": true,
+      "across": 2,
+      "distance": 17.5,
+      "width": 64,
+      "depth": 66
+    },
+    {
+      "id": "lighthouse",
+      "name": "The lighthouse",
+      "across": 10,
+      "distance": 33,
+      "elevation": -0.45,
+      "box": [
+        -5.03,
+        -15.8,
+        5.03,
+        0
+      ],
+      "shadow": true,
+      "redraw": {
+        "lighthouse_lit": 1,
+        "room_lit": 1
+      }
+    },
+    {
+      "id": "door",
+      "name": "The lighthouse door",
+      "on": "lighthouse",
+      "across": 0.5,
+      "distance": -1.94,
+      "elevation": 0.42,
+      "facing": 180,
+      "place": {
+        "facing": "door_turn"
+      },
+      "box": [
+        -1.05,
+        -1.9,
+        0.05,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "steps",
+      "name": "Steps to the lighthouse door",
+      "across": 10,
+      "distance": 30.3,
+      "box": [
+        -0.8,
+        -0.55,
+        0.8,
+        0.05
+      ]
+    },
+    {
+      "id": "bundles_steps",
+      "name": "The bundles on the steps",
+      "across": 10.9,
+      "distance": 30.0,
+      "elevation": 0.17,
+      "shadow": true,
+      "box": [
+        -1.1,
+        -0.5,
+        1.4,
+        0.1
+      ]
+    },
+    {
+      "id": "arrow_stone",
+      "name": "The stone with the arrow",
+      "across": 7.7,
+      "distance": 28.5,
+      "shadow": true,
+      "box": [
+        -0.45,
+        -0.45,
+        0.45,
+        0.05
+      ]
+    },
+    {
+      "id": "pines",
+      "name": "Island pines",
+      "box": [
+        -1.9,
+        -3.75,
+        1.75,
+        0.1
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": 6.5,
+          "distance": 27.5
+        },
+        {
+          "across": 13.6,
+          "distance": 30,
+          "scale": 0.85,
+          "flip": true
+        },
+        {
+          "across": 4.5,
+          "distance": 22.5,
+          "scale": 0.7
+        },
+        {
+          "across": 14.5,
+          "distance": 35.5,
+          "scale": 1.1
+        },
+        {
+          "across": 7.1,
+          "distance": 36.5,
+          "scale": 0.9,
+          "flip": true
+        },
+        {
+          "across": -12.5,
+          "distance": 19,
+          "scale": 0.75,
+          "flip": true
+        }
+      ],
+      "across": 6.5,
+      "distance": 27.5
+    },
+    {
+      "id": "pine1",
+      "name": "A pine that creeps to the door",
+      "across": 2.6,
+      "distance": 23,
+      "box": [
+        -1.9,
+        -3.75,
+        1.75,
+        0.1
+      ],
+      "shadow": true,
+      "place": {
+        "across": "pine1_a",
+        "distance": "pine1_d"
+      }
+    },
+    {
+      "id": "pine2",
+      "name": "A pine that creeps to the door",
+      "across": 15.8,
+      "distance": 25.5,
+      "box": [
+        -1.9,
+        -3.75,
+        1.75,
+        0.1
+      ],
+      "shadow": true,
+      "place": {
+        "across": "pine2_a",
+        "distance": "pine2_d"
+      }
+    },
+    {
+      "id": "pine3",
+      "name": "A pine that creeps to the door",
+      "across": 4.2,
+      "distance": 31.5,
+      "box": [
+        -1.9,
+        -3.75,
+        1.75,
+        0.1
+      ],
+      "shadow": true,
+      "place": {
+        "across": "pine3_a",
+        "distance": "pine3_d"
+      }
+    },
+    {
+      "id": "boat",
+      "name": "The boat Adventure",
+      "across": -3.9,
+      "distance": 8.6,
+      "facing": 195,
+      "place": {
+        "across": "boat_a",
+        "distance": "boat_d",
+        "facing": "boat_turn"
+      },
+      "box": [
+        -1.95,
+        -2.85,
+        2.45,
+        0.2
+      ],
+      "shadow": true
+    },
+    {
+      "id": "sprout",
+      "name": "A shoot out of the cleft",
+      "across": 1.7000000000000002,
+      "distance": 4.6,
+      "box": [
+        -0.15,
+        -0.6,
+        0.15,
+        0.05
+      ]
+    },
+    {
+      "id": "rock",
+      "name": "Wet rocks at the cove's edge",
+      "across": -3.55,
+      "distance": 12.6,
+      "shadow": true,
+      "box": [
+        -1,
+        -0.45,
+        1,
+        0.05
+      ]
+    },
+    {
+      "id": "driftwood",
+      "name": "Driftwood along the cove",
+      "across": -3.6,
+      "distance": 8.9,
+      "shadow": true,
+      "box": [
+        -1.5,
+        -0.7,
+        1.5,
+        0.1
+      ]
+    },
+    {
+      "id": "bow_lantern",
+      "name": "The lantern on the bow",
+      "across": 1.68,
+      "distance": -0.02,
+      "elevation": 1.18,
+      "box": [
+        -0.16,
+        -0.48,
+        0.16,
+        0.03
+      ],
+      "uniforms": {
+        "lit": 0
+      },
+      "on": "boat"
+    },
+    {
+      "id": "stones",
+      "name": "Loose stones",
+      "across": 0,
+      "distance": 0,
+      "shadow": true,
+      "box": [
+        -0.5,
+        -0.3,
+        0.5,
+        0.05
+      ]
+    },
+    {
+      "id": "boulder",
+      "name": "Boulder",
+      "across": -2.65,
+      "distance": 4.4,
+      "shadow": true,
+      "box": [
+        -1.6,
+        -0.74,
+        1.6,
+        0
+      ]
+    },
+    {
+      "id": "bundle",
+      "name": "Bundle of blankets",
+      "across": -1.3,
+      "distance": 3.4,
+      "shadow": true,
+      "box": [
+        -0.5,
+        -0.5,
+        0.5,
+        0.05
+      ]
+    },
+    {
+      "id": "handbag",
+      "name": "Moominmamma's handbag",
+      "across": -0.55,
+      "distance": 3.75,
+      "facing": 200,
+      "shadow": true,
+      "box": [
+        -0.25,
+        -0.4,
+        0.25,
+        0.03
+      ]
+    },
+    {
+      "id": "can",
+      "name": "The paraffin can",
+      "across": 1.3,
+      "distance": 4.1,
+      "facing": 165,
+      "shadow": true,
+      "box": [
+        -0.2,
+        -0.55,
+        0.2,
+        0.03
+      ]
+    },
+    {
+      "id": "spray",
+      "name": "Spray on the cove's rocks",
+      "across": -4.0,
+      "distance": 9.5,
+      "particles": {
+        "kind": "splashes",
+        "source": [
+          1.2,
+          5,
+          0
+        ],
+        "rate": 14,
+        "amount": "storm"
+      }
+    },
+    {
+      "id": "rain",
+      "name": "Rain",
+      "particles": {
+        "kind": "rain",
+        "amount": "storm",
+        "count": 9000,
+        "wind": 1.2
+      }
+    },
+    {
+      "id": "mooring",
+      "name": "The mooring close",
+      "insert": "mooring_open"
+    },
+    {
+      "id": "edge_splash",
+      "name": "A wave on the rocks at the edge",
+      "particles": {
+        "kind": "splashes",
+        "at": "rock#edge",
+        "burst": {
+          "on": "edge_splash",
+          "count": 70
+        }
+      }
+    },
+    {
+      "id": "papa",
+      "name": "Moominpappa",
+      "person": {
+        "cast": "cast",
+        "who": "papa",
+        "does": "hands_behind"
+      },
+      "across": 0.45,
+      "distance": 3.4,
+      "place": {
+        "across": "papa_a",
+        "distance": "papa_d"
+      }
+    },
+    {
+      "id": "mama",
+      "name": "Moominmamma",
+      "person": {
+        "cast": "cast",
+        "who": "mama",
+        "does": "seated"
+      },
+      "across": -1.3,
+      "distance": 3.35,
+      "place": {
+        "across": "mama_a",
+        "distance": "mama_d"
+      }
+    },
+    {
+      "id": "troll",
+      "name": "Moomintroll",
+      "person": {
+        "cast": "cast",
+        "who": "troll",
+        "does": "seated"
+      },
+      "across": -2.65,
+      "distance": 4.4,
+      "place": {
+        "across": "troll_a",
+        "distance": "troll_d"
+      }
+    },
+    {
+      "id": "my",
+      "name": "Little My",
+      "person": {
+        "cast": "cast",
+        "who": "my",
+        "does": "sit_look"
+      },
+      "across": 7.05,
+      "distance": 28.75,
+      "place": {
+        "across": "my_a",
+        "distance": "my_d"
+      }
+    },
+    {
+      "id": "fisher",
+      "name": "The Fisherman",
+      "person": {
+        "cast": "cast",
+        "who": "fisher",
+        "does": "stand"
+      },
+      "across": 16.2,
+      "distance": 27,
+      "place": {
+        "across": "fisher_a",
+        "distance": "fisher_d"
+      }
+    }
+  ],
+  "state": {
+    "dawn": 1,
+    "dusk": 0,
+    "night": 0,
+    "moon": 0.6,
+    "storm": 0,
+    "calm": 0,
+    "flash": 0,
+    "lighthouse_lit": 0,
+    "beam": 0,
+    "beam_turn": 0,
+    "beam_tilt": -1,
+    "room_lit": 0,
+    "pines": 0,
+    "door": 0,
+    "frost_step": false,
+    "frost_patch": false,
+    "boat": "moored",
+    "boat_up": 0,
+    "cleft": "empty",
+    "driftwood": false,
+    "bundles": "slab",
+    "papa_shore": "silent",
+    "fisher_here": false,
+    "fisher_hand": false,
+    "mooring": 0,
+    "mooring_open": 0,
+    "boat_off": 0,
+    "edge_splash": 0,
+    "papa_lantern": 0,
+    "beat": null,
+    "beat_next": null,
+    "papa_at": "slab",
+    "mama_at": "slab",
+    "troll_at": "boulder",
+    "my_at": "stone",
+    "fisher_at": "away",
+    "papa_placed": "",
+    "mama_placed": "",
+    "troll_placed": "",
+    "my_placed": "",
+    "fisher_placed": "",
+    "papa_mood": "smile",
+    "mama_mood": "smile",
+    "troll_mood": "thinking",
+    "my_mood": "smile",
+    "fisher_mood": "neutral",
+    "papa_a": 0.45,
+    "papa_d": 3.4,
+    "papa_turn": 215,
+    "papa_look": [
+      -3,
+      -2,
+      1.6
+    ],
+    "mama_a": -1.3,
+    "mama_d": 3.35,
+    "mama_turn": 150,
+    "mama_on": [
+      -1.3,
+      3.4,
+      0.4
+    ],
+    "mama_look": [
+      3,
+      1,
+      1.3
+    ],
+    "troll_a": -2.65,
+    "troll_d": 4.4,
+    "troll_turn": 240,
+    "troll_on": [
+      -2.65,
+      4.4,
+      0.5
+    ],
+    "troll_look": [
+      -6,
+      0,
+      0.8
+    ],
+    "my_a": 7.05,
+    "my_d": 28.75,
+    "my_turn": 175,
+    "my_look": "arrow_stone#stone",
+    "fisher_a": 16.2,
+    "fisher_d": 27,
+    "fisher_turn": 35,
+    "fisher_look": [
+      30,
+      60,
+      1.5
+    ],
+    "pine1_a": 2.6,
+    "pine1_d": 23,
+    "pine2_a": 15.8,
+    "pine2_d": 25.5,
+    "pine3_a": 4.2,
+    "pine3_d": 31.5,
+    "door_turn": 180,
+    "boat_a": -3.9,
+    "boat_d": 8.6,
+    "boat_turn": 195
+  },
+  "states": {
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dawn's light and sky (0 — the day)"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dusk's light and sky, the afterglow (0 — the day); may move before the eyes"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the moonlit night (0 — the day); over dawn and dusk"
+    },
+    "moon": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the moon's phase: 0 a thin crescent … 1 full (changes between steps; seen by night)"
+    },
+    "storm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the storm: grey light and sky, its clouds, many quick crests, rain, wind; over a half — lightning now and then"
+    },
+    "calm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the sea calm: few crests, slow (a still night)"
+    },
+    "flash": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "lightning: the sky and everything lit white a moment (the storm's script and the game's moments)"
+    },
+    "lighthouse_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lighthouse's lamp burns: the lantern's glass warm, its light and glow"
+    },
+    "beam": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lighthouse's beam: 0 none … 1 full; while on, the island's script turns it (seen in the air by night, at dusk, in a storm)"
+    },
+    "beam_turn": {
+      "type": "number",
+      "means": "the beam's bearing, degrees (the island's script turns it on and on while beam is on)"
+    },
+    "room_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the round room's window on the tower lit from within (seen from outside)"
+    },
+    "beam_tilt": {
+      "range": [
+        -60,
+        10
+      ],
+      "smooth": true,
+      "means": "the beam's height, degrees (−1 a little down, out to sea; a piece tilts it down onto someone «in the beam»)"
+    },
+    "pines": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "how far the three pines have crept up to the lighthouse door overnight (1 — at the threshold); between steps"
+    },
+    "door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lighthouse door, hung on its right jamb: 0 shut … 1 open outward, toward the landing (the door minigame moves it)"
+    },
+    "frost_step": {
+      "type": "boolean",
+      "means": "the frost's trail from the water to the door and back, thickest on the threshold"
+    },
+    "frost_patch": {
+      "type": "boolean",
+      "means": "a white patch of rime on the stones by the landing"
+    },
+    "boat": {
+      "values": [
+        "moored",
+        "up",
+        "cracked",
+        "tarred",
+        "away"
+      ],
+      "means": "the boat: moored in the cove (bow on the rocks, stern afloat, rocking), pulled up the rocks, pulled up with a split in her side, the split tarred, gone"
+    },
+    "boat_up": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "while moored: how far she is pulled up the rocks (the boat minigame moves it; 1 — where 'up' has her)"
+    },
+    "cleft": {
+      "values": [
+        "empty",
+        "weed",
+        "sprout"
+      ],
+      "means": "the cleft by the landing: bare, packed with seaweed, a green shoot out of the weed"
+    },
+    "driftwood": {
+      "type": "boolean",
+      "means": "driftwood thrown up along the cove after the storm"
+    },
+    "papa_shore": {
+      "values": [
+        "look",
+        "silent",
+        "crouch",
+        "glance",
+        "none"
+      ],
+      "means": "4.5, by the storm's choice: Papa at the water says «You see» (look), says nothing (silent), crouches and strokes the water (crouch), looks at the sea over his shoulder and goes to the boat (glance), does not come out (none)"
+    },
+    "bundles": {
+      "values": [
+        "slab",
+        "steps",
+        "none"
+      ],
+      "means": "the luggage: on the slab as landed (the bundle Mama sits on, her bag, the paraffin can), the bundles on the lighthouse steps (one wet), all carried in"
+    },
+    "papa_at": {
+      "values": [
+        "slab",
+        "edge",
+        "door",
+        "boat",
+        "cleft",
+        "water",
+        "stone",
+        "steps_foot",
+        "patch",
+        "boat_walk",
+        "above_water",
+        "mooring",
+        "in_boat"
+      ],
+      "means": "where papa is (the script puts them there: lib.PLACES.papa): slab — on the slab, hands behind; edge — on the wet rocks at the cove's edge, facing the sea; door — at the door, a hand on it; boat — by the boat; cleft — at the cleft; water — at the water in the cove; stone — by the arrow stone"
+    },
+    "mama_at": {
+      "values": [
+        "slab",
+        "steps",
+        "cleft",
+        "stand",
+        "cove",
+        "patch",
+        "boat_side",
+        "in_boat"
+      ],
+      "means": "where mama is (the script puts them there: lib.PLACES.mama): slab — sitting on the bundle; steps — sitting on the lighthouse steps; cleft — at the cleft; stand — standing on the slab"
+    },
+    "troll_at": {
+      "values": [
+        "boulder",
+        "boat",
+        "boat_far",
+        "in_boat"
+      ],
+      "means": "where troll is (the script puts them there: lib.PLACES.troll): boulder — sitting on the boulder; boat — by the boat's stern; boat_far — on the far side of the hull (the play's, «son closed»)"
+    },
+    "my_at": {
+      "values": [
+        "stone",
+        "rock",
+        "below_door",
+        "in_boat"
+      ],
+      "means": "where my is (the script puts them there: lib.PLACES.my): stone — sitting by the arrow stone; rock — sitting on the slab, near"
+    },
+    "fisher_at": {
+      "values": [
+        "away",
+        "door",
+        "threshold",
+        "path"
+      ],
+      "means": "where fisher is (the script puts them there: lib.PLACES.fisher): away — far on the rocks, going away from the lighthouse; door — at the door, his palm on it; threshold — sitting on the threshold, facing the sea"
+    },
+    "papa_placed": {
+      "type": "string",
+      "means": "the place papa was last put at (the script's: put again only when papa_at asks another)"
+    },
+    "mama_placed": {
+      "type": "string",
+      "means": "the place mama was last put at (the script's: put again only when mama_at asks another)"
+    },
+    "troll_placed": {
+      "type": "string",
+      "means": "the place troll was last put at (the script's: put again only when troll_at asks another)"
+    },
+    "my_placed": {
+      "type": "string",
+      "means": "the place my was last put at (the script's: put again only when my_at asks another)"
+    },
+    "fisher_placed": {
+      "type": "string",
+      "means": "the place fisher was last put at (the script's: put again only when fisher_at asks another)"
+    },
+    "papa_a": {
+      "type": "number",
+      "means": "where papa stands, across (the script's, from papa_at)"
+    },
+    "papa_d": {
+      "type": "number",
+      "means": "where papa stands, distance (the script's, from papa_at)"
+    },
+    "mama_a": {
+      "type": "number",
+      "means": "where mama stands, across (the script's, from mama_at)"
+    },
+    "mama_d": {
+      "type": "number",
+      "means": "where mama stands, distance (the script's, from mama_at)"
+    },
+    "troll_a": {
+      "type": "number",
+      "means": "where troll stands, across (the script's, from troll_at)"
+    },
+    "troll_d": {
+      "type": "number",
+      "means": "where troll stands, distance (the script's, from troll_at)"
+    },
+    "my_a": {
+      "type": "number",
+      "means": "where my stands, across (the script's, from my_at)"
+    },
+    "my_d": {
+      "type": "number",
+      "means": "where my stands, distance (the script's, from my_at)"
+    },
+    "fisher_a": {
+      "type": "number",
+      "means": "where fisher stands, across (the script's, from fisher_at)"
+    },
+    "fisher_d": {
+      "type": "number",
+      "means": "where fisher stands, distance (the script's, from fisher_at)"
+    },
+    "pine1_a": {
+      "type": "number",
+      "means": "where the creeping pine 1 stands, across (the script's, from pines)"
+    },
+    "pine1_d": {
+      "type": "number",
+      "means": "where the creeping pine 1 stands, distance (the script's, from pines)"
+    },
+    "pine2_a": {
+      "type": "number",
+      "means": "where the creeping pine 2 stands, across (the script's, from pines)"
+    },
+    "pine2_d": {
+      "type": "number",
+      "means": "where the creeping pine 2 stands, distance (the script's, from pines)"
+    },
+    "pine3_a": {
+      "type": "number",
+      "means": "where the creeping pine 3 stands, across (the script's, from pines)"
+    },
+    "pine3_d": {
+      "type": "number",
+      "means": "where the creeping pine 3 stands, distance (the script's, from pines)"
+    },
+    "fisher_hand": {
+      "type": "boolean",
+      "means": "«Boat» (the play's: «invited»): the Fisherman at the door lifts his hand after Mama as the boat goes (fisher_door)"
+    },
+    "mooring": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the mooring minigame: the rope let go off the ring (the mooring close; cast_off follows)"
+    },
+    "mooring_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the mooring close open (closeups shot mooring)"
+    },
+    "boat_off": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the boat going off out of the cove with the family in her (cast_off)"
+    },
+    "edge_splash": {
+      "type": "number",
+      "means": "each step up — a wave splashes on the rocks at the edge (rock#edge)"
+    },
+    "papa_lantern": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lantern in Papa's paw lit (its light at papa#flame)"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (the module beats; the game names it)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game goes to next (its cut made ready)"
+    },
+    "door_turn": {
+      "type": "number",
+      "means": "the door's facing (the script's, from door: 180 − 70 · door)"
+    },
+    "boat_a": {
+      "type": "number",
+      "means": "where the boat lies, across (the script's, from boat and boat_up)"
+    },
+    "boat_d": {
+      "type": "number",
+      "means": "where the boat lies, distance (the script's, from boat and boat_up)"
+    },
+    "boat_turn": {
+      "type": "number",
+      "means": "the boat's facing (the script's, from boat and boat_up)"
+    }
+  },
+  "music": {
+    "prompts": [
+      {
+        "text": "Solo nylon-string guitar picking a slow, plain northern folk tune, close and intimate, sea wind behind it",
+        "weight": 1.1
+      },
+      {
+        "text": "Soft accordion holding long quiet chords, a little out of breath, a Finnish summer evening by the shore",
+        "weight": 0.8
+      },
+      {
+        "text": "Sparse felt piano, three notes and a long pause, cold clear morning air, gentle melancholy",
+        "weight": 0.9
+      },
+      {
+        "text": "A small clarinet melody, wistful and a little comic, like a story told to a child, over a bowed double bass",
+        "weight": 0.5
+      },
+      {
+        "text": "Glassy harmonium drones with the hiss of waves on granite, slow and wide, almost still",
+        "weight": 0.4
+      },
+      {
+        "text": "Music box playing a lullaby slightly out of tune, far away, nostalgic",
+        "weight": 0
+      },
+      {
+        "text": "Solo cello, long low phrases, lonely lighthouse at dawn, restrained and warm",
+        "weight": 0
+      },
+      {
+        "text": "Kantele plucked softly, open fifths, Nordic folk, bright and bare",
+        "weight": 0
+      },
+      {
+        "text": "Brushed snare and upright bass, a slow cheerful waltz, a family on a boat trip",
+        "weight": 0
+      },
+      {
+        "text": "Whistled melody over a ukulele, light-hearted, a proud father setting out on an adventure",
+        "weight": 0
+      },
+      {
+        "text": "Strings swelling slowly into a wide open chord, the sea and the sky, hopeful and sad at once",
+        "weight": 0
+      },
+      {
+        "text": "Wind chimes and low synth pad, the bare island at night, the moon on the water",
+        "weight": 0
+      },
+      {
+        "text": "Tin whistle and frame drum, a storm coming up over the sea, restless",
+        "weight": 0
+      },
+      {
+        "text": "A celesta and a flute, an imaginary garden painted on a wall, bees and summer warmth",
+        "weight": 0
+      },
+      {
+        "text": "Low drone of a foghorn-like brass note under thin high violins, a dark lighthouse, waiting",
+        "weight": 0
+      },
+      {
+        "text": "Children's choir humming wordlessly, very far off, a memory of a valley",
+        "weight": 0
+      }
+    ],
+    "bpm": 72,
+    "density": 0.3,
+    "brightness": 0.45,
+    "scale": "D_MAJOR_B_MINOR"
+  }
+}

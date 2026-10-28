@@ -1,0 +1,13 @@
+{"strings": [
+  {"text":"27 August. Wind north. Today I am forty. Nobody knows.","translation":"27 августа. Ветер норд. Мне сегодня сорок. Никто не знает.","where":"scenes/round-room/elements/wall_a.js"},
+  {"text":"Ate bread. Whose, I don't know.","translation":"Съел хлеб. Чей — не знаю.","where":"scenes/round-room/elements/wall_a.js"},
+  {"text":"Calm. The sea is good today.","translation":"Штиль. Море сегодня хорошее.","where":"scenes/round-room/elements/wall_a.js"},
+  {"text":"Ice on the steps. Wind north.","translation":"На ступенях лёд. Ветер норд.","where":"scenes/round-room/elements/wall_a.js"},
+  {"text":"Fog. Heard a ship. It did not come.","translation":"Туман. Слышал судно. Не подошло.","where":"scenes/round-room/elements/wall_a.js"},
+  {"text":"Wind south-west. Nobody again.","translation":"Ветер зюйд-вест. Опять никто.","where":"scenes/round-room/elements/wall_a.js"},
+  {"text":"23 August. Arrived.","translation":"23 августа. Прибыли.","where":"scenes/round-room/elements/wall_a.js"},
+  {"text":"Depth: more than the rope.","translation":"Глубина: больше верёвки.","where":"scenes/round-room/elements/wall_a.js"},
+  {"text":"27 August. Calm.","translation":"27 августа. Тихо.","where":"scenes/round-room/elements/wall_a.js"},
+  {"text":"The Round Room","translation":"Круглая комната","where":"scenes/round-room/scene.json title"},
+  {"text":"The round room at the foot of the lighthouse.","translation":"Круглая комната у подножия маяка.","where":"scenes/round-room/scene.json caption"}
+]}

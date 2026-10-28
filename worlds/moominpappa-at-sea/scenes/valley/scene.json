@@ -1,0 +1,1796 @@
+{
+  "engine": 3,
+  "title": "Moominvalley",
+  "caption": "The end of August in the valley. Everything is already done.",
+  "horizon": 0.56,
+  "camera": {
+    "mode": "picture"
+  },
+  "light": {
+    "ambient": 0.78,
+    "ambientColor": "#f1eee6",
+    "bounce": 0.55,
+    "haze": 0.08,
+    "hazeColor": "#dbe3e6",
+    "hazeGlow": 0,
+    "shafts": 0,
+    "tint": "#f6e6cc",
+    "tintStrength": 0.04,
+    "vignette": 0.2,
+    "grain": 0.07,
+    "wind": [
+      0.5,
+      -1,
+      0.5
+    ],
+    "saturation": 1.05,
+    "looks": {
+      "dawn": {
+        "ambient": 0.72,
+        "ambientColor": "#eadfee",
+        "tint": "#f4c8c0",
+        "tintStrength": 0.07,
+        "haze": 0.09,
+        "hazeColor": "#ecd8d8",
+        "lights": {
+          "sun": 0.2
+        }
+      },
+      "dusk": {
+        "ambient": 0.82,
+        "ambientColor": "#ffe4c8",
+        "tint": "#ffb98a",
+        "tintStrength": 0.07,
+        "haze": 0.07,
+        "hazeColor": "#f4d4b4",
+        "saturation": 1.1,
+        "brightness": 1.06,
+        "lights": {
+          "sun": 0
+        }
+      },
+      "night": {
+        "ambient": 0.42,
+        "ambientColor": "#8797cc",
+        "tint": "#5a6aaa",
+        "tintStrength": 0.08,
+        "saturation": 0.8,
+        "haze": 0.07,
+        "hazeColor": "#3c4a74",
+        "hazeGlow": 0.6,
+        "lights": {
+          "sun": 0,
+          "evening": 0,
+          "morning": 0
+        }
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "sun",
+      "from": [
+        -140,
+        38
+      ],
+      "color": "#fff1dc",
+      "strength": 1.25
+    },
+    {
+      "id": "evening",
+      "from": [
+        -100,
+        9
+      ],
+      "color": "#ffc88e",
+      "strength": 1.8,
+      "on": "dusk"
+    },
+    {
+      "id": "morning",
+      "from": [
+        95,
+        10
+      ],
+      "color": "#ffd9cc",
+      "strength": 1.25,
+      "on": "dawn"
+    },
+    {
+      "id": "moon",
+      "from": "moon#disc",
+      "color": "#cdd8f2",
+      "strength": 1.0,
+      "on": "night"
+    },
+    {
+      "id": "lamp",
+      "of": "lamp#flame",
+      "color": "#ffcf88",
+      "strength": 1.4,
+      "reach": 5,
+      "on": "lamps",
+      "glow": 0.25,
+      "flicker": 0.05
+    },
+    {
+      "id": "window",
+      "of": "window_lit#glow",
+      "color": "#ffcf88",
+      "strength": 0.7,
+      "reach": 5,
+      "on": "lamps"
+    },
+    {
+      "id": "stove_fire",
+      "of": "stove#fire",
+      "color": "#ff9c4a",
+      "strength": 0.5,
+      "reach": 1.2,
+      "on": "jam",
+      "flicker": 0.3
+    },
+    {
+      "id": "ember",
+      "of": "moss#ember",
+      "color": "#ff8a3a",
+      "strength": 0.7,
+      "reach": 1.2,
+      "on": "smoke_grey",
+      "flicker": 0.4
+    },
+    {
+      "id": "bow_lantern",
+      "of": "boat_lantern#flame",
+      "color": "#ffcf88",
+      "strength": 1.0,
+      "reach": 4,
+      "on": "lantern_bow",
+      "glow": 0.3,
+      "flicker": 0.05
+    }
+  ],
+  "modules": [
+    "cast",
+    "chart",
+    "beats",
+    "lantern"
+  ],
+  "objects": [
+    {
+      "id": "sky",
+      "name": "The valley sky",
+      "sky": true,
+      "uniforms": {
+        "dusk": 0,
+        "night": 0,
+        "dawn": 0
+      }
+    },
+    {
+      "id": "moon",
+      "name": "The moon",
+      "sky": true,
+      "box": [
+        0.45,
+        0.1,
+        0.59,
+        0.24
+      ]
+    },
+    {
+      "id": "sea",
+      "name": "The sea",
+      "plane": true,
+      "across": -754.5,
+      "distance": 1500,
+      "elevation": -0.45,
+      "width": 1491,
+      "depth": 3000,
+      "reflect": {
+        "strength": 0.25,
+        "fade": 0,
+        "rough": 0.5,
+        "ripple": 0.35
+      }
+    },
+    {
+      "id": "meadow",
+      "name": "The valley's land",
+      "plane": true,
+      "drape": true,
+      "across": 149,
+      "distance": 130,
+      "width": 330,
+      "depth": 260
+    },
+    {
+      "id": "stream",
+      "name": "The stream",
+      "plane": true,
+      "across": -4.6,
+      "distance": 16,
+      "elevation": -0.45,
+      "width": 2.4,
+      "depth": 32,
+      "reflect": {
+        "strength": 0.3,
+        "fade": 4,
+        "rough": 0.25,
+        "ripple": 0.3
+      }
+    },
+    {
+      "id": "moss",
+      "name": "The moss under the apple tree",
+      "plane": true,
+      "across": 0.05,
+      "distance": 9.05,
+      "elevation": 0.029,
+      "width": 1.4,
+      "depth": 1.0
+    },
+    {
+      "id": "frost",
+      "name": "The Groke's frost",
+      "plane": true,
+      "across": -11.3,
+      "distance": 36,
+      "elevation": -0.27,
+      "width": 3.8,
+      "depth": 2.6,
+      "uniforms": {
+        "ring": 0,
+        "track": 0,
+        "gx": 0.7,
+        "gy": 0
+      }
+    },
+    {
+      "id": "rime",
+      "name": "Rime on the dune grass",
+      "across": -10.6,
+      "distance": 35.55,
+      "onLand": false,
+      "elevation": -0.32,
+      "facing": 180,
+      "uniforms": {
+        "ring": 0
+      },
+      "box": [
+        -1.2,
+        -0.5,
+        1.2,
+        0.03
+      ]
+    },
+    {
+      "id": "house",
+      "name": "The Moomins' house",
+      "across": 8.2,
+      "distance": 19.5,
+      "facing": 180,
+      "shadow": true,
+      "box": [
+        -9.111,
+        -12.267,
+        9.111,
+        0
+      ]
+    },
+    {
+      "id": "window_lit",
+      "name": "The lit window",
+      "across": 8.2,
+      "distance": 16.57,
+      "elevation": 3.149,
+      "facing": 180,
+      "glows": true,
+      "box": [
+        -0.36,
+        -1.05,
+        0.36,
+        0.05
+      ]
+    },
+    {
+      "id": "veranda",
+      "name": "The veranda's floor",
+      "plane": true,
+      "across": 7.4,
+      "distance": 15.3,
+      "elevation": 0.72,
+      "width": 4.6,
+      "depth": 2.6,
+      "walk": true
+    },
+    {
+      "id": "rail",
+      "name": "The veranda's front",
+      "across": 7.4,
+      "distance": 14.0,
+      "elevation": -0.02,
+      "facing": 180,
+      "shadow": true,
+      "box": [
+        -2.4,
+        -1.3,
+        2.4,
+        0.05
+      ]
+    },
+    {
+      "id": "rail_side",
+      "name": "The veranda's ends",
+      "box": [
+        -1.4,
+        -1.3,
+        1.4,
+        0.05
+      ],
+      "shadow": true,
+      "across": 5.1,
+      "distance": 15.3,
+      "copies": [
+        {
+          "across": 5.1,
+          "distance": 15.3,
+          "facing": 270,
+          "elevation": -0.042
+        },
+        {
+          "across": 9.7,
+          "distance": 15.3,
+          "facing": 90,
+          "elevation": -0.045
+        }
+      ]
+    },
+    {
+      "id": "steps",
+      "name": "The veranda's steps",
+      "across": 7.0,
+      "distance": 13.85,
+      "elevation": -0.014,
+      "facing": 180,
+      "box": [
+        -0.5,
+        -0.65,
+        0.5,
+        0.05
+      ]
+    },
+    {
+      "id": "table",
+      "name": "The veranda table",
+      "across": 7.2,
+      "distance": 15.2,
+      "onLand": false,
+      "elevation": 0.72,
+      "facing": 180,
+      "shadow": true,
+      "box": [
+        -0.7,
+        -0.56,
+        0.7,
+        0.03
+      ]
+    },
+    {
+      "id": "lamp",
+      "name": "The paraffin lamp",
+      "across": 7.15,
+      "distance": 15.25,
+      "onLand": false,
+      "elevation": 1.22,
+      "facing": 180,
+      "box": [
+        -0.12,
+        -0.48,
+        0.12,
+        0.02
+      ]
+    },
+    {
+      "id": "jars",
+      "name": "Jars of jam",
+      "across": 6.82,
+      "distance": 15.15,
+      "onLand": false,
+      "elevation": 1.22,
+      "facing": 180,
+      "box": [
+        -0.2,
+        -0.2,
+        0.2,
+        0.02
+      ]
+    },
+    {
+      "id": "stove",
+      "name": "The little stove and the jam pan",
+      "across": 5.5,
+      "distance": 14.45,
+      "onLand": false,
+      "elevation": 0.72,
+      "facing": 180,
+      "shadow": true,
+      "box": [
+        -0.32,
+        -0.66,
+        0.5,
+        0.03
+      ]
+    },
+    {
+      "id": "chairs",
+      "name": "The veranda chairs",
+      "box": [
+        -0.28,
+        -0.82,
+        0.28,
+        0.03
+      ],
+      "onLand": false,
+      "shadow": true,
+      "across": 7.2,
+      "distance": 16.02,
+      "elevation": 0.72,
+      "copies": [
+        {
+          "across": 7.2,
+          "distance": 16.02,
+          "facing": 180,
+          "elevation": 0.72
+        },
+        {
+          "across": 6.12,
+          "distance": 15.2,
+          "facing": 135,
+          "elevation": 0.72
+        },
+        {
+          "across": 8.28,
+          "distance": 15.2,
+          "facing": 225,
+          "elevation": 0.72
+        }
+      ]
+    },
+    {
+      "id": "stool",
+      "name": "Little My's stool",
+      "across": 6.65,
+      "distance": 14.48,
+      "onLand": false,
+      "elevation": 0.72,
+      "facing": 180,
+      "shadow": true,
+      "box": [
+        -0.22,
+        -0.56,
+        0.22,
+        0.03
+      ]
+    },
+    {
+      "id": "shelf",
+      "name": "The shelf by the door",
+      "across": 9.3,
+      "distance": 16.75,
+      "elevation": 1.396,
+      "facing": 158,
+      "box": [
+        -0.5,
+        -0.45,
+        0.5,
+        0.2
+      ]
+    },
+    {
+      "id": "apple",
+      "name": "The old apple tree",
+      "across": -0.6,
+      "distance": 9.2,
+      "shadow": true,
+      "box": [
+        -2.5,
+        -4.7,
+        2.5,
+        0.1
+      ]
+    },
+    {
+      "id": "orchard",
+      "name": "Young apple trees",
+      "box": [
+        -1.4,
+        -3.4,
+        1.4,
+        0.1
+      ],
+      "shadow": true,
+      "across": -2.8,
+      "distance": 19.5,
+      "copies": [
+        {
+          "across": -2.8,
+          "distance": 19.5,
+          "scale": 0.9
+        },
+        {
+          "across": 11.6,
+          "distance": 11.2,
+          "flip": true
+        },
+        {
+          "across": 3.6,
+          "distance": 23.0,
+          "scale": 0.85
+        },
+        {
+          "across": 13.5,
+          "distance": 18.0,
+          "scale": 0.95
+        }
+      ]
+    },
+    {
+      "id": "lilacs",
+      "name": "Lilac bushes",
+      "box": [
+        -1.5,
+        -2.2,
+        1.5,
+        0.1
+      ],
+      "shadow": true,
+      "across": 4.6,
+      "distance": 18.4,
+      "copies": [
+        {
+          "across": 4.6,
+          "distance": 18.4
+        },
+        {
+          "across": 11.3,
+          "distance": 17.0,
+          "flip": true
+        },
+        {
+          "across": 5.2,
+          "distance": 21.2,
+          "scale": 0.9
+        }
+      ]
+    },
+    {
+      "id": "birches",
+      "name": "Birches",
+      "box": [
+        -1.6,
+        -7.4,
+        1.6,
+        0.1
+      ],
+      "shadow": true,
+      "across": -6.3,
+      "distance": 13.5,
+      "copies": [
+        {
+          "across": -6.3,
+          "distance": 13.5,
+          "scale": 1.0
+        },
+        {
+          "across": -6.9,
+          "distance": 20,
+          "scale": 1.1
+        },
+        {
+          "across": -6.0,
+          "distance": 27.5,
+          "scale": 0.9,
+          "flip": true
+        },
+        {
+          "across": -1.2,
+          "distance": 34,
+          "scale": 1.0
+        },
+        {
+          "across": 13.8,
+          "distance": 26,
+          "scale": 1.1,
+          "flip": true
+        },
+        {
+          "across": 5.582,
+          "distance": 42.452,
+          "scale": 0.981
+        },
+        {
+          "across": 20.157,
+          "distance": 101.211,
+          "scale": 1.026
+        },
+        {
+          "across": 0.377,
+          "distance": 67.265,
+          "scale": 0.879,
+          "flip": true
+        },
+        {
+          "across": 59.786,
+          "distance": 76.66,
+          "scale": 1.068,
+          "flip": true
+        },
+        {
+          "across": 39.663,
+          "distance": 107.691,
+          "scale": 0.868
+        },
+        {
+          "across": 8.865,
+          "distance": 102.378,
+          "scale": 1.168
+        },
+        {
+          "across": 13.168,
+          "distance": 99.434,
+          "scale": 0.844,
+          "flip": true
+        },
+        {
+          "across": 8.913,
+          "distance": 74.006,
+          "scale": 0.831,
+          "flip": true
+        },
+        {
+          "across": 58.541,
+          "distance": 98.169,
+          "scale": 1.053
+        },
+        {
+          "across": 22.029,
+          "distance": 53.432,
+          "scale": 0.997,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "oaks",
+      "name": "Leafy trees on the hills",
+      "box": [
+        -4.2,
+        -8.8,
+        4.2,
+        0.1
+      ],
+      "across": 20,
+      "distance": 60,
+      "copies": [
+        {
+          "across": 37.951,
+          "distance": 61.453,
+          "scale": 1.173,
+          "flip": true
+        },
+        {
+          "across": 63.358,
+          "distance": 47.457,
+          "scale": 0.96,
+          "flip": true
+        },
+        {
+          "across": 4.621,
+          "distance": 80.809,
+          "scale": 0.725
+        },
+        {
+          "across": 26.285,
+          "distance": 96.83,
+          "scale": 1.0
+        },
+        {
+          "across": 9.988,
+          "distance": 92.321,
+          "scale": 1.074,
+          "flip": true
+        },
+        {
+          "across": 34.937,
+          "distance": 105.1,
+          "scale": 0.726
+        },
+        {
+          "across": 19.74,
+          "distance": 98.819,
+          "scale": 1.105,
+          "flip": true
+        },
+        {
+          "across": 38.228,
+          "distance": 119.976,
+          "scale": 0.915,
+          "flip": true
+        },
+        {
+          "across": 29.177,
+          "distance": 79.071,
+          "scale": 0.831
+        },
+        {
+          "across": 24.946,
+          "distance": 91.757,
+          "scale": 1.087
+        },
+        {
+          "across": 63.355,
+          "distance": 119.386,
+          "scale": 0.779
+        },
+        {
+          "across": 39.221,
+          "distance": 80.301,
+          "scale": 1.08
+        },
+        {
+          "across": 16.14,
+          "distance": 81.228,
+          "scale": 0.821,
+          "flip": true
+        },
+        {
+          "across": 5.976,
+          "distance": 90.76,
+          "scale": 0.835
+        },
+        {
+          "across": 69.23,
+          "distance": 68.198,
+          "scale": 0.916,
+          "flip": true
+        },
+        {
+          "across": 35.31,
+          "distance": 98.325,
+          "scale": 1.083,
+          "flip": true
+        },
+        {
+          "across": 12.592,
+          "distance": 63.658,
+          "scale": 1.196,
+          "flip": true
+        },
+        {
+          "across": 3.849,
+          "distance": 100.428,
+          "scale": 0.882
+        },
+        {
+          "across": 11.053,
+          "distance": 84.184,
+          "scale": 1.139
+        },
+        {
+          "across": 44.331,
+          "distance": 114.424,
+          "scale": 1.004
+        },
+        {
+          "across": 36.237,
+          "distance": 93.873,
+          "scale": 1.191,
+          "flip": true
+        },
+        {
+          "across": 25.914,
+          "distance": 61.804,
+          "scale": 1.087,
+          "flip": true
+        },
+        {
+          "across": -3.8,
+          "distance": 38.5,
+          "scale": 0.7
+        }
+      ]
+    },
+    {
+      "id": "spruces",
+      "name": "Spruces on the hills",
+      "box": [
+        -2.3,
+        -10.2,
+        2.3,
+        0.1
+      ],
+      "across": 30,
+      "distance": 80,
+      "copies": [
+        {
+          "across": 6.994,
+          "distance": 149.636,
+          "scale": 0.855,
+          "flip": true
+        },
+        {
+          "across": 1.911,
+          "distance": 46.947,
+          "scale": 1.021,
+          "flip": true
+        },
+        {
+          "across": 72.639,
+          "distance": 164.234,
+          "scale": 1.151,
+          "flip": true
+        },
+        {
+          "across": 40.483,
+          "distance": 159.476,
+          "scale": 1.138,
+          "flip": true
+        },
+        {
+          "across": 71.648,
+          "distance": 75.961,
+          "scale": 1.179,
+          "flip": true
+        },
+        {
+          "across": 17.441,
+          "distance": 158.443,
+          "scale": 0.925,
+          "flip": true
+        },
+        {
+          "across": 70.779,
+          "distance": 133.007,
+          "scale": 1.256,
+          "flip": true
+        },
+        {
+          "across": 22.014,
+          "distance": 131.751,
+          "scale": 1.094,
+          "flip": true
+        },
+        {
+          "across": 21.845,
+          "distance": 117.493,
+          "scale": 0.965
+        },
+        {
+          "across": 61.607,
+          "distance": 162.663,
+          "scale": 0.961
+        },
+        {
+          "across": 62.453,
+          "distance": 100.548,
+          "scale": 1.1,
+          "flip": true
+        },
+        {
+          "across": 81.433,
+          "distance": 106.763,
+          "scale": 0.908
+        },
+        {
+          "across": -4.339,
+          "distance": 99.454,
+          "scale": 1.235
+        },
+        {
+          "across": 21.333,
+          "distance": 75.471,
+          "scale": 1.208
+        },
+        {
+          "across": 43.148,
+          "distance": 54.057,
+          "scale": 0.763
+        },
+        {
+          "across": 70.663,
+          "distance": 139.736,
+          "scale": 0.883
+        },
+        {
+          "across": 84.023,
+          "distance": 85.084,
+          "scale": 1.12,
+          "flip": true
+        },
+        {
+          "across": 67.409,
+          "distance": 164.82,
+          "scale": 1.224
+        },
+        {
+          "across": 73.36,
+          "distance": 95.077,
+          "scale": 1.298
+        },
+        {
+          "across": 31.603,
+          "distance": 95.114,
+          "scale": 0.814,
+          "flip": true
+        },
+        {
+          "across": 40.162,
+          "distance": 115.995,
+          "scale": 1.237,
+          "flip": true
+        },
+        {
+          "across": -0.722,
+          "distance": 118.059,
+          "scale": 1.034,
+          "flip": true
+        },
+        {
+          "across": -4.615,
+          "distance": 70.917,
+          "scale": 0.782
+        },
+        {
+          "across": 5.361,
+          "distance": 56.02,
+          "scale": 0.881,
+          "flip": true
+        },
+        {
+          "across": 43.747,
+          "distance": 109.216,
+          "scale": 1.154
+        },
+        {
+          "across": 5.382,
+          "distance": 132.645,
+          "scale": 1.113,
+          "flip": true
+        },
+        {
+          "across": 85.58,
+          "distance": 139.501,
+          "scale": 1.072
+        },
+        {
+          "across": 41.909,
+          "distance": 83.08,
+          "scale": 1.112
+        },
+        {
+          "across": 33.153,
+          "distance": 79.743,
+          "scale": 1.224,
+          "flip": true
+        },
+        {
+          "across": 24.121,
+          "distance": 98.688,
+          "scale": 0.847
+        },
+        {
+          "across": 42.923,
+          "distance": 124.867,
+          "scale": 0.833,
+          "flip": true
+        },
+        {
+          "across": 55.39,
+          "distance": 152.344,
+          "scale": 0.969,
+          "flip": true
+        },
+        {
+          "across": 23.808,
+          "distance": 151.276,
+          "scale": 0.898,
+          "flip": true
+        },
+        {
+          "across": 56.294,
+          "distance": 71.388,
+          "scale": 1.19,
+          "flip": true
+        },
+        {
+          "across": 46.84,
+          "distance": 158.115,
+          "scale": 1.017,
+          "flip": true
+        },
+        {
+          "across": 52.704,
+          "distance": 69.892,
+          "scale": 0.966,
+          "flip": true
+        },
+        {
+          "across": 1.175,
+          "distance": 144.892,
+          "scale": 1.148
+        },
+        {
+          "across": 1.881,
+          "distance": 44.741,
+          "scale": 1.132,
+          "flip": true
+        },
+        {
+          "across": 2.146,
+          "distance": 86.064,
+          "scale": 1.287,
+          "flip": true
+        },
+        {
+          "across": 33.311,
+          "distance": 139.946,
+          "scale": 1.033
+        },
+        {
+          "across": 23.454,
+          "distance": 157.277,
+          "scale": 0.805,
+          "flip": true
+        },
+        {
+          "across": 36.396,
+          "distance": 109.567,
+          "scale": 0.988,
+          "flip": true
+        },
+        {
+          "across": 64.371,
+          "distance": 64.76,
+          "scale": 1.062,
+          "flip": true
+        },
+        {
+          "across": 70.321,
+          "distance": 111.655,
+          "scale": 0.846,
+          "flip": true
+        },
+        {
+          "across": 32.003,
+          "distance": 149.367,
+          "scale": 1.223
+        },
+        {
+          "across": 80.409,
+          "distance": 51.14,
+          "scale": 1.092
+        },
+        {
+          "across": 56.12,
+          "distance": 161.592,
+          "scale": 0.761
+        },
+        {
+          "across": 30.831,
+          "distance": 111.252,
+          "scale": 1.18
+        },
+        {
+          "across": -6.93,
+          "distance": 158.501,
+          "scale": 1.152
+        },
+        {
+          "across": -6.312,
+          "distance": 150.973,
+          "scale": 1.037,
+          "flip": true
+        },
+        {
+          "across": -5.104,
+          "distance": 153.723,
+          "scale": 0.849
+        },
+        {
+          "across": -5.163,
+          "distance": 154.547,
+          "scale": 1.108,
+          "flip": true
+        },
+        {
+          "across": -6.185,
+          "distance": 157.328,
+          "scale": 1.094,
+          "flip": true
+        },
+        {
+          "across": -5.359,
+          "distance": 121.42,
+          "scale": 1.081,
+          "flip": true
+        },
+        {
+          "across": -5.599,
+          "distance": 138.857,
+          "scale": 1.148,
+          "flip": true
+        },
+        {
+          "across": -6.675,
+          "distance": 149.652,
+          "scale": 0.986,
+          "flip": true
+        },
+        {
+          "across": -5.079,
+          "distance": 146.94,
+          "scale": 1.186,
+          "flip": true
+        },
+        {
+          "across": -6.959,
+          "distance": 117.316,
+          "scale": 0.948,
+          "flip": true
+        },
+        {
+          "across": -6.2,
+          "distance": 41,
+          "scale": 0.8
+        },
+        {
+          "across": -2.2,
+          "distance": 43.5,
+          "scale": 0.9,
+          "flip": true
+        },
+        {
+          "across": -8.4,
+          "distance": 45,
+          "scale": 0.75
+        }
+      ]
+    },
+    {
+      "id": "bridge",
+      "name": "The footbridge",
+      "across": -4.6,
+      "distance": 8.0,
+      "onLand": false,
+      "elevation": 0,
+      "facing": 180,
+      "shadow": true,
+      "box": [
+        -1.7,
+        -1.1,
+        1.7,
+        0.3
+      ]
+    },
+    {
+      "id": "jetty",
+      "name": "The jetty",
+      "plane": true,
+      "across": -14.0,
+      "distance": 24.0,
+      "elevation": -0.15,
+      "width": 4.6,
+      "depth": 1.1,
+      "walk": true
+    },
+    {
+      "id": "posts",
+      "name": "The jetty's posts",
+      "box": [
+        -0.1,
+        -1.25,
+        0.1,
+        0.02
+      ],
+      "onLand": false,
+      "across": -11.9,
+      "distance": 23.5,
+      "elevation": -0.95,
+      "copies": [
+        {
+          "across": -11.9,
+          "distance": 23.5,
+          "elevation": -0.95
+        },
+        {
+          "across": -14.0,
+          "distance": 23.5,
+          "elevation": -0.95
+        },
+        {
+          "across": -16.15,
+          "distance": 23.5,
+          "elevation": -0.95
+        },
+        {
+          "across": -16.15,
+          "distance": 24.5,
+          "elevation": -0.95
+        },
+        {
+          "across": -14.0,
+          "distance": 24.5,
+          "elevation": -0.95
+        }
+      ]
+    },
+    {
+      "id": "boat",
+      "name": "The boat Adventure",
+      "across": -15.4,
+      "distance": 22.85,
+      "onLand": false,
+      "elevation": -0.45,
+      "facing": 180,
+      "shadow": true,
+      "place": {
+        "across": "boat_a",
+        "distance": "boat_d"
+      },
+      "box": [
+        -2.1,
+        -2.75,
+        2.0,
+        0.45
+      ]
+    },
+    {
+      "id": "boat_lantern",
+      "name": "The lantern on the bow",
+      "across": 1.705,
+      "distance": -0.02,
+      "elevation": 1.08,
+      "box": [
+        -0.16,
+        -0.48,
+        0.16,
+        0.27
+      ],
+      "uniforms": {
+        "lit": 0
+      },
+      "on": "boat",
+      "facing": 180
+    },
+    {
+      "id": "luggage",
+      "name": "The luggage on the jetty",
+      "across": -13.75,
+      "distance": 23.7,
+      "onLand": false,
+      "elevation": -0.15,
+      "facing": 180,
+      "shadow": true,
+      "box": [
+        -0.6,
+        -0.6,
+        0.6,
+        0.03
+      ]
+    },
+    {
+      "id": "tufts",
+      "name": "Tall grass near",
+      "box": [
+        -0.45,
+        -0.9,
+        0.45,
+        0.05
+      ],
+      "across": -2.0,
+      "distance": 4.6,
+      "copies": [
+        {
+          "across": -2.0,
+          "distance": 4.6,
+          "scale": 1.0
+        },
+        {
+          "across": -1.1,
+          "distance": 5.4,
+          "scale": 0.9
+        },
+        {
+          "across": 2.2,
+          "distance": 4.9,
+          "scale": 1.1
+        },
+        {
+          "across": 3.1,
+          "distance": 5.8,
+          "scale": 0.9
+        },
+        {
+          "across": -2.9,
+          "distance": 6.2,
+          "scale": 1.0
+        },
+        {
+          "across": 4.4,
+          "distance": 5.2,
+          "scale": 1.0
+        },
+        {
+          "across": -0.3,
+          "distance": 4.4,
+          "scale": 0.9
+        },
+        {
+          "across": 5.4,
+          "distance": 6.8,
+          "scale": 0.9
+        },
+        {
+          "across": -2.4,
+          "distance": 7.4,
+          "scale": 0.85
+        }
+      ]
+    },
+    {
+      "id": "smoke_grey",
+      "particles": {
+        "kind": "smoke",
+        "at": "moss#fire",
+        "amount": "smoke_grey",
+        "rate": 12,
+        "size": [
+          0.12,
+          0.9
+        ],
+        "speed": [
+          0.25,
+          0.45
+        ],
+        "life": [
+          3,
+          5
+        ],
+        "color": "#7d7770",
+        "opacity": 0.8
+      }
+    },
+    {
+      "id": "steam",
+      "particles": {
+        "kind": "smoke",
+        "at": "moss#fire",
+        "amount": "smoke_white",
+        "rate": 12,
+        "size": [
+          0.12,
+          0.9
+        ],
+        "speed": [
+          0.3,
+          0.5
+        ],
+        "life": [
+          2,
+          4
+        ],
+        "color": "#f6f5f0",
+        "opacity": 0.8
+      }
+    },
+    {
+      "id": "jam_steam",
+      "particles": {
+        "kind": "smoke",
+        "at": "stove#pan",
+        "amount": "jam",
+        "rate": 3,
+        "size": [
+          0.05,
+          0.35
+        ],
+        "speed": [
+          0.15,
+          0.3
+        ],
+        "life": [
+          2,
+          3
+        ],
+        "color": "#f2f0ea",
+        "opacity": 0.3
+      }
+    },
+    {
+      "id": "chart",
+      "name": "Papa's chart on the table, close",
+      "insert": "chart"
+    },
+    {
+      "id": "basket",
+      "name": "Mama's basket, packed",
+      "insert": "basket",
+      "iris": [
+        0.889,
+        0.5,
+        0.62,
+        0.44
+      ]
+    },
+    {
+      "id": "papa",
+      "across": 1.5,
+      "distance": 8.6,
+      "name": "Moominpappa",
+      "person": {
+        "cast": "cast",
+        "who": "papa",
+        "does": "hands_behind"
+      },
+      "place": {
+        "across": "papa_a",
+        "distance": "papa_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "mama",
+      "across": 6.2,
+      "distance": 14.55,
+      "name": "Moominmamma",
+      "person": {
+        "cast": "cast",
+        "who": "mama",
+        "does": "hands_behind"
+      },
+      "place": {
+        "across": "mama_a",
+        "distance": "mama_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "troll",
+      "across": -3.45,
+      "distance": 10.2,
+      "name": "Moomintroll",
+      "person": {
+        "cast": "cast",
+        "who": "troll",
+        "does": "sit_look"
+      },
+      "place": {
+        "across": "troll_a",
+        "distance": "troll_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "my",
+      "across": -3.35,
+      "distance": 11.5,
+      "name": "Little My",
+      "person": {
+        "cast": "cast",
+        "who": "my",
+        "does": "sit_look"
+      },
+      "place": {
+        "across": "my_a",
+        "distance": "my_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "groke",
+      "across": -10.6,
+      "distance": 36,
+      "name": "The Groke",
+      "person": {
+        "cast": "cast",
+        "who": "groke",
+        "does": "hands_behind"
+      },
+      "place": {
+        "across": "groke_a",
+        "distance": "groke_d"
+      },
+      "shadow": true
+    }
+  ],
+  "state": {
+    "dawn": 0,
+    "dusk": 0,
+    "night": 0,
+    "moon": 0.2,
+    "lamps": 0,
+    "moss": "green",
+    "smoke": 0,
+    "smoke_grey": 0,
+    "smoke_white": 0,
+    "frost": 0,
+    "candles": "shelf",
+    "paints": false,
+    "chart": 0,
+    "basket": 0,
+    "lantern_bow": 0,
+    "jam": 1,
+    "luggage": 0,
+    "packed": 5,
+    "boat_a": -15.4,
+    "boat_d": 22.85
+  },
+  "states": {
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the morning light (a look): 0 none … 1 early morning, rose from the right"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the evening light (a look): 0 none … 1 golden evening, the low sun from the left"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the night (a look): 0 none … 1 a clear moonlit night, light enough to read faces; day is dawn, dusk and night all 0"
+    },
+    "moon": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the moon's phase: 0 a thin new crescent … 1 full (seen at night)"
+    },
+    "lamps": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lamps lit: the paraffin lamp on the veranda table and the house's front window"
+    },
+    "moss": {
+      "values": [
+        "green",
+        "smoulder",
+        "burnt"
+      ],
+      "means": "the moss under the apple tree: green; a little fire smouldering in it (grey smoke, an ember); put out — a small black spot"
+    },
+    "smoke": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "while the moss smoulders: how far the ladle has turned its grey smoke to white steam (М1)"
+    },
+    "smoke_grey": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (script.js, from moss and smoke): the grey smoke's share — not set from outside"
+    },
+    "smoke_white": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (script.js, from moss and smoke): the white steam's share — not set from outside"
+    },
+    "frost": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the Groke's frost on the beach: 0 none … 0.4 the rime round her at its widest … 1 her white track down to the water"
+    },
+    "candles": {
+      "values": [
+        "shelf",
+        "basket"
+      ],
+      "means": "where the candles are: on the shelf by the door, or packed in the basket (the insert)"
+    },
+    "paints": {
+      "type": "boolean",
+      "means": "Mama's box of paints on top in the basket (the insert)"
+    },
+    "chart": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the insert: Papa's chart on the table under the lamp, close (0 closed … 1 open); its point chart#island"
+    },
+    "basket": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the insert: Mama's basket packed, from above (0 closed … 1 open)"
+    },
+    "lantern_bow": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lantern on the boat's bow lit"
+    },
+    "jam": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the pieces': the jam cooking on the veranda stove — its fire, its steam"
+    },
+    "luggage": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the pieces': the basket, the bundle and the can waiting on the jetty"
+    },
+    "packed": {
+      "range": [
+        0,
+        5
+      ],
+      "means": "the pieces' (basket): how much is in the basket — 1 the hat, 2 the notebook, 3 the sweater, 4 the jar under it, 5 the paints on top (only with the play's paints)"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (modules/beats): the game names it"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will name next (modules/beats: its cut made ready)"
+    },
+    "boat_a": {
+      "type": "number",
+      "means": "the pieces' (push_off): where the boat is, across (moored: −15.4)"
+    },
+    "boat_d": {
+      "type": "number",
+      "means": "the pieces' (push_off): where the boat is, distance (moored: 22.85)"
+    },
+    "papa_a": {
+      "type": "number",
+      "means": "the pieces': where papa stands, across (lib.js PLACES)"
+    },
+    "papa_d": {
+      "type": "number",
+      "means": "the pieces': where papa stands, distance (lib.js PLACES)"
+    },
+    "mama_a": {
+      "type": "number",
+      "means": "the pieces': where mama stands, across (lib.js PLACES)"
+    },
+    "mama_d": {
+      "type": "number",
+      "means": "the pieces': where mama stands, distance (lib.js PLACES)"
+    },
+    "troll_a": {
+      "type": "number",
+      "means": "the pieces': where troll stands, across (lib.js PLACES)"
+    },
+    "troll_d": {
+      "type": "number",
+      "means": "the pieces': where troll stands, distance (lib.js PLACES)"
+    },
+    "my_a": {
+      "type": "number",
+      "means": "the pieces': where my stands, across (lib.js PLACES)"
+    },
+    "my_d": {
+      "type": "number",
+      "means": "the pieces': where my stands, distance (lib.js PLACES)"
+    },
+    "groke_a": {
+      "type": "number",
+      "means": "the pieces': where groke stands, across (lib.js PLACES)"
+    },
+    "groke_d": {
+      "type": "number",
+      "means": "the pieces': where groke stands, distance (lib.js PLACES)"
+    }
+  },
+  "music": {
+    "prompts": [
+      {
+        "text": "Solo nylon-string guitar picking a slow, plain northern folk tune, a warm late-summer evening in a garden",
+        "weight": 1.0
+      },
+      {
+        "text": "Soft accordion holding long quiet chords, a little out of breath, a Finnish summer evening by the shore",
+        "weight": 0.9
+      },
+      {
+        "text": "A celesta and a flute, a garden at the end of August, bees and apples, warm and a little sad",
+        "weight": 0.8
+      },
+      {
+        "text": "Children's choir humming wordlessly, very far off, a memory of a valley",
+        "weight": 0.5
+      },
+      {
+        "text": "A small clarinet melody, wistful and a little comic, like a story told to a child, over a bowed double bass",
+        "weight": 0.5
+      },
+      {
+        "text": "Sparse felt piano, three notes and a long pause, evening light on a veranda, gentle melancholy",
+        "weight": 0.4
+      },
+      {
+        "text": "Music box playing a lullaby slightly out of tune, far away, nostalgic",
+        "weight": 0
+      },
+      {
+        "text": "Solo cello, long low phrases, a father restless in a garden where everything is done",
+        "weight": 0
+      },
+      {
+        "text": "Kantele plucked softly, open fifths, Nordic folk, bright and bare",
+        "weight": 0
+      },
+      {
+        "text": "Brushed snare and upright bass, a slow cheerful waltz, a family on a boat trip",
+        "weight": 0
+      },
+      {
+        "text": "Whistled melody over a ukulele, light-hearted, a proud father setting out on an adventure",
+        "weight": 0
+      },
+      {
+        "text": "Strings swelling slowly into a wide open chord, the sea and the sky, hopeful and sad at once",
+        "weight": 0
+      },
+      {
+        "text": "Crickets and a ticking clock under a single sustained harmonium note, night on a veranda, a map under a lamp",
+        "weight": 0
+      },
+      {
+        "text": "Low drone of a foghorn-like brass note under thin high violins, something cold far off on the shore",
+        "weight": 0
+      },
+      {
+        "text": "Glassy harmonium drones with the hiss of waves on sand, slow and wide, almost still",
+        "weight": 0
+      },
+      {
+        "text": "Tin whistle and frame drum, packing for a journey, eager and a little hurried",
+        "weight": 0
+      }
+    ],
+    "bpm": 72,
+    "density": 0.3,
+    "brightness": 0.55,
+    "scale": "D_MAJOR_B_MINOR"
+  }
+}
