@@ -59,7 +59,7 @@ round_box = lambda r, p: [-r3(math.pi * r), -length(p), r3(math.pi * r), 0]
 wall_box = [-r3(WS / 2), -H, r3(WS / 2), 0]
 light = island.light(WIND)
 light["inside"] = 0.9
-for k, v in {"night": 0.85, "storm": 0.6}.items():
+for k, v in {"night": 1.0, "storm": 0.85}.items():
     light["looks"][k]["inside"] = v
 # a lantern carried lit: its light at the flame in the hand (modules/cast part lantern…), on by `<id>_lamp`
 carried = [{"id": f"lamp_{who}", "at": f"{who}#flame", "on": f"{who}_lamp", "color": "#ffd08c", "strength": 1.1, "reach": 5, "flicker": 0.1,

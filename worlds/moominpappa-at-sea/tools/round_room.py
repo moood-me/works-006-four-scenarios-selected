@@ -75,7 +75,7 @@ light = island.light(WIND)
 light["inside"] = 0.75
 # (no beam here: the lighthouse's beam is the lantern room's and the outside scenes')
 light["looks"]["storm"]["lights"].pop("beam", None)
-for k, v in {"dawn": 0.8, "dusk": 0.8, "night": 0.85, "storm": 0.65}.items():
+for k, v in {"dawn": 0.8, "dusk": 0.8, "night": 1.0, "storm": 0.8}.items():
     light["looks"][k]["inside"] = v
 cheek = lambda t, face, h, deep: {"across": at(t, R + deep / 2)[0], "distance": at(t, R + deep / 2)[1], "elevation": h, "facing": r3(face)}
 person = lambda id, name, who, a, d, does=None: {"id": id, "name": name, "person": {"cast": "cast", "who": who, **({"does": does} if does else {})},

@@ -273,7 +273,8 @@ const PEOPLE = ["papa", "mama", "my", "troll"];
 // eyes from beside: on Papa at the gate (his right profile); along the keeper's wall low (whoever is at the line); at
 // the sill from its right
 // (and on the boy at the window from its right, past the table)
-const EYE = { gate: [...at(-3, 2.95), 1.35], line: [...at(-18, 2.6), 0.95], sill: [...at(WIN.mid - 14, 2.5), 1.5], window: [...at(WIN.mid + 30, 2.3), 1.4] };
+const EYE = { gate: [...at(-3, 2.95), 1.35], line: [...at(-18, 2.6), 0.95], sill: [...at(WIN.mid - 14, 2.5), 1.5], window: [...at(WIN.mid + 30, 2.3), 1.4],
+  door: [...at(DOOR.mid - 14, 1.6), 1.25] };
 // the light at each hour (the party's: the pieces move it only where the step's own time passes before the eyes)
 function film(scene) {
   // the lanterns carried lit: how much each burns (the light at its flame, `<id>_lamp`)
@@ -1229,17 +1230,20 @@ function film(scene) {
         cam(s, ON("mama", "medium"));
         await moment(s, "night3:mama", 6);
         await walk(papa, [...at(DOOR.mid - 8, R - 0.55)]);
-        papa.turn(DOOR.mid + 60);
+        // (both turned to the room, the camera on their faces, room over Papa's hat)
+        papa.turn(196);
         troll.turn(DOOR.mid + 180);
-        papa.reach({ r: "troll#shoulder_l" });
-        await cam(s, ON("troll", "close"));
+        papa.look(null);
+        papa.mood("sad");
+        papa.reach({ l: "troll#shoulder_r" });
+        await cam(s, FROM(EYE.door, [...at(DOOR.mid - 4, R - 0.6), 0.95]));
         await moment(s, "night3:shoulder", 0.5);
       },
     },
     // 4.7 "Let him go": he goes; Mama with the blanket out after him
     n3_go: {
       after: "night3",
-      from: () => ROOM(STAND("troll", SPOT.door), STAND("papa", [...at(DOOR.mid - 8, R - 0.55), DOOR.mid + 60]), STAND("mama", SPOT.table_l), { ...WIDE }),
+      from: () => ROOM(STAND("troll", SPOT.door), STAND("papa", [...at(DOOR.mid - 8, R - 0.55), 196]), STAND("mama", SPOT.table_l), { ...WIDE }),
       run: async s => {
         const troll = P(s, "troll"), mama = P(s, "mama");
         P(s, "papa").reach(null);
@@ -1292,7 +1296,7 @@ function film(scene) {
     // 4.7 "Mama's right": the boy at the window
     n3_right: {
       after: "night3",
-      from: () => ROOM(STAND("troll", SPOT.door), STAND("papa", [...at(DOOR.mid - 8, R - 0.55), DOOR.mid + 60]), { ...WIDE }),
+      from: () => ROOM(STAND("troll", SPOT.door), STAND("papa", [...at(DOOR.mid - 8, R - 0.55), 196]), { ...WIDE }),
       run: async s => {
         const troll = P(s, "troll");
         P(s, "papa").reach(null);
@@ -1320,7 +1324,7 @@ function film(scene) {
     // 4.7 "Come on. I'll go to the dune": out together
     n3_dune: {
       after: "night3",
-      from: () => ROOM(STAND("troll", SPOT.door), STAND("papa", [...at(DOOR.mid - 8, R - 0.55), DOOR.mid + 60]), { ...WIDE }),
+      from: () => ROOM(STAND("troll", SPOT.door), STAND("papa", [...at(DOOR.mid - 8, R - 0.55), 196]), { ...WIDE }),
       run: async s => {
         const troll = P(s, "troll"), papa = P(s, "papa");
         papa.reach(null);

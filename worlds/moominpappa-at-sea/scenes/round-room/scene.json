@@ -75,7 +75,7 @@
           "sun_dawn": 0,
           "sun_dusk": 0
         },
-        "inside": 0.85
+        "inside": 1.0
       },
       "storm": {
         "ambient": 0.6,
@@ -97,7 +97,7 @@
           "sun_dusk": 0.3,
           "moon": 0.6
         },
-        "inside": 0.65
+        "inside": 0.8
       },
       "flash": {
         "ambient": 0.9,
@@ -1267,6 +1267,8 @@
     "lighthouse_lit": 0,
     "beam": 0,
     "beam_turn": 0,
+    "beam_tilt": -1,
+    "room_lit": 0,
     "garden": -1,
     "paints": "green",
     "wall_mama": 0,
@@ -1437,6 +1439,21 @@
     "beam_turn": {
       "type": "number",
       "means": "the beam's bearing, degrees (the island's script turns it on and on while beam is on)"
+    },
+    "room_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the round room's window on the tower lit from within (seen from outside)"
+    },
+    "beam_tilt": {
+      "range": [
+        -60,
+        10
+      ],
+      "smooth": true,
+      "means": "the beam's height, degrees (−1 a little down, out to sea; a piece tilts it down onto someone «in the beam»)"
     },
     "garden": {
       "range": [
