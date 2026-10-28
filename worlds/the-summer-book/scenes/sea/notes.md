@@ -32,7 +32,7 @@ the boat's frame), or framing a point (`camera_target`). Where the people sit is
 by Sophia's scale, §8 — in `party`); the island's going (`island`), the swell (`sway`) are the pieces'. All in the last
 morning's light (`late`, `dawn`, `fog` 0.6 → 0.85 as the island goes).
 
-- `aboard` («Окно», «Платок», ≈ 8 s): the big boat off the far rock, everyone in their seats, the things,
+- `aboard` («Окно», «Платок», ≈ 3 s): the big boat off the far rock, everyone in their seats, the things,
   the basket (`basket`), the dinghy in tow (`dinghy`); the motor starts, the island begins to go (`island` 0.15 →
   0.25) — `aboard:motor`; with `counted` Sophia's lips move: she counted Grandmother's steps into the boat —
   `aboard:count`.
@@ -46,7 +46,7 @@ morning's light (`late`, `dawn`, `fog` 0.6 → 0.85 as the island goes).
   closed, smiling — `eyes_closed:smile`.
 - `swell` («Платок», ≈ 4 s): out on the swell, the boat pitching (`sway` up); Grandmother on her thwart. Ends in the
   pose of М11 «Сидеть прямо» (`grandma#chest`): the mini-game moves `sway` (the swell she sits upright against).
-- `motor` (every ending, the second step, ≈ 6 s): the motor; the island going by on the right (`island` → 0.45) —
+- `motor` (every ending, the second step, ≈ 3 s): the motor; the island going by on the right (`island` → 0.45) —
   `motor:go`. (The game then cuts to the shore's `from_water` and the new house's `from_sea`, and back.)
 - `look_house` (every ending without the new house, after the new house's `from_sea`, ≈ 6 s): Sophia looks back a long
   time at the black windows of that house as long as they can be seen (`new_house#windows`) — `look_house:look`.
@@ -117,15 +117,15 @@ weather (the island's keyed mirror).
 
 ```json
 {"beats": {
- "aboard": {"after": [], "tells": ["aboard:motor", "aboard:count"], "seconds": 8, "show": false},
+ "aboard": {"after": [], "tells": ["aboard:motor", "aboard:count"], "seconds": 3, "show": false},
  "come_over": {"after": [], "tells": ["come_over:sat"], "seconds": 10, "show": false},
  "hand_in_hand": {"after": [], "tells": [], "seconds": 3, "show": false},
  "eyes_closed": {"after": ["come_over", "hand_in_hand"], "tells": ["eyes_closed:smile"], "seconds": 10, "show": false},
- "swell": {"after": [], "tells": [], "seconds": 4, "show": false},
- "motor": {"after": [], "tells": ["motor:go"], "seconds": 6, "show": false},
- "look_house": {"after": [], "tells": ["look_house:look"], "seconds": 6, "show": false},
+ "swell": {"after": [], "tells": [], "seconds": 2, "show": false},
+ "motor": {"after": [], "tells": ["motor:go"], "seconds": 3, "show": false},
+ "look_house": {"after": [], "tells": ["look_house:look"], "seconds": 4, "show": false},
  "cat_gift": {"after": ["look_house"], "tells": ["cat_gift:bird", "cat_gift:over", "cat_gift:stroke"], "seconds": 12, "show": false},
- "sky": {"after": ["look_house", "cat_gift"], "tells": ["sky:sign"], "seconds": 5, "show": false},
+ "sky": {"after": ["look_house", "cat_gift"], "tells": ["sky:sign"], "seconds": 4, "show": false},
  "window_talk": {"after": ["look_house", "cat_gift", "sky"], "tells": ["window_talk:look", "window_talk:said", "window_talk:papa", "window_talk:sophia", "window_talk:song"], "seconds": 22, "show": false},
  "tent_talk": {"after": ["look_house", "cat_gift", "sky"], "tells": ["tent_talk:tell", "tent_talk:mama", "tent_talk:hand", "tent_talk:again", "tent_talk:once"], "seconds": 24, "show": false},
  "oars_boat": {"after": ["look_house", "cat_gift", "sky"], "tells": ["oars_boat:board", "oars_boat:tremble", "oars_boat:hand", "oars_boat:seat", "oars_boat:ask", "oars_boat:better", "oars_boat:tie", "oars_boat:count"], "seconds": 22, "show": false},

@@ -168,6 +168,8 @@ const PORCH = { ...OFF(-2.8, 12.2, -74, 0), camera_look: 0.03 };
 const PORCH_NEAR = { ...OFF(-4.3, 12.8, -78, -0.25), camera_look: 0.06 };
 // the shore path to the big boat, from the water; the dinghy by the pier, from the water
 const PATH_CAM = { ...OFF(1.0, 20.5, -75, 0.2), camera_look: 0.02 };
+// the last stretch of the path to the gangway's foot, from the water (the short walks)
+const GANGWAY_CAM = { ...OFF(1.0, 20.5, -50, 0.2), camera_look: 0.02 };
 const DINGHY_CAM = { ...OFF(2.6, 12.4, -20, 0.1), camera_look: 0.05 };
 // the calm's pebble: Grandmother sitting turned along the shore, seen from ahead of her (her face, the glass water)
 const PEBBLE_CAM = { ...OFF(0.1, 9.4, -165, -0.25), camera_look: 0.1 };
@@ -919,8 +921,8 @@ function film(scene) {
     last_morning: {
       from: () => ({ ...NEAR(SPOT.pier_root, 9, 0, 0.02), camera_yaw: -6, ...ATS('grandma', 'pier_root'), ...AT('sophia', 'pier_root'), ...AT('papa', 'pier_root') }),
       run: async s => {
-        await dolly(s, NEAR(SPOT.pier_root, 7, 0, 0.02), 4);
-        await tell(s, 'last_morning:boat', 2);
+        await dolly(s, NEAR(SPOT.pier_root, 7, 0, 0.02), 2);
+        await tell(s, 'last_morning:boat', 1);
       },
     },
     signs: {
@@ -942,7 +944,7 @@ function film(scene) {
           s.person('grandma').reach({ r: 'grandma#hips' });
           await cutTo(s, group);
         }
-        await tell(s, 'signs:smoke', 2.5);
+        await tell(s, 'signs:smoke', 1.6);
         s.person('sophia').reach(null);
         s.person('grandma').reach(null);
         s.set('papa_with', null);
@@ -952,52 +954,52 @@ function film(scene) {
           else s.set('papa_with', ['hat']);
           await cutTo(s, { ...NEAR([-0.5, 15.6], 3.6, 0, 0.03), ...AT('papa', 'pier_root', { papa_with: hat === 'on' ? null : ['hat'] }) });
           if (hat === 'on') s.person('papa').reach({ r: 'sophia#head' });
-          await tell(s, 'signs:hat', 2.5);
+          await tell(s, 'signs:hat', 1.6);
           s.person('papa').reach(null);
         }
         const bird = get('sign_bird');
         if (bird === 'graves') {
           await cutTo(s, { ...NEAR([-1.9, 9.4], 3.4, 0.4, 0.06), ...AT('sophia', 'graves') });
           s.person('sophia').reach({ r: 'graves#pit' });
-          await tell(s, 'signs:bird', 3);
+          await tell(s, 'signs:bird', 1.8);
           s.person('sophia').reach(null);
         } else if (bird === 'basket') {
           s.set('papa_with', ['basket']);
           await cutTo(s, NEAR([-0.5, 15.6], 4.2, 0, 0.03));
-          await tell(s, 'signs:bird', 3);
+          await tell(s, 'signs:bird', 1.8);
         }
       },
     },
     walk_self: {
-      from: () => ({ ...PATH_CAM, ...ATS('grandma', 'pier_root'), ...AT('sophia', 'pier_root'), ...AT('papa', 'pier_root') }),
+      from: () => ({ ...GANGWAY_CAM, ...ATS('grandma', [-3.0, 23.2], { turn: 340 }), ...AT('sophia', [-3.5, 22.6], { turn: 340 }), ...AT('papa', [-2.6, 23.6], { turn: 340 }) }),
       run: async s => {
-        await s.all(go(s, 'grandma', [SPOT.shore_a, SPOT.shore_b, SPOT.shore_c, SPOT.gangway], 120, 'old_walk'),
-          go(s, 'papa', [SPOT.shore_a, SPOT.shore_b, SPOT.shore_c, [-3.4, 26.8]], 110), go(s, 'sophia', [SPOT.shore_a, SPOT.shore_b, [-4.6, 26.1]], 120));
-        await tell(s, 'walk_self:there', 1);
+        await s.all(go(s, 'grandma', [SPOT.shore_c, SPOT.gangway], 120, 'old_walk'),
+          go(s, 'papa', [SPOT.shore_c, [-3.4, 26.8]], 110), go(s, 'sophia', [[-4.6, 26.1]], 120));
+        await tell(s, 'walk_self:there');
       },
     },
     walk_arm: {
-      from: () => ({ ...PATH_CAM, ...ATS('grandma', 'pier_root'), ...AT('sophia', 'pier_root'), ...AT('papa', 'pier_root') }),
+      from: () => ({ ...GANGWAY_CAM, ...ATS('grandma', [-3.0, 23.2], { turn: 340 }), ...AT('sophia', [-3.5, 22.6], { turn: 340 }), ...AT('papa', [-2.6, 23.6], { turn: 340 }) }),
       run: async s => {
         s.person('papa').reach({ l: 'grandma#hand_r' });
         s.person('grandma').reach({ r: 'papa#hand_l' });
-        await s.all(go(s, 'grandma', [SPOT.shore_a, SPOT.shore_b, SPOT.shore_c, SPOT.gangway], 120, 'old_walk'),
-          go(s, 'papa', [[-1.2, 17.2], [-2.2, 21.2], [-3.2, 24.6], [-3.6, 26.7]], 110, 'old_walk'), go(s, 'sophia', [SPOT.shore_a, SPOT.shore_b, [-4.6, 26.1]], 120));
-        await tell(s, 'walk_arm:there', 1);
+        await s.all(go(s, 'grandma', [SPOT.shore_c, SPOT.gangway], 120, 'old_walk'),
+          go(s, 'papa', [[-3.2, 24.6], [-3.6, 26.7]], 110, 'old_walk'), go(s, 'sophia', [[-4.6, 26.1]], 120));
+        await tell(s, 'walk_arm:there');
       },
     },
     walk_slow: {
-      from: () => ({ ...PATH_CAM, luggage: true, ...ATS('grandma', 'pier_root'), ...AT('sophia', 'bundle'),
+      from: () => ({ ...PATH_CAM, luggage: true, ...ATS('grandma', SPOT.shore_b, { turn: 200 }), ...AT('sophia', 'bundle'),
         ...AT('papa', [-3.4, 26.8], { turn: 300, papa_with: ['bundle', 'knife'] }) }),
       run: async s => {
         s.person('sophia').look('grandma');
         s.person('papa').look('grandma');
-        s.person('grandma').reach({ r: [-1.0, 16.6, 0.4] });
-        await go(s, 'grandma', [SPOT.shore_a, SPOT.shore_b], null, 'old_walk');
-        await tell(s, 'walk_slow:stones', 2);
+        s.person('grandma').reach({ r: [-2.2, 22.4, 0.4] });
+        await go(s, 'grandma', [[-3.0, 22.8]], null, 'old_walk');
+        await tell(s, 'walk_slow:stones', 1);
         s.person('grandma').reach({ r: 'gangway#rail' });
         await go(s, 'grandma', [SPOT.shore_c, SPOT.gangway], 120, 'old_walk');
-        await tell(s, 'walk_slow:there', 1);
+        await tell(s, 'walk_slow:there');
       },
     },
     elbow: {
@@ -1006,7 +1008,7 @@ function film(scene) {
       run: async s => {
         await cutTo(s, SHOT('grandma', 'medium', [0.5, 0.45], 0));
         s.person('papa').reach({ l: 'grandma#elbow_r' });
-        await tell(s, 'elbow:taken', 3);
+        await tell(s, 'elbow:taken', 2);
         s.person('grandma').reach({ r: 'gangway#rail' });
         await cutTo(s, SHOT('gangway#rail', 'medium', [0.5, 0.5], 0));
       },
@@ -1027,11 +1029,11 @@ function film(scene) {
       },
     },
     tent_walk: {
-      from: () => ({ ...PATH_CAM, big_boat: true, ...ATS('grandma', 'pier_root'), ...AT('sophia', 'pier_root'), ...AT('papa', 'pier_root', { papa_with: ['bundle'] }) }),
+      from: () => ({ ...GANGWAY_CAM, big_boat: true, ...ATS('grandma', [-3.0, 23.2], { turn: 340 }), ...AT('sophia', [-3.5, 22.6], { turn: 340 }), ...AT('papa', [-2.6, 23.6], { turn: 340, papa_with: ['bundle'] }) }),
       run: async s => {
-        await s.all(go(s, 'grandma', [SPOT.shore_a, SPOT.shore_b, SPOT.shore_c, SPOT.gangway], 120, 'old_walk'),
-          go(s, 'papa', [SPOT.shore_a, [-2.4, 21.6], [-3.4, 26.8]], 110), go(s, 'sophia', [SPOT.shore_a, SPOT.shore_b, [-4.6, 26.1]], 120));
-        await tell(s, 'tent_walk:board', 2);
+        await s.all(go(s, 'grandma', [SPOT.shore_c, SPOT.gangway], 120, 'old_walk'),
+          go(s, 'papa', [[-3.4, 26.8]], 110), go(s, 'sophia', [[-4.6, 26.1]], 120));
+        await tell(s, 'tent_walk:board', 1);
         s.person('sophia').look('grandma');
         await tell(s, 'tent_walk:count', get('counted') ? 3 : 0);
         if (get('knock_broken')) await s.wait(2);
@@ -1118,19 +1120,19 @@ function film(scene) {
       },
     },
     from_water: {
-      from: () => ({ ...OFF(6, 9, -64, 0.4), hat: get('hat') }),
+      from: () => ({ ...OFF(6, 9, -64, 0.4), hat: get('hat'), grandma_here: false, sophia_here: false, papa_here: false }),
       run: async s => {
-        await s.move('camera_z', 11, { over: 4, ease: 'linear' });
+        await s.move('camera_z', 11, { over: 2, ease: 'linear' });
         await tell(s, 'from_water:door');
         await cutTo(s, OFF(5, 8, -70, 0.3));
-        await s.move('camera_z', 9.5, { over: 4, ease: 'linear' });
+        await s.move('camera_z', 9.5, { over: 2, ease: 'linear' });
         await tell(s, 'from_water:gate');
         await cutTo(s, OFF(5, 12, -82, 0.6));
-        await s.move('camera_z', 13.5, { over: 4, ease: 'linear' });
+        await s.move('camera_z', 13.5, { over: 2, ease: 'linear' });
         await tell(s, 'from_water:rail');
         if ((get('graves') ?? 0) > 0) {
           await cutTo(s, OFF(4, 6, -60, 0.2));
-          await s.move('camera_z', 7.2, { over: 4, ease: 'linear' });
+          await s.move('camera_z', 7.2, { over: 2, ease: 'linear' });
           await tell(s, 'from_water:graves');
         }
       },

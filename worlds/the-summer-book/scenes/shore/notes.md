@@ -215,9 +215,9 @@ sets them, except where `party` says.
   «You would have gone»).
 
 **Epilogue** (31 August, `late`, `dawn`, thin fog `fog` 0.6, `big_boat`, `luggage`)
-- `last_morning` (≈ 8 s): the things by the pier; the big boat by the far rock, the gangway; everyone at the pier —
+- `last_morning` (≈ 3 s): the things by the pier; the big boat by the far rock, the gangway; everyone at the pier —
   `last_morning:boat`.
-- `signs` (≈ 6–14 s, by `sign_smoke`, `sign_hat`, `sign_bird`): one gesture each — Sophia slips Grandmother the
+- `signs` (≈ 4–6 s, by `sign_smoke`, `sign_hat`, `sign_bird`): one gesture each — Sophia slips Grandmother the
   pouch (`pouch`) / Papa takes the shell off the rail into the basket (`shell`) / Grandmother crumples the empty packet
   (`packet`) / pats her empty pocket (`pocket`) — `signs:smoke`; the hat on Sophia, Papa straightens its brim and turns
   to the water (`on`) / Papa with the hat from the house, puts it in his bag (`bag`) — `signs:hat` (`nail`: no gesture
@@ -226,14 +226,15 @@ sets them, except where `party` says.
 - The way to the boat (the game chooses by Grandmother's strength): `walk_self` (≥ 3: she walks to the gangway by
   herself — `walk_self:there`), `walk_arm` (1–2: on Papa's arm — `walk_arm:there`), `walk_slow` (0: step by step along
   the shore, holding the stones, then the gangway's rail; Sophia sits on a bundle watching, Papa by the gangway with
-  her bundle and her knife — `walk_slow:stones`, `walk_slow:there`). Each ends at the gangway's foot.
-- `elbow` («Окно», full, ≈ 6 s): on the gangway Papa takes her by the elbow; she does not shake it off —
+  her bundle and her knife — `walk_slow:stones`, `walk_slow:there`). Each ends at the gangway's foot. Each shows only the last
+  stretch of the shore, everyone in the frame (≈ 5–10 s).
+- `elbow` («Окно», full, ≈ 4 s): on the gangway Papa takes her by the elbow; she does not shake it off —
   `elbow:taken`; Sophia sits down by her place in the boat (the game's next scene shows it). Ends in the pose of М11
   «Сходни» (`gangway#rail`: her palm on the rail, the last time).
 - `catch` («Окно», late, ≈ 10 s): she does not give him her elbow; Papa a step behind, ready to catch — `catch:behind`
   («Don't catch me…»); Sophia looks from him to her — `catch:look`; at strength 0 she stops at the gangway —
   `catch:stop` («Well, hold me…»). Ends in the pose of М11 «Сходни».
-- `tent_walk` («Палатка», after the game's cut from `cape`, ≈ 10 s, by strength): he carries the things and does not
+- `tent_walk` («Палатка», after the game's cut from `cape`, ≈ 7 s, by strength): he carries the things and does not
   look at her; she steps in by herself / leaning on Sophia's hand or his arm, he lifts her in / she walks by herself
   step by step, everyone waits — `tent_walk:board`; with `counted` Sophia counts her steps soundlessly with her lips —
   `tent_walk:count`; with `knock_broken` Sophia does not take her hand at first, then
@@ -254,7 +255,7 @@ sets them, except where `party` says.
   Papa walks the shore level with them, the bundle on his shoulder (or sits in the bow) — `oars_after:straight`;
   halfway her hand reaches for the oars by itself and lies back on her knees — `oars_after:hand`; at the big boat —
   `oars_after:there`.
-- `from_water` (finals, ≈ 4 s a shot; the camera out over the water, looking in at the island, the motor's sound the
+- `from_water` (finals, ≈ 2 s a shot; the camera out over the water, looking in at the island, the motor's sound the
   game's): the house's door — through the veranda's glass the nail with the hat or empty (`hat`) — `from_water:door`;
   the gate, the chair by it or not (`chair`) — `from_water:gate`; the porch's empty rail — `from_water:rail`; with
   `graves` the row of little graves with wooden birds — `from_water:graves`. Each moment a shot made ready ahead; the
@@ -348,18 +349,18 @@ The sea's mirror follows the weather (the island's keyed mirror: rough and rippl
  "count": {"after": ["run_to"], "tells": ["count:sleeve", "count:look", "count:count", "count:in"], "seconds": 20, "show": false},
  "hem": {"after": ["run_to"], "tells": ["hem:said", "hem:silent", "hem:cling"], "seconds": 12, "show": false},
  "alone": {"after": ["run_to"], "tells": ["alone:said", "alone:stop", "alone:sleeve", "alone:later", "alone:coffee"], "seconds": 12, "show": false},
- "last_morning": {"after": [], "tells": ["last_morning:boat"], "seconds": 8, "show": false},
- "signs": {"after": ["last_morning"], "tells": ["signs:smoke", "signs:hat", "signs:bird"], "seconds": 10, "show": false},
- "walk_self": {"after": [], "tells": ["walk_self:there"], "seconds": 10, "show": false},
- "walk_arm": {"after": [], "tells": ["walk_arm:there"], "seconds": 14, "show": false},
- "walk_slow": {"after": [], "tells": ["walk_slow:stones", "walk_slow:there"], "seconds": 24, "show": false},
- "elbow": {"after": ["walk_self", "walk_arm", "walk_slow"], "tells": ["elbow:taken"], "seconds": 6, "show": false},
+ "last_morning": {"after": [], "tells": ["last_morning:boat"], "seconds": 3, "show": false},
+ "signs": {"after": ["last_morning"], "tells": ["signs:smoke", "signs:hat", "signs:bird"], "seconds": 6, "show": false},
+ "walk_self": {"after": [], "tells": ["walk_self:there"], "seconds": 5, "show": false},
+ "walk_arm": {"after": [], "tells": ["walk_arm:there"], "seconds": 6, "show": false},
+ "walk_slow": {"after": [], "tells": ["walk_slow:stones", "walk_slow:there"], "seconds": 10, "show": false},
+ "elbow": {"after": ["walk_self", "walk_arm", "walk_slow"], "tells": ["elbow:taken"], "seconds": 4, "show": false},
  "catch": {"after": ["walk_self", "walk_arm", "walk_slow"], "tells": ["catch:behind", "catch:look", "catch:stop"], "seconds": 10, "show": false},
- "tent_walk": {"after": [], "tells": ["tent_walk:board", "tent_walk:count", "tent_walk:hand"], "seconds": 10, "show": false},
+ "tent_walk": {"after": [], "tells": ["tent_walk:board", "tent_walk:count", "tent_walk:hand"], "seconds": 7, "show": false},
  "shawl_walk": {"after": [], "tells": ["shawl_walk:jacket", "shawl_walk:there", "shawl_walk:doctor"], "seconds": 14, "show": false},
  "dinghy_board": {"after": [], "tells": ["dinghy_board:oars", "dinghy_board:stern", "dinghy_board:bow_in", "dinghy_board:hold", "dinghy_board:hand", "dinghy_board:push", "dinghy_board:sophia", "dinghy_board:shake"], "seconds": 25, "show": false},
  "oars_after": {"after": ["dinghy_board"], "tells": ["oars_after:straight", "oars_after:hand", "oars_after:there"], "seconds": 18, "show": false},
- "from_water": {"after": [], "tells": ["from_water:door", "from_water:gate", "from_water:rail", "from_water:graves"], "seconds": 16, "show": false}},
+ "from_water": {"after": [], "tells": ["from_water:door", "from_water:gate", "from_water:rail", "from_water:graves"], "seconds": 8, "show": false}},
  "points": ["rock#ledge", "rock#shelf", "rock#warm", "peony:2#stems", "pier#end", "boat#boat", "rowboat#gunwale", "rowboat#seat", "net#knot", "gate#gate", "gate#stone", "chair#back", "porch#rail", "porch#landing", "graves#pit", "dinghy#oars", "dinghy#seat", "dinghy#bow", "gangway#rail", "big_boat#deck", "big_boat#bow", "luggage#basket", "house_front#veranda", "house_front#door", "house_front#gable", "veranda_in#hat", "cat#cat", "cat#back", "far_roof#roof", "far_boat#lamp", "sky#sun", "sky#sun_late", "sky#sun_dawn", "sky#moon", "grandma#chest", "grandma#hand_r", "grandma#hands", "sophia#chest", "sophia#hand_l", "sophia#shoulder_r", "papa#chest", "eriksson#chest", "teeth#teeth", "stems#stem", "tremble#hands", "gunwale#hands", "knot#thread", "knot#knot", "string#bow", "oars#hands", "rail#hand", "grandma#pebble"],
  "offers": ["peony:2#stems", "sophia#hand_l", "sophia#shoulder_r", "rock#ledge", "rowboat#gunwale", "net#knot", "grandma#pebble", "porch#rail", "grandma#hands", "gangway#rail", "dinghy#oars", "grandma#chest", "sophia#chest", "papa#chest", "stems#stem", "gunwale#hands", "knot#thread", "string#bow", "oars#hands", "rail#hand"],
  "party": {"dawn": 0, "dusk": 0, "night": 0, "late": 0, "calm": 0, "storm": 0, "flash": 0, "fog": 0, "moon": 1, "chair": "none", "shell": false, "graves": 0, "weed": false, "boat_out": false, "big_boat": false, "luggage": false, "hat": "nail", "skirt": true, "knew": false, "ask_back": false, "heard": false, "knock_broken": false, "sign_smoke": "pocket", "sign_hat": "nail", "sign_bird": "none", "grandma_here": true, "sophia_here": true, "papa_here": true, "eriksson_here": false, "weak": false, "counted": false, "shawl_lost": false, "net_self": false, "oar": false, "parcel_long": false},

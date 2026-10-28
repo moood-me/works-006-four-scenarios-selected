@@ -106,9 +106,9 @@ function film(scene) {
     aboard: {
       from: () => ({ ...VIEW, island: 0.15, sway: 0, ...SEATS() }),
       run: async s => {
-        s.move('island', 0.25, { over: 8, ease: 'in' });
-        await s.wait(2);
-        await tell(s, 'aboard:motor', 3);
+        s.move('island', 0.25, { over: 6, ease: 'in' });
+        await s.wait(1);
+        await tell(s, 'aboard:motor', 1.5);
         if (get('counted')) {
           s.person('sophia').look('grandma');
           await cutTo(s, CLOSE('sophia'));
@@ -152,14 +152,14 @@ function film(scene) {
     swell: {
       from: () => ({ ...VIEW, island: 0.25, sway: 0.6, ...SEATS() }),
       run: async s => {
-        await s.wait(1.5);
+        await s.wait(0.8);
         await cutTo(s, MEDIUM('grandma'));
       },
     },
     motor: {
       from: () => ({ ...VIEW, island: 0.3, sway: 0, ...SEATS() }),
       run: async s => {
-        await s.move('island', 0.45, { over: 6, ease: 'linear' });
+        await s.move('island', 0.45, { over: 3, ease: 'linear' });
         await tell(s, 'motor:go');
       },
     },
@@ -168,9 +168,9 @@ function film(scene) {
       run: async s => {
         s.person('sophia').look('new_house#windows');
         await cutTo(s, CLOSE('sophia'));
-        await s.wait(1.5);
-        await dolly(s, { ...VIEW, camera_yaw: YAW(NEW_HOUSE, 0.45) }, 3);
-        await tell(s, 'look_house:look', 2);
+        await s.wait(0.8);
+        await dolly(s, { ...VIEW, camera_yaw: YAW(NEW_HOUSE, 0.45) }, 2);
+        await tell(s, 'look_house:look', 1);
       },
     },
     cat_gift: {
@@ -216,7 +216,7 @@ function film(scene) {
           await cutTo(s, MEDIUM('sophia'));
           await s.person('sophia').do('fold_hands');
         }
-        await tell(s, 'sky:sign', 2.5);
+        await tell(s, 'sky:sign', 1.5);
       },
     },
     window_talk: {
