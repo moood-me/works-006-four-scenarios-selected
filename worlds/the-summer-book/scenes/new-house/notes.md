@@ -70,12 +70,34 @@ floor); the people's `<id>_here`, `<id>_mood`. The night at the house is `night:
 - The dead trees are this scene's own painting (`deadtree`, as the forest's are its own): one tree for the island in
   `isle` would be better — its owner's.
 
+## Pieces (stage 5)
+
+The pieces of the game's steps (plan.md «Куски сцен по шагам», scenario.md 3.3 «moss» and §10's common shots), played by
+the module `beats`: the key `beat`, `beat:<name>` told at its end, `beat_next`. Each: what it shows, the keys it begins
+with or sets, where it ends — in the pose of what comes next; its moments are told as `<piece>:<moment>` — the game
+speaks its lines and shows its plates there. Where the people stand and the camera are each piece's own (its `from`);
+the game sets only the play's keys (the hour, `seal` in the epilogue). All are the game's (`show` false); the showcase
+plays them. No choice and no minigame is played here: the stones' minigame (М7в) is the forest's, the porch after it
+the shore's.
+
+- `window` (3.3 «moss», ≈ 10 s). Night, the moon over the sea: Grandmother and Sophia come out of the dead trees onto the rock before the house with the lantern (in her left hand); the house white, its windows black; Grandmother goes to the veranda's window and pulls at its lever — it is not locked, it swings open. Keys: night 1, lantern hand; sash 0 → 1. From: both on the rock (path). Ends: both at the open window (sash). Moments: `window:come` — the house before them, its black windows; `window:open` — the window swings open (the game: «not locked…»).
+- `inside` (3.3 «moss», ≈ 12 s). After `window`. Cut inside (the climbing in is not shown): the two in the room by the doorway, the lantern lifted — new, clean, the moon in the four big windows; Grandmother goes to the wide bed, sets the lantern on the floor and sits on its foot; Sophia looks round. Keys: view room; lantern hand → floor. Ends: Grandmother sitting on the bed's foot, the lantern at her feet. Moments: `inside:in` — in the room, everything new (the game: «Inside everything is new, clean, smelling of paint»); `inside:sat` — she sits on the owners' bed.
+- `smoke` (3.3 «moss», ≈ 8 s). After `inside`. Grandmother takes the packet out of her pocket, a cigarette out of it, strikes a match and lights it; the ember, the thin smoke in the moonlight; she sits smoking. Keys: cigarette 0 → 1. Ends: Grandmother smoking on the bed. Moments: `smoke:packet` — the packet in her hand (with «quit» the game says «For an occasion like this» here); `smoke:lit` — the cigarette alight.
+- `drawers` (3.3 «moss», ≈ 12 s). After `smoke`. Sophia goes to the chest of drawers and pulls the drawers out one after another, looks into each — empty, clean — takes nothing; then turns to Grandmother. Keys: drawers 0 → 1. Ends: Sophia by the open drawers, turned to Grandmother. Moments: `drawers:open` — the last drawer out, empty (the game: «Sophia opens all the drawers and takes nothing»); `drawers:turn` — she turns to her (the game: «Nobody has died here»).
+- `look` (3.3 «moss», ≈ 8 s). After `drawers`. Grandmother's face close, looking at Sophia, the cigarette in her hand; a pause; she puts it out, gets up and takes the lantern. Keys: cigarette 1 → 0; lantern floor → hand. Ends: Grandmother standing by the bed with the lantern. Moments: `look:face` — her face close (the game: «Grandmother looks at her. A pause»); `look:up` — she is up (the game: «Come on»).
+- `seal` (3.3 «moss», ≈ 9 s). After `look`. Going, Sophia lays the wooden seal on the table under the window, the moon over it; the two go out at the doorway; the room empty, the seal on the table in the moonlight (then the game's cut, through black, home to the porch). Keys: seal false → true. Ends: the empty room, the seal on the table. Moments: `seal:left` — the seal on the table (the game: «Going, Sophia leaves the wooden seal on the table»); `seal:gone` — the room empty.
+- `from_sea` (epilogue, the common shots from the water, ≈ 7 s). The last morning in the thin fog, from the water: the new house on the far side over the water, its big black windows; the camera comes nearer under the windows — with `seal`, the wooden seal on the table in the window; without, only the black windows. Keys: late 1, dawn 1, fog 0.6, nobody here; seal (the play's). Ends: the windows close (with `seal`: the seal in the window). Moments: `from_sea:windows` — the black windows; `from_sea:seal` — nearer: the seal in the window (told without `seal` too: the empty window).
+
+## Open for the game (stage 5)
+
+- The packet and the cigarette, the match, the lantern in her hand are the cast's parts (package Л); the lights
+  (`lantern_hand`, `cigarette`) go to the parts' points when they come.
+- In «quit» the packet is taken out of the crevice in the forest, on the way (the forest's `pack: taken`); here she only
+  takes it out of her pocket — the same in every branch.
+- `view` stays for the stage-4 stills; the pieces set the camera themselves.
+
 ## Contract for the check
 
 ```json
-{"beats": {},
- "points": ["sash#sash", "bed#seat", "table#seal", "table#table", "chest#drawers", "lantern#lantern", "seal#seal", "back#windows", "sky#sun", "sky#sun_late", "sky#sun_dawn", "sky#moon", "grandma#chest", "sophia#chest"],
- "offers": ["sash#sash", "bed#seat", "table#seal", "chest#drawers", "grandma#chest", "sophia#chest"],
- "party": {"dawn": 0, "dusk": 0, "night": 0, "late": 0, "calm": 0, "storm": 0, "flash": 0, "fog": 0, "moon": 1, "view": "out", "grandma_at": "path", "sophia_at": "path", "grandma_here": false, "sophia_here": false, "sash": 0, "drawers": 0, "seal": false, "cigarette": 0, "lantern": "none"},
- "acts": {"flash": {"values": [], "tells": ["flash:strike"]}}}
+{"beats": {"window": {"after": [], "tells": ["window:come", "window:open"], "seconds": 10, "show": false}, "inside": {"after": ["window"], "tells": ["inside:in", "inside:sat"], "seconds": 12, "show": false}, "smoke": {"after": ["inside"], "tells": ["smoke:packet", "smoke:lit"], "seconds": 8, "show": false}, "drawers": {"after": ["smoke"], "tells": ["drawers:open", "drawers:turn"], "seconds": 12, "show": false}, "look": {"after": ["drawers"], "tells": ["look:face", "look:up"], "seconds": 8, "show": false}, "seal": {"after": ["look"], "tells": ["seal:left", "seal:gone"], "seconds": 9, "show": false}, "from_sea": {"after": [], "tells": ["from_sea:windows", "from_sea:seal"], "seconds": 7, "show": false}}, "points": ["sash#sash", "bed#seat", "table#seal", "table#table", "chest#drawers", "lantern#lantern", "seal#seal", "back#windows", "sky#sun", "sky#sun_late", "sky#sun_dawn", "sky#moon", "grandma#chest", "sophia#chest"], "offers": ["sash#sash", "bed#seat", "table#seal", "chest#drawers", "grandma#chest", "sophia#chest"], "party": {"dawn": 0, "dusk": 0, "night": 0, "late": 0, "calm": 0, "storm": 0, "flash": 0, "fog": 0, "moon": 1, "seal": false, "grandma_here": false, "sophia_here": false}, "acts": {"flash": {"values": [], "tells": ["flash:strike"]}}}
 ```
