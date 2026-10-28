@@ -96,6 +96,14 @@ key).
   room glows in the room's air as in the fog outside. Held down here (the house's `fog_air` `hazeGlow` 0.8, the lamp's
   reach 3.5); the engine has no air of its own for what is inside (reported).
 - By day the window's pane shows a faint image of the room (the pane's `show` counts the day's light so).
+- **The second door shut though `creak` says open** (engine, reported): an element's `place` facing key (`door2_f`)
+  that the scene opens with — set in its state, or by the script as it starts — is not applied: the door is drawn shut
+  until the key changes while it plays (a piece's cut, a move). Seen: the house, `--state` `{"creak": 0.5}` (the
+  script sets `door2_f` 230 at once) or `{"door2_f": 190}`, a frame at 1.5 s — the door shut; the same door turned by a
+  cut in `light_back` — open. A game opening a piece after the minigame turned `creak` cuts to it, so it turns; a scene
+  restored with the door ajar would show it shut.
+- The window's faces (`moon_window`, `night_face`, `night_window`): seen in profile against the moonlit glass — the
+  two look out (at the moon, the tent); the room has no place for the eye before them.
 
 ## Pieces (stage 5)
 

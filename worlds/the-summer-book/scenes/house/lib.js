@@ -124,33 +124,36 @@ function CAMW([ex, ez, ey], [ta, td, te]) {
 // the shots: [eye, at]
 const SHOT = {
   // the veranda: past the hat to Papa asleep; his table from beyond its far end along the glazing (his face, the
-  // bench, the doorway and the hat beyond); supper and the cup from the doorway's end of the table; close on Papa at
-  // his table; Papa on his cot; the glass door from the veranda's middle; the cot and the doorway wide
-  hat0: [[1.85, -1.9, 1.4], [2.45, -0.03, 1.3]],
-  hat1: [[3.05, -1.85, 1.3], [3.25, -0.3, 0.95]],
+  // bench, the doorway and the hat beyond); supper from the doorway's end of the table; the cup from its far end;
+  // close on Papa at his table; Grandmother coming to it through the glass door; Papa on his cot; the glass door from
+  // the veranda's middle; the cot and the doorway wide
+  hat0: [[1.0, -2.6, 1.4], [2.45, -0.03, 1.25]],
+  hat1: [[2.3, -3.0, 1.3], [3.3, -0.3, 0.95]],
   table: [[0.7, -4.0, 1.45], [1.5, -1.3, 0.95]],
   supper: [[0.55, -0.4, 1.3], [1.1, -1.95, 0.85]],
-  cup: [[0.6, -0.45, 1.3], [0.75, -2.1, 0.85]],
-  papa: [[0.55, -3.4, 1.3], [1.2, -2.45, 1.1]],
+  cup: [[0.35, -3.7, 1.35], [0.8, -2.0, 0.85]],
+  papa: [[0.3, -3.9, 1.2], [1.2, -2.45, 1.0]],
+  cough: [[2.9, -3.4, 1.5], [1.4, -1.8, 1.0]],
+  sniff: [[2.0, 0.6, 1.6], [0.2, 2.9, 0.9]],
   cot: [[3.25, -2.05, 1.2], [4.05, -0.5, 0.6]],
-  door: [[3.6, -2.8, 1.5], [1.9, -0.2, 1.0]],
+  door: [[3.8, -3.6, 1.5], [1.9, -0.2, 1.0]],
   ver: [[3.0, -3.9, 1.5], [2.6, -0.6, 0.9]],
   // the room: from its doorway; both beds from their foot on the right, from the foot on the left (the backs of the two
   // on their beds' edges); Sophia's pillow from the foot; the window from behind the one standing there; the faces at
   // the window from beside the night table; the lamp at the glass and her face by it (from the window's right); the
   // second door from the beds' side; the window and the armchair from the second door's corner; the palm by the candle
   // from the left corner; the two on Sophia's bed from the right; Sophia sitting up; the blanket from beside Sophia's
-  // bed; the hat on Sophia's bed; the doorway from the window's side
+  // bed; the hat on Sophia's bed; the doorway from the window's side; Sophia at the sill from the second door's corner
   room: [[2.0, 0.45, 1.55], [-0.9, 3.0, 0.7]],
   beds: [[-0.3, 1.35, 1.35], [-1.65, 3.05, 0.65]],
-  bedsL: [[-2.3, 1.0, 1.35], [-1.75, 2.75, 0.6]],
+  bedsL: [[-2.3, 0.7, 1.55], [-1.75, 2.75, 0.6]],
   pillow: [[-1.5, 1.05, 1.4], [-1.1, 3.1, 0.65]],
   window: [[1.25, 1.75, 1.2], [0.05, 3.5, 1.25]],
-  face_s: [[-0.75, 2.9, 1.0], [0.1, 3.38, 0.88]],
-  face_g: [[-0.75, 2.85, 1.45], [-0.05, 3.3, 1.3]],
-  lamp: [[0.95, 3.15, 1.4], [-0.15, 3.45, 1.15]],
+  face_s: [[-1.2, 3.2, 1.05], [0.1, 3.38, 0.75]],
+  face_g: [[-1.2, 3.15, 1.45], [-0.05, 3.3, 1.3]],
+  lamp: [[1.15, 2.85, 1.35], [-0.15, 3.4, 1.1]],
   door2: [[-0.6, 1.2, 1.5], [2.3, 1.75, 1.0]],
-  corner: [[1.85, 0.9, 1.55], [-0.15, 3.0, 0.85]],
+  corner: [[2.0, 0.6, 1.6], [0.0, 3.0, 0.8]],
   m7b: [[-2.45, 1.0, 1.4], [-1.85, 3.0, 0.75]],
   m8c: [[0.1, 2.1, 1.2], [-1.0, 3.0, 0.95]],
   up: [[-0.35, 2.2, 1.15], [-1.175, 3.2, 0.85]],
@@ -192,12 +195,12 @@ const PL = {
 const SPOT = {
   // the room
   g_foot: [-2.05, 1.45], s_foot: [-1.15, 1.7], foot_r: [-0.55, 1.6], s_side: [-0.5, 2.65], s_pet: [-0.6, 3.0],
-  s_win: [0.1, 3.38], g_win: [-0.05, 3.3], lamp_side: [-0.3, 3.1], by_chair: [0.8, 2.8], box: [-0.45, 2.3],
+  s_win: [0.1, 3.38], g_win: [-0.05, 3.3], lamp_side: [-0.15, 3.3], by_chair: [0.8, 2.8], box: [-0.45, 2.3],
   door2: [1.85, 1.65], door2_s: [1.6, 1.95], thr2: [2.35, 1.95], entry: [2.95, 1.95], hook: [3.45, 1.15], outer: [3.75, 1.95],
   in_door: [1.725, 0.55], room_in: [1.2, 1.3], sill: [0.55, 3.35],
   // the veranda
   ver_door: [1.725, -0.6], under_hat: [2.35, -0.5], hat_round: [2.9, -0.7], ver_mid: [3.2, -2.2], cot_side: [4.0, -1.1],
-  cot_head: [3.85, -1.0], table_p: [1.3, -1.75], table_g: [0.95, -2.85], s_ver: [4.6, -2.3], out1: [5.0, -3.6], out2: [6.0, -5.9],
+  cot_head: [3.85, -1.0], table_p: [1.3, -1.75], table_g: [0.5, -2.85], s_ver: [4.6, -2.3], out1: [5.0, -3.6], out2: [6.0, -5.9],
   // outside: the porch beyond the entry's outer door
   porch: [4.4, 1.95], round: [4.4, 3.2],
 };
@@ -316,16 +319,18 @@ function film(scene, show = false) {
     // takes her knife and her pouch off the table
     morning: {
       show: { hour: {}, here: IDS },
-      from: () => OPEN(AT('papa', 'p_chair', 'write'), STAND('grandma', SPOT.table_g, [0.45, -1.9]), STAND('sophia', SPOT.s_ver, SPOT.under_hat),
-        CAMS.table),
+      from: () => OPEN(AT('papa', 'p_chair', 'write'), STAND('grandma', SPOT.table_g, [0.45, -1.5]), STAND('sophia', SPOT.s_ver, SPOT.under_hat),
+        CAMS.ver),
       run: async s => {
         const sophia = P(s, 'sophia'), grandma = P(s, 'grandma');
         sophia.look(W3(1.9, -0.3, 0));
         await walk(sophia, SPOT.under_hat);
         await moment(s, 'morning:hat', 0.6);
+        const table = ready(s, 'supper');
         await walk(sophia, SPOT.ver_door, SPOT.in_door, SPOT.room_in);
         sophia.look(null);
-        grandma.reach({ r: W3(0.55, -2.0, 0.76) });
+        table.cut();
+        grandma.reach({ r: W3(0.45, -2.3, 0.76) });
         await s.wait(1);
         grandma.reach(null);
         grandma.with(['knife', 'pouch']);
@@ -337,14 +342,14 @@ function film(scene, show = false) {
     morning_go: {
       after: ['morning'],
       show: { hour: {}, here: ['grandma', 'papa'] },
-      from: () => OPEN(AT('papa', 'p_chair', 'write'), STAND('grandma', SPOT.table_g, [0.45, -1.9], { grandma_with: ['knife', 'pouch'] }), CAMS.table),
+      from: () => OPEN(AT('papa', 'p_chair', 'write'), STAND('grandma', SPOT.table_g, [0.45, -1.5], { grandma_with: ['knife', 'pouch'] }), CAMS.supper),
       run: async s => {
         const grandma = P(s, 'grandma'), papa = P(s, 'papa');
         if (s.get('papa_watch')) {
           papa.do('seated', { loop: true });
           papa.look('grandma');
         }
-        await walk(grandma, [1.6, -1.2], SPOT.ver_door);
+        await walk(grandma, [1.6, -3.0], [1.6, -1.2], SPOT.ver_door);
         await moment(s, 'morning_go:door', 0.4);
         await walk(grandma, SPOT.in_door, SPOT.room_in);
         await s.wait(1.5);
@@ -474,7 +479,7 @@ function film(scene, show = false) {
     // close — the choice's pose
     moon_window: {
       show: { hour: { night: 1, calm: 1 }, here: IDS },
-      from: () => OPEN(STAND('sophia', SPOT.s_win, [-0.3, 4.3], { sophia_look: MOON }), AT('grandma', 'g_lie', 'lie_bed'), COT_SLEEP(), CAMS.window),
+      from: () => OPEN(STAND('sophia', SPOT.s_win, [-0.9, 4.3], { sophia_look: MOON }), AT('grandma', 'g_lie', 'lie_bed'), COT_SLEEP(), CAMS.window),
       run: async s => {
         await moment(s, 'moon_window:water', 3);
         await inBed(s, 'grandma', 'g_up', 'sit_bed', 'sit_up');
@@ -495,7 +500,7 @@ function film(scene, show = false) {
     gone: {
       after: ['moon_window'],
       show: { hour: { night: 1, calm: 1 }, here: IDS },
-      from: () => OPEN(STAND('sophia', SPOT.s_win, [-0.3, 4.3], { sophia_look: MOON }), AT('grandma', 'g_up', 'sit_bed', { grandma_look: 'sophia' }),
+      from: () => OPEN(STAND('sophia', SPOT.s_win, [-0.9, 4.3], { sophia_look: MOON }), AT('grandma', 'g_up', 'sit_bed', { grandma_look: 'sophia' }),
         COT_SLEEP(), CAMS.face_s),
       run: async s => {
         const sophia = P(s, 'sophia'), grandma = P(s, 'grandma'), papa = P(s, 'papa');
@@ -569,7 +574,7 @@ function film(scene, show = false) {
     sky: {
       after: ['moon_window'],
       show: { hour: { night: 1, calm: 1 }, here: IDS },
-      from: () => OPEN(STAND('sophia', SPOT.s_win, [-0.3, 4.3], { sophia_look: MOON }), AT('grandma', 'g_up', 'sit_bed', { grandma_look: 'sophia' }),
+      from: () => OPEN(STAND('sophia', SPOT.s_win, [-0.9, 4.3], { sophia_look: MOON }), AT('grandma', 'g_up', 'sit_bed', { grandma_look: 'sophia' }),
         COT_SLEEP({ papa_look: W3(4.2, -1.5, 2.6) }), CAMS.face_s),
       run: async s => {
         const sophia = P(s, 'sophia'), grandma = P(s, 'grandma');
@@ -622,7 +627,7 @@ function film(scene, show = false) {
     to_door: {
       after: ['moon_window'],
       show: { hour: { night: 1, calm: 1 }, here: IDS },
-      from: () => OPEN(STAND('sophia', SPOT.s_win, [-0.3, 4.3], { sophia_look: MOON }), AT('grandma', 'g_up', 'sit_bed', { grandma_look: 'sophia' }),
+      from: () => OPEN(STAND('sophia', SPOT.s_win, [-0.9, 4.3], { sophia_look: MOON }), AT('grandma', 'g_up', 'sit_bed', { grandma_look: 'sophia' }),
         COT_SLEEP(), CAMS.face_s),
       run: async s => {
         const grandma = P(s, 'grandma'), sophia = P(s, 'sophia');
@@ -666,7 +671,7 @@ function film(scene, show = false) {
     // shoulders again; she coughs
     cough: {
       show: { hour: {}, here: ['grandma', 'papa'] },
-      from: () => OPEN(AT('papa', 'p_chair', 'write'), STAND('grandma', SPOT.in_door, SPOT.ver_door), CAMS.table),
+      from: () => OPEN(AT('papa', 'p_chair', 'write'), STAND('grandma', SPOT.in_door, SPOT.ver_door), CAMS.cough),
       run: async s => {
         const grandma = P(s, 'grandma'), papa = P(s, 'papa');
         await walk(grandma, SPOT.ver_door, [1.5, -1.25]);
@@ -890,8 +895,8 @@ function film(scene, show = false) {
     // an August day: the bottle on the sill; Sophia runs in by the second door with the parcel and sniffs it
     sniff: {
       show: { hour: { late: 1 }, play: { drops: 'full' }, here: ['grandma', 'sophia'] },
-      from: () => OPEN(STAND('sophia', SPOT.entry, SPOT.thr2, { sophia_with: ['parcel'], sophia_gait: 'run' }), STAND('grandma', [0.9, 1.5], SPOT.thr2),
-        { creak: 1 }, CAMS.door2),
+      from: () => OPEN(STAND('sophia', SPOT.entry, SPOT.thr2, { sophia_with: ['parcel'], sophia_gait: 'run' }), STAND('grandma', [-0.3, 2.1], SPOT.thr2),
+        { creak: 1 }, CAMS.sniff),
       run: async s => {
         const sophia = P(s, 'sophia'), grandma = P(s, 'grandma');
         await walk(sophia, SPOT.thr2, [1.3, 2.4], SPOT.sill);
@@ -903,7 +908,7 @@ function film(scene, show = false) {
         await sophia.do('sniff');
         sophia.mood('disgusted');
         sophia.reach(null);
-        await face(sophia, SPOT.sill, [0.9, 1.5]);
+        await face(sophia, SPOT.sill, [-0.3, 2.1]);
         sophia.look('grandma');
         await moment(s, 'sniff:sniff', 3);
       },
@@ -921,7 +926,7 @@ function film(scene, show = false) {
     // comes in from the sea, the tent's light blurs and goes out
     night_window: {
       show: { hour: { night: 1, late: 1, fog: 0.3 }, play: { cat: true }, here: ['grandma', 'papa'] },
-      from: get => OPEN(STAND('grandma', SPOT.g_win, [-0.5, 4.3], { grandma_look: TENT }), COT_SLEEP(), { casement: 0.3, tent_light: 1 },
+      from: get => OPEN(STAND('grandma', SPOT.g_win, [-1.0, 4.3], { grandma_look: TENT }), COT_SLEEP(), { casement: 0.3, tent_light: 1 },
         CATAT('sill', get('cat') ? 'sit' : 'none', -1), CAMS.window),
       run: async s => {
         await moment(s, 'night_window:tent', 4);
@@ -936,7 +941,7 @@ function film(scene, show = false) {
     night_face: {
       after: ['night_window'],
       show: { hour: { night: 1, late: 1, fog: 0.8 }, play: { cat: true }, here: ['grandma', 'papa'] },
-      from: get => OPEN(STAND('grandma', SPOT.g_win, [-0.5, 4.3], { grandma_look: TENT }), COT_SLEEP(), { casement: 0.3 },
+      from: get => OPEN(STAND('grandma', SPOT.g_win, [-1.0, 4.3], { grandma_look: TENT }), COT_SLEEP(), { casement: 0.3 },
         CATAT('sill', get('cat') ? 'sit' : 'none', -1), CAMS.window),
       run: async s => {
         if (s.get('cat') && s.get('cat_pose') !== 'none') {
@@ -956,7 +961,7 @@ function film(scene, show = false) {
     go_out: {
       after: ['night_face'],
       show: { hour: { night: 1, late: 1, fog: 0.8 }, here: ['grandma', 'papa'] },
-      from: () => OPEN(STAND('grandma', SPOT.g_win, [-0.5, 4.3], { grandma_look: TENT }), COT_SLEEP(), { casement: 0.3 }, CAMS.face_g),
+      from: () => OPEN(STAND('grandma', SPOT.g_win, [-1.0, 4.3], { grandma_look: TENT }), COT_SLEEP(), { casement: 0.3 }, CAMS.face_g),
       run: async s => {
         const grandma = P(s, 'grandma');
         const door = ready(s, 'door2');
@@ -991,7 +996,7 @@ function film(scene, show = false) {
     wake: {
       after: ['night_face'],
       show: { hour: { night: 1, late: 1, fog: 0.8 }, here: ['grandma', 'papa'] },
-      from: () => OPEN(STAND('grandma', SPOT.g_win, [-0.5, 4.3], { grandma_look: TENT }), COT_SLEEP(), { casement: 0.3 }, CAMS.face_g),
+      from: () => OPEN(STAND('grandma', SPOT.g_win, [-1.0, 4.3], { grandma_look: TENT }), COT_SLEEP(), { casement: 0.3 }, CAMS.face_g),
       run: async s => {
         const grandma = P(s, 'grandma'), papa = P(s, 'papa');
         const ver = ready(s, 'ver');
@@ -1078,12 +1083,12 @@ function film(scene, show = false) {
         await moment(s, 'light_back:near', 3);
         await going;
         // (round the corner, in at the porch: in the entry, coming through the second door)
-        const door = ready(s, 'door2', { ...STAND('papa', SPOT.entry, SPOT.thr2, { papa_with: ['big_lantern'], papa_reach: hand ? { r: 'sophia#hand_l' } : null }),
-          ...STAND('sophia', [3.0, 2.3], SPOT.thr2, { sophia_reach: hand ? { l: 'papa#hand_r' } : null, sophia_do: hand ? { motion: 'sleepy_walk', loop: true } : 'stand' }),
+        const door = ready(s, 'door2', { ...STAND('papa', [2.95, 1.75], SPOT.thr2, { papa_with: ['big_lantern'], papa_reach: hand ? { r: 'sophia#hand_l' } : null }),
+          ...STAND('sophia', [2.95, 2.25], SPOT.thr2, { sophia_reach: hand ? { l: 'papa#hand_r' } : null, sophia_do: hand ? { motion: 'sleepy_walk', loop: true } : 'stand' }),
           creak: 1, grandma_reach: null, grandma_look: 'sophia' });
         await s.until(() => door.ready);
         door.cut();
-        await s.all(walk(papa, SPOT.thr2, [1.85, 2.0]), walk(sophia, [2.4, 2.25]));
+        await s.all(walk(papa, [2.35, 1.75], [1.85, 1.7]), walk(sophia, [2.4, 2.25], [1.9, 2.35]));
       },
     },
     // in the room Papa takes Sophia to her bed; with `kick` she stops on the threshold first and kicks it; she lies down
@@ -1091,7 +1096,7 @@ function film(scene, show = false) {
     back_in: {
       after: ['light_back'],
       show: { hour: { night: 1, late: 1, fog: 0.8 }, play: { kick: true }, here: IDS },
-      from: () => OPEN(STAND('papa', [1.85, 2.0], [0, 2.5], { papa_with: ['big_lantern'], papa_lantern: 1 }), STAND('sophia', [2.4, 2.25], [0, 2.5]),
+      from: () => OPEN(STAND('papa', [1.85, 1.7], [0, 2.5], { papa_with: ['big_lantern'], papa_lantern: 1 }), STAND('sophia', [1.9, 2.35], [0, 2.5]),
         STAND('grandma', SPOT.lamp_side, [0.05, 3.71], { grandma_with: ['cardigan'], grandma_look: 'sophia' }),
         { lamp: 'window', lamp_x: LAMP.window[0], lamp_z: LAMP.window[1], lamp_e: LAMP.window[2], lamp_lit: 1, creak: 1 }, CAMS.door2),
       run: async s => {
@@ -1100,7 +1105,7 @@ function film(scene, show = false) {
         sophia.reach(null);
         sophia.do('stand');
         if (s.get('kick')) {
-          await face(sophia, [2.4, 2.25], [2.3, 2.0]);
+          await face(sophia, [1.9, 2.35], [2.3, 2.0]);
           await sophia.do('kick');
         }
         sophia.look('grandma');
@@ -1118,7 +1123,7 @@ function film(scene, show = false) {
     elbow: {
       after: ['back_in'],
       show: { hour: { night: 1, late: 1, fog: 0.8 }, play: { hold_hand: true, sophia_knows: true }, here: IDS },
-      from: () => OPEN(STAND('papa', [1.85, 2.0], [0, 2.5], { papa_with: ['big_lantern'] }), AT('sophia', 's_wall', 'lie_side'),
+      from: () => OPEN(STAND('papa', [1.85, 1.7], [0, 2.5], { papa_with: ['big_lantern'] }), AT('sophia', 's_wall', 'lie_side'),
         STAND('grandma', SPOT.lamp_side, [0.05, 3.71], { grandma_with: ['cardigan'] }),
         { lamp: 'window', lamp_x: LAMP.window[0], lamp_z: LAMP.window[1], lamp_e: LAMP.window[2], lamp_lit: 1, creak: 1 }, CAMS.corner),
       run: async s => {
@@ -1175,7 +1180,7 @@ function film(scene, show = false) {
     lamp_window: {
       after: ['night_face'],
       show: { hour: { night: 1, late: 1, fog: 0.8 }, here: ['grandma', 'papa'] },
-      from: () => OPEN(STAND('grandma', SPOT.g_win, [-0.5, 4.3], { grandma_look: TENT }), COT_SLEEP(), { casement: 0.3 }, CAMS.face_g),
+      from: () => OPEN(STAND('grandma', SPOT.g_win, [-1.0, 4.3], { grandma_look: TENT }), COT_SLEEP(), { casement: 0.3 }, CAMS.face_g),
       run: async s => {
         const grandma = P(s, 'grandma');
         await cam(s, 'lamp', 2);
