@@ -6,5 +6,6 @@
     "family": 30,
     "summer": 20
   },
-  "main": ""
+  "main": "",
+  "languages": ["en", "ru"]
 }

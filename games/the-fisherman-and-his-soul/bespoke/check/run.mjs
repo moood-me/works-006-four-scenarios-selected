@@ -74,12 +74,12 @@ async function step(c, s, state, where) {
   const g = context(b, view, hub, structuredClone(state), j);
   let folder = null;
   const made = [], titles = [], scenes = [];
-  const { scene, say, choose, interrupt, play, title } = g;
+  const { scene, say: speak, choose, interrupt, play, title } = g;
   g.scene = (f, o, x) => { folder = f; scenes.push(f); return scene(f, o, x); };
   g.say = (who, text, at) => {
     if (!PEOPLE[who]) miss(`${where}: “${text}” — said by “${who}”, no one of people.json`);
     lines.set(`${who}\n${text}`, { who, text });
-    return say(who, text, at);
+    return speak(who, text, at);
   };
   g.choose = (choice, offers) => {
     const def = CHAPTERS[c].choices.find(x => x.id === choice);

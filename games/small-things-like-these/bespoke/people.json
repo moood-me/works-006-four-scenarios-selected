@@ -2,115 +2,96 @@
   "narrator": {
     "voice": "Algieba",
     "how": "quiet, plain and close, an Irish man's low voice reading a short book aloud by the fire: only what is seen, no pity in the voice, the weight left in the pauses",
-    "name": "narrator",
     "short": "narrator"
   },
   "bill": {
     "voice": "Enceladus",
     "how": "a tired working man near forty, soft-spoken and few-worded, Irish; never raises his voice; the truth he says quietly, and short",
-    "name": "Bill Furlong, a coal merchant",
     "short": "Bill"
   },
   "eileen": {
     "voice": "Kore",
     "how": "a brisk Irish housewife, quick and practical, counting as she talks; warm to her own, sharp and dry about others; when it hurts — faster, not louder",
-    "name": "Eileen Furlong, his wife",
     "short": "Eileen"
   },
   "sara": {
     "voice": "Despina",
     "how": "a girl of seventeen, Irish, hoarse from the cold; a whisper in one breath; lies quickly and evenly with a smile in the voice; asks about her boy flatly, almost as a challenge",
-    "name": "Sara Redmond, a girl from the laundry",
     "short": "Sara"
   },
   "mother": {
     "voice": "Sulafat",
     "how": "the Mother Superior: warm, unhurried, very polite, never raising her voice; every kindness lands as an obligation; questions instead of answers",
-    "name": "the Mother Superior",
     "short": "Mother Superior"
   },
   "kehoe": {
     "voice": "Gacrux",
     "how": "an older Irish woman behind a café counter: grumbling and kind, her important things in a whisper, her eyes on who is listening",
-    "name": "Mrs Kehoe, who keeps the café",
     "short": "Mrs Kehoe"
   },
   "sheila": {
     "voice": "Zephyr",
     "how": "a girl of twelve who sings in the convent choir: bright, quick, full of herself; gloating or in tears, nothing in between",
-    "name": "Sheila, his daughter",
     "short": "Sheila"
   },
   "kathleen": {
     "voice": "Autonoe",
     "how": "a girl of fourteen, the eldest: sulky and cross, short words; hurt she does not show except by banging things",
-    "name": "Kathleen, his eldest daughter",
     "short": "Kathleen"
   },
   "loretta": {
     "voice": "Autonoe",
     "how": "a small girl, the youngest: earnest and curious, says what she sees",
-    "name": "Loretta, his youngest daughter",
     "short": "Loretta"
   },
   "grace": {
     "voice": "Zephyr",
     "how": "a girl of eight with a mouthful of raisins: matter-of-fact, out of breath from running",
-    "name": "Grace, his daughter",
     "short": "Grace"
   },
   "worker": {
     "voice": "Algenib",
     "how": "a coal-yard hand, Irish, gravelly and joking, grumbling about money",
-    "name": "a man of the yard",
     "short": "Yard hand"
   },
   "sister": {
     "voice": "Sulafat",
     "how": "a nun of the convent: smiling, smooth and cool, every word in its place",
-    "name": "a sister of the convent",
     "short": "Sister"
   },
   "young": {
     "voice": "Despina",
     "how": "a young country nun at the grille at night: low and quick, afraid of being heard, sorry and firm",
-    "name": "the young sister",
     "short": "Young sister"
   },
   "wilson": {
     "voice": "Gacrux",
     "how": "an old Protestant widow, remembered: calm, dry, settling a thing once and for all",
-    "name": "Mrs Wilson",
     "short": "Mrs Wilson"
   },
   "tenant": {
     "voice": "Zubenelgenubi",
     "how": "a countryman at a gate: easy, chatty, saying everything in the same tone as the weather",
-    "name": "the new tenant of the Wilson house",
     "short": "Tenant"
   },
   "oldman": {
     "voice": "Rasalgethi",
     "how": "a very old man met in the fog: slow and kind, a little odd",
-    "name": "an old man in the fog",
     "short": "Old man"
   },
   "dougherty": {
     "voice": "Kore",
     "how": "a nosy neighbour on the street: loud, shocked, saying it to your face",
-    "name": "Mrs Dougherty",
     "short": "Mrs Dougherty"
   },
   "postman": {
     "voice": "Achird",
     "how": "the postman in the café: friendly, offhand, in a hurry",
-    "name": "the postman",
     "short": "Postman"
   },
   "nephew": {
     "voice": "Puck",
     "how": "Mrs Kehoe's young nephew: awkward, mumbling",
-    "name": "Mrs Kehoe's nephew",
     "short": "Nephew"
   }
 }

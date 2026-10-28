@@ -1,5 +1,5 @@
 {"strings": [
-  {"text":"Adventure","translation":"Приключение","where":"scenes/valley/elements/boat.js"},
-  {"text":"Moominvalley","translation":"Муми-дол","where":"scenes/valley/scene.json title"},
-  {"text":"The end of August in the valley. Everything is already done.","translation":"Конец августа в долине. Всё уже сделано.","where":"scenes/valley/scene.json caption"}
+  {"text":"Adventure","translation":"Приключение","where":"worlds/moominpappa-at-sea/scenes/valley/elements/boat.js"},
+  {"text":"Moominvalley","translation":"Муми-дол","where":"worlds/moominpappa-at-sea/scenes/valley/scene.json title"},
+  {"text":"The end of August in the valley. Everything is already done.","translation":"Конец августа в долине. Всё уже сделано.","where":"worlds/moominpappa-at-sea/scenes/valley/scene.json caption"}
 ]}

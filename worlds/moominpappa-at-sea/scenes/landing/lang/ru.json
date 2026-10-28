@@ -1,4 +1,4 @@
 {"strings": [
-  {"text":"The Landing Rocks","translation":"Скалы у причала","where":"scenes/landing/scene.json title"},
-  {"text":"Dawn on the island. The lighthouse is dark, and the door is locked.","translation":"Рассвет на острове. Маяк не горит, дверь заперта.","where":"scenes/landing/scene.json caption"}
+  {"text":"The Landing Rocks","translation":"Скалы у причала","where":"worlds/moominpappa-at-sea/scenes/landing/scene.json title"},
+  {"text":"Dawn on the island. The lighthouse is dark, and the door is locked.","translation":"Рассвет на острове. Маяк не горит, дверь заперта.","where":"worlds/moominpappa-at-sea/scenes/landing/scene.json caption"}
 ]}

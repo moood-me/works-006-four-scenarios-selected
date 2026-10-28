@@ -145,7 +145,7 @@ async function step(c, s, state, where) {
   const g = context(b, view, hub, st, j);
   let folder = null, present = new Set();
   const made = [], titles = [];
-  const { scene, say, choose, play, title, here, set, beat, told, beds } = g;
+  const { scene, say: speak, choose, play, title, here, set, beat, told, beds } = g;
   // the piece shown: {last: the piece begun last, opening: the one the scene was opened on, not taken up yet, next:
   // beat_next set}; the moments waited for whose piece has not begun yet
   let cur = null, pending = [];
@@ -212,7 +212,7 @@ async function step(c, s, state, where) {
     // (someone of the shown scene the step has not brought in — a piece brought them: said over them, `at` given)
     else if (at === undefined && SCENES.get(folder)?.people.has(who) && !present.has(who)) miss(`${where}: “${text}” — said as the narrator by “${who}”, of the scene “${folder}” but not here for the step (give at)`);
     lines.set(`${who}\n${text}`, { who, text });
-    return say(who, text, at);
+    return speak(who, text, at);
   };
   g.choose = (choice, offers) => {
     const def = CHAPTERS[c].choices.find(x => x.id === choice);

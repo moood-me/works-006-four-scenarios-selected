@@ -1,4 +1,4 @@
 {"strings": [
-  {"text":"The Open Sea","translation":"Открытое море","where":"scenes/sea/scene.json title"},
-  {"text":"The boat goes on through the night. Behind the stern, a white strip on the water.","translation":"Лодка идёт сквозь ночь. За кормой — белая полоса на воде.","where":"scenes/sea/scene.json caption"}
+  {"text":"The Open Sea","translation":"Открытое море","where":"worlds/moominpappa-at-sea/scenes/sea/scene.json title"},
+  {"text":"The boat goes on through the night. Behind the stern, a white strip on the water.","translation":"Лодка идёт сквозь ночь. За кормой — белая полоса на воде.","where":"worlds/moominpappa-at-sea/scenes/sea/scene.json caption"}
 ]}

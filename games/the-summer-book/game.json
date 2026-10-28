@@ -9,6 +9,7 @@
     "relationships": 70,
     "immersion": 40
   },
-  "world": "pavel--the-summer-book",
-  "scenes": []
+  "world": "../../worlds/the-summer-book",
+  "scenes": [],
+  "languages": ["en", "ru"]
 }

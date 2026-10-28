@@ -6,5 +6,6 @@
     "sea": 40,
     "romance": 40
   },
-  "main": "pier"
+  "main": "pier",
+  "languages": ["en", "ru"]
 }

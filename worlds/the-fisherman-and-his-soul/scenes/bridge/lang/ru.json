@@ -1,4 +1,4 @@
 {"strings": [
-  {"text":"The Bridge","translation":"Мост","where":"scenes/bridge/scene.json title"},
-  {"text":"Night at the bridge. The lights of the town over the dark river.","translation":"Ночь у моста. Огни города над тёмной рекой.","where":"scenes/bridge/scene.json caption"}
+  {"text":"The Bridge","translation":"Мост","where":"worlds/the-fisherman-and-his-soul/scenes/bridge/scene.json title"},
+  {"text":"Night at the bridge. The lights of the town over the dark river.","translation":"Ночь у моста. Огни города над тёмной рекой.","where":"worlds/the-fisherman-and-his-soul/scenes/bridge/scene.json caption"}
 ]}

@@ -2,37 +2,31 @@
   "narrator": {
     "voice": "Erinome",
     "how": "calm and clear, a little amused and a little sad, unhurried — like a Tove Jansson book read aloud on an August evening",
-    "name": "narrator",
     "short": "narrator"
   },
   "papa": {
     "voice": "Sadaltager",
     "how": "solemn and loud, a captain on his own deck, fond of his own stories; when he is moved, or alone, suddenly quiet and almost shy",
-    "name": "Moominpappa",
     "short": "Papa"
   },
   "mama": {
     "voice": "Callirrhoe",
     "how": "warm, light and quick, never complaining; whatever hurts she says lightly and turns at once to the tea",
-    "name": "Moominmamma",
     "short": "Mama"
   },
   "troll": {
     "voice": "Umbriel",
     "how": "a boy, soft and low, very few words, looking at the floor; stubborn underneath",
-    "name": "Moomintroll, their son",
     "short": "Moomintroll"
   },
   "my": {
     "voice": "Laomedeia",
     "how": "a tiny girl: sharp, quick, mocking, delighted with everything that is interesting; never sorry for anyone",
-    "name": "Little My",
     "short": "My"
   },
   "fisher": {
     "voice": "Schedar",
     "how": "old, flat and slow, hoarse from the wind; a few words about the weather, never looking at whom he speaks to",
-    "name": "the Fisherman",
     "short": "Fisherman"
   }
 }

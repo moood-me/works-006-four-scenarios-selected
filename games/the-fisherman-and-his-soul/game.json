@@ -9,6 +9,7 @@
     "relationships": 70,
     "immersion": 40
   },
-  "world": "pavel--the-fisherman-and-his-soul",
-  "scenes": []
+  "world": "../../worlds/the-fisherman-and-his-soul",
+  "scenes": [],
+  "languages": ["en", "ru"]
 }

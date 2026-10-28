@@ -9,6 +9,7 @@
     "relationships": 70,
     "immersion": 40
   },
-  "world": "pavel--moominpappa-at-sea",
-  "scenes": []
+  "world": "../../worlds/moominpappa-at-sea",
+  "scenes": [],
+  "languages": ["en", "ru"]
 }

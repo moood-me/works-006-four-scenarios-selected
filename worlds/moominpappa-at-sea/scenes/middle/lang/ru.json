@@ -1,4 +1,4 @@
 {"strings": [
-  {"text":"The Middle of the Island","translation":"Середина острова","where":"scenes/middle/scene.json title"},
-  {"text":"Among the pines, a clearing, and a pool so black it seems to have no bottom.","translation":"Среди сосенок — поляна и омут, такой чёрный, что у него будто нет дна.","where":"scenes/middle/scene.json caption"}
+  {"text":"The Middle of the Island","translation":"Середина острова","where":"worlds/moominpappa-at-sea/scenes/middle/scene.json title"},
+  {"text":"Among the pines, a clearing, and a pool so black it seems to have no bottom.","translation":"Среди сосенок — поляна и омут, такой чёрный, что у него будто нет дна.","where":"worlds/moominpappa-at-sea/scenes/middle/scene.json caption"}
 ]}

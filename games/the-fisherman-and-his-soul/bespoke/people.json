@@ -2,61 +2,51 @@
   "narrator": {
     "voice": "Charon",
     "how": "a man telling a parable: even, unhurried, a little grave, with the repetitions of a fairy tale read aloud; never sentimental",
-    "name": "narrator",
     "short": "narrator"
   },
   "fisherman": {
     "voice": "Orus",
     "how": "a young fisherman: few words, plain and blunt, a little hoarse from the sea; when he is moved he loses his words and says one",
-    "name": "the young Fisherman",
     "short": "Fisherman"
   },
   "soul": {
     "voice": "Orus",
     "how": "the Fisherman's own voice, half a tone lower and drier, quieter, close to the ear; clever, exact and mocking — or, when she longs, tired",
-    "name": "the Soul, the Fisherman's shadow",
     "short": "Soul"
   },
   "mermaid": {
     "voice": "Leda",
     "how": "a young girl of the sea: light, bright, laughing easily, singing a little as she talks; says strange human words as if tasting them",
-    "name": "the little Mermaid",
     "short": "Mermaid"
   },
   "witch": {
     "voice": "Pulcherrima",
     "how": "a young red-haired witch: quick, low and teasing, laughing first; under the laugh, hurt",
-    "name": "the Witch",
     "short": "Witch"
   },
   "priest": {
     "voice": "Alnilam",
     "how": "an old priest who thunders from habit: deep, firm and certain, a pulpit voice even in a small room",
-    "name": "the Priest",
     "short": "Priest"
   },
   "potter": {
     "voice": "Iapetus",
     "how": "a widowed potter: kind, plain and tired, a few words at a time; when he is hurt, very quiet",
-    "name": "the potter by the bridge",
     "short": "Potter"
   },
   "widow": {
     "voice": "Vindemiatrix",
     "how": "a fisherman's widow: low and even, asking nothing, every word weighed",
-    "name": "the widow",
     "short": "Widow"
   },
   "girl": {
     "voice": "Aoede",
     "how": "a village girl dancing barefoot at a feast: breathless, merry, calling out",
-    "name": "a girl on the pier",
     "short": "Girl"
   },
   "women": {
     "voice": "Achernar",
     "how": "village women whispering behind their hands: hushed, eager, a little afraid",
-    "name": "the women of the village",
     "short": "Women"
   }
 }

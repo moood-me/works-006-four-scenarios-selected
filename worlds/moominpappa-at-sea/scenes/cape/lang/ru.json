@@ -1,4 +1,4 @@
 {"strings": [
-  {"text":"The Fisherman's Cape","translation":"Мыс Рыбака","where":"scenes/cape/scene.json title"},
-  {"text":"The Fisherman sits with his net, his side to the lighthouse. Papa sits down beside him and says nothing.","translation":"Рыбак сидит с сетью, боком к маяку. Папа садится рядом и молчит.","where":"scenes/cape/scene.json caption"}
+  {"text":"The Fisherman's Cape","translation":"Мыс Рыбака","where":"worlds/moominpappa-at-sea/scenes/cape/scene.json title"},
+  {"text":"The Fisherman sits with his net, his side to the lighthouse. Papa sits down beside him and says nothing.","translation":"Рыбак сидит с сетью, боком к маяку. Папа садится рядом и молчит.","where":"worlds/moominpappa-at-sea/scenes/cape/scene.json caption"}
 ]}

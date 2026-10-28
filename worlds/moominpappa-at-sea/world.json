@@ -6,5 +6,6 @@
     "fairy tale": 30,
     "family": 20
   },
-  "main": "landing"
+  "main": "landing",
+  "languages": ["en", "ru"]
 }

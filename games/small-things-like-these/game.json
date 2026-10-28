@@ -8,6 +8,7 @@
     "drama": 80,
     "relationships": 60
   },
-  "world": "pavel--small-things-like-these",
-  "scenes": []
+  "world": "../../worlds/small-things-like-these",
+  "scenes": [],
+  "languages": ["en", "ru"]
 }

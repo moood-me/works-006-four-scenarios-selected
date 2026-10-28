@@ -6,5 +6,6 @@
     "winter": 25,
     "small town": 15
   },
-  "main": "coal-gate"
+  "main": "coal-gate",
+  "languages": ["en", "ru"]
 }
