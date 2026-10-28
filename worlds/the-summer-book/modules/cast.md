@@ -17,9 +17,12 @@ lantern in any hand).
 
 For a while (`<id>_wear` — fields over the look): Grandmother without her shawl (it is round Sophia, or lost) —
 `grandma_wear: {"garment": "long_dress"}` (the same dress, no shawl); with it again — `grandma_wear: null`.
-Grandmother with her eyes closed — `grandma_wear: {"face": "closed"}` (the cast's face: the lids down, calm; it takes
-no `<id>_mood`). Sophia in the straw hat — `sophia_wear: {"hat": "straw"}` (the cast's hat, too big for her). Both at
-once: one object (`{"garment": "long_dress", "face": "closed"}`).
+Grandmother with her eyes closed — the engine's expression: `grandma_mood: "eyes_closed"`. Sophia in the straw hat —
+`sophia_wear: {"hat": "straw"}` (the cast's hat, too big for her).
+
+Points on everyone (the engine's): `head`, `hand_r`, `hand_l`, `hands`, `chest`, `hips`, `shoulder_r`, `shoulder_l`,
+`elbow_r`, `elbow_l` (Papa catching her by the elbow: `papa_reach {"r": "grandma#elbow_l"}`), `back`, `nape`, `foot_r`,
+`foot_l`, `feet`; and the parts' own (below).
 
 ## Motions (`<id>_do`, `go`, a gait `<id>_gait`)
 
@@ -133,7 +136,7 @@ hand; `carry` — `carry_walk`; `step` on the porch — `sit_down` / `sit_stone`
 
 Not motions (the engine's reach, look, carrying): a palm on a trunk, a gunwale, the canvas, the rail; hand in hand;
 Sophia holding Grandmother's skirt (`sophia_reach {"r": "grandma#hips"}`); Papa's hand under her arm
-(`papa_reach {"l": "grandma#hand_l"}` — the people have no elbow point, reported by the house); Sophia pressed against
+(`papa_reach {"l": "grandma#elbow_r"}`); Sophia pressed against
 someone (`lean`) — a seated loop and a look; moving along a bed seated (`shift`) — a seated loop and
 `walk(points, {steps: false})`; giving and taking a thing — both `_reach`, the part moved from one `_with` to the
 other's.

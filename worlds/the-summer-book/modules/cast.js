@@ -142,22 +142,6 @@ return {
         F.ball(add(head, mul(hu, rh * 0.5)), axes, [rh * 1.08, rh * 0.1, rh * 1.06], RIBBON, F.sides, 2.4);
       } },
     },
-    faces: {
-      // Grandmother's face with the eyes closed (`grandma_wear: {"face": "closed"}`): the lids down — thin dark arcs —,
-      // the brows, the nose, the mouth at rest; calm (it takes no `<id>_mood`)
-      closed: { name: 'eyes closed', draw: F => {
-        const { axes, r: rh, on } = F.head, [, hu] = axes, dark = [0.2, 0.16, 0.15], brow = F.colors.hair.map(v => v * 0.75);
-        const lips = F.colors.skin.map(v => v * 0.72);
-        for (const sx of [-1, 1]) {
-          F.tube([on([sx * 0.22, 0.06, 0.95], 0.995), on([sx * 0.33, 0.04, 0.94], 1.0), on([sx * 0.44, 0.06, 0.9], 0.995)],
-            [[0, rh * 0.016], [1, rh * 0.02], [2, rh * 0.016]], [[0, dark]], 6, hu);
-          F.tube([on([sx * 0.16, 0.33, 0.93], 0.995), on([sx * 0.3, 0.34, 0.9], 1.0), on([sx * 0.45, 0.29, 0.84], 0.995)],
-            [[0, rh * 0.026], [1, rh * 0.03], [2, rh * 0.02]], [[0, brow]], 6, hu);
-        }
-        F.ball(on([0, -0.1, 1], 0.97), axes, [rh * 0.085, rh * 0.12, rh * 0.11], F.colors.skin.map(v => v * 0.97), 10);
-        F.tube([on([-0.12, -0.37, 0.93], 0.995), on([0, -0.38, 0.94], 1.0), on([0.12, -0.37, 0.93], 0.995)], [[0, rh * 0.016], [2, rh * 0.016]], [[0, lips]], 6, hu);
-      } },
-    },
     parts: {
       // an enamel mug held in both hands before the chest: between the hands, upright
       mug: {
