@@ -32,18 +32,20 @@ A seated loop sits on what `<id>_on` names ([across, distance, the seat's top]):
 step (the feet go down to what is under them), a thwart, a bench. Who does it is said where it was made for someone;
 any of them may play any motion (Sophia moves as a small adult).
 
-**Status** — *made*: in `cast.data.json`; *to make*: named, coming (until then the engine warns and they stand).
+**Status** — *made*: in `cast.data.json`, looked at on these people; *to make*: named, coming (until then the engine
+warns and they stand). Some *made* ones are takes made before for other worlds, looked at here and kept (the same
+model).
 
 | id | kind | what | for | status |
 | --- | --- | --- | --- | --- |
 | `old_walk` | gait | Grandmother's slow old walk, small steps, a little bent | Grandmother (always hers: `person.gait`) | to make |
 | `lantern_walk` | gait | the old walk, the lantern held out before her in the left hand | Grandmother in the fog, the night path | to make |
-| `walk_fast` | gait | a quick walk | Papa | to make |
+| `walk_fast` | gait | a quick walk | Papa | made |
 | `lead_walk` | gait | a slow walk at an old woman's pace, the right arm a little out (she on it: both `_reach` hand to hand / to `#hand_l`) | Papa leading his mother | to make |
-| `carry_walk` | gait | walks with something big in both arms before the chest (the camp bed, the bundle, the parcel) | Papa, anyone | to make |
+| `carry_walk` | gait | walks with something big in both arms before the chest (the camp bed, the bundle, the parcel) | Papa, anyone | made |
 | `run` | gait | a child's run | Sophia | to make |
-| `proud_walk` | gait | walks importantly, chest out, hands behind the back | Sophia («ours») | to make |
-| `back_away` | gait | steps backwards slowly, facing as before | Sophia | to make |
+| `proud_walk` | gait | walks importantly, chest out, hands behind the back | Sophia («ours») | made |
+| `back_away` | gait | steps backwards slowly, facing as before | Sophia | made |
 | `sleepy_walk` | gait | a slow drowsy walk, the head down, led by the hand | Sophia at night | to make |
 | `hands_behind` | loop | stands, hands behind the back | anyone | made |
 | `seated` | loop | sits at rest on a low seat, the hands on the knees | anyone (a thwart, a bench, Papa's cot, a step) | made |
@@ -54,21 +56,21 @@ any of them may play any motion (Sophia moves as a small adult).
 | `sit_ground` | loop | sits on the ground, the knees up, the arms on them | not Grandmother (the long skirt's engine limit, below) | made |
 | `sit_down` | once | sits down onto a low seat behind and ends seated (`go('sit_down', {to: SEAT, turn})`, then a seated loop) | anyone (Grandmother: the stone, the stump, the bed's edge, the step, the bench) | to make |
 | `sit_heavy` | once | sits down heavily, all at once, onto a low seat (dizzy) | Grandmother | to make |
-| `rise` | once | gets up from a low seat and ends standing | anyone | to make |
+| `rise` | once | gets up from a low seat and ends standing | anyone | made |
 | `rise_slow` | once | an old woman gets up slowly from a low seat, a hand pushing on what is beside her (`<id>_reach` to the rail, the trunk, the rock, the bed's edge) | Grandmother | to make |
 | `try_rise` | once | tries to get up from a low seat, cannot, sinks back seated | Grandmother | to make |
-| `sit_floor` | once | sits down on the floor / the ground, ends sitting with the knees up (then `hug_knees`, `sit_look`, `sit_threshold`) | Sophia; Grandmother only where the skirt is hidden | to make |
+| `sit_floor` | once | sits down on the floor / the ground, ends sitting with the knees up (then `hug_knees`, `sit_look`, `sit_threshold`) | Sophia; Grandmother only where the skirt is hidden | made |
 | `get_up` | once | gets up from sitting on the ground and ends standing | Sophia | to make |
-| `crouch` | loop | crouched low, the hands working at the ground before her (the hole, the moss, the animals, the bottom drawer, laying stones) | Sophia, Papa | to make |
+| `crouch` | loop | crouched low, the hands working at the ground before her (the hole, the moss, the animals, the bottom drawer, laying stones) | Sophia, Papa | made |
 | `kneel` | loop | kneels upright on the ground | Sophia | to make |
 | `kneel_rise` | once | gets up from kneeling, ends standing | Sophia | to make |
-| `kneel_pray` | loop | kneels, the hands together before the chest, the head bowed | Sophia («Господи, пусть что-нибудь случится») | to make |
+| `kneel_pray` | loop | kneels, the hands together before the chest, the head bowed | Sophia («Господи, пусть что-нибудь случится») | made |
 | `tie` | loop | kneeling, ties a knot low before her with both hands (the tent's peg) | Sophia | to make |
 | `pet` | loop | bent over low before her, stroking with the right hand (the sitting cat, a bed) | Sophia | to make |
-| `put_down` | once | bends down and sets something on the ground before her, straightens (`set_down`, `stoop`) | anyone | to make |
-| `pick_up` | once | bends down and picks something up from the ground, straightens | anyone | to make |
-| `put_table` | once | sets something down on a table before her | anyone | to make |
-| `dizzy` | loop | seated, bent forward, the head down to the knees, the hands on them | Grandmother | to make |
+| `put_down` | once | bends down and sets something on the ground before her, straightens (`set_down`, `stoop`) | anyone | made |
+| `pick_up` | once | bends down and picks something up from the ground, straightens | anyone | made |
+| `put_table` | once | sets something down on a table before her | anyone | made |
+| `dizzy` | loop | seated, bent forward, the head down to the knees, the hands on them | Grandmother | made |
 | `sway` | loop | stands swaying, about to fall, a hand out (the ground swims); played once (`loop: false`) — one sway | Grandmother | to make |
 | `catch_breath` | once | standing, stops and catches her breath, a hand at the chest | Grandmother | to make |
 | `carve` | loop | seated, whittles a small piece of wood held in the left hand with a knife in the right, before the chest | Grandmother | to make |
@@ -89,9 +91,9 @@ any of them may play any motion (Sophia moves as a small adult).
 | `shawl` | once | draws a shawl round her own shoulders with both hands | Grandmother | to make |
 | `cardigan` | once | puts on a cardigan | Grandmother | to make |
 | `cough` | once | coughs, a hand to the mouth | Grandmother | to make |
-| `armchair` | loop | sits back in an armchair, the arms on its arms | Grandmother | to make |
-| `doze` | loop | sits asleep in an armchair, the head sunk to the side | Grandmother | to make |
-| `lie_bed` | loop | lies on the back, breathing (bed, cot) — `<id>_on` a point of the bed, `turn` the way the feet point | anyone | to make |
+| `armchair` | loop | sits back in an armchair, the arms on its arms | Grandmother | made |
+| `doze` | loop | sits asleep in an armchair, the head sunk to the side | Grandmother | made |
+| `lie_bed` | loop | lies on the back, breathing (bed, cot) — `<id>_on` a point of the bed, `turn` the way the feet point | anyone | made |
 | `lie_side` | loop | lies on the side, the knees drawn up, the hands under the cheek (turned to the wall: Papa's `lie_wall`) | anyone | to make |
 | `sit_bed` | loop | sits up in bed, the legs out straight before her under the blanket | Grandmother, Sophia | to make |
 | `half_up` | loop | half up on an elbow in bed, the other hand held up | Sophia | to make |
@@ -103,7 +105,7 @@ any of them may play any motion (Sophia moves as a small adult).
 | `sigh` | once | lying, a long breath out | anyone | to make |
 | `sit_threshold` | loop | sits on the floor, the back against the jamb, the knees up | Sophia | to make |
 | `write` | loop | seated at a table, writing with the right hand | Papa | to make |
-| `eat` | loop | seated at a table, eating with a spoon (`chew`) | anyone | to make |
+| `eat` | loop | seated at a table, eating with a spoon (`chew`) | anyone | made |
 | `row` | loop | seated, rowing with two oars | Eriksson, Sophia | to make |
 | `splash` | loop | stands in water to the chest, laughing, slapping the water with both hands | Sophia (the sea hides her below it) | to make |
 | `stamp` | once | a child stamps a foot in anger | Sophia | to make |
@@ -151,34 +153,34 @@ In the right hand unless said. A part's point is `"<id>#<point>"` (for `look`, `
 | part | what | points | status |
 | --- | --- | --- | --- |
 | `mug` | an enamel mug held in both hands before the chest | `mug` | made |
-| `lantern` | the small storm lantern with its candle, hanging by its bail in the **left** hand, burning (its globe glows) — Grandmother's, Papa's in «law» | `flame`, `globe` | to make |
-| `big_lantern` | Papa's big paraffin storm lantern, hanging by its bail in the right hand, burning | `flame`, `globe` | to make |
-| `candle` | a lit candle in a holder, in the right hand before the chest | `flame` | to make |
-| `knife` | Grandmother's clasp knife, open, in the right hand | `blade` | to make |
-| `driftwood` | a piece of grey driftwood in the left hand (what she carves) | `wood` | to make |
-| `chip` | = `driftwood` (the shore's name: a chip she carves a bird from) | `wood` | to make |
-| `seal` | the little wooden seal she carved, in the right hand | `seal` | to make |
-| `bird` | a dead bird held by two fingers of the right hand | `bird` | to make |
-| `pillowcase` | the bird wrapped in a pillowcase, in both hands | `bundle` | to make |
-| `pouch` | Grandmother's tobacco pouch, in the left hand | `pouch` | to make |
-| `packet` | a packet of cigarettes, in the left hand (`pack` in the new house's notes) | `packet` | to make |
-| `cigarette` | a lit cigarette between the right hand's fingers (thin smoke from its ember) | `ember` | to make |
-| `match` | a lit match in the right hand (its flame glows) | `flame` | to make |
-| `pebble` | a small grey pebble in the right hand | `pebble` | to make |
-| `parcel` | a parcel in brown paper tied with string, in both hands before the chest | `parcel`, `string` | to make |
-| `bundle` | Papa's bundle of belongings, on the right shoulder | `bundle` | to make |
-| `drops` | a little brown bottle in the right hand | `bottle` | to make |
-| `list` | a sheet of paper in the left hand, a pencil in the right (Papa's list) | `page` | to make |
-| `net` | a heap of tangled net on the knees between the hands (seated) | `net` | to make |
-| `blanket_fold` | a folded blanket carried in both arms | `blanket` | to make |
-| `blanket` | a blanket wrapped round the shoulders and the trunk (sitting or standing) | — | to make |
-| `blanket_round` | one blanket round two sitting side by side: the half of it on this one, open toward the other (each of the two `_with` it) | — | to make |
-| `shawl` | Grandmother's grey shawl round the shoulders of someone else (Sophia: to her knees) | — | to make |
-| `jacket` | Papa's dark jacket over the shoulders (on Grandmother, the sleeves hanging empty) | — | to make |
-| `cardigan` | a knitted grey-brown cardigan, worn | — | to make |
-| `hat` | the straw hat held by its brim in the right hand (worn — `sophia_wear: {"hat": "straw"}`, above) | `hat` | to make |
-| `shell` | a white shell in the right hand | `shell` | to make |
-| `basket` | the lidded wicker basket hanging from the right hand by its handle (the cat in it) | `basket` | to make |
+| `lantern` | the small storm lantern with its candle, hanging by its bail in the **left** hand, burning (its globe glows) — Grandmother's, Papa's in «law» | `flame`, `globe` | made |
+| `big_lantern` | Papa's big paraffin storm lantern, hanging by its bail in the right hand, burning | `flame`, `globe` | made |
+| `candle` | a lit candle in a holder, in the right hand before the chest | `flame` | made |
+| `knife` | Grandmother's clasp knife, open, in the right hand | `blade` | made |
+| `driftwood` | a piece of grey driftwood in the left hand (what she carves) | `wood` | made |
+| `chip` | = `driftwood` (the shore's name: a chip she carves a bird from) | `wood` | made |
+| `seal` | the little wooden seal she carved, in the right hand | `seal` | made |
+| `bird` | a dead bird held by two fingers of the right hand | `bird` | made |
+| `pillowcase` | the bird wrapped in a pillowcase, in both hands | `bundle` | made |
+| `pouch` | Grandmother's tobacco pouch, in the left hand | `pouch` | made |
+| `packet` | a packet of cigarettes, in the left hand (`pack` in the new house's notes) | `packet` | made |
+| `cigarette` | a lit cigarette between the right hand's fingers (thin smoke from its ember) | `ember` | made |
+| `match` | a lit match in the right hand (its flame glows) | `flame` | made |
+| `pebble` | a small grey pebble in the right hand | `pebble` | made |
+| `parcel` | a parcel in brown paper tied with string, in both hands before the chest | `parcel`, `string` | made |
+| `bundle` | Papa's bundle of belongings, on the right shoulder | `bundle` | made |
+| `drops` | a little brown bottle in the right hand | `bottle` | made |
+| `list` | a sheet of paper in the left hand, a pencil in the right (Papa's list) | `page` | made |
+| `net` | a heap of tangled net on the knees between the hands (seated) | `net` | made |
+| `blanket_fold` | a folded blanket carried in both arms | `blanket` | made |
+| `blanket` | a blanket wrapped round the shoulders and the trunk (sitting or standing) | — | made |
+| `blanket_round` | one blanket round two sitting side by side: the half of it on this one, open toward the other (each of the two `_with` it) | — | made |
+| `shawl` | Grandmother's grey shawl round the shoulders of someone else (Sophia: to her knees) | — | made |
+| `jacket` | Papa's dark jacket over the shoulders (on Grandmother, the sleeves hanging empty) | — | made |
+| `cardigan` | a knitted grey-brown cardigan, worn | — | made |
+| `hat` | the straw hat held by its brim in the right hand (worn — `sophia_wear: {"hat": "straw"}`, above) | `hat` | made |
+| `shell` | a white shell in the right hand | `shell` | made |
+| `basket` | the lidded wicker basket hanging from the right hand by its handle (the cat in it) | `basket` | made |
 
 **A lantern, a candle, a match, a cigarette in the hand** are lit by the scene's light at the part's point:
 `{"id": "…", "at": "grandma#flame", "on": "<key>"}` — the point of the part the person has with them now (the
@@ -194,7 +196,13 @@ other's with it.
 The module `closeups` (`closeups.md`): hands and small things close — `teeth`, `stems`, `knife`, `match`,
 `gunwale`, `knot`, `tremble`, `gap`, `breast`, `sleeve`, `string`, `palm`, `oars`, `rail`.
 
-## Checked (2026-10-28, GPU, `sheets/sb-cape/trial*.json` beside the world's clones)
+## Checked (2026-10-28, GPU)
+
+- The parts, the worn things, the straw hat, `eyes_closed`, the elbow reach: rendered on the four in a trial spec beside
+  the world's clones (`sheets/sb-people/trial.json`, states `states1.json`, `states2.json`; `face-*.png` — the closed
+  eyes close: two thin dark lines under the brows, calm).
+
+Before (`sheets/sb-cape/trial*.json`):
 
 - Seated on a stone (`sit_stone`) the long dress reads: it falls from the lap over the knees to the ground.
 - **Seated on the ground with the knees up (`sit_ground`) it does not**: seen from the front the skirt is a flat stiff
