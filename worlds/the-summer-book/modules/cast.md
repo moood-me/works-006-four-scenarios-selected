@@ -40,6 +40,7 @@ model).
 | --- | --- | --- | --- | --- |
 | `old_walk` | gait | Grandmother's slow old walk, small steps, a little bent | Grandmother (always hers: `person.gait`) | to make |
 | `lantern_walk` | gait | the old walk, the lantern held out before her in the left hand | Grandmother in the fog, the night path | to make |
+| `balance_walk` | gait | an old woman steps slowly and carefully over wet stones, the arms out a little for balance | Grandmother (the cape's `fog_way`, the stones) | to make |
 | `walk_fast` | gait | a quick walk | Papa | made |
 | `lead_walk` | gait | a slow walk at an old woman's pace, the right arm a little out (she on it: both `_reach` hand to hand / to `#hand_l`) | Papa leading his mother | to make |
 | `carry_walk` | gait | walks with something big in both arms before the chest (the camp bed, the bundle, the parcel) | Papa, anyone | made |
