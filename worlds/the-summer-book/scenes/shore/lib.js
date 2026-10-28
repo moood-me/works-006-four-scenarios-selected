@@ -54,7 +54,7 @@ const PLACES = {
     water: { at: [0.2, 4.0], turn: 150, look: [8, 5, 0.2], reach: { l: 'sophia#hand_r' } },
     ledge: { at: [0.15, 5.55], turn: 110, look: 'rock#shelf' },
     warm: { at: [-0.8, 6.0], turn: 150, on: [-0.8, 6.3, 0.3], do: 'sit_stone' },
-    warm_back: { at: [-0.8, 6.0], turn: 330, on: [-0.8, 6.3, 0.3], do: 'sit_stone' },
+    warm_back: { at: [-0.8, 6.0], turn: 20, on: [-0.8, 6.3, 0.3], do: 'sit_stone' },
     edge_sit: { at: [0.55, 5.1], turn: 120, on: [0.65, 5.25, 0.15], do: 'sit_stone', look: 'rock#shelf' },
     path: { at: [-3.4, 8.8], turn: 160 },
     gate: { at: [-3.3, 11.2], turn: 170 },
@@ -77,7 +77,7 @@ const PLACES = {
     water: { at: [0.68, 4.27], turn: 150, look: 'grandma', reach: { r: 'grandma#hand_l' } },
     edge: { at: [1.0, 5.5], turn: 110, look: 'rock#shelf' },
     shelf: { at: [2.6, 5.8], turn: 230, look: 'grandma' },
-    warm: { at: [-0.15, 6.75], turn: 150, do: 'hug_knees' },
+    warm: { at: [-0.45, 5.75], turn: 170, do: 'hug_knees' },
     edge_sit: { at: [0.95, 5.65], turn: 120, do: 'hug_knees' },
     graves: { at: [-1.3, 8.8], turn: 230, look: 'graves#pit' },
     pier_edge: { at: [6.6, 15.55], turn: 110, look: 'rowboat#gunwale' },
@@ -169,6 +169,8 @@ const PORCH_NEAR = { ...OFF(-4.3, 12.8, -78, -0.25), camera_look: 0.06 };
 // the shore path to the big boat, from the water; the dinghy by the pier, from the water
 const PATH_CAM = { ...OFF(1.0, 20.5, -75, 0.2), camera_look: 0.02 };
 const DINGHY_CAM = { ...OFF(2.6, 12.4, -20, 0.1), camera_look: 0.05 };
+// the calm's pebble: Grandmother sitting turned along the shore, seen from ahead of her (her face, the glass water)
+const PEBBLE_CAM = { ...OFF(0.1, 9.4, -165, -0.25), camera_look: 0.1 };
 const CAM = ['camera_x', 'camera_z', 'camera_yaw', 'camera_h', 'camera_look'];
 // a line's time, roughly as the game's voice takes it (0.3 s and 0.06 a letter) — the pieces leave it
 const SAY = (...lines) => lines.reduce((t, l) => t + 0.3 + 0.06 * l.length, 0);
@@ -416,7 +418,9 @@ function film(scene) {
         await s.wait(1.5);
         await tell(s, 'nets:sat', SAY('Mamma. Tell me, if anything', 'I’m not going to be the last to know any more') + 1.5);
         s.person('papa').with(null);
-        await cutTo(s, SHOT('grandma', 'medium', [0.5, 0.4], 0));
+        // the choice's pose: the two faces from before them (they sit facing the start), aimed between them
+        s.person('grandma').look(null);
+        await cutTo(s, NEAR([-1.6, 14.25], 3.4, 0.35, 0.1));
       },
     },
     nets_say: {
@@ -496,12 +500,13 @@ function film(scene) {
         await tell(s, 'calm:back', 2);
         s.set('grandma_with', ['pebble']);
         s.person('grandma').look([2.2, 7.6, -0.55]);
-        await cutTo(s, SHOT('grandma#hand_r', 'medium', [0.5, 0.5], 0));
+        // the pose of М4: her face from ahead along the shore, the water on her right, the pebble in her hand
+        await cutTo(s, PEBBLE_CAM);
       },
     },
     calm_after: {
       after: 'calm',
-      from: () => ({ ...NEAR([-0.4, 6.4], 4.2, 0.4, 0.05), rings: 1, cat_pose: 'none', grandma_with: null, ...ATS('grandma', 'warm_back'), ...AT('sophia', 'warm') }),
+      from: () => ({ ...PEBBLE_CAM, rings: 1, cat_pose: 'none', grandma_with: null, ...ATS('grandma', 'warm_back'), ...AT('sophia', 'warm') }),
       run: async s => {
         await dolly(s, NEAR([-0.4, 6.4], 4.2, 0.4, 0.05), 1.5);
         await tell(s, 'calm_after:still', 3);
