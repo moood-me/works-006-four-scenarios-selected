@@ -107,11 +107,12 @@ export default async function (b) {
   const keep = next => { kept = next; return b.keep(kept); };
   let jumped = () => {};
   const author = b.game.mine ? view.author({
-    chapters: CHAPTERS, plays: PLAYS.map(p => p.label), at: () => replay?.run ?? kept,
-    games: (as, chapter, step) => ran(as, FIRST[chapter] + step).then(r => r.games),
+    // (“play as…”: 0 — the main run as it was played; k — PLAYS[k − 1], its state at the step, the main run's aside)
+    chapters: CHAPTERS, plays: [tr('the main run, as it was played'), ...PLAYS.map(p => p.label)], at: () => replay?.run ?? kept,
+    games: (as, chapter, step) => ran(Math.max(0, as - 1), FIRST[chapter] + step).then(r => r.games),
     go: async (as, chapter, step, game) => {
-      const state = await coming(as, chapter, step);
-      jumped({ jump: game == null ? state : { ...state, play: game, choices: (await ran(as, FIRST[chapter] + step)).state.choices } });
+      const p = Math.max(0, as - 1), state = await coming(p, chapter, step);
+      jumped({ jump: game == null ? state : { ...state, play: game, choices: (await ran(p, FIRST[chapter] + step)).state.choices }, own: as > 0 });
     },
   }) : null;
   const away = () => new Promise(ok => b.menu(() => ok('away')));
@@ -133,10 +134,23 @@ export default async function (b) {
     }
     const done = kept.chapter;
     await onward();
-    if (kept.chapter === END) ended();
+    if (kept.chapter === END) {
+      ended();
+      await closing();
+    }
     // (no map between the prologue and chapter I, nor between IV and the epilogue: on at once)
     after = done === 0 || done === EPILOGUE - 1 ? { on: true } : { reveal: done };
   }
+
+  // the play played through: the last shot goes to black, the ending's name over it; the map comes out of the black
+  async function closing() {
+    b.menu(null);
+    await b.fade(1, 2);
+    const f = facts(kept);
+    await view.title(ENDINGS.find(e => e.id === f.ending).label);
+    closed = true;
+  }
+  let closed = false; // (the map to come out of the black)
 
   // the run being played (the replay, else the main run), step by step to its chapter's end → 'done'; or till ☰ →
   // 'away'
@@ -175,7 +189,7 @@ export default async function (b) {
   function replayFrom(to) {
     if (to.jump) {
       const { chapter, step, play } = to.jump, at = kept.steps[chapter];
-      if (at?.[step]) {
+      if (!to.own && at?.[step]) {
         return { run: { ...structuredClone(at[step]), ...(play != null ? { play } : {}) }, steps: structuredClone(at.slice(0, step + 1)), done: false };
       }
       return { run: structuredClone(to.jump), steps: Object.assign([], { [step]: run(to.jump) }), done: false };
@@ -199,6 +213,7 @@ export default async function (b) {
     view.gauge(replay ? replay.run : kept); // (how things stand, in the corner)
     beds({ sea_in: 0.2 }, 2); // (the drawing on Papa's table, the sea beyond the veranda's glass)
     await b.show(SCENES.map, { state: { shown: Math.min(reveal ?? (replay ? replay.run.chapter : kept.chapter), EPILOGUE) }, captions: false });
+    if (closed) { closed = false; b.fade(0, 1.5); }
     const drawn = trees(b, sky(), { grow: reveal, author: !!author });
     const notice = replay?.done && anew() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};
     let asked = null; // (an option that would leave the replay: asked again)

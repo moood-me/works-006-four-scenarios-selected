@@ -323,6 +323,7 @@
   {"text":"You knocked","translation":"Ты постучала","where":"bespoke/game.js"},
   {"text":"You shouted instead","translation":"Ты закричала вместо стука","where":"bespoke/game.js"},
   {"text":"You did not knock. She waited","translation":"Ты не постучала. Она ждала","where":"bespoke/game.js"},
+  {"text":"the main run, as it was played","translation":"основная партия, как она сыграна","where":"bespoke/game.js"},
   {"text":"If you keep it, the chapters after this one will have to be played again.","translation":"Если оставить, главы после этой придётся сыграть заново.","where":"bespoke/game.js"},
   {"text":"Drop the replay","translation":"Бросить переигровку","where":"bespoke/game.js"},
   {"text":"Keep","translation":"Оставить","where":"bespoke/game.js"},

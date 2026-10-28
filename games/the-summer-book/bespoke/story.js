@@ -269,7 +269,8 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
   })());
   if (j && j.target < Infinity) j.idle.then(seen);
   // the time a line asks, once said: heard — a breath after; shown without a voice — as long as it takes to read it
-  const after = ({ heard, text }) => sleep(heard ? 500 : 300 + text.length * 60);
+  // (as long as the page keeps its bubble: speech.js, at least 2.5 s)
+  const after = ({ heard, text }) => sleep(heard ? 500 : Math.max(2500, 1500 + text.length * 60));
   const g = {
     state,
     signal: left.signal,
