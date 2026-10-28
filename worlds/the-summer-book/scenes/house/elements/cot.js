@@ -1,5 +1,6 @@
-// Papa's camp bed along the back wall: a canvas folding bed on crossed legs, made with a grey wool blanket and a white
-// pillow at its left end. Metres from the middle of its foot; 1.9 m long, 0.48 m high.
+// Papa's camp bed (`cot`: along the veranda's back wall, or in the room before the window onto the cape): a canvas
+// folding bed on crossed legs, made with a grey wool blanket and a white pillow at its left end. Metres from the middle
+// of its foot; 1.9 m long, 0.48 m high.
 g.fillStyle = '#7b6a55';
 for (const x of [-0.85, 0.85]) {
   g.save();
