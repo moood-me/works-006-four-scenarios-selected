@@ -7,7 +7,7 @@
 //     at 1 or less the walk ends at the second stone (the piece `sit_half` follows: she sits down halfway).
 //   М10а «The Stones in the Fog», without the lantern (Ш3 «behind», after `fog_way` without it) — a slip: she sits down
 //     on the stone and waits, then goes on (`rest`); with her strength at 1 or less she sits down at the second stone
-//     to get her breath, a few seconds, whatever the hands do (`rest`), and goes on.
+//     to get her breath (`rest`, long enough to sit down and breathe), whatever the hands do, and goes on.
 // Balance — lead anywhere, one track for the whole way, the arrow the lantern (or her body, in the dark) tilting on
 // the wet stones; a quiet ring on the next stone (`path#stone<n>`), its arc of danger how far it tilts. Kept steady
 // KEEP s — she steps on to it (`step` n: the scene walks her there at her pace and tells `step:stone<n>`; meanwhile
@@ -24,7 +24,9 @@
 import { clamp, until, keys, teach, settle, wobble } from './hands.js';
 
 const KEEP = 1.6, STONE = 7, ALONE = 12, OFF = 0.9, PUSH = 0.6;
-const REST = 3, BREATH = 3.5; // s: sat down after a slip in the dark; to get her breath at the second stone
+// s the rest is held (`rest` true; the scene walks her to the low stone by hers and sits her — it tells no moment —,
+// then false: she rises slowly and is back): after a slip in the dark; to get her breath at the second stone
+const REST = 7.5, BREATH = 7.5;
 const WALK = 8000; // ms: the longest a step to a stone is waited for
 
 // path({title, phrase, about, slip: 'sway' | 'dip' | 'rest', short}) → a minigame; short(state) — the walk ends at the
