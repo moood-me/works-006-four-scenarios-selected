@@ -1,0 +1,14 @@
+{
+  "type": "bespoke",
+  "title": "The Summer Book",
+  "description": "One summer on an island in a pale northern sea: a grandmother who is getting old and a six-year-old girl who lost her mother this spring. Before the summer ends the grandmother can give her one thing — the truth, protection, or the summer itself. What will she give, and what will be left ungiven?",
+  "line": "An island for one summer, an old woman and a little girl — and what will Grandmother have time to give her?",
+  "source": "after the novel by Tove Jansson",
+  "genres": {
+    "drama": 70,
+    "relationships": 70,
+    "immersion": 40
+  },
+  "world": "pavel--the-summer-book",
+  "scenes": []
+}

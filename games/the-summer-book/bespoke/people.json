@@ -1,0 +1,44 @@
+{
+  "narrator": {
+    "voice": "Vindemiatrix",
+    "how": "calm, dry and clear, a little amused and a little sad, unhurried — like a Tove Jansson book read aloud on a grey summer morning",
+    "name": "narrator",
+    "short": "narrator"
+  },
+  "grandma": {
+    "voice": "Gacrux",
+    "how": "an old woman, dry and short, as of a matter of business; mocking, never soft, never sorry for herself; tired underneath",
+    "name": "Grandmother",
+    "short": "Grandmother"
+  },
+  "grandma_song": {
+    "voice": "Gacrux",
+    "how": "an old woman singing an old song of the skerries under her breath, hoarse and slow, a lullaby tune, losing the words and humming over the gaps",
+    "name": "Grandmother, singing",
+    "short": "Grandmother"
+  },
+  "sophia": {
+    "voice": "Leda",
+    "how": "a girl of six: quick, bossy and loud, stamps her foot, swears and orders; when it matters, suddenly serious as a grown-up and very quiet",
+    "name": "Sophia",
+    "short": "Sophia"
+  },
+  "sophia_song": {
+    "voice": "Leda",
+    "how": "a girl of six singing to herself without words, a made-up tune, high and thin, solemn, a little out of tune",
+    "name": "Sophia, singing",
+    "short": "Sophia"
+  },
+  "papa": {
+    "voice": "Sadachbia",
+    "how": "a quiet man who lost his wife this spring: level and short, only about things to be done, without lifting his eyes; when moved, he breaks off",
+    "name": "Papa",
+    "short": "Papa"
+  },
+  "eriksson": {
+    "voice": "Fenrir",
+    "how": "an old fisherman from the far skerries: hoarse, slow, plain, without pity; a few words and no goodbye",
+    "name": "Eriksson",
+    "short": "Eriksson"
+  }
+}
