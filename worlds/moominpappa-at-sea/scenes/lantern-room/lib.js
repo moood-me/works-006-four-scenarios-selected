@@ -82,7 +82,9 @@ const GALLERY_WAY = [at(108, 2.3), at(108, RAIL - 0.35), at(90, RAIL - 0.35), at
 const COT_BED = [1.75, 4.3, 0.42];
 // eyes from beside: inside by the glass on the right, on Papa out on the gallery (raised over the beam's cone); by the
 // lamp's left, on whoever holds the lantern to the soot
-const EYE = { gallery: [...at(64, 1.7), 1.95], soot: [...at(30, 1.2), 1.9], lamp: [-0.9, 1.2, 2.45] };
+const EYE = { gallery: [...at(64, 1.7), 1.95], soot: [...at(30, 1.2), 1.9], lamp: [-0.9, 1.2, 2.45],
+  // out on the gallery behind him, over the beam's cone: Papa writing, whole, the lit lantern room beyond
+  writing: [...at(112, RAIL - 0.2), 1.95] };
 function film(scene) {
   // the lanterns carried lit: how much each burns (the light at its flame, `<id>_lamp`)
   const LIT = { lantern: 1, lantern_low: 0.45 }, LAMPS = { papa_lamp: 1, troll_lamp: 1 };
@@ -523,7 +525,7 @@ function film(scene) {
     // Epilogue "The Beam": Papa writing on the gallery, the lamp burning; ("in a week") My in the hatch
     e_write: {
       from: () => ROOM(STAND("papa", SPOT.write, { papa_with: ["book"], papa_do: loop("hold"), papa_look: "papa#page" }), { my_here: false,
-        troll_here: false, flame: "lit", lenses: 1, ...FROM(EYE.lamp, [1.0, 4.8, 1.3]) }),
+        troll_here: false, flame: "lit", lenses: 1, ...FROM(EYE.writing, [SPOT.write[0], SPOT.write[1], 0.9]) }),
       run: async s => {
         await moment(s, "e_write:write", 5);
         P(s, "my").here(true);
