@@ -5,7 +5,7 @@
 `contracts-review.md`. Здесь — как всё легло в код.
 
 - **Игра:** `moood-me/pavel--game--the-summer-book` (bespoke, private), стенд resuming3 —
-  http://resuming3.localhost:8445/~pavel/games/the-summer-book. Ветки: `sb/game` → `env/malay/resuming3`; в env/dev с 2026-10-28 (игра `7dfd368`, мир `c4351cc`) — по слову Павла, без голосов и 68 движений (Kimodo не поднят), до третьего прохода тестера.
+  http://resuming3.localhost:8445/~pavel/games/the-summer-book. Ветки: `sb/game` → `env/malay/resuming3`; в env/dev с 2026-10-28 (игра `7dfd368`, мир `22fea53` — с движениями; пять, что Kimodo не дал, заменены, cast.md) — по слову Павла, без голосов.
   **Мир:** `moood-me/pavel--the-summer-book`, сцены `shore` (С1), `house` (С2), `forest` (С3), `new-house` (С5), `cape`
   (С4), `sea` (С6) и фон карты `map`. Правда о каждой — её `notes.md`, блок «Contract for the check».
 - **Каркас** — как у «Папы и моря»:
