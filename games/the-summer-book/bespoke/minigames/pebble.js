@@ -1,5 +1,5 @@
 // М4 «The Pebble» (2.1, the shore in the calm, after the piece `calm`: the two of them back to back and cross,
-// Grandmother's hand with a pebble over the glass water): hold, then let go — a groove on her (`grandma#chest`):
+// Grandmother's hand with a pebble over the glass water): hold, then let go — a groove on the pebble in her hand (`grandma#pebble`):
 // held till full, the pebble is in her fingers, her
 // hand out over the water (`pebble_hand`, going out as the hold takes); then the sea lies waiting, like glass (the plate says so) and the arc of
 // time runs: lifted — it falls, rings spread on the glass (`rings` one more), and nothing else happens; not lifted in
@@ -18,7 +18,7 @@ export default {
   title: tr('The Pebble'),
   about: 7,
   skipped: {},
-  points: ['grandma#chest'],
+  points: ['grandma#pebble'],
   keys: ['rings', 'pebble_hand'],
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('The sea like glass, and a pebble in an old hand.') });
@@ -26,7 +26,7 @@ export default {
     const send = keys(g);
     const over = settle(signal, () => { thrown(); g.set('pebble_hand', 0, 1); });
     send('pebble_hand', 0);
-    const how = await letGo(g, b, mg, { at: 'grandma#chest', take: 1, wait: WAIT, held: u => send('pebble_hand', u), sign: () => {
+    const how = await letGo(g, b, mg, { at: 'grandma#pebble', take: 1, wait: WAIT, held: u => send('pebble_hand', u), sign: () => {
       mg.plate.set({ phrase: tr('Not a ripple on the glass. Nothing moves.') });
     } });
     if (!how) return this.skipped;

@@ -21,8 +21,8 @@
 //     held(u) each frame of it, early() — let go after it had begun to fill); then the call to let go: the sign
 //     (sign(): what the scene shows — the other pulls, the thing slides — and the plate's new line; the ghost cannot
 //     show it under a finger that is down), and the groove's arc of time running down `wait` s (5 — the scenario's):
-//     the finger lifted — let go; the arc run out — it goes by itself, “held long”. Its mark never pressed for ALONE s —
-//     the same as held long (the scenario's way out by time). → 'let' | 'long' | null (the mini-game ended first)
+//     the finger lifted — let go; the arc run out — it goes by itself, “held long”. Not taken hold of (full) in ALONE s, the finger
+//     up — the same as held long (the scenario's way out by time). → 'let' | 'long' | null (the mini-game ended first)
 //   keep(g, b, mg, {at, seconds, take, frame, slip}) — “hold” that ends by its count (scenario §7: “hold and balance
 //     end by their count; dropped — it colours”): a groove at `at`; the count (`seconds`) begins as the groove is first
 //     pressed (never pressed for ALONE s — over, as if held); frame({fill, taken, held, t, dt, on}) each frame (fill —
@@ -94,17 +94,15 @@ export async function letGo(g, b, mg, { at, take = 1.2, sign = () => {}, wait = 
   const hold = mg.hold({ on: mark, seconds: take, drain: 0.6 });
   const taught = teach(b, mg, [hold]);
   const ebb = hold.on('up', () => { if (hold.state.fill > 0.15 && hold.state.fill < 1) early(); });
-  let touched = false;
-  const touch = hold.on('down', () => { touched = true; });
   const t00 = mg.t;
   const took = await until(mg, ({ t }) => {
     const s = hold.state;
     held(s.fill);
     mg.plate.set({ fill: 0.5 * s.fill, glow: s.held ? 'good' : 'idle' });
-    return (s.fill >= 1 && s.held) || (!touched && t - t00 >= ALONE);
+    // (the way out by time: not taken hold of in ALONE s — touched or not — it goes by itself, as held long)
+    return (s.fill >= 1 && s.held) || (!s.held && t - t00 >= ALONE);
   });
   ebb();
-  touch();
   taught.remove();
   if (!took) return null;
   if (!hold.state.held) { mark.remove(); return 'long'; }
@@ -162,7 +160,7 @@ export async function keep(g, b, mg, { at, seconds, take = 1, frame = () => {}, 
   return { slips };
 }
 
-const TEAR = 0.1, FAST = 2.5, BACK = 0.12, LIMIT = 15, SELF = 1.5;
+const TEAR = 0.1, FAST = 6, BACK = 0.12, LIMIT = 15, SELF = 1.5;
 export async function slowly(g, b, mg, { at, pulls = 3, frame = () => {}, jerk = () => {} }) {
   mg.plate.set({ notches: Array.from({ length: pulls - 1 }, (_, i) => (i + 1) / pulls) });
   const end = mg.mark({ at, kind: 'dash' });
