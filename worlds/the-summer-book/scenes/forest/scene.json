@@ -196,18 +196,28 @@
     },
     {
       "id": "hand_lamp",
-      "at": "grandma#hand_r",
+      "at": "grandma#flame",
       "color": "#ffc98a",
       "strength": 1.1,
       "reach": 3.5,
       "on": "lamp_lit",
       "flicker": 0.12
+    },
+    {
+      "id": "match",
+      "at": "grandma#flame",
+      "color": "#ffc070",
+      "strength": 0.7,
+      "reach": 1.2,
+      "on": "match_lit",
+      "flicker": 0.3
     }
   ],
   "modules": [
     "cast",
     "isle",
-    "beats"
+    "beats",
+    "closeups"
   ],
   "state": {
     "dawn": 0,
@@ -240,7 +250,13 @@
     "step": 0,
     "lantern_sway": 0,
     "grab": false,
-    "lamp_lit": 0
+    "lamp_lit": 0,
+    "flipper": false,
+    "knife_open": 0,
+    "carve": 0,
+    "knife_flaw": 0,
+    "match_lit": 0,
+    "smoking": 0
   },
   "states": {
     "dawn": {
@@ -453,6 +469,49 @@
       ],
       "smooth": true,
       "means": "the scene's own: Grandmother's lantern alight in her hand (from grandma_with and lantern_sway)"
+    },
+    "match_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own: a struck match in Grandmother's hand (from grandma_with)"
+    },
+    "smoking": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own: Grandmother's cigarette alight, its thin smoke (from grandma_with)"
+    },
+    "flipper": {
+      "type": "boolean",
+      "means": "the play's: the knife jerked in 1.2 — the carved seal has one flipper (the seal in the moss so; knife_flaw shows it too while the step goes on)"
+    },
+    "knife_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М3 «knife»: the close-up of her hands carving open (0 closed … 1 open)"
+    },
+    "carve": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the knife close-up: the driftwood becoming a seal (0 a rough log … 1 the seal)"
+    },
+    "knife_flaw": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the knife close-up: 1 — a jerk, one flipper split off (the seal has one flipper); 0 — whole"
     },
     "beat": {
       "type": "string",
@@ -980,6 +1039,29 @@
       }
     },
     {
+      "id": "smoke",
+      "name": "The cigarette's smoke",
+      "particles": {
+        "kind": "smoke",
+        "at": "grandma#ember",
+        "amount": "smoking",
+        "rate": 2.5,
+        "size": [
+          0.02,
+          0.25
+        ],
+        "speed": [
+          0.04,
+          0.12
+        ],
+        "life": [
+          2.5,
+          4.5
+        ],
+        "opacity": 0.3
+      }
+    },
+    {
       "id": "rain",
       "name": "Rain",
       "particles": {
@@ -988,6 +1070,11 @@
         "count": 9000,
         "wind": 1.2
       }
+    },
+    {
+      "id": "knife",
+      "name": "Her hands carving, close",
+      "insert": "knife_open"
     }
   ],
   "music": {

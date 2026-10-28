@@ -14,11 +14,18 @@ writes `scene.json`, `elements/sky.*`, `elements/sea.*`). Engine 3, camera `pict
   branch above); each a layer that sways a little in the wind and, by `spin` (0…1, smooth, animate), wheels about its
   foot — all as one, as a dizzy head sees them (М6). Living pines far off (the island's).
 - **Things**: `stump` (a form; `stump#seat`, Grandmother sits on it: `sit_stone`), `animals` (the wooden horse, bird,
-  dog, cow and — the fifth — the seal: `animals` 0–5; `animals#seal`), `crevice` (a boulder, a form, with its crack:
+  dog, cow and — the fifth — the seal: `animals` 0–5; `animals#seal`; the seal's far front flipper a layer of its own,
+  gone with the play's `flipper` — the knife jerked in 1.2 — or the minigame's `knife_flaw` in the same step), `crevice` (a boulder, a form, with its crack:
   `pack` none · in · taken; `crevice#pack`).
 - **The end of July** (`band` 0…1, smooth): a heavy grey band along the horizon (`band`, a layer faded by animate). **By
   night**: the moon behind the viewer, faces lit; `boat_out` — the family's boat at the nets far out, Papa's lantern
   (`far_boat#lamp`, the light `far_lamp`).
+- **The knife minigame's close-up** (the world's `closeups`, `modules/closeups.md`): the insert `knife` (`knife_open`;
+  `carve` 0…1 the wood becoming the seal; `knife_flaw` 0/1 one flipper split off; the points `knife#blade`,
+  `knife#wood`), painted once by the module (`elements/knife.js`), its animate the module's `live`.
+- **In her hands** (the cast's parts, their lights at their points): the lantern's `hand_lamp` at `grandma#flame`
+  (`lamp_lit`), the struck match's `match` at `grandma#flame` (`match_lit`), the cigarette's thin smoke (`smoke`,
+  particles at `grandma#ember`, `smoking`) — the script sets those three keys from `grandma_with`.
 - **People** (the world's `cast`): `<id>_at` (`lib.PLACES`; sitting ones by the script): Grandmother — clearing (first),
   stump (sitting on it), trunk (her palm on it, looking up at the branch), moss (sitting on the ground), path1…3;
   Sophia — clearing (first), moss (by the beetle), stump, crevice, path1. Grandmother sitting on the ground
@@ -53,7 +60,7 @@ The rules every piece keeps (review-stage5.md of «Папа и море»):
 
 - `carve` (1.2, ≈ 9 s). The grey dead trees creaking in the wind, the moss; Sophia crouched in the moss with her four animals; Grandmother comes from the clearing's edge to the stump (`old_walk`), sits down on it (`sit_stump`) and takes out her knife and a piece of driftwood (the cast's parts). Keys: animals 4. From: Grandmother `clearing`, Sophia `animals`. Ends: the knife minigame's pose — Grandmother on the stump, her hands with the knife before her chest, her face and hands in the middle 4:3 (the minigame opens the insert `knife`). Moments: `carve:trees` — the forest (the game: «Grey dead trees…»); `carve:sat` — she sits and begins.
 - `seal_set` (1.2, ≈ 12 s). After `carve`. The seal is done; Sophia comes, takes it from her hand (both `_reach`), crouches and sets it in the moss with the others. Keys: animals 4 → 5. Ends: Sophia crouched among the five animals, Grandmother on the stump looking at her. Moments: `seal_set:seal` — the seal out of the wood (the game: «A seal. Sophia sets the animals in the moss»); `seal_set:forest` — Sophia among them («This is their forest…»).
-- `trunk` (1.2, ≈ 15 s). After `seal_set`. Grandmother gets up slowly (`rise_slow`), goes to the trunk and reaches up to the dry branch — and stands still, her palm on the trunk (`trunk#palm`), her eyes closed, three seconds: her face close (Sophia off the frame with her animals: she does not see); then she goes back to the stump, sits and carves again. Ends: Grandmother carving on the stump, Sophia at the animals. Moments: `trunk:reach` — she reaches up; `trunk:still` — the palm on the trunk, the eyes closed (the game's plate); `trunk:back` — she sits again.
+- `trunk` (1.2, ≈ 15 s). After `seal_set`. Grandmother gets up slowly (`rise_slow`), goes to the trunk and reaches up to the dry branch — and stands still, her palm on the trunk (`trunk#palm`), her eyes closed (the expression `eyes_closed`; the game's face again after), three seconds: her face close (Sophia off the frame with her animals: she does not see); then she goes back to the stump, sits and carves again. Ends: Grandmother carving on the stump, Sophia at the animals. Moments: `trunk:reach` — she reaches up; `trunk:still` — the palm on the trunk, the eyes closed (the game's plate); `trunk:back` — she sits again.
 - `match` (1.3, ≈ 10 s). After `trunk` (its `from` is `trunk`'s end: the step may open with it). Sophia wanders off among the trees to her animals; Grandmother takes a cigarette out of the pouch and strikes a match (the insert `match`), lights it, the thin smoke; Sophia has come round behind her back (`behind`). Ends: the choice `smoke` — Grandmother on the stump in front, Sophia at her shoulder, `grandma#chest` in the middle 4:3. Moments: `match:strike` — the match (the game: «Grandmother thinks Sophia has gone…»); `match:behind` — Sophia there («Papa doesn't allow it!»).
 - `ours` (1.3 «secret», ≈ 7 s). After `match`. Grandmother smokes on; Sophia walks off between the trees importantly, chest out, hands behind her back (`hands_behind`). Ends: Grandmother smoking alone (then the game's house at supper). Moments: `ours:proud` — Sophia puffed up (the game: «…all day puffed up with it»).
 - `think` (1.3 «tell», ≈ 7 s). After `match`. Sophia sits down on the moss a little way off (`aside`), her chin on her knees, looking at Grandmother; Grandmother smokes. Ends: the two apart (then the house at supper). Moments: `think:think` — she thinks it over (the game: «…till evening»).
@@ -100,18 +107,21 @@ arm by the stump). Eriksson and the cat are not in the forest.
 
 ## Open for the game (stage 5)
 
-- The inserts (package Л, `closeups`): the knife and the shavings (`knife_open`, `carve` 0…1 — the knife minigame's;
-  its flawed «one flipper» lives in the insert only), the match at the cigarette. The insert elements and their keys
-  come with the closeups (not in the scene yet).
+- The knife minigame (М3): the insert `knife` (above) — `knife_open`, `carve` 0…1, `knife_flaw` 0/1 (one flipper);
+  its points `knife#blade`, `knife#wood`. The seal it makes: `seal_set` lays it in the moss with one flipper while
+  `knife_flaw` is 1; in the later steps (3.1–3.2) the play's `flipper` (the game sets it from the minigame's result)
+  keeps it so. (The `match` close-up of `closeups.md` is not in the scene yet: the `match` piece shows the match on the
+  people.)
 - The stones minigame (М7в): `step` 1…3 walks the two stone by stone (`step:stone1…3` on arrival); flawed —
   `lantern_sway` (0…1: the lantern swings, its light wavering) and `grab` (Sophia catches her skirt).
 - The moss minigame (М6): `spin` 0…1 — the trees wheel; `fall` brings it back to 0.
 - Grandmother sits on the stump in 3.1–3.2, not on the moss, until the engine's skirt is mended (cast.md).
-- **Wanted from package Л** (the names the code uses; until they are made the people stand): Grandmother — the gait
+- **From package Л** (`modules/cast.md`, in: the names the code uses are the cast's; the motions still «to make» stand
+  in — the people stand): Grandmother — the gait
   `old_walk`, `sit_down` (onto the stump, once), `sit_heavy` (down onto it heavily, once), `sit_stone` (have), `carve`,
   `smoke`, `dizzy` (head on the knees, seated) — loops; `strike` (the match), `put_out` (the cigarette on a stone),
-  `pat_pocket`, `pull_away`, `rise_slow`, `sway` (standing, the ground swimming: loop); her eyes closed at the trunk (a
-  face, not a mood the engine has); Sophia — `crouch`, `get_up`, `sit_down`, `put_down` (the seal in the moss),
+  `pat_pocket`, `pull_away`, `rise_slow`, `sway` (standing, the ground swimming: loop); her eyes closed at the trunk (now
+  the engine's expression `eyes_closed`); Sophia — `crouch`, `get_up`, `sit_down`, `put_down` (the seal in the moss),
   `hug_knees` (have), `kick` (the moss, bored), `fists`, `count` (sitting, counting aloud), `nose_moss` (loops), the
   gaits `run`, `proud_walk` (chest out, hands behind her back), `back_away`; Papa — the gaits `walk_fast`, `lead_walk`.
   Parts: `knife`, `driftwood`, `seal` (in a hand), `pouch`, `cigarette`, `match`, `packet`, `lantern`.
@@ -120,8 +130,8 @@ arm by the stump). Eriksson and the cat are not in the forest.
 
 ```json
 {"beats": {"carve": {"after": [], "tells": ["carve:trees", "carve:sat"], "seconds": 9, "show": false}, "seal_set": {"after": ["carve"], "tells": ["seal_set:seal", "seal_set:forest"], "seconds": 12, "show": false}, "trunk": {"after": ["seal_set"], "tells": ["trunk:reach", "trunk:still", "trunk:back"], "seconds": 15, "show": false}, "match": {"after": ["trunk"], "tells": ["match:strike", "match:behind"], "seconds": 10, "show": false}, "ours": {"after": ["match"], "tells": ["ours:proud"], "seconds": 7, "show": false}, "think": {"after": ["match"], "tells": ["think:think"], "seconds": 7, "show": false}, "quit": {"after": ["match"], "tells": ["quit:out", "quit:in", "quit:pocket"], "seconds": 14, "show": false}, "swim": {"after": [], "tells": ["swim:animals", "swim:up"], "seconds": 9, "show": false}, "fall": {"after": ["swim"], "tells": ["fall:sat", "fall:near", "fall:face"], "seconds": 12, "show": false}, "run_papa": {"after": ["fall"], "tells": ["run_papa:gone"], "seconds": 7, "show": false}, "papa_comes": {"after": ["run_papa"], "tells": ["papa_comes:come", "papa_comes:lift", "papa_comes:held"], "seconds": 14, "show": false}, "lead_home": {"after": ["papa_comes"], "tells": ["lead_home:go", "lead_home:play", "lead_home:back"], "seconds": 12, "show": false}, "count": {"after": ["fall"], "tells": ["count:back", "count:ask", "count:sit", "count:up"], "seconds": 18, "show": false}, "beetle": {"after": ["fall"], "tells": ["beetle:nose", "beetle:beetle", "beetle:hand", "beetle:house"], "seconds": 16, "show": false}, "night_path": {"after": [], "tells": ["night_path:boat", "night_path:pack", "night_path:stone"], "seconds": 11, "show": false}, "into_trees": {"after": ["night_path"], "tells": ["into_trees:gone"], "seconds": 6, "show": false}},
- "points": ["stump#seat", "trunk#palm", "trunk#branch", "crevice#pack", "moss#beetle", "animals#seal", "animals#animals", "path#stone1", "path#stone2", "path#stone3", "far_boat#lamp", "sky#sun", "sky#sun_late", "sky#sun_dawn", "grandma#chest", "sophia#chest", "papa#chest"],
- "offers": ["stump#seat", "trunk#palm", "trunk#branch", "crevice#pack", "moss#beetle", "animals#seal", "path#stone1", "path#stone2", "path#stone3", "grandma#chest", "sophia#chest", "papa#chest"],
- "party": {"dawn": 0, "dusk": 0, "night": 0, "late": 0, "calm": 0, "storm": 0, "flash": 0, "fog": 0, "moon": 1, "animals": 4, "pack": "none", "band": 0, "boat_out": false, "brave": false, "sophia_back": false, "grandma_here": true, "sophia_here": true, "papa_here": false},
- "acts": {"flash": {"values": [], "tells": ["flash:strike"]}, "knife_open": {"values": [], "tells": []}, "carve": {"values": [], "tells": []}, "spin": {"values": [], "tells": []}, "step": {"values": [], "tells": ["step:stone1", "step:stone2", "step:stone3"]}, "lantern_sway": {"values": [], "tells": []}, "grab": {"values": [false, true], "tells": []}}}
+ "points": ["stump#seat", "trunk#palm", "trunk#branch", "crevice#pack", "moss#beetle", "animals#seal", "animals#animals", "path#stone1", "path#stone2", "path#stone3", "far_boat#lamp", "sky#sun", "sky#sun_late", "sky#sun_dawn", "grandma#chest", "sophia#chest", "papa#chest", "knife#blade", "knife#wood"],
+ "offers": ["stump#seat", "trunk#palm", "trunk#branch", "crevice#pack", "moss#beetle", "animals#seal", "path#stone1", "path#stone2", "path#stone3", "grandma#chest", "sophia#chest", "papa#chest", "knife#blade", "knife#wood"],
+ "party": {"dawn": 0, "dusk": 0, "night": 0, "late": 0, "calm": 0, "storm": 0, "flash": 0, "fog": 0, "moon": 1, "animals": 4, "pack": "none", "band": 0, "boat_out": false, "brave": false, "sophia_back": false, "grandma_here": true, "sophia_here": true, "papa_here": false, "flipper": false},
+ "acts": {"flash": {"values": [], "tells": ["flash:strike"]}, "knife_open": {"values": [], "tells": []}, "carve": {"values": [], "tells": []}, "spin": {"values": [], "tells": []}, "step": {"values": [], "tells": ["step:stone1", "step:stone2", "step:stone3"]}, "lantern_sway": {"values": [], "tells": []}, "grab": {"values": [false, true], "tells": []}, "knife_flaw": {"values": [0, 1], "tells": []}}}
 ```

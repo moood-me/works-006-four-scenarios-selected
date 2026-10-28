@@ -41,7 +41,7 @@ def on_tent(x, d):
     return [round(TENT[0] - math.cos(F) * x - math.sin(F) * d, 3), round(TENT[1] + math.sin(F) * x - math.cos(F) * d, 3)]
 
 
-SEATS = [[-1.6, 9.6], on_tent(-1.05, 1.6), [-0.85, 5.75]]
+SEATS = [[-1.6, 9.6], on_tent(-1.05, 1.6), [-0.85, 5.75], [-3.0, 11.15]]
 LEDGE = [3.35, 9.2]
 # the people's and the cat's first places (lib.PLACES, lib.CAT): Grandmother and Sophia as approved; Papa by the tent
 FIRST = {"grandma": ("stand", [-0.4, 4.4], 160), "sophia": ("tent", [1.4, 5.6], 200), "papa": ("by", on_tent(-1.6, -0.9), FACING - 180 + 150)}
@@ -82,7 +82,8 @@ objects = [
     {"id": "seat", "name": "Low stones to sit on", "across": SEATS[0][0], "distance": SEATS[0][1], "box": [-1.2, -0.45, 1.2, 0], "shadow": True,
      "copies": [{"across": SEATS[0][0], "distance": SEATS[0][1], "elevation": -0.1},
                 {"across": SEATS[1][0], "distance": SEATS[1][1], "elevation": -0.1, "flip": True},
-                {"across": SEATS[2][0], "distance": SEATS[2][1], "elevation": -0.1, "scale": 0.9}]},
+                {"across": SEATS[2][0], "distance": SEATS[2][1], "elevation": -0.1, "scale": 0.9},
+                {"across": SEATS[3][0], "distance": SEATS[3][1], "elevation": -0.1, "scale": 0.85, "flip": True}]},
     {"id": "ledge", "name": "The crevice and its ledge", "across": LEDGE[0], "distance": LEDGE[1], "onLand": False, "elevation": WATER - 0.08, "facing": 114,
      "height": 0.55, "box": [-0.56, -0.6, 0.56, 0.06]},
     {"id": "tent", "name": "Sophia's tent", "unseen": True, "across": TENT[0], "distance": TENT[1], "facing": FACING, "place": {"tilt": "tent_tilt"}},
@@ -117,19 +118,21 @@ objects = [
     {"id": "papa", "name": "Papa", "person": {"cast": "cast", "who": "papa", "turn": FIRST["papa"][2]},
      "across": FIRST["papa"][1][0], "distance": FIRST["papa"][1][1], "place": {"across": "papa_a", "distance": "papa_d"}},
     isle.RAIN,
+    # the knock minigame's close-up (the world's closeups, modules/closeups.md): opened by `palm_open`
+    {"id": "palm", "name": "Her palm by the glowing canvas, close", "insert": "palm_open"},
 ]
 
 lights = isle.lights(("sky#sun", "#ffefd8", 1.3), ("sky#sun_late", "#ffe2b8", 1.25), ("sky#sun_dawn", "#ffeedd", 1.0),
                      ([300, 5], "#f3d6c6", 0.5), ([205, 38], "#c4d2f2", 0.8), [30, 30]) + [
     {"id": "candle", "of": "lantern#flame", "color": "#ffc27a", "strength": 2.6, "reach": 3.5, "on": "candle", "flicker": 0.15},
     {"id": "window", "of": "far_window#window", "color": "#ffcf88", "strength": 1, "reach": 3, "on": "window"},
-    {"id": "hand_lamp", "at": "grandma#hand_r", "color": "#ffc98a", "strength": 1.1, "reach": 3.5, "on": "lamp_lit", "flicker": 0.12}]
+    {"id": "hand_lamp", "at": "grandma#flame", "color": "#ffc98a", "strength": 1.1, "reach": 3.5, "on": "lamp_lit", "flicker": 0.12}]
 
 # the empty play: a June day on the cape, the tent standing, Grandmother and Sophia where the approved look has them,
 # Papa and the cat not here, the candle and the window out
 state = {**isle.STATE,
          "candle": 0, "window": 0, "tent": "up", "lean": 0, "tent_tilt": 0, "flap": "open", "shawl": "none", "stones": False, "stones_laid": 0, "from": "land",
-         "knocks": False, "lamp_hand": True, "weak": False, "sophia_night": "whisper", "step": 0, "lantern_dip": 0, "lamp_lit": 0,
+         "knocks": False, "lamp_hand": True, "weak": False, "sophia_night": "whisper", "step": 0, "lantern_dip": 0, "lamp_lit": 0, "rest": False, "palm_open": 0, "palm_near": 0.6,
          "grandma_at": "stand", "sophia_at": "tent", "papa_at": "by", "papa_here": False,
          "grandma_a": FIRST["grandma"][1][0], "grandma_d": FIRST["grandma"][1][1], "sophia_a": FIRST["sophia"][1][0], "sophia_d": FIRST["sophia"][1][1],
          "papa_a": FIRST["papa"][1][0], "papa_d": FIRST["papa"][1][1],
@@ -163,6 +166,9 @@ states = {**isle.STATES,
           "step": {"range": [0, 3], "means": "the fog and dark minigames: the stone of the path Grandmother walks to (1…3), at her pace; step:stone<n> told on arrival"},
           "lantern_dip": {"range": [0, 1], "smooth": True, "means": "the fog minigame's flaw: the lantern in her hand guttering (0 alight … 1 nearly out)"},
           "lamp_lit": {"range": [0, 1], "smooth": True, "means": "the scene's own: Grandmother's lantern alight in her hand (from grandma_with and lantern_dip)"},
+          "rest": {"type": "boolean", "means": "the fog and dark minigames (during fog_way): true — Grandmother sits down where she stands (by the first stone on its low stone, at the second on the halfway stone seat:0); false — she gets up and goes on, back on the stone"},
+          "palm_open": {"range": [0, 1], "smooth": True, "means": "М10г «knock»: the close-up of her palm by the tent's canvas open (0 closed … 1 open)"},
+          "palm_near": {"range": [0, 1], "smooth": True, "means": "the palm close-up: how near her palm is to the canvas (1 touching it)"},
           "beat": {"type": "string", "means": "the piece playing (the module beats; the game names it, notes.md «Pieces»)"},
           "beat_next": {"type": "string", "means": "the piece the game goes to next (its cut made ready)"},
           "from": {"values": ["land", "sea", "side"], "means": "where the camera is (a cut): on the rock as the scene starts; out on the water, looking back at the cape (the tent's back, the crevice and its ledge); up the path on the left, looking across the tent to the sea (whoever sits behind it)"},
@@ -186,7 +192,7 @@ spec = {
     "camera": {"mode": "picture"},
     "light": light,
     "lights": lights,
-    "modules": ["cast", "isle", "cat", "beats"],
+    "modules": ["cast", "isle", "cat", "beats", "closeups"],
     "state": state,
     "states": states,
     "objects": objects,

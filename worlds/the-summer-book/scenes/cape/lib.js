@@ -89,8 +89,9 @@ const onTent = (x, d) => [TENT.at[0] - Math.cos(F) * x - Math.sin(F) * d, TENT.a
 const tentTurn = t => TENT.facing - 180 + t;
 
 // the seats (the `seat` element's copies): a low stone halfway down the path, one behind the tent by its far corner (its
-// back stands at the water's edge), and one by the last stone of the path (where she rests, weak, on her way down)
-const SEATS = { half: [-1.6, 9.6], back: onTent(-1.05, 1.6), rest: [-0.85, 5.75] };
+// back stands at the water's edge), one by the last stone of the path (where she rests, weak, on her way down) and one
+// by the first (where she sits down in the dark minigame, `rest`)
+const SEATS = { half: [-1.6, 9.6], back: onTent(-1.05, 1.6), rest: [-0.85, 5.75], first: [-3.0, 11.15] };
 const SEAT_TOP = 0.32; // (0.42 high, sunk 0.1 into the rock)
 const seat = k => [SEATS[k][0], SEATS[k][1], SEAT_TOP];
 const DEG = 180 / Math.PI;
@@ -119,7 +120,8 @@ const PLACES = {
     rest: { at: SEATS.rest, turn: face(SEATS.rest, TENT.at), look: 'tent', do: 'sit_stone', on: seat('rest') },
     half: { at: SEATS.half, turn: 140, look: 'tent', do: 'sit_stone', on: seat('half') },
     door: { at: onTent(-0.5, -0.5), turn: tentTurn(45), look: 'tent_front#door' },
-    inside: { at: onTent(-0.32, 0.9), turn: tentTurn(180), look: 'sophia', do: 'sit_ground' },
+    // (in the tent the floor's edge is a low seat: not on the ground — the long skirt, cast.md)
+    inside: { at: onTent(-0.32, 0.9), turn: tentTurn(180), look: 'sophia', do: 'sit_stone', on: [...onTent(-0.32, 0.9), 0.22] },
     behind: { at: SEATS.back, turn: tentTurn(59), look: 'tent_back#palm', do: 'sit_stone', on: seat('back') },
   },
   sophia: {
@@ -370,7 +372,7 @@ const FILM = {
       await s.wait(1);
       s.tell('law:lantern');
       await s.all(goTo(s, 'grandma', 'stand'), goTo(s, 'sophia', 'tent'), down);
-      await papa.do('set_down');
+      await papa.do('put_down');
       papa.with(null);
       s.move('candle', 1, { over: 2, ease: 'out' });
       await goTo(s, 'papa', 'by');
@@ -558,7 +560,7 @@ const FILM = {
       glideTo(s, SHOTS.door, 3);
       await goTo(s, 'grandma', 'door');
       if (knocks) gm.reach({ r: 'tent_front#door' });
-      const knock = gm.do(knocks ? 'knock' : 'stoop');
+      const knock = gm.do(knocks ? 'knock' : 'put_down');
       s.tell('knock_in:knock');
       await knock;
       gm.reach(null);
@@ -582,7 +584,7 @@ const FILM = {
       glideTo(s, SHOTS.in_tent, 3);
       gm.with(null);
       await s.all(goTo(s, 'sophia', 'lie', [], { rise: 'get_up', sit: 'lie_down' }), (async () => {
-        await gm.do('stoop');
+        await gm.do('put_down');
         await goTo(s, 'grandma', 'inside', [onTent(-0.1, -0.3), onTent(-0.15, 0.3)], { sit: 'sit_down' });
       })());
       so.reach({ l: 'grandma#hand_r' });
@@ -942,13 +944,13 @@ const FILM = {
       papa.reach(null);
       s.tell('weigh:let');
       await s.wait(1);
-      papa.do('lay_stones', { loop: true });
+      papa.do('crouch', { loop: true });
       papa.look('stones_front');
       await s.move('stones_laid', 0.3, { over: 3 });
       s.set('papa_do', null);
       await papa.walk([onTent(1.15, 0.35)]);
       await papa.turn(tentTurn(270));
-      papa.do('lay_stones', { loop: true });
+      papa.do('crouch', { loop: true });
       papa.look('stones_side');
       await s.move('stones_laid', 1, { over: 5 });
       s.set('stones', true);

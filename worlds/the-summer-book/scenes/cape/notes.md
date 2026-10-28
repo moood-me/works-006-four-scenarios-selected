@@ -10,8 +10,9 @@ moonlit night) with `fog: 0.5`, Grandmother and Sophia at their first places —
 - **The land** is `lib.ground` (relief.js): `coast(z)` the line of the rock, `shore(z)` where the sea meets it, `edge`
   the waterline. `rock` paints the granite (the island's) and the cape's own moss and grass inland (burnt in August:
   `late`). `path` — the wet stones coming down from the island (`path#stone1` the highest, `#stone2`, `#stone3`);
-  `seat` — two low stones to sit on (halfway down the path, and behind the tent by its far corner: the tent's back
-  stands at the water's edge).
+  `seat` — low stones to sit on: `seat:0` halfway down the path (by `stone2`), `seat:1` behind the tent by its far
+  corner (the tent's back stands at the water's edge), `seat:2` by the last stone, `seat:3` by the first (behind it,
+  for the dark minigame's `rest`).
 - **The tent** is cards and planes on the unseen anchor `tent` (facing 215; `lib.onTent(across, distance)` — a point of
   its frame in the world's): `tent_front`, `tent_back`, the two roof slopes, `tent_floor` (Sophia's blanket), the
   candle `lantern` at its back, `peg` (the front guy rope and its peg), `stones_side`/`stones_front` (the stones round
@@ -38,6 +39,13 @@ moonlit night) with `fog: 0.5`, Grandmother and Sophia at their first places —
   the peg, the last morning), path (on the highest stone). Papa is not here in the empty play.
 - **The cat** (the world's `cat`): `cat_at` (tent · door · rock: `lib.CAT`), `cat_pose` (sit · lie · walk · none — not
   here, the empty play). Walking, a new `cat_at` sends him there at his pace (`cat:arrived` told).
+- **The knock minigame's close-up** (the world's `closeups`, `modules/closeups.md`): the insert `palm` (`palm_open`;
+  `palm_near` 0…1 — the palm's nearness to the canvas, 0.6 at rest, 1 touching; the point `palm#palm`), painted once
+  by the module (`elements/palm.js`), its animate the module's `live`.
+- **The dark minigame's `rest`** (during `fog_way`, the script): true — Grandmother sits down where she stands, on the
+  low stone by it (`stone1` → `seat:3`, `stone2` → `seat:0`, `stone3` → `seat:2`: a few steps, `sit_down`, `sit_stone`);
+  false — she gets up (`rise_slow`) and is back on the stone, facing on down the path. A newer `rest` or `step` takes
+  over whatever of it is still going.
 - **The camera** (`from`, a cut): `land` — the scene's own; `sea` — out on the water to the right looking back at the
   cape (the tent's back, the crevice, the ledge); `side` — up the path on the left, across the tent to the sea (whoever
   sits behind it).
@@ -119,7 +127,8 @@ The rules every piece keeps (review-stage5.md of «Папа и море»):
 Places (`<id>_at`, lib.PLACES; the pieces'): Grandmother `stand`, `top` (up the path behind the big boulder, out of
 sight — where everyone comes from and goes to), `pole`, `stone1…3`, `rest` (sitting on the low stone by `stone3`,
 `seat:2`), `half` (sitting on the halfway stone, `seat:0`, beside `stone2`), `door`, `inside` (in the tent beside
-Sophia, her knees under the blanket), `behind` (sitting on `seat:1`); Sophia `parcel` (kneeling by it), `tent`, `tie`,
+Sophia, her knees under the blanket — sitting on the floor's edge as on a low seat, 0.22 m: not on the ground, the
+long skirt, cast.md), `behind` (sitting on `seat:1`); Sophia `parcel` (kneeling by it), `tent`, `tie`,
 `pet` (crouched by the cat), `door` (sitting at the door, `hug_knees`), `lie` (lying inside the door), `inside`, `path`,
 `by_half` (standing by Grandmother on the halfway stone), `half` (sitting on the rock beside her), `top`; Papa `top`,
 `path`, `by`, `lamp` (stooping at the door to set the lantern in), `mother` (beside Grandmother's `stand`), `peg`
@@ -140,8 +149,9 @@ Grandmother, `tent_shot` and `shawl_shot` nobody. A piece puts whom it does not 
   its seat, the place's keys set as they arrive); `goUp` — up the path behind the boulder, gone; `catTo` — the cat
   walks; `SHOWFILM` — the pieces with the play's keys the showcase gives them (`SHOW`).
 - `script.js`: the places, the cat, `lean` → the tent's tilt, Grandmother's lantern light (`lamp_lit` from
-  `grandma_with` and `lantern_dip`: the light `hand_lamp` at her hand), the minigames' `step` (during `fog_way` she
-  walks to that stone at her pace, `step:stone<n>` told on arrival), `from` for stills, `beats.play`.
+  `grandma_with` and `lantern_dip`: the light `hand_lamp` at the lantern's flame, `grandma#flame`), the minigames'
+  `step` (during `fog_way` she walks to that stone at her pace, `step:stone<n>` told on arrival) and `rest` (above),
+  `from` for stills, `beats.play`.
 - What changes inside a piece is painted once: the parcel, the pole, the shawl on the ledge and the stones round the
   tent are layers their animates show (`tent`, `shawl`, `stones` / `stones_laid` — laid one by one); the standing
   tent (`tent` up) and its door (`flap`) change on ready cuts (`law` opens on the tent standing; `knock_in` and `found`
@@ -156,9 +166,13 @@ Grandmother, `tent_shot` and `shawl_shot` nobody. A piece puts whom it does not 
   (`step:stone1…3` on arrival; the walk is the scene's, only during `fog_way`); flawed — `lantern_dip` (0…1: the
   lantern's light guttering). For «go» at strength ≤ 1 the walk ends at `stone2` (`sit_half` follows); otherwise at
   `stone3`.
-- The knock minigame (М10г): the insert of the palm at the canvas (`palm_open`; package Л — the insert element and its
-  key come with the closeups); its point `tent_back#palm`.
-- **Wanted from package Л** (the names the code uses; until they are made the people stand, and the render warns):
+- The dark minigame (М10а without the lantern): `rest` (true · false, above) — sat down after a slip, and at `stone2`
+  to get her breath when weak.
+- The knock minigame (М10г): the insert `palm` (`palm_open`, `palm_near`; the point `palm#palm`, above); `alone_talk`
+  ends in its pose at `tent_back#palm` and opens nothing.
+- **From package Л** (`modules/cast.md`, in: the names below are the cast's now — `stoop` and `set_down` are its
+  `put_down`, `lay_stones` its `crouch` (a loop), Grandmother in the tent `sit_stone` on a low seat, not `sit_ground`;
+  the motions still «to make» stand in — the people stand, the render warns). Asked for:
   Grandmother — the gait `old_walk` (always hers), `hold_pole` (loop, both hands on the pole), `sit_down` (onto a low
   stone, once), `sit_stone` (have), `sit_ground` (in the tent), `rise_slow`, `try_rise` (tries to get up, sinks back),
   `catch_breath` (standing, once), `sway` (dizzy, once), `knock` (three knocks on the canvas, once), `stoop` (once),
@@ -175,10 +189,10 @@ Grandmother, `tent_shot` and `shawl_shot` nobody. A piece puts whom it does not 
 
 ```json
 {"beats": {"pitch": {"after": [], "tells": ["pitch:cape", "pitch:pole"], "seconds": 10, "show": false}, "law": {"after": ["pitch"], "tells": ["law:lantern", "law:law", "law:window", "law:yours"], "seconds": 18, "show": false}, "up_path": {"after": ["law", "cat_comes"], "tells": ["up_path:gone"], "seconds": 6, "show": false}, "doctor": {"after": ["law", "cat_comes"], "tells": ["doctor:say", "doctor:gone"], "seconds": 12, "show": false}, "cat_comes": {"after": ["law"], "tells": ["cat_comes:sit", "cat_comes:gone"], "seconds": 12, "show": false}, "goodnight": {"after": ["up_path"], "tells": ["goodnight:door"], "seconds": 6, "show": false}, "sleeve": {"after": ["goodnight"], "tells": ["sleeve:turn", "sleeve:catch"], "seconds": 9, "show": false}, "leave": {"after": ["goodnight", "sleeve"], "tells": ["leave:gone"], "seconds": 8, "show": false}, "no_wave": {"after": ["goodnight"], "tells": ["no_wave:back"], "seconds": 10, "show": false}, "candle_out": {"after": [], "tells": ["candle_out:glow", "candle_out:fog", "candle_out:out"], "seconds": 12, "show": true}, "fog_way": {"after": [], "tells": ["fog_way:stone"], "seconds": 7, "show": false}, "knock_in": {"after": ["fog_way"], "tells": ["knock_in:knock", "knock_in:open"], "seconds": 10, "show": false}, "in_tent": {"after": ["knock_in"], "tells": ["in_tent:hand", "in_tent:dawn"], "seconds": 16, "show": false}, "fetch": {"after": ["in_tent"], "tells": ["fetch:cant", "fetch:run", "fetch:papa", "fetch:home"], "seconds": 20, "show": false}, "sit_half": {"after": ["fog_way"], "tells": ["sit_half:spin", "sit_half:shout"], "seconds": 8, "show": false}, "found": {"after": ["sit_half"], "tells": ["found:out", "found:found"], "seconds": 12, "show": false}, "turn_home": {"after": ["found"], "tells": ["turn_home:turn", "turn_home:caught", "turn_home:sat"], "seconds": 10, "show": false}, "till_dawn": {"after": ["found", "turn_home"], "tells": ["till_dawn:talk", "till_dawn:dawn"], "seconds": 14, "show": false}, "papa_finds": {"after": ["till_dawn"], "tells": ["papa_finds:come", "papa_finds:found", "papa_finds:home"], "seconds": 16, "show": false}, "flap_moon": {"after": [], "tells": ["flap_moon:window", "flap_moon:night", "flap_moon:down"], "seconds": 14, "show": false}, "cat_fog": {"after": ["flap_moon", "behind_sit"], "tells": ["cat_fog:lie"], "seconds": 8, "show": false}, "out_of_white": {"after": [], "tells": ["out_of_white:thin", "out_of_white:meet"], "seconds": 10, "show": false}, "behind_sit": {"after": ["fog_way"], "tells": ["behind_sit:rest", "behind_sit:sat", "behind_sit:quiet"], "seconds": 12, "show": false}, "alone_talk": {"after": ["behind_sit", "cat_fog"], "tells": ["alone_talk:talk", "alone_talk:mama", "alone_talk:three"], "seconds": 12, "show": false}, "before_dawn": {"after": ["alone_talk"], "tells": ["before_dawn:up", "before_dawn:shawl", "before_dawn:gone"], "seconds": 14, "show": false}, "peg": {"after": [], "tells": ["peg:peg", "peg:mine", "peg:palm"], "seconds": 12, "show": false}, "weigh": {"after": ["peg"], "tells": ["weigh:let", "weigh:stones", "weigh:winter"], "seconds": 14, "show": false}, "tent_shot": {"after": [], "tells": ["tent_shot:flap", "tent_shot:white"], "seconds": 9, "show": false}, "shawl_shot": {"after": [], "tells": ["shawl_shot:patch", "shawl_shot:white"], "seconds": 9, "show": false}},
- "points": ["tent_front#door", "tent_back#palm", "path#stone1", "path#stone2", "path#stone3", "peg#peg", "ledge#shawl", "pole#grip", "pole#top", "parcel#parcel", "seat:0#seat", "seat:1#seat", "lantern", "far_window#window", "cat#cat", "cat#back", "sky#sun", "sky#sun_late", "sky#sun_dawn", "grandma#chest", "sophia#chest", "papa#chest"],
- "offers": ["tent_front#door", "tent_back#palm", "path#stone1", "path#stone2", "path#stone3", "peg#peg", "ledge#shawl", "pole#grip", "parcel#parcel", "cat#back", "far_window#window", "grandma#chest", "sophia#chest", "papa#chest"],
+ "points": ["tent_front#door", "tent_back#palm", "path#stone1", "path#stone2", "path#stone3", "peg#peg", "ledge#shawl", "pole#grip", "pole#top", "parcel#parcel", "seat:0#seat", "seat:1#seat", "lantern", "far_window#window", "cat#cat", "cat#back", "sky#sun", "sky#sun_late", "sky#sun_dawn", "grandma#chest", "sophia#chest", "papa#chest", "palm#palm"],
+ "offers": ["tent_front#door", "tent_back#palm", "path#stone1", "path#stone2", "path#stone3", "peg#peg", "ledge#shawl", "pole#grip", "parcel#parcel", "cat#back", "far_window#window", "grandma#chest", "sophia#chest", "papa#chest", "palm#palm"],
  "party": {"dawn": 0, "dusk": 0, "night": 0, "late": 0, "calm": 0, "storm": 0, "flash": 0, "fog": 0, "moon": 1, "lean": 0, "shawl": "none", "stones": false, "knocks": false, "lamp_hand": true, "weak": false, "sophia_night": "whisper", "grandma_here": true, "sophia_here": true, "papa_here": false},
- "acts": {"flash": {"values": [], "tells": ["flash:strike"]}, "cat_at": {"values": [], "tells": ["cat:arrived"]}, "tent": {"values": ["pole", "up"], "tells": []}, "lean": {"values": [], "tells": []}, "step": {"values": [], "tells": ["step:stone1", "step:stone2", "step:stone3"]}, "lantern_dip": {"values": [], "tells": []}, "palm_open": {"values": [], "tells": []}}}
+ "acts": {"flash": {"values": [], "tells": ["flash:strike"]}, "cat_at": {"values": [], "tells": ["cat:arrived"]}, "tent": {"values": ["pole", "up"], "tells": []}, "lean": {"values": [], "tells": []}, "step": {"values": [], "tells": ["step:stone1", "step:stone2", "step:stone3"]}, "lantern_dip": {"values": [], "tells": []}, "palm_open": {"values": [], "tells": []}, "palm_near": {"values": [], "tells": []}, "rest": {"values": [false, true], "tells": []}}}
 ```
 
 Against the plan's names: `ledge#shawl` is the crevice's (its element is `ledge`); `flap` is `open` · `shut` (a door

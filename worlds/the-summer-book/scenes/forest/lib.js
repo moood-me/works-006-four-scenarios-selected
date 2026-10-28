@@ -287,8 +287,12 @@ const FILM = {
       await s.wait(1.5);
       gm.reach({ r: 'trunk#palm' });
       gm.look(null);
+      // her eyes closed (the engine's expression), the game's face again after
+      const mood = s.get('grandma_mood');
+      gm.mood('eyes_closed');
       s.tell('trunk:still');
       await s.wait(3);
+      gm.mood(mood ?? 'neutral');
       glideTo(s, SHOTS.animals, 3);
       await goTo(s, 'grandma', 'stump', [], { sit: 'sit_down' });
       gm.do('carve', { loop: true });

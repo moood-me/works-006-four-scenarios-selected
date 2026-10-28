@@ -175,6 +175,11 @@ objects = [
      "distance": 4.384, "place": {"across": "grandma_a", "distance": "grandma_d"}},
     {"id": "sophia", "name": "Sophia", "person": {"cast": "cast", "who": "sophia", "turn": 190}, "across": 0.39,
      "distance": 3.606, "place": {"across": "sophia_a", "distance": "sophia_d"}},
+
+    # the minigames' close-ups (the world's closeups, modules/closeups.md): each opened by its `<shot>_open`
+    {"id": "gap", "name": "The gap between the beds, close", "insert": "gap_open"},
+    {"id": "breast", "name": "Sophia's palm on her breast, close", "insert": "breast_open"},
+    {"id": "sleeve", "name": "Sophia's fingers on the sleeve, close", "insert": "sleeve_open"},
 ]
 
 # the light: the island's (the day as approved; the looks by the hour and the weather), the room's share of the light
@@ -194,13 +199,14 @@ lights += [
     # the day (or the night) at the veranda's glazing and at the room's window
     {"id": "sky_in", "of": "glazing", "daylight": True, "strength": 1},
     {"id": "win_in", "of": "room_window", "daylight": True, "strength": 0.7},
-    # Grandmother's lamp; Sophia's candle in her hand; Papa's lantern out in the night (the tent's candle is its glow)
+    # Grandmother's lamp; Sophia's candle in her hand (the cast's part: the light at its flame); Papa's lantern out in the night (the tent's candle is its glow)
     {"id": "lamp", "of": "lamp#flame", "color": "#ffcf8e", "strength": 1.2, "reach": 3.5, "flicker": 0.06},
-    {"id": "candle", "at": "sophia#hand_r", "color": "#ffc98a", "strength": 1.1, "reach": 3, "on": "candle", "flicker": 0.15},
+    {"id": "candle", "at": "sophia#flame", "color": "#ffc98a", "strength": 1.1, "reach": 3, "on": "candle", "flicker": 0.15},
     {"id": "far_lantern", "of": "far_lantern#flame", "color": "#ffd08e", "strength": 1.6, "reach": 6},
-    # the storm lantern in Grandmother's hand, Papa's big lantern in his (the lanterns themselves are the people's parts)
-    {"id": "grandma_lantern", "at": "grandma#hand_r", "color": "#ffd08e", "strength": 1.3, "reach": 5, "on": "grandma_lantern", "flicker": 0.1},
-    {"id": "papa_lantern", "at": "papa#hand_r", "color": "#ffd08e", "strength": 1.5, "reach": 6, "on": "papa_lantern", "flicker": 0.1},
+    # the storm lantern in Grandmother's hand, Papa's big lantern in his (the lanterns themselves are the people's parts:
+    # the lights at their flames)
+    {"id": "grandma_lantern", "at": "grandma#flame", "color": "#ffd08e", "strength": 1.3, "reach": 5, "on": "grandma_lantern", "flicker": 0.1},
+    {"id": "papa_lantern", "at": "papa#flame", "color": "#ffd08e", "strength": 1.5, "reach": 6, "on": "papa_lantern", "flicker": 0.1},
 ]
 
 # the keys: the island's, the play's (the game sets them) and the house's own (its pieces move them); where they start is
@@ -224,6 +230,7 @@ states.update({
     "knew": {"type": "boolean", "means": "Papa knows (from the forest): at dawn he looks at the burnt-out lamp, sets the drops by her"},
     "sophia_knows": {"type": "boolean", "means": "«Sophia knows»: at dawn Sophia raises herself on her bed («I didn't tell…»)"},
     "wall": {"type": "boolean", "means": "«behind»: Sophia called — she lies down face to the wall (else she only says it)"},
+    "slips": {"type": "boolean", "means": "М5а «palm» / М5б «hand» flawed: Sophia does not come at once — she waits, looks, then comes (gone_near, sky_morning)"},
     # the house's own
     "bird": {"type": "boolean", "means": "a dead bird on Sophia's pillow"},
     "lamp": {"values": ["none", "table", "window", "burnt", "bed"], "means": "Grandmother's lamp: not in the room · on the night table · in the window · burnt out in the window (the chimney sooted) · under the blanket on Grandmother's bed"},
@@ -247,6 +254,14 @@ states.update({
     "papa_lantern": {"range": [0, 1], "smooth": True, "means": "Papa's big lantern alight in his hand"},
     "cot_carried": {"type": "boolean", "means": "the camp bed carried before Papa"},
     "cat_pose": {"values": ["sit", "lie", "walk", "none"], "means": "the cat (modules/cat): sitting · lying · walking · not here"},
+    # the minigames' close-ups (modules/closeups.md)
+    "gap_open": {"range": [0, 1], "smooth": True, "means": "М5а «palm», М5б «hand»: the close-up of the gap between the beds open (0 closed … 1 open)"},
+    "gap_palm": {"range": [0, 1], "smooth": True, "means": "the gap close-up: Grandmother's palm lying open on the blanket (0 taken away … 1 there)"},
+    "gap_hand": {"range": [0, 1], "smooth": True, "means": "the gap close-up: Sophia's hand come over the gap into Grandmother's (0 not yet … 1 in hers)"},
+    "breast_open": {"range": [0, 1], "smooth": True, "means": "М7б «still»: the close-up of Sophia's palm on Grandmother's breast open"},
+    "breast_flicker": {"range": [0, 1], "smooth": True, "means": "the breast close-up: the candle's flame stirring (0 still)"},
+    "sleeve_open": {"range": [0, 1], "smooth": True, "means": "М8в «sleeve»: the close-up of Sophia's fingers on Grandmother's sleeve open"},
+    "sleeve_let": {"range": [0, 1], "smooth": True, "means": "the sleeve close-up: the fingers open and let go (0 holding … 1 gone)"},
     "cat_dir": {"values": [1, -1], "means": "the cat faces right (1, as painted) or left"},
 })
 for k, m in [("cat_x", "the cat's place (the house's frame)"), ("cat_z", "the cat's place"), ("cat_y", "the cat's height over the floor"),
@@ -264,6 +279,7 @@ for who in ("grandma", "sophia", "papa"):
 
 state = {**isle.STATE, "hat": "nail", "teabox": False, "drops": "none", "cot": "veranda", "papa_watch": False, "secret": False, "cat": False,
          "take_lantern": True, "sophia_hand": False, "kick": False, "hold_hand": False, "knew": False, "sophia_knows": False, "wall": False,
+         "slips": False, "gap_open": 0, "gap_palm": 1, "gap_hand": 0, "breast_open": 0, "breast_flicker": 0, "sleeve_open": 0, "sleeve_let": 0,
          "bird": False, "lamp": "table", "lamp_lit": 0, "lamp_up": 0, "supper": False, "packed": False, "candle": 0, "casement": 0, "creak": 0,
          "tent_light": 0, "far_light": 0, "far_light_at": 0, "under": 0, "cover": 1, "cup": False, "tilt": 0, "drops_at": "sill",
          "storm_lantern": True, "grandma_lantern": 0, "papa_lantern": 0, "cot_carried": False, "cat_pose": "none", "cat_dir": 1,
@@ -284,7 +300,7 @@ spec = {
     "camera": {"mode": "picture"},
     "light": light,
     "lights": lights,
-    "modules": ["cast", "isle", "beats", "cat"],
+    "modules": ["cast", "isle", "beats", "cat", "closeups"],
     "state": state,
     "states": states,
     "objects": objects,

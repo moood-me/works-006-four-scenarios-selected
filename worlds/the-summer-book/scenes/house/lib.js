@@ -214,7 +214,7 @@ const GAIT = { grandma: 'old_walk', sophia: null, papa: null };
 // the step's hour and weather (the showcase's: the game sets them), and the play's keys as the empty play has them
 const HOUR = { dawn: 0, dusk: 0, night: 0, late: 0, calm: 0, storm: 0, flash: 0, fog: 0, moon: 1 };
 const PLAY = { hat: 'nail', teabox: false, drops: 'none', cot: 'veranda', papa_watch: false, secret: false, cat: false, take_lantern: true,
-  sophia_hand: false, kick: false, hold_hand: false, knew: false, sophia_knows: false, wall: false };
+  sophia_hand: false, kick: false, hold_hand: false, knew: false, sophia_knows: false, wall: false, slips: false };
 // the house's own keys at rest: what a piece moves begins from here (the things, the lights, the doors, the cat)
 const REST = { bird: false, lamp: 'table', lamp_lit: 0, lamp_up: 0, supper: false, packed: false, candle: 0, casement: 0, creak: 0,
   tent_light: 0, far_light: 0, far_light_at: 0, under: 0, cover: 1, cup: false, tilt: 0, drops_at: 'sill', storm_lantern: true,
@@ -263,6 +263,16 @@ function film(scene, show = false) {
     p.on(W3(x, z, top));
     if (how) await p.do(how);
     p.do(loop, { loop: true });
+  }
+  // moved along a bed seated (the cast's way: no motion — a seated loop slid there without steps), then sat on its
+  // place there, facing as it says
+  async function shift(s, id, place, loop = 'seated') {
+    const [[x, z, top], [tx, tz]] = PL[place], p = P(s, id);
+    p.do(loop, { loop: true });
+    p.on(null);
+    await p.walk([pt([x, z])], { steps: false });
+    p.on(W3(x, z, top));
+    await p.turn(TURN(x, z, tx, tz));
   }
   // a moment the game speaks on: told, then held for its line
   const moment = async (s, name, hold = 2.5) => {
@@ -369,7 +379,7 @@ function film(scene, show = false) {
         if (s.get('secret')) P(s, 'sophia').look('grandma');
         else {
           P(s, 'sophia').look(W3(0.6, -1.15, 0.75));
-          P(s, 'papa').do('chew', { loop: true });
+          P(s, 'papa').do('eat', { loop: true });
         }
         await moment(s, 'supper_table:look', 3);
       },
@@ -450,7 +460,7 @@ function film(scene, show = false) {
         { bird: true }, CATAT('pillow', 'sit', -1), CAMS.pillow),
       run: async s => {
         const grandma = P(s, 'grandma'), sophia = P(s, 'sophia');
-        await inBed(s, 'grandma', 'g_head', 'seated', 'shift');
+        await shift(s, 'grandma', 'g_head');
         grandma.look('pillow#pillow');
         grandma.reach({ r: 'pillow#pillow', l: 'pillow#pillow' });
         await s.wait(1.2);
@@ -516,13 +526,13 @@ function film(scene, show = false) {
         const back = ready(s, 'bedsL');
         await s.until(() => ver.ready);
         ver.cut();
-        await rise(s, 'papa', 'cot_lie', 'get_up_cot');
+        await rise(s, 'papa', 'cot_lie', 'get_up_bed');
         await walk(papa, SPOT.ver_mid, SPOT.out1, SPOT.out2);
         papa.here(false);
         await moment(s, 'gone:papa', 1);
         await s.until(() => back.ready);
         back.cut();
-        await inBed(s, 'grandma', 'g_edge', 'seated', 'shift');
+        await shift(s, 'grandma', 'g_edge');
         grandma.look('sophia');
         grandma.reach({ r: 'beds#gap' });
         await moment(s, 'gone:near', 2);
@@ -536,12 +546,20 @@ function film(scene, show = false) {
         CAMS.bedsL),
       run: async s => {
         const sophia = P(s, 'sophia'), grandma = P(s, 'grandma');
+        if (s.get('slips')) {
+          // (the palm taken away in М5а: she does not come at once — cries on, looks round at her, away, then comes)
+          await s.wait(2);
+          sophia.look('grandma');
+          await s.wait(1.5);
+          sophia.look(null);
+          await s.wait(1.5);
+        }
         await rise(s, 'sophia', 's_edge');
         await walk(sophia, SPOT.foot_r, SPOT.s_foot, [-1.9, 1.55]);
         grandma.reach(null);
-        await sit(s, 'sophia', 'g_near', 'lean');
+        await sit(s, 'sophia', 'g_near', 'seated');
         sophia.mood('neutral');
-        sophia.look(null);
+        sophia.look('grandma');
         grandma.reach({ r: 'sophia#back' });
         await moment(s, 'gone_near:quiet', 3);
       },
@@ -593,7 +611,7 @@ function film(scene, show = false) {
         await walk(sophia, [-0.2, 2.9], SPOT.s_side);
         await sit(s, 'sophia', 's_edge', 'seated');
         await inBed(s, 'sophia', 's_lie', 'lie_bed', 'lie_down');
-        await inBed(s, 'grandma', 'g_edge', 'seated', 'shift');
+        await shift(s, 'grandma', 'g_edge');
         grandma.reach({ r: 'sophia#hand_l' });
         sophia.reach({ l: 'grandma#hand_r' });
         await s.wait(1.5);
@@ -608,6 +626,13 @@ function film(scene, show = false) {
         sophia.reach({ r: W3(-1.0, 3.0, 0.55), l: W3(-1.0, 2.6, 0.55) });
         await sophia.do('make_bed');
         sophia.reach(null);
+        if (s.get('slips')) {
+          // (her hand let go in М5б: she does not come at once — stands by her bed, looks at her, down, then goes)
+          sophia.look('grandma');
+          await s.wait(1.5);
+          sophia.look(W3(-1.0, 2.8, 0.5));
+          await s.wait(1.5);
+        }
         await walk(sophia, SPOT.foot_r, [-1.4, 1.7]);
         await face(sophia, [-1.4, 1.7], [-1.9, 2.55]);
         sophia.look('grandma');
@@ -801,7 +826,7 @@ function film(scene, show = false) {
         await moment(s, 'storm_cot:up', 2);
         papa.look(null);
         s.set('papa_turn', TURN(4.5, -0.5, 6, -0.5));
-        await inBed(s, 'papa', 'cot_lie', 'lie_wall', 'lie_down');
+        await inBed(s, 'papa', 'cot_lie', 'lie_side', 'lie_down');
         await moment(s, 'storm_cot:wall', 2);
       },
     },
@@ -845,7 +870,7 @@ function film(scene, show = false) {
         const door = ready(s, 'door');
         await s.until(() => door.ready);
         door.cut();
-        await rise(s, 'papa', 'cot_lie', 'get_up_cot');
+        await rise(s, 'papa', 'cot_lie', 'get_up_bed');
         await walk(papa, SPOT.cot_side, [2.3, -0.9], SPOT.ver_door);
         await face(papa, SPOT.ver_door, SPOT.in_door);
         papa.look(W3(-1.9, 2.8, 0.7));
@@ -976,11 +1001,11 @@ function film(scene, show = false) {
         grandma.reach(null);
         if (s.get('take_lantern')) {
           await walk(grandma, SPOT.thr2, SPOT.hook);
-          grandma.reach({ r: W3(3.95, 1.0, 1.55) });
+          grandma.reach({ l: W3(3.95, 1.0, 1.55) });
           await s.wait(0.8);
           s.set('storm_lantern', false);
           grandma.reach(null);
-          grandma.with(['storm_lantern']);
+          grandma.with(['lantern']);
           await s.move('grandma_lantern', 1, { over: 0.8 });
           await walk(grandma, SPOT.outer);
         } else {
@@ -1008,7 +1033,7 @@ function film(scene, show = false) {
         await moment(s, 'wake:woke', 1.5);
         grandma.reach(null);
         await walk(grandma, [3.2, -1.3]);
-        await rise(s, 'papa', 'cot_lie', 'get_up_cot');
+        await rise(s, 'papa', 'cot_lie', 'get_up_bed');
         papa.with(['big_lantern']);
         await s.move('papa_lantern', 1, { over: 0.6 });
         await s.all(grandma.do('cardigan'), walk(papa, [3.2, -1.9], [2.5, -1.3]));
@@ -1141,7 +1166,7 @@ function film(scene, show = false) {
         await walk(grandma, [0.35, 3.0]);
         await grandma.do('sway');
         await moment(s, 'elbow:sway', 0.5);
-        papa.reach({ r: 'grandma#hand_l' });
+        papa.reach({ r: 'grandma#elbow_l' });
         await walk(papa, [0.75, 2.75]);
         await moment(s, 'elbow:caught', 3);
         await sit(s, 'grandma', 'chair', 'armchair');
@@ -1218,13 +1243,13 @@ function film(scene, show = false) {
         lamp_e: LAMP.burnt[2] }, CAMS.corner),
       run: async s => {
         const papa = P(s, 'papa'), grandma = P(s, 'grandma');
-        papa.with(['plaid']);
+        papa.with(['blanket_fold']);
         await to(papa, SPOT.by_chair, [1.35, 3.08]);
         papa.reach({ r: 'grandma#shoulder_r', l: 'grandma#shoulder_l' });
         await papa.do('drape');
         papa.reach(null);
         papa.with(null);
-        grandma.with(['plaid']);
+        grandma.with(['blanket']);
         await moment(s, 'chair_dawn:cover', 2.5);
         await to(papa, [0.5, 3.2], [0.4, 4.5]);
         papa.look(TENT);
