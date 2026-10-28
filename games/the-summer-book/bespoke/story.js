@@ -85,7 +85,7 @@ export function carry(folder, state) {
       sophia_hand: s.sophia <= 1, kick: c.night === 'knock', hold_hand: c.nets === 'net' && !knew, knew, sophia_knows: c.head === 'sophia',
     };
     case SCENES.forest: return {
-      animals: m.seal ? 5 : 4, pack: c.smoke !== 'quit' ? 'none' : m.someday === 'kept' ? 'taken' : 'in',
+      animals: m.seal ? 5 : 4, flipper: !!m.flipper, pack: c.smoke !== 'quit' ? 'none' : m.someday === 'kept' ? 'taken' : 'in',
       brave: s.sophia >= 3, sophia_back: c.mama === 'sky',
     };
     case SCENES.cape: return {

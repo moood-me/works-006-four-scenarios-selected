@@ -111,7 +111,8 @@ export default {
           cry: async () => g.mood('sophia', 'sad'),
           papa: async () => g.sound.door(),
         });
-        await g.play(palm);
+        // (the palm taken away: Sophia comes over late)
+        g.set('slips', (await g.play(palm)).slips > 0);
         await g.beat('gone_near');
         await g.scene(SCENES.house, { beat: 'hat_bed', here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'sad', papa: 'sad' }, keys: DAY });
         await g.beat('hat_bed');
@@ -129,10 +130,10 @@ export default {
           },
           wave: async () => g.mood('sophia', 'smile'),
         });
-        await g.play(hand);
+        const { slips } = await g.play(hand); // (let go before she slept: in the morning she comes to her late)
         await piece(g, 'sky_morning', {
           whisper: () => g.say('sophia', 'Mama sees'),
-        }, () => g.scene(SCENES.house, { beat: 'sky_morning', here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'smile', papa: 'neutral' }, keys: DAY }));
+        }, () => g.scene(SCENES.house, { beat: 'sky_morning', here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'smile', papa: 'neutral' }, keys: { ...DAY, slips: slips > 0 } }));
       } else {
         await g.beat('to_door');
         if ((await g.play(door)).creaked) g.sound.cough(); // (it creaked: Papa coughs on the veranda)
