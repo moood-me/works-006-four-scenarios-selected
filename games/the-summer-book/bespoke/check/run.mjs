@@ -11,7 +11,8 @@
 // people they name (persons of the scene, named in its contract); every key a step opens a scene with (what the play
 // has done to the place — story.js carry — and the step's own) is in the contract's party, and every key it sets is in
 // its party or acts, with a value the scene's states allow; a choice's points are in the contract's offers, a
-// minigame's point in its points or offers — a person's, only while they are there; every line is said by one of
+// minigame's points (its `points`) in its points or offers — a person's, only while they are there — and what it
+// moves (its `keys`) in its party or acts; every line is said by one of
 // people.json; a choice offered is one of the chapter's list with the same options; nothing breaks. The map (game.js):
 // its keys shown and come, a point for each chapter and the author's. At each path's end: exactly one finale was played (its title),
 // and it is the one facts gives — by the rule of the scenario (§3: the third hinge decides, full or late by the first
@@ -161,23 +162,26 @@ async function step(c, s, state, where) {
     if (choice) made.push(choice);
     return choose(choice, offers);
   };
-  g.play = (m, o) => { point(folder, atOf(m), where, present, false); return play(m, o); };
+  g.play = (m, o) => { minigame(m, where, folder, present); return play(m, o); };
   g.title = text => { titles.push(text); return title(text); };
   let broke = null;
   await Promise.race([CHAPTERS[c].steps[s](g).catch(e => { broke = e; }), j.idle]);
   if (broke) miss(`${where}: the step broke: ${broke.message}`);
   return { state: g.state, made, titles };
 }
-// (a stub's point: as stub.js was given it)
-const POINTS = new Map();
-const stubs = await load('minigames/all.js');
-for (const [name, m] of Object.entries(stubs)) {
-  const src = readFileSync(join(game, 'minigames/all.js'), 'utf8');
-  const at = new RegExp(`export const ${name} = stub\\(\\{[^]*?at: '([^']+)'`).exec(src)?.[1];
-  if (!at) miss(`minigames/all.js: “${name}” has no point`);
-  POINTS.set(m, at ?? '');
+// the mini-games (minigames/all.js): each says where its marks stand (points) and what of the scene it moves (keys)
+const GAMES = await load('minigames/all.js');
+for (const [name, m] of Object.entries(GAMES)) {
+  if (!Array.isArray(m.points)) miss(`minigames/${name}: no points`);
+  if (!Array.isArray(m.keys)) miss(`minigames/${name}: no keys`);
 }
-const atOf = m => POINTS.get(m) ?? '';
+// a mini-game played on the scene shown: its points in the contract's points or offers (a person's — while they are
+// there), its keys in its party or acts
+function minigame(m, where, folder, present) {
+  for (const ref of m.points ?? []) point(folder, ref, where, present, false);
+  const c = SCENES.get(folder)?.contract;
+  for (const k of m.keys ?? []) if (c && !(k in c.party) && !(k in c.acts)) miss(`${where}: the mini-game “${m.title}” moves “${k}”, not in the party or acts of the scene “${folder}”`);
+}
 
 // --- every path: depth first, a step played again for each option of the choice it makes
 const STEPS = CHAPTERS.flatMap((ch, c) => ch.steps.map((_, s) => [c, s]));
