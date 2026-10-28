@@ -611,7 +611,7 @@ const FILM = {
       so.reach(null);
       gm.reach(null);
       await gm.do('try_rise');
-      gm.do('sit_ground', { loop: true });
+      gm.do('sit_stone', { loop: true });
       s.tell('fetch:cant');
       glideTo(s, SHOTS.stones, 3);
       await so.do('get_up');
@@ -901,7 +901,7 @@ const FILM = {
       s.set('grandma_do', null);
       s.tell('before_dawn:up');
       s.set('shawl', 'ledge');
-      gm.wear({ garment: 'dress' });
+      gm.wear({ garment: 'long_dress' });
       s.tell('before_dawn:shawl');
       await s.wait(1);
       glideTo(s, SHOTS.stones, 4);

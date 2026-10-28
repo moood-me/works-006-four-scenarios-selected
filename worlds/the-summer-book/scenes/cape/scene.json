@@ -252,6 +252,7 @@
     "lantern_dip": 0,
     "lamp_lit": 0,
     "rest": false,
+    "balance": 0,
     "palm_open": 0,
     "palm_near": 0.6,
     "grandma_at": "stand",
@@ -559,6 +560,14 @@
     "rest": {
       "type": "boolean",
       "means": "the fog and dark minigames (during fog_way): true — Grandmother sits down where she stands (by the first stone on its low stone, at the second on the halfway stone seat:0); false — she gets up and goes on, back on the stone"
+    },
+    "balance": {
+      "range": [
+        -1,
+        1
+      ],
+      "smooth": true,
+      "means": "the fog and dark minigames (during fog_way): how far Grandmother tips on the wet stones, as the minigame's arrow — −1 to her left … 1 to her right; past a little she puts a hand out that way for balance (0: steady)"
     },
     "palm_open": {
       "range": [

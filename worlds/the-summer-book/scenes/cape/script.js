@@ -2,8 +2,8 @@
 // fog's look); the people at their places (`<id>_at`: lib.PLACES, put by the island's `places`); the cat at his
 // (`cat_at`: lib.CAT — walking, he goes there at his pace and tells `cat:arrived`); the tent leaning as crooked as
 // `lean` says; Grandmother's lantern alight in her hand (`lamp_lit`: while she carries it, dipping as `lantern_dip`
-// says); the stones minigame's `step` walking her down the path, its `rest` sitting her down by a stone; the camera
-// from the land, the sea or the side (`from`: lib.VIEWS, a cut); the pieces (lib.FILM, the module beats).
+// says); the stones minigame's `step` walking her down the path, its `rest` sitting her down by a stone, its `balance`
+// putting a hand out; the camera from the land, the sea or the side (`from`: lib.VIEWS, a cut); the pieces (lib.FILM, the module beats).
 const L = scene.lib;
 const isle = scene.kit.isle;
 isle.weather(scene);
@@ -112,6 +112,24 @@ scene.on('change', 'rest', async v => {
   gm.turn(p.turn);
   gm.look(p.look);
 });
+
+// the minigames' `balance` (during fog_way, standing): tipping on the wet stones she puts a hand out that way — the
+// further she tips, the further out (−1 her left … 1 her right; a little either way: none)
+const balance = () => {
+  if (scene.get('beat') !== 'fog_way' || scene.get('rest')) return;
+  const b = Math.max(-1, Math.min(1, +scene.get('balance') || 0));
+  const gm = scene.person('grandma');
+  if (Math.abs(b) < 0.15) {
+    gm.reach(null);
+    return;
+  }
+  const t = ((+scene.get('grandma_turn') || 0) * Math.PI) / 180, side = Math.sign(b), out = 0.45 + 0.35 * Math.abs(b);
+  const a = +scene.get('grandma_a') || 0, d = +scene.get('grandma_d') || 0;
+  const p = [a + Math.cos(t) * side * out + Math.sin(t) * 0.15, d - Math.sin(t) * side * out + Math.cos(t) * 0.15, 1.05 - 0.25 * Math.abs(b)];
+  gm.reach(side > 0 ? { r: p } : { l: p });
+};
+scene.on('change', 'balance', balance);
+scene.on('move', 'balance', balance);
 
 // where the camera is, for a still (the pieces set their own shots): a cut to that view
 const view = () => {

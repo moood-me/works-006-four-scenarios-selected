@@ -379,7 +379,8 @@ the shore's `from_water:door`); 2.2 «bury» and 3.4 «porch» go on on the shor
   «tell» the shore's `shell`; with «called» the cape's `out_of_white` → the shore's `called_porch` → `cot_moved` in
   the evening; without it `out_of_white` → `breakfast`; `doctor_list` between the cape's `doctor` and `goodnight`
   (through black both ways).
-- The minigames' keys here: `creak` (М5в «door» — the second door's leaf, 0…1), `tilt` (М7а «cup» — the cup in her
+- The minigames' keys here: `far_light` (М10б «lamp» — Papa's light out in the fog: dimmed to 0.1 while the lamp is
+  lowered, back as it is held up), `creak` (М5в «door» — the second door's leaf, 0…1), `tilt` (М7а «cup» — the cup in her
   hands, −1…1), `cover` (М8б «blanket» — the blanket's edge, 0…1), `lamp_up` (М10б «lamp» — the lamp at the glass,
   0…1; not `lamp`, which here is where the lamp is). Their points: `door2#handle`, `table#cup`, `beds#cover`,
   `lamp#lamp`; М10в `lamp#lamp`. In the inserts (above): М5а/М5б `gap#palm` (`gap_open`, `gap_palm`, `gap_hand`), М7б
@@ -427,5 +428,5 @@ the shore's `from_water:door`); 2.2 «bury» and 3.4 «porch» go on on the shor
  "points": ["back_wall#doorway", "glazing#window", "hat#hat", "room#window", "beds#gap", "beds#cover", "pillow#pillow", "door2#handle", "lamp#lamp", "table#cup", "armchair#seat", "tent#tent", "far_lantern#lantern", "sky#moon", "cat#cat", "cat#back", "grandma", "sophia", "papa", "grandma#chest", "sophia#chest", "papa#chest", "gap#palm", "breast#palm", "sleeve#fingers"],
  "offers": ["grandma#chest", "sophia#chest", "papa#chest", "pillow#pillow", "beds#gap", "beds#cover", "door2#handle", "table#cup", "lamp#lamp", "room#window", "hat#hat", "back_wall#doorway", "gap#palm", "breast#palm", "sleeve#fingers"],
  "party": {"dawn": 0, "dusk": 0, "night": 0, "late": 0, "calm": 0, "storm": 0, "flash": 0, "fog": 0, "moon": 1, "hat": "nail", "teabox": false, "drops": "none", "cot": "veranda", "papa_watch": false, "secret": false, "cat": false, "take_lantern": true, "sophia_hand": false, "kick": false, "hold_hand": false, "knew": false, "sophia_knows": false, "wall": false, "slips": false},
- "acts": {"flash": {"values": [], "tells": ["flash:strike"]}, "creak": {"values": [], "tells": []}, "tilt": {"values": [], "tells": []}, "cover": {"values": [], "tells": []}, "lamp_up": {"values": [], "tells": []}, "gap_open": {"values": [], "tells": []}, "gap_palm": {"values": [], "tells": []}, "gap_hand": {"values": [], "tells": []}, "breast_open": {"values": [], "tells": []}, "breast_flicker": {"values": [], "tells": []}, "sleeve_open": {"values": [], "tells": []}, "sleeve_let": {"values": [], "tells": []}}}
+ "acts": {"flash": {"values": [], "tells": ["flash:strike"]}, "creak": {"values": [], "tells": []}, "tilt": {"values": [], "tells": []}, "cover": {"values": [], "tells": []}, "lamp_up": {"values": [], "tells": []}, "gap_open": {"values": [], "tells": []}, "gap_palm": {"values": [], "tells": []}, "gap_hand": {"values": [], "tells": []}, "breast_open": {"values": [], "tells": []}, "breast_flicker": {"values": [], "tells": []}, "sleeve_open": {"values": [], "tells": []}, "sleeve_let": {"values": [], "tells": []}, "far_light": {"values": [], "tells": []}}}
 ```

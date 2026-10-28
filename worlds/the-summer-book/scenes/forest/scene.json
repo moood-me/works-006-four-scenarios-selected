@@ -252,6 +252,7 @@
     "grab": false,
     "lamp_lit": 0,
     "flipper": false,
+    "slips": false,
     "knife_open": 0,
     "carve": 0,
     "knife_flaw": 0,
@@ -485,6 +486,10 @@
       ],
       "smooth": true,
       "means": "the scene's own: Grandmother's cigarette alight, its thin smoke (from grandma_with)"
+    },
+    "slips": {
+      "type": "boolean",
+      "means": "the play's: the moss minigame (М6) flawed — in fall she sits bowed longer before Sophia comes, and Sophia comes closer (her hand on Grandmother's shoulder)"
     },
     "flipper": {
       "type": "boolean",

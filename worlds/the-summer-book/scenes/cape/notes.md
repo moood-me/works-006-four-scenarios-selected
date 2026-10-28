@@ -166,6 +166,10 @@ Grandmother, `tent_shot` and `shawl_shot` nobody. A piece puts whom it does not 
   (`step:stone1…3` on arrival; the walk is the scene's, only during `fog_way`); flawed — `lantern_dip` (0…1: the
   lantern's light guttering). For «go» at strength ≤ 1 the walk ends at `stone2` (`sit_half` follows); otherwise at
   `stone3`.
+- The fog and dark minigames: `balance` −1…1 (smooth) — her tipping on the wet stones as the minigame's arrow (−1 to
+  her left … 1 to her right): past 0.15 she puts a hand out that way for balance, further the more she tips (her
+  `_reach`, the script's, during `fog_way`, not while she sits). The engine has no lean of a person's body: the hand
+  out is how it shows.
 - The dark minigame (М10а without the lantern): `rest` (true · false, above) — sat down after a slip, and at `stone2`
   to get her breath when weak.
 - The knock minigame (М10г): the insert `palm` (`palm_open`, `palm_near`; the point `palm#palm`, above); `alone_talk`
@@ -176,7 +180,7 @@ Grandmother, `tent_shot` and `shawl_shot` nobody. A piece puts whom it does not 
   Grandmother — the gait `old_walk` (always hers), `hold_pole` (loop, both hands on the pole), `sit_down` (onto a low
   stone, once), `sit_stone` (have), `sit_ground` (in the tent), `rise_slow`, `try_rise` (tries to get up, sinks back),
   `catch_breath` (standing, once), `sway` (dizzy, once), `knock` (three knocks on the canvas, once), `stoop` (once),
-  `hands_behind` (have); the garment `dress` (her dress without the shawl: `grandma_wear: {garment: 'dress'}` as it
+  `hands_behind` (have); the garment `long_dress` (her dress without the shawl: `grandma_wear: {garment: 'long_dress'}` as it
   slips off); Sophia — `kneel` (loop), `get_up` (from sitting, kneeling, crouching, lying), `tie` (kneeling at the peg,
   loop), `crouch`, `pet` (stroking the sitting cat, loop), `sit_down` (onto the ground, once), `hug_knees` (have),
   `lie_down` (once), `lie_side` (loop), `cry`, `whisper`, `talk_sitting` (loops), `drape` (the blanket round them both,
@@ -192,7 +196,7 @@ Grandmother, `tent_shot` and `shawl_shot` nobody. A piece puts whom it does not 
  "points": ["tent_front#door", "tent_back#palm", "path#stone1", "path#stone2", "path#stone3", "peg#peg", "ledge#shawl", "pole#grip", "pole#top", "parcel#parcel", "seat:0#seat", "seat:1#seat", "lantern", "far_window#window", "cat#cat", "cat#back", "sky#sun", "sky#sun_late", "sky#sun_dawn", "grandma#chest", "sophia#chest", "papa#chest", "palm#palm"],
  "offers": ["tent_front#door", "tent_back#palm", "path#stone1", "path#stone2", "path#stone3", "peg#peg", "ledge#shawl", "pole#grip", "parcel#parcel", "cat#back", "far_window#window", "grandma#chest", "sophia#chest", "papa#chest", "palm#palm"],
  "party": {"dawn": 0, "dusk": 0, "night": 0, "late": 0, "calm": 0, "storm": 0, "flash": 0, "fog": 0, "moon": 1, "lean": 0, "shawl": "none", "stones": false, "knocks": false, "lamp_hand": true, "weak": false, "sophia_night": "whisper", "grandma_here": true, "sophia_here": true, "papa_here": false},
- "acts": {"flash": {"values": [], "tells": ["flash:strike"]}, "cat_at": {"values": [], "tells": ["cat:arrived"]}, "tent": {"values": ["pole", "up"], "tells": []}, "lean": {"values": [], "tells": []}, "step": {"values": [], "tells": ["step:stone1", "step:stone2", "step:stone3"]}, "lantern_dip": {"values": [], "tells": []}, "palm_open": {"values": [], "tells": []}, "palm_near": {"values": [], "tells": []}, "rest": {"values": [false, true], "tells": []}}}
+ "acts": {"flash": {"values": [], "tells": ["flash:strike"]}, "cat_at": {"values": [], "tells": ["cat:arrived"]}, "tent": {"values": ["pole", "up"], "tells": []}, "lean": {"values": [], "tells": []}, "step": {"values": [], "tells": ["step:stone1", "step:stone2", "step:stone3"]}, "lantern_dip": {"values": [], "tells": []}, "palm_open": {"values": [], "tells": []}, "palm_near": {"values": [], "tells": []}, "rest": {"values": [false, true], "tells": []}, "balance": {"values": [], "tells": []}}}
 ```
 
 Against the plan's names: `ledge#shawl` is the crevice's (its element is `ledge`); `flap` is `open` · `shut` (a door

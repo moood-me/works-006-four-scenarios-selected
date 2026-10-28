@@ -102,7 +102,7 @@ state = {**isle.STATE, "animals": 4, "pack": "none", "band": 0, "spin": 0, "boat
          "grandma_a": FIRST["grandma"][0][0], "grandma_d": FIRST["grandma"][0][1], "sophia_a": FIRST["sophia"][0][0], "sophia_d": FIRST["sophia"][0][1],
          "papa_a": FIRST["papa"][0][0], "papa_d": FIRST["papa"][0][1],
          "brave": False, "sophia_back": False, "step": 0, "lantern_sway": 0, "grab": False, "lamp_lit": 0,
-         "flipper": False, "knife_open": 0, "carve": 0, "knife_flaw": 0, "match_lit": 0, "smoking": 0}
+         "flipper": False, "slips": False, "knife_open": 0, "carve": 0, "knife_flaw": 0, "match_lit": 0, "smoking": 0}
 
 
 def placed(id, who, places):
@@ -125,6 +125,7 @@ states = {**isle.STATES,
           "lamp_lit": {"range": [0, 1], "smooth": True, "means": "the scene's own: Grandmother's lantern alight in her hand (from grandma_with and lantern_sway)"},
           "match_lit": {"range": [0, 1], "smooth": True, "means": "the scene's own: a struck match in Grandmother's hand (from grandma_with)"},
           "smoking": {"range": [0, 1], "smooth": True, "means": "the scene's own: Grandmother's cigarette alight, its thin smoke (from grandma_with)"},
+          "slips": {"type": "boolean", "means": "the play's: the moss minigame (М6) flawed — in fall she sits bowed longer before Sophia comes, and Sophia comes closer (her hand on Grandmother's shoulder)"},
           "flipper": {"type": "boolean", "means": "the play's: the knife jerked in 1.2 — the carved seal has one flipper (the seal in the moss so; knife_flaw shows it too while the step goes on)"},
           "knife_open": {"range": [0, 1], "smooth": True, "means": "М3 «knife»: the close-up of her hands carving open (0 closed … 1 open)"},
           "carve": {"range": [0, 1], "smooth": True, "means": "the knife close-up: the driftwood becoming a seal (0 a rough log … 1 the seal)"},

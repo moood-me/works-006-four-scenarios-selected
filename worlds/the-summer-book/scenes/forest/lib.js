@@ -409,9 +409,13 @@ const FILM = {
       await goTo(s, 'grandma', 'stump', [], { sit: 'sit_heavy' });
       gm.do('dizzy', { loop: true });
       s.tell('fall:sat');
+      // (the moss minigame flawed — `slips`: she sits bowed longer before Sophia comes, and Sophia comes closer — her
+      // hand on Grandmother's shoulder)
+      if (s.get('slips')) await s.wait(2.5);
       so.gait('run');
       await goTo(s, 'sophia', 'near', [], { rise: 'get_up' });
       so.gait(null);
+      if (s.get('slips')) so.reach({ r: 'grandma#shoulder_l' });
       s.tell('fall:near');
       await cutTo(s, SHOTS.face);
       s.tell('fall:face');
@@ -611,7 +615,7 @@ const SHOW = {
   carve: { dawn: 0, dusk: 0, night: 0, late: 0, band: 0, animals: 4, pack: 'none', boat_out: false, grandma_here: true, sophia_here: true },
   quit: {},
   swim: { late: 1, band: 1, animals: 5 },
-  fall: { brave: false },
+  fall: { brave: false, slips: false },
   beetle: {},
   night_path: { ...NIGHT, band: 0, boat_out: true, pack: 'in' },
 };
