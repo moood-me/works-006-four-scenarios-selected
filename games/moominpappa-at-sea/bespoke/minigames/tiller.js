@@ -4,7 +4,8 @@
 // the swell (`wave` up to 1 and down) and shoves the bow to one side, then the other (`push`). Blown right off the star
 // (|heading| ≥ BLOWN) — a mistake (off the way), once a wave. After the third wave — the end (clean; flawed if blown
 // off — and Papa, as if nothing were wrong: «Just as planned»). It ends by its count, steered or not. A quiet ring on
-// the star (`star`): what the bow is kept on. The bar — the time the bow was kept on it.
+// the star (`star`): what the bow is kept on; its arc of danger — how far the bow is off it (the boat's turn is small
+// in the frame: the arc says it plainly). The bar — the time the bow was kept on it.
 //   What he does: Papa steers his family across the night sea by a star.
 //   What he wants: to lead his own — a captain who knows the way.
 //   How it is for him: proud, a little unsure in the dark, the boat heavy with sleeping people.
@@ -28,7 +29,7 @@ export default {
     const over = settle(signal, () => { g.set('heading', 0, 1.5); g.set('wave', 0, 2); });
     send('heading', 0);
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, steer: 'rate', release: 'stay', push: 0 });
-    mg.mark({ at: 'star', kind: 'ring', quiet: true });
+    const star = mg.mark({ at: 'star', kind: 'ring', quiet: true, danger: 0 });
     teach(b, mg, [lead]);
     const END = FIRST + (WAVES - 1) * EVERY + SHOVE + 1;
     const hit = new Set();
@@ -42,6 +43,7 @@ export default {
       send('wave', swell);
       const a = lead.state.arrow;
       send('heading', a);
+      star.set({ danger: clamp(Math.abs(a) / BLOWN) });
       if (on && Math.abs(a) >= BLOWN && !hit.has(k)) {
         hit.add(k);
         blown++;

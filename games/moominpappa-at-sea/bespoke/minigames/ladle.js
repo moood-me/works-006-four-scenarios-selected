@@ -1,5 +1,5 @@
 // М1 «The Ladle» (prologue П.2, the valley, after the piece `smoke`: Papa beside the moss with the ladle, the camera
-// still): hold — a groove on the moss (`apple#moss`), filled in 4 s while held: the ladle over the little fire, the
+// still): hold — a groove on the moss (`apple#moss`), filled in 3 s while held: the ladle over the little fire, the
 // smoke going from grey to white steam (`smoke` = the fill); let go, it ebbs and the smoke greys again. Let go once it
 // had begun — Papa blows on his paw: «Ow» (the first time only). Full — the fire is out: the end (clean, or flawed if
 // he let go).
@@ -10,7 +10,7 @@
 //   → { early: how many times let go too soon }
 import { clamp, until, keys, teach, settle } from './hands.js';
 
-const SECONDS = 4, DRAIN = 1.5;
+const SECONDS = 3, DRAIN = 2.5;
 
 export default {
   title: tr('The Ladle'),
