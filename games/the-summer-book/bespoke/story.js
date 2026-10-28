@@ -1,17 +1,19 @@
 // What a chapter's steps play with: context(b, view, hub, state, j, {forward}) → g. Its state is a working copy — kept
 // only once the step is done (game.js). A step left behind (the player went to the map: ☰) does nothing more and never
 // ends: whatever it still calls returns a promise that never settles.
-// Stage 3 of the game (rpg docs/writing-games-v2/game-stages.md): the whole play on the world's three scenes as they
-// are — people stand, the scenes only say who is there (and what their own keys already show: the cape's night, fog
-// and candle). What the scenario's film would show is a plate with “Next” (g.plate, g.sheet); a mini-game is its stub —
-// a mark to press and a card saying what it will be (minigames/stub.js); a place the world has not got yet — the
-// people in one of its scenes and a label saying where it really is.
+// Stage 4 of the game (rpg docs/writing-games-v2/game-stages.md): the whole play on the world's own scenes — people
+// stand and breathe; each step opens its scene with the keys of the play (the hour and the weather of the island, where
+// each one is, what the play has done to the place: carry). What the scenario's film would show is still a plate with
+// “Next” (g.plate, g.sheet); a mini-game is its stub — a mark to press and a card saying what it will be
+// (minigames/stub.js); a place the world has not got yet — the people in one of its scenes and a label saying where it
+// really is. The truth of each scene's keys and points is its notes.md, “Contract for the check”.
 //   g.state — what the play carries: {scales, shown, marks, choices} (game.js); what follows from it: facts(g.state)
 //   g.signal — aborts when the step is left
 //   g.scene(folder, {here, moods, where, keys}, {cut}) — that scene of the world, full-screen: of its people only `here`
-//     (ids) are there (`<id>_here`, the engine's key), their faces as `moods` say ({id: mood}); `keys` — values of the
-//     scene's own keys (its scene.json's states); `where` — a label in the corner, where this really happens (none:
-//     the place is the scene's own). Always opened anew
+//     (ids) are there (`<id>_here`, the engine's key), their faces as `moods` say ({id: mood}); then what the play has
+//     done to the place (carry), then `keys` — the step's (the hour, the weather, where each one is: its contract's
+//     party); `where` — a label in the corner, where this really happens (none: the place is the scene's own). Always
+//     opened anew
 //   g.here(id, on) — someone of the shown scene comes or goes (in one cut); g.mood(id, mood) — their face
 //   g.set(key, value) — one of the shown scene's own keys (in one cut)
 //   g.wait(ms) — time of the game's own (a pause)
@@ -41,7 +43,18 @@
 // minigame gives its `skipped`.
 
 // the world's scenes the game plays, by their folders (the shore — also the map's background, game.js)
-export const SCENES = { shore: 'shore', house: 'house', cape: 'cape' };
+export const SCENES = { shore: 'shore', house: 'house', forest: 'forest', cape: 'cape', sea: 'sea' };
+
+// What the play has done to a place (scenario §9, the marks), as the keys of its scene's party: the shell ashtray on the
+// rail and the row of little graves on the shore; the hat, the tea box, the drops and Papa's camp bed in the house; the
+// seal among the animals and the packet in the crevice in the forest.
+export function carry(folder, state) {
+  const m = state.marks;
+  if (folder === SCENES.shore) return { shell: m.smoke === 'told', graves: m.cat === 'bury' ? 5 : 0 };
+  if (folder === SCENES.house) return { hat: m.mama === 'gone' ? 'bed' : 'nail', teabox: m.cat === 'gift', drops: m.drops ? 'full' : 'none', cot: m.heard ? 'room' : 'veranda' };
+  if (folder === SCENES.forest) return { animals: m.seal ? 5 : 4, pack: m.smoke !== 'quit' ? 'none' : m.someday === 'kept' ? 'taken' : 'in' };
+  return {};
+}
 
 // The scales (scenario §8), each with two sides: where they start, their bounds, its name in the gauge, its two ends
 // (`sides`: the left one, the right one; `spent` — its pips counted from the right end: the bar grows as the value
@@ -214,7 +227,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       const st = {};
       for (const id of people) st[`${id}_here`] = present.has(id);
       for (const [id, mood] of Object.entries(moods)) st[`${id}_mood`] = mood;
-      Object.assign(st, keys);
+      Object.assign(st, carry(folder, state), keys);
       if (unseen()) { j.scene(folder, st, where); return; }
       showing = true;
       try {

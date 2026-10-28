@@ -13,11 +13,12 @@ export default {
   steps: [
     // П.1–П.3: dawn, the teeth in the peonies, the question
     async g => {
-      await g.scene(SCENES.shore, { here: ['grandma'], moods: { grandma: 'thinking' } });
+      await g.scene(SCENES.shore, { here: ['grandma'], moods: { grandma: 'thinking' }, keys: { dawn: 1, grandma_at: 'peonies' } });
       g.title(tr('The Summer Book'));
       await g.say('narrator', 'This spring Sophia’s mother died. That summer, as always, they lived on the island: Papa, Sophia and Grandmother');
       await g.plate(tr('June, dawn; everyone is asleep. Grandmother sits in the peonies by the porch, feeling about in the earth with her hand.'));
       await g.play(peonies);
+      g.set('sophia_at', 'porch');
       g.here('sophia', true);
       g.mood('sophia', 'surprised');
       await g.plate(tr('Sophia comes out on the porch in her nightdress.'));
@@ -31,6 +32,7 @@ export default {
       await g.say('grandma', 'Soon. But that is not the least concern of yours');
       await g.say('sophia', 'Why?');
       await g.plate(tr('Grandmother gets up slowly, holding on to the porch rail, and instead of an answer:'));
+      g.set('grandma_at', 'porch');
       await g.say('grandma', 'Let’s go down to the water');
       await g.plate(tr('In the doorway behind them a straw hat hangs on its nail. Behind the window Papa is asleep.'));
       g.gauge('strength');
@@ -38,7 +40,8 @@ export default {
     },
     // П.4–П.5: the ledge; ⚑ where the bottom is
     async g => {
-      await g.scene(SCENES.shore, { here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'smile' } }, { cut: true });
+      await g.scene(SCENES.shore, { here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'smile' },
+        keys: { dawn: 1, grandma_at: 'ledge', sophia_at: 'edge' } }, { cut: true });
       await g.plate(tr('Clear water, and under it a ledge; further out it is dark. Sophia stands on the very edge.'));
       await g.say('sophia', 'I want to see where the bottom is');
       const bottom = await g.choose('bottom', { 'sophia#chest': [
@@ -60,17 +63,19 @@ export default {
       } else if (bottom === 'go') {
         await g.say('grandma', 'Go on. I’m watching');
         await g.play(shoulder);
-        g.here('sophia', false);
+        g.set('sophia_at', 'shelf');
         await g.plate(tr('Sophia steps onto the ledge, slips and sits down in the water up to her chest; she gasps — and laughs, wet and proud.'));
         g.mood('grandma', 'afraid');
         await g.plate(tr('On the rock Grandmother’s hands are shaking. Only you see it.'));
       } else {
         await g.play(ledge);
+        g.set('sophia_at', 'shelf');
         g.mood('sophia', 'laugh');
         await g.plate(tr('Slowly Grandmother climbs down into the cold water, knee-deep, and the two of them stand on the ledge together.'));
         await g.say('sophia', 'You too!');
         g.mood('grandma', 'tired');
         await g.plate(tr('Getting back up does not work at once, and Grandmother sits a long time on the edge of the rock with her feet in the water. Papa comes out of the house, climbs down without a word and holds out his hand.'));
+        g.set('papa_at', 'lawn');
         g.here('papa', true);
         await g.say('grandma', 'Myself');
         await g.plate(tr('She climbs out by herself, slowly; Papa stands beside her till she is on her feet.'));

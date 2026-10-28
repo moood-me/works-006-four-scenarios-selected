@@ -1,12 +1,10 @@
 // I. “The Magic Forest” (scenario §5, 1.1–1.5). The house in the morning, the hat on its nail; the forest — the seal,
 // the palm on the trunk; ⚑ the cigarette; Eriksson with the post: “Don’t hold your girl back”; the nets in the evening —
 // ⚑ what to tell Papa. All of it only colours.
-// Stand-ins: the forest — the cape. Eriksson is in no scene yet (stage 4): a plate, his voice.
+// Eriksson is in no scene yet: a plate, his voice (his boat is the shore's).
 // Reads: marks.water. Leaves: choices.smoke, choices.nets, marks.smoke, marks.nets, marks.say.
 import { SCENES } from '../story.js';
 import { knife, push, net } from '../minigames/all.js';
-
-const FOREST = tr('In truth: the magic forest — grey dead trees twisted by the wind, moss, a stump.');
 
 export default {
   number: 'I', title: tr('The Magic Forest'),
@@ -18,7 +16,8 @@ export default {
   steps: [
     // 1.1: the house in the morning
     async g => {
-      await g.scene(SCENES.house, { here: ['papa', 'grandma', 'sophia'], moods: { papa: 'thinking', grandma: 'neutral', sophia: 'sad' } });
+      await g.scene(SCENES.house, { here: ['papa', 'grandma', 'sophia'], moods: { papa: 'thinking', grandma: 'neutral', sophia: 'sad' },
+        keys: { view: 'veranda', papa_at: 'table', grandma_at: 'door', sophia_at: 'door' } });
       g.title(tr('June'));
       await g.plate(tr('Morning. Papa at his table on the veranda by the window: papers, coffee. The hat on its nail by the door; Sophia walks under it without raising her eyes. Grandmother takes her knife and her tobacco pouch.'));
       await g.say('papa', 'Mamma, don’t go far');
@@ -27,17 +26,21 @@ export default {
     },
     // 1.2: the forest; the knife; the palm on the trunk
     async g => {
-      await g.scene(SCENES.cape, { here: ['grandma', 'sophia'], moods: { grandma: 'thinking', sophia: 'smile' }, where: FOREST });
+      await g.scene(SCENES.forest, { here: ['grandma', 'sophia'], moods: { grandma: 'thinking', sophia: 'smile' }, keys: { grandma_at: 'stump', sophia_at: 'moss' } });
       await g.plate(tr('Grey dead trees twisted by the wind, moss. Grandmother sits down on a stump and carves an animal out of driftwood.'));
       await g.play(knife);
+      g.set('animals', 5);
+      g.mark('seal', true, null);
       await g.plate(tr('A seal. Sophia sets the animals in the moss.'));
       await g.say('sophia', 'This is their forest. They live here when we’re not here');
       g.mood('grandma', 'tired');
+      g.set('grandma_at', 'trunk');
       await g.plate(tr('Grandmother gets up to reach a dry branch — and stands still with her palm on the trunk and her eyes closed, three seconds. Sophia does not see. Then she sits down again and carves.'));
+      g.set('grandma_at', 'stump');
     },
     // 1.3: ⚑ the cigarette
     async g => {
-      await g.scene(SCENES.cape, { here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'angry' }, where: FOREST }, { cut: true });
+      await g.scene(SCENES.forest, { here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'angry' }, keys: { grandma_at: 'stump', sophia_at: 'stump' } }, { cut: true });
       await g.plate(tr('Grandmother thinks Sophia has gone off to her animals; she takes a cigarette out of the pouch and strikes a match. Sophia is behind her.'));
       await g.say('sophia', 'Papa doesn’t allow it!');
       const smoke = await g.choose('smoke', { 'grandma#chest': [
@@ -61,6 +64,7 @@ export default {
         await g.plate(tr('Papa says nothing and chews. In the morning a big shell lies on the veranda rail, an ashtray. Nobody mentions it. Now Grandmother smokes on the veranda, by the shell, under Papa’s look over his papers.'));
       } else {
         await g.say('grandma', 'You’re right');
+        g.set('pack', 'in');
         await g.plate(tr('Grandmother puts the cigarette out on a stone and pushes the packet deep into a crevice. Sophia is pleased — and at once bored: there is no secret.'));
         g.mood('grandma', 'sad');
         await g.plate(tr('All day Grandmother pats her empty pocket.'));
@@ -70,7 +74,7 @@ export default {
     // 1.4: Eriksson with the post; push off
     async g => {
       const { water } = g.state.marks;
-      await g.scene(SCENES.shore, { here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'thinking' } });
+      await g.scene(SCENES.shore, { here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'thinking' }, keys: { rowboat: 1, grandma_at: 'pier', sophia_at: 'pier' } });
       await g.plate(tr('A rowing boat comes in to the pier: Eriksson, an old fisherman from the far skerries. He does not come ashore; he hands over the post. Grandmother goes down to the pier.'));
       await g.say('eriksson', 'You’ve got old');
       await g.say('grandma', 'And you haven’t?');
@@ -81,13 +85,14 @@ export default {
       else await g.plate(tr('Eriksson looks at Sophia: she is holding Grandmother by the skirt.'));
       await g.say('eriksson', 'Don’t hold your girl back');
       await g.play(push);
+      g.set('rowboat', 0);
       await g.plate(tr('Eriksson rows away without saying goodbye.'));
       await g.say('sophia', 'What did he say?');
       await g.say('grandma', 'That he’s old');
     },
     // 1.5: the nets in the evening; ⚑ “tell me, if anything”
     async g => {
-      await g.scene(SCENES.shore, { here: ['papa', 'grandma'], moods: { papa: 'thinking', grandma: 'neutral' } });
+      await g.scene(SCENES.shore, { here: ['papa', 'grandma'], moods: { papa: 'thinking', grandma: 'neutral' }, keys: { dusk: 1, net: true, papa_at: 'net', grandma_at: 'net' } });
       await g.plate(tr('Evening. Papa by the boat, untangling a net. Grandmother brings him coffee and sits down beside him on a stone.'));
       await g.say('papa', 'Mamma. Tell me, if anything');
       await g.wait(1500);

@@ -1,4 +1,4 @@
-// The map's trees (game.js map) at stage 3: the world has no map's scene yet (it comes with all the scenes, stage 4), so
+// The map's trees (game.js map) till the world has its map's scene (`map`, package Г of the plan), so
 // the chapters stand as paper leaves in one row over the shore at dawn, laid out by CSS — a row the player scrolls
 // sideways, the chapter the play is at brought into view. Each leaf: its number and title (its knot), its rows of
 // choices (the forks) — the question, the answers: the one chosen in ink, the others in pencil, those never reached

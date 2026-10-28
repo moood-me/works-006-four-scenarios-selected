@@ -3,12 +3,15 @@
 // then the motor, the island from the water by the play's marks, the lines of the promises in the boat, the island
 // going into the white. The ending the three hinges decide (story.js facts): “The Window” (Keep), “The Tent”
 // (Together), “The Oars” (Let go) — each full or late —, “The Shawl on the Stone” (holding the incompatible).
-// Stand-ins: the big boat at sea — the shore. Eriksson is not here.
+// The last morning: dawn and late, a thin fog (0.6); the island goes into the white from the sea's boat (`island`).
+// Eriksson is not here.
 // Reads: everything (facts, marks). Leaves: nothing.
 import { SCENES, facts } from '../story.js';
 import { gangway, hold, oars, upright } from '../minigames/all.js';
 
-const BOAT = tr('In truth: the big motor boat in the morning fog, the island going away behind it.');
+const MORNING = { dawn: 1, late: 1, fog: 0.6 };
+// where Sophia and Grandmother sit in the big boat (Sophia's scale, §8)
+const seats = f => ({ sophia_at: f.sophia >= 3 ? 'bow' : f.sophia === 2 ? 'beside' : 'hand', grandma_at: f.sophia <= 1 ? 'hand' : 'seat' });
 
 export default {
   number: '', title: tr('August'),
@@ -19,11 +22,12 @@ export default {
     async g => {
       const f = facts(g.state), m = g.state.marks;
       if (f.ending === 'tent') {
-        await g.scene(SCENES.cape, { here: ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'neutral' }, keys: { night: 0, fog: 0.3, candle: 0, window: 0 },
-          where: tr('In truth: the cape on the last morning, a thin fog; the tent still standing.') });
+        await g.scene(SCENES.cape, { here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'smile', sophia: 'neutral', papa: 'sad' },
+          keys: { ...MORNING, grandma_at: 'door', sophia_at: 'tent', papa_at: 'peg' } });
         g.title(tr('The Tent'));
       } else {
-        await g.scene(SCENES.shore, { here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'neutral', papa: 'neutral' } });
+        await g.scene(SCENES.shore, { here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'neutral', papa: 'neutral' },
+          keys: { ...MORNING, big_boat: true, luggage: true, grandma_at: 'pier', sophia_at: 'pier', papa_at: 'pier', chair: f.knew ? 'set' : 'none' } });
         g.title(f.ending === 'window' ? tr('The Window') : f.ending === 'oars' ? tr('The Oars') : tr('The Shawl on the Stone'));
       }
       await g.plate(tr('31 August, the last morning. A thin morning fog — the shore can be seen in it. The things are by the pier; the big boat stands by the far rock, where it is deep, and a gangway with a rail is laid to it from the shore. The island is shut up till summer.'));
@@ -54,6 +58,8 @@ export default {
             await g.plate(tr('And he puts her into the boat.'));
           }
         }
+        g.set('grandma_at', 'gangway');
+        g.set('papa_at', 'gangway');
         await g.plate(sits(f));
         await g.play(gangway);
       } else if (f.ending === 'tent') {
@@ -61,20 +67,28 @@ export default {
         await g.say('papa', 'The winter will carry it off');
         await g.say('sophia', 'It won’t. It’s mine');
         await g.plate(tr('Grandmother, saying nothing, lays her palm on the canvas. He stands a long time, lets go of the peg and weighs the edges of the tent down with stones. Then:'));
+        g.set('stones', true);
         if (f.knew) await g.say('papa', 'You’ll winter with us. The doctor will come every week');
         else await g.say('papa', 'You’ll winter with us. The doctor will come');
         await g.plate(tr('She does not answer.'));
-        await g.scene(SCENES.shore, { here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'smile', sophia: 'neutral', papa: 'sad' }, where: BOAT });
+        await g.scene(SCENES.shore, { here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'smile', sophia: 'neutral', papa: 'sad' },
+          keys: { ...MORNING, big_boat: true, luggage: true, grandma_at: 'gangway', sophia_at: 'gangway', papa_at: 'gangway', chair: f.knew ? 'set' : 'none' } });
         if (f.strength >= 3) await g.plate(tr('He carries the things and does not look at his mother. She steps into the boat by herself; he stands beside and does not look.'));
         else if (f.strength >= 1) await g.plate(f.sophia <= 2
           ? tr('He carries the things and does not look at his mother. She walks leaning on Sophia’s hand; Papa lifts her into the boat — and even then does not look at her.')
           : tr('He carries the things and does not look at his mother. She walks leaning on his arm; he lifts her into the boat — and even then does not look at her.'));
         else await g.plate(tr('He carries the things and does not look at his mother. She walks by herself, step by step, along the shore, holding on to the stones and then the gangway rail; everyone waits by the boat, nobody hurries her. He puts her into the boat holding her under the arms, and does not look at her.'));
         if (f.knockBroken) await g.plate(tr('On the gangway Sophia does not take her hand at first — then she does.'));
-        if (f.sophia >= 3) await g.plate(tr('Sophia sits on the bow at first; when the island begins to go, she comes over to Grandmother by herself.'));
+        await g.scene(SCENES.sea, { here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'smile', sophia: 'neutral', papa: 'sad' },
+          keys: { ...MORNING, island: 0.2, grandma_at: 'hand', sophia_at: f.sophia >= 3 ? 'bow' : 'hand', papa_at: 'stern' } });
+        if (f.sophia >= 3) {
+          await g.plate(tr('Sophia sits on the bow at first; when the island begins to go, she comes over to Grandmother by herself.'));
+          g.set('sophia_at', 'hand');
+        }
         await g.play(hold);
         await g.plate(tr('Grandmother sits with her eyes closed, smiling.'));
       } else if (f.ending === 'oars') {
+        g.set('dinghy', 'moored');
         await g.plate(tr('Walking over the stones to the big boat would take Grandmother long: by water it is a hundred strokes from the pier, along the shore twice as far. Sophia, who has rowed circles by the pier all summer, sits down in the dinghy at the oars without a word and waits.'));
         await g.plate(f.strength <= 2
           ? tr('Grandmother is in the stern of the dinghy: Papa sets her in, holding her under the arms.')
@@ -108,7 +122,9 @@ export default {
           await g.say('sophia', 'Myself!');
           await g.plate(tr('— then lets them be.'));
         }
+        g.set('dinghy', 'out');
         await g.play(oars);
+        g.set('dinghy_at', 1);
         await g.plate(tr('The dinghy goes crooked, then straight. Halfway, Grandmother’s hand reaches for the oars by itself — and lies back on her knees.'));
       } else {
         await g.plate(tr('The last days Grandmother sat on the porch, in Papa’s jacket.'));
@@ -119,6 +135,8 @@ export default {
         await g.say('papa', 'In town — a doctor');
         await g.plate(tr('She nods: there is nothing to argue with.'));
         if (f.knockBroken) await g.plate(tr('On the gangway Sophia does not take her hand at first — then she does.'));
+        await g.scene(SCENES.sea, { here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'tired', sophia: 'neutral', papa: 'neutral' },
+          keys: { ...MORNING, island: 0.2, sway: 1, ...seats(f), papa_at: 'stern' } });
         await g.plate(sits(f));
         await g.play(upright);
       }
@@ -126,7 +144,8 @@ export default {
     // the motor; the island from the water; the lines in the boat; into the white
     async g => {
       const f = facts(g.state);
-      await g.scene(SCENES.shore, { here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'neutral', papa: 'neutral' }, where: BOAT });
+      await g.scene(SCENES.sea, { here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'neutral', papa: 'neutral' },
+        keys: { ...MORNING, island: 0.3, basket: f.bird === 'gift' ? 'cat' : 'shut', ...seats(f), papa_at: 'stern' } });
       await g.plate(tr('The motor. From the water the island goes by.'));
       const shots = [];
       if (f.mama === 'moon') shots.push(tr('The door of the house: the hat on its nail.'));
@@ -158,6 +177,8 @@ export default {
           await g.say('grandma_song', 'Row, little boat… mm-mm… the light on the skerry… is burning for you', 'grandma');
         }
         await g.say('narrator', 'That winter Grandmother lived with them in town, in a room with a window onto the yard. It was a good window');
+        g.set('island', 1);
+        g.set('fog', 0.85);
         await g.plate(tr('Last shot: the window of the house on the island, dark, going into the fog.'));
       } else if (f.ending === 'tent') {
         await g.plate(f.house
@@ -173,7 +194,9 @@ export default {
           await g.say('sophia', 'Why only once?');
           await g.plate(tr('Grandmother does not answer.'));
         }
+        await g.scene(SCENES.cape, { here: [], keys: { ...MORNING, stones: true, from: 'sea' } }, { cut: true });
         await g.plate(tr('Only the motor. Last shot: the tent on the cape, grey, flapping in the wind, going into the fog.'));
+        g.set('fog', 0.85);
       } else if (f.ending === 'oars') {
         await g.plate(f.strength <= 2
           ? tr('At the big boat Sophia does not take her by the hand: Papa lifts her in.')
@@ -200,6 +223,8 @@ export default {
           await g.plate(tr('The talk goes past Grandmother.'));
         } else await g.plate(tr('Papa silently takes the dinghy’s oars from Sophia and ties it to the stern.'));
         await promises(g, f);
+        g.set('island', 1);
+        g.set('fog', 0.85);
         if (f.sophia >= 3) await g.plate(tr('Last shot: Grandmother’s empty hands on her knees — and Sophia ahead, on the bow.'));
         else if (f.sophia === 2) await g.plate(tr('Last shot: Grandmother’s empty hands on her knees — and Sophia beside her, facing forward.'));
         else await g.plate(tr('Last shot: Sophia’s hand in Grandmother’s hand, and the bow of the boat empty.'));
@@ -222,7 +247,9 @@ export default {
         await g.plate(tr('From the water Sophia sees by the cape, in a crevice above the water, a grey patch.'));
         await g.say('sophia', 'What’s that?');
         await g.say('grandma', 'A stone');
+        await g.scene(SCENES.cape, { here: [], keys: { ...MORNING, shawl: 'ledge', from: 'sea' } }, { cut: true });
         await g.plate(tr('Last shot: the grey shawl on the stone, going into the fog.'));
+        g.set('fog', 0.85);
       }
     },
   ],

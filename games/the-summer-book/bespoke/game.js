@@ -5,10 +5,10 @@
 // docs/new-games/letnyaya-kniga/scenario.md), each a row of steps on the world's scenes; the choices, the scales
 // (Grandmother's strength, Sophia: hand in hand — on her own) and what is remembered carry from chapter to chapter; the
 // three hinges decide the ending (story.js facts) — the play always goes through to the epilogue.
-// Stage 3 (rpg docs/writing-games-v2/game-stages.md): the play whole on the world's three scenes, people standing; what
-// the film would show — plates with “Next”; the mini-games — stubs (minigames/stub.js); places not drawn yet — the
-// people in a scene of the world and a label saying where it really is.
-//   The map of the play (moood/docs/agents/games.md §2), at stage 3 a row of leaves over the shore (map.js) — the
+// Stage 4 (rpg docs/writing-games-v2/game-stages.md): the play whole on the world's own scenes, people standing, each
+// step with its keys (story.js); what the film would show — plates with “Next”; the mini-games — stubs
+// (minigames/stub.js).
+//   The map of the play (moood/docs/agents/games.md §2), till the world has its map, a row of leaves over the shore (map.js) — the
 // world has no map's scene yet. What can be done on it is its own drawing — pressed, the language's mark opens there,
 // born open (story.js hub.ask): the main run's pointer — “Start”, “Continue” (from the beginning of the step it stopped
 // in); a chapter played — “Replay the chapter”; each fork the main run reached in it — “Replay from here”. The play
