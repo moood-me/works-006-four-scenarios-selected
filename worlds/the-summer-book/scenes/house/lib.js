@@ -108,9 +108,10 @@ const DEG = Math.PI / 180;
 const W3 = (x, z, y = 0) => [wa(x, z), wd(x, z), y + FL];
 // which way one at [x, z] faces to face [tx, tz] (a person's turn: the world's bearing)
 const TURN = (x, z, tx, tz) => bearing(tx - x, tz - z);
-// the camera: an eye [x, z, y] looking at [x, z, y] — all its keys (the eye 1.4 over the floor at camera_h 0); or at a
-// point of the world ([across, distance, elevation])
-const EYE0 = 1.4;
+// the camera: an eye [x, z, y] looking at [x, z, y] — all its keys (the eye 1.7 over the floor at camera_h 0: the
+// engine stands the eye on the house's floors, `walk` planes; every shot's eye is over one); or at a point of the world
+// ([across, distance, elevation])
+const EYE0 = 1.7;
 function CAM([ex, ez, ey], [tx, tz, ty]) {
   const r = Math.hypot(tx - ex, tz - ez);
   return { camera_target: null, camera_x: wa(ex, ez), camera_z: wd(ex, ez), camera_h: ey - EYE0, camera_yaw: bearing(tx - ex, tz - ez),
