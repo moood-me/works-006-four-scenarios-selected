@@ -2,7 +2,8 @@
 // (0.75 m), a hand's width between them. White sheets turned down over grey wool (Grandmother's) and an old faded quilt
 // (Sophia's); Grandmother's pillow (Sophia's is `pillow`). Metres from the plane's middle (x as the house's frame
 // plus 1.725, y toward the room's near wall: Grandmother's bed x −0.925…−0.025, y −0.99…0.99; Sophia's 0.175…0.925,
-// −0.99…0.69). The point `gap`: the edge of Grandmother's blanket by Sophia's bed (her palm there, not reaching over).
+// −0.99…0.69). The point `gap`: the edge of Grandmother's blanket by Sophia's bed (her palm there, not reaching over);
+// `cover`: the middle of Grandmother's bed, where the blanket is held up over the two (М8б).
 // Grandmother's
 g.fillStyle = '#efede7';
 g.fillRect(-0.925, -0.99, 0.9, 0.56);
@@ -37,3 +38,4 @@ for (let i = 0; i < 6; i++) {
 g.fillStyle = '#f4f2ec';
 g.fillRect(0.175, -0.53, 0.75, 0.07);
 e.at(-0.05, 0.05, 'gap');
+e.at(-0.475, -0.25, 'cover');

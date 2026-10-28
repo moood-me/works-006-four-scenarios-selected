@@ -82,11 +82,11 @@ fn night_sky(at: vec2f, h: f32) -> vec3f {
   c = select(c, rgb(89.0, 106.0, 142.0), at.y > h);
   return glow_soft(c, at, vec2f(u_night_x, h), vec2f(1.5, 0.1), rgb(164.0, 178.0, 207.0), 0.75);
 }
-// the storm's sky: white-grey and light, lighter toward the horizon (by night a lit grey-blue)
+// the storm's sky: white-grey and light, lighter toward the horizon (by night a light grey-blue: the storm is light)
 fn storm_sky(at: vec2f, h: f32) -> vec3f {
   let t = rise(at, h);
   let day = mix(rgb(178.0, 185.0, 194.0), rgb(226.0, 228.0, 230.0), t * t);
-  let night = mix(rgb(70.0, 80.0, 104.0), rgb(128.0, 138.0, 160.0), t * t);
+  let night = mix(rgb(120.0, 130.0, 154.0), rgb(178.0, 186.0, 204.0), t * t);
   return mix(day, night, u_night);
 }
 // how much of a disc of radius r about o covers this pixel (its edge a pixel soft)
@@ -136,12 +136,12 @@ fn shade(painted: vec4f, at: vec2f, uv: vec2f) -> vec4f {
   var cc = mix(pc, pc * vec3f(1.02, 0.99, 0.93), u_late * (1.0 - u_dawn));
   cc = mix(cc, mix(rgb(227.0, 226.0, 228.0), rgb(240.0, 226.0, 220.0), warm), u_dusk);
   cc = mix(cc, mix(rgb(154.0, 168.0, 198.0), rgb(185.0, 196.0, 220.0), warm), u_night);
-  cc = mix(cc, mix(rgb(176.0, 182.0, 190.0), rgb(98.0, 106.0, 124.0), u_night), u_storm);
+  cc = mix(cc, mix(rgb(176.0, 182.0, 190.0), rgb(140.0, 148.0, 166.0), u_night), u_storm);
   L = mix(L, srgbToLinear(cc), cl.a * (1.0 - fogk));
   // the storm: the sky white-grey, its heavy clouds over it, darker in their bellies
   L = mix(L, srgbToLinear(storm_sky(at, h)), 0.9 * u_storm);
   let sc = layer(2, at);
-  let scol = mix(mix(rgb(168.0, 175.0, 185.0), rgb(128.0, 136.0, 148.0), sc.a), mix(rgb(84.0, 92.0, 112.0), rgb(60.0, 66.0, 84.0), sc.a), u_night);
+  let scol = mix(mix(rgb(168.0, 175.0, 185.0), rgb(128.0, 136.0, 148.0), sc.a), mix(rgb(120.0, 128.0, 148.0), rgb(92.0, 100.0, 120.0), sc.a), u_night);
   L = mix(L, srgbToLinear(scol), sc.a * u_storm * (1.0 - fogk));
   // the thick fog: the sky gone into white air (pale grey-blue under the moon)
   let fogc = mix(mix(rgb(228.0, 230.0, 231.0), rgb(226.0, 220.0, 216.0), u_dusk), rgb(170.0, 180.0, 204.0), u_night);
