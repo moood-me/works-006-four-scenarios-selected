@@ -1,5 +1,5 @@
 // М2б «The Shoulder» (П.5 «go», the shore at dawn, after «Go on. I'm watching», the piece `shoulder` ending in its pose:
-// Grandmother's hand on Sophia's shoulder): hold, then let go — a groove on the shoulder (`sophia#shoulder_r`): held
+// Grandmother's hand on Sophia's shoulder): hold, then let go — a groove on Sophia (`sophia#chest`): held
 // till full, the hand rests there; then Sophia leans on toward the ledge (`let` a little — the shoulder going from under
 // the hand; the plate says so) and the arc of time runs: lifted — the hand opens, she goes (`let` 1; clean); not lifted
 // in WAIT s — Sophia shakes the hand off herself (held long, neutral). The piece after it: she steps onto the ledge and
@@ -17,13 +17,13 @@ export default {
   title: tr('The Shoulder'),
   about: 6,
   skipped: { long: false },
-  points: ['sophia#shoulder_r'],
+  points: ['sophia#chest'],
   keys: ['let'],
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('Under the clear water a ledge, and the girl’s shoulder under an old hand.') });
     const over = settle(signal, () => g.set('let', 1));
     g.set('let', 0);
-    const how = await letGo(g, b, mg, { at: 'sophia#shoulder_r', take: 1.2, wait: WAIT, sign: () => {
+    const how = await letGo(g, b, mg, { at: 'sophia#chest', take: 1.2, wait: WAIT, sign: () => {
       g.set('let', 0.3, 0.6);
       mg.plate.set({ phrase: tr('The shoulder stirs under the hand: the ledge is so near.') });
     } });

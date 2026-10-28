@@ -24,7 +24,7 @@ export default {
     const over = settle(signal, () => g.set('cover', 1, 0.6));
     send('cover', 0.5);
     const r = await keep(g, b, mg, { at: 'beds#cover', seconds: SECONDS, take: 1,
-      frame: ({ u, on }) => send('cover', on ? 0.3 + 0.7 * u : 0.5),
+      frame: ({ fill, taken }) => send('cover', taken ? 0.3 + 0.7 * fill : 0.5 + 0.5 * fill),
       slip: () => g.mood('sophia', 'afraid') });
     if (!r) return this.skipped;
     send('cover', 1);

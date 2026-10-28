@@ -29,8 +29,8 @@ export default {
     g.set('gap_open', 1, 0.4);
     let hand = 1;
     const r = await keep(g, b, mg, { at: 'gap#palm', seconds: SECONDS, take: 0.8,
-      frame: ({ u, held, on, dt }) => {
-        hand = !on ? 1 : held ? Math.min(1, hand + dt * 0.8) : Math.max(0.4, Math.min(hand, u));
+      frame: ({ fill, taken, held, dt }) => {
+        hand = !taken ? 1 : held ? Math.min(1, hand + dt * 0.8) : Math.max(0.4, Math.min(hand, fill));
         send('gap_hand', hand);
       },
       slip: () => g.mood('sophia', 'sad') });

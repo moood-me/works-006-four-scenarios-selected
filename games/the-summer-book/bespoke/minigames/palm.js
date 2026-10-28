@@ -28,7 +28,7 @@ export default {
     g.set('gap_hand', 0);
     g.set('gap_open', 1, 0.4);
     const r = await keep(g, b, mg, { at: 'gap#palm', seconds: SECONDS, take: 0.8,
-      frame: ({ u, on }) => send('gap_palm', on ? u : 1) });
+      frame: ({ fill, taken }) => send('gap_palm', taken ? fill : 1) });
     if (!r) return this.skipped;
     send('gap_palm', 1);
     g.set('gap_open', 0, 0.6);

@@ -21,13 +21,14 @@
 //     held(u) each frame of it, early() — let go after it had begun to fill); then the call to let go: the sign
 //     (sign(): what the scene shows — the other pulls, the thing slides — and the plate's new line; the ghost cannot
 //     show it under a finger that is down), and the groove's arc of time running down `wait` s (5 — the scenario's):
-//     the finger lifted — let go; the arc run out — it goes by itself, “held long”. Never touched for ALONE s — the
-//     same as held long (the scenario's way out by time). → 'let' | 'long' | null (the mini-game ended first)
+//     the finger lifted — let go; the arc run out — it goes by itself, “held long”. Its mark never pressed for ALONE s —
+//     the same as held long (the scenario's way out by time). → 'let' | 'long' | null (the mini-game ended first)
 //   keep(g, b, mg, {at, seconds, take, frame, slip}) — “hold” that ends by its count (scenario §7: “hold and balance
-//     end by their count; dropped — it colours”): a groove at `at`; the count (`seconds`) begins at the first touch
-//     (never touched for ALONE s — over, as if held); frame({u, held, t, dt, on}) each frame (u — how far the hold has
-//     taken: the fill, `take` s to full; on — touched yet); let go after it had filled — slip() (a mistake: the fill ebbs, the ghost shows the
-//     holding again; hold again and it fills again). → {slips} | null
+//     end by their count; dropped — it colours”): a groove at `at`; the count (`seconds`) begins as the groove is first
+//     pressed (never pressed for ALONE s — over, as if held); frame({fill, taken, held, t, dt, on}) each frame (fill —
+//     the hold's, `take` s to full; taken — it has been full once, or slipped: till then the thing stays as it was, the
+//     touch never takes it away; on — pressed yet); let go after it had nearly filled — slip() (a mistake: the fill
+//     ebbs, the ghost shows the holding again; hold again and it fills again). The bar — the time held. → {slips} | null
 //   slowly(g, b, mg, {at, pulls, frame, jerk}) — “pull slowly” (scenario §7: carefully, making up one's mind): a dashed
 //     ring at `at`; each slow pull (a tear of TEAR of the frame's height) draws a length out (frame(u) — how far all of
 //     it has come, 0…1, moving with the finger, kept when it lets go). Too fast (faster than FAST a second) — it jerks
@@ -94,7 +95,7 @@ export async function letGo(g, b, mg, { at, take = 1.2, sign = () => {}, wait = 
   const taught = teach(b, mg, [hold]);
   const ebb = hold.on('up', () => { if (hold.state.fill > 0.15 && hold.state.fill < 1) early(); });
   let touched = false;
-  const touch = mg.on('down', () => { touched = true; });
+  const touch = hold.on('down', () => { touched = true; });
   const t00 = mg.t;
   const took = await until(mg, ({ t }) => {
     const s = hold.state;
@@ -128,33 +129,40 @@ export async function letGo(g, b, mg, { at, take = 1.2, sign = () => {}, wait = 
 export async function keep(g, b, mg, { at, seconds, take = 1, frame = () => {}, slip = () => {} }) {
   const mark = mg.mark({ at, kind: 'groove' });
   const hold = mg.hold({ on: mark, seconds: take, drain: 1.2 });
-  teach(b, mg, [hold]);
-  let begun = null, slips = 0;
+  const taught = teach(b, mg, [hold]);
+  // begun: the mark first pressed; taken: the hold once full, or let go after it had nearly filled (a slip) — till
+  // then the thing stays as it is; kept: the time held
+  let begun = null, slips = 0, taken = false, kept = 0;
   const t00 = mg.t;
-  const off = hold.on('up', () => {
-    if (hold.state.fill < 1) mg.show({ gestures: [hold] });
-    if (hold.state.fill < 0.6) return;
-    slips++;
-    g.failed();
-    mg.error('early', { at: mark, chip: true });
-    slip(slips);
-  });
-  const touch = mg.on('down', () => { begun ??= mg.t; });
+  const offs = [
+    hold.on('down', () => { begun ??= mg.t; }),
+    hold.on('up', () => {
+      if (hold.state.fill < 1) mg.show({ gestures: [hold] });
+      if (hold.state.fill < 0.6) return;
+      taken = true;
+      slips++;
+      g.failed();
+      mg.error('early', { at: mark, chip: true });
+      slip(slips);
+    }),
+  ];
   const done = await until(mg, ({ t, dt }) => {
     const s = hold.state, now = begun == null ? 0 : t - begun;
-    frame({ u: s.fill, held: s.held, t: now, dt, on: begun != null });
-    mg.plate.set({ fill: clamp(now / seconds), glow: s.held ? 'good' : begun == null ? 'idle' : 'bad' });
+    if (s.fill >= 1) taken = true;
+    if (s.held) kept += dt;
+    frame({ fill: s.fill, taken, held: s.held, t: now, dt, on: begun != null });
+    mg.plate.set({ fill: clamp(kept / seconds), glow: s.held ? 'good' : begun == null ? 'idle' : 'bad' });
     return (begun != null && now >= seconds) || (begun == null && t - t00 >= ALONE);
   });
-  off();
-  touch();
+  offs.forEach(f => f());
+  taught.remove();
   if (!done) return null;
   mg.snap({ at: mark });
   mark.remove();
   return { slips };
 }
 
-const TEAR = 0.1, FAST = 1.8, BACK = 0.12, LIMIT = 15, SELF = 1.5;
+const TEAR = 0.1, FAST = 2.5, BACK = 0.12, LIMIT = 15, SELF = 1.5;
 export async function slowly(g, b, mg, { at, pulls = 3, frame = () => {}, jerk = () => {} }) {
   mg.plate.set({ notches: Array.from({ length: pulls - 1 }, (_, i) => (i + 1) / pulls) });
   const end = mg.mark({ at, kind: 'dash' });
@@ -207,7 +215,7 @@ const OFF = 0.9;
 export async function balance(g, b, mg, { at, seconds, keep: need = null, width = 0.45, push = () => 0, frame = () => {}, slip = () => {}, bar = u => u }) {
   const lead = mg.lead({ zone: { at: 0, width }, steer: 'rate', release: 'stay', push: 0 });
   const mark = mg.mark({ at, kind: 'ring', quiet: true, danger: 0 });
-  teach(b, mg, [lead]);
+  const taught = teach(b, mg, [lead]);
   let begun = null, kept = 0, slips = 0, caught = 0;
   const touch = mg.on('down', () => { begun ??= mg.t; });
   const t00 = mg.t;
@@ -229,6 +237,7 @@ export async function balance(g, b, mg, { at, seconds, keep: need = null, width 
     return (need != null && kept >= need) || (begun != null && now >= seconds) || (begun == null && t - t00 >= ALONE);
   });
   touch();
+  taught.remove();
   if (!done) return null;
   mark.remove();
   lead.remove();
