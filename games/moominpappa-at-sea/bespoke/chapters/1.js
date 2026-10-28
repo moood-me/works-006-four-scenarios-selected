@@ -38,7 +38,7 @@ export default {
       await strip;
       await g.say('papa', 'The moon’s path. Pretty');
       await glance;
-      const boat = await g.choose('boat', { 'tiller#grip': [
+      const boat = await g.choose('boat', { 'lantern#flame': [
         { id: 'douse', label: tr('“Put out the lantern. We’ll go by the stars.”') },
         { id: 'keep', label: tr('“Leave it burning. Mama will wake up and be frightened.”') },
         { id: 'hold', label: tr('“Here. Shine it back, since you’re looking.”') },
