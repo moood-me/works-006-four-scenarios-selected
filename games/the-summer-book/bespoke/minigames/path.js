@@ -29,10 +29,11 @@ const KEEP = 1.6, STONE = 7, ALONE = 12, OFF = 0.9, PUSH = 0.6;
 const REST = 7.5, BREATH = 7.5;
 const WALK = 8000; // ms: the longest a step to a stone is waited for
 
-// path({title, phrase, about, slip: 'sway' | 'dip' | 'rest', short}) → a minigame; short(state) — the walk ends at the
-// second stone; breath(state) — she sits down at the second stone to get her breath
-export function path({ title, phrase, about, slip, short = () => false, breath = () => false }) {
-  const keyed = { sway: ['lantern_sway', 'grab'], dip: ['lantern_dip'], rest: ['rest'] }[slip];
+// path({title, phrase, about, slip: 'sway' | 'dip' | 'rest', short, breath, body}) → a minigame; short(state) — the walk
+// ends at the second stone; breath(state) — she sits down at the second stone to get her breath; body — the scene shows
+// the arrow on her (`balance` −1 left … 1 right: her arm out to that side, the cape's)
+export function path({ title, phrase, about, slip, short = () => false, breath = () => false, body = false }) {
+  const keyed = [...{ sway: ['lantern_sway', 'grab'], dip: ['lantern_dip'], rest: ['rest'] }[slip], ...(body ? ['balance'] : [])];
   return {
     title, about,
     skipped: { slips: 0 },
@@ -47,6 +48,7 @@ export function path({ title, phrase, about, slip, short = () => false, breath =
         if (slip === 'sway') { g.set('lantern_sway', 0, 0.6); g.set('grab', false); }
         if (slip === 'dip') g.set('lantern_dip', 0, 0.6);
         if (slip === 'rest') g.set('rest', false);
+        if (body) g.set('balance', 0, 0.6);
       });
       g.set('step', 1);
       if (slip === 'sway') { g.set('lantern_sway', 0); g.set('grab', false); }
@@ -72,6 +74,7 @@ export function path({ title, phrase, about, slip, short = () => false, breath =
         mg.sceneTurn(true);
         quiet();
         lead.set({ push: 0 });
+        if (body) g.set('balance', 0, 0.6);
         send('step', n);
         g.told(`step:stone${n}`, WALK).then(() => { if (phase === 'walk') phase = 'there'; });
       };
@@ -81,6 +84,7 @@ export function path({ title, phrase, about, slip, short = () => false, breath =
         quiet();
         lead.set({ push: 0 });
         g.set('rest', true);
+        if (body) g.set('balance', 0, 0.6);
         mg.plate.set({ phrase: tr('She sits down on a low stone to get her breath.') });
       };
       const t00 = mg.t;
@@ -101,6 +105,7 @@ export function path({ title, phrase, about, slip, short = () => false, breath =
           lead.set({ push: begun == null ? 0 : t < caught ? -Math.sign(s.arrow) * 1.6 * Math.min(1, Math.abs(s.arrow) * 4) : wobble(t - begun, PUSH, n) });
           if (begun != null && s.in) kept += dt;
           if (slip === 'sway') send('lantern_sway', clamp(Math.abs(s.arrow)));
+          if (body) send('balance', clamp(s.arrow, -1, 1));
           ring.set({ danger: clamp(Math.abs(s.arrow) / OFF) });
           mg.plate.set({ fill: clamp((n - 2 + clamp(kept / KEEP)) / (last - 1)), glow: begun == null ? 'idle' : s.in ? 'good' : 'bad' });
           const alone = begun == null && t - t00 >= ALONE, late = begun != null && t - Math.max(from, begun) >= STONE;
@@ -131,6 +136,7 @@ export function path({ title, phrase, about, slip, short = () => false, breath =
       if (!done) return this.skipped;
       if (slip === 'sway' && grabbed !== Infinity) { g.set('grab', false); g.mood('sophia', 'neutral'); }
       mg.sceneTurn(false);
+      if (body) g.set('balance', 0, 0.6);
       over();
       await mg.end({ as: slips ? 'flawed' : 'clean' });
       return { slips };
