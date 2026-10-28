@@ -6,8 +6,8 @@
 //   keys(g) → send(key, value) — a key of the scene set when it differs by more than 0.01 from what the scene has now,
 //     reaching 0 or 1 always
 //   teach(b, mg, gestures) — the ghost shows the gestures as soon as their marks are in the frame — every time, so that
-//     what the hands do is plain from the first second — and again whenever the player stands still (3 s, then every
-//     6); gone with the gestures
+//     what the hands do is plain from the first second — and again whenever the player stands still (2 s, then every
+//     4); gone with the gestures
 //   settle(signal, fn) → over() — fn if the minigame is cut short (skipped, the step left): the scene left as a
 //     minigame played through leaves it (an insert closed, a key at its end); over() — it is played through (called
 //     just before mg.end): fn no more
@@ -31,7 +31,7 @@ export function keys(g) {
     g.set(key, value);
   };
 }
-export const teach = (b, mg, gestures) => b.minigame.tricks.teach(mg, gestures, { still: [3, 6] });
+export const teach = (b, mg, gestures) => b.minigame.tricks.teach(mg, gestures, { still: [2, 4] });
 export function pace(tau = 0.25) {
   let v = 0, was = null;
   return {

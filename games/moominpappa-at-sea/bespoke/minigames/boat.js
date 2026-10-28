@@ -2,8 +2,8 @@
 // boat): rhythm with the other — the boy heaves in his own time: a breathing ring on the boat (`boat#boat`), held while
 // it grows (the boy heaves — they pull together: the boat comes up the rocks, `boat_up` += a share of the heave), let
 // go while it falls (the boy takes breath). Pulling while he rests — a jerk out of time (a mistake: too early or too
-// late; once a breath): the boy looks round (`troll` surprised for a moment). Up (`boat_up` 1) — the end (clean; flawed
-// if it jerked); the piece after it: they straighten up.
+// late; once a breath): the boy looks round (`troll` surprised for a moment), and the ghost shows his time again.
+// Up (`boat_up` 1) — the end (clean; flawed if it jerked); the piece after it: they straighten up.
 //   What he does: Papa and his son pull the boat up the rocks before the storm.
 //   What they want: to save the boat — together, without words.
 //   How it is for him: the one «together» of father and son; the boy says nothing.
@@ -30,6 +30,7 @@ export default {
     const hull = mg.mark({ at: 'boat#boat', kind: 'ring' });
     const heave = mg.rhythm({ on: hull, bpm: BPM, breath: true });
     teach(b, mg, [heave]);
+    let shown = null; // (the ghost shown again after a jerk: what his time is)
     let up = 0, jerks = 0, jerked = -1, back = 0, breath = null, since = 0;
     const done = await until(mg, ({ dt }) => {
       const s = heave.state;
@@ -42,6 +43,8 @@ export default {
         mg.error('timing', { at: hull });
         g.mood('troll', 'surprised');
         back = 1.2;
+        shown?.remove();
+        shown = mg.show({ gestures: [heave] });
       }
       if (back > 0 && (back -= dt) <= 0) g.mood('troll', 'neutral');
       send('boat_up', up);
