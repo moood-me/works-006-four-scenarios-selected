@@ -144,8 +144,7 @@ function film(scene) {
       run: async s => {
         s.move('island', 0.6, { over: 10, ease: 'linear' });
         await dolly(s, VIEW, 2);
-        s.person('grandma').mood('smile');
-        s.person('grandma').look([0.45, -1.2, 0]);
+        s.person('grandma').mood('eyes_closed');
         await cutTo(s, CLOSE('grandma'));
         await tell(s, 'eyes_closed:smile', 5);
       },
@@ -268,7 +267,8 @@ function film(scene) {
     },
     oars_boat: {
       after: ['look_house', 'cat_gift', 'sky'],
-      from: () => ({ ...VIEW, island: 0.15, dinghy: false, ...AT('grandma', [1.0, 0.6], { turn: 270 }), ...AT('sophia', 'bow'), ...AT('papa', [0.6, 0.9], { turn: 90 }) }),
+      from: () => ({ ...VIEW, island: 0.15, dinghy: true, ...AT('grandma', [1.0, 0.6], { turn: 270 }),
+        ...AT('sophia', PLACES.sophia.bow.at, { turn: 180, sophia_do: PLACES.sophia.bow.do }), ...AT('papa', [0.6, 0.9], { turn: 90 }) }),
       run: async s => {
         s.person('papa').reach({ r: 'grandma#elbow_l' });
         await tell(s, 'oars_boat:board', 2);
@@ -294,16 +294,16 @@ function film(scene) {
           await cutTo(s, CLOSE('papa'));
           await tell(s, 'oars_boat:better', SAY('Better'));
         } else {
-          put(s, 'papa', [0.4, 4.3]);
+          await s.person('papa').walk([[0.4, 3.0], [0.4, 4.3]]);
           await s.person('papa').do('tie');
-          s.set('dinghy', true);
           await tell(s, 'oars_boat:tie', 1);
+          await s.person('papa').walk([PLACES.papa.stern.at]);
           put(s, 'papa', 'stern');
         }
       },
     },
     promise: {
-      after: ['window_talk', 'tent_talk', 'oars_boat', 'shawl_talk'],
+      after: ['window_talk', 'tent_talk', 'oars_boat', 'shawl_talk', 'sky'],
       from: () => ({ ...VIEW, island: 0.55, ...SEATS() }),
       run: async s => {
         const so = s.person('sophia');
@@ -342,7 +342,7 @@ function film(scene) {
       },
     },
     oars_last: {
-      after: ['oars_boat', 'promise'],
+      after: ['oars_boat', 'promise', 'sky'],
       from: () => ({ ...VIEW, island: 0.55, ...SEATS() }),
       run: async s => {
         s.move('fog', 0.85, { over: 10 });

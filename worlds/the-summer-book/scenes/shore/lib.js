@@ -109,8 +109,9 @@ const PLACES = {
 };
 // the cat's places (cat_at): [across, distance, elevation over the land] and which way he faces (1 right, −1 left) —
 // on the porch's landing, lying on its rail, on the path above the rock (where he comes from), on the rock past the
-// two of them (where he goes)
+// two of them, and away behind the juniper by the path (where he goes out of sight)
 const CAT = {
+  away: { at: [-2.4, 12.3, 0], dir: -1 },
   porch: { at: [-6.09, 13.97, 0.62], dir: 1 },
   rail: { at: [-6.87, 14.53, 1.48], dir: 1 },
   path: { at: [-2.6, 7.9, 0], dir: 1 },
@@ -174,6 +175,8 @@ const SAY = (...lines) => lines.reduce((t, l) => t + 0.3 + 0.06 * l.length, 0);
 
 function film(scene) {
   const get = k => scene.get(k);
+  // (her shawl lost behind the tent — «За палаткой», «Платок»: she is in the dress alone from then on)
+  const ATS = (id, at, more = {}) => AT(id, at, id === 'grandma' && get('shawl_lost') ? { grandma_wear: { garment: 'long_dress' }, ...more } : more);
   // the camera moved there over seconds (its own keys; a shot's target let go first); cut to a shot made ready
   const dolly = (s, cam, over = 2.5) => {
     s.set('camera_target', null);
@@ -198,7 +201,12 @@ function film(scene) {
   };
   // put one at a place of PLACES (set at once, as the place says)
   const put = (s, id, at) => {
-    for (const [k, v] of Object.entries(AT(id, at, Array.isArray(at) ? { turn: get(`${id}_turn`) } : {}))) s.set(k, v);
+    for (const [k, v] of Object.entries(ATS(id, at, Array.isArray(at) ? { turn: get(`${id}_turn`) } : {}))) s.set(k, v);
+  };
+  // 12: walk to a place (steps), then be there as the place says (sat down, turned)
+  const settle = async (s, id, at, gait = null) => {
+    await go(s, id, [PLACES[id][at].at], null, gait);
+    put(s, id, at);
   };
   const tell = async (s, moment, wait = 0) => {
     s.tell(moment);
@@ -208,7 +216,7 @@ function film(scene) {
     // ── Prologue ──
     peonies: {
       from: () => ({ ...(PORCH), stems: 0, sophia_here: false,
-        ...AT('grandma', 'step', { grandma_reach: { r: 'peony:2#stems' }, grandma_look: 'peony:2#stems' }) }),
+        ...ATS('grandma', 'step', { grandma_reach: { r: 'peony:2#stems' }, grandma_look: 'peony:2#stems' }) }),
       run: async s => {
         await s.wait(1.5);
         await tell(s, 'peonies:start', SAY('This spring Sophia’s mother died. That summer, as always, they lived on the island: Papa, Sophia and Grandmother'));
@@ -218,7 +226,7 @@ function film(scene) {
     },
     teeth: {
       after: 'peonies',
-      from: () => ({ ...(PORCH_NEAR), ...AT('grandma', 'step') }),
+      from: () => ({ ...(PORCH_NEAR), ...ATS('grandma', 'step') }),
       run: async s => {
         const gm = s.person('grandma');
         gm.reach(null);
@@ -240,33 +248,34 @@ function film(scene) {
         await cutTo(s, SHOT('grandma', 'medium', [0.5, 0.45], 0));
         gm.reach({ r: 'porch#rail' });
         await gm.do('rise_slow');
-        put(s, 'grandma', 'porch');
+        put(s, 'grandma', PLACES.grandma.step.at);
+        await settle(s, 'grandma', 'porch', 'old_walk');
         await tell(s, 'teeth:up', SAY('Let’s go down to the water'));
       },
     },
     ledge: {
-      from: () => ({ ...VIEW, rings: 0, ...AT('grandma', SPOT.above, { turn: 140 }), ...AT('sophia', [-1.0, 7.0], { turn: 140 }) }),
+      from: () => ({ ...VIEW, rings: 0, ...ATS('grandma', SPOT.above, { turn: 140 }), ...AT('sophia', [-1.0, 7.0], { turn: 140 }) }),
       run: async s => {
         await s.all(go(s, 'sophia', [[0.4, 6.0], [1.0, 5.5]], 110), go(s, 'grandma', [[-0.3, 6.0], SPOT.edge], 115));
         put(s, 'sophia', 'edge');
         put(s, 'grandma', 'ledge');
-        await cutTo(s, NEAR([0.6, 5.5], 2.8, 0.1, 0.04));
+        await cutTo(s, NEAR([0.6, 5.5], 2.8, 0.1, 0.18));
         await tell(s, 'ledge:edge', SAY('I want to see where the bottom is'));
       },
     },
     wrist: {
       after: 'ledge',
-      from: () => ({ ...NEAR([0.6, 5.5], 2.8, 0.1, 0.04), pull: 0, ...AT('grandma', 'ledge'), ...AT('sophia', 'edge') }),
+      from: () => ({ ...NEAR([0.6, 5.5], 2.8, 0.1, 0.18), pull: 0, ...ATS('grandma', 'ledge'), ...AT('sophia', 'edge') }),
       run: async s => {
         await s.person('sophia').do('lean_over');
         s.person('grandma').reach({ r: 'sophia#hand_l' });
-        await dolly(s, NEAR([0.6, 5.5], 2.4, 0.2, 0.06), 2);
+        await cutTo(s, NEAR([0.6, 5.5], 2.4, 0.2, 0.22));
         await tell(s, 'wrist:bottom', 1);
       },
     },
     wrist_after: {
       after: 'wrist',
-      from: () => ({ ...NEAR([0.6, 5.5], 2.4, 0.2, 0.06), ...AT('grandma', 'ledge', { grandma_reach: { r: 'sophia#hand_l' } }), ...AT('sophia', 'edge') }),
+      from: () => ({ ...NEAR([0.6, 5.5], 2.4, 0.2, 0.06), ...ATS('grandma', 'ledge', { grandma_reach: { r: 'sophia#hand_l' } }), ...AT('sophia', 'edge') }),
       run: async s => {
         const gm = s.person('grandma');
         const so = s.person('sophia');
@@ -276,9 +285,8 @@ function film(scene) {
         await go(s, 'sophia', [[0.3, 5.9]], 250);
         await so.do('stamp');
         await tell(s, 'wrist_after:stamp', SAY('I hate you!') + 1.5);
-        put(s, 'grandma', 'edge_sit');
-        await go(s, 'sophia', [[0.95, 5.65]], 120);
-        put(s, 'sophia', 'edge_sit');
+        await settle(s, 'grandma', 'edge_sit');
+        await settle(s, 'sophia', 'edge_sit');
         await dolly(s, NEAR([0.8, 5.4], 2.4, 0.6, 0.1), 2);
         await tell(s, 'wrist_after:sat', SAY('Don’t stick to me. It’s hot') + 2);
         gm.reach({ l: 'sophia#hand_r' });
@@ -289,15 +297,15 @@ function film(scene) {
     },
     shoulder: {
       after: 'ledge',
-      from: () => ({ ...NEAR([0.6, 5.5], 2.8, 0.1, 0.04), let: 0, ...AT('grandma', 'ledge'), ...AT('sophia', 'edge') }),
+      from: () => ({ ...NEAR([0.6, 5.5], 2.8, 0.1, 0.18), let: 0, ...ATS('grandma', 'ledge'), ...AT('sophia', 'edge') }),
       run: async s => {
         s.person('grandma').reach({ r: 'sophia#shoulder_r' });
-        await dolly(s, NEAR([0.8, 5.4], 2.6, 0.15, 0.05), 2);
+        await cutTo(s, NEAR([0.6, 5.5], 2.4, 0.15, 0.2));
       },
     },
     slip: {
       after: 'shoulder',
-      from: () => ({ ...NEAR([0.8, 5.4], 2.6, 0.15, 0.05), ...AT('grandma', 'ledge'), ...AT('sophia', 'edge') }),
+      from: () => ({ ...NEAR([0.8, 5.4], 2.6, 0.15, 0.05), ...ATS('grandma', 'ledge'), ...AT('sophia', 'edge') }),
       run: async s => {
         const so = s.person('sophia');
         s.person('grandma').reach(null);
@@ -315,22 +323,22 @@ function film(scene) {
     },
     down: {
       after: 'ledge',
-      from: () => ({ ...NEAR([0.6, 5.5], 2.8, 0.1, 0.04), step: 0, ...AT('grandma', 'ledge'), ...AT('sophia', 'edge') }),
+      from: () => ({ ...NEAR([0.6, 5.5], 2.8, 0.1, 0.18), step: 0, ...ATS('grandma', 'ledge'), ...AT('sophia', 'edge') }),
       run: async s => {
-        await dolly(s, NEAR([0.9, 5.4], 3.2, 0.2, 0.06), 2);
+        await cutTo(s, NEAR([0.6, 5.5], 2.8, 0.1, 0.24));
       },
     },
     down_after: {
       after: 'down',
-      from: () => ({ ...NEAR([0.9, 5.4], 3.2, 0.2, 0.06), ...AT('grandma', 'knee'), ...AT('sophia', 'edge'), ...AT('papa', SPOT.door, { turn: 200 }) }),
+      from: () => ({ ...NEAR([0.9, 5.4], 3.2, 0.2, 0.06), ...ATS('grandma', 'knee'), ...AT('sophia', 'edge'), ...AT('papa', SPOT.door, { turn: 200 }) }),
       run: async s => {
         const so = s.person('sophia');
-        await go(s, 'sophia', [PLACES.sophia.shelf.at], 230);
-        put(s, 'sophia', 'shelf');
+        put(s, 'papa', SPOT.door);
+        s.set('papa_turn', 200);
+        await settle(s, 'sophia', 'shelf');
         so.mood('laugh');
         await tell(s, 'down_after:you', SAY('You too!') + 1);
-        await go(s, 'grandma', [SPOT.edge]);
-        put(s, 'grandma', 'edge_sit');
+        await settle(s, 'grandma', 'edge_sit');
         s.person('grandma').mood('tired');
         await tell(s, 'down_after:sat', 2);
         await s.all(dolly(s, VIEW, 3), go(s, 'papa', PAPA_DOWN.concat([[0.25, 5.6]]), 120));
@@ -338,14 +346,15 @@ function film(scene) {
         await tell(s, 'down_after:hand', SAY('Myself') + 0.5);
         s.person('papa').reach(null);
         await s.person('grandma').do('rise_slow');
-        put(s, 'grandma', 'ledge');
+        put(s, 'grandma', SPOT.edge);
+        await settle(s, 'grandma', 'ledge');
         await tell(s, 'down_after:up', 2);
       },
     },
     // ── Chapter I ──
     eriksson: {
       from: () => ({ ...NEAR(SPOT.pier_end, 6, 0, 0.02), rowboat: 0, eriksson_here: true,
-        ...AT('grandma', 'pier'), ...AT('sophia', get('skirt') ? 'pier' : 'pier_edge', get('skirt') ? { sophia_reach: { r: 'grandma#hips' } } : {}) }),
+        ...ATS('grandma', 'pier'), ...AT('sophia', get('skirt') ? 'pier' : 'pier_edge', get('skirt') ? { sophia_reach: { r: 'grandma#hips' } } : {}) }),
       run: async s => {
         await s.move('rowboat', 1, { over: 12, ease: 'out' });
         await tell(s, 'eriksson:in', 1);
@@ -365,11 +374,16 @@ function film(scene) {
     },
     eriksson_off: {
       after: 'eriksson',
-      from: () => ({ ...NEAR(SPOT.pier_end, 6, 0, 0.02), rowboat: 0.85, eriksson_here: true, ...AT('grandma', 'pier'),
+      from: () => ({ ...NEAR(SPOT.pier_end, 6, 0, 0.02), rowboat: 0.85, eriksson_here: true, ...ATS('grandma', 'pier'),
         ...AT('sophia', get('skirt') ? 'pier' : 'pier_edge') }),
       run: async s => {
         s.person('grandma').reach(null);
         s.set('eriksson_look', null);
+        if (get('oar')) {
+          s.person('eriksson').reach({ r: 'pier#end' });
+          await s.wait(1.2);
+          s.person('eriksson').reach(null);
+        }
         await dolly(s, NEAR(SPOT.pier_end, 7.5, 0, 0.02), 2);
         await s.move('rowboat', 0, { over: 12, ease: 'in' });
         await tell(s, 'eriksson_off:gone', 0.5);
@@ -380,7 +394,7 @@ function film(scene) {
       },
     },
     shell: {
-      from: () => ({ ...(PORCH), shell: false, ...AT('grandma', SPOT.foot, { turn: 30, grandma_with: ['cigarette'] }),
+      from: () => ({ ...(PORCH), shell: false, ...ATS('grandma', SPOT.foot, { turn: 30, grandma_with: ['cigarette'] }),
         ...AT('papa', 'veranda', { papa_look: 'grandma', papa_do: 'write' }) }),
       run: async s => {
         await s.wait(1);
@@ -392,13 +406,13 @@ function film(scene) {
     },
     nets: {
       from: () => ({ ...NEAR(SPOT.by_boat, 4.5, 0.3, 0.04), net: true, knot: 0, ...AT('papa', 'net'),
-        ...AT('grandma', [-3.0, 11.6], { turn: 160, grandma_with: ['mug'] }) }),
+        ...ATS('grandma', [-3.0, 11.6], { turn: 160, grandma_with: ['mug'] }) }),
       run: async s => {
         await go(s, 'grandma', [[-1.9, 13.2], [-1.4, 13.7]], 300);
         s.person('grandma').with(null);
         s.person('papa').with(['mug']);
         await tell(s, 'nets:coffee', 1.5);
-        put(s, 'grandma', 'net');
+        await settle(s, 'grandma', 'net');
         await s.wait(1.5);
         await tell(s, 'nets:sat', SAY('Mamma. Tell me, if anything', 'I’m not going to be the last to know any more') + 1.5);
         s.person('papa').with(null);
@@ -407,7 +421,7 @@ function film(scene) {
     },
     nets_say: {
       after: 'nets',
-      from: () => ({ ...NEAR(SPOT.by_boat, 3.6, 0.4, 0.05), net: true, ...AT('papa', 'net'), ...AT('grandma', 'net') }),
+      from: () => ({ ...NEAR(SPOT.by_boat, 3.6, 0.4, 0.05), net: true, ...AT('papa', 'net'), ...ATS('grandma', 'net') }),
       run: async s => {
         s.person('papa').with(['mug']);
         await s.person('papa').do('drink');
@@ -418,7 +432,7 @@ function film(scene) {
     },
     nets_nothing: {
       after: 'nets',
-      from: () => ({ ...NEAR(SPOT.by_boat, 3.6, 0.4, 0.05), net: true, ...AT('papa', 'net'), ...AT('grandma', 'net') }),
+      from: () => ({ ...NEAR(SPOT.by_boat, 3.6, 0.4, 0.05), net: true, ...AT('papa', 'net'), ...ATS('grandma', 'net') }),
       run: async s => {
         s.person('papa').do('untangle_fast', { loop: true });
         await tell(s, 'nets_nothing:fast', SAY('All right') + 2);
@@ -431,7 +445,7 @@ function film(scene) {
     },
     net: {
       after: 'nets',
-      from: () => ({ ...NEAR(SPOT.by_boat, 3.6, 0.4, 0.05), net: true, knot: 0, ...AT('papa', 'net'), ...AT('grandma', 'net') }),
+      from: () => ({ ...NEAR(SPOT.by_boat, 3.6, 0.4, 0.05), net: true, knot: 0, ...AT('papa', 'net'), ...ATS('grandma', 'net') }),
       run: async s => {
         s.person('grandma').reach({ r: 'net#knot', l: 'net#knot' });
         s.person('grandma').look('net#knot');
@@ -441,9 +455,10 @@ function film(scene) {
     net_after: {
       after: 'net',
       from: () => ({ ...NEAR(SPOT.by_boat, 3.6, 0.4, 0.05), net: true, knot: 1, ...AT('papa', 'net'),
-        ...AT('grandma', 'net', { grandma_reach: { r: 'net#knot', l: 'net#knot' } }) }),
+        ...ATS('grandma', 'net', { grandma_reach: { r: 'net#knot', l: 'net#knot' } }) }),
       run: async s => {
         await dolly(s, NEAR(SPOT.by_boat, 3.6, 0.4, 0.05), 1.5);
+        if (get('net_self')) s.person('grandma').reach(null);
         await tell(s, 'net_after:together', 3);
         s.person('papa').look('grandma');
         await tell(s, 'net_after:thanks', SAY('Thank you, Mamma'));
@@ -456,7 +471,7 @@ function film(scene) {
     // ── Chapter II ──
     calm: {
       from: () => ({ ...NEAR([-0.4, 6.4], 4.2, 0.4, 0.05), rings: 0, cat_at: 'path', cat_placed: 'path', cat_a: -2.6, cat_d: 7.9, cat_e: 0, cat_pose: 'sit',
-        cat_dir: 1, ...AT('grandma', 'warm'), ...AT('sophia', 'warm') }),
+        cat_dir: 1, ...ATS('grandma', 'warm'), ...AT('sophia', 'warm') }),
       run: async s => {
         const so = s.person('sophia');
         await s.wait(2);
@@ -467,8 +482,16 @@ function film(scene) {
         so.reach({ r: 'cat#back', l: 'cat#back' });
         await s.wait(1.5);
         so.reach(null);
+        s.set('cat_at', 'away');
         await tell(s, 'calm:gone', SAY('Why doesn’t he love me? I feed him', 'What do you think?', 'Don’t ask back!', 'Then don’t ask me anything either!'));
+        await s.until(() => Math.hypot((get('cat_a') ?? 0) - CAT.away.at[0], (get('cat_d') ?? 0) - CAT.away.at[1]) < 0.05);
         s.set('cat_pose', 'none');
+        const gm = s.person('grandma');
+        s.set('grandma_on', null);
+        await gm.do('rise');
+        put(s, 'grandma', PLACES.grandma.warm.at);
+        await gm.turn(PLACES.grandma.warm_back.turn);
+        await gm.do('sit_down');
         put(s, 'grandma', 'warm_back');
         await tell(s, 'calm:back', 2);
         s.set('grandma_with', ['pebble']);
@@ -478,7 +501,7 @@ function film(scene) {
     },
     calm_after: {
       after: 'calm',
-      from: () => ({ ...NEAR([-0.4, 6.4], 4.2, 0.4, 0.05), rings: 1, cat_pose: 'none', grandma_with: null, ...AT('grandma', 'warm_back'), ...AT('sophia', 'warm') }),
+      from: () => ({ ...NEAR([-0.4, 6.4], 4.2, 0.4, 0.05), rings: 1, cat_pose: 'none', grandma_with: null, ...ATS('grandma', 'warm_back'), ...AT('sophia', 'warm') }),
       run: async s => {
         await dolly(s, NEAR([-0.4, 6.4], 4.2, 0.4, 0.05), 1.5);
         await tell(s, 'calm_after:still', 3);
@@ -520,7 +543,7 @@ function film(scene) {
       },
     },
     graves: {
-      from: () => ({ ...NEAR([-1.9, 9.4], 3.6, 0.5, 0.08), graves: 0, ...AT('grandma', 'graves'), ...AT('sophia', 'graves') }),
+      from: () => ({ ...NEAR([-1.9, 9.4], 3.6, 0.5, 0.08), graves: 0, ...ATS('grandma', 'graves'), ...AT('sophia', 'graves') }),
       run: async s => {
         s.person('grandma').with(['knife', 'chip']);
         s.person('grandma').do('carve', { loop: true });
@@ -549,7 +572,7 @@ function film(scene) {
       },
     },
     moon_path: {
-      from: () => ({ ...VIEW, ...AT('grandma', SPOT.foot, { turn: 150 }), ...AT('sophia', [-6.0, 13.1], { turn: 150, sophia_reach: { r: 'grandma#hand_l' } }) }),
+      from: () => ({ ...VIEW, ...ATS('grandma', SPOT.foot, { turn: 150 }), ...AT('sophia', [-6.0, 13.1], { turn: 150, sophia_reach: { r: 'grandma#hand_l' } }) }),
       run: async s => {
         s.person('grandma').reach({ l: 'sophia#hand_r' });
         await s.all(go(s, 'grandma', [[-4.4, 10.4], [-2.0, 7.0], SPOT.water], 150), go(s, 'sophia', [[-3.9, 10.6], [-1.5, 7.2], PLACES.sophia.water.at], 150));
@@ -568,7 +591,7 @@ function film(scene) {
     },
     // ── Chapter III ──
     home_late: {
-      from: () => ({ ...(PORCH), boat_out: true, ...AT('grandma', SPOT.path_mid, { turn: 200 }),
+      from: () => ({ ...(PORCH), boat_out: true, ...ATS('grandma', SPOT.path_mid, { turn: 200 }),
         ...AT('sophia', [-3.0, 9.4], { turn: 200 }) }),
       run: async s => {
         await s.all(go(s, 'grandma', [[-5.2, 12.4], SPOT.foot], 200, 'old_walk'), go(s, 'sophia', [[-4.6, 12.4], [-5.8, 13.0]], 220));
@@ -583,7 +606,7 @@ function film(scene) {
       },
     },
     step_beside: {
-      from: () => ({ ...(PORCH), ...AT('grandma', 'step'), ...AT('papa', SPOT.door, { turn: 200 }) }),
+      from: () => ({ ...(PORCH), ...ATS('grandma', 'step'), ...AT('papa', SPOT.door, { turn: 200 }) }),
       run: async s => {
         await go(s, 'papa', [SPOT.landing, [-5.9, 13.4]], 200);
         put(s, 'papa', 'step');
@@ -594,7 +617,8 @@ function film(scene) {
       },
     },
     rail: {
-      from: () => ({ ...(PORCH), gust: 0, ...AT('grandma', SPOT.door, { turn: 200 }), ...AT('sophia', SPOT.door, { turn: 200 }) }),
+      from: () => ({ ...(PORCH), gust: 0, ...ATS('grandma', SPOT.door, { turn: 200 }), ...AT('sophia', SPOT.door, { turn: 200 }),
+        ...AT('papa', [-6.0, 14.9], { turn: 200 }) }),
       run: async s => {
         await s.all(go(s, 'grandma', [SPOT.landing], 200), go(s, 'sophia', [[-5.75, 13.95]], 200));
         put(s, 'grandma', 'landing');
@@ -604,7 +628,7 @@ function film(scene) {
     },
     rail_after: {
       after: 'rail',
-      from: () => ({ ...(PORCH), ...AT('grandma', 'landing'), ...AT('sophia', 'landing') }),
+      from: () => ({ ...(PORCH), ...ATS('grandma', 'landing'), ...AT('sophia', 'landing') }),
       run: async s => {
         await dolly(s, PORCH, 1.5);
         s.person('sophia').mood('laugh');
@@ -612,7 +636,7 @@ function film(scene) {
         await tell(s, 'rail_after:sky', SAY('It isn’t you. It’s the sky. Look at it') + 1);
         await tell(s, 'rail_after:creak', 2);
         if (get('knew')) {
-          put(s, 'papa', 'door_in');
+          await settle(s, 'papa', 'door_in');
           s.set('papa_with', ['blanket_fold']);
           s.person('papa').look('grandma');
           await tell(s, 'rail_after:papa', SAY('Mamma. Indoors') + 2);
@@ -628,12 +652,12 @@ function film(scene) {
     },
     circles: {
       from: () => ({ ...OFF(4.6, 9.4, -24, 0.2), weed: true, dinghy: 'circles', ...AT('sophia', 'dinghy'), ...AT('papa', 'pier'),
-        ...AT('grandma', 'step') }),
+        ...ATS('grandma', 'step') }),
       run: async s => {
         await s.wait(4);
         await tell(s, 'circles:straight', 3);
         s.set('dinghy', 'moored');
-        await s.wait(2);
+        await s.until(() => Math.hypot((get('dinghy_a') ?? 0) - DINGHY.moored[0], (get('dinghy_d') ?? 0) - DINGHY.moored[1]) < 0.05);
         s.person('sophia').look('papa');
         await cutTo(s, { ...OFF(3.6, 11.6, -31, 0.2), camera_look: 0.04 });
         await tell(s, 'circles:tent', SAY('I want a tent. My own. To sleep on my own'));
@@ -650,7 +674,7 @@ function film(scene) {
     },
     // ── Chapter IV ──
     post: {
-      from: () => ({ ...NEAR(SPOT.pier_end, 6, 0, 0.02), rowboat: 0, eriksson_here: true, ...AT('grandma', 'pier'),
+      from: () => ({ ...NEAR(SPOT.pier_end, 6, 0, 0.02), rowboat: 0, eriksson_here: true, ...ATS('grandma', 'pier'),
         ...AT('sophia', 'pier_edge'), ...AT('papa', 'veranda') }),
       run: async s => {
         await s.move('rowboat', 1, { over: 12, ease: 'out' });
@@ -668,16 +692,21 @@ function film(scene) {
     },
     post_after: {
       after: 'post',
-      from: () => ({ ...NEAR(SPOT.pier_end, 6, 0, 0.02), rowboat: 1, eriksson_here: true, parcel: 1, ...AT('grandma', 'pier'),
+      from: () => ({ ...NEAR(SPOT.pier_end, 6, 0, 0.02), rowboat: 1, eriksson_here: true, parcel: 1, ...ATS('grandma', 'pier'),
         ...AT('sophia', [6.6, 16.0], { turn: 90, sophia_with: ['parcel'] }), ...AT('papa', 'veranda') }),
       run: async s => {
         s.person('sophia').reach(null);
+        if (get('parcel_long')) {
+          s.set('sophia_do', 'hug_knees');
+          s.person('sophia').look('rowboat#seat');
+        }
         await dolly(s, NEAR(SPOT.pier_end, 6, 0, 0.02), 1.5);
         await tell(s, 'post_after:ask', SAY('Will you put it up yourself?', 'Myself!') + 1);
       },
     },
     gate: {
-      from: () => ({ ...NEAR([-3.5, 11.6], 5, 0.2, 0.03), chair: 'set', rowboat: 1, eriksson_here: true, ...AT('grandma', 'stone'), ...AT('papa', 'veranda') }),
+      from: () => ({ ...NEAR([-3.5, 11.6], 5, 0.2, 0.03), chair: 'set', rowboat: 1, eriksson_here: true, ...ATS('grandma', 'stone'), ...AT('papa', 'veranda'),
+        ...AT('sophia', 'pier') }),
       run: async s => {
         await tell(s, 'gate:sat', 2.5);
         await tell(s, 'gate:call', SAY('To the nets?'));
@@ -710,7 +739,7 @@ function film(scene) {
     },
     foot: {
       after: 'post_after',
-      from: () => ({ ...NEAR(SPOT.pier_end, 6, 0, 0.02), rowboat: 1, eriksson_here: true, ...AT('grandma', 'pier_back'), ...AT('sophia', [6.6, 16.0], { turn: 90 }) }),
+      from: () => ({ ...NEAR(SPOT.pier_end, 6, 0, 0.02), rowboat: 1, eriksson_here: true, ...ATS('grandma', 'pier_back'), ...AT('sophia', [6.6, 16.0], { turn: 90 }) }),
       run: async s => {
         await tell(s, 'foot:call', SAY('Will you come out to the nets?'));
         await go(s, 'grandma', [SPOT.pier_end], 95);
@@ -727,8 +756,7 @@ function film(scene) {
       },
     },
     porch_stay: {
-      after: 'post_after',
-      from: () => ({ ...PORCH, rowboat: 1, eriksson_here: true, ...AT('grandma', 'step'), ...AT('papa', 'veranda') }),
+      from: () => ({ ...PORCH, rowboat: 1, eriksson_here: true, ...ATS('grandma', 'step'), ...AT('papa', 'veranda') }),
       run: async s => {
         await tell(s, 'porch_stay:call', SAY('Will you come out to the nets?'));
         s.person('grandma').look('rowboat#seat');
@@ -748,7 +776,9 @@ function film(scene) {
       },
     },
     porch_dawn: {
-      from: () => ({ ...(PORCH), ...AT('grandma', 'step', { grandma_mood: 'tired' }) }),
+      from: () => ({ ...(PORCH), ...ATS('grandma', 'step', { grandma_mood: 'tired' }),
+        ...(get('shawl_lost') ? { ...AT('papa', [-6.0, 14.9], { turn: 200 }), ...AT('sophia', [-1.6, 8.0], { turn: 330 }) }
+          : { ...AT('papa', 'step_by_stand'), ...AT('sophia', [-6.9, 13.0], { turn: 120 }) }) }),
       run: async s => {
         await s.wait(2);
         await tell(s, 'porch_dawn:sat', 4);
@@ -756,7 +786,7 @@ function film(scene) {
     },
     jacket: {
       after: 'porch_dawn',
-      from: () => ({ ...(PORCH), ...AT('grandma', 'step'), ...AT('papa', SPOT.door, { turn: 200, papa_with: ['jacket'] }) }),
+      from: () => ({ ...(PORCH), ...ATS('grandma', 'step'), ...AT('papa', SPOT.door, { turn: 200, papa_with: ['jacket'] }) }),
       run: async s => {
         await go(s, 'papa', [SPOT.landing, [-6.0, 13.35]], 220);
         await s.person('papa').do('drape');
@@ -768,12 +798,12 @@ function film(scene) {
     },
     learns: {
       after: ['porch_dawn', 'jacket'],
-      from: () => ({ ...(PORCH), ...AT('grandma', 'step'), ...AT('papa', 'step_by'),
+      from: () => ({ ...(PORCH), ...ATS('grandma', 'step'), ...AT('papa', 'step_by'),
         ...(get('sophia_here') ? AT('sophia', [-6.9, 13.0], { turn: 120 }) : {}) }),
       run: async s => {
         if (get('papa_at') !== 'step_by') {
-          await go(s, 'papa', [PLACES.papa.step_by.at], PLACES.papa.step_by.turn);
-          put(s, 'papa', 'step_by');
+          await go(s, 'papa', [SPOT.landing]);
+          await settle(s, 'papa', 'step_by');
         }
         s.person('papa').look('grandma');
         await cutTo(s, PORCH_NEAR);
@@ -781,18 +811,23 @@ function film(scene) {
         s.person('papa').reach({ r: 'grandma#hand_r' });
         s.person('grandma').reach({ r: 'papa#hand_r' });
         await tell(s, 'learns:hand', 2.5);
-        await tell(s, 'learns:sophia', get('sophia_here') ? SAY('I didn’t tell. She told me not to') + 1 : 0);
+        // (Sophia, when she is here — on the porch with them in «Идти»)
+        if (get('sophia_here') && Math.hypot((get('sophia_a') ?? 0) + 6.9, (get('sophia_d') ?? 0) - 13.0) > 1) {
+          await go(s, 'sophia', [[-6.9, 13.0]], 120);
+        }
+        await tell(s, 'learns:sophia', get('sophia_here') && !get('shawl_lost') ? SAY('I didn’t tell. She told me not to') + 1 : 0);
       },
     },
     run_to: {
       after: ['learns', 'jacket'],
-      from: () => ({ ...VIEW, ...AT('grandma', 'step'), ...AT('papa', 'step_by'), ...AT('sophia', [-1.6, 8.0], { turn: 330 }) }),
+      from: () => ({ ...VIEW, ...ATS('grandma', 'step'), ...AT('papa', 'step_by'), ...AT('sophia', [-1.6, 8.0], { turn: 330 }) }),
       run: async s => {
         s.person('papa').reach(null);
         s.person('grandma').reach(null);
         s.person('papa').look([60, 60, 3]);
         await s.wait(1.5);
-        await go(s, 'papa', [[-5.4, 12.2], [-4.4, 10.8]], 150);
+        s.person('papa').walk([[-5.4, 12.2], [-4.4, 10.8], [-2.0, 7.6], [1.5, 3.0]]);
+        put(s, 'sophia', [-1.6, 8.0]);
         s.person('sophia').gait('run');
         await go(s, 'sophia', [[-3.4, 9.8], [-5.2, 12.4], [-5.8, 13.0]], 220);
         s.person('sophia').gait(null);
@@ -803,7 +838,7 @@ function film(scene) {
     },
     count: {
       after: 'run_to',
-      from: () => ({ ...(PORCH), ...AT('grandma', 'step'), ...AT('papa', [-4.6, 11.4], { turn: 30 }), ...AT('sophia', [-5.8, 13.0], { turn: 220 }) }),
+      from: () => ({ ...(PORCH), ...ATS('grandma', 'step'), ...AT('papa', [-4.6, 11.4], { turn: 30 }), ...AT('sophia', [-5.8, 13.0], { turn: 220 }) }),
       run: async s => {
         await go(s, 'papa', [[-5.5, 12.6]], 60);
         s.person('sophia').mood('afraid');
@@ -825,8 +860,10 @@ function film(scene) {
     },
     hem: {
       after: 'run_to',
-      from: () => ({ ...(PORCH), ...AT('grandma', 'step'), ...AT('papa', [-5.5, 12.6], { turn: 60 }), ...AT('sophia', [-5.8, 13.0], { turn: 220 }) }),
+      from: () => ({ ...(PORCH), ...ATS('grandma', 'step'), ...AT('papa', [-5.3, 12.4], { turn: turnTo(-5.3, 12.4, -6.35, 13.6) }),
+        ...AT('sophia', [-5.8, 13.0], { turn: 220 }) }),
       run: async s => {
+        await go(s, 'papa', [[-5.3, 12.4]], turnTo(-5.3, 12.4, -6.35, 13.6));
         s.person('sophia').mood('angry');
         await tell(s, 'hem:said', SAY('I called and you didn’t come!', 'And you didn’t knock!'));
         await tell(s, 'hem:silent', 2.5);
@@ -838,13 +875,13 @@ function film(scene) {
     },
     alone: {
       after: 'run_to',
-      from: () => ({ ...(PORCH), ...AT('grandma', 'step'), ...AT('sophia', [-5.8, 13.0], { turn: 220 }) }),
+      from: () => ({ ...(PORCH), ...ATS('grandma', 'step'), ...AT('sophia', [-5.8, 13.0], { turn: 220 }) }),
       run: async s => {
         s.person('sophia').mood('smile');
         await tell(s, 'alone:said', SAY('I was alone! All night! By myself!'));
         s.person('sophia').mood('afraid');
         await tell(s, 'alone:stop', 2);
-        put(s, 'sophia', 'step_by');
+        await settle(s, 'sophia', 'step_by');
         s.person('sophia').reach({ r: 'grandma#hand_l' });
         await tell(s, 'alone:sleeve', 3);
         await cutTo(s, { ...(PORCH), ...AT('sophia', [-4.8, 11.8], { turn: 230 }) });
@@ -855,7 +892,7 @@ function film(scene) {
       },
     },
     called_porch: {
-      from: () => ({ ...(PORCH), ...AT('grandma', 'step'), ...AT('papa', 'step_by_stand'), ...AT('sophia', [-5.6, 12.8], { turn: 230 }) }),
+      from: () => ({ ...(PORCH), ...ATS('grandma', 'step'), ...AT('papa', 'step_by_stand'), ...AT('sophia', [-5.6, 12.8], { turn: 230 }) }),
       run: async s => {
         s.person('sophia').mood('angry');
         await tell(s, 'called_porch:said', SAY('I called!', 'And you didn’t knock!'));
@@ -875,7 +912,7 @@ function film(scene) {
     },
     // ── Epilogue ──
     last_morning: {
-      from: () => ({ ...NEAR(SPOT.pier_root, 9, 0, 0.02), camera_yaw: -6, ...AT('grandma', 'pier_root'), ...AT('sophia', 'pier_root'), ...AT('papa', 'pier_root') }),
+      from: () => ({ ...NEAR(SPOT.pier_root, 9, 0, 0.02), camera_yaw: -6, ...ATS('grandma', 'pier_root'), ...AT('sophia', 'pier_root'), ...AT('papa', 'pier_root') }),
       run: async s => {
         await dolly(s, NEAR(SPOT.pier_root, 7, 0, 0.02), 4);
         await tell(s, 'last_morning:boat', 2);
@@ -883,7 +920,7 @@ function film(scene) {
     },
     signs: {
       after: 'last_morning',
-      from: () => ({ ...NEAR(SPOT.pier_root, 7, 0, 0.02), camera_yaw: -6, ...AT('grandma', 'pier_root'), ...AT('sophia', 'pier_root'), ...AT('papa', 'pier_root') }),
+      from: () => ({ ...NEAR(SPOT.pier_root, 7, 0, 0.02), camera_yaw: -6, ...ATS('grandma', 'pier_root'), ...AT('sophia', 'pier_root'), ...AT('papa', 'pier_root') }),
       run: async s => {
         const smoke = get('sign_smoke');
         const group = NEAR([-0.5, 15.6], 4.2, 0, 0.03);
@@ -927,8 +964,7 @@ function film(scene) {
       },
     },
     walk_self: {
-      after: 'signs',
-      from: () => ({ ...PATH_CAM, ...AT('grandma', 'pier_root'), ...AT('sophia', 'pier_root'), ...AT('papa', 'pier_root') }),
+      from: () => ({ ...PATH_CAM, ...ATS('grandma', 'pier_root'), ...AT('sophia', 'pier_root'), ...AT('papa', 'pier_root') }),
       run: async s => {
         await s.all(go(s, 'grandma', [SPOT.shore_a, SPOT.shore_b, SPOT.shore_c, SPOT.gangway], 120, 'old_walk'),
           go(s, 'papa', [SPOT.shore_a, SPOT.shore_b, SPOT.shore_c, [-3.4, 26.8]], 110), go(s, 'sophia', [SPOT.shore_a, SPOT.shore_b, [-4.6, 26.1]], 120));
@@ -936,8 +972,7 @@ function film(scene) {
       },
     },
     walk_arm: {
-      after: 'signs',
-      from: () => ({ ...PATH_CAM, ...AT('grandma', 'pier_root'), ...AT('sophia', 'pier_root'), ...AT('papa', 'pier_root') }),
+      from: () => ({ ...PATH_CAM, ...ATS('grandma', 'pier_root'), ...AT('sophia', 'pier_root'), ...AT('papa', 'pier_root') }),
       run: async s => {
         s.person('papa').reach({ l: 'grandma#hand_r' });
         s.person('grandma').reach({ r: 'papa#hand_l' });
@@ -947,8 +982,7 @@ function film(scene) {
       },
     },
     walk_slow: {
-      after: 'signs',
-      from: () => ({ ...PATH_CAM, luggage: true, ...AT('grandma', 'pier_root'), ...AT('sophia', 'bundle'),
+      from: () => ({ ...PATH_CAM, luggage: true, ...ATS('grandma', 'pier_root'), ...AT('sophia', 'bundle'),
         ...AT('papa', [-3.4, 26.8], { turn: 300, papa_with: ['bundle', 'knife'] }) }),
       run: async s => {
         s.person('sophia').look('grandma');
@@ -963,8 +997,9 @@ function film(scene) {
     },
     elbow: {
       after: ['walk_self', 'walk_arm', 'walk_slow'],
-      from: () => ({ ...SHOT('grandma', 'medium', [0.5, 0.45], 0), ...AT('grandma', 'gangway'), ...AT('papa', 'gangway'), ...AT('sophia', 'gangway') }),
+      from: () => ({ ...SHOT('grandma', 'medium', [0.5, 0.45], 0), ...ATS('grandma', 'gangway'), ...AT('papa', 'gangway'), ...AT('sophia', 'gangway') }),
       run: async s => {
+        await cutTo(s, SHOT('grandma', 'medium', [0.5, 0.45], 0));
         s.person('papa').reach({ l: 'grandma#elbow_r' });
         await tell(s, 'elbow:taken', 3);
         s.person('grandma').reach({ r: 'gangway#rail' });
@@ -973,8 +1008,9 @@ function film(scene) {
     },
     catch: {
       after: ['walk_self', 'walk_arm', 'walk_slow'],
-      from: () => ({ ...SHOT('grandma', 'medium', [0.5, 0.45], 0), ...AT('grandma', 'gangway'), ...AT('papa', [-3.6, 25.6], { turn: 20 }), ...AT('sophia', 'gangway') }),
+      from: () => ({ ...SHOT('grandma', 'medium', [0.5, 0.45], 0), ...ATS('grandma', 'gangway'), ...AT('papa', [-3.6, 25.6], { turn: 20 }), ...AT('sophia', 'gangway') }),
       run: async s => {
+        await s.all(cutTo(s, SHOT('grandma', 'medium', [0.5, 0.45], 0)), go(s, 'papa', [[-3.6, 25.6]], 20));
         s.person('papa').look('grandma');
         await tell(s, 'catch:behind', SAY('Don’t catch me. I won’t fall'));
         s.person('sophia').look('papa');
@@ -986,7 +1022,7 @@ function film(scene) {
       },
     },
     tent_walk: {
-      from: () => ({ ...PATH_CAM, big_boat: true, ...AT('grandma', 'pier_root'), ...AT('sophia', 'pier_root'), ...AT('papa', 'pier_root', { papa_with: ['bundle'] }) }),
+      from: () => ({ ...PATH_CAM, big_boat: true, ...ATS('grandma', 'pier_root'), ...AT('sophia', 'pier_root'), ...AT('papa', 'pier_root', { papa_with: ['bundle'] }) }),
       run: async s => {
         await s.all(go(s, 'grandma', [SPOT.shore_a, SPOT.shore_b, SPOT.shore_c, SPOT.gangway], 120, 'old_walk'),
           go(s, 'papa', [SPOT.shore_a, [-2.4, 21.6], [-3.4, 26.8]], 110), go(s, 'sophia', [SPOT.shore_a, SPOT.shore_b, [-4.6, 26.1]], 120));
@@ -999,26 +1035,25 @@ function film(scene) {
       },
     },
     shawl_walk: {
-      after: 'signs',
-      from: () => ({ ...(PORCH), ...AT('grandma', 'step', { grandma_with: ['jacket'] }), ...AT('sophia', [-5.8, 13.0], { turn: 220 }) }),
+      from: () => ({ ...(PORCH), ...ATS('grandma', 'step', { grandma_with: ['jacket'] }), ...AT('sophia', [-5.8, 13.0], { turn: 220 }),
+        ...AT('papa', 'gangway') }),
       run: async s => {
         await tell(s, 'shawl_walk:jacket', SAY('Where’s your shawl?', 'I lost it') + 1);
         await s.person('grandma').do('rise_slow');
-        put(s, 'grandma', 'porch');
-        await cutTo(s, PATH_CAM);
-        put(s, 'grandma', SPOT.shore_b);
+        put(s, 'grandma', PLACES.grandma.step.at);
+        await settle(s, 'grandma', 'porch', 'old_walk');
+        await cutTo(s, { ...PATH_CAM, ...ATS('grandma', SPOT.shore_b, { turn: 200, grandma_with: ['jacket'] }) });
         await go(s, 'grandma', [SPOT.shore_c, SPOT.gangway], 120, 'old_walk');
         await tell(s, 'shawl_walk:there', 1);
-        put(s, 'papa', 'gangway');
         s.person('papa').look('grandma');
         await cutTo(s, SHOT('papa', 'medium', [0.5, 0.45], 0));
         await tell(s, 'shawl_walk:doctor', SAY('In town — a doctor') + 1);
       },
     },
     dinghy_board: {
-      after: 'signs',
-      from: () => ({ ...DINGHY_CAM, dinghy: 'moored', dinghy_at: 0, ...AT('grandma', 'pier_root'), ...AT('sophia', 'pier_root'), ...AT('papa', 'pier_root') }),
+      from: () => ({ ...DINGHY_CAM, dinghy: 'moored', dinghy_at: 0, ...ATS('grandma', 'pier_root'), ...AT('sophia', 'pier_root'), ...AT('papa', 'pier_root') }),
       run: async s => {
+        await go(s, 'sophia', [[1.2, 15.2]]);
         put(s, 'sophia', 'dinghy');
         await tell(s, 'dinghy_board:oars', 2);
         if (get('weak')) {
@@ -1026,9 +1061,11 @@ function film(scene) {
           await s.wait(1);
           s.person('papa').reach(null);
         }
+        await go(s, 'grandma', [[0.7, 15.1]], null, 'old_walk');
         put(s, 'grandma', 'dinghy');
         await tell(s, 'dinghy_board:stern', 2);
         if (get('heard')) {
+          await go(s, 'papa', [[1.6, 15.3]]);
           put(s, 'papa', 'dinghy');
           s.set('papa_with', ['bundle']);
           await tell(s, 'dinghy_board:bow_in', 3);
@@ -1051,14 +1088,16 @@ function film(scene) {
           await tell(s, 'dinghy_board:shake', SAY('Myself!') + 1);
         }
         s.person('grandma').reach({ r: 'dinghy#oars', l: 'dinghy#oars' });
+        s.set('dinghy', 'out');
         await cutTo(s, { ...OFF(2.2, 13.2, -15, 0), camera_look: 0.09 });
       },
     },
     oars_after: {
       after: 'dinghy_board',
-      from: () => ({ ...PATH_CAM, dinghy: 'out', dinghy_at: 0.4, ...AT('grandma', 'dinghy'), ...AT('sophia', 'dinghy'),
+      from: () => ({ ...PATH_CAM, dinghy: 'out', dinghy_at: 0.4, ...ATS('grandma', 'dinghy'), ...AT('sophia', 'dinghy'),
         ...(get('heard') ? AT('papa', 'dinghy') : AT('papa', [-1.4, 17.6], { turn: 20, papa_with: ['bundle'] })) }),
       run: async s => {
+        s.set('dinghy', 'out');
         s.person('grandma').reach(null);
         const walk = get('heard') ? null : go(s, 'papa', [SPOT.shore_b, SPOT.shore_c, [-3.4, 26.8]], 110);
         s.move('dinghy_at', 1, { over: 18, ease: 'inOut' });
