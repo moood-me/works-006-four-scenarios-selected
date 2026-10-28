@@ -1,5 +1,9 @@
-// The candle lantern Papa brought, set inside the tent's door: a tin frame, four glass sides, a candle in it (the layer
-// `flame` and its light, faded by `candle` in animate). Metres from its foot; 0.3 m tall.
+// The candle lantern Papa brought, set at the back of the tent (there while the tent stands): a tin frame, four glass
+// sides, a candle in it (the layer `flame` and its light, faded by `candle` in animate). Metres from its foot; 0.3 m
+// tall.
+e.light(0, -0.145, 0.06, '#ffd08a', 1, 'flame');
+e.at(0, -0.15);
+if (!e.lib.tentShown(e.state, 'up')) return;
 g.fillStyle = '#5b5f62';
 g.fillRect(-0.075, -0.03, 0.15, 0.03);
 g.fillRect(-0.075, -0.25, 0.15, 0.025);
@@ -26,5 +30,3 @@ e.layer('flame', {}, c => {
   c.ellipse(0, -0.145, 0.012, 0.025, 0, 0, 6.2832);
   c.fill();
 });
-e.light(0, -0.145, 0.06, '#ffd08a', 1, 'flame');
-e.at(0, -0.15);

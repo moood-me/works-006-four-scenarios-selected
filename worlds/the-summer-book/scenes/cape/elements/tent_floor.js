@@ -1,5 +1,6 @@
 // The tent's floor: Sophia's grey blanket spread on a groundsheet, a pillow at the back. Seen from above, metres from
 // its middle, y toward the door.
+if (!e.lib.tentShown(e.state, 'up')) return;
 g.fillStyle = '#8d8a80';
 g.fillRect(-0.75, -0.92, 1.5, 1.84);
 g.fillStyle = '#9fa3a6';

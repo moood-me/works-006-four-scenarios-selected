@@ -1,6 +1,2 @@
-// the dusk and the night cross-faded by `night`
-const n = e.state.night;
-e.layer('dusk').alpha = 1 - n;
-e.layer('clouds_dusk').alpha = 1 - n;
-e.layer('night').alpha = n;
-e.layer('clouds_night').alpha = n;
+// the hour and the weather to the sky's shader (modules/isle.md) — written by tools/isle.py
+e.kit.isle.skyMove(e, { moon: false });
