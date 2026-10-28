@@ -100,17 +100,20 @@ export default {
           keys: { ...isle(27, 'night'), ...lit, ...sand(f), troll_at: f.night3 === 'right' ? 'far' : 'beside' } }, { cut: true });
         await g.beat('beam');
         g.beds({ sea_in: 0.2 });
-        const read = g.told('e_beam_my:my'), out = g.told('e_beam_my:window');
+        const read = g.told('e_beam_my:my');
         await g.scene(SCENES.room, { beat: 'e_beam_my', here: ['my'], moods: { my: 'smile' }, keys: room('night', f, { line27: 'clean' }) }, { cut: true });
         const beamMy = g.beat('e_beam_my');
         await read;
         await g.say('my', '“I am forty today. Nobody knows.” Ha. I know');
+        await beamMy;
+        // the last shot outside: the beam going out to sea past the lighthouse — the narrator's line over it
+        g.beds({ sea: 0.3, wind: 0.1 });
+        const out = g.told('beam_window:out');
+        await g.scene(SCENES.landing, { beat: 'beam_window', here: [], keys: { ...land(27, 'night'), ...lit, pines: 1, boat: 'tarred' } }, { cut: true });
+        const last = g.beat('beam_window');
         await out;
         await g.say('narrator', 'The lighthouse shone far. For everyone who was at sea');
-        await beamMy;
-        g.beds({ sea: 0.3, wind: 0.1 });
-        await g.scene(SCENES.landing, { beat: 'beam_window', here: [], keys: { ...land(27, 'night'), ...lit, pines: 1, boat: 'tarred' } }, { cut: true });
-        await g.beat('beam_window');
+        await last;
       } else if (f.ending === 'boat') {
         g.beds({ sea_in: 0.25 });
         await g.scene(SCENES.room, { beat: 'e_basket', here: ['mama'], moods: { mama: 'smile' },
