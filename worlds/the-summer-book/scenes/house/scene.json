@@ -871,7 +871,8 @@
         "fade": 0,
         "rough": 0.1,
         "ripple": 0.1
-      }
+      },
+      "water": true
     },
     {
       "id": "islet",

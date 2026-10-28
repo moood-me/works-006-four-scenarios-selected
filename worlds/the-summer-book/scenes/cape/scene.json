@@ -655,7 +655,8 @@
         "fade": 0,
         "rough": 0.25,
         "ripple": 0.15
-      }
+      },
+      "water": true
     },
     {
       "id": "fog_wall",
