@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Well","translation":"Колодец","where":"scenes/well/scene.json title"},
+  {"text":"Midnight in the fir wood. The full moon over the well.","translation":"Полночь в ельнике. Полная луна над колодцем.","where":"scenes/well/scene.json caption"}
+]}

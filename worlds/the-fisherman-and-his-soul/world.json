@@ -1,0 +1,10 @@
+{
+  "title": "The Fisherman and His Soul",
+  "description": "After Oscar Wilde. A bay with no country and no time: a pier, a stone in the moonlit water, a fir wood with a well, a bridge to a town of lights. A young fisherman, the sea-girl he loves, and the soul he cuts away.",
+  "themes": {
+    "fairy-tale": 50,
+    "sea": 40,
+    "romance": 40
+  },
+  "main": "pier"
+}
