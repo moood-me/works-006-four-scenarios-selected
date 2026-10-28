@@ -17,6 +17,9 @@ lantern in any hand).
 
 For a while (`<id>_wear` — fields over the look): Grandmother without her shawl (it is round Sophia, or lost) —
 `grandma_wear: {"garment": "long_dress"}` (the same dress, no shawl); with it again — `grandma_wear: null`.
+Grandmother with her eyes closed — `grandma_wear: {"face": "closed"}` (the cast's face: the lids down, calm; it takes
+no `<id>_mood`). Sophia in the straw hat — `sophia_wear: {"hat": "straw"}` (the cast's hat, too big for her). Both at
+once: one object (`{"garment": "long_dress", "face": "closed"}`).
 
 ## Motions (`<id>_do`, `go`, a gait `<id>_gait`)
 
@@ -41,7 +44,7 @@ any of them may play any motion (Sophia moves as a small adult).
 | `sleepy_walk` | gait | a slow drowsy walk, the head down, led by the hand | Sophia at night | to make |
 | `hands_behind` | loop | stands, hands behind the back | anyone | made |
 | `seated` | loop | sits at rest on a low seat, the hands on the knees | anyone (a thwart, a bench, Papa's cot, a step) | made |
-| `sit_stone` | loop | sits upright on a low seat, the hands together in the lap, the elbows in at her sides (remade: no longer splayed) | Grandmother (stone, stump, bed's edge, step) | made → remake |
+| `sit_stone` | loop | sits upright on a low seat, the hands together in the lap, the elbows in at her sides (remade: the old one read as elbows splayed, hands on the hips) | Grandmother (stone, stump, bed's edge, step) | made → remake |
 | `sit_bench` | loop | an old man sits on a low bench, leaning forward, the forearms on the knees | Eriksson on his thwart | made |
 | `sit_look` | loop | sits on the ground, looks into the distance | Sophia | made |
 | `hug_knees` | loop | sits on the ground hugging the knees | Sophia | made |
@@ -110,6 +113,14 @@ any of them may play any motion (Sophia moves as a small adult).
 | `whisper` | loop | seated, leaning to the side, whispering | Sophia | to make |
 | `talk_sitting` | loop | seated, talking, the hands moving | Sophia | to make |
 | `wave` | once | waves up with the right hand | Sophia | to make |
+| `shove` | once | standing, shoves something before her away with both hands (the chair) | Grandmother | to make |
+| `lean_over` | loop | stands at an edge bent forward, looking down over it (the water) | Sophia | to make |
+| `shake` | once | seated, shakes someone's hands off hers with a jerk of both arms | Sophia (off the oars) | to make |
+| `fold_hands` | once | seated, folds her hands together before the chest — and lowers them to the lap | Sophia | to make |
+| `drink` | loop | seated, drinking from a mug in the right hand now and then | Papa | to make |
+| `untangle_fast` | loop | seated, working a tangle in a net on the knees with both hands, quickly | Papa | to make |
+| `kneeling` | loop | = `kneel` (the same motion under the shore's name) | Sophia | to make |
+| `rise_floor` | once | = `get_up` (the same motion under the sea's name) | Sophia | to make |
 | `make_bed` | once | smooths a blanket before her with both hands | Sophia | to make |
 | `sniff` | once | bends to smell something small held up in the hand | Sophia | to make |
 | `blow` | once | blows out a candle held before her | Sophia | to make |
@@ -142,6 +153,7 @@ In the right hand unless said. A part's point is `"<id>#<point>"` (for `look`, `
 | `candle` | a lit candle in a holder, in the right hand before the chest | `flame` | to make |
 | `knife` | Grandmother's clasp knife, open, in the right hand | `blade` | to make |
 | `driftwood` | a piece of grey driftwood in the left hand (what she carves) | `wood` | to make |
+| `chip` | = `driftwood` (the shore's name: a chip she carves a bird from) | `wood` | to make |
 | `seal` | the little wooden seal she carved, in the right hand | `seal` | to make |
 | `bird` | a dead bird held by two fingers of the right hand | `bird` | to make |
 | `pillowcase` | the bird wrapped in a pillowcase, in both hands | `bundle` | to make |
@@ -161,15 +173,16 @@ In the right hand unless said. A part's point is `"<id>#<point>"` (for `look`, `
 | `shawl` | Grandmother's grey shawl round the shoulders of someone else (Sophia: to her knees) | — | to make |
 | `jacket` | Papa's dark jacket over the shoulders (on Grandmother, the sleeves hanging empty) | — | to make |
 | `cardigan` | a knitted grey-brown cardigan, worn | — | to make |
-| `straw_hat` | the straw hat on the head (Sophia: too big for her) | `hat` | to make |
-| `hat_hand` | the straw hat held by its brim in the right hand | `hat` | to make |
+| `hat` | the straw hat held by its brim in the right hand (worn — `sophia_wear: {"hat": "straw"}`, above) | `hat` | to make |
+| `shell` | a white shell in the right hand | `shell` | to make |
+| `basket` | the lidded wicker basket hanging from the right hand by its handle (the cat in it) | `basket` | to make |
 
 **A lantern, a candle, a match, a cigarette in the hand** are lit by the scene's light at the part's point:
 `{"id": "…", "at": "grandma#flame", "on": "<key>"}` — the point of the part the person has with them now (the
 scene's own standing lantern `here: false` meanwhile); the cigarette's smoke is the scene's, at `"grandma#ember"`.
 Out is no part: the light's `on` goes off and the part goes (`_with` without it).
 
-**A thing from shoulders to shoulders** (the shawl, the jacket, the blanket, the hat): the giver's `drape` (or a
+**A thing from shoulders to shoulders** (the shawl, the jacket, the blanket, the hat; the shore's `plaid` is `blanket`): the giver's `drape` (or a
 hand's `_reach` for the hat), and at its end the thing changes figures — the giver's `_with`/`_wear` without it, the
 other's with it.
 
