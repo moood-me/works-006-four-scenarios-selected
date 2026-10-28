@@ -190,7 +190,8 @@
   ],
   "modules": [
     "cast",
-    "isle"
+    "isle",
+    "cat"
   ],
   "state": {
     "dawn": 0,
@@ -394,7 +395,7 @@
         "cat",
         "shut"
       ],
-      "means": "the basket in the bow: the cat Mappe sitting on its lid, or shut with him in it"
+      "means": "the basket in the bow: the cat Mappe sitting on its lid (the world's cat), or shut with him in it"
     },
     "dinghy": {
       "type": "boolean",
@@ -718,6 +719,10 @@
         {
           "across": 0,
           "distance": 1.9
+        },
+        {
+          "across": 0,
+          "distance": 3.9
         }
       ],
       "shadow": true
@@ -744,6 +749,10 @@
         {
           "across": 0,
           "distance": 1.74
+        },
+        {
+          "across": 0,
+          "distance": 3.74
         }
       ]
     },
@@ -763,11 +772,27 @@
       "facing": 180
     },
     {
+      "id": "cat",
+      "name": "Mappe, the cat",
+      "on": "hull",
+      "across": 0.95,
+      "distance": -0.9,
+      "elevation": 0.47,
+      "height": 0.5,
+      "box": [
+        -0.46,
+        -0.56,
+        0.46,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
       "id": "bundles",
       "name": "The things",
       "on": "hull",
       "across": -0.7,
-      "distance": 3.2,
+      "distance": 2.4,
       "height": 0.7,
       "box": [
         -0.55,

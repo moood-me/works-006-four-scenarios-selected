@@ -68,7 +68,8 @@ objects = [
      "depth": 3.39, "rotation": 90, "tilt": -35.8},
     {"id": "chimney", "name": "Chimney", "on": "house", "across": -0.8, "distance": 2.5, "height": 5.8, "box": [-0.4, -5.9, 0.4, 0.05]},
     {"id": "porch", "name": "Porch", "on": "house", "across": 1.6, "distance": -0.7, "facing": 180, "height": 1.5, "box": [-0.9, -1.7, 0.75, 0.05]},
-    {"id": "cat", "name": "Mappe, the cat", "on": "house", "across": 1.85, "distance": -0.95, "elevation": 0.55, "height": 0.45, "box": [-0.3, -0.48, 0.3, 0.03]},
+    {"id": "cat", "name": "Mappe, the cat", "across": -6.09, "distance": 13.97, "elevation": 0.62, "height": 0.5, "box": [-0.46, -0.56, 0.46, 0.03],
+     "shadow": True, "place": {"across": "cat_a", "distance": "cat_d", "elevation": "cat_e"}},
     {"id": "peony", "name": "Peonies", "across": -9.56, "distance": 15.4, "height": 0.85, "box": [-0.75, -1, 0.75, 0.05],
      "copies": [{"across": -9.56, "distance": 15.4}, {"across": -7.21, "distance": 14.54, "scale": 0.9, "flip": True}, {"across": -5.58, "distance": 13.9, "scale": 1.05}]},
     {"id": "pier", "name": "Pier", "plane": True, "walk": True, "across": 3.6, "distance": 16, "elevation": -0.15, "width": 10, "depth": 1.3, "shadow": True},
@@ -113,6 +114,9 @@ objects = [
      "place": {"across": "sophia_a", "distance": "sophia_d"}},
     {"id": "papa", "name": "Papa", "person": {"cast": "cast", "who": "papa", "turn": 150}, "across": -3, "distance": 8,
      "place": {"across": "papa_a", "distance": "papa_d"}},
+    # Eriksson never comes ashore: he sits on his boat's thwart, carried with it
+    {"id": "eriksson", "name": "Eriksson", "person": {"cast": "cast", "who": "eriksson", "turn": 270, "does": "sit_bench"},
+     "across": ROWBOAT[0][0], "distance": ROWBOAT[0][1]},
     isle.RAIN,
 ]
 
@@ -128,7 +132,9 @@ state = {**isle.STATE,
          "rowboat": 0, "rowboat_a": ROWBOAT[0][0], "rowboat_d": ROWBOAT[0][1], "rowboat_f": 180,
          "net": False, "chair": "none", "shell": False, "graves": 0, "weed": False, "boat_out": False,
          "dinghy": "moored", "dinghy_at": 0, "dinghy_a": DINGHY[0], "dinghy_d": DINGHY[1], "dinghy_f": 180,
-         "big_boat": False, "luggage": False}
+         "big_boat": False, "luggage": False, "hat": "nail",
+         "cat_at": "porch", "cat_pose": "sit", "cat_a": -6.09, "cat_d": 13.97, "cat_e": 0.62, "cat_dir": 1,
+         "eriksson_here": False, "eriksson_on": {"on": "rowboat", "at": [-0.2, 0.3, 0.45]}, "eriksson_look": "grandma"}
 
 
 def placed(id, who, places):
@@ -139,9 +145,17 @@ def placed(id, who, places):
 
 
 states = {**isle.STATES,
-          **placed("grandma", "Grandmother", ["water", "ledge", "warm", "path", "gate", "porch", "peonies", "pier", "net", "gangway"]),
-          **placed("sophia", "Sophia", ["water", "edge", "shelf", "warm", "graves", "porch", "pier", "gangway"]),
-          **placed("papa", "Papa", ["lawn", "veranda", "porch", "pier", "net", "gangway"]),
+          **placed("grandma", "Grandmother", ["water", "ledge", "warm", "path", "gate", "porch", "peonies", "pier", "net", "gangway", "step", "knee", "dinghy"]),
+          **placed("sophia", "Sophia", ["water", "edge", "shelf", "warm", "graves", "porch", "pier", "gangway", "dinghy"]),
+          **placed("papa", "Papa", ["lawn", "veranda", "porch", "pier", "net", "gangway", "dinghy"]),
+          "hat": {"values": ["nail", "none"], "means": "the straw hat on its nail by the room's door, seen through the veranda's glass (the house's own hat; from the water)"},
+          "cat_at": {"values": ["porch", "rail", "path", "past"], "means": "where the cat is (lib.CAT): on the porch's landing, lying on its rail, on the path above the rock, on the rock past them; set while he walks (cat_pose walk), he goes there at his pace (cat:arrived told)"},
+          "cat_pose": {"values": ["sit", "lie", "walk", "none"], "means": "what the cat does: sits, lies, walks; none, not here"},
+          "cat_a": {"range": [-12, 12], "means": "the scene's own: where the cat is (across)"},
+          "cat_d": {"range": [0, 30], "means": "the scene's own: where the cat is (distance)"},
+          "cat_e": {"range": [0, 2], "means": "the scene's own: how high the cat is over the land (the porch, its rail)"},
+          "cat_dir": {"values": [1, -1], "means": "the scene's own: which way the cat faces (1 right, -1 left)"},
+          "cat_placed": {"type": "string", "means": "the scene's own: the place the cat was last put at"},
           "rowboat": {"range": [0, 1], "smooth": True, "means": "Eriksson's boat: 0 not here (far out on the right, gone in the haze), 1 alongside the pier's end; moved up he rows in, down he rows away (the boat turns round at the pier first)"},
           "rowboat_a": {"range": [0, 75], "means": "the scene's own: where Eriksson's boat is (across), set from rowboat"},
           "rowboat_d": {"range": [10, 35], "means": "the scene's own: where Eriksson's boat is (distance), set from rowboat"},
@@ -168,7 +182,7 @@ spec = {
     "camera": {"mode": "picture"},
     "light": isle.light(WIND),
     "lights": lights,
-    "modules": ["cast", "isle"],
+    "modules": ["cast", "isle", "cat"],
     "state": state,
     "states": states,
     "objects": objects,

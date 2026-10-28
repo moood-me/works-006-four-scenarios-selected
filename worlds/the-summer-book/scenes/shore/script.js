@@ -1,7 +1,8 @@
 // The shore's mechanics, all from the state (a scene opened again goes on as it was): the island's weather (the thick
 // fog's look, the storm's lightning); the people at their places (`<id>_at`: lib.PLACES); Eriksson's boat along its
 // way by `rowboat` (turned round at the pier as he leaves); the dinghy moored, going round in circles, or out along the
-// shore by `dinghy_at`.
+// shore by `dinghy_at`; the cat at his place (`cat_at`: lib.CAT — walking, he goes there at his pace and tells
+// `cat:arrived`).
 const L = scene.lib;
 const isle = scene.kit.isle;
 isle.weather(scene);
@@ -77,3 +78,30 @@ scene.on('change', 'dinghy_at', () => scene.get('dinghy') === 'out' && out());
 scene.on('move', 'dinghy_at', () => scene.get('dinghy') === 'out' && out());
 scene.every(LAP, lap);
 dinghy();
+
+// the cat: put at his place, or — walking — he goes there
+async function cat() {
+  const at = scene.get('cat_at');
+  const c = L.CAT[at];
+  if (!c) {
+    scene.warn(`cat_at: no place "${at}" — the places: ${Object.keys(L.CAT).join(', ')}`);
+    return;
+  }
+  if (scene.get('cat_placed') === at) return;
+  scene.set('cat_placed', at);
+  const a0 = scene.get('cat_a');
+  if (scene.get('cat_pose') === 'walk' && typeof a0 === 'number') {
+    scene.set('cat_dir', c.at[0] >= a0 ? 1 : -1);
+    const way = await scene.path(['cat_a', 'cat_d', 'cat_e'], [c.at], { speed: 0.45 });
+    if (way !== 'done') return;
+    scene.set('cat_dir', c.dir);
+    scene.tell('cat:arrived');
+    return;
+  }
+  scene.set('cat_a', c.at[0]);
+  scene.set('cat_d', c.at[1]);
+  scene.set('cat_e', c.at[2]);
+  scene.set('cat_dir', c.dir);
+}
+scene.on('change', 'cat_at', cat);
+cat();
