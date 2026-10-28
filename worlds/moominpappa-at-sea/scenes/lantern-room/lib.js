@@ -80,7 +80,7 @@ const GALLERY_WAY = [at(108, 2.3), at(108, RAIL - 0.35), at(90, RAIL - 0.35), at
 const COT_BED = [1.75, 4.3, 0.42];
 // eyes from beside: inside by the glass on the right, on Papa out on the gallery (raised over the beam's cone); by the
 // lamp's left, on whoever holds the lantern to the soot
-const EYE = { gallery: [...at(64, 1.7), 1.95], soot: [...at(30, 1.2), 1.9] };
+const EYE = { gallery: [...at(64, 1.7), 1.95], soot: [...at(30, 1.2), 1.9], lamp: [-0.9, 1.2, 2.45] };
 function film(scene) {
   // the lanterns carried lit: how much each burns (the light at its flame, `<id>_lamp`)
   const LIT = { lantern: 1, lantern_low: 0.45 }, LAMPS = { papa_lamp: 1, troll_lamp: 1 };
@@ -528,6 +528,9 @@ function film(scene) {
         P(s, "my").look("papa");
         cam(s, ON("my", "medium", HIGH));
         await moment(s, "e_write:my", 5);
+        // the pose of «Луч» (watch, don't touch): the lit lamp turning, the beam out through the glass, Papa writing on
+        // the gallery beyond it — the eye raised over the beam's cone, the frame's top left free
+        await cam(s, FROM(EYE.lamp, [0.6, 5.0, 1.3]), 2);
       },
     },
     // Epilogue "The Stair", the late "Pie": the pot warmed, the lamp lit by his matchbox, and down without staying
