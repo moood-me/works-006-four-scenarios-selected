@@ -135,7 +135,7 @@ export default {
         }, () => g.scene(SCENES.house, { beat: 'sky_morning', here: ['grandma', 'sophia', 'papa'], moods: { grandma: 'neutral', sophia: 'smile', papa: 'neutral' }, keys: DAY }));
       } else {
         await g.beat('to_door');
-        await g.play(door);
+        if ((await g.play(door)).creaked) g.sound.cough(); // (it creaked: Papa coughs on the veranda)
         await g.beat('door_out');
         g.beds({ sea: 0.3 });
         await piece(g, 'moon_path', {

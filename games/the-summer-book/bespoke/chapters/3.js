@@ -116,8 +116,9 @@ export default {
         g.beds({ sea_in: 0.2 });
         await g.scene(SCENES.house, { beat: 'palm_night', here: HOME, moods: { grandma: 'neutral', sophia: 'thinking' }, keys: hour('night') });
         await g.beat('palm_night');
-        await g.play(still);
-        await piece(g, 'not_today', { whisper: () => g.say('sophia', 'Not today') });
+        // (she moved: «You’re not asleep?» in the mini-game — Sophia goes back without the whisper)
+        const { moved } = await g.play(still);
+        await piece(g, 'not_today', { whisper: () => (moved ? undefined : g.say('sophia', 'Not today')) });
       } else {
         g.beds({ wind: 0.15, trees: 0.4 });
         await g.scene(SCENES.forest, { beat: 'night_path', here: ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'smile' }, keys: { ...hour('night'), boat_out: true } });
@@ -191,7 +192,7 @@ export default {
       } else if (storm === 'blanket') {
         await g.say('grandma', 'Under the blanket. I’ll sing');
         await g.beat('under');
-        await g.play(blanket);
+        if ((await g.play(blanket)).slips) g.sound.thunder(1.4); // (the blanket slipped: the thunder louder)
         await piece(g, 'song', {
           sing: () => g.say('grandma_song', 'Row, little boat, past the last of the stones… the gull is asleep and the herring… mm-mm… sleeps too… the light on the skerry is… mm… is burning for you', 'grandma'),
         });

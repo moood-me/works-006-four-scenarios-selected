@@ -16,7 +16,7 @@
 // Played once:
 //   creak({slow}) (the second door) · door (shut quietly) · strike (a match) · knife (a shaving off the driftwood) ·
 //   cup · rustle (the net) · splash(level) · thunder(level) · knock (three knocks on the canvas) · purr(seconds) ·
-//   hiss (the cat in the basket)
+//   hiss (the cat in the basket) · cough (Papa on the veranda, through the wall)
 import { built, kit } from './ambience.js';
 
 let ctx = null, master = null, rooms = null, still = null, awake = false, held = false;
@@ -385,6 +385,13 @@ export function hiss() {
   for (let i = 0; i < 6; i++) burst(t + 1 + i * rnd(0.08, 0.16), out, { f: rnd(2500, 3800), Q: 3, len: 0.04, loud: 0.2 });
 }
 
+// Papa coughs on the veranda, beyond the wall: two dry barks, muffled
+export function cough() {
+  const t = now(), wall = filter({ type: 'lowpass', frequency: 900, Q: 0.6 });
+  wall.connect(air(0.4, 'room'));
+  for (const [at, loud] of [[0, 0.5], [0.32, 0.35]]) burst(t + at, wall, { kind: 'pink', f: 420, Q: 1.1, len: 0.18, loud, attack: 0.01 });
+}
+
 // the same, unheard: a step played unseen (jump.js) — the beds as it leaves them are heard once it is seen
 export function unheard() {
   const levels = {}, none = () => {};
@@ -395,7 +402,7 @@ export function unheard() {
       beds(set = {}) { for (const name in BEDS) levels[name] = set[name] ?? 0; },
       ...Object.fromEntries(Object.keys(BEDS).map(name => [name, bedOf(name)])),
       creak: none, door: none, strike: none, knife: none, cup: none, rustle: none, splash: none, thunder: none, knock: none,
-      purr: none, hiss: none,
+      purr: none, hiss: none, cough: none,
     },
     wake() { for (const [name, level] of Object.entries(levels)) BEDS[name](level, 1); },
   };

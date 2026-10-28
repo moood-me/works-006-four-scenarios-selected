@@ -34,7 +34,8 @@ export default {
       g.beds({ wind: 0.3, trees: 0.4 });
       await g.scene(SCENES.forest, { beat: 'carve', here: ['grandma', 'sophia'], moods: { grandma: 'thinking', sophia: 'smile' }, keys: DAY });
       await g.beat('carve');
-      await g.play(knife);
+      // (one flipper split off: the insert shows it; no scene reads it yet)
+      g.mark('flipper', (await g.play(knife)).flipper, null);
       await piece(g, 'seal_set', {
         forest: () => g.say('sophia', 'This is their forest. They live here when we’re not here'),
       });

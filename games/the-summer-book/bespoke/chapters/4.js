@@ -83,7 +83,7 @@ export default {
       g.beds({ sea: 0.35, wind: 0.15 });
       await g.scene(SCENES.cape, { beat: 'pitch', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'smile' }, keys: DUSK });
       await g.beat('pitch');
-      await g.play(pole);
+      g.mark('lean', (await g.play(pole)).lean, null); // (the tent as crooked as the pole trembled: the cape's `lean` from now on)
       await piece(g, 'law', {
         law: async () => {
           await g.say('papa', 'Candle for two hours. If the fog comes — don’t move from the spot. Not toward a light, not toward a voice. That’s the law', 'papa');
