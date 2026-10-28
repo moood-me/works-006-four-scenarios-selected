@@ -1,14 +1,4 @@
-{
- "strings": [
-  {
-   "text": "The Shore by the House",
-   "translation": "Берег у дома",
-   "where": "scenes/shore/scene.json title"
-  },
-  {
-   "text": "June on the island. The sea lies still as glass.",
-   "translation": "Июнь на острове. Море стоит гладкое, как стекло.",
-   "where": "scenes/shore/scene.json caption"
-  }
- ]
-}
+{"strings": [
+  {"text":"The Shore by the House","translation":"Берег у дома","where":"scenes/shore/scene.json title"},
+  {"text":"June on the island. The sea lies still as glass.","translation":"Июнь на острове. Море стоит гладкое, как стекло.","where":"scenes/shore/scene.json caption"}
+]}

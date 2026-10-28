@@ -1,14 +1,4 @@
-{
- "strings": [
-  {
-   "text": "The Summer Book",
-   "translation": "Летняя книга",
-   "where": "world.json title"
-  },
-  {
-   "text": "An island in a pale northern sea, one summer: a grandmother who is getting old and a six-year-old girl who lost her mother this spring. After Tove Jansson.",
-   "translation": "Остров в бледном северном море, одно лето: стареющая бабушка и шестилетняя девочка, у которой этой весной умерла мама. По Туве Янссон.",
-   "where": "world.json description"
-  }
- ]
-}
+{"strings": [
+  {"text":"The Summer Book","translation":"Летняя книга","where":"world.json title"},
+  {"text":"An island in a pale northern sea, one summer: a grandmother who is getting old and a six-year-old girl who lost her mother this spring. After Tove Jansson.","translation":"Остров в бледном северном море, одно лето: стареющая бабушка и шестилетняя девочка, у которой этой весной умерла мама. По Туве Янссон.","where":"world.json description"}
+]}

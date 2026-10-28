@@ -38,7 +38,11 @@ A scene's generator (`tools/<scene>.py`, run `python -B tools/<scene>.py <world>
   waterline: the storm's foam). `clear` — where the water is clear over the rock under it (the bottom seen).
 - `RAIN` — rain on `storm`; `STATE`, `STATES`; `write_json(path, spec)` (UTF-8, `\n`).
 
-The scene's `script.js` calls `scene.kit.isle.weather(scene)` (`fog_air` from `fog`; the storm's lightning).
+The scene's `script.js` calls `scene.kit.isle.weather(scene)` (`fog_air` from `fog`; the storm's lightning) and, for
+its people, `scene.kit.isle.places(scene, PLACES)`: each person stands where `<id>_at` names — `PLACES[id][name] =
+{at: [across, distance], turn, look, reach}`, the person's `"place": {"across": "<id>_a", "distance": "<id>_d"}`; set
+at once when `<id>_at` changes, and on opening only if it differs from `<id>_placed`. A scene declares `<id>_at`,
+`<id>_a`, `<id>_d`, `<id>_placed` in its `states` (`tools/shore.py` `placed()`).
 
 ## The painters (modules/isle.js)
 
@@ -57,6 +61,9 @@ The scene's `script.js` calls `scene.kit.isle.weather(scene)` (`fog_air` from `f
 - A plane with its own shader does not hide what is under or behind it (2026-10-27): with a `sea.wgsl` on the shore's
   sea the pier's posts below the water and the boat's hull under the waterline showed through it; without the shader
   they are hidden. So the sea's weather is layers moved by its animate, not a shader (reported).
+- An anchor the camera rides that has no `facing`, standing on something that tilts, is turned by the engine to face
+  the start's eye — which is itself: its direction is undefined and flips with the tilt (the camera looked the wrong
+  way). Give such an anchor its own `facing` (the sea's `eye`: 180) (reported).
 - A mirror's `strength`, `rough`, `ripple` are fixed numbers, not keys: the storm's sea mirrors as the calm one does,
   only its crests, foam and the grey sky it mirrors tell it (reported).
 
