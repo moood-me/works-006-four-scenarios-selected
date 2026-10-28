@@ -1,6 +1,8 @@
 // The tent going up (`tent: pole`): the front pole stood upright, the canvas hanging slack from its top and lying in
-// folds on the rock about its foot (painted only in that state; the slack canvas stirs in the wind). Metres from the pole's foot. Its points: `grip` (where hands hold the pole), `top`.
-if (e.lib.tentShown(e.state, 'pole')) e.layer('pole', { pivot: [0, 0], wind: { strength: 0.04, gust: 0.6 } }, c => {
+// folds on the rock about its foot (one layer painted once, the slack canvas stirring in the wind; its animate shows it
+// in that state — Sophia stands it up in a piece). Metres from the pole's foot. Its points: `grip` (where hands hold
+// the pole), `top`.
+e.layer('pole', { pivot: [0, 0], wind: { strength: 0.04, gust: 0.6 } }, c => {
   // the canvas, slack: hanging from the top, spread out on the rock
   c.fillStyle = '#ddd5c2';
   c.beginPath();

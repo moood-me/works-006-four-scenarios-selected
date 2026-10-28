@@ -102,10 +102,10 @@ The rules every piece keeps (review-stage5.md of «Папа и море»):
 - `turn_home` (4.5 «go», strength ≤ 1, «Sophia knows», ≈ 10 s). After `found`. Sophia turns at once to the house, a step up into the white; Grandmother catches her by the hand (both `_reach`); Sophia stands, then sits down beside her on the rock. Ends: the two sitting, hand in hand. Moments: `turn_home:turn` — she turns («You said — run for Papa!»); `turn_home:caught` — the hand («Not today. Sit with me»); `turn_home:sat` — she sits.
 - `till_dawn` (4.5 «go», strength ≤ 1, ≈ 14 s). After `found`, `turn_home`. Sophia sits beside her and puts her blanket round them both (the blanket on both: `drape`, the cast's part on each); she holds her hand and talks, talks; the night goes toward dawn (`night` 1 → 0.4, `dawn` 0 → 0.6, `fog` 0.8 → 0.5). Ends: the first light, the two under the blanket, hand in hand. Moments: `till_dawn:talk` — she talks (the game's plate); `till_dawn:dawn` — the first light.
 - `papa_finds` (4.5 «go», strength ≤ 1, ≈ 16 s). After `till_dawn`. Papa comes fast down the stones out of the thinning white, finds them, lifts his mother up by the arm and leads her up, stopping twice in the frame (every ten steps); Sophia after them with the blanket. Keys: papa_here → true. Ends: the three going up into the white. Moments: `papa_finds:come` — Papa out of the white; `papa_finds:found` — by them (with «Papa knows» the game's «Mamma»); `papa_finds:home` — he leads her.
-- `flap_moon` (4.5 «lamp», a cut from the house's window, ≈ 14 s). Under the moon in the light fog (`fog` 0.5) Sophia sits at the thrown-back flap (`door`, `flap` open, `candle` 0), hugging her knees, and looks up at the blurred patch of the window far up (`window` 1, `far_window#window`); the camera low before her, her face and the window's patch both seen. Then by `sophia_night`: `cry` — she cries, then goes quiet; `whisper` — she whispers, and lies down inside the door (`lie`); `huddle` — nothing, she sits on, huddled. Keys: sophia_night (the play's). Ends: Sophia lying at the door, or sitting huddled. Moments: `flap_moon:window` — she looks at the window (the game's plate); `flap_moon:night` — the cry or the whisper (the game: «Mama, can you see?», …); `flap_moon:down` — lying down, gone quiet, or still huddled.
-- `cat_fog` (4.5 «lamp», «behind», «gift», ≈ 8 s). After `flap_moon`, `behind_sit`. Out of the fog the wet cat comes over the rocks (`off` → `door`, walking) and lies down at the tent's door (`lie`) — at Sophia's feet, or into the side view past Grandmother. The camera as it is. Ends: the cat lying at the door. Moments: `cat_fog:lie` — he lies down (the game's plate).
+- `flap_moon` (4.5 «lamp», a cut from the house's window, ≈ 14 s). Under the moon in the light fog (`fog` 0.5) Sophia sits at the thrown-back flap (`door`, `flap` open, `candle` 0), hugging her knees, and looks up at the blurred patch of the window far up (`window` 1, `far_window#window`) — seen over her shoulder (her face and the far window cannot be in one frame: she faces it); then a ready cut to her face close. Then by `sophia_night`: `cry` — she cries, then goes quiet; `whisper` — she whispers, and lies down inside the door (`lie`); `huddle` — nothing, she sits on, huddled. Keys: sophia_night (the play's). Ends: Sophia lying at the door, or sitting huddled. Moments: `flap_moon:window` — she looks at the window (the game's plate); `flap_moon:night` — the cry or the whisper (the game: «Mama, can you see?», …); `flap_moon:down` — lying down, gone quiet, or still huddled.
+- `cat_fog` (4.5 «lamp», «behind», «gift», ≈ 8 s). After `flap_moon`, `behind_sit`. Out of the fog the wet cat comes from behind the tent's back (`fog` → round its side → `door`, walking) and lies down at the tent's door (`lie`) — at Sophia's feet, or past Grandmother behind the tent. The camera as it is. Ends: the cat lying at the door. Moments: `cat_fog:lie` — he lies down (the game's plate).
 - `out_of_white` (4.5 «lamp», the morning, ≈ 10 s). The cape at dawn in the thinning white (`dawn` 1, `fog` 0.6 → 0.4); Papa comes down the stones; out of the white Sophia comes up to meet him, wet, by herself (from `door` up to `up`), and goes on past him up the path; he looks at the empty tent. Keys: fog 0.6 → 0.4; papa_here true. Ends: Sophia going up past Papa, the tent behind. Moments: `out_of_white:thin` — the fog thinning, Papa coming down (the game's plate «The fog thins, and Papa goes to the cape at once»); `out_of_white:meet` — the two meet (the game: «…out of the white Sophia comes to meet him, wet, by herself»).
-- `behind_sit` (4.5 «behind», ≈ 12 s). After `fog_way` (the act `step` has walked her to `stone3`). At the last stone she stops to get her breath — with `weak` she sits down on the rock a few seconds — then goes round the tent slowly to its back and sits on the wet stone there (`behind`, `seat:1`), in her shawl; a ready cut to the view from the side (lib.VIEWS `side`, all keys). Keys: weak (the play's). Ends: Grandmother on the stone behind the tent, her face in the moonlight, the canvas by her. Sophia's shadow on the canvas sits hugging her knees (`inside`). Moments: `behind_sit:rest` — at the last stone (the game's «…twice she sits down to get her breath»; the first rest is the minigame's, at `stone2`); `behind_sit:sat` — sitting behind it (the game's plate); `behind_sit:quiet` — told always: her shadow on the canvas, quiet (with «called» the game's «By the time she came Sophia had gone quiet…»).
+- `behind_sit` (4.5 «behind», ≈ 12 s). After `fog_way` (the act `step` has walked her to `stone3`). At the last stone she stops to get her breath — with `weak` she sits down on the low stone by it a few seconds (`rest`, `seat:2`) — then goes round the tent slowly to its back and sits on the wet stone there (`behind`, `seat:1`), in her shawl; a ready cut from beyond the tent's back over the water (her face this way: she sits facing along the canvas). Keys: weak (the play's). Ends: Grandmother on the stone behind the tent, her face in the moonlight, the canvas by her. Sophia inside sits hugging her knees (`inside`; the candle is out — no shadow on the canvas). Moments: `behind_sit:rest` — at the last stone (the game's «…twice she sits down to get her breath»; the first rest is the minigame's, at `stone2`); `behind_sit:sat` — sitting behind it (the game's plate); `behind_sit:quiet` — told always: Sophia inside, quiet (with «called» the game's «By the time she came Sophia had gone quiet…»).
 - `alone_talk` (4.5 «behind», ≈ 12 s). After `behind_sit`, `cat_fog`. Sophia inside (`inside`, the candle out: her voice through the canvas) talks aloud to herself; the camera close on Grandmother listening, the canvas by her face; at the end her palm comes up near the canvas. Ends: the knock minigame's pose — her palm at `tent_back#palm`, her face, in the middle 4:3 (the minigame opens the insert of the palm at the canvas). Moments: `alone_talk:talk` — Sophia talking (the game's plate); `alone_talk:mama` — told always (the game's «Mama, I'm alone. Hardly frightened at all» unless «moon»); `alone_talk:three` — midnight, told always (with «knock» the game's «Well… three times…»).
 - `before_dawn` (4.5 «behind», ≈ 14 s). After `alone_talk`. Toward dawn she gets up slowly holding the rock (`rise_slow`); the shawl slips off her shoulders behind the tent into the crevice and stays on the ledge above the water (`shawl` none → ledge; the cast's shawl off her) — she does not bend for it; she goes up the stones holding them, slowly, into the white (`night` 1 → 0.6, `dawn` 0 → 0.4). Keys: shawl none → ledge. Ends: the stone behind the tent empty in the greying fog (then the game's shore, the porch). Moments: `before_dawn:up` — she gets up; `before_dawn:shawl` — the shawl gone down; `before_dawn:gone` — she is gone.
 
@@ -116,33 +116,61 @@ The rules every piece keeps (review-stage5.md of «Папа и море»):
 - `tent_shot` («The Tent», the last frame, ≈ 9 s). From the sea (lib.VIEWS `sea`): the tent on the cape, grey, its door's flaps beating in the wind; the fog closes over it (`fog` → 0.85). Keys: stones true, lean (the play's), nobody here. Ends: the tent nearly gone in the white. Moments: `tent_shot:flap` — the flapping tent; `tent_shot:white` — the fog closes.
 - `shawl_shot` («The Shawl on the Stone», the last frame, ≈ 9 s). From the sea, nearer than `sea`: the crevice by the cape, a grey patch on the ledge above the water; the fog closes (`fog` → 0.85). Keys: shawl ledge (the play's), nobody here. Ends: the grey patch in the white. Moments: `shawl_shot:patch` — the patch; `shawl_shot:white` — the fog closes.
 
-Places (`<id>_at`, lib.PLACES; the pieces'): Grandmother `stand`, `pole`, `stone1…3`, `half` (the halfway stone,
-`sit_stone`; beside `stone2`), `door`, `inside` (new: in the tent beside Sophia, her knees under the blanket — the
-skirt hidden), `behind`; Sophia `tent`, `tie`, `door` (now sitting at the door, `hug_knees`), `lie` (new: lying inside
-the door), `inside`, `half` (new: by Grandmother on the halfway stone, sitting on the rock), `path`, `up` (new: on the
-stones above, going home); Papa `by`, `mother` (new: beside Grandmother's `stand`), `peg`, `path`, `top` (new: above
-the stones, out of sight — where he comes from and goes to), `half` (new: at her arm on the halfway stone), `door`
-(new: at her arm at the tent's door). The cat (`cat_at`): `tent`, `door`, `rock`, `off` (new: beyond the rocks, out
-of sight — he walks there and is `none`). Eriksson is not on the cape: the scenario has him only on the shore.
+Places (`<id>_at`, lib.PLACES; the pieces'): Grandmother `stand`, `top` (up the path behind the big boulder, out of
+sight — where everyone comes from and goes to), `pole`, `stone1…3`, `rest` (sitting on the low stone by `stone3`,
+`seat:2`), `half` (sitting on the halfway stone, `seat:0`, beside `stone2`), `door`, `inside` (in the tent beside
+Sophia, her knees under the blanket), `behind` (sitting on `seat:1`); Sophia `parcel` (kneeling by it), `tent`, `tie`,
+`pet` (crouched by the cat), `door` (sitting at the door, `hug_knees`), `lie` (lying inside the door), `inside`, `path`,
+`by_half` (standing by Grandmother on the halfway stone), `half` (sitting on the rock beside her), `top`; Papa `top`,
+`path`, `by`, `lamp` (stooping at the door to set the lantern in), `mother` (beside Grandmother's `stand`), `peg`
+(crouched, his hand on it), `half` (at her arm on the halfway stone), `door` (at her arm at the tent's door). The cat
+(`cat_at`): `tent`, `door`, `rock`, `off` (over the rocks behind the juniper, out of sight), `fog` (behind the tent's
+back in the white). Eriksson is not on the cape: the scenario has him only on the shore.
+
+**Who is here.** Papa is the pieces' (`papa_here`: they bring him and send him away); Grandmother and Sophia are the
+game's (`grandma_here`, `sophia_here`): `candle_out`, `flap_moon`, `cat_fog` (in «lamp»), `out_of_white` show no
+Grandmother, `tent_shot` and `shawl_shot` nobody. A piece puts whom it does not show at `top` (out of sight).
+
+## The code
+
+- `lib.js`: `FILM` — the pieces (the module `beats`, copied unchanged from «Папа и море»'s `modules/beats*`, pm/all);
+  `SHOTS` — each piece's frames, set by hand with `aim(eye, point, fx, fy)`: the eye where it stands, the point put at
+  [fx, fy] of the 16:9 frame (turned, the lens shifted — `camera_look` —, every camera key set: a ready cut or a glide
+  leaves no offset behind); `goTo` — someone walks to a place at their gait and is there as it says (sitting down on
+  its seat, the place's keys set as they arrive); `goUp` — up the path behind the boulder, gone; `catTo` — the cat
+  walks; `SHOWFILM` — the pieces with the play's keys the showcase gives them (`SHOW`).
+- `script.js`: the places, the cat, `lean` → the tent's tilt, Grandmother's lantern light (`lamp_lit` from
+  `grandma_with` and `lantern_dip`: the light `hand_lamp` at her hand), the minigames' `step` (during `fog_way` she
+  walks to that stone at her pace, `step:stone<n>` told on arrival), `from` for stills, `beats.play`.
+- What changes inside a piece is painted once: the parcel, the pole, the shawl on the ledge and the stones round the
+  tent are layers their animates show (`tent`, `shawl`, `stones` / `stones_laid` — laid one by one); the standing
+  tent (`tent` up) and its door (`flap`) change on ready cuts (`law` opens on the tent standing; `knock_in` and `found`
+  cut to the open flap) — the shut door must stay a painting facing its way for Sophia's sharp shadow on it.
 
 ## Open for the game (stage 5)
 
 - The pole minigame (М9): `tent` pole → up (the act), `lean` 0…1 (flawed: the tent crooked, «So it should be»); its
-  point `pole#grip`. `lean` is the play's from then on (4.3, the night, the last morning).
-- The fog and dark minigames (М10а, one factory with the forest's stones): `step` 0…3 walks Grandmother stone by
-  stone (`step:stone1…3` on arrival); flawed — `lantern_dip` (0…1: the lantern goes out and comes back). For «go» at
-  strength ≤ 1 the walk ends at `stone2` (`sit_half` follows); otherwise at `stone3`.
-- The knock minigame (М10г): the insert of the palm at the canvas (`palm_open`; package Л); its point `tent_back#palm`.
-- Motions the pieces want (package Л): `old_walk`, `hold_pole`, `tie` (Sophia kneeling), `pet`, `crouch`,
-  `hug_knees`, `hold_lantern`, `knock`, `lead_arm`, `rise_slow`, `run`, `drape`, `sit_stone`, Sophia lying in the
-  tent; parts: the lantern with the candle (Papa's, then in the tent: the element `lantern`), Grandmother's lantern,
-  Sophia's blanket (on one, on both), the shawl taken off.
-- Keys that now change inside a piece — `tent` (`pitch`, the pole minigame), `flap` (`knock_in`, `found`), `stones`
-  (`weigh`), `shawl` (`before_dawn`) — must not repaint: each state becomes a layer painted once, which one is seen
-  is the animate's (as the cat's poses); the stones are laid one by one that way too.
-- New in the scene with the pieces (not in its `scene.json` yet): the keys `knocks`, `lamp_hand`, `sophia_night`,
-  `weak`, `step`, `lantern_dip`, `palm_open`, `beat`, `beat_next`; the places above; Grandmother's lantern light.
-
+  point `pole#grip`. `law` opens on a ready cut to the tent standing whether or not the act raised it. `lean` is the
+  play's from then on (4.3, the night, the last morning).
+- The fog and dark minigames (М10а, one factory with the forest's stones): `step` 1…3 walks Grandmother to that stone
+  (`step:stone1…3` on arrival; the walk is the scene's, only during `fog_way`); flawed — `lantern_dip` (0…1: the
+  lantern's light guttering). For «go» at strength ≤ 1 the walk ends at `stone2` (`sit_half` follows); otherwise at
+  `stone3`.
+- The knock minigame (М10г): the insert of the palm at the canvas (`palm_open`; package Л — the insert element and its
+  key come with the closeups); its point `tent_back#palm`.
+- **Wanted from package Л** (the names the code uses; until they are made the people stand, and the render warns):
+  Grandmother — the gait `old_walk` (always hers), `hold_pole` (loop, both hands on the pole), `sit_down` (onto a low
+  stone, once), `sit_stone` (have), `sit_ground` (in the tent), `rise_slow`, `try_rise` (tries to get up, sinks back),
+  `catch_breath` (standing, once), `sway` (dizzy, once), `knock` (three knocks on the canvas, once), `stoop` (once),
+  `hands_behind` (have); the garment `dress` (her dress without the shawl: `grandma_wear: {garment: 'dress'}` as it
+  slips off); Sophia — `kneel` (loop), `get_up` (from sitting, kneeling, crouching, lying), `tie` (kneeling at the peg,
+  loop), `crouch`, `pet` (stroking the sitting cat, loop), `sit_down` (onto the ground, once), `hug_knees` (have),
+  `lie_down` (once), `lie_side` (loop), `cry`, `whisper`, `talk_sitting` (loops), `drape` (the blanket round them both,
+  once), the gait `run`; Papa — `set_down` (stooping, once), `crouch`, `lay_stones` (loop), the gaits `walk_fast` and
+  `lead_walk` (slowed to his mother's pace, she on his arm: both `_reach` hand to hand). Parts: `lantern` (the candle
+  lantern — Papa's in `law`, Grandmother's in the fog), `blanket` (Sophia wrapped in it), `blanket_round` (on each of
+  the two sitting under it).
+- Faces: the game's (`<id>_mood`).
 ## Contract for the check
 
 ```json

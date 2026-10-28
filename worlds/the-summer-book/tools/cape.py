@@ -41,7 +41,7 @@ def on_tent(x, d):
     return [round(TENT[0] - math.cos(F) * x - math.sin(F) * d, 3), round(TENT[1] + math.sin(F) * x - math.cos(F) * d, 3)]
 
 
-SEATS = [[-1.6, 9.6], on_tent(-1.05, 1.6)]
+SEATS = [[-1.6, 9.6], on_tent(-1.05, 1.6), [-0.85, 5.75]]
 LEDGE = [3.35, 9.2]
 # the people's and the cat's first places (lib.PLACES, lib.CAT): Grandmother and Sophia as approved; Papa by the tent
 FIRST = {"grandma": ("stand", [-0.4, 4.4], 160), "sophia": ("tent", [1.4, 5.6], 200), "papa": ("by", on_tent(-1.6, -0.9), FACING - 180 + 150)}
@@ -81,7 +81,8 @@ objects = [
     {"id": "path", "name": "The wet stones of the path", "plane": True, "drape": True, "across": -1.75, "distance": 8.4, "width": 5, "depth": 6.4},
     {"id": "seat", "name": "Low stones to sit on", "across": SEATS[0][0], "distance": SEATS[0][1], "box": [-1.2, -0.45, 1.2, 0], "shadow": True,
      "copies": [{"across": SEATS[0][0], "distance": SEATS[0][1], "elevation": -0.1},
-                                                 {"across": SEATS[1][0], "distance": SEATS[1][1], "elevation": -0.1, "flip": True}]},
+                {"across": SEATS[1][0], "distance": SEATS[1][1], "elevation": -0.1, "flip": True},
+                {"across": SEATS[2][0], "distance": SEATS[2][1], "elevation": -0.1, "scale": 0.9}]},
     {"id": "ledge", "name": "The crevice and its ledge", "across": LEDGE[0], "distance": LEDGE[1], "onLand": False, "elevation": WATER - 0.08, "facing": 114,
      "height": 0.55, "box": [-0.56, -0.6, 0.56, 0.06]},
     {"id": "tent", "name": "Sophia's tent", "unseen": True, "across": TENT[0], "distance": TENT[1], "facing": FACING, "place": {"tilt": "tent_tilt"}},
@@ -121,12 +122,14 @@ objects = [
 lights = isle.lights(("sky#sun", "#ffefd8", 1.3), ("sky#sun_late", "#ffe2b8", 1.25), ("sky#sun_dawn", "#ffeedd", 1.0),
                      ([300, 5], "#f3d6c6", 0.5), ([205, 38], "#c4d2f2", 0.8), [30, 30]) + [
     {"id": "candle", "of": "lantern#flame", "color": "#ffc27a", "strength": 2.6, "reach": 3.5, "on": "candle", "flicker": 0.15},
-    {"id": "window", "of": "far_window#window", "color": "#ffcf88", "strength": 1, "reach": 3, "on": "window"}]
+    {"id": "window", "of": "far_window#window", "color": "#ffcf88", "strength": 1, "reach": 3, "on": "window"},
+    {"id": "hand_lamp", "at": "grandma#hand_r", "color": "#ffc98a", "strength": 1.1, "reach": 3.5, "on": "lamp_lit", "flicker": 0.12}]
 
 # the empty play: a June day on the cape, the tent standing, Grandmother and Sophia where the approved look has them,
 # Papa and the cat not here, the candle and the window out
 state = {**isle.STATE,
-         "candle": 0, "window": 0, "tent": "up", "lean": 0, "tent_tilt": 0, "flap": "open", "shawl": "none", "stones": False, "from": "land",
+         "candle": 0, "window": 0, "tent": "up", "lean": 0, "tent_tilt": 0, "flap": "open", "shawl": "none", "stones": False, "stones_laid": 0, "from": "land",
+         "knocks": False, "lamp_hand": True, "weak": False, "sophia_night": "whisper", "step": 0, "lantern_dip": 0, "lamp_lit": 0,
          "grandma_at": "stand", "sophia_at": "tent", "papa_at": "by", "papa_here": False,
          "grandma_a": FIRST["grandma"][1][0], "grandma_d": FIRST["grandma"][1][1], "sophia_a": FIRST["sophia"][1][0], "sophia_d": FIRST["sophia"][1][1],
          "papa_a": FIRST["papa"][1][0], "papa_d": FIRST["papa"][1][1],
@@ -141,9 +144,9 @@ def placed(id, who, places):
 
 
 states = {**isle.STATES,
-          **placed("grandma", "Grandmother", ["stand", "pole", "stone1", "stone2", "stone3", "half", "door", "behind"]),
-          **placed("sophia", "Sophia", ["tent", "tie", "door", "inside", "path"]),
-          **placed("papa", "Papa", ["by", "peg", "path"]),
+          **placed("grandma", "Grandmother", ["stand", "top", "pole", "stone1", "stone2", "stone3", "rest", "half", "door", "inside", "behind"]),
+          **placed("sophia", "Sophia", ["parcel", "tent", "tie", "pet", "door", "lie", "inside", "path", "by_half", "half", "top"]),
+          **placed("papa", "Papa", ["top", "path", "by", "lamp", "mother", "peg", "half", "door"]),
           "candle": {"range": [0, 1], "smooth": True, "means": "the candle in the lantern at the back of the tent: 0 out, 1 burning — the canvas glows with it"},
           "window": {"range": [0, 1], "smooth": True, "means": "the lamp behind Grandmother's window in the far house: 0 dark, 1 lit"},
           "tent": {"values": ["parcel", "pole", "up"], "means": "the tent: in its parcel on the rock (as Eriksson brought it); its pole stood up, the canvas slack; standing"},
@@ -152,8 +155,18 @@ states = {**isle.STATES,
           "flap": {"values": ["open", "shut"], "means": "the tent's door: its flaps thrown back and tied; laced shut (whoever sits inside between the candle and it is a shadow on it)"},
           "shawl": {"values": ["none", "ledge"], "means": "Grandmother's shawl: not here; slipped into the crevice, lying on its ledge over the water (seen from the sea)"},
           "stones": {"type": "boolean", "means": "the last morning: stones laid round the tent's edges"},
+          "stones_laid": {"range": [0, 1], "smooth": True, "means": "the scene's own: the stones being laid one by one in a piece (the front's to 0.3, then the side's)"},
+          "knocks": {"type": "boolean", "means": "the play's: «I'll knock at midnight, three times» was promised — at the door she knocks three times (else she stoops to it: «It's me»)"},
+          "lamp_hand": {"type": "boolean", "means": "the play's: Grandmother goes down to the tent in the fog with the lantern (its light a warm circle on her and the stones), or without it, by the moonlit fog"},
+          "weak": {"type": "boolean", "means": "the play's: her strength at 1 or less — on the way behind the tent she sits down to get her breath"},
+          "sophia_night": {"values": ["cry", "whisper", "huddle"], "means": "the play's: Sophia alone at the flap under the moon — cries, then goes quiet; whispers and lies down; sits on, huddled, all night"},
+          "step": {"range": [0, 3], "means": "the fog and dark minigames: the stone of the path Grandmother walks to (1…3), at her pace; step:stone<n> told on arrival"},
+          "lantern_dip": {"range": [0, 1], "smooth": True, "means": "the fog minigame's flaw: the lantern in her hand guttering (0 alight … 1 nearly out)"},
+          "lamp_lit": {"range": [0, 1], "smooth": True, "means": "the scene's own: Grandmother's lantern alight in her hand (from grandma_with and lantern_dip)"},
+          "beat": {"type": "string", "means": "the piece playing (the module beats; the game names it, notes.md «Pieces»)"},
+          "beat_next": {"type": "string", "means": "the piece the game goes to next (its cut made ready)"},
           "from": {"values": ["land", "sea", "side"], "means": "where the camera is (a cut): on the rock as the scene starts; out on the water, looking back at the cape (the tent's back, the crevice and its ledge); up the path on the left, looking across the tent to the sea (whoever sits behind it)"},
-          "cat_at": {"values": ["tent", "door", "rock"], "means": "where the cat is (lib.CAT): by the tent's front, at its door, on the rock nearer; set while he walks (cat_pose walk), he goes there at his pace (cat:arrived told)"},
+          "cat_at": {"values": ["tent", "door", "rock", "off", "fog"], "means": "where the cat is (lib.CAT): by the tent's front, at its door, on the rock nearer, over the rocks out of sight, behind the tent's back in the fog; set while he walks (cat_pose walk), he goes there at his pace (cat:arrived told)"},
           "cat_pose": {"values": ["sit", "lie", "walk", "none"], "means": "what the cat does: sits, lies, walks; none — not here"},
           "cat_a": {"range": [-12, 12], "means": "the scene's own: where the cat is (across)"},
           "cat_d": {"range": [0, 30], "means": "the scene's own: where the cat is (distance)"},
@@ -173,7 +186,7 @@ spec = {
     "camera": {"mode": "picture"},
     "light": light,
     "lights": lights,
-    "modules": ["cast", "isle", "cat"],
+    "modules": ["cast", "isle", "cat", "beats"],
     "state": state,
     "states": states,
     "objects": objects,
