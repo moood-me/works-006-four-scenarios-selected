@@ -13,7 +13,9 @@
 //     done to the place (carry), then `keys` — the step's (the hour, the weather, where each one is: its contract's
 //     party). Always opened anew
 //   g.here(id, on) — someone of the shown scene comes or goes (in one cut); g.mood(id, mood) — their face
-//   g.set(key, value) — one of the shown scene's own keys (in one cut)
+//   g.set(key, value, seconds) / g.get(key) — the shown scene's state (seconds: moved there over them; none — in one cut)
+//   g.told(text, ms) — until the scene tells `text` (a piece's moment, a mini-game's place reached: 'step:stone2'…) →
+//     true, or ms pass → false
 //   g.wait(ms) — time of the game's own (a pause)
 //   g.say(who, text, at) — someone of the game's people (people.json) says it over `at` (default: over themselves if
 //     they are in the scene, else low in the middle, as the narrator), in their voice; → a breath after it is heard
@@ -24,8 +26,9 @@
 //     state.choices[choice] (choice null: not a choice of the chapter's map)
 //   g.play(minigame, opts) — a mini-game (a module of minigames/: {title, about, skipped, run(g, b, opts, signal)});
 //     the signal aborts when it is skipped (the page's ⏭, where it may be skipped) or the step is left; → its result
-//   g.minigame({phrase}) — inside a minigame's run: the language's mini-game begun; g.card(title, gesture, text) — the
-//     stub's card beside it, gone with the minigame (→ a function that takes it away sooner)
+//   g.minigame({phrase}) — inside a minigame's run: the language's mini-game begun; g.failed() — a mistake made in it:
+//     from then on the page's ⏭ may skip it (scenario §7: «Skip» after the first failure); g.card(title, gesture,
+//     text) — the stub's card beside it, gone with the minigame (→ a function that takes it away sooner)
 //   g.apply(choice) — what the option chosen does, by EFFECTS: the scales, then each mark
 //   g.scale(name, delta) — a scale moves; the player sees which way (the gauge, the words)
 //   g.gauge(name) — the scale is shown from now on; its one line of what it means said once
@@ -169,7 +172,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
     w.timer = setTimeout(() => { waits.delete(w); w.ok(); }, ms);
     waits.add(w);
   }));
-  const put = (key, value) => (unseen() ? j.did([key, value]) : b.set(key, value));
+  const put = (key, value, seconds) => (unseen() ? j.did([key, value]) : b.set(key, value, seconds));
   let people = new Set(), present = new Set(); // the shown scene's people; those of them there now
   let playing = null; // the minigame played now: {signal, end, skippable}
   // the page's ⏭ as the step stands now: none while a choice or a plate waits or the step is still unseen; in a
@@ -197,7 +200,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
   let seeing = null;
   const seen = () => (seeing ??= (async () => {
     const { shown, then } = j;
-    j.seen();
+    for (const h of j.seen()) hub.told(h.text, h.ms).then(h.ok);
     view.gauge(state);
     if (shown) {
       await alive(b.show(shown.folder, { state: shown.state, captions: false, then }));
@@ -233,9 +236,10 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
         await alive(b.show(folder, { state: st, captions: false, fade: !cut }));
       } finally { showing = false; }
     },
-    set(key, value) {
-      if (gone()) return;
-      put(key, value);
+    set: (key, value, seconds) => (gone() ? undefined : put(key, value, seconds)),
+    get: key => (unseen() ? j.values[key] : b.get(key)),
+    told(text, ms = 60000) {
+      return gone() ? never : unseen() ? j.heard(text, ms) : alive(hub.told(text, ms));
     },
     here(id, on) {
       if (gone()) return;
@@ -306,6 +310,12 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       mg.on('skip', playing.end);
       return mg;
     },
+    // a mistake made in the mini-game (beside its mg.error): from the first one on it may be skipped
+    failed() {
+      if (!playing || playing.skippable) return;
+      playing.skippable = true;
+      ahead();
+    },
     card(title, gesture, text) {
       if (!playing) throw new Error('g.card: only inside a minigame (g.play)');
       const off = view.card(title, gesture, text);
@@ -365,18 +375,27 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
   return g;
 }
 
-// The player's choices, listened to once for the whole play — game.js owns it: whatever is being chosen now gets the
-// action.
+// The player's choices and what the scenes tell, listened to once for the whole play (bespoke.on keeps a listener for
+// good) — game.js owns it: whatever is being chosen now gets the action; whoever waits for a tell hears it.
 //   hub.offer({ref: options}) → the action once the player has chosen it: a plain choice of the language of
 //     mini-games — a mark on each point; a touch opens its options as petals, one too; one who touches no mark for
 //     SHOW s is shown how: the ghost finger on each in turn
 //   hub.ask(at, options) → the action chosen, or null: a mark born open where the game's own drawing was pressed (at:
 //     fn → {x, y} page px — map.js), its options out as petals at once; a touch off them folds it — null
-//   hub.withdraw() — nothing offered
+//   hub.withdraw() — nothing offered; hub.told(text, ms) → true once the scene tells it, false if ms pass
 const SHOW = 8; // s: nothing pressed so long — the ghost shows how
 
 export function listen(b) {
   let offered = null; // the plain choice going on: the language's mini-game
+  const waiting = new Set(); // what the scene is waited to tell: {text, ok, timer}
+  const told = (text, ms) => new Promise(ok => {
+    const w = { text, ok };
+    w.timer = setTimeout(() => { if (waiting.delete(w)) ok(false); }, ms);
+    waiting.add(w);
+  });
+  b.on('tell', text => {
+    for (const w of waiting) if (w.text === text) { waiting.delete(w); clearTimeout(w.timer); w.ok(true); }
+  });
   return {
     offer(offers) {
       offered?.leave();
@@ -408,5 +427,6 @@ export function listen(b) {
       });
     },
     withdraw() { offered?.leave(); offered = null; },
+    told,
   };
 }
