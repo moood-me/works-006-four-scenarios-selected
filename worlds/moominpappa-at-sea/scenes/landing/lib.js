@@ -251,8 +251,9 @@ const turnNear = (s, b) => () => {
   return Math.abs(((t - b + 540) % 360) - 180) < 8;
 };
 
-// the door seen between the pines that crept up to it, from just below the steps
-const DOOR_CAM = { ...CAM0, camera_x: 9.7, camera_z: 26.2, camera_h: 0.75, camera_yaw: 3, camera_look: 0.04 };
+// the door seen between the pines that crept up to it, from between them below the steps, low: the tower above the
+// door, the top of the frame clear (a minigame's plate sits there)
+const DOOR_CAM = { ...CAM0, camera_x: 9.95, camera_z: 28.3, camera_h: -0.4, camera_yaw: 0, camera_look: 0.06 };
 
 // the family in the boat, leaving
 const IN_BOAT = () => ({ ...at('papa', 'in_boat'), ...at('mama', 'in_boat'), ...at('troll', 'in_boat'), ...at('my', 'in_boat') });
