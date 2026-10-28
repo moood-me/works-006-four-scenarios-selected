@@ -106,7 +106,8 @@ def sky(folder, low, sun, late, dawn, dusk_x, night_x, bolt, moon=None, band_x=A
 
 def sea(folder, elevation, reflect, centre=(0, 2000), size=(6000, 4000), clear=()):
     """The sea plane, its code and animate written into the scene's elements/: centred at `centre` [across,
-    distance], `size` [width, depth] metres, at the scene's sea level; `reflect` its mirror (the scene's own numbers —
+    distance], `size` [width, depth] metres, at the scene's sea level (`water`: the eye riding over it stays 1.7 m over
+    it, not over the sea floor); `reflect` its mirror (the scene's own numbers —
     or keyed: {"strength": "mirror_strength", "rough": "mirror_rough", "ripple": "mirror_ripple", "fade": …}, the
     weather moving them: MIRROR_STATES, the script's weather(scene, lib.MIRROR)); `clear` —
     [[across, distance, rx, rz], …] where the water is clear over the rock. Its foam runs along the scene's lib.edge
@@ -118,7 +119,7 @@ def sea(folder, elevation, reflect, centre=(0, 2000), size=(6000, 4000), clear=(
     _write(os.path.join(el, "sea.animate.js"), "// the calm and the storm on the sea's layers (modules/isle.md) — written by tools/isle.py\n"
            "e.kit.isle.seaMove(e);\n")
     return {"id": "sea", "name": "Sea", "plane": True, "across": centre[0], "distance": centre[1], "elevation": elevation,
-            "width": size[0], "depth": size[1], "reflect": reflect}
+            "width": size[0], "depth": size[1], "reflect": reflect, "water": True}
 
 
 def mirror_state(base):

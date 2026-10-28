@@ -832,7 +832,8 @@
         "rough": "mirror_rough",
         "ripple": "mirror_ripple",
         "fade": 0
-      }
+      },
+      "water": true
     },
     {
       "id": "rings",

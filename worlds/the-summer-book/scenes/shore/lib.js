@@ -154,16 +154,13 @@ const SHOT = (target, shot = 'medium', frame = [0.5, 0.45], glide = 1.5) => ({ .
   camera_frame: frame, camera_glide: glide });
 // the scene's camera brought nearer one at p: `dist` metres from them along the line the viewer sees them by, turned
 // to them, `h` metres lower, the gaze lowered `look` screen heights
-// (the eye stays 1.7 m over the ground under it: over the water it is lifted to 1.25 m over the water at least, as one
-// in a boat sees)
-const LIFT = (x, z) => Math.max(0, WATER + 1.25 - 1.7 - ground(x, z));
 const NEAR = ([a, d], dist, h = 0, look = 0) => {
   const l = Math.hypot(a, d);
   const k = Math.max(0, 1 - dist / l);
-  return { ...VIEW, camera_x: a * k, camera_z: d * k, camera_yaw: Math.atan2(a, d) * 180 / Math.PI, camera_h: LIFT(a * k, d * k) - h, camera_look: look };
+  return { ...VIEW, camera_x: a * k, camera_z: d * k, camera_yaw: Math.atan2(a, d) * 180 / Math.PI, camera_h: -h, camera_look: look };
 };
 // the camera at [x, z] (from the start), turned `yaw` (degrees, + right): out over the water looking in at the island
-const OFF = (x, z, yaw, h = 0) => ({ ...VIEW, camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: LIFT(x, z) + h });
+const OFF = (x, z, yaw, h = 0) => ({ ...VIEW, camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: h });
 // the porch from the grass on its right (the gate stands on the line from the start: the camera keeps clear of it):
 // the step and the landing, wide and near
 const PORCH = { ...OFF(-2.8, 12.2, -74, 0), camera_look: 0.03 };

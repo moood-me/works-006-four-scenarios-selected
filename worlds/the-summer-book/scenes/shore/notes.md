@@ -274,7 +274,7 @@ hat on its nail or not (`from_water`); `skirt` — Sophia holds Grandmother's sk
 `lib.js` `film(scene)` — each piece's `from` (places by `PLACES`, the camera, the scene's own keys) and `run`; played
 by the world's `beats` (`modules/beats.js`, «Папа и море»'s, unchanged) from `script.js`; `showcase.js` plays a
 selection in its play's keys. The camera: the scene's own moved nearer (`NEAR` — along the line the viewer sees them
-by; over the water the eye kept 1.25 m over it, `LIFT`), out over the water (`OFF`), or the operator on a person or a
+by; over the water the eye 1.7 m over the sea plane, `water`), out over the water (`OFF`), or the operator on a person or a
 point where the line to them is clear (`SHOT`); each choice's pose frames the chooser's face with the point in the
 middle 4:3; each mini-game's pose its point there. People walk at their gaits (`go`); seated places put at once where
 they stand. The mini-games' keys are shown by the scene (`script.js`: `stems`, `pull`, `let`, `step`, `parcel`;
