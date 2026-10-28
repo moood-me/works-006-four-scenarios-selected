@@ -204,7 +204,8 @@
     "cast",
     "isle",
     "cat",
-    "beats"
+    "beats",
+    "closeups"
   ],
   "state": {
     "dawn": 0,
@@ -277,6 +278,18 @@
     "splash": 0,
     "beat": "",
     "beat_next": "",
+    "teeth_open": 0,
+    "teeth_show": 0,
+    "stems_open": 0,
+    "tremble_open": 0,
+    "gunwale_open": 0,
+    "gunwale_push": 0,
+    "knot_open": 0,
+    "string_open": 0,
+    "oars_open": 0,
+    "oars_let": 0,
+    "rail_open": 0,
+    "rail_let": 0,
     "skirt": true,
     "knew": false,
     "ask_back": false,
@@ -449,6 +462,102 @@
       ],
       "smooth": true,
       "means": "М9а «Свёрток» (the mini-game's): the parcel from Grandmother's hands (0) into Sophia's (1)"
+    },
+    "teeth_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up teeth open (0 closed … 1 open): the mini-game's or the piece's"
+    },
+    "stems_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up stems open (0 closed … 1 open): the mini-game's or the piece's"
+    },
+    "tremble_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up tremble open (0 closed … 1 open): the mini-game's or the piece's"
+    },
+    "gunwale_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up gunwale open (0 closed … 1 open): the mini-game's or the piece's"
+    },
+    "knot_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up knot open (0 closed … 1 open): the mini-game's or the piece's"
+    },
+    "string_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up string open (0 closed … 1 open): the mini-game's or the piece's"
+    },
+    "oars_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up oars open (0 closed … 1 open): the mini-game's or the piece's"
+    },
+    "rail_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up rail open (0 closed … 1 open): the mini-game's or the piece's"
+    },
+    "teeth_show": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the teeth close-up: Sophia's fingers lift them out of the earth (the piece's)"
+    },
+    "gunwale_push": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М3б (the mini-game's): the hands on the gunwale push off and open"
+    },
+    "oars_let": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М11 «Вёсла» (the mini-game's): Grandmother's hands lift off the oars"
+    },
+    "rail_let": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М11 «Сходни» (the mini-game's): her hand opens and leaves the rail"
     },
     "splash": {
       "type": "number",
@@ -1739,6 +1848,46 @@
         "count": 9000,
         "wind": 1.2
       }
+    },
+    {
+      "id": "teeth",
+      "name": "The teeth found in the peonies (a piece opens it: П.3)",
+      "insert": "teeth_open"
+    },
+    {
+      "id": "stems",
+      "name": "The peony stems close (М1)",
+      "insert": "stems_open"
+    },
+    {
+      "id": "tremble",
+      "name": "Grandmother's hands shaking on the rock (a piece opens it: П.5 «Иди»)",
+      "insert": "tremble_open"
+    },
+    {
+      "id": "gunwale",
+      "name": "The hands on the gunwale (М3б)",
+      "insert": "gunwale_open"
+    },
+    {
+      "id": "knot",
+      "name": "The net's knot close (М3в)",
+      "insert": "knot_open"
+    },
+    {
+      "id": "string",
+      "name": "The parcel's string (М9а)",
+      "insert": "string_open"
+    },
+    {
+      "id": "oars",
+      "name": "The hands on the oars (М11 «Вёсла»)",
+      "insert": "oars_open"
+    },
+    {
+      "id": "rail",
+      "name": "The hand on the gangway's rail (М11 «Сходни»)",
+      "insert": "rail_open"
     }
   ],
   "music": {

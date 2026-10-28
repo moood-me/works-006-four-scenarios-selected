@@ -109,7 +109,8 @@ weather (the island's keyed mirror).
 
 - Motions: Sophia `rise_floor` (up from the deck), `fold_hands`; Papa `drape` (the blanket), `tie` (the dinghy's
   painter at the stern). Grandmother with her eyes closed (`eyes_closed`: a face of the cast's).
-- Parts: `blanket`. The dead bird is the scene's (`bird`, `cat_bird`).
+- Parts — in: `blanket_fold` (Papa carrying it), `blanket_round` (round the two). The dead bird is the scene's (`bird`,
+  `cat_bird`).
 
 ## Contract for the check
 

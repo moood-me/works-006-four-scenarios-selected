@@ -230,7 +230,11 @@ function film(scene) {
         gm.look('sophia');
         await tell(s, 'teeth:porch', SAY('What are you doing?', 'Looking for my teeth'));
         await tell(s, 'teeth:found', SAY('Found them', 'Show me'));
-        await tell(s, 'teeth:in', 3);
+        s.set('teeth_show', 0);
+        s.set('teeth_open', 1);
+        await s.move('teeth_show', 1, { over: 2.5 });
+        await tell(s, 'teeth:in', 1.5);
+        s.set('teeth_open', 0);
         await cutTo(s, SHOT('sophia', 'close', [0.42, 0.42], 0));
         await tell(s, 'teeth:ask', SAY('When will you die?', 'Soon. But that is not the least concern of yours', 'Why?') + 0.5);
         await cutTo(s, SHOT('grandma', 'medium', [0.5, 0.45], 0));
@@ -304,8 +308,9 @@ function film(scene) {
         so.mood('laugh');
         await dolly(s, NEAR(PLACES.sophia.shelf.at, 3.2, -0.1, 0.06), 2);
         await tell(s, 'slip:laugh', 2.5);
-        await cutTo(s, NEAR(PLACES.grandma.ledge.at, 1.8, 0.5, 0.12));
+        s.set('tremble_open', 1);
         await tell(s, 'slip:hands', 3);
+        s.set('tremble_open', 0);
       },
     },
     down: {
@@ -466,13 +471,14 @@ function film(scene) {
         s.set('cat_pose', 'none');
         put(s, 'grandma', 'warm_back');
         await tell(s, 'calm:back', 2);
+        s.set('grandma_with', ['pebble']);
         s.person('grandma').look([2.2, 7.6, -0.55]);
         await cutTo(s, SHOT('grandma#hand_r', 'medium', [0.5, 0.5], 0));
       },
     },
     calm_after: {
       after: 'calm',
-      from: () => ({ ...NEAR([-0.4, 6.4], 4.2, 0.4, 0.05), rings: 1, cat_pose: 'none', ...AT('grandma', 'warm_back'), ...AT('sophia', 'warm') }),
+      from: () => ({ ...NEAR([-0.4, 6.4], 4.2, 0.4, 0.05), rings: 1, cat_pose: 'none', grandma_with: null, ...AT('grandma', 'warm_back'), ...AT('sophia', 'warm') }),
       run: async s => {
         await dolly(s, NEAR([-0.4, 6.4], 4.2, 0.4, 0.05), 1.5);
         await tell(s, 'calm_after:still', 3);
@@ -553,7 +559,7 @@ function film(scene) {
         await tell(s, 'moon_path:path', SAY('And Mama…', 'Look') + 1);
         await cutTo(s, SHOT('sophia', 'medium', [0.45, 0.45], 0));
         await s.person('grandma').do('drape');
-        s.set('grandma_wear', { garment: 'dress' });
+        s.set('grandma_wear', { garment: 'long_dress' });
         s.set('sophia_with', ['shawl']);
         await tell(s, 'moon_path:shawl', 3);
         await cutTo(s, { ...(PORCH) });
@@ -607,12 +613,13 @@ function film(scene) {
         await tell(s, 'rail_after:creak', 2);
         if (get('knew')) {
           put(s, 'papa', 'door_in');
-          s.set('papa_with', ['blanket']);
+          s.set('papa_with', ['blanket_fold']);
           s.person('papa').look('grandma');
           await tell(s, 'rail_after:papa', SAY('Mamma. Indoors') + 2);
           await s.person('papa').do('drape');
           s.set('papa_with', null);
-          s.set('grandma_with', ['blanket']);
+          s.set('grandma_with', ['blanket_round']);
+          s.set('sophia_with', ['blanket_round']);
           await tell(s, 'rail_after:blanket', 2);
         } else {
           await dolly(s, PORCH_NEAR, 3);
@@ -881,6 +888,7 @@ function film(scene) {
         const smoke = get('sign_smoke');
         const group = NEAR([-0.5, 15.6], 4.2, 0, 0.03);
         if (smoke === 'pouch') {
+          s.set('sophia_with', ['pouch']);
           s.person('sophia').reach({ r: 'grandma#hand_l' });
           await cutTo(s, group);
         } else if (smoke === 'shell') {
@@ -888,6 +896,7 @@ function film(scene) {
           s.set('shell', false);
           s.set('papa_with', ['shell']);
         } else {
+          if (smoke === 'packet') s.set('grandma_with', ['packet']);
           s.person('grandma').reach({ r: 'grandma#hips' });
           await cutTo(s, group);
         }
@@ -956,7 +965,7 @@ function film(scene) {
       after: ['walk_self', 'walk_arm', 'walk_slow'],
       from: () => ({ ...SHOT('grandma', 'medium', [0.5, 0.45], 0), ...AT('grandma', 'gangway'), ...AT('papa', 'gangway'), ...AT('sophia', 'gangway') }),
       run: async s => {
-        s.person('papa').reach({ l: 'grandma#hand_r' });
+        s.person('papa').reach({ l: 'grandma#elbow_r' });
         await tell(s, 'elbow:taken', 3);
         s.person('grandma').reach({ r: 'gangway#rail' });
         await cutTo(s, SHOT('gangway#rail', 'medium', [0.5, 0.5], 0));

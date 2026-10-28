@@ -291,8 +291,13 @@ The sea's mirror follows the weather (the island's keyed mirror: rough and rippl
 - Parts: `cigarette`, `knife` and `chip`, `shawl` (on Sophia), `blanket`, `list`, `parcel`, `jacket`, `bundle`, `hat`,
   `shell`, `basket`; `mug` is there. Looks: Grandmother without her shawl (`grandma_wear`), the straw hat on Sophia
   (`sophia_wear`).
-- Close-ups (`closeups`): the teeth in the peonies, the stems, the hands on the gunwale, the knot, Grandmother's hands
-  shaking on the rock, the string of the parcel, the palm on the gangway's rail, the hands on the oars.
+- Close-ups — the world's `closeups`, in: `teeth` (the piece `teeth` opens it at `teeth:in`, `teeth_show`), `tremble`
+  (`slip:hands`), and the mini-games' `stems` (`stems`), `gunwale` (`gunwale_push`), `knot` (`knot`), `string`
+  (`parcel`), `oars` (`oars_let`), `rail` (`rail_let`), each opened by `<shot>_open`; their points in the contract.
+- Parts — in, by the cast's names: `cigarette`, `mug`, `knife` and `chip`, `pebble`, `shawl` (on Sophia; Grandmother
+  `long_dress` meanwhile), `blanket_fold` carried and `blanket_round` round the two, `list`, `parcel`, `jacket`,
+  `bundle`, `hat`, `shell`, `basket`, `pouch`, `packet`. Motions — those above, until they come: stand-ins (standing,
+  `seated`).
 
 ## Contract for the check
 
@@ -350,10 +355,10 @@ The sea's mirror follows the weather (the island's keyed mirror: rough and rippl
  "dinghy_board": {"after": ["signs"], "tells": ["dinghy_board:oars", "dinghy_board:stern", "dinghy_board:bow_in", "dinghy_board:hold", "dinghy_board:hand", "dinghy_board:push", "dinghy_board:sophia", "dinghy_board:shake"], "seconds": 25, "show": false},
  "oars_after": {"after": ["dinghy_board"], "tells": ["oars_after:straight", "oars_after:hand", "oars_after:there"], "seconds": 18, "show": false},
  "from_water": {"after": [], "tells": ["from_water:door", "from_water:gate", "from_water:rail", "from_water:graves"], "seconds": 16, "show": false}},
- "points": ["rock#ledge", "rock#shelf", "rock#warm", "peony:2#stems", "pier#end", "boat#boat", "rowboat#gunwale", "rowboat#seat", "net#knot", "gate#gate", "gate#stone", "chair#back", "porch#rail", "porch#landing", "graves#pit", "dinghy#oars", "dinghy#seat", "dinghy#bow", "gangway#rail", "big_boat#deck", "big_boat#bow", "luggage#basket", "house_front#veranda", "house_front#door", "house_front#gable", "veranda_in#hat", "cat#cat", "cat#back", "far_roof#roof", "far_boat#lamp", "sky#sun", "sky#sun_late", "sky#sun_dawn", "sky#moon", "grandma#chest", "grandma#hand_r", "grandma#hands", "sophia#chest", "sophia#hand_l", "sophia#shoulder_r", "papa#chest", "eriksson#chest"],
- "offers": ["peony:2#stems", "sophia#hand_l", "sophia#shoulder_r", "rock#ledge", "rowboat#gunwale", "net#knot", "grandma#hand_r", "porch#rail", "grandma#hands", "gangway#rail", "dinghy#oars", "grandma#chest", "sophia#chest", "papa#chest"],
+ "points": ["rock#ledge", "rock#shelf", "rock#warm", "peony:2#stems", "pier#end", "boat#boat", "rowboat#gunwale", "rowboat#seat", "net#knot", "gate#gate", "gate#stone", "chair#back", "porch#rail", "porch#landing", "graves#pit", "dinghy#oars", "dinghy#seat", "dinghy#bow", "gangway#rail", "big_boat#deck", "big_boat#bow", "luggage#basket", "house_front#veranda", "house_front#door", "house_front#gable", "veranda_in#hat", "cat#cat", "cat#back", "far_roof#roof", "far_boat#lamp", "sky#sun", "sky#sun_late", "sky#sun_dawn", "sky#moon", "grandma#chest", "grandma#hand_r", "grandma#hands", "sophia#chest", "sophia#hand_l", "sophia#shoulder_r", "papa#chest", "eriksson#chest", "teeth#teeth", "stems#stem", "tremble#hands", "gunwale#hands", "knot#thread", "knot#knot", "string#bow", "oars#hands", "rail#hand"],
+ "offers": ["peony:2#stems", "sophia#hand_l", "sophia#shoulder_r", "rock#ledge", "rowboat#gunwale", "net#knot", "grandma#hand_r", "porch#rail", "grandma#hands", "gangway#rail", "dinghy#oars", "grandma#chest", "sophia#chest", "papa#chest", "stems#stem", "gunwale#hands", "knot#thread", "string#bow", "oars#hands", "rail#hand"],
  "party": {"dawn": 0, "dusk": 0, "night": 0, "late": 0, "calm": 0, "storm": 0, "flash": 0, "fog": 0, "moon": 1, "chair": "none", "shell": false, "graves": 0, "weed": false, "boat_out": false, "big_boat": false, "luggage": false, "hat": "nail", "skirt": true, "knew": false, "ask_back": false, "heard": false, "knock_broken": false, "sign_smoke": "pocket", "sign_hat": "nail", "sign_bird": "none", "grandma_here": true, "sophia_here": true, "papa_here": true, "eriksson_here": false},
- "acts": {"stems": {"values": [], "tells": []}, "pull": {"values": [], "tells": []}, "let": {"values": [], "tells": []}, "step": {"values": [], "tells": []}, "rowboat": {"values": [], "tells": []}, "knot": {"values": [], "tells": []}, "rings": {"values": [], "tells": []}, "gust": {"values": [], "tells": []}, "parcel": {"values": [], "tells": []}, "dinghy_at": {"values": [], "tells": []}, "flash": {"values": [], "tells": ["flash:strike"]}}}
+ "acts": {"stems": {"values": [], "tells": []}, "pull": {"values": [], "tells": []}, "let": {"values": [], "tells": []}, "step": {"values": [], "tells": []}, "rowboat": {"values": [], "tells": []}, "knot": {"values": [], "tells": []}, "rings": {"values": [], "tells": []}, "gust": {"values": [], "tells": []}, "parcel": {"values": [], "tells": []}, "dinghy_at": {"values": [], "tells": []}, "flash": {"values": [], "tells": ["flash:strike"]}, "stems_open": {"values": [], "tells": []}, "gunwale_open": {"values": [], "tells": []}, "gunwale_push": {"values": [], "tells": []}, "knot_open": {"values": [], "tells": []}, "string_open": {"values": [], "tells": []}, "oars_open": {"values": [], "tells": []}, "oars_let": {"values": [], "tells": []}, "rail_open": {"values": [], "tells": []}, "rail_let": {"values": [], "tells": []}}}
 ```
 
 Against the plan's names: the shelf's points are the land's — `rock#ledge` (the plan's `ledge#edge`) and `rock#shelf`

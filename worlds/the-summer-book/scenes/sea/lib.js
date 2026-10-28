@@ -205,13 +205,14 @@ function film(scene) {
           s.person('sophia').mood('laugh');
           await cutTo(s, CLOSE('sophia'));
         } else if (mark === 'blanket') {
-          s.set('papa_with', ['blanket']);
+          s.set('papa_with', ['blanket_fold']);
           s.set('papa_do', null);
           s.set('papa_on', null);
           await s.person('papa').walk([[0.0, 0.8]]);
           await s.person('papa').do('drape');
           s.set('papa_with', null);
-          s.set('grandma_with', ['blanket']);
+          s.set('grandma_with', ['blanket_round']);
+          s.set('sophia_with', ['blanket_round']);
         } else {
           await cutTo(s, MEDIUM('sophia'));
           await s.person('sophia').do('fold_hands');
@@ -269,7 +270,7 @@ function film(scene) {
       after: ['look_house', 'cat_gift', 'sky'],
       from: () => ({ ...VIEW, island: 0.15, dinghy: false, ...AT('grandma', [1.0, 0.6], { turn: 270 }), ...AT('sophia', 'bow'), ...AT('papa', [0.6, 0.9], { turn: 90 }) }),
       run: async s => {
-        s.person('papa').reach({ r: 'grandma#hand_r' });
+        s.person('papa').reach({ r: 'grandma#elbow_l' });
         await tell(s, 'oars_boat:board', 2);
         put(s, 'grandma', get('grandma_at') ?? 'seat');
         if (!get('learned')) {
