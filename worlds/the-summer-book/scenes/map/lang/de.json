@@ -1,0 +1,8 @@
+{"strings": [
+  {"text":"The house","translation":"Das Haus","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The magic forest","translation":"Der Zauberwald","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The new house","translation":"Das neue Haus","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The cape","translation":"Das Kap","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The Island","translation":"Die Insel","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The Map","translation":"Die Karte","where":"worlds/the-summer-book/scenes/map/scene.json title"}
+]}
