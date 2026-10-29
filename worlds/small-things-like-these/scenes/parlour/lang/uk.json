@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Mother Superior's Parlour","translation":"Приймальня настоятельки","where":"worlds/small-things-like-these/scenes/parlour/scene.json title"},
+  {"text":"Sunday, before light. In the parlour the laundry cannot be heard.","translation":"Неділя, ще темно. У приймальні пральні не чути.","where":"worlds/small-things-like-these/scenes/parlour/scene.json caption"}
+]}
