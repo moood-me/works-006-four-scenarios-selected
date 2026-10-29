@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Shore by the House","translation":"집 앞 물가","where":"worlds/the-summer-book/scenes/shore/scene.json title"},
+  {"text":"June on the island. The sea lies still as glass.","translation":"섬의 6월. 바다가 유리처럼 고요하다.","where":"worlds/the-summer-book/scenes/shore/scene.json caption"}
+]}
