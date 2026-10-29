@@ -1,0 +1,595 @@
+{
+  "engine": 3,
+  "title": "The Deep",
+  "caption": "Under the water: sand, weed, and the light coming down from above.",
+  "horizon": 0.5,
+  "camera": {
+    "mode": "walk",
+    "area": [
+      0.5,
+      0.5,
+      0,
+      0.4
+    ]
+  },
+  "modules": [
+    "cast"
+  ],
+  "light": {
+    "ambient": 0.78,
+    "ambientColor": "#a6e2dc",
+    "saturation": 1.05,
+    "bounce": 0.5,
+    "haze": 0.6,
+    "hazeColor": "#4fb3b6",
+    "hazeGlow": 0.6,
+    "shafts": 3.0,
+    "vignette": 0.22,
+    "grain": 0.06,
+    "wind": [
+      1,
+      0.3,
+      0.45
+    ],
+    "looks": {
+      "dusk": {
+        "ambient": 0.62,
+        "ambientColor": "#8fb0d2",
+        "hazeColor": "#2d6f8c",
+        "shafts": 0.5,
+        "lights": {
+          "sun": 0.25
+        }
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "sun",
+      "from": [
+        160,
+        72
+      ],
+      "color": "#fff1cf",
+      "strength": 1.4,
+      "through": [
+        [
+          [
+            -1.0,
+            2.0,
+            7
+          ],
+          [
+            0.6,
+            1.6,
+            7
+          ],
+          [
+            2.3,
+            2.3,
+            7
+          ],
+          [
+            2.5,
+            3.6,
+            7
+          ],
+          [
+            0.9,
+            4.1,
+            7
+          ],
+          [
+            -0.9,
+            3.5,
+            7
+          ]
+        ],
+        [
+          [
+            -3.6,
+            4.9,
+            7
+          ],
+          [
+            -2.3,
+            4.6,
+            7
+          ],
+          [
+            -1.6,
+            5.5,
+            7
+          ],
+          [
+            -2.2,
+            6.4,
+            7
+          ],
+          [
+            -3.3,
+            6.2,
+            7
+          ]
+        ],
+        [
+          [
+            3.3,
+            7.8,
+            7
+          ],
+          [
+            4.9,
+            7.6,
+            7
+          ],
+          [
+            5.4,
+            8.7,
+            7
+          ],
+          [
+            4.6,
+            9.4,
+            7
+          ],
+          [
+            3.5,
+            9.1,
+            7
+          ]
+        ],
+        [
+          [
+            -1.2,
+            10.2,
+            7
+          ],
+          [
+            0.5,
+            10.0,
+            7
+          ],
+          [
+            1.2,
+            11.1,
+            7
+          ],
+          [
+            0.2,
+            11.9,
+            7
+          ],
+          [
+            -1.0,
+            11.6,
+            7
+          ]
+        ],
+        [
+          [
+            6.0,
+            2.4,
+            7
+          ],
+          [
+            7.3,
+            2.3,
+            7
+          ],
+          [
+            7.6,
+            3.3,
+            7
+          ],
+          [
+            6.5,
+            3.8,
+            7
+          ]
+        ],
+        [
+          [
+            -6.1,
+            0.9,
+            7
+          ],
+          [
+            -4.7,
+            0.8,
+            7
+          ],
+          [
+            -4.4,
+            1.9,
+            7
+          ],
+          [
+            -5.6,
+            2.3,
+            7
+          ]
+        ],
+        [
+          [
+            1.3,
+            15.3,
+            7
+          ],
+          [
+            3.0,
+            15.2,
+            7
+          ],
+          [
+            3.2,
+            16.6,
+            7
+          ],
+          [
+            1.6,
+            16.8,
+            7
+          ]
+        ]
+      ],
+      "soft": 0.8
+    }
+  ],
+  "state": {
+    "fisherman_at": "sand",
+    "hands": false,
+    "years": false,
+    "dusk": 0,
+    "far_light": 0,
+    "fisherman_a": -0.62,
+    "fisherman_d": 4.22,
+    "fisherman_placed": "sand",
+    "fisherman_on": [
+      -0.62,
+      4.22,
+      0.4
+    ],
+    "fisherman_do": "seated",
+    "fisherman_turn": 135,
+    "fisherman_look": "mermaid",
+    "mermaid_on": [
+      0.58,
+      4.22,
+      0.4
+    ],
+    "mermaid_do": "seated",
+    "mermaid_turn": 225,
+    "mermaid_look": "fisherman",
+    "mermaid_with": [
+      "tail"
+    ],
+    "mermaid_wear": {
+      "barefoot": "both"
+    }
+  },
+  "states": {
+    "fisherman_at": {
+      "values": [
+        "sand",
+        "standing"
+      ],
+      "means": "where the Fisherman is (lib.PLACES): sitting beside her on the low slab on the sand (2.1, 3С.1, «Два огня») / on his feet on the sand before her, a little left (2.5); set, put there at once, both turned anew"
+    },
+    "hands": {
+      "type": "boolean",
+      "means": "her right hand in his left while he sits beside her (3С.1 when they sit silent, «Два огня»); false — their hands in their laps"
+    },
+    "years": {
+      "type": "boolean",
+      "means": "years on (the ending «Два огня»): his hair white (the cast's fisherman_old as his look); she the same"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the evening up there: 0 the day — bright turquoise water, the light from above in shafts; 1 the dusk — bluer, dimmer, the shafts faint (3С.1, so that the warm light far above reads); set at once (the water round is painted again)"
+    },
+    "far_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "a warm light far above going over the surface — his lantern carried along the bridge to the town (3С.1): 0 none; from just over 0 it comes in at the left, goes right over the open water as it rises, fades out toward 1"
+    },
+    "fisherman_a": {
+      "range": [
+        -3,
+        3
+      ],
+      "means": "the scene's own: where the Fisherman is across, set from fisherman_at"
+    },
+    "fisherman_d": {
+      "range": [
+        2,
+        6
+      ],
+      "means": "the scene's own: where the Fisherman is ahead, set from fisherman_at"
+    },
+    "fisherman_placed": {
+      "type": "string",
+      "means": "the scene's own: the place the Fisherman was last put at"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "The water above and round",
+      "sky": true,
+      "uniforms": {
+        "dusk": 0,
+        "lx": 0.68,
+        "lamp": 0
+      }
+    },
+    {
+      "id": "far_rocks",
+      "name": "Far rocks",
+      "across": 0,
+      "distance": 26,
+      "height": 10,
+      "box": [
+        -42,
+        -10,
+        44,
+        0.6
+      ]
+    },
+    {
+      "id": "sand",
+      "name": "The sand",
+      "plane": true,
+      "drape": true,
+      "across": 0,
+      "distance": 30,
+      "width": 120,
+      "depth": 80
+    },
+    {
+      "id": "rock",
+      "name": "The stone's foot",
+      "across": 3.2,
+      "distance": 9,
+      "elevation": -0.15,
+      "height": 9,
+      "box": [
+        -7.5,
+        -9,
+        7.5,
+        0
+      ],
+      "shadow": true
+    },
+    {
+      "id": "school",
+      "name": "A school of small fish",
+      "across": 0,
+      "distance": 13,
+      "height": 3.2,
+      "box": [
+        -18,
+        -4.5,
+        18,
+        -1.3
+      ]
+    },
+    {
+      "id": "fish",
+      "name": "Bigger fish",
+      "across": 0,
+      "distance": 6.5,
+      "height": 1.55,
+      "box": [
+        -8,
+        -2.45,
+        8,
+        -0.9
+      ]
+    },
+    {
+      "id": "kelp",
+      "name": "Tall weed",
+      "height": 5,
+      "box": [
+        -1.4,
+        -4.9,
+        1.4,
+        0.1
+      ],
+      "translucent": 0.4,
+      "shadow": true,
+      "copies": [
+        {
+          "across": -2.3,
+          "distance": 2.8
+        },
+        {
+          "across": -3.4,
+          "distance": 5.2,
+          "scale": 1.1,
+          "flip": true
+        },
+        {
+          "across": -1.6,
+          "distance": 8.5,
+          "scale": 0.9
+        },
+        {
+          "across": -5.0,
+          "distance": 9.5,
+          "scale": 1.2
+        },
+        {
+          "across": 2.5,
+          "distance": 3.4,
+          "flip": true
+        },
+        {
+          "across": 5.2,
+          "distance": 6.8,
+          "scale": 1.15
+        },
+        {
+          "across": -3.0,
+          "distance": 15,
+          "scale": 1.1
+        },
+        {
+          "across": 8,
+          "distance": 16,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "grass",
+      "name": "Sea grass",
+      "height": 0.6,
+      "box": [
+        -0.45,
+        -0.65,
+        0.45,
+        0.05
+      ],
+      "copies": [
+        {
+          "across": -1.4,
+          "distance": 4.0,
+          "scale": 0.9
+        },
+        {
+          "across": 1.5,
+          "distance": 4.5,
+          "flip": true
+        },
+        {
+          "across": -0.9,
+          "distance": 5.3,
+          "scale": 0.8
+        },
+        {
+          "across": 2.2,
+          "distance": 6.3,
+          "scale": 1.1
+        },
+        {
+          "across": -2.6,
+          "distance": 6.6,
+          "scale": 1.2,
+          "flip": true
+        },
+        {
+          "across": 0.9,
+          "distance": 3.0,
+          "scale": 0.7
+        },
+        {
+          "across": -1.0,
+          "distance": 2.2,
+          "scale": 0.8,
+          "flip": true
+        },
+        {
+          "across": 3.4,
+          "distance": 2.4,
+          "scale": 0.9
+        }
+      ]
+    },
+    {
+      "id": "slab",
+      "name": "The low stone they sit on",
+      "across": 0,
+      "distance": 4.3,
+      "height": 0.6,
+      "box": [
+        -3.5,
+        -0.6,
+        3.5,
+        0
+      ],
+      "shadow": true
+    },
+    {
+      "id": "bubbles",
+      "name": "Bubbles by the stone",
+      "across": 2.0,
+      "distance": 7.6,
+      "elevation": 0.1,
+      "particles": {
+        "kind": "bubbles",
+        "source": [
+          1.2,
+          0.6,
+          0
+        ],
+        "rate": 1.2
+      }
+    },
+    {
+      "id": "bubbles_weed",
+      "name": "Bubbles by the weed",
+      "across": -3.3,
+      "distance": 5.4,
+      "elevation": 0.1,
+      "particles": {
+        "kind": "bubbles",
+        "source": [
+          0.4,
+          0.4,
+          0
+        ],
+        "rate": 0.7
+      }
+    },
+    {
+      "id": "motes",
+      "name": "Motes in the water",
+      "across": 0,
+      "distance": 7,
+      "elevation": 2.5,
+      "particles": {
+        "kind": "dust",
+        "source": [
+          12,
+          10,
+          5
+        ],
+        "rate": 30
+      }
+    },
+    {
+      "id": "fisherman",
+      "name": "The Fisherman",
+      "person": {
+        "cast": "cast",
+        "who": "fisherman",
+        "turn": 135
+      },
+      "across": -0.62,
+      "distance": 4.22,
+      "place": {
+        "across": "fisherman_a",
+        "distance": "fisherman_d"
+      }
+    },
+    {
+      "id": "mermaid",
+      "name": "The Mermaid",
+      "person": {
+        "cast": "cast",
+        "who": "mermaid",
+        "turn": 225
+      },
+      "across": 0.58,
+      "distance": 4.22
+    }
+  ]
+}

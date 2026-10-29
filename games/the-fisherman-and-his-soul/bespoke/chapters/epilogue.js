@@ -1,10 +1,10 @@
 // Epilogue (scenario §5, §10). Three endings, by the road and the wave (story.js facts): “White Flowers” (stayed with
 // her in the wave — after Wilde), “A Lantern on the Pier” (drew her away from the water), “Two Lights” (stayed in the
 // deep both times). A pause meant to be: the player only watches — two parts with “Next” between them.
-// Places: the shore (standing in the pier till its view of the land comes), the pier, the Priest's house, the deep
-// (standing in the pier till its scene is merged), the stone (the last shot of «Two Lights»).
+// Places: the shore (standing in the pier till its view of the land comes), the pier, the Priest's house, the deep, the
+// stone (the last shot of «Two Lights»).
 // Reads: everything (facts; marks.apart — М8's trace).
-import { PRIEST, STONE, facts } from '../story.js';
+import { DEEP, PRIEST, STONE, facts } from '../story.js';
 
 export default {
   number: '', title: tr('Epilogue'),
@@ -81,8 +81,8 @@ export default {
         else if (f.sounds) await g.plate(tr('Last shot: night; the old Fisherman alone at the end of the pier with his lantern, its beam on the water. Sometimes he seems to hear three notes.'));
         else await g.plate(tr('Last shot: night; the old Fisherman alone at the end of the pier with his lantern, its beam on the water. Only the water.'));
       } else {
-        await g.scene('deep', { here: ['fisherman', 'mermaid'], moods: { fisherman: 'neutral', mermaid: 'smile' },
-          where: tr('In truth: under the water by the stone, years on. His hair is white; she is the same as in the net.') });
+        await g.scene('deep', { here: ['fisherman', 'mermaid'], moods: { fisherman: 'neutral', mermaid: 'smile' }, keys: DEEP.years,
+          where: tr('Years on. His hair is white; she is the same as in the net.') });
         await g.plate(tr('She touches his hair.'));
         await g.say('mermaid', 'What is this — white?');
         await g.say('fisherman', 'Years');
@@ -90,6 +90,7 @@ export default {
         await g.plate(tr('He does not answer.'));
         if (f.net === 'word') await g.plate(tr('He is the first to take her hand, as he always called her.'));
         else await g.plate(tr('She takes his hand first, before he reaches for hers.'));
+        g.set('hands', true);
         if (f.sounds) await g.plate(tr('She sings all four notes.'));
         else await g.plate(tr('She begins to sing and falls silent; they are silent, hand in hand.'));
         await g.scene('stone', { here: [], keys: STONE.lights });

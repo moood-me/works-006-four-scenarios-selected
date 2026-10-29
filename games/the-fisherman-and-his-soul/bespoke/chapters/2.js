@@ -1,10 +1,10 @@
 // II. Three Years (scenario §5, 2.1–2.8). The deep and her song; the first year — the Mirror of Wisdom, her law said
 // aloud; the choice “till sunrise”; the second year — the Ring of Riches; dancing under water; the third year — the
 // dancer on the square; ⚑ the first hinge “One Day”.
-// Places: the deep (standing in the pier till its scene is merged), the pier.
+// Places: the deep, the pier.
 // Reads: marks.come, danced; scales.soul, song. Leaves: choices.sit, day; scales.soul, song. М4 touched twice — she
 // sings holding his hand.
-import { facts } from '../story.js';
+import { DEEP, facts } from '../story.js';
 import { song } from '../minigames/all.js';
 
 export default {
@@ -17,7 +17,7 @@ export default {
   steps: [
     // 2.1: the deep
     async g => {
-      await g.scene('deep', { here: ['fisherman', 'mermaid'], moods: { fisherman: 'smile', mermaid: 'smile' } });
+      await g.scene('deep', { here: ['fisherman', 'mermaid'], moods: { fisherman: 'smile', mermaid: 'smile' }, keys: DEEP.sand });
       await g.plate(tr('Light in pillars, weed, fish. She sings; he sits on the sand.'));
       const { touches } = await g.play(song);
       if (touches >= 2) await g.plate(tr('She laughs, and sings on, holding his hand.'));
@@ -76,7 +76,7 @@ export default {
     // 2.5: dancing under water
     async g => {
       const f = facts(g.state);
-      await g.scene('deep', { here: ['fisherman', 'mermaid'], moods: { fisherman: 'smile', mermaid: 'smile' } });
+      await g.scene('deep', { here: ['fisherman', 'mermaid'], moods: { fisherman: 'smile', mermaid: 'smile' }, keys: DEEP.standing });
       await g.say('fisherman', 'Show me how you dance here');
       await g.say('mermaid', 'We do not dance. Dancing is done with feet');
       if (f.danced) {
@@ -86,6 +86,7 @@ export default {
       g.mood('mermaid', 'laugh');
       await g.plate(tr('She laughs and beats her tail.'));
       g.mood('mermaid', 'sad');
+      g.set('mermaid_look', 'fisherman#feet');
       await g.plate(tr('Then for a long time she looks at his feet — and hides her face in her hair.'));
     },
     // 2.6: the third year

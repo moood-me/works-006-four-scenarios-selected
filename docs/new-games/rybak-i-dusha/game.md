@@ -8,8 +8,8 @@
 - **Места** (`story.js PLACES`): `stone` — сцена `stone` (С2; и лодка в море), `pier` — `pier` (С1), `priest` —
   `priest-house` (С3), `well` — `well` (С4), `bridge` — `bridge` (С5). Пока стоят в чужих сценах с ярлыком «На самом
   деле: …»: `shore` (берег, шалаш, поле — в `pier`, до её вида на берег), `room` (дом гончара внутри — в `bridge`, до
-  сцены `potter-room`), `deep` (глубина — в `pier`, до слияния ветки `r3/rybak-deep`). Моменты сцен — ключи из их
-  notes.md (`STONE`, `PRIEST`). Ярлык шага (`where`) говорит час и год, пока сцена их не показывает.
+  сцены `potter-room`). `deep` — сцена `deep` (С6, слита 2026-10-29). Моменты сцен — ключи из их notes.md (`STONE`,
+  `DEEP`, `PRIEST`). Ярлык шага (`where`) говорит час и год, пока сцена их не показывает.
 - **Люди** — по id сцен; кого у сцены ещё нет — слышно, не видно (`SILENT` — те, кто молчит: `velvet`, `daughter`,
   `woman_a`, `woman_b`, `widow_girl`, `widow_boy`, `beggar`, `musician_a`, `musician_b`). Голос «women» — над
   `woman_a`.

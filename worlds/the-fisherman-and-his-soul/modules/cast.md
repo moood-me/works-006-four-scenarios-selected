@@ -25,6 +25,8 @@ the water's glow), a fine line, a simple face (eyes, brows, a mouth) that reads 
   ankles (the cast's garment `cassock`).
 - `woman_a`, `woman_b` — two women of the village, his flock: one in a slate-blue dress with a kerchief (`hood`), one in
   a brown dress, hair in a bun, a pale shawl (`scarf`).
+- `fisherman_old` — the Fisherman years on (the ending «Два огня», scene `deep`): the same man, his hair white. Not a
+  person of its own: a scene gives it as his look (`fisherman_wear`: the object `scene.kit.cast.characters.fisherman_old`).
 
 ## Things (the cast's parts: `<id>_with`)
 

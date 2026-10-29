@@ -2,7 +2,7 @@
 // only once the step is done (game.js). A step left behind (the player went to the map: ☰) does nothing more and never
 // ends: whatever it still calls returns a promise that never settles.
 // Stage 5 of the game (moood-me/moood docs/writing/game-stages.md), under way: the places on their own scenes (PLACES;
-// the potter's room, the shore and the deep still stand in others till their scenes come), the people where the scenes
+// the potter's room and the shore still stand in others till their scenes come), the people where the scenes
 // have them, the mini-games real (minigames/); what the scenes' pieces will show is a plate with “Next” (g.plate,
 // g.sheet) till the pieces come (the contract: docs/new-games/rybak-i-dusha/game.md «Stage 5 — pieces»).
 //   g.state — what the play carries: {scales, shown, marks, choices} (game.js); what follows from it: facts(g.state)
@@ -67,8 +67,7 @@ export const PLACES = {
   bridge: { folder: 'bridge' }, // С5 the bridge and the town
   // С5 inside: the scene `potter-room` (asked of the world); till then the bridge, the potter's house seen from outside
   room: { folder: 'bridge', where: tr('In truth: inside the potter’s house — the hearth, the bench, the shelf with the silver cup.') },
-  // С6 the deep: the scene `deep` (branch r3/rybak-deep, to be merged); till then the pier
-  deep: { folder: 'pier', where: tr('In truth: under the water by the stone — sand, weed, the light from above in pillars; the two of them sit on the sand.') },
+  deep: { folder: 'deep' }, // С6 the deep
 };
 // The people the steps name who never speak (people.json has the ones heard): the scenes' elements, seen as the scenes
 // get them (the pieces' contract, game.md)
@@ -83,6 +82,14 @@ export const STONE = {
   rise: { boat: false, lantern: 0, fisherman_at: 'water', far_light: 0.5 }, // 3С.1 «Подняться»: his lantern far away
   sea: { boat: true, lantern: 1, net: 'heap', fisherman_at: 'boat' }, // 4.5–4.6: the widow's boat at sea, at night
   lights: { boat: false, lantern: 0, deep_lights: true, far_light: 0.5 }, // «Два огня»: the last shot
+};
+// The deep's moments (its notes.md, «The moments»): where he is (its script puts both and turns them), the evening
+// up there, the years
+export const DEEP = {
+  sand: { fisherman_at: 'sand' }, // 2.1: the two sitting side by side on the low stone in the sand
+  standing: { fisherman_at: 'standing' }, // 2.5: he on his feet on the sand before her
+  dusk: { fisherman_at: 'sand', dusk: 1, far_light: 0.01 }, // 3С.1: evening up there, his lantern far above
+  years: { fisherman_at: 'sand', years: true, hands: false }, // «Два огня»: years on, his hair white
 };
 // The Priest's house's moments (its notes.md): the morning; the Fisherman on the bench (its default) or not here
 export const PRIEST = {

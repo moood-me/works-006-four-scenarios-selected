@@ -6,11 +6,10 @@
 //   Without Him: the deep, his lantern going over the bridge — the sign “Rise”; the town — the Soul with his face takes
 // the cup (the rumour, always); the fourth year — the Soul with the cup; ⚑ the last call; “I'll go”: the house by the
 // bridge, the choice of how he gives the cup back.
-// Places: the bridge, the potter's room (standing in the bridge till its scene comes), the deep (standing in the pier
-// till its scene is merged), the stone («Подняться»), the pier.
+// Places: the bridge, the potter's room (standing in the bridge till its scene comes), the deep, the stone («Подняться»), the pier.
 // Reads: choices.day; scales.soul, song. Leaves: choices.wait, cup, rise, last, giveback; marks.thief; scales.soul, song.
 // М5 rang — no bread, the potter not sure; М9 held long — he goes under not looking back.
-import { STONE, facts } from '../story.js';
+import { DEEP, STONE, facts } from '../story.js';
 import { cup, post } from '../minigames/all.js';
 
 const went = g => g.state.choices.day !== 'stay';
@@ -147,10 +146,12 @@ export default {
     async g => {
       if (went(g)) return;
       const f = facts(g.state);
-      await g.scene('deep', { here: ['fisherman', 'mermaid'], moods: { fisherman: 'neutral', mermaid: f.sounds ? 'smile' : 'neutral' } });
+      await g.scene('deep', { here: ['fisherman', 'mermaid'], moods: { fisherman: 'neutral', mermaid: f.sounds ? 'smile' : 'neutral' },
+        keys: { ...DEEP.dusk, hands: !f.sounds } });
       if (f.sounds) await g.plate(tr('She sings; he listens.'));
       else await g.plate(tr('They sit in silence, her hand in his.'));
       await g.say('narrator', 'And the Soul went over the earth alone');
+      g.set('far_light', 0.6, 8);
       await g.plate(tr('From above, through the water, comes a warm light — his lantern, far off, going over the bridge to the town.'));
       const r = await g.interrupt('rise', { fisherman: [{ id: 'rose', label: tr('Rise') }] }, { id: 'stayed' }, 3000,
         tr('A warm light far above, going away.'));
@@ -160,6 +161,7 @@ export default {
         await g.plate(tr('He comes up to his shoulders by the stone and watches the little light go away beyond the bridge. From below the Mermaid pulls him by the hand — silently — and that evening she sings no more.'));
         g.here('fisherman', false);
       } else {
+        g.set('far_light', 1, 6);
         await g.plate(tr('The light goes away. He does not lift his head; she lays her palm over his eyes and sings on.'));
       }
       g.apply('rise');
