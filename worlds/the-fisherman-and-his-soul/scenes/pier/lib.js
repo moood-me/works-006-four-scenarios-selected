@@ -83,7 +83,13 @@ function film(scene) {
   const SHORE = light => ({ view: 'shore', ...VIEW.shore, ...LIGHT[light], light, hut: 'none', shawl: false, widow_boat: false, mound: false,
     linen: false, shells: false });
   const WIDE_SHORE = { ...P.CAM0, ...VIEW.shore };
-  const shotShore = (target, size, frame) => P.shot(target, size, frame, P.CAM0);
+  // the shore's nearer cameras, each its own place on the sand or the bank (the operator would film them from the land,
+  // the bank in its way): by the hut and the water's edge; by the widow's boat; low over her on the sand; up on the
+  // bank by the field's edge
+  const SHORE_HUT = { ...P.CAM0, camera_x: 5.0, camera_z: 0.6, camera_yaw: 255 };
+  const SHORE_WIDOW = { ...P.CAM0, camera_x: 4.8, camera_z: 0.4, camera_yaw: 240, camera_look: 0.03 };
+  const SHORE_SAND = { ...P.CAM0, camera_x: 3.3, camera_z: 1.3, camera_yaw: 262, camera_look: 0.14 };
+  const SHORE_FIELD = { ...P.CAM0, camera_x: 0.6, camera_z: -7.8, camera_yaw: 222, camera_look: 0.06 };
   const put = (s, o) => { for (const [k, v] of Object.entries(o)) s.set(k, v); };
   // an object without some of its keys (a piece's `from` that leaves a key to the game)
   const without = (o, ...ks) => Object.fromEntries(Object.entries(o).filter(([k]) => !ks.includes(k)));
@@ -724,7 +730,7 @@ function film(scene) {
         const her = s.person('witch');
         await P.go(s, 'witch', [[2.6, 0.1]], 250);
         her.look('fisherman');
-        P.frame(s, shotShore('witch', 'medium', [0.5, 0.42]), 2);
+        P.frame(s, SHORE_HUT, 2);
         await P.tell(s, 'witch_shore:stop', 1);
         if (s.get('witch_way') === 'danced') {
           // she lays bread and her shawl by the hut, and goes, looking back
@@ -759,13 +765,13 @@ function film(scene) {
         await P.go(s, 'widow', [PLACES.widow.sand.at], 300);
         s.person('widow').look('fisherman');
         s.person('fisherman').look('widow');
-        P.frame(s, shotShore('widow', 'medium', [0.45, 0.42]), 2);
+        P.frame(s, SHORE_WIDOW, 2);
         await P.tell(s, 'widow:say', 3);
         await P.tell(s, 'widow:boat', 3);
         // the children look at the net on the rail
         s.person('widow_girl').look('rail');
         s.person('widow_boy').look('rail');
-        P.frame(s, shotShore('widow_boy', 'close', [0.5, 0.45]), 2);
+        P.frame(s, { ...SHORE_WIDOW, camera_z: -0.6, camera_x: 3.4 }, 2);
         await P.tell(s, 'widow:net', 2);
       },
     },
@@ -781,7 +787,7 @@ function film(scene) {
         const b = P.go(s, 'widow_boy', [[2.8, 0.1]]);
         await b;
         s.person('widow_boy').look('rail');
-        P.frame(s, shotShore('widow_boy', 'close', [0.5, 0.45]), 1.5);
+        P.frame(s, SHORE_HUT, 1.5);
         await s.person('widow_boy').do('look_back');
         await P.tell(s, 'widow_goes:look', 0.5);
         P.frame(s, WIDE_SHORE, 2);
@@ -799,12 +805,12 @@ function film(scene) {
         // he comes up from the water's edge with the full net; the widow sees the fish
         await P.go(s, 'fisherman', [[1.6, 0.0]], 270);
         s.person('widow').look('fisherman#hands');
-        P.frame(s, shotShore('widow', 'medium', [0.45, 0.42]), 2);
+        P.frame(s, SHORE_HUT, 2);
         await P.tell(s, 'dawn_shore:fish', 3);
         // the children by something on the sand step apart: her
         P.frame(s, WIDE_SHORE, 2);
         await s.all(P.go(s, 'widow_girl', [[1.6, 1.3]]), P.go(s, 'widow_boy', [[0.3, 1.2]]));
-        await P.cut(s, shotShore('mermaid', 'close', [0.5, 0.5]));
+        await P.cut(s, SHORE_SAND);
         await P.tell(s, 'dawn_shore:apart', 2);
       },
     },
@@ -816,16 +822,16 @@ function film(scene) {
         put(s, { ...at('mermaid', 'sand'), mermaid_do: 'lie_still', mermaid_mood: 'eyes_closed' });
         s.set('mermaid_here', true);
         await s.move('wave', 0, { over: 3, ease: 'out' });
-        await P.cut(s, shotShore('mermaid', 'close', [0.5, 0.5]));
+        await P.cut(s, SHORE_SAND);
         await P.tell(s, 'wave_lays:laid', 2);
       },
     },
     kneel_kiss: {
       after: ['dawn_shore', 'wave_lays'],
       from: () => ({ ...SHORE('dawn'), ...NONE, hut: 'built', ...at('fisherman', 'sand'), ...at('mermaid', 'sand'), mermaid_do: 'lie_still',
-        mermaid_mood: 'eyes_closed', soul_here: false, ...shotShore('fisherman', 'medium', [0.5, 0.5]) }),
+        mermaid_mood: 'eyes_closed', soul_here: false, ...SHORE_SAND }),
       run: async s => {
-        P.open(s, { ...at('fisherman', 'sand'), fisherman_with: null, ...shotShore('fisherman', 'medium', [0.5, 0.5]) });
+        P.open(s, { ...at('fisherman', 'sand'), fisherman_with: null, ...SHORE_SAND });
         const him = s.person('fisherman');
         him.look('mermaid');
         await him.do('kneel');
@@ -864,9 +870,9 @@ function film(scene) {
     wrap: {
       after: 'sea_comes',
       from: () => ({ ...SHORE('dawn'), ...NONE, hut: 'built', wave: 0.3, ...at('fisherman', 'sand'), fisherman_do: 'kneel', ...at('mermaid', 'sand'),
-        mermaid_do: 'lie_still', soul_here: false, ...shotShore('fisherman', 'medium', [0.5, 0.5]) }),
+        mermaid_do: 'lie_still', soul_here: false, ...SHORE_SAND }),
       run: async s => {
-        P.open(s, shotShore('fisherman', 'medium', [0.5, 0.5]));
+        P.open(s, SHORE_SAND);
         // he wraps her in his net
         await s.wait(2);
         s.set('mermaid_here', false);
@@ -891,7 +897,7 @@ function film(scene) {
         await P.tell(s, 'fall_by:hut', 0.5);
         await s.move('wave', 0.3, { over: 3 });
         // up at the field's edge he drops down beside her
-        P.frame(s, shotShore('fisherman', 'medium', [0.5, 0.5]), 2);
+        P.frame(s, SHORE_FIELD, 2);
         put(s, at('fisherman', 'field'));
         await s.person('fisherman').do('fall_beside');
         await P.tell(s, 'fall_by:fell', 2);
@@ -909,14 +915,14 @@ function film(scene) {
         // the Priest walks down the shore to bless the sea, and stops by them
         await P.go(s, 'priest', [PLACES.priest.shore.at], 80);
         s.person('priest').look('mermaid');
-        P.frame(s, shotShore('priest', 'medium', [0.45, 0.42]), 2);
+        P.frame(s, SHORE_SAND, 2);
         await P.tell(s, 'morning_two:stop', 3);
       },
     },
     field_corner: {
       from: () => ({ ...SHORE('noon'), ...NONE, linen: true, hut: 'gone', fisherman_here: false, mermaid_here: false, soul_here: false,
         ...at('widow_girl', 'field'), widow_girl_a: -1.5, widow_girl_d: -7, ...at('widow_boy', 'field'), widow_boy_a: -1.0, widow_boy_d: -7.2,
-        ...shotShore('shells', 'full', [0.5, 0.55]) }),
+        ...SHORE_FIELD }),
       run: async s => {
         // the widow's children come and lay shells there — or nobody
         const lay = s.get('shells');
@@ -941,7 +947,7 @@ function film(scene) {
         const him = s.person('fisherman');
         // he comes up with the knife and sets it at the mound's head
         await P.go(s, 'fisherman', [[-3.7, -11.2]], 70);
-        P.frame(s, shotShore('mound#head', 'full', [0.5, 0.6]), 2);
+        P.frame(s, SHORE_FIELD, 2);
         await him.do('lay_down');
         s.set('fisherman_with', null);
         s.set('knife', 'mound');
@@ -955,9 +961,9 @@ function film(scene) {
       after: 'mound_morning',
       from: () => ({ ...SHORE('morning'), ...NONE, mound: true, hut: 'gone', knife: 'mound', fisherman_a: -3.7, fisherman_d: -11.2, fisherman_at: 'field',
         fisherman_placed: 'field', fisherman_turn: 70, fisherman_do: 'sit_ground', ...at('priest', 'mound'), priest_a: 1, priest_d: -9, mermaid_here: false,
-        soul_here: false, ...shotShore('priest', 'medium', [0.45, 0.42]) }),
+        soul_here: false, ...SHORE_FIELD }),
       run: async s => {
-        P.open(s, { ...at('priest', 'mound'), priest_a: 1, priest_d: -9, ...shotShore('priest', 'medium', [0.45, 0.42]) });
+        P.open(s, { ...at('priest', 'mound'), priest_a: 1, priest_d: -9, ...SHORE_FIELD });
         const priest = s.person('priest');
         // the Priest comes up to the mound
         await P.go(s, 'priest', [PLACES.priest.mound.at], 250);
