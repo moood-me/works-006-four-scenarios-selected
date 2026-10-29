@@ -21,6 +21,10 @@ the water's glow), a fine line, a simple face (eyes, brows, a mouth) that reads 
   `frockcoat`: skirts to the knees).
 - `potter` — the potter by the bridge: a widower, broad, greying brown hair, a clay-brown apron over a pale shirt.
 - `daughter` — his daughter, six or so: small, a madder-red dress, brown hair to the shoulders.
+- `priest` — the Priest (the white house on the hill): an ageing man, upright, grey short hair, a black cassock to the
+  ankles (the cast's garment `cassock`).
+- `woman_a`, `woman_b` — two women of the village, his flock: one in a slate-blue dress with a kerchief (`hood`), one in
+  a brown dress, hair in a bun, a pale shawl (`scarf`).
 
 ## Things (the cast's parts: `<id>_with`)
 
