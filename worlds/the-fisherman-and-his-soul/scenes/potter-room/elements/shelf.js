@@ -1,5 +1,6 @@
 // The shelf on the back wall: a board on two brackets, the potter's best pots, a round loaf at its front, and — while it
-// is here (`cup_at` shelf) — the small silver cup behind the loaf, his wife's. Points `cup` (where it stands, behind the
+// is here (`cup_at` shelf) — the small silver cup behind the loaf, his wife's; a little clay oil lamp burning at its
+// left end (its flame the scene's light "lamp"). Points `cup` (where it stands, behind the
 // bread) and `bread`. Metres, the board's top at y 0
 g.fillStyle = '#5c4430';
 g.fillRect(-0.6, 0, 1.2, 0.05);
@@ -37,6 +38,17 @@ if (e.state.cup_at === 'shelf') {
   g.fillRect(0.02, -0.16, 0.012, 0.07);
 }
 e.at(0.06, -0.1, 'cup');
+// the oil lamp: a clay saucer with a spout, its small flame
+g.fillStyle = '#9a6a44';
+g.beginPath();
+g.ellipse(-0.08, -0.025, 0.07, 0.025, 0, 0, Math.PI * 2);
+g.fill();
+g.fillRect(-0.02, -0.04, 0.05, 0.02);
+g.fillStyle = '#ffd88a';
+g.beginPath();
+g.ellipse(0.025, -0.07, 0.012, 0.028, 0, 0, Math.PI * 2);
+g.fill();
+e.light(0.025, -0.07, 0.03, '#ffcf7a', 1.2, 'lamp');
 // the loaf in front of where the cup stands
 g.fillStyle = '#b07a46';
 g.beginPath();
