@@ -1,17 +1,24 @@
 # Рыбак и его душа — игра в терминах кода
 
-Стадия 3 (`moood-me/moood:docs/writing/game-stages.md`): вся игра на трёх сценах мира. Сценарий — `scenario.md` (ветка
-`five-scenarios`); здесь — как он лёг в код.
+Стадии (`moood-me/moood:docs/writing/game-stages.md`): 3 — вся игра на трёх сценах (2026-10-22); 5 — идёт
+(2026-10-29): игра на настоящих местах, мини-игры настоящие, куски сцен — по контракту ниже («Stage 5 — pieces»).
+Сценарий — `scenario.md`; здесь — как он лёг в код.
 
-- **Игра:** `moood-me/pavel--game--the-fisherman-and-his-soul` (bespoke, private), стенд resuming3 —
-  http://resuming3.localhost:8445/~pavel/games/the-fisherman-and-his-soul. **Мир:**
-  `moood-me/pavel--the-fisherman-and-his-soul`, сцены `pier` (С1 мостки; на ней же С2 камень и С6 глубина), `well`
-  (С4), `bridge` (С5; на ней же дом гончара и, пустая, дом Священника) — без правок: кто есть, задаёт игра ключом
-  движка `<id>_here`.
-- **Каркас** — как у «Папы и моря» (`bespoke/game.js`, `story.js`, `jump.js`, `ui.js`, `map.js`, `minigames/stub.js`,
-  `check/run.mjs`). Добавлено: `g.interrupt(choice, offers, otherwise, ms)` — прерывание (знак, который стоит `ms`;
-  не тронут — `otherwise`), у главы `skip(r)` — глава не на этом пути (глава 4 на пути «Глубина»; после главы 3 —
-  эпилог), `titleOf(r)` — имя главы по пути (III «Город» / «Без него»).
+- **Игра:** `games/the-fisherman-and-his-soul` (bespoke) этого репозитория; **мир:** `worlds/the-fisherman-and-his-soul`.
+- **Места** (`story.js PLACES`): `stone` — сцена `stone` (С2; и лодка в море), `pier` — `pier` (С1), `priest` —
+  `priest-house` (С3), `well` — `well` (С4), `bridge` — `bridge` (С5). Пока стоят в чужих сценах с ярлыком «На самом
+  деле: …»: `shore` (берег, шалаш, поле — в `pier`, до её вида на берег), `room` (дом гончара внутри — в `bridge`, до
+  сцены `potter-room`), `deep` (глубина — в `pier`, до слияния ветки `r3/rybak-deep`). Моменты сцен — ключи из их
+  notes.md (`STONE`, `PRIEST`). Ярлык шага (`where`) говорит час и год, пока сцена их не показывает.
+- **Люди** — по id сцен; кого у сцены ещё нет — слышно, не видно (`SILENT` — те, кто молчит: `velvet`, `daughter`,
+  `woman_a`, `woman_b`, `widow_girl`, `widow_boy`, `beggar`, `musician_a`, `musician_b`). Голос «women» — над
+  `woman_a`.
+- **Каркас** — как у «Папы и моря» и «Кентервиля» (`bespoke/game.js`, `story.js`, `jump.js`, `ui.js`, `map.js`,
+  `minigames/`, `check/run.mjs`). Своё: `g.interrupt(choice, offers, otherwise, ms, phrase)` — знак (одно касание
+  точки за `ms`, дуга времени тает; не тронут — `otherwise`), у главы `skip(r)` — глава не на этом пути (глава 4 на
+  пути «Глубина»), `titleOf(r)` — имя главы по пути (III «Город» / «Без него»). Куски: `g.scene(place, {beat})`,
+  `g.beat`, `g.told`, `piece(g, name, {moment: fn})` — как у «Летней книги»; в главах пока плашки, куски встают на их
+  место, когда сцены их получат.
 
 ## Главы и шаги
 
@@ -40,17 +47,18 @@
 `stay` → «Белые цветы», `pull` → «Фонарь на мостках». Остальное — по меткам и шкалам (`hard`, `sounds`, `thief`,
 `widow`, `net`, `witch`).
 
-## Заглушки стадии 3 (меняются на стадии 5)
+## Стадия 5 — что уже стоит и что ждёт
 
-- **Плашка с «Дальше»** — всё, что показал бы фильм сцены.
-- **Мини-игры** (`minigames/all.js`, 11 штук, раздел 7) — `stub(...)`: кружок на точке сцены + фраза плашки языка +
-  карточка (жест, что делают руки, исход неудачи, настроение). Исход — обычный.
-- **Прерывания** (1.3 «Остановиться», 3С.1 «Подняться») — знак языка на Рыбаке, стоит 5 с (в сценарии 3 с: на стадии
-  3 знак открывает лепесток, это два касания).
-- **Чужая сцена** — ярлык «На самом деле: …»: лодка, камень, глубина — на мостках; дом гончара, площадь, дом
-  Священника — у моста; дом Священника в «Двух огнях» — у колодца (там Ведьма в толпе).
-- **Люди, которых нет в мире** — Священник, вдова, девушка на мостках, женщины деревни: их слышно (голос — в середине
-  внизу, как у рассказчика), в кадре их нет; ярлык говорит «пока только слышно».
+- **Мини-игры** (`minigames/`, 11, раздел 7) — на языке мини-игр, по файлу на каждую (общее — `hands.js`, взят у
+  «Кентервиля»): `net` (тянуть), `release` (держать и отпустить), `dance` (ритм бубна), `knife` (провести), `song`
+  (ничего не трогать), `cup` (равновесие), `post` (держать и отпустить), `knife2` (провести — нож проходит насквозь),
+  `net2` (тянуть), `hold` (держать), `drag` (тянуть). Каждая возвращает след неудачи, и главы его читают: дыра в сети
+  (`marks.torn`, видна в 4.8), не взглянула (П.4), сбился в пляске (1.5), рука Души как дым (`marks.rough`), поёт
+  держа за руку (2.1), чаша звякнула — хлеба нет (3.6), не оглянулся (3С.4), бросил нож (4.2), полсети (4.5), пальцы
+  почти касаются (`marks.apart`, «Белые цветы»), сеть рвётся шире (4.8). Точки и ключи, которых у сцен ещё нет, —
+  в контракте; проверка называет их «ждём».
+- **Знаки** (1.3 «Остановиться», 3С.1 «Подняться») — одно касание Рыбака за 3 с, как в сценарии.
+- **Плашки** — где сцена покажет кусок; уходят, когда кусок есть.
 - **Карта игры** — ряд листов поверх пустых мостков (`map.js`).
 
 ## Голоса (`people.json`)
@@ -60,10 +68,13 @@
 
 ## Проверка
 
-`node bespoke/check/run.mjs <клон мира>` — все 1 440 путей (каждая комбинация выборов и прерываний, что встречает
-путь), на каждом: сцены и люди есть в мире, точки выборов и мини-игр — элементы сцены, реплики — люди `people.json`,
-одна концовка и та, что по правилу; выборы ровно те, что у пути; шкалы в границах; «вор» — где положено; `PLAYS` карты
-автора кончаются как подписаны. `@moood/check` — тексты и русский перевод.
+`node bespoke/check/run.mjs [клон мира]` (по умолчанию — мир из game.json) — все 1 440 путей (каждая комбинация
+выборов и знаков, что встречает путь), на каждом: места игры — сцены мира, люди — игры, ключи — из states сцены,
+точки выборов — элементы сцены или люди в кадре, реплики — люди `people.json`, куски и их моменты — в контракте сцены
+(notes.md, «Contract for the check»), одна концовка и та, что по правилу; выборы ровно те, что у пути; шкалы в
+границах; «вор» — где положено; `PLAYS` карты автора кончаются как подписаны — и ещё раз со всеми мини-играми
+проваленными. Отдельно, как «ждём», — что контракт кусков просит у сцен, а у них ещё нет. `@moood/check` — тексты и
+русский перевод.
 
 ## Stage 5 — pieces
 
@@ -286,7 +297,7 @@ moment named) · tells.
 - `feast` · pier · `light` noon; `girl` dancing on the boards (`dance_light`), `woman_a`, `woman_b` clapping (`clap`),
   then `whisper`; the Fisherman walks in from the pier's end toward the shore and comes level with the girl (slows,
   stands a moment: the living pose) · 12 · wide → medium on him and the girl · at `feast:whisper`: women «By the
-  well…» · `feast:whisper`, `feast:level`; then the sign «Остановиться» (a touch on `girl`, 3 s)
+  well…» · `feast:whisper`, `feast:level`; then the sign «Остановиться» (a touch on `fisherman`, 3 s)
 - `danced` · pier · after `feast` · he stops, looks at her feet (`fisherman_look` `girl#feet`); she pulls his sleeve
   (`girl_reach` his left hand); he `clumsy_dance`s, laughs; his shadow on the boards dances with him · 10 · medium on
   the two → wide (the shadow) · at `danced:pull`: girl «Dance, fisherman!» · `danced:pull`, `danced:laugh`
@@ -571,11 +582,11 @@ moment named) · tells.
 | id | § | scene, after | gesture | marks on | keys the game drives | s | a miss leaves |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `net` | М1 | stone, `night` | pull slowly | `net_over#rope` | `haul` 0 → 1, `heel` | 10 | the net torn at the edge: `net_hole` 1 on the rail all game, and in 4.8 |
-| `release` | М1б | stone, `in_net` + the choice | hold, then let go (when she grows still) | `net_over#knot` | `knot` 0 → 1, `mermaid_do` struggle → still | 5 | held long: the knot slides by itself, she slips out not looking at him (`looks` false) |
+| `release` | М1б | stone, `in_net` + the choice | hold, then let go (when she grows still) | `net_over#knot` | `knot` 0 → 1, `mermaid_mood` afraid → neutral (her struggling is the piece's) | 5 | held long: the knot slides by itself, she slips out not looking at him (`looks` false) |
 | `dance` | М2 | well, `dance` | rhythm (the tambourine, ~100 bpm) | `witch#tambourine` | `round`, `stumble` | 12 | out of step: he stumbles, she pulls him by the hands harder and laughs (`velvet` `stumbled`) |
 | `knife` | М3 | pier, `knife_ready` | trace | `cutline#heel` → `cutline#toe` | `cut` 0..1, `cut_rough` | 10 | an uneven cut: the Soul's left hand smoke to the end (`soul_wear` soul_smoke) |
-| `song` | М4 | deep, `deep_song` | touch nothing | — (hands off) | `mermaid_do` (sing / laugh), `mermaid_near`, `hands` | 10 | touched: she stops, laughs, begins again nearer; at the second touch she sings holding his hand (`hands` true) |
-| `cup` | М5 | room, `bend_daughter` | balance (lead) | `fisherman#cup` (the part's point) | `cup_tilt`, `fisherman_a`/`_d` toward the shelf, `cup_at` shelf at the end | 8 | it rings: the potter turns, sees it, no bread (`found_cup` `rang`); no rumour |
+| `song` | М4 | deep, `deep_song` | touch nothing | — (hands off) | `mermaid_mood` (laugh, then smile), `mermaid_near`, `hands` | 10 | touched: she stops, laughs, begins again nearer; at the second touch she sings holding his hand (`hands` true) |
+| `cup` | М5 | room, `bend_daughter` | balance (lead) | `fisherman#cup` (the part's point) | `cup_tilt` −1..1, `carry` 0 → 1 (he goes from the bench to the shelf as it rises — the scene moves him), `cup_at` hand → shelf, `potter_look` (he turns to the ring) | 8 | it rings: the potter turns, sees it, no bread (`found_cup` `rang`); no rumour |
 | `knife2` | М6 | pier, `knife_rust` | trace (it goes through all the same) | `cutline#heel` → `cutline#toe` | `cut` (passes, leaves nothing) | 10 | he throws the knife on the boards, then drives it into the post (`knife_back` `thrown`) |
 | `net2` | М7 | stone (the widow's boat), `boat_out` | pull slowly | `net_over#rope` | `haul`, `fish` | 10 | half a net (`fish` 0.5); the children get fish all the same |
 | `hold` | М8 | shore, `sea_comes` + the choice «остаться» | hold (by its count) | `mermaid#hand_l` (her hand in his) | `wave` 0.3 → 1, `fisherman_reach` | 10 | her hand slips: he stays beside her, fingers almost touching (`morning_two` `apart`) |
@@ -583,7 +594,8 @@ moment named) · tells.
 | `post` | М9 | pier, `turn_away` | hold, then let go | `lantern_post#grip` | `fisherman_reach` | 5 | held long: his fingers slip by themselves; he goes under not looking back (`sink` `looked` false) |
 
 The signs (the scenario's «прерывания»): one touch within 3 s on the point, its arc of time running down (a press
-with no petals): «Остановиться» on `girl` right after `feast:level`; «Подняться» on `fisherman` at `deep_dusk:light`.
+with no petals): «Остановиться» on `fisherman` right after `feast:level` (he stops); «Подняться» on `fisherman` at
+`deep_dusk:light`.
 Person points the language needs (`#head`, `#chest`, `#hand_l`, `#hand_r`, `#feet`) are the engine's; the parts':
 `#cup`, `#tambourine`, `#flame`. Scene points to add: `net_over#rope`, `net_over#knot`, `cutline#heel`, `cutline#toe`,
 `lantern_post#grip`, `bundle#rope`, `stall#coppers`, `bowl#coins`, `shelf#cup`, `shelf#bread`, `bench#seat`.
