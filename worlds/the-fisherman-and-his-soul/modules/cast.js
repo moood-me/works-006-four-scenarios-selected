@@ -201,6 +201,23 @@ function fiddle(F) {
   const hold = add(F.P('RightHand'), mul(along, 0.06 * m));
   F.bar(add(hold, mul(along, -0.06 * m)), add(hold, mul(along, 0.5 * m)), 0.005 * m, 0.004 * m, [[0, WOOD_DARK]], 4, s);
 }
+// a bunch of white flowers held in the right hand, stems down (the finales): green stems, white heads with yellow eyes;
+// its point `flowers`
+function flowersHand(F) {
+  const { add, mul } = V();
+  const m = F.fit.h;
+  const [along] = handAxes(F, 'RightHand');
+  const c = add(F.P('RightHand'), mul(along, 0.05 * m));
+  const top = add(c, [0, 0.16 * m, 0]);
+  F.bar(add(c, [0, -0.08 * m, 0]), top, 0.012 * m, 0.02 * m, [[0, [0.36, 0.52, 0.3, 1]]], 5, [1, 0, 0]);
+  for (let k = 0; k < 5; k++) {
+    const a = (k / 5) * Math.PI * 2;
+    const at = add(top, [Math.cos(a) * 0.045 * m, 0.02 * m * (k % 2), Math.sin(a) * 0.045 * m]);
+    F.ball(at, [[1, 0, 0], [0, 1, 0], [0, 0, 1]], [0.035 * m, 0.022 * m, 0.035 * m], [0.96, 0.96, 0.93, 1], 8);
+    F.ball(add(at, [0, 0.018 * m, 0]), [[1, 0, 0], [0, 1, 0], [0, 0, 1]], [0.01 * m, 0.008 * m, 0.01 * m], [0.95, 0.8, 0.3, 1], 6);
+  }
+  F.point('flowers', top);
+}
 // a small reed pipe from the lips toward the hands
 function pipe(F) {
   const { add, sub, mul, unit, mix } = V();
@@ -316,6 +333,7 @@ return {
       ribbon: { name: 'ribbon', draw: F => ribbon(F) },
       fiddle: { name: 'fiddle', draw: F => fiddle(F) },
       pipe: { name: 'pipe', draw: F => pipe(F) },
+      flowers: { name: 'white flowers', draw: F => flowersHand(F) },
     },
   },
 };
