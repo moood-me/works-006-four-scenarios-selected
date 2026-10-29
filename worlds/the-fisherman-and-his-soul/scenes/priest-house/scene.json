@@ -36,8 +36,8 @@
     { "id": "moon", "from": "sky#disc", "through": ["door_opening"], "color": "#c9d6f4", "strength": 0.9 },
     { "id": "sun", "from": [6, 5], "through": ["door_opening"], "color": "#ffdcae", "strength": 0.9, "on": "morning" },
     { "id": "door_air", "of": "door_opening", "daylight": 0.9, "reach": 5 },
-    { "id": "candles", "of": "candles#flame", "color": "#ffbe6e", "strength": 1.3, "reach": 5, "flicker": 0.18, "glow": 0.12 },
-    { "id": "lamp", "of": "lamp#flame", "color": "#ffc27a", "strength": 1.5, "reach": 5, "flicker": 0.1, "glow": 0.3 }
+    { "id": "candles", "of": "candles#flame", "color": "#ffbe6e", "strength": 0.85, "reach": 4, "flicker": 0.18, "glow": 0.18 },
+    { "id": "lamp", "of": "lamp#flame", "color": "#ffc27a", "strength": 1.1, "reach": 4.5, "flicker": 0.1, "glow": 0.3 }
   ],
   "state": {
     "morning": 0,
@@ -46,9 +46,9 @@
     "priest_a": -1.5,
     "priest_d": 4.4,
     "priest_look": "fisherman",
-    "fisherman_a": 1.38,
-    "fisherman_d": 4.3,
-    "fisherman_on": [1.38, 4.3, 0.45],
+    "fisherman_a": 1.57,
+    "fisherman_d": 4.37,
+    "fisherman_on": [1.57, 4.37, 0.45],
     "fisherman_look": "priest",
     "woman_a_here": false,
     "woman_a_a": -1.25,
@@ -70,8 +70,8 @@
     "bench_tilt": { "range": [0, 90], "smooth": true, "means": "the bench the Fisherman sits on: 0 standing; 90 knocked over backwards, lying on its back (1.2: he gets up so sharply that it falls) — move it over a short time" },
     "priest_a": { "type": "number", "means": "where the Priest stands, metres right of the start's line (the altar −1.5; the threshold 0.45)" },
     "priest_d": { "type": "number", "means": "where the Priest stands, metres ahead (the altar 4.4; the threshold 5.6)" },
-    "fisherman_a": { "type": "number", "means": "where the Fisherman stands, metres right (on the bench 1.38; the threshold 0.45)" },
-    "fisherman_d": { "type": "number", "means": "where the Fisherman stands, metres ahead (on the bench 4.3; the threshold 5.75)" },
+    "fisherman_a": { "type": "number", "means": "where the Fisherman stands, metres right (on the bench 1.57; the threshold 0.45)" },
+    "fisherman_d": { "type": "number", "means": "where the Fisherman stands, metres ahead (on the bench 4.37; the threshold 5.75)" },
     "woman_a_a": { "type": "number", "means": "where the woman in the kerchief stands, metres right" },
     "woman_a_d": { "type": "number", "means": "where the woman in the kerchief stands, metres ahead" },
     "woman_b_a": { "type": "number", "means": "where the woman in the brown dress stands, metres right" },
@@ -122,7 +122,7 @@
     { "id": "bench_end_r", "name": "The bench's other end", "on": "bench", "across": 0.7, "distance": -0.17, "facing": 90, "height": 0.45, "box": [-0.17, -0.45, 0.17, 0.01], "inside": true },
     { "id": "dust", "name": "Dust in the light from the door", "inside": true, "particles": { "kind": "dust", "at": [0.4, 4.4, 1.2], "source": [1.6, 2.8, 1.6], "rate": 3 } },
     { "id": "priest", "name": "The Priest", "person": { "cast": "cast", "who": "priest", "turn": 110 }, "across": -1.5, "distance": 4.4, "place": { "across": "priest_a", "distance": "priest_d" } },
-    { "id": "fisherman", "name": "The Fisherman", "person": { "cast": "cast", "who": "fisherman", "turn": 250, "does": "seated" }, "across": 1.38, "distance": 4.3, "place": { "across": "fisherman_a", "distance": "fisherman_d" } },
+    { "id": "fisherman", "name": "The Fisherman", "person": { "cast": "cast", "who": "fisherman", "turn": 250, "does": "seated" }, "across": 1.57, "distance": 4.37, "place": { "across": "fisherman_a", "distance": "fisherman_d" } },
     { "id": "woman_a", "name": "A woman of the village, in a kerchief", "person": { "cast": "cast", "who": "woman_a", "turn": 30 }, "across": -1.25, "distance": 2.7, "place": { "across": "woman_a_a", "distance": "woman_a_d" } },
     { "id": "woman_b", "name": "A woman of the village, in brown", "person": { "cast": "cast", "who": "woman_b", "turn": 10 }, "across": -0.3, "distance": 2.4, "place": { "across": "woman_b_a", "distance": "woman_b_d" } },
     { "id": "witch", "name": "The Witch", "person": { "cast": "cast", "who": "witch", "turn": 300 }, "across": 1.7, "distance": 2.9, "place": { "across": "witch_a", "distance": "witch_d" } }

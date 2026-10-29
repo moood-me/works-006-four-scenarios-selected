@@ -4,6 +4,10 @@
 const LIME = '#ebe6da';
 const BAND = '#8b98a6';
 function wall(g, seed, left, right, top) {
+  g.save();
+  g.beginPath();
+  g.rect(left, top, right - left, -top + 0.02);
+  g.clip();
   g.fillStyle = LIME;
   g.fillRect(left, top, right - left, -top + 0.02);
   for (let i = 0; i < 26; i++) {
@@ -19,5 +23,6 @@ function wall(g, seed, left, right, top) {
   g.fillRect(left, -0.34, right - left, 0.36);
   g.fillStyle = 'rgba(60, 70, 84, 0.35)';
   g.fillRect(left, -0.35, right - left, 0.02);
+  g.restore();
 }
 return { wall, LIME, BAND };

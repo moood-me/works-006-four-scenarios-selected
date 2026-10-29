@@ -27,7 +27,7 @@ the light from the door, the grass outside, the sea's ripples and the moon's pat
   layer `dawn` shown over it by `morning` in its shader), `sea` (a mirror at −30: the moon's path), `far_land` (the
   bay's far side, the town's few lights), `hill` (draped; `relief.js`: level to 9 m, then falling to the shore), `grass`.
 - People (`modules/cast`): `priest` (−1.5, 4.4) turned 110 by the altar; `fisherman` sat on the bench
-  (`fisherman_on` [1.38, 4.3, 0.45], `seated`) turned 250; they look at each other, both a little toward us. Not here
+  (`fisherman_on` [1.57, 4.37, 0.45] — 0.2 m behind the seat's middle: the `seated` loop puts the hips that far before the point, `seated`) turned 250; they look at each other, both a little toward us. Not here
   unless a moment wants them: `woman_a`, `woman_b` (the village women), `witch`.
 
 ## State
