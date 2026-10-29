@@ -338,7 +338,7 @@
   {"text":"continue\nthe game","translation":"ゲームを\nつづける","where":"games/the-summer-book/bespoke/game.js"},
   {"text":"start\nthe game","translation":"ゲームを\nはじめる","where":"games/the-summer-book/bespoke/game.js"},
   {"text":"Finale: decided late","translation":"フィナーレ：遅れて決めた","where":"games/the-summer-book/bespoke/game.js"},
-  {"text":"Finale: in full","translation":"フィナーレ：間にあって決めた","where":"games/the-summer-book/bespoke/game.js"},
+  {"text":"Finale: decided in time","translation":"フィナーレ：間にあって決めた","where":"games/the-summer-book/bespoke/game.js"},
   {"text":"Replay","translation":"やりなおし","where":"games/the-summer-book/bespoke/map.js"},
   {"text":"continue\nthe replay","translation":"やりなおしを\nつづける","where":"games/the-summer-book/bespoke/map.js"},
   {"text":"the author’s map","translation":"作者の地図","where":"games/the-summer-book/bespoke/map.js"},

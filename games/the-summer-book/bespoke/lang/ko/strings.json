@@ -338,7 +338,7 @@
   {"text":"continue\nthe game","translation":"게임\n계속하기","where":"games/the-summer-book/bespoke/game.js"},
   {"text":"start\nthe game","translation":"게임\n시작하기","where":"games/the-summer-book/bespoke/game.js"},
   {"text":"Finale: decided late","translation":"피날레: 늦은 결정","where":"games/the-summer-book/bespoke/game.js"},
-  {"text":"Finale: in full","translation":"피날레: 제때","where":"games/the-summer-book/bespoke/game.js"},
+  {"text":"Finale: decided in time","translation":"피날레: 제때","where":"games/the-summer-book/bespoke/game.js"},
   {"text":"Replay","translation":"다시 하기","where":"games/the-summer-book/bespoke/map.js"},
   {"text":"continue\nthe replay","translation":"다시 하기\n계속","where":"games/the-summer-book/bespoke/map.js"},
   {"text":"the author’s map","translation":"작가의 지도","where":"games/the-summer-book/bespoke/map.js"},
