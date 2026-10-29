@@ -14,7 +14,7 @@ const PLACES = {
     water: { at: [0.2, 4.9, 0.52], turn: 150 },
   },
   mermaid: {
-    stone: { at: [0.75, 6.36, 0], on: [0.75, 6.36, 3.15], do: 'seated', turn: 215 },
+    stone: { at: [0.78, 6.4, 0], on: [0.78, 6.4, 3.15], do: 'seated', turn: 215 },
     water: { at: [0.1, 5.6, 0.77], turn: 200 },
     net: { at: [-0.5, 5.7, 0.77], turn: 240 },
   },

@@ -64,13 +64,13 @@
     "fisherman_placed": "boat",
     "fisherman_turn": 127,
     "fisherman_look": "mermaid",
-    "mermaid_a": 0.75,
-    "mermaid_d": 6.36,
+    "mermaid_a": 0.78,
+    "mermaid_d": 6.4,
     "mermaid_e": 0,
     "mermaid_placed": "stone",
     "mermaid_on": [
-      0.75,
-      6.36,
+      0.78,
+      6.4,
       3.15
     ],
     "mermaid_do": "seated",
@@ -78,7 +78,10 @@
     "mermaid_look": "fisherman",
     "mermaid_with": [
       "tail"
-    ]
+    ],
+    "mermaid_wear": {
+      "barefoot": "both"
+    }
   },
   "states": {
     "boat": {
@@ -334,10 +337,10 @@
     {
       "id": "posts",
       "name": "The pier's end posts",
-      "height": 2.95,
+      "height": 2.77,
       "box": [
         -0.1,
-        -2.95,
+        -2.77,
         0.1,
         0.02
       ],
@@ -470,8 +473,8 @@
       "id": "rings_m",
       "name": "Rings round her",
       "plane": true,
-      "across": 0.75,
-      "distance": 6.36,
+      "across": 0.78,
+      "distance": 6.4,
       "elevation": -0.62,
       "width": 1.6,
       "depth": 1.6,
@@ -518,8 +521,8 @@
         "who": "mermaid",
         "turn": 217
       },
-      "across": 0.75,
-      "distance": 6.36,
+      "across": 0.78,
+      "distance": 6.4,
       "place": {
         "across": "mermaid_a",
         "distance": "mermaid_d",

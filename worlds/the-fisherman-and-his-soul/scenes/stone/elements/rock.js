@@ -21,7 +21,7 @@ for (let i = 0; i < 80; i++) {
   const x = -W / 2 + W * e.anim.hash(i, 1);
   const y = -H + 0.3 + 1.6 * e.anim.hash(i, 2);
   const r = 0.05 + 0.16 * e.anim.hash(i, 3);
-  g.fillStyle = e.anim.hash(i, 4) > 0.5 ? 'rgba(130, 146, 112, 0.5)' : 'rgba(92, 96, 104, 0.45)';
+  g.fillStyle = e.anim.hash(i, 4) > 0.5 ? 'rgba(120, 132, 110, 0.32)' : 'rgba(92, 96, 104, 0.35)';
   g.beginPath();
   g.ellipse(x, y, r * 1.6, r, 0, 0, Math.PI * 2);
   g.fill();
@@ -32,12 +32,12 @@ for (let i = 0; i < 70; i++) {
   const y = line - 0.12 + 0.06 * e.anim.hash(i, 12);
   g.fillRect(x, y, 0.04 + 0.05 * e.anim.hash(i, 13), 0.15 + 0.3 * e.anim.hash(i, 14));
 }
-const RX = 1.5;
+const RX = 1.45;
 const RZ = 1.1;
 const TOP = 3.2;
 e.form((u, v) => {
   const a = (u - 0.5) * Math.PI * 2;
-  const n = 1 + 0.1 * Math.sin(3 * a + 1.3) + 0.06 * Math.sin(5 * a + 0.4);
+  const n = 1 + 0.1 * Math.sin(3 * a + 1.3) + 0.06 * Math.sin(5 * a + 0.4) + 0.04 * Math.sin(7 * a + 2.1);
   let r;
   let y;
   if (v < 0.12) {
@@ -47,7 +47,7 @@ e.form((u, v) => {
   } else {
     const t = (v - 0.12) / 0.88;
     r = 0.55 + 0.45 * Math.sin(t * Math.PI / 2);
-    y = (TOP - 0.06) * (1 - t * t);
+    y = (TOP - 0.06) * (1 - t * t) * (1 + 0.07 * Math.sin(2 * a + 0.5) * t * (1 - t) * 4);
   }
   return [r * RX * n * Math.sin(a), y, r * RZ * n * Math.cos(a)];
 }, { closed: 'u', ground: '#4c525c' });
