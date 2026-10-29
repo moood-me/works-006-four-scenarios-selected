@@ -7,3 +7,5 @@ const door = () => scene.set('door_turn', 270 + 80 * Math.min(1, Math.max(0, Num
 scene.on('change', 'door', door);
 scene.on('move', 'door', door);
 door();
+// The pieces (lib.film, played by `beat` through the world's `beats`)
+scene.kit.beats.play(scene, L.film(scene));

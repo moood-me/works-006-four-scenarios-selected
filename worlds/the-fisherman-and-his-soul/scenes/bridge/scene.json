@@ -15,7 +15,9 @@
   "modules": [
     "cast",
     "hours",
-    "places"
+    "places",
+    "pieces",
+    "beats"
   ],
   "light": {
     "ambient": 0.6,
@@ -222,7 +224,10 @@
     "woman_b_a": 1.5,
     "woman_b_d": 9.0,
     "woman_a_look": "woman_b",
-    "woman_b_look": "woman_a"
+    "woman_b_look": "woman_a",
+    "daughter_a": 2.15,
+    "daughter_d": 7.0,
+    "slow": false
   },
   "objects": [
     {
@@ -1014,7 +1019,11 @@
         "turn": 230
       },
       "across": 2.15,
-      "distance": 7
+      "distance": 7,
+      "place": {
+        "across": "daughter_a",
+        "distance": "daughter_d"
+      }
     },
     {
       "id": "soul",
@@ -1290,6 +1299,26 @@
     "woman_b_d": {
       "type": "number",
       "means": "the scene's own: where woman_b stands, metres ahead"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (notes.md «Pieces»; the world's beats)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will play next (its cut made ready)"
+    },
+    "slow": {
+      "type": "boolean",
+      "means": "a piece's variant (door_shut): «это я взял» — the door shuts slowly; else at once"
+    },
+    "daughter_a": {
+      "type": "number",
+      "means": "where the potter's daughter stands, metres right"
+    },
+    "daughter_d": {
+      "type": "number",
+      "means": "where the potter's daughter stands, metres ahead"
     }
   }
 }

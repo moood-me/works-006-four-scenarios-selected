@@ -218,6 +218,20 @@ function flowersHand(F) {
   }
   F.point('flowers', top);
 }
+// a string of fish hanging from the right hand by a cord through their gills (the catch for the market): four silver
+// fish one under another, swinging a little late
+function fishString(F) {
+  const { add } = V();
+  const m = F.fit.h;
+  const h = F.P('RightHand');
+  const low = F.swing('fish', add(h, [0, -0.32 * m, 0]), 70);
+  F.bar(h, low, 0.004 * m, 0.004 * m, [[0, STRAP]], 4, [1, 0, 0]);
+  for (let k = 0; k < 4; k++) {
+    const u = 0.25 + 0.22 * k;
+    const c = [h[0] + (low[0] - h[0]) * u, h[1] + (low[1] - h[1]) * u, h[2] + (low[2] - h[2]) * u];
+    F.ball(add(c, [0.03 * m * (k % 2 ? 1 : -1), 0, 0]), [[0, 1, 0], [1, 0, 0], [0, 0, 1]], [0.11 * m, 0.035 * m, 0.012 * m], [0.72, 0.78, 0.8, 1], 8);
+  }
+}
 // a small reed pipe from the lips toward the hands
 function pipe(F) {
   const { add, sub, mul, unit, mix } = V();
@@ -334,6 +348,7 @@ return {
       fiddle: { name: 'fiddle', draw: F => fiddle(F) },
       pipe: { name: 'pipe', draw: F => pipe(F) },
       flowers: { name: 'white flowers', draw: F => flowersHand(F) },
+      fish: { name: 'string of fish', draw: F => fishString(F) },
     },
   },
 };

@@ -55,6 +55,7 @@ the water's glow), a fine line, a simple face (eyes, brows, a mouth) that reads 
 - `ring` — a gold ring on the third finger of the right hand (point `#ring`) — the Soul's (2.4).
 - `tambourine_hand` — the tambourine held up in the left hand, its face turned out (dancing; point `#tambourine`).
 - `bundles` — the widow's: a cloth bundle hanging from the right hand, a bigger one on the back.
+- `fish` — a string of silver fish hanging from the right hand (the market, П.6).
 - `flowers` — a bunch of white flowers in the right hand (the finales; point `#flowers`).
 - `beard`, `ribbon`, `fiddle`, `pipe` — the looks' own (above).
 - The Soul's left hand «like smoke» (the knife's miss, М3) is not a look: the scenes where the Soul is seen give smoke
