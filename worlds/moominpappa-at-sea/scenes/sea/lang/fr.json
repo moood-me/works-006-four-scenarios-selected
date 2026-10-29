@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Open Sea","translation":"La haute mer","where":"worlds/moominpappa-at-sea/scenes/sea/scene.json title"},
+  {"text":"The boat goes on through the night. Behind the stern, a white strip on the water.","translation":"Le bateau avance à travers la nuit. Derrière la poupe, une bande blanche sur l’eau.","where":"worlds/moominpappa-at-sea/scenes/sea/scene.json caption"}
+]}
