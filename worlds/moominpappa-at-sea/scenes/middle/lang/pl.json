@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Middle of the Island","translation":"Środek wyspy","where":"worlds/moominpappa-at-sea/scenes/middle/scene.json title"},
+  {"text":"Among the pines, a clearing, and a pool so black it seems to have no bottom.","translation":"Wśród sosenek polana i jeziorko tak czarne, jakby nie miało dna.","where":"worlds/moominpappa-at-sea/scenes/middle/scene.json caption"}
+]}

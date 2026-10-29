@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Fisherman's Cape","translation":"Przylądek Rybaka","where":"worlds/moominpappa-at-sea/scenes/cape/scene.json title"},
+  {"text":"The Fisherman sits with his net, his side to the lighthouse. Papa sits down beside him and says nothing.","translation":"Rybak siedzi przy sieci, bokiem do latarni. Tatuś siada obok i milczy.","where":"worlds/moominpappa-at-sea/scenes/cape/scene.json caption"}
+]}
