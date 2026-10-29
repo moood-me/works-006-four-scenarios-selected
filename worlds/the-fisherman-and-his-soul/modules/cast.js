@@ -94,6 +94,19 @@ return {
     daughter: { kind: 'shapes', style: 'bay', who: 'child', garment: 'dress', hair: 'long',
       body: { height: 0.66, head: 1.18, legs: 0.94, arms: 0.95, shoulders: 0.86, thick: 0.8 },
       colors: { skin: '#efd3b9', hair: '#7a5534', top: '#a5524a', garment: '#a5524a', bottom: '#a5524a', shoes: '#3a2a24' } },
+    // the Priest of the bay, in his white house on the hill: an ageing man, upright, grey hair cut short, a weathered
+    // face, a black cassock to the ankles (the cast's garment `cassock`) — the darkest thing in his white room
+    priest: { kind: 'shapes', style: 'bay', who: 'man', garment: 'cassock', hair: 'short',
+      body: { height: 1.0, thick: 0.96, shoulders: 0.97, neck: 1.0 },
+      colors: { skin: '#dcb092', hair: '#a29c94', top: '#2e2a33', garment: '#2e2a33', bottom: '#2e2a33', shoes: '#1c1a1e' } },
+    // two women of the village — the Priest's flock (the sermon in his house, the sign they make): one in a slate-blue
+    // dress with a kerchief over her hair (`hood`), one in a brown dress, her hair in a bun, a pale shawl at her neck
+    woman_a: { kind: 'shapes', style: 'bay', who: 'woman', garment: 'dress', hair: 'bun', hood: true,
+      body: { height: 0.93, thick: 0.98, shoulders: 0.92, neck: 1.0 },
+      colors: { skin: '#e4b998', hair: '#4e3a2c', top: '#5f7088', garment: '#5f7088', bottom: '#5f7088', shoes: '#3a2e26' } },
+    woman_b: { kind: 'shapes', style: 'bay', who: 'woman', garment: 'dress', hair: 'bun', scarf: true,
+      body: { height: 0.9, thick: 1.04, shoulders: 0.95, neck: 0.98 },
+      colors: { skin: '#d9a985', hair: '#6a5240', top: '#8a6448', garment: '#8a6448', bottom: '#8a6448', shoes: '#3a2e26', accent: '#e2d6bc' } },
     // the Fisherman years on, under the water (the ending «Два огня»): the same man, his hair gone white — a scene gives
     // it as his `fisherman_wear` (the look's object, scene.kit.cast.characters.fisherman_old)
     fisherman_old: { kind: 'shapes', style: 'bay', who: 'man', garment: 'tunic', hair: 'short', barefoot: 'both',
@@ -105,7 +118,11 @@ return {
     // simple face (eyes, brows, a mouth) so that faces read
     styles: { bay: { from: 'flat', name: 'The Bay', line: 0.8, face: 'simple' } },
     // a frock coat: fitted, its skirts to the knees, the sleeves of its cloth
-    garments: { frockcoat: { name: 'frock coat', hang: [{ to: 0.95, from: 'shoulders', flare: 0.12 }], sleeves: 'garment' } },
+    // a cassock: plain, close at the shoulders, its skirts straight down to the ankles, the sleeves of its cloth
+    garments: {
+      frockcoat: { name: 'frock coat', hang: [{ to: 0.95, from: 'shoulders', flare: 0.12 }], sleeves: 'garment' },
+      cassock: { name: 'cassock', hang: [{ to: 1.38, from: 'shoulders', flare: 0.16 }], sleeves: 'garment' },
+    },
     parts: {
       lantern: { name: 'lantern', draw: F => lantern(F, 'RightHand') },
       tambourine: { name: 'tambourine', draw: F => tambourine(F) },
