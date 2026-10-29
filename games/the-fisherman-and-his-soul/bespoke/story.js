@@ -415,12 +415,24 @@ export function listen(b) {
     for (const w of waiting) if (w.text === text) { waiting.delete(w); clearTimeout(w.timer); w.ok(true); }
   });
   let offered = null; // the plain choice going on: the language's mini-game
+  // where a choice's mark stands (the language's own drawing: a page point, games are full-screen — the scene's canvas
+  // is the page's): on its point while the frame has it; out of it (the one who chooses left at the frame's edge, or
+  // behind the eye) at the frame's edge nearest to them, else in its middle — a person off the frame never leaves the
+  // play waiting on a mark nobody sees (the language hides a mark whose point is out of the frame)
+  const toward = ref => {
+    const at = ref.includes('#') ? ref : `${ref}@`;
+    return () => {
+      const f = b.frame(), p = b.where(at), m = 0.12 * f.h;
+      if (!p) return { x: f.x + f.w / 2, y: f.y + f.h / 2 };
+      return { x: Math.min(f.x + f.w - m, Math.max(f.x + m, p.x)), y: Math.min(f.y + f.h - m, Math.max(f.y + m, p.y)) };
+    };
+  };
   // a sign: one mark, a touch is the action (a mini-game's press, no petals), its arc of time running down; not
   // touched in time — `otherwise`
   function chance(offers, within, otherwise, phrase) {
     const mg = offered = b.minigame.start({ phrase }), [ref] = Object.keys(offers), [action] = offers[ref];
     return new Promise(ok => {
-      const mark = mg.mark({ at: ref.includes('#') ? ref : `${ref}@`, time: 1 });
+      const mark = mg.mark({ at: toward(ref), time: 1 });
       const press = mg.press({ on: mark });
       const t0 = mg.t;
       let over = false;
@@ -442,7 +454,7 @@ export function listen(b) {
       return new Promise(ok => {
         const chosen = (mark, action) => { mg.snap({ at: mark }); mg.leave(); offered = null; ok(action); };
         for (const ref of refs) {
-          const options = offers[ref], mark = mg.mark({ at: ref.includes('#') ? ref : `${ref}@` });
+          const options = offers[ref], mark = mg.mark({ at: toward(ref) });
           const press = mg.press({ on: mark, petals: options });
           press.on('down', () => clearTimeout(ghost));
           press.on('choose', ({ id }) => chosen(mark, options.find(o => o.id === id)));

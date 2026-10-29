@@ -15,6 +15,9 @@ const off = g => facts(g.state).road === 'deep';
 // the hour he comes back to the pier at: in the morning mist after the town, at night after the bridge, in the evening
 // after the potter's door
 const back = f => (f.road === 'late' ? 'evening' : f.wait === 'back' ? 'night' : 'morning');
+// the Witch's shawl and loaf by the hut (laid in `witch_shore` if he danced with her till dawn) lie there till the wave
+// takes the hut: every shore opened after says so
+const shawl = f => f.witch !== 'demand';
 
 export default {
   number: 'IV', title: tr('The Shore'),
@@ -77,7 +80,7 @@ export default {
         boat: () => g.say('widow', 'The boat is rotting. Take it, if you need it'),
         net: () => g.say('soul', 'You are the best fisherman in the bay. Go out for one night — for them. What harm is there?'),
       }, () => g.scene('shore', { beat: 'widow', here: ['fisherman', 'widow', 'widow_girl', 'widow_boy'], moods: { fisherman: 'neutral', widow: 'sad' },
-        keys: { thief: f.thief } }));
+        keys: { thief: f.thief, shawl: shawl(f) } }));
       const w = await g.choose('widow', { fisherman: [
         { id: 'out', label: tr('Go out for the night') },
         { id: 'stayed', label: tr('Stay') },
@@ -112,9 +115,10 @@ export default {
       if (f.widow === 'out') {
         await piece(g, 'dawn_shore', { fish: () => g.say('widow', 'If the boat goes out — we’ll stay') },
           () => g.scene('shore', { beat: 'dawn_shore', here: ['fisherman', 'widow', 'widow_girl', 'widow_boy', 'mermaid'], moods: { fisherman: 'neutral', mermaid: 'eyes_closed' },
-            keys: { fish: g.state.marks.half ? 0.5 : 1 } }));
+            keys: { fish: g.state.marks.half ? 0.5 : 1, shawl: shawl(f) } }));
       } else {
-        await g.scene('shore', { beat: 'wave_lays', here: ['fisherman', 'mermaid'], moods: { fisherman: 'neutral', mermaid: 'eyes_closed' } });
+        await g.scene('shore', { beat: 'wave_lays', here: ['fisherman', 'mermaid'], moods: { fisherman: 'neutral', mermaid: 'eyes_closed' },
+          keys: { shawl: shawl(f) } });
         await g.beat('wave_lays');
       }
       g.mood('fisherman', 'sad');

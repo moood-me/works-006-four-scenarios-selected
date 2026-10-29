@@ -54,8 +54,15 @@ function film(scene) {
     fisherman_a: -0.98, fisherman_d: 6.81, fisherman_turn: 110, fisherman_with: ['lantern'], fisherman_look: 'witch', witch_look: 'fisherman',
     velvet_a: 3.5, velvet_d: 10.4, velvet_turn: 235, velvet_look: 'fisherman', velvet_do: 'hands_behind' };
   const HIS = [-0.98, 6.81];
-  // where the Witch goes back to after the dance falls apart: by the rim, on her feet
+  // where the Witch goes back to after the dance falls apart: by the rim, on her feet; where he stands then, before her
+  // on her left, turned to her (the two of them in one shot: the choice is his — his face must be in the frame)
   const BY_RIM = [0.05, 6.75];
+  const BEFORE = { fisherman_a: -0.85, fisherman_d: 6.55, fisherman_turn: 100, witch_turn: 260 };
+  // the dance seen near: the operator on the well, the circle and the two of them filling the frame (the well a quarter
+  // of its height), the moon's glade round them
+  const ROUND_SHOT = P.shot('well', 0.27, [0.5, 0.6]);
+  // the two after the dance: the Witch a little right of the middle, he on her left, both whole
+  const TWO = P.shot('witch', 'full', [0.64, 0.45]);
   const film = {
     well_evening: {
       from: () => ({ ...TIME.evening, time: 'evening', ...SITE, ...DO0, witch_do: 'swing_feet', witch_on: RIM, fisherman_with: ['lantern'],
@@ -80,7 +87,7 @@ function film(scene) {
     },
     dance: {
       from: () => ({ ...TIME.midnight, time: 'midnight', ...SITE, ...DO0, velvet_here: false, witch_on: null, witch_with: ['tambourine_hand'],
-        fisherman_with: null, round_angle: 0, ...P.CAM0 }),
+        fisherman_with: null, round_angle: 0, ...ROUND_SHOT }),
       run: async s => {
         s.set('velvet_here', false);
         P.loop(s, 'witch', 'dance_tambourine');
@@ -92,9 +99,9 @@ function film(scene) {
     velvet: {
       after: 'dance',
       from: () => ({ ...TIME.midnight, time: 'midnight', ...SITE, ...DO0, witch_on: null, witch_with: ['tambourine_hand'], fisherman_with: null,
-        witch_do: 'dance_tambourine', fisherman_do: 'dance_round', round: true, ...P.CAM0 }),
+        witch_do: 'dance_tambourine', fisherman_do: 'dance_round', round: true, ...ROUND_SHOT }),
       run: async s => {
-        P.open(s, { round: true });
+        P.open(s, { round: true, ...ROUND_SHOT });
         // the man in black steps out by the last fir; the dance stops; she pulls him toward the man
         s.set('velvet_here', true);
         s.set('velvet_a', 4.4);
@@ -134,9 +141,12 @@ function film(scene) {
     broken: {
       after: 'sign_velvet',
       from: () => ({ ...TIME.midnight, time: 'midnight', ...SITE, ...DO0, witch_on: null, witch_a: BY_RIM[0], witch_d: BY_RIM[1], witch_do: 'pant',
-        fisherman_with: null, velvet_here: false, ...P.shot('witch', 'medium', [0.5, 0.42]) }),
+        fisherman_with: null, velvet_here: false, round: false, ...BEFORE, fisherman_do: 'stand', ...TWO }),
       run: async s => {
-        P.open(s, P.shot('witch', 'medium', [0.5, 0.42]));
+        // (he is put before her at once, wherever the dance left him: a cut — the shot is the two of them)
+        P.open(s, { round: false, ...BEFORE, ...TWO });
+        s.person('fisherman').do('stand', { loop: true });
+        s.person('fisherman').look('witch');
         s.person('witch').mood('angry');
         P.loop(s, 'witch', 'pant');
         await s.wait(2.5);
@@ -148,14 +158,14 @@ function film(scene) {
     demand: {
       after: 'broken',
       from: () => ({ ...TIME.midnight, time: 'midnight', ...SITE, ...DO0, witch_on: null, witch_a: BY_RIM[0], witch_d: BY_RIM[1], fisherman_with: null,
-        velvet_here: false, ...P.shot('witch', 'close', [0.5, 0.42]) }),
+        velvet_here: false, ...BEFORE, ...P.shot('witch', 'close', [0.5, 0.42]) }),
       run: async s => {
         P.open(s, P.shot('witch', 'close', [0.5, 0.42]));
         const her = s.person('witch');
         her.look('fisherman');
         await P.tell(s, 'demand:promise', 3);
         // she leans to him and whispers
-        await P.go(s, 'witch', [[-0.55, 6.85]], 270);
+        await P.go(s, 'witch', [[-0.4, 6.75]], 255);
         P.frame(s, P.shot('fisherman', 'medium', [0.6, 0.42]), 1.5);
         await her.do('whisper');
         await P.tell(s, 'demand:whisper', 0.5);
@@ -173,9 +183,9 @@ function film(scene) {
     dance_dawn: {
       after: 'broken',
       from: () => ({ ...TIME.midnight, time: 'midnight', ...SITE, ...DO0, witch_on: null, witch_a: BY_RIM[0], witch_d: BY_RIM[1], fisherman_with: null,
-        velvet_here: false, ...P.CAM0 }),
+        velvet_here: false, ...BEFORE, ...ROUND_SHOT }),
       run: async s => {
-        P.open(s, P.CAM0);
+        P.open(s, ROUND_SHOT);
         const her = s.person('witch');
         her.do('stand', { loop: true });
         await s.wait(1.5);

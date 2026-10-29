@@ -10,14 +10,14 @@ function wall(g, seed, left, right, top) {
   g.clip();
   g.fillStyle = PLASTER;
   g.fillRect(left, top, right - left, -top + 0.02);
-  for (let i = 0; i < 22; i++) {
+  // the plaster's grain: small worn flecks, a few centimetres, faint (big soft blots read as haze in the air, not as
+  // a wall — the faces before it went dull)
+  for (let i = 0; i < 90; i++) {
     const x = left + (right - left) * anim.hash(i, seed);
     const y = top + -top * anim.hash(i, seed + 1);
-    const w = 0.2 + 0.4 * anim.hash(i, seed + 2);
-    g.fillStyle = anim.hash(i, seed + 3) > 0.5 ? 'rgba(180, 160, 130, 0.16)' : 'rgba(236, 226, 206, 0.2)';
-    g.beginPath();
-    g.ellipse(x, y, w, w * 0.6, 0, 0, Math.PI * 2);
-    g.fill();
+    const w = 0.02 + 0.06 * anim.hash(i, seed + 2);
+    g.fillStyle = anim.hash(i, seed + 3) > 0.5 ? 'rgba(160, 140, 112, 0.22)' : 'rgba(240, 232, 214, 0.25)';
+    g.fillRect(x, y, w, w * 0.5);
   }
   // smoke-darkened under the ceiling
   const smoke = g.createLinearGradient(0, top, 0, top + 0.6);

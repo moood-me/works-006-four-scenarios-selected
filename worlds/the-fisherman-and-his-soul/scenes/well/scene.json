@@ -19,15 +19,15 @@
     "beats"
   ],
   "light": {
-    "ambient": 0.6,
-    "ambientColor": "#8fa6d8",
+    "ambient": 0.9,
+    "ambientColor": "#9fb4e0",
     "saturation": 1.0,
     "bounce": 0.4,
-    "haze": 0.16,
+    "haze": 0.1,
     "hazeColor": "#22325a",
     "hazeGlow": 1.2,
     "shafts": 0.45,
-    "vignette": 0.34,
+    "vignette": 0.22,
     "grain": 0.08,
     "wind": [
       1,
@@ -62,7 +62,7 @@
       "id": "moon",
       "from": "sky#disc",
       "color": "#c3d2f2",
-      "strength": 0.9
+      "strength": 1.35
     },
     {
       "id": "lantern",

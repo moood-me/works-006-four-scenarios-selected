@@ -80,7 +80,9 @@ function film(scene) {
     lantern_lit: 1, mermaid_steps: false, mermaid_with: ['tail'], mermaid_wear: { barefoot: 'both' }, fisherman_look: null, soul_look: null, mermaid_look: null };
   // the sea's view at an hour; the shore's
   const SEA = light => ({ view: 'sea', ...VIEW.sea, ...LIGHT[light], light });
-  const SHORE = light => ({ view: 'shore', ...VIEW.shore, ...LIGHT[light], light, hut: 'none', shawl: false, widow_boat: false, mound: false,
+  // (`shawl` is the game's: laid by the Witch in `witch_shore`, it lies by the hut till the wave takes the hut — the game
+  // says so on every shore it opens after; a piece sets it only where it lays it or the wave takes it)
+  const SHORE = light => ({ view: 'shore', ...VIEW.shore, ...LIGHT[light], light, hut: 'none', widow_boat: false, mound: false,
     linen: false, shells: false });
   const WIDE_SHORE = { ...P.CAM0, ...VIEW.shore };
   // the shore's nearer cameras, each its own place on the sand or the bank (the operator would film them from the land,
@@ -90,6 +92,9 @@ function film(scene) {
   const SHORE_WIDOW = { ...P.CAM0, camera_x: 4.8, camera_z: 0.4, camera_yaw: 240, camera_look: 0.03 };
   const SHORE_SAND = { ...P.CAM0, camera_x: 3.3, camera_z: 1.3, camera_yaw: 262, camera_look: 0.14 };
   const SHORE_FIELD = { ...P.CAM0, camera_x: 0.6, camera_z: -7.8, camera_yaw: 222, camera_look: 0.06 };
+  // near the two on the sand by the water, on the wide view's own line (the water and the wave on the right): his
+  // face, her hand in his, the sea coming — the choice and «Holding Her» (М8) are played here
+  const SHORE_NEAR = { ...P.CAM0, camera_x: 3.3, camera_z: 0.95, camera_yaw: 250, camera_look: 0.12 };
   const put = (s, o) => { for (const [k, v] of Object.entries(o)) s.set(k, v); };
   // an object without some of its keys (a piece's `from` that leaves a key to the game)
   const without = (o, ...ks) => Object.fromEntries(Object.entries(o).filter(([k]) => !ks.includes(k)));
@@ -723,7 +728,7 @@ function film(scene) {
       },
     },
     witch_shore: {
-      from: () => ({ ...SHORE('morning'), ...NONE, snow: true, hut: 'built', ...at('fisherman', 'hut'), fisherman_do: 'sit_ground', ...at('witch', 'shore'),
+      from: () => ({ ...SHORE('morning'), ...NONE, snow: true, hut: 'built', shawl: false, ...at('fisherman', 'hut'), fisherman_do: 'sit_ground', ...at('witch', 'shore'),
         witch_a: 6.5, witch_d: 1.0, witch_turn: 270, mermaid_here: false, soul_here: false, ...WIDE_SHORE }),
       run: async s => {
         P.loop(s, 'fisherman', 'sit_ground');
@@ -855,6 +860,8 @@ function film(scene) {
           P.go(s, 'widow_boy', [[-1.6, -8.4]], null, 'run');
         }
         await P.tell(s, 'sea_comes:run', 3);
+        // near them: what follows is his (the choice, her hand)
+        await P.cut(s, SHORE_NEAR);
       },
     },
     covered: {
@@ -894,6 +901,7 @@ function film(scene) {
         // the wave strikes the hut and carries it off
         await s.move('wave', 0.9, { over: 2.5, ease: 'in' });
         s.set('hut', 'gone');
+        s.set('shawl', false);
         await P.tell(s, 'fall_by:hut', 0.5);
         await s.move('wave', 0.3, { over: 3 });
         // up at the field's edge he drops down beside her
