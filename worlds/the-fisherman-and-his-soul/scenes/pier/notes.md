@@ -97,12 +97,83 @@ lantern's dark glass).
 - Lying on the sand, sitting on the pier's edge, kneeling: motions of the pieces (the places put them; what they do
   there is a motion).
 
+## Pieces
+
+The pieces (`lib.film`, the world's `beats` from `script.js`): on the sea's side `feast`, `danced`, `passed`,
+`moonrise`, `shadow_rises`, `heart_cut`, `heart_come`, `knife_ready`, `cut`, `into_sea` (chapter I), `come_out`, `law`,
+`sit_edge`, `to_song`, `ring`, `laugh_go`, `third_year`, `go_day`, `stay_day` (II), `fourth_year`, `late_go`,
+`turn_away`, `sink` (III «Без него»), `call_her`, `knife_rust`, `knife_back`, `night_alone` (IV), and the finales'
+`knife_sea`, `bless_sea`, `hook_empty`, `post_knife`, `old_lantern`, `soul_leaves`, `witch_knife`, `witch_dance`; on the
+shore's (`view` shore) `winter`, `witch_shore`, `widow`, `widow_goes`, `dawn_shore`, `wave_lays`, `kneel_kiss`,
+`sea_comes`, `covered`, `wrap`, `fall_by`, `morning_two`, `field_corner`, `mound_morning`, `priest_mound`.
+Variants: `smell`, `hard`, `song`, `looked`, `thrown`, `boy`, `thief`, `children`, `apart`, `witch_way` (the contract's
+«witch» — `witch` is a person here), `fish`, `shells` (field_corner: the children lay them). `years` — his white hair
+(the cast's `fisherman_old` as his look; the game cannot pass a look object). `call_her` leaves its hour to the game
+(`light`, `mist`). Her tail goes with her everywhere (on the sand it shows).
+The cameras: the operator films from the shore's side (a face turned to the sea is its back), so the Soul's face as it
+turns to him is filmed from the camera's own place behind the pier's end (`CAM_BACK`), the cut by the post from nearer
+the boards (`CAM_NEAR`); on the shore the operator would film from the land through walls and the bank — the shore's
+pieces use the shore's own cameras (`SHORE_HUT`, `SHORE_WIDOW`, `SHORE_SAND`, `SHORE_FIELD`) and its wide view.
+Sheets (2026-10-29): the sea's — as meant after the fixes above (the feast's whisper before he walks; the knife and the
+cut framed wider); the shore's — as meant with its own cameras. The thin vertical line in the shore's view was the
+sky's seam (its painting ended there): the sky is now painted from 3.28 left of the stage to 3.0 right of it — its seam
+behind the viewer's right shoulder, seen from neither view (checked in the shore's sheet).
+
 ## Contract for the check
 
 ```json
-{"points": ["cutline#heel", "cutline#toe", "lantern_post#grip", "lantern_post#knife", "knife_boards#knife", "bundle#rope", "mound#head", "sky#disc", "sky#low"],
- "keys": ["light", "mist", "snow", "view", "lantern_at", "lantern_lit", "knife", "rust", "net_rail", "net_hole", "hut", "shawl", "widow_boat", "wave", "mound", "linen", "shells", "under_light", "far_lantern", "cut", "cut_rough", "bundle", "drag", "soul_smoke", "fisherman_at", "soul_at", "mermaid_at", "girl_at", "woman_a_at", "woman_b_at", "widow_at", "widow_girl_at", "widow_boy_at", "witch_at", "priest_at"]}
+{"beats": {
+ "feast": {"after":[],"tells":["feast:whisper","feast:level"],"seconds":12,"show":false},
+ "danced": {"after":["feast"],"tells":["danced:pull","danced:laugh"],"seconds":10,"show":false},
+ "passed": {"after":["feast"],"tells":["passed:look"],"seconds":6,"show":false},
+ "moonrise": {"after":[],"tells":["moonrise:shadow","moonrise:her"],"seconds":10,"show":false},
+ "shadow_rises": {"after":["moonrise"],"tells":["shadow_rises:up","shadow_rises:face"],"seconds":12,"show":false},
+ "heart_cut": {"after":["shadow_rises"],"tells":["heart_cut:turn"],"seconds":6,"show":false},
+ "heart_come": {"after":["shadow_rises"],"tells":["heart_come:under","heart_come:up"],"seconds":9,"show":false},
+ "knife_ready": {"after":["shadow_rises","heart_cut","heart_come"],"tells":["knife_ready:end"],"seconds":4,"show":false},
+ "cut": {"after":["knife_ready"],"tells":["cut:apart","cut:post"],"seconds":10,"show":false},
+ "into_sea": {"after":["cut"],"tells":["into_sea:far","into_sea:under","into_sea:soul"],"seconds":18,"show":false},
+ "come_out": {"after":[],"tells":["come_out:call","come_out:up"],"seconds":10,"show":false},
+ "law": {"after":["come_out"],"tells":["law:up"],"seconds":4,"show":false},
+ "sit_edge": {"after":["law"],"tells":["sit_edge:sat","sit_edge:laugh","sit_edge:back"],"seconds":16,"show":false},
+ "to_song": {"after":["law"],"tells":["to_song:under","to_song:out"],"seconds":12,"show":false},
+ "ring": {"after":[],"tells":["ring:shown"],"seconds":6,"show":false},
+ "laugh_go": {"after":["ring"],"tells":["laugh_go:laugh","laugh_go:gone"],"seconds":10,"show":false},
+ "third_year": {"after":[],"tells":["third_year:near","third_year:stone"],"seconds":10,"show":false},
+ "go_day": {"after":["third_year"],"tells":["go_day:up","go_day:in","go_day:her","go_day:turn","go_day:gone"],"seconds":22,"show":false},
+ "stay_day": {"after":["third_year"],"tells":["stay_day:turn","stay_day:gone"],"seconds":16,"show":false},
+ "fourth_year": {"after":[],"tells":["fourth_year:up","fourth_year:stone"],"seconds":12,"show":false},
+ "late_go": {"after":["fourth_year"],"tells":["late_go:knife","late_go:in","late_go:her","late_go:water"],"seconds":18,"show":false},
+ "turn_away": {"after":["fourth_year"],"tells":["turn_away:hand"],"seconds":5,"show":false},
+ "sink": {"after":["turn_away"],"tells":["sink:under"],"seconds":6,"show":false},
+ "call_her": {"after":[],"tells":["call_her:hung","call_her:call","call_her:light"],"seconds":16,"show":false},
+ "knife_rust": {"after":["call_her"],"tells":["knife_rust:out"],"seconds":5,"show":false},
+ "knife_back": {"after":["knife_rust"],"tells":["knife_back:through","knife_back:post"],"seconds":8,"show":false},
+ "night_alone": {"after":[],"tells":["night_alone:end"],"seconds":6,"show":false},
+ "knife_sea": {"after":[],"tells":["knife_sea:out","knife_sea:thrown"],"seconds":8,"show":false},
+ "bless_sea": {"after":[],"tells":["bless_sea:bless"],"seconds":8,"show":false},
+ "hook_empty": {"after":[],"tells":["hook_empty:end"],"seconds":10,"show":false},
+ "post_knife": {"after":[],"tells":["post_knife:out"],"seconds":5,"show":false},
+ "old_lantern": {"after":[],"tells":["old_lantern:end"],"seconds":14,"show":false},
+ "soul_leaves": {"after":[],"tells":["soul_leaves:turn","soul_leaves:gone"],"seconds":14,"show":false},
+ "witch_knife": {"after":[],"tells":["witch_knife:out","witch_knife:gone"],"seconds":10,"show":false},
+ "witch_dance": {"after":[],"tells":["witch_dance:end"],"seconds":10,"show":false},
+ "winter": {"after":[],"tells":["winter:hut","winter:snow"],"seconds":16,"show":false},
+ "witch_shore": {"after":[],"tells":["witch_shore:stop","witch_shore:gone"],"seconds":16,"show":false},
+ "widow": {"after":[],"tells":["widow:say","widow:boat","widow:net"],"seconds":14,"show":false},
+ "widow_goes": {"after":[],"tells":["widow_goes:look","widow_goes:gone"],"seconds":14,"show":false},
+ "dawn_shore": {"after":[],"tells":["dawn_shore:fish","dawn_shore:apart"],"seconds":18,"show":false},
+ "wave_lays": {"after":[],"tells":["wave_lays:laid"],"seconds":10,"show":false},
+ "kneel_kiss": {"after":["dawn_shore","wave_lays"],"tells":["kneel_kiss:kiss"],"seconds":8,"show":false},
+ "sea_comes": {"after":["kneel_kiss"],"tells":["sea_comes:dark","sea_comes:run"],"seconds":10,"show":false},
+ "covered": {"after":["sea_comes"],"tells":["covered:end"],"seconds":6,"show":false},
+ "wrap": {"after":["sea_comes"],"tells":["wrap:end"],"seconds":6,"show":false},
+ "fall_by": {"after":["wrap"],"tells":["fall_by:hut","fall_by:fell"],"seconds":10,"show":false},
+ "morning_two": {"after":[],"tells":["morning_two:stop"],"seconds":14,"show":false},
+ "field_corner": {"after":[],"tells":["field_corner:end"],"seconds":10,"show":false},
+ "mound_morning": {"after":[],"tells":["mound_morning:knife","mound_morning:sat"],"seconds":12,"show":false},
+ "priest_mound": {"after":["mound_morning"],"tells":["priest_mound:who","priest_mound:begone","priest_mound:gone"],"seconds":14,"show":false}
+},
+ "points": ["cutline#heel","cutline#toe","lantern_post#grip","lantern_post#knife","knife_boards#knife","bundle#rope","mound#head","sky#disc","sky#low"],
+ "keys": ["light", "years","mist","snow","view","lantern_at","lantern_lit","knife","rust","net_rail","net_hole","hut","shawl","widow_boat","wave","mound","linen","shells","under_light","far_lantern","cut","cut_rough","bundle","drag","soul_smoke","fisherman_at","soul_at","mermaid_at","girl_at","woman_a_at","woman_b_at","widow_at","widow_girl_at","widow_boy_at","witch_at","priest_at"]}
 ```
-
-The pieces are not written yet: no `beats` (the game's check says them waited for). The points and the keys the
-mini-games and the pieces' contract ask of this scene — the block above.

@@ -57,11 +57,25 @@ the mini-game's mark is `fisherman#cup`, the cast part's point.
   the viewer walks in at most 1.0 m (was 1.6) — less of the room's walls and floor asked finer at once. Not measured
   again (one measuring a new scene, tonight's load).
 
+## Pieces
+
+The pieces (`lib.film`, the world's `beats` from `script.js`): `room_in` (3.3), `sleepwalk` (3.4),
+`cup_gone`, `confess`, `bend_daughter`, `found_cup` (3.5–3.6), `soul_theft` (3С.2). Variants: `rang` (found_cup),
+`hard` (soul_theft). `carry` and `cup_tilt` act only while the cup is in a hand (`cup_at` hand). Not rendered at this
+stage.
+
 ## Contract for the check
 
 ```json
-{"points": ["bench#seat", "shelf#cup", "shelf#bread", "hearth#fire", "fisherman#cup"],
- "keys": ["fire", "morning", "door", "cup_at", "cup_tilt", "carry", "soul_smoke", "fisherman_at", "potter_at", "daughter_at", "soul_at"]}
+{"beats": {
+ "room_in": {"after":[],"tells":["room_in:cup","room_in:sat"],"seconds":12,"show":false},
+ "sleepwalk": {"after":[],"tells":["sleepwalk:up","sleepwalk:cup","sleepwalk:down","sleepwalk:girl"],"seconds":22,"show":false},
+ "cup_gone": {"after":[],"tells":["cup_gone:search","cup_gone:bag"],"seconds":10,"show":false},
+ "confess": {"after":["cup_gone"],"tells":["confess:out","confess:look","confess:hide"],"seconds":14,"show":false},
+ "bend_daughter": {"after":["cup_gone"],"tells":["bend_daughter:bent"],"seconds":4,"show":false},
+ "found_cup": {"after":[],"tells":["found_cup:find","found_cup:bread","found_cup:look"],"seconds":10,"show":false},
+ "soul_theft": {"after":[],"tells":["soul_theft:girl","soul_theft:cup","soul_theft:wake","soul_theft:gone"],"seconds":20,"show":false}
+},
+ "points": ["bench#seat","shelf#cup","shelf#bread","hearth#fire","fisherman#cup"],
+ "keys": ["fire","morning","door","cup_at","cup_tilt","carry","soul_smoke","fisherman_at","potter_at","daughter_at","soul_at"]}
 ```
-
-The pieces are not written yet: no `beats`. Points and keys asked of this scene — the block above.

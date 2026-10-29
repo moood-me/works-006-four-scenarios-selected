@@ -75,4 +75,106 @@ function fish(g, x, y, len, dir, body, belly) {
   g.fill();
   g.restore();
 }
-return { PLACES, OTHER, turnOf, place, fish };
+// The deep's pieces (the game's contract, game.md «Stage 5 — pieces»; notes.md «Pieces»): played by the world's
+// `beats` from the script. `film(scene)` → {name: {from, after, run}}.
+function film(scene) {
+  const P = kit.pieces;
+  // the two on the slab, or he standing before her; turned half to each other; their looks
+  const pose = at => {
+    const st = { fisherman_at: at, mermaid_at: 'sand', fisherman_here: true, mermaid_here: true };
+    return { fisherman_at: at, ...place(at, st), mermaid_turn: turnOf('mermaid', 'sand', st), fisherman_look: 'mermaid', mermaid_look: 'fisherman' };
+  };
+  const BASE = { hands: false, years: false, dusk: 0, far_light: 0, mermaid_near: 0, fisherman_reach: null, mermaid_reach: null, mermaid_do: 'seated' };
+  const film = {
+    deep_song: {
+      from: () => ({ ...BASE, ...pose('sand'), ...P.CAM0, camera_pitch: 35, camera_z: -0.3 }),
+      run: async s => {
+        P.loop(s, 'mermaid', 'sing');
+        // the camera comes down from the light of the surface to the two
+        await s.all(s.move('camera_pitch', 0, { over: 5 }), s.move('camera_z', 0, { over: 5 }));
+        P.frame(s, P.shot('mermaid', 'medium', [0.62, 0.45]), 2.5);
+        await P.tell(s, 'deep_song:sing', 3);
+      },
+    },
+    dance_deep: {
+      from: () => ({ ...BASE, ...pose('standing'), ...P.shot('fisherman', 'medium', [0.45, 0.45]) }),
+      run: async s => {
+        const her = s.person('mermaid');
+        // he dances on the sand, clumsily; she laughs
+        await s.person('fisherman').do('clumsy_dance');
+        await P.tell(s, 'dance_deep:dance', 0.5);
+        her.mood('laugh');
+        await her.do('laugh');
+        await P.tell(s, 'dance_deep:laugh', 0.5);
+        // then she looks at his feet, and hides her face
+        P.frame(s, P.shot('mermaid', 'close', [0.5, 0.42]), 1.5);
+        her.mood('sad');
+        her.look('fisherman#feet');
+        await P.tell(s, 'dance_deep:feet', 2.5);
+        P.loop(s, 'mermaid', 'hide_face');
+        await P.tell(s, 'dance_deep:hide', 3);
+      },
+    },
+    deep_dusk: {
+      from: () => ({ ...BASE, dusk: 1, far_light: 0.01, ...pose('sand'), ...P.CAM0 }),
+      run: async s => {
+        if (s.get('sing')) P.loop(s, 'mermaid', 'sing');
+        s.set('hands', !s.get('sing'));
+        await P.tell(s, 'deep_dusk:begin', 3);
+        // the camera looks up: the warm light far above going along
+        s.move('camera_pitch', 32, { over: 4 });
+        await s.move('far_light', 0.6, { over: 6, ease: 'linear' });
+        await P.tell(s, 'deep_dusk:light', 2);
+      },
+    },
+    palm_eyes: {
+      after: 'deep_dusk',
+      from: () => ({ ...BASE, dusk: 1, far_light: 0.6, ...pose('sand'), ...P.shot('mermaid', 'close', [0.6, 0.45]) }),
+      run: async s => {
+        P.open(s, P.shot('mermaid', 'close', [0.6, 0.45]));
+        s.move('far_light', 1, { over: 3, ease: 'linear' });
+        P.loop(s, 'mermaid', 'sing');
+        await s.wait(2);
+        // she lays her palm over his eyes and sings on
+        s.set('hands', false);
+        s.set('mermaid_reach', { l: 'fisherman#head' });
+        await P.tell(s, 'palm_eyes:palm', 4);
+      },
+    },
+    white_hair: {
+      from: () => ({ ...BASE, years: true, ...pose('sand'), ...P.shot('fisherman', 'close', [0.4, 0.42]) }),
+      run: async s => {
+        await s.wait(1.5);
+        // she touches his hair
+        s.set('mermaid_reach', { l: 'fisherman#head' });
+        await P.tell(s, 'white_hair:touch', 4);
+        s.set('mermaid_reach', null);
+        await s.wait(1);
+      },
+    },
+    hands_years: {
+      after: 'white_hair',
+      from: () => ({ ...BASE, years: true, ...pose('sand'), ...P.shot('fisherman#hand_l', 'close', [0.5, 0.5]) }),
+      run: async s => {
+        P.open(s, P.shot('fisherman#hand_l', 'close', [0.5, 0.5]));
+        // who takes whose hand first: «слово» — he hers; «даром» — she his, before he reaches
+        if (s.get('first') === 'she') s.set('mermaid_reach', { r: 'fisherman#hand_l' });
+        else s.set('fisherman_reach', { l: 'mermaid#hand_r' });
+        await s.wait(1.5);
+        s.set('hands', true);
+        await P.tell(s, 'hands_years:hand', 1);
+        if (s.get('sing')) P.loop(s, 'mermaid', 'sing');
+        else {
+          // (she begins and stops)
+          P.loop(s, 'mermaid', 'sing');
+          await s.wait(2);
+          s.set('mermaid_do', 'seated');
+        }
+        P.frame(s, P.shot('mermaid', 'medium', [0.6, 0.45]), 2);
+        await s.wait(3);
+      },
+    },
+  };
+  return film;
+}
+return { film, PLACES, OTHER, turnOf, place, fish };

@@ -64,3 +64,23 @@ The Soul is not here in any moment (in 1.2 it is still in him: one shadow).
 
 - Nothing missing for this scene. The Fisherman's sign on the threshold (1.2), rising from the bench, the Priest's
   gestures — stage 5 motions.
+
+## Pieces
+
+The pieces (`lib.film`, the world's `beats` from `script.js`): `priest_sign`, `bench_falls`, `begone` (1.2),
+`feast_flowers` («Белые цветы»), `threshold_flowers` («Фонарь на мостках»: the flowers carried — the cast's `flowers`),
+`sermon` («Два огня»). The sign broken off halfway (begone) is the `sign` motion stopped (its action cancelled). Not
+rendered at this stage (its motions were coming in as it was written).
+
+## Contract for the check
+
+```json
+{"beats": {
+ "priest_sign": {"after":[],"tells":["priest_sign:sign"],"seconds":5,"show":false},
+ "bench_falls": {"after":["priest_sign"],"tells":["bench_falls:fall"],"seconds":3,"show":false},
+ "begone": {"after":["bench_falls"],"tells":["begone:point","begone:sign"],"seconds":12,"show":false},
+ "feast_flowers": {"after":[],"tells":["feast_flowers:ask"],"seconds":12,"show":false},
+ "threshold_flowers": {"after":[],"tells":["threshold_flowers:laid","threshold_flowers:found","threshold_flowers:altar"],"seconds":18,"show":false},
+ "sermon": {"after":[],"tells":["sermon:preach","sermon:sign","sermon:laugh"],"seconds":14,"show":false}
+}}
+```

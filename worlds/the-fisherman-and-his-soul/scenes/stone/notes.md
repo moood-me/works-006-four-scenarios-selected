@@ -72,11 +72,36 @@ one here, `deep_lights`, `far_light` toward 1.
 - `pass_light` 0 → 1 → 0 — a pale light passing under the keel (`keel_light`: a glow on the water under the hull).
 - Not rendered at this stage (few renders tonight): the net's layers and the dusk are the pieces' first look.
 
+## Pieces
+
+The pieces (`lib.film`, played by the world's `beats` from `script.js`; the shared kit `modules/pieces.js`): the
+prologue's `night`, `in_net`, `go_word`, `go_free`, `evenings`; chapter I's `ask_wife`, `laugh_tail`, `dive`; 3С.1's
+`rise`; 4.5–4.6's `boat_out`, `keel_light`; «Два огня»'s `two_lights`. Their variants (keys the game sets with the
+piece): `looks` (go_word, go_free), `net_way` — the contract's «net» (evenings; the scene's `net` is where the net is),
+`fish` (keel_light). A piece that follows another (`after`) and is played in the same opening is not cut to its `from`:
+it sets what it needs that differs (`pieces.open`). Framed shots are the operator's on someone (`camera_target`) and
+never with the camera's offsets on top (the offsets move the operator's pose: the target behind the lens). Sheet
+(2026-10-29): the night's push in, the evenings, the wading in, the dive — as meant; fixed after it: the following
+pieces' framing (they were left on the piece before), the light under the keel framed wide (a close shot put the lens
+in the hull).
+
 ## Contract for the check
 
 ```json
-{"points": ["net_over#rope", "net_over#knot", "sky#disc"],
- "keys": ["light", "boat", "lantern", "net", "haul", "heel", "fish", "knot", "splash", "pass_light", "net_hole", "deep_lights", "far_light", "fisherman_at", "mermaid_at"]}
+{"beats": {
+ "night": {"after":[],"tells":["night:cast","night:rope"],"seconds":15,"show":false},
+ "in_net": {"after":["night"],"tells":["in_net:wake","in_net:hold"],"seconds":12,"show":false},
+ "go_word": {"after":["in_net"],"tells":["go_word:under"],"seconds":6,"show":false},
+ "go_free": {"after":["in_net"],"tells":["go_free:linger","go_free:turn","go_free:under"],"seconds":12,"show":false},
+ "evenings": {"after":[],"tells":["evenings:sing","evenings:empty","evenings:end"],"seconds":18,"show":false},
+ "ask_wife": {"after":[],"tells":["ask_wife:there"],"seconds":8,"show":false},
+ "laugh_tail": {"after":["ask_wife"],"tells":["laugh_tail:splash"],"seconds":4,"show":false},
+ "dive": {"after":["laugh_tail"],"tells":["dive:under"],"seconds":5,"show":false},
+ "rise": {"after":[],"tells":["rise:watch","rise:pulled"],"seconds":12,"show":false},
+ "boat_out": {"after":[],"tells":["boat_out:cast"],"seconds":8,"show":false},
+ "keel_light": {"after":["boat_out"],"tells":["keel_light:light"],"seconds":10,"show":false},
+ "two_lights": {"after":[],"tells":["two_lights:end"],"seconds":10,"show":false}
+},
+ "points": ["net_over#rope","net_over#knot","sky#disc"],
+ "keys": ["light","boat","lantern","net","haul","heel","fish","knot","splash","pass_light","net_hole","deep_lights","far_light","fisherman_at","mermaid_at"]}
 ```
-
-The pieces are not written yet: no `beats`. Points and keys the mini-games and the pieces ask of this scene — the block above.

@@ -25,3 +25,5 @@ scene.kit.hours.follow(scene, 'light', L.LIGHT);
 const tilt = () => scene.set('boat_tilt', -6 * (Number(scene.get('heel')) || 0));
 scene.on('change', 'heel', tilt);
 scene.on('move', 'heel', tilt);
+// The pieces (lib.film, played by `beat` through the world's `beats`)
+scene.kit.beats.play(scene, L.film(scene));

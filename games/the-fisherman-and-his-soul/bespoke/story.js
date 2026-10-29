@@ -1,10 +1,10 @@
 // What a chapter's steps play with: context(b, view, hub, state, j, {forward}) → g. Its state is a working copy — kept
 // only once the step is done (game.js). A step left behind (the player went to the map: ☰) does nothing more and never
 // ends: whatever it still calls returns a promise that never settles.
-// Stage 5 of the game (moood-me/moood docs/writing/game-stages.md), under way: every place on its own scene (PLACES),
-// the people at the places the scenario puts them (the scenes' `<id>_at`), the mini-games real (minigames/); what the
-// scenes' pieces will show is a plate with “Next” (g.plate, g.sheet) till the pieces come (the contract:
-// docs/new-games/rybak-i-dusha/game.md «Stage 5 — pieces»).
+// Stage 5 of the game (moood-me/moood docs/writing/game-stages.md): every place on its own scene (PLACES), every step
+// on the scenes' pieces (their key `beat`: piece, g.beat — the contract: docs/new-games/rybak-i-dusha/game.md «Stage 5 —
+// pieces»), the lines said at the pieces' moments, what no piece shows said by the narrator; the choices and the
+// mini-games (minigames/) in the poses the pieces end in.
 //   g.state — what the play carries: {scales, shown, marks, choices} (game.js); what follows from it: facts(g.state)
 //   g.signal — aborts when the step is left
 //   g.scene(place, {beat, here, moods, keys, where}, {cut}) — that place of the game (PLACES: the world's scene it is
@@ -26,8 +26,6 @@
 //   g.say(who, text, at) — someone of the game's people (people.json) says it over `at` (a person of the scene: default
 //     themselves) if they are here, else low in the middle, as the narrator, in their voice; → a breath after it is
 //     heard
-//   g.plate(text) — a plate over the scene: what happens here that the scene does not show; → once “Next” is pressed
-//   g.sheet(title, lines) — the same, a list
 //   g.choose(choice, {ref: options}) — the player presses one of the points ('id#point' | 'id'), then one of its
 //     options ([{id, label}]: petals, one too — the language of mini-games, hub.offer); → the option's id, kept in
 //     state.choices[choice] (choice null: not a choice of the chapter's map)
@@ -47,10 +45,10 @@
 //   g.done() → once the step's code is through: the page's ⏭ taken back; g.leave() — the step left behind (game.js)
 // The page's ⏭ (bespoke.forward) is the step's while it is played ({forward}: whether the player has seen the step —
 // game.js): where the step is seen, pressed, the step goes on at once to its next interaction — the next line said,
-// plate, choice, minigame, scene or title —, the waits between over at once, the line heard dropped. In a minigame the ⏭
-// skips it; while a choice or a plate waits there is none.
+// piece, choice, minigame, scene or title —, the waits between over at once, the line heard dropped. In a minigame the ⏭
+// skips it; while a choice waits there is none.
 // A step may be played up to a minigame unseen, without time (the author's map: a jump — jump.js j), or all through
-// (a dry run: game.js, check/run.mjs): then nothing of it is said, shown or heard, a plate goes by at once, and a
+// (a dry run: game.js, check/run.mjs): then nothing of it is said, shown or heard, a piece ends as soon as it is begun, and a
 // minigame gives its `skipped` (or what the dry run asks: j.result — check/run.mjs plays the misses too).
 
 // The game's places (scenario §4) and the world's scene each is played on — the one map of them (a place may also be a
@@ -76,37 +74,6 @@ export const TRACES = {
 // The people the steps name who never speak (people.json has the ones heard): the scenes' elements, seen as the scenes
 // get them (the pieces' contract, game.md)
 export const SILENT = ['velvet', 'daughter', 'woman_a', 'woman_b', 'widow_girl', 'widow_boy', 'beggar', 'musician_a', 'musician_b'];
-// The stone's moments (its notes.md, «The moments»): the keys that put it there. Its people are put by its script from
-// `<id>_at`; `here` says who is there.
-export const STONE = {
-  night: { boat: true, lantern: 1, net: 'heap', fisherman_at: 'boat' }, // П.1–П.2: the boat by the stone, the net in it
-  net: { boat: true, lantern: 1, net: 'over', haul: 1, fisherman_at: 'boat', mermaid_at: 'net' }, // П.3–П.4: she in his net
-  evenings: { light: 'evening', boat: true, lantern: 1, net: 'over', haul: 1, fish: 1, fisherman_at: 'boat', mermaid_at: 'stone' }, // П.5: she on the stone
-  ask: { boat: false, lantern: 0, fisherman_at: 'shallows', mermaid_at: 'stone' }, // 1.1: he knee-deep by the stone
-  rise: { boat: false, lantern: 0, fisherman_at: 'water', far_light: 0.5 }, // 3С.1 «Подняться»: his lantern far away
-  sea: { boat: true, lantern: 1, net: 'heap', fisherman_at: 'boat' }, // 4.5–4.6: the widow's boat at sea, at night
-  lights: { boat: false, lantern: 0, deep_lights: true, far_light: 0.5 }, // «Два огня»: the last shot
-};
-// The deep's moments (its notes.md, «The moments»): where he is (its script puts both and turns them), the evening
-// up there, the years
-export const DEEP = {
-  sand: { fisherman_at: 'sand' }, // 2.1: the two sitting side by side on the low stone in the sand
-  standing: { fisherman_at: 'standing' }, // 2.5: he on his feet on the sand before her
-  dusk: { fisherman_at: 'sand', dusk: 1, far_light: 0.01 }, // 3С.1: evening up there, his lantern far above
-  years: { fisherman_at: 'sand', years: true, hands: false }, // «Два огня»: years on, his hair white
-};
-// The Priest's house's moments (its notes.md): the morning; the Fisherman on the bench (its default) or not here
-export const PRIEST = {
-  morning: { morning: 1 }, // 1.2
-  // «Белые цветы», the feast: the flowers on the altar, the Priest at it turned to the room, the women before him
-  feast: { morning: 1, flowers: 'altar', priest_turn: 150, woman_a_a: -0.9, woman_a_d: 2.6, woman_b_a: 0.2, woman_b_d: 2.9,
-    woman_a_look: 'priest', woman_b_look: 'priest' },
-  // «Фонарь на мостках», the third spring: the flowers on the threshold, then on the altar
-  threshold: { morning: 1, flowers: 'threshold', fisherman_on: null, fisherman_a: 0.45, fisherman_d: 5.75 },
-  altar: { morning: 1, flowers: 'altar' },
-  // «Два огня», years on: the Priest on the threshold speaking to the room; the women and the Witch before him
-  sermon: { morning: 1, priest_a: 0.45, priest_d: 5.6, priest_turn: 180, witch_mood: 'laugh' },
-};
 
 // The scales (scenario §8), each with two sides: where they start, their bounds, its name in the gauge, the side the
 // player reads when they move (up: delta > 0, down: delta < 0), and the one line that says what they mean. Both start
@@ -199,7 +166,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
   let people = new Set(), present = new Set(); // the shown scene's people; those of them there now
   let opening = null; // the piece the scene was opened with, till g.beat takes it up: {name, ended}
   let playing = null; // the minigame played now: {signal, end, skippable}
-  // the page's ⏭ as the step stands now: none while a choice or a plate waits or the step is still unseen; in a
+  // the page's ⏭ as the step stands now: none while a choice waits or the step is still unseen; in a
   // minigame — its skip, where it may be skipped; else, where the step is seen, on to the next interaction
   const ahead = () => {
     if (forward == null || gone()) return;
@@ -232,7 +199,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
     }
     ahead();
   })());
-  // (waiting for the player: a choice, a plate — no ⏭ meanwhile)
+  // (waiting for the player: a choice — no ⏭ meanwhile)
   async function wait(p) {
     if (fast) await alive(land());
     waiting = true;
@@ -317,16 +284,6 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       if (unseen()) return sleep(300 + text.length * 60);
       if (fast) await alive(land());
       return alive(b.say(who, text, { at })).then(after);
-    },
-    async plate(text) {
-      if (gone()) return never;
-      if (unseen()) return;
-      return wait(() => view.plate(text, { signal: left.signal }));
-    },
-    async sheet(title, lines) {
-      if (gone()) return never;
-      if (unseen()) return;
-      return wait(() => view.sheet(title, lines, { signal: left.signal }));
     },
     async choose(choice, offers) {
       if (gone()) return never;

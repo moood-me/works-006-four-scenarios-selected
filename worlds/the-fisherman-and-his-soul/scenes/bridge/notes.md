@@ -55,11 +55,32 @@ the mist on the water, the chimney's smoke, the lamps' and the hearth's flicker,
 - Render (2026-10-29): the square at night with the Soul at the stall, the musicians, the beggar on the bridge, the door
   ajar — as meant (the lanterns, the stall and its coppers, the ring lit by them; the faces read).
 
+## Pieces
+
+The pieces (`lib.film`, the world's `beats` from `script.js`): `market` (the prologue's morning: the cast's
+`fish`), `under_bridge`, `over_bridge`, `square`, `hand_itself`, `shrug_back`, `bridge_dawn`, `beggar`, `soul_town`,
+`rumour`, `door_potter`, `door_shut`. Variant: `slow` (door_shut). The daughter now stands at her place's keys. Sheet
+(2026-10-29): as meant but the beggar's piece — the operator, framing the Fisherman on the bridge, stood under it by the
+water (the bridge's road is no floor to it) and then inside the old man: it is filmed now from the camera's own place
+on the road (`ON_ROAD`, `AT_BOWL`).
+
 ## Contract for the check
 
 ```json
-{"points": ["stall#coppers", "bowl#coins", "cottage_glow#cup", "sky#disc"],
- "keys": ["time", "square", "door", "copper", "soul_smoke", "fisherman_at", "soul_at", "potter_at", "beggar_at"]}
+{"beats": {
+ "market": {"after":[],"tells":["market:give","market:end"],"seconds":12,"show":false},
+ "under_bridge": {"after":[],"tells":["under_bridge:sat"],"seconds":6,"show":false},
+ "over_bridge": {"after":[],"tells":["over_bridge:walk","over_bridge:head"],"seconds":12,"show":false},
+ "square": {"after":[],"tells":["square:met"],"seconds":8,"show":false},
+ "hand_itself": {"after":["square"],"tells":["hand_itself:reach","hand_itself:caught"],"seconds":8,"show":false},
+ "shrug_back": {"after":["hand_itself"],"tells":["shrug_back:turn"],"seconds":8,"show":false},
+ "bridge_dawn": {"after":[],"tells":["bridge_dawn:stop","bridge_dawn:on"],"seconds":12,"show":false},
+ "beggar": {"after":[],"tells":["beggar:reach","beggar:caught","beggar:copper"],"seconds":16,"show":false},
+ "soul_town": {"after":[],"tells":["soul_town:met"],"seconds":10,"show":false},
+ "rumour": {"after":[],"tells":["rumour:say"],"seconds":8,"show":false},
+ "door_potter": {"after":[],"tells":["door_potter:open","door_potter:cup"],"seconds":10,"show":false},
+ "door_shut": {"after":["door_potter"],"tells":["door_shut:take","door_shut:shut"],"seconds":8,"show":false}
+},
+ "points": ["stall#coppers","bowl#coins","cottage_glow#cup","sky#disc"],
+ "keys": ["time","square","door","copper","soul_smoke","fisherman_at","soul_at","potter_at","beggar_at"]}
 ```
-
-The pieces are not written yet: no `beats`. Points and keys asked of this scene — the block above.

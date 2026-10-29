@@ -201,6 +201,49 @@ function fiddle(F) {
   const hold = add(F.P('RightHand'), mul(along, 0.06 * m));
   F.bar(add(hold, mul(along, -0.06 * m)), add(hold, mul(along, 0.5 * m)), 0.005 * m, 0.004 * m, [[0, WOOD_DARK]], 4, s);
 }
+// a bunch of white flowers held in the right hand, stems down (the finales): green stems, white heads with yellow eyes;
+// its point `flowers`
+function flowersHand(F) {
+  const { add, mul } = V();
+  const m = F.fit.h;
+  const [along] = handAxes(F, 'RightHand');
+  const c = add(F.P('RightHand'), mul(along, 0.05 * m));
+  const top = add(c, [0, 0.16 * m, 0]);
+  F.bar(add(c, [0, -0.08 * m, 0]), top, 0.012 * m, 0.02 * m, [[0, [0.36, 0.52, 0.3, 1]]], 5, [1, 0, 0]);
+  for (let k = 0; k < 5; k++) {
+    const a = (k / 5) * Math.PI * 2;
+    const at = add(top, [Math.cos(a) * 0.045 * m, 0.02 * m * (k % 2), Math.sin(a) * 0.045 * m]);
+    F.ball(at, [[1, 0, 0], [0, 1, 0], [0, 0, 1]], [0.035 * m, 0.022 * m, 0.035 * m], [0.96, 0.96, 0.93, 1], 8);
+    F.ball(add(at, [0, 0.018 * m, 0]), [[1, 0, 0], [0, 1, 0], [0, 0, 1]], [0.01 * m, 0.008 * m, 0.01 * m], [0.95, 0.8, 0.3, 1], 6);
+  }
+  F.point('flowers', top);
+}
+// a string of fish hanging from the right hand by a cord through their gills (the catch for the market): four silver
+// fish one under another, swinging a little late
+function fishString(F) {
+  const { add } = V();
+  const m = F.fit.h;
+  const h = F.P('RightHand');
+  const low = F.swing('fish', add(h, [0, -0.32 * m, 0]), 70);
+  F.bar(h, low, 0.004 * m, 0.004 * m, [[0, STRAP]], 4, [1, 0, 0]);
+  for (let k = 0; k < 4; k++) {
+    const u = 0.25 + 0.22 * k;
+    const c = [h[0] + (low[0] - h[0]) * u, h[1] + (low[1] - h[1]) * u, h[2] + (low[2] - h[2]) * u];
+    F.ball(add(c, [0.03 * m * (k % 2 ? 1 : -1), 0, 0]), [[0, 1, 0], [1, 0, 0], [0, 0, 1]], [0.11 * m, 0.035 * m, 0.012 * m], [0.72, 0.78, 0.8, 1], 8);
+  }
+}
+// his net heavy with the night's catch, slung over the right shoulder: a brown sack of mesh hanging down his back, silver
+// glints of fish in it
+function netCatch(F) {
+  const { add, mul } = V();
+  const m = F.fit.h;
+  const fc = F.fwd('Chest');
+  const top = add(F.P('RightArm'), [0, 0.04 * m, 0]);
+  const sack = F.swing('catch', add(add(F.P('Spine1'), mul(fc, -0.2 * m)), [0, -0.05 * m, 0]), 60);
+  F.bar(top, sack, 0.03 * m, 0.08 * m, [[0, [0.42, 0.33, 0.24, 1]]], 6, F.side('Chest'));
+  F.ball(sack, [F.side('Chest'), [0, 1, 0], fc], [0.2 * m, 0.24 * m, 0.13 * m], [0.4, 0.32, 0.24, 1], 10);
+  for (let k = 0; k < 3; k++) F.ball(add(sack, [0.07 * m * (k - 1), -0.07 * m * k + 0.05 * m, -0.12 * m]), [[0.8, 0.6, 0], [-0.6, 0.8, 0], [0, 0, 1]], [0.07 * m, 0.012 * m, 0.01 * m], [0.75, 0.8, 0.84, 1], 6);
+}
 // a small reed pipe from the lips toward the hands
 function pipe(F) {
   const { add, sub, mul, unit, mix } = V();
@@ -316,6 +359,9 @@ return {
       ribbon: { name: 'ribbon', draw: F => ribbon(F) },
       fiddle: { name: 'fiddle', draw: F => fiddle(F) },
       pipe: { name: 'pipe', draw: F => pipe(F) },
+      flowers: { name: 'white flowers', draw: F => flowersHand(F) },
+      fish: { name: 'string of fish', draw: F => fishString(F) },
+      net_catch: { name: 'net with the catch', draw: F => netCatch(F) },
     },
   },
 };

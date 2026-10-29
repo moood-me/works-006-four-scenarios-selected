@@ -14,7 +14,9 @@
   },
   "modules": [
     "cast",
-    "hours"
+    "hours",
+    "pieces",
+    "beats"
   ],
   "light": {
     "ambient": 0.6,
@@ -118,7 +120,10 @@
     "fisherman_a": -0.98,
     "fisherman_d": 6.81,
     "witch_a": 0.34,
-    "witch_d": 7.29
+    "witch_d": 7.29,
+    "velvet_a": 3.5,
+    "velvet_d": 10.4,
+    "stumbled": false
   },
   "objects": [
     {
@@ -670,7 +675,11 @@
         "does": "hands_behind"
       },
       "across": 3.5,
-      "distance": 10.4
+      "distance": 10.4,
+      "place": {
+        "across": "velvet_a",
+        "distance": "velvet_d"
+      }
     }
   ],
   "states": {
@@ -733,6 +742,26 @@
     "witch_d": {
       "type": "number",
       "means": "where the Witch stands when off the rim, metres ahead (set by the dance)"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (notes.md «Pieces»; the world's beats)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will play next (its cut made ready)"
+    },
+    "stumbled": {
+      "type": "boolean",
+      "means": "a piece's variant (velvet): М2 missed — she laughs as she pulls him"
+    },
+    "velvet_a": {
+      "type": "number",
+      "means": "where the man in black stands, metres right (3.5 by his fir)"
+    },
+    "velvet_d": {
+      "type": "number",
+      "means": "where the man in black stands, metres ahead (10.4)"
     }
   }
 }

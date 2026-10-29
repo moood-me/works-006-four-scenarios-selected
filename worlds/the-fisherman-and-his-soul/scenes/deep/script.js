@@ -41,3 +41,5 @@ const near = () => {
 scene.on('change', 'mermaid_near', near);
 scene.on('move', 'mermaid_near', near);
 near();
+// The pieces (lib.film, played by `beat` through the world's `beats`)
+scene.kit.beats.play(scene, L.film(scene));

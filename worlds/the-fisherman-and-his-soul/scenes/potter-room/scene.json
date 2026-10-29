@@ -14,7 +14,9 @@
   },
   "modules": [
     "cast",
-    "places"
+    "places",
+    "pieces",
+    "beats"
   ],
   "light": {
     "ambient": 0.82,
@@ -148,7 +150,9 @@
     "soul_a": 2.15,
     "soul_d": 1.65,
     "soul_placed": "door",
-    "soul_here": false
+    "soul_here": false,
+    "rang": false,
+    "hard": false
   },
   "states": {
     "fire": {
@@ -296,6 +300,22 @@
     "soul_d": {
       "type": "number",
       "means": "the scene's own: where soul stands, metres ahead"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (notes.md «Pieces»; the world's beats)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will play next (its cut made ready)"
+    },
+    "rang": {
+      "type": "boolean",
+      "means": "a piece's variant (found_cup): М5 missed — the cup rang; he sees it on the shelf, looks at his guest a long while; no bread"
+    },
+    "hard": {
+      "type": "boolean",
+      "means": "a piece's variant (soul_theft): the hardened Soul goes straight to the shelf (else it stands over the sleeping girl a long while)"
     }
   },
   "objects": [
