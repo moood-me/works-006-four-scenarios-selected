@@ -1,0 +1,5 @@
+{"strings": [
+  {"text":"Adventure","translation":"冒險","where":"worlds/moominpappa-at-sea/scenes/valley/elements/boat.js"},
+  {"text":"Moominvalley","translation":"姆米谷","where":"worlds/moominpappa-at-sea/scenes/valley/scene.json title"},
+  {"text":"The end of August in the valley. Everything is already done.","translation":"姆米谷的八月底。一切都已經做完了。","where":"worlds/moominpappa-at-sea/scenes/valley/scene.json caption"}
+]}

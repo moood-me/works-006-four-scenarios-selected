@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Middle of the Island","translation":"島的中央","where":"worlds/moominpappa-at-sea/scenes/middle/scene.json title"},
+  {"text":"Among the pines, a clearing, and a pool so black it seems to have no bottom.","translation":"松樹之間有一塊空地，還有一個黑得好像沒有底的水潭。","where":"worlds/moominpappa-at-sea/scenes/middle/scene.json caption"}
+]}

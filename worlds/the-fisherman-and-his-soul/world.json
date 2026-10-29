@@ -7,5 +7,5 @@
     "romance": 40
   },
   "main": "pier",
-  "languages": ["en", "ru", "uk", "de", "es", "ja", "be", "fr"]
+  "languages": ["en", "ru", "uk", "de", "es", "ja", "be", "fr", "zh-hant"]
 }

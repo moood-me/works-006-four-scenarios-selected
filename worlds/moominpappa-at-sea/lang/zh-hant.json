@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"Moominpappa at Sea","translation":"姆米爸爸航海記","where":"worlds/moominpappa-at-sea/world.json title"},
+  {"text":"A bare pink-granite island far out in a grey-blue sea, an unlit lighthouse, a few frightened black pines. After Tove Jansson: a family that came to find its place, each finding a loneliness of their own.","translation":"灰藍色大海的遠方，一座光禿禿的粉紅色花崗岩小島，一座熄了燈的燈塔，幾棵受了驚的黑松。根據朵貝．楊笙的小說：一家人來這裡尋找自己的位置，結果每個人都找到了屬於自己的孤獨。","where":"worlds/moominpappa-at-sea/world.json description"}
+]}
