@@ -6,10 +6,9 @@
 // (story.js facts) — the play always goes through to the epilogue. Chapter 3 is the Town on the road that went with the
 // Soul and “Without Him” on the road that stayed (its steps of the other road do nothing); chapter 4 is not on the
 // road that stayed both times (`skip`): after chapter 3 the epilogue comes.
-// Stage 3 (rpg docs/writing-games-v2/game-stages.md): the play whole on the world's three scenes, people standing; what
-// the film would show — plates with “Next”; the mini-games — stubs (minigames/stub.js); places not drawn yet — the
-// people in a scene of the world and a label saying where it really is; people the world has not got yet (the Priest,
-// the Widow, the girl on the pier) — heard, not seen.
+// Stage 5 under way (moood-me/moood docs/writing/game-stages.md): the places on their scenes (story.js PLACES), the
+// mini-games real (minigames/); the scenes' pieces in place of the plates as they come (docs/new-games/rybak-i-dusha/
+// game.md «Stage 5 — pieces»); people a scene has not got yet — heard, not seen.
 //   The map of the play (moood/docs/agents/games.md §2), at stage 3 a row of leaves over the empty pier (map.js) — the
 // world has no map's scene yet. What can be done on it is its own drawing — pressed, the language's mark opens there,
 // born open (story.js hub.ask): the main run's pointer — “Start”, “Continue” (from the beginning of the step it stopped
@@ -27,7 +26,7 @@
 // choices } —, steps: {chapter: [the main run as each of its steps began, and as it ended]}, seen: {chapter: how many
 // of its steps the player has ever played through} — never lessened. The page's ⏭ (bespoke.forward, story.js) is the
 // player's only where they have been. Where the play is and how it ended — bespoke.at, bespoke.ended.
-import { ENDINGS, SCALES, SCENES, context, facts, listen } from './story.js';
+import { ENDINGS, PLACES, SCALES, context, facts, listen } from './story.js';
 import { ui } from './ui.js';
 import { trees } from './map.js';
 import { jump as unseen } from './jump.js';
@@ -182,7 +181,7 @@ export default async function (b) {
     b.hush();
     view.quiet();
     view.gauge(null);
-    await b.show(SCENES.pier, { state: { fisherman_here: false, soul_here: false, mermaid_here: false }, captions: false });
+    await b.show(PLACES.pier.folder, { state: { fisherman_here: false, soul_here: false, mermaid_here: false }, captions: false });
     const drawn = trees(b, sky(), { grow: reveal, author: !!author });
     const notice = replay?.done && anew() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};
     let asked = null; // (an option that would leave the replay: asked again)

@@ -1,10 +1,11 @@
 // Epilogue (scenario §5, §10). Three endings, by the road and the wave (story.js facts): “White Flowers” (stayed with
 // her in the wave — after Wilde), “A Lantern on the Pier” (drew her away from the water), “Two Lights” (stayed in the
 // deep both times). A pause meant to be: the player only watches — two parts with “Next” between them.
-// Stand-ins: the shore and the field — the pier; the Priest's house — the well (the Witch in the crowd) or the bridge;
-// the deep — the pier. The Priest is heard, not seen.
-// Reads: everything (facts). Leaves: nothing.
-import { SCENES, facts } from '../story.js';
+// Pieces: the shore's morning_two, field_corner, mound_morning, priest_mound; the pier's knife_sea, bless_sea,
+// hook_empty, post_knife, old_lantern, soul_leaves, witch_knife, witch_dance; the Priest's house's feast_flowers,
+// threshold_flowers, sermon; the deep's white_hair, hands_years; the stone's two_lights.
+// Reads: everything (facts; marks.apart — М8's trace).
+import { facts, piece } from '../story.js';
 
 export default {
   number: '', title: tr('Epilogue'),
@@ -15,79 +16,100 @@ export default {
     async g => {
       const f = facts(g.state);
       if (f.ending === 'flowers') {
-        await g.scene(SCENES.pier, { here: ['fisherman', 'mermaid'], moods: { fisherman: 'neutral', mermaid: 'neutral' },
-          where: tr('In truth: the shore by the pier, morning; the two of them on the sand, he holding her.') });
-        g.title(tr('White Flowers'));
-        await g.plate(tr('Morning. The lantern still burns on the post. The Priest comes down to bless the sea; on the sand lie two — the Fisherman holding her in his arms.'));
-        await g.say('priest', 'I will not bless the sea. Accursed are the sea-folk, and accursed are they who go with them');
-        if (f.thief) await g.say('priest', 'He sold his soul — and turned thief');
-        await g.plate(tr('He pulls the knife out of the post and throws it into the sea.'));
+        await piece(g, 'morning_two', {
+          stop: async () => {
+            await g.say('priest', 'I will not bless the sea. Accursed are the sea-folk, and accursed are they who go with them');
+            if (f.thief) await g.say('priest', 'He sold his soul — and turned thief');
+          },
+        }, async () => {
+          await g.scene('shore', { beat: 'morning_two', here: ['fisherman', 'mermaid', 'priest'], moods: { fisherman: 'eyes_closed', mermaid: 'eyes_closed', priest: 'angry' },
+            keys: { apart: !!g.state.marks.apart } });
+          g.title(tr('White Flowers'));
+        });
+        await g.scene('pier', { beat: 'knife_sea', here: ['priest'], moods: { priest: 'angry' } });
+        await g.beat('knife_sea');
         await g.say('priest', 'Bury them in the corner of the field where the linen is bleached. With no sign');
       } else if (f.ending === 'lantern') {
-        await g.scene(SCENES.pier, { here: ['fisherman'], moods: { fisherman: 'sad' },
-          where: tr('In truth: the edge of the field where the linen is bleached, morning; a fresh mound.') });
+        await g.scene('pier', { beat: 'post_knife', here: ['fisherman'], moods: { fisherman: 'sad' } });
         g.title(tr('A Lantern on the Pier'));
-        await g.plate(tr('Morning. At the edge of the field — a fresh mound. The Fisherman goes down to the pier — the post has stood — pulls out the knife and sets it at her head. He sits beside her.'));
-        await g.say('priest', 'Who is here?');
-        await g.say('fisherman', 'She is from the sea');
-        if (f.thief) await g.say('priest', 'And a thief, they say');
-        await g.plate(tr('The Fisherman does not answer.'));
-        await g.say('priest', 'She shall not lie in holy ground. And you — come away from her. Begone!');
-        await g.plate(tr('The Fisherman does not get up. The Priest goes, without a blessing.'));
+        await g.beat('post_knife');
+        await g.scene('shore', { beat: 'mound_morning', here: ['fisherman', 'priest'], moods: { fisherman: 'sad', priest: 'angry' } });
+        await g.beat('mound_morning');
+        await piece(g, 'priest_mound', {
+          who: async () => {
+            await g.say('priest', 'Who is here?');
+            await g.say('fisherman', 'She is from the sea');
+            if (f.thief) await g.say('priest', 'And a thief, they say');
+          },
+          begone: () => g.say('priest', 'She shall not lie in holy ground. And you — come away from her. Begone!'),
+        });
       } else {
-        await g.scene(SCENES.pier, { here: ['soul'], moods: { soul: f.hard ? 'neutral' : 'sad' },
-          where: tr('In truth: the pier, the same morning as the last call.') });
-        g.title(tr('Two Lights'));
-        if (f.hard) await g.plate(tr('The Soul leaves the pier with the cup and the lantern. The lantern is dark; she does not turn round. Over the hill, to the bridge.'));
-        else await g.plate(tr('The Soul leaves the pier with the cup and the lantern. The lantern burns; once she turns to the water. Over the hill, to the bridge.'));
-        await g.scene(SCENES.well, { here: ['witch'], moods: { witch: 'laugh' },
-          where: tr('In truth: the Priest’s house on the hill, years later; the crowd at the door, the Witch among them.') });
-        await g.say('priest', 'The fisherman from the bay sold his soul — and see, now he thieves from town to town');
-        await g.plate(tr('The women make the sign.'));
-        await g.plate(tr('The Witch in the crowd laughs aloud.'));
-        await g.say('witch', 'Sold! He gave it away for nothing — I saw');
-        if (f.witch === 'demand') await g.plate(tr('And afterwards she pulls the knife out of the post and carries it away.'));
-        else await g.plate(tr('And at full moon she dances alone at the end of the pier.'));
+        await piece(g, 'soul_leaves', {}, async () => {
+          await g.scene('pier', { beat: 'soul_leaves', here: ['soul'], moods: { soul: f.hard ? 'neutral' : 'sad' }, keys: { hard: f.hard },
+            where: tr('The same morning as the last call.') });
+          g.title(tr('Two Lights'));
+        });
+        await piece(g, 'sermon', {
+          preach: () => g.say('priest', 'The fisherman from the bay sold his soul — and see, now he thieves from town to town'),
+          laugh: async () => {
+            g.mood('witch', 'laugh');
+            await g.say('witch', 'Sold! He gave it away for nothing — I saw');
+          },
+        }, () => g.scene('priest', { beat: 'sermon', here: ['priest', 'woman_a', 'woman_b', 'witch'], moods: { priest: 'angry', witch: 'neutral' },
+          where: tr('Years later.') }));
+        if (f.witch === 'demand') {
+          await g.scene('pier', { beat: 'witch_knife', here: ['witch'], moods: { witch: 'laugh' } });
+          await g.beat('witch_knife');
+        } else {
+          await g.scene('pier', { beat: 'witch_dance', here: ['witch'], moods: { witch: 'laugh' } });
+          await g.beat('witch_dance');
+        }
       }
     },
     // part two: years later; the last shot
     async g => {
       const f = facts(g.state);
       if (f.ending === 'flowers') {
-        await g.scene(SCENES.bridge, { here: [],
-          where: tr('In truth: the Priest’s white house, three years later, a feast day.') });
-        await g.plate(tr('Three years. On the altar — white flowers such as no one has seen, and their scent. The Priest meant to speak of wrath — and speaks of love, not knowing why himself.'));
-        await g.say('priest', 'Where are the flowers from?');
-        await g.plate(tr('From the corner of the field where the linen is bleached.'));
-        if (f.widow === 'out') await g.plate(tr('To that corner the widow’s children carry shells: they stayed, the boat goes out again.'));
-        else await g.plate(tr('To that corner nobody goes.'));
-        await g.plate(tr('In the morning the Priest goes down to the sea and blesses everything — the water, the fish, the sea-folk. But the sea-folk had left the bay, and there were never flowers in that corner again.'));
-        await g.scene(SCENES.pier, { here: [], where: tr('In truth: the pier in the mist; the Priest on it, the empty hook of the lantern.') });
-        if (f.widow === 'stayed' && f.sounds) await g.plate(tr('Last shot: the Priest on the pier in the mist, the lantern’s hook empty. Far off, at the edge of hearing, four notes, going away out of the bay.'));
-        else await g.plate(tr('Last shot: the Priest on the pier in the mist, the lantern’s hook empty. Only the water.'));
+        await piece(g, 'feast_flowers', {
+          ask: async () => {
+            await g.say('narrator', 'Three years went by. On the altar lay white flowers such as no one had ever seen. The Priest meant to speak of wrath — and spoke of love, not knowing why himself');
+            await g.say('priest', 'Where are the flowers from?');
+            await g.say('women', 'From the corner of the field where the linen is bleached', 'woman_a');
+          },
+        }, () => g.scene('priest', { beat: 'feast_flowers', here: ['priest', 'woman_a', 'woman_b'], moods: { priest: 'thinking' } }));
+        await g.scene('shore', { beat: 'field_corner', here: f.widow === 'out' ? ['widow_girl', 'widow_boy'] : [], keys: { shells: f.widow === 'out' } });
+        await g.beat('field_corner');
+        if (f.widow === 'out') await g.say('narrator', 'To that corner the widow’s children carried shells: they had stayed, and the boat went out again');
+        else await g.say('narrator', 'To that corner nobody went');
+        await g.scene('pier', { beat: 'bless_sea', here: ['priest'], moods: { priest: 'neutral' } });
+        await g.beat('bless_sea');
+        await g.say('narrator', 'In the morning the Priest went down to the sea and blessed everything — the water, the fish, the sea-folk. But the sea-folk had left the bay, and there were never flowers in that corner again');
+        await g.scene('pier', { beat: 'hook_empty', here: ['priest'], moods: { priest: 'neutral' } });
+        await g.beat('hook_empty');
+        if (f.widow === 'stayed' && f.sounds) await g.say('narrator', 'Far off, at the edge of hearing, four notes, going away out of the bay');
       } else if (f.ending === 'lantern') {
-        await g.scene(SCENES.bridge, { here: ['fisherman'], moods: { fisherman: 'neutral' },
-          where: tr('In truth: the Priest’s door, three springs later.') });
-        await g.plate(tr('Three springs. On the mound — white flowers such as no one has seen. The Fisherman carries them to the Priest’s door, lays them on the threshold and goes.'));
-        await g.plate(tr('The Priest sets them on the altar; he meant to speak of wrath — and speaks of love. The next day he blesses the sea. The sea-folk have left the bay.'));
-        await g.scene(SCENES.pier, { here: ['fisherman'], moods: { fisherman: 'neutral' },
-          where: tr('In truth: the pier at night, many years later; the Fisherman is old.') });
-        if (f.widow === 'out') await g.plate(tr('Last shot: night; the old Fisherman at the end of the pier with his lantern, its beam on the water. Beside him the widow’s boy knots a new net from his. He hears no notes — only the water.'));
-        else if (f.sounds) await g.plate(tr('Last shot: night; the old Fisherman alone at the end of the pier with his lantern, its beam on the water. Sometimes he seems to hear three notes.'));
-        else await g.plate(tr('Last shot: night; the old Fisherman alone at the end of the pier with his lantern, its beam on the water. Only the water.'));
+        await piece(g, 'threshold_flowers', {
+          altar: () => g.say('narrator', 'Three springs went by, and on the mound grew white flowers such as no one had seen. The Priest set them on the altar; he meant to speak of wrath — and spoke of love'),
+        }, () => g.scene('priest', { beat: 'threshold_flowers', here: ['fisherman', 'priest'], moods: { fisherman: 'neutral', priest: 'surprised' } }));
+        await g.scene('pier', { beat: 'bless_sea', here: ['priest'], moods: { priest: 'neutral' } });
+        await g.beat('bless_sea');
+        await g.say('narrator', 'The next day he blessed the sea. But the sea-folk had left the bay');
+        await g.scene('pier', { beat: 'old_lantern', here: f.widow === 'out' ? ['fisherman', 'widow_boy'] : ['fisherman'], moods: { fisherman: 'neutral' },
+          keys: { boy: f.widow === 'out' }, where: tr('Many years later.') });
+        await g.beat('old_lantern');
+        if (f.widow === 'stayed' && f.sounds) await g.say('narrator', 'Sometimes he seems to hear three notes');
       } else {
-        await g.scene(SCENES.pier, { here: ['fisherman', 'mermaid'], moods: { fisherman: 'neutral', mermaid: 'smile' },
-          where: tr('In truth: under the water by the stone, years on. His hair is white; she is the same as in the net.') });
-        await g.plate(tr('She touches his hair.'));
-        await g.say('mermaid', 'What is this — white?');
-        await g.say('fisherman', 'Years');
-        await g.say('mermaid', 'What are “years”?');
-        await g.plate(tr('He does not answer.'));
-        if (f.net === 'word') await g.plate(tr('He is the first to take her hand, as he always called her.'));
-        else await g.plate(tr('She takes his hand first, before he reaches for hers.'));
-        if (f.sounds) await g.plate(tr('She sings all four notes.'));
-        else await g.plate(tr('She begins to sing and falls silent; they are silent, hand in hand.'));
-        await g.plate(tr('Last shot: night, the bay; under the water by the stone, two pale lights; far off beyond the hill, a third, going away.'));
+        await piece(g, 'white_hair', {
+          touch: async () => {
+            await g.say('mermaid', 'What is this — white?');
+            await g.say('fisherman', 'Years');
+            await g.say('mermaid', 'What are “years”?');
+          },
+        }, () => g.scene('deep', { beat: 'white_hair', here: ['fisherman', 'mermaid'], moods: { fisherman: 'neutral', mermaid: 'smile' },
+          keys: { first: f.net === 'word' ? 'he' : 'she', sing: f.sounds }, where: tr('Years on.') }));
+        await g.beat('hands_years');
+        await g.scene('stone', { beat: 'two_lights', here: [] });
+        await g.beat('two_lights');
       }
     },
   ],
