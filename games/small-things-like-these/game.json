@@ -9,5 +9,5 @@
     "relationships": 60
   },
   "world": "../../worlds/small-things-like-these",
-  "languages": ["en", "ru"]
+  "languages": ["en", "ru", "ja"]
 }
