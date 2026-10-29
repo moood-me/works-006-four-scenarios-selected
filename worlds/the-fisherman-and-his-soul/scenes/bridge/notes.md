@@ -31,3 +31,35 @@ the mist on the water, the chimney's smoke, the lamps' and the hearth's flicker,
   the scene's light `lantern` is at `fisherman#flame`; `potter` (1.8, 7.6) before his door, turned 235; `daughter`
   (2.15, 7.0) at his side, turned 230, her right hand in his left (`_reach`). Looks: the Fisherman at the potter, the
   two of them at him — the three seen in profile across the lane.
+
+## Stage 5: the hours, the square, the door, the beggar (2026-10-29, r3/rybak-pieces)
+
+- The hours (hours.md): `time` night / evening / morning → `dusk`, `dawn`, `day` (the morning a clear day — the market:
+  the stall out). The town's windows keep glowing in the day (their glows are painted lights; a look does not dim them).
+- People at named places (places.md, lib.PLACES): `fisherman_at` / `soul_at` — `lane` (default), `under` (on the landing
+  under the bridge's end by the water, 3.1), `head` (the bridge's head), `mid` (the bridge's middle), `stall`, `door`;
+  `potter_at` — `door` (default), `stall`, `doorway`; `beggar_at` — `parapet` (sat against the far parapet midway,
+  facing the road; `beggar_mood` eyes_closed). New people: `soul` (its lantern — the light `soul_lantern`; `soul_smoke`),
+  `beggar`, `musician_a`, `musician_b` (at the bridge's head), `woman_a`, `woman_b` (by the potter's wares) — all
+  `_here` false by default.
+- `square` — the square's night (3.2): `lanterns` across the lane (each its own small light), `circle` (the empty ring
+  of trodden sand on the cobbles), `stall` — the potter's stall out on the lane with coppers on it (point
+  `stall#coppers`; also out in the morning).
+- `door` 0…1 — the potter's door: `door_leaf` hinged on the doorway's near side, turned into the room (`door_turn` 270
+  shut … 350 open); shut, it covers the lit room; the hearth's light in the lane goes with it (`hearth` on `door`).
+- The beggar's `bowl` at his feet (point `bowl#coins`); `copper` — a pulse (count it up): the bowl rocks, a copper falls
+  from the far parapet into the river (`coin`, `coin_splash`).
+- `landing` — a stone landing under the bridge's end at the water (walk; `landing_face`). It is below the quay: seen
+  from the scene's own camera only at its edge — a piece frames it (camera_x left, over the river: the river is now
+  `water`, the eye stays over it).
+- Render (2026-10-29): the square at night with the Soul at the stall, the musicians, the beggar on the bridge, the door
+  ajar — as meant (the lanterns, the stall and its coppers, the ring lit by them; the faces read).
+
+## Contract for the check
+
+```json
+{"points": ["stall#coppers", "bowl#coins", "cottage_glow#cup", "sky#disc"],
+ "keys": ["time", "square", "door", "copper", "soul_smoke", "fisherman_at", "soul_at", "potter_at", "beggar_at"]}
+```
+
+The pieces are not written yet: no `beats`. Points and keys asked of this scene — the block above.
