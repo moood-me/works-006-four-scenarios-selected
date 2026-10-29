@@ -25,3 +25,9 @@ const fin = () => { scene.set('fin_a', (Number(scene.get('mermaid_a')) || 0) + 0
 scene.on('change', 'mermaid_a', fin);
 scene.on('change', 'mermaid_d', fin);
 fin();
+// the Fisherman years on (`years`): his look with white hair (the cast's fisherman_old) — «Фонарь на мостках»'s last shot
+const years = () => scene.set('fisherman_wear', scene.get('years') === true ? scene.kit.cast.characters.fisherman_old : null);
+scene.on('change', 'years', years);
+years();
+// The pieces (lib.film, played by `beat` through the world's `beats`)
+scene.kit.beats.play(scene, L.film(scene));

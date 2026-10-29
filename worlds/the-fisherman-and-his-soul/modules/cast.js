@@ -232,6 +232,18 @@ function fishString(F) {
     F.ball(add(c, [0.03 * m * (k % 2 ? 1 : -1), 0, 0]), [[0, 1, 0], [1, 0, 0], [0, 0, 1]], [0.11 * m, 0.035 * m, 0.012 * m], [0.72, 0.78, 0.8, 1], 8);
   }
 }
+// his net heavy with the night's catch, slung over the right shoulder: a brown sack of mesh hanging down his back, silver
+// glints of fish in it
+function netCatch(F) {
+  const { add, mul } = V();
+  const m = F.fit.h;
+  const fc = F.fwd('Chest');
+  const top = add(F.P('RightArm'), [0, 0.04 * m, 0]);
+  const sack = F.swing('catch', add(add(F.P('Spine1'), mul(fc, -0.2 * m)), [0, -0.05 * m, 0]), 60);
+  F.bar(top, sack, 0.03 * m, 0.08 * m, [[0, [0.42, 0.33, 0.24, 1]]], 6, F.side('Chest'));
+  F.ball(sack, [F.side('Chest'), [0, 1, 0], fc], [0.2 * m, 0.24 * m, 0.13 * m], [0.4, 0.32, 0.24, 1], 10);
+  for (let k = 0; k < 4; k++) F.ball(add(sack, [0.06 * m * (k - 1.5), 0.05 * m * (k % 2), -0.12 * m]), [[1, 0, 0], [0, 1, 0], [0, 0, 1]], [0.05 * m, 0.015 * m, 0.012 * m], [0.75, 0.8, 0.84, 1], 6);
+}
 // a small reed pipe from the lips toward the hands
 function pipe(F) {
   const { add, sub, mul, unit, mix } = V();
@@ -349,6 +361,7 @@ return {
       pipe: { name: 'pipe', draw: F => pipe(F) },
       flowers: { name: 'white flowers', draw: F => flowersHand(F) },
       fish: { name: 'string of fish', draw: F => fishString(F) },
+      net_catch: { name: 'net with the catch', draw: F => netCatch(F) },
     },
   },
 };

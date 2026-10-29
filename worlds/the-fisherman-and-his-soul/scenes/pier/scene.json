@@ -15,7 +15,9 @@
   "modules": [
     "cast",
     "hours",
-    "places"
+    "places",
+    "pieces",
+    "beats"
   ],
   "light": {
     "ambient": 0.62,
@@ -271,7 +273,19 @@
     "priest_a": 0.2,
     "priest_d": -0.6,
     "fin_a": 2.05,
-    "fin_d": 5.6
+    "fin_d": 5.6,
+    "years": false,
+    "smell": false,
+    "hard": false,
+    "song": false,
+    "looked": true,
+    "thrown": false,
+    "boy": false,
+    "thief": false,
+    "children": false,
+    "apart": false,
+    "witch_way": "demanded",
+    "fish": 1
   },
   "objects": [
     {
@@ -1373,6 +1387,68 @@
     "fin_d": {
       "type": "number",
       "means": "the scene's own: where her tail's fluke rises behind her, set from where she is"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (notes.md «Pieces»; the world's beats)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will play next (its cut made ready)"
+    },
+    "years": {
+      "type": "boolean",
+      "means": "the Fisherman years on: his white hair (the cast's fisherman_old as his look) — «Фонарь на мостках»'s last shot"
+    },
+    "smell": {
+      "type": "boolean",
+      "means": "a piece's variant (moonrise): «плясал с ней» — the camera goes to her for her line"
+    },
+    "hard": {
+      "type": "boolean",
+      "means": "a piece's variant (laugh_go, soul_leaves): the Soul hardened — an angry laugh; the lantern dark, no turn"
+    },
+    "song": {
+      "type": "boolean",
+      "means": "a piece's variant (third_year, fourth_year): her song — a faint light under the water by the stone; else the stone empty"
+    },
+    "looked": {
+      "type": "boolean",
+      "means": "a piece's variant (sink): he looks once at the pier before he goes (false: М9's fingers slipped)"
+    },
+    "thrown": {
+      "type": "boolean",
+      "means": "a piece's variant (knife_back): М6 missed — he throws the knife on the boards, then picks it up"
+    },
+    "boy": {
+      "type": "boolean",
+      "means": "a piece's variant (old_lantern): «вышел» — the widow's boy sits beside him knotting a new net"
+    },
+    "thief": {
+      "type": "boolean",
+      "means": "a piece's variant (widow): she has heard he is a thief — she looks at him long and keeps the children behind her"
+    },
+    "children": {
+      "type": "boolean",
+      "means": "a piece's variant (sea_comes): «вышел» — the children run up the shore"
+    },
+    "apart": {
+      "type": "boolean",
+      "means": "a piece's variant (morning_two): М8 slipped — they lie side by side, fingers almost touching"
+    },
+    "witch_way": {
+      "values": [
+        "demanded",
+        "danced"
+      ],
+      "means": "a piece's variant (witch_shore; the contract's key «witch», named so: `witch` is a person here): demanded — she stops, laughs, walks on; danced — she lays bread and her shawl by the hut, goes looking back"
+    },
+    "fish": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "a piece's variant (dawn_shore): the catch he carries up (1 full, 0.5 half — М7's miss); the sack on his shoulder is the cast's net_catch"
     }
   }
 }
