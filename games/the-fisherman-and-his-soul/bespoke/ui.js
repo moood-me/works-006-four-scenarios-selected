@@ -7,7 +7,6 @@
 //   view.plate(text, {signal}) — a plate low over the scene: what happens here that the scene does not show, and
 //     “Next”; → once it is pressed (or Space / Enter)
 //   view.sheet(title, lines, {signal}) — the same, a list
-//   view.card(title, gesture, text) — the card of a stub mini-game, high on the right: what it will be; → takes it away
 //   view.where(text | null) — the label high on the left: where this really happens (a stand-in scene)
 //   view.hint(text) — one line low in the middle; → a function that takes it away
 //   view.title(text, {signal}) — words in the middle of the frame; → once they have gone (9 s)
@@ -79,15 +78,6 @@ export function ui(layer) {
         const list = el('ul', '', p);
         for (const line of lines) el('li', '', list).textContent = line;
       }, opts);
-    },
-    card(title, gesture, text) {
-      const c = el('div', 'card', layer);
-      const head = el('p', 'head', c);
-      el('b', '', head).textContent = title;
-      el('span', 'gesture', head).textContent = gesture;
-      el('p', 'text', c).textContent = text;
-      el('p', 'stub', c).textContent = tr('A mini-game to be: for now, press the mark.');
-      return () => c.remove();
     },
     where(text) {
       label.hidden = !text;

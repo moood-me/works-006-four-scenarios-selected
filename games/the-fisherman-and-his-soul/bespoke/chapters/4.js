@@ -2,10 +2,13 @@
 // chapter 3). He calls her — the light under the water does not rise; the knife does not cut twice; winter in the hut,
 // the Witch; spring, the widow; the choice “a night at sea”; the heart that is all hers; the sea brings her; ⚑ the
 // second hinge “The Wave”.
-// Stand-ins: the whole chapter — the pier (the hut by the water, the widow's boat, the shore); the widow and her
-// children are heard, not seen.
-// Reads: choices.day, wait, last; marks.net, witch, thief; scales.soul, song. Leaves: choices.widow, wave; marks.widow.
-import { SCENES, facts } from '../story.js';
+// Places: the pier; the shore (standing in the pier till the pier's view of the land comes: the hut, the widow's boat,
+// the sand, the field); the widow's boat at sea — the stone's boat. The widow and her children are heard till the
+// shore has them.
+// Reads: choices.day, wait, last; marks.net, witch, thief, torn; scales.soul, song. Leaves: choices.widow, wave;
+// marks.widow; the traces of М6 (he threw the knife down), М7 (half a net), М8 (marks.apart: her hand slipped), М8б
+// (the net torn wider).
+import { STONE, facts } from '../story.js';
 import { knife2, net2, hold, drag } from '../minigames/all.js';
 
 const off = g => facts(g.state).road === 'deep';
@@ -23,9 +26,9 @@ export default {
     async g => {
       if (off(g)) return;
       const f = facts(g.state);
-      const when = f.road === 'late' ? tr('In truth: the pier, evening; back from the town.')
-        : f.wait === 'back' ? tr('In truth: the pier, night; back from the town.') : tr('In truth: the pier, a misty morning; back from the town.');
-      await g.scene(SCENES.pier, { here: ['fisherman'], moods: { fisherman: 'neutral' }, where: when });
+      const when = f.road === 'late' ? tr('Evening; back from the town.')
+        : f.wait === 'back' ? tr('Night; back from the town.') : tr('A misty morning; back from the town.');
+      await g.scene('pier', { here: ['fisherman'], moods: { fisherman: 'neutral' }, where: when });
       await g.plate(tr('He hangs the lantern on the post and calls.'));
       if (f.net === 'word') {
         await g.say('fisherman', 'You swore by the sea to come whenever I call. I am calling!');
@@ -41,24 +44,25 @@ export default {
     async g => {
       if (off(g)) return;
       const f = facts(g.state);
-      await g.scene(SCENES.pier, { here: ['fisherman'], moods: { fisherman: 'angry' } }, { cut: true });
+      await g.scene('pier', { here: ['fisherman'], moods: { fisherman: 'angry' } }, { cut: true });
       if (f.road === 'went') {
         await g.say('fisherman', 'Come out. You promised to come out on the shore');
         await g.say('soul', 'I promised. I lied');
       }
       await g.plate(tr('He pulls the knife out of the post — it is rusty.'));
       await g.say('fisherman', 'I’ll cut you off again');
-      await g.play(knife2);
+      const { thrown } = await g.play(knife2);
       await g.plate(tr('The same gesture as at moonrise — and the knife goes through the shadow as through water.'));
       await g.say('soul', 'A knife cuts once. You cut me off yourself');
       g.mood('fisherman', 'sad');
-      await g.plate(tr('He drives the knife back into the post.'));
+      await g.plate(thrown ? tr('He throws the knife down on the boards. Then he picks it up and drives it back into the post.')
+        : tr('He drives the knife back into the post.'));
     },
     // 4.3: winter; the Witch
     async g => {
       if (off(g)) return;
       const f = facts(g.state);
-      await g.scene(SCENES.pier, { here: ['fisherman'], moods: { fisherman: 'tired' },
+      await g.scene('shore', { here: ['fisherman', 'witch'], moods: { fisherman: 'tired' },
         where: tr('In truth: the shore by the pier — a hut of willow rods; autumn, then snow on the boards.') });
       await g.plate(tr('He weaves a hut of rods by the water. Autumn; snow on the pier; every evening he calls.'));
       await g.plate(tr('Along the frozen shore comes the Witch.'));
@@ -79,7 +83,7 @@ export default {
     async g => {
       if (off(g)) return;
       const f = facts(g.state);
-      await g.scene(SCENES.pier, { here: ['fisherman'], moods: { fisherman: 'neutral' },
+      await g.scene('shore', { here: ['fisherman', 'widow', 'widow_girl', 'widow_boy'], moods: { fisherman: 'neutral' },
         where: tr('In truth: the shore in spring; a widow with two children by her husband’s boat, drawn up on the sand. She is heard, not seen yet.') });
       await g.plate(tr('A widow with two children, by the boat of her husband who did not come back in the storm. She asks for nothing.'));
       await g.say('widow', 'There are no fish. When the ice goes, we’ll leave. Somewhere');
@@ -91,15 +95,20 @@ export default {
     // 4.5: the choice “a night at sea”
     async g => {
       if (off(g)) return;
-      await g.scene(SCENES.pier, { here: ['fisherman'], moods: { fisherman: 'thinking' } }, { cut: true });
+      await g.scene('shore', { here: ['fisherman', 'widow', 'widow_girl', 'widow_boy'], moods: { fisherman: 'thinking' },
+        where: tr('In truth: the shore in spring, the widow and her children by the boat.') }, { cut: true });
       const w = await g.choose('widow', { fisherman: [
         { id: 'out', label: tr('Go out for the night') },
         { id: 'stayed', label: tr('Stay') },
       ] });
       if (w === 'out') {
+        await g.scene('stone', { here: ['fisherman'], moods: { fisherman: 'neutral' }, keys: STONE.sea,
+          where: tr('The widow’s boat at sea, at night.') });
         await g.plate(tr('The widow’s boat, his lantern on the bow, his net.'));
-        await g.play(net2);
-        await g.plate(tr('The net is full.'));
+        g.set('net', 'over');
+        const { half } = await g.play(net2);
+        if (half) g.mark('half', true, null);
+        await g.plate(half ? tr('Half a net. The children will have fish all the same.') : tr('The net is full.'));
       } else {
         await g.plate(tr('The widow nods. In the morning she takes the children over the bridge with their bundles, who knows where; the younger looks back at the net on the rail. At night he is alone on the pier.'));
       }
@@ -109,8 +118,8 @@ export default {
     async g => {
       if (off(g)) return;
       const f = facts(g.state);
-      await g.scene(SCENES.pier, { here: ['fisherman'], moods: { fisherman: 'tired' },
-        where: f.widow === 'out' ? tr('In truth: the widow’s boat at sea, night.') : tr('In truth: the pier, night.') });
+      if (f.widow === 'out') await g.scene('stone', { here: ['fisherman'], moods: { fisherman: 'tired' }, keys: STONE.sea, where: tr('The widow’s boat at sea, at night.') });
+      else await g.scene('pier', { here: ['fisherman'], moods: { fisherman: 'tired' }, where: tr('Night.') });
       if (f.widow === 'out') await g.plate(tr('Under the keel passes a pale light, and for a moment — four notes. He thinks he is dreaming, and draws in the net.'));
       await g.say('soul', 'I tempted you with evil and with good. Let me at least into your heart — to be one, as before');
       await g.say('fisherman', 'Come in');
@@ -120,7 +129,7 @@ export default {
     async g => {
       if (off(g)) return;
       const f = facts(g.state);
-      await g.scene(SCENES.pier, { here: ['fisherman'], moods: { fisherman: 'neutral' },
+      await g.scene('shore', { here: f.widow === 'out' ? ['fisherman', 'widow', 'widow_girl', 'widow_boy'] : ['fisherman'], moods: { fisherman: 'neutral' },
         where: f.widow === 'out' ? tr('In truth: the shore by the pier, dawn.') : tr('In truth: the shore by the pier, night.') });
       if (f.widow === 'out') {
         await g.plate(tr('Dawn. He comes in with a full net and hangs the lantern on the post. The widow sees the fish.'));
@@ -143,18 +152,22 @@ export default {
     async g => {
       if (off(g)) return;
       const f = facts(g.state);
-      await g.scene(SCENES.pier, { here: ['fisherman', 'mermaid'], moods: { fisherman: 'sad', mermaid: 'neutral' },
+      await g.scene('shore', { here: ['fisherman', 'mermaid'], moods: { fisherman: 'sad', mermaid: 'eyes_closed' },
         where: tr('In truth: the shore; she lies on the sand at his knees, the wave coming.') }, { cut: true });
       const w = await g.choose('wave', { fisherman: [
         { id: 'stay', label: tr('Stay with her') },
         { id: 'pull', label: tr('Draw her away from the water') },
       ] });
       if (w === 'stay') {
-        await g.play(hold);
-        await g.plate(tr('Her hand in his while the wave comes. His heart breaks — and the Soul goes into his heart.'));
+        const { slips } = await g.play(hold);
+        if (slips) g.mark('apart', true, null);
+        await g.plate(slips ? tr('Her hand slips out of his; he stays beside her, their fingers almost touching. His heart breaks — and the Soul goes into his heart.')
+          : tr('Her hand in his while the wave comes. His heart breaks — and the Soul goes into his heart.'));
       } else {
-        await g.plate(tr('He wraps her in his net and draws her up the shore, backing away.'));
-        await g.play(drag);
+        await g.plate(g.state.marks.torn ? tr('He wraps her in his net — the one torn at the edge on the night he caught her — and draws her up the shore, backing away.')
+          : tr('He wraps her in his net and draws her up the shore, backing away.'));
+        const { torn } = await g.play(drag);
+        if (torn) await g.plate(tr('The wave reaches his knees; the net tears wider. He draws her out all the same.'));
         await g.plate(tr('The wave strikes the hut and carries it off. Up at the edge of the field where the linen is bleached he falls beside her. His heart breaks — and the Soul goes into his heart.'));
       }
       if (f.hard) await g.plate(tr('The Soul goes in without a word, and he shudders with cold.'));

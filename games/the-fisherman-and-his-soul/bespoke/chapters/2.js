@@ -1,12 +1,11 @@
 // II. Three Years (scenario §5, 2.1–2.8). The deep and her song; the first year — the Mirror of Wisdom, her law said
 // aloud; the choice “till sunrise”; the second year — the Ring of Riches; dancing under water; the third year — the
 // dancer on the square; ⚑ the first hinge “One Day”.
-// Stand-ins: the deep — the pier (the two of them under water).
-// Reads: marks.come, danced; scales.soul, song. Leaves: choices.sit, day; scales.soul, song.
-import { SCENES, facts } from '../story.js';
+// Places: the deep (standing in the pier till its scene is merged), the pier.
+// Reads: marks.come, danced; scales.soul, song. Leaves: choices.sit, day; scales.soul, song. М4 touched twice — she
+// sings holding his hand.
+import { facts } from '../story.js';
 import { song } from '../minigames/all.js';
-
-const DEEP = () => tr('In truth: under the water — sand, weed, light from above in pillars; the two of them sit on the sand.');
 
 export default {
   number: 'II', title: tr('Three Years'),
@@ -18,16 +17,17 @@ export default {
   steps: [
     // 2.1: the deep
     async g => {
-      await g.scene(SCENES.pier, { here: ['fisherman', 'mermaid'], moods: { fisherman: 'smile', mermaid: 'smile' }, where: DEEP() });
+      await g.scene('deep', { here: ['fisherman', 'mermaid'], moods: { fisherman: 'smile', mermaid: 'smile' } });
       await g.plate(tr('Light in pillars, weed, fish. She sings; he sits on the sand.'));
-      await g.play(song);
+      const { touches } = await g.play(song);
+      if (touches >= 2) await g.plate(tr('She laughs, and sings on, holding his hand.'));
       await g.say('narrator', 'A year went by like a single evening');
     },
     // 2.2: the first year
     async g => {
       const f = facts(g.state);
-      await g.scene(SCENES.pier, { here: ['fisherman', 'soul'], moods: { fisherman: 'neutral', soul: 'neutral' },
-        where: tr('In truth: the pier, a misty dawn; he stands in the shallows up to his waist.') });
+      await g.scene('pier', { here: ['fisherman', 'soul'], moods: { fisherman: 'neutral', soul: 'neutral' },
+        where: tr('A misty dawn; he stands in the shallows up to his waist.') });
       await g.plate(tr('From the shore, his own voice:'));
       await g.say('soul', 'Come out');
       await g.plate(tr('The Fisherman comes up onto the shallows, up to his waist. On the pier stands the Soul with his lantern.'));
@@ -41,7 +41,7 @@ export default {
     },
     // 2.3: the choice “till sunrise”
     async g => {
-      await g.scene(SCENES.pier, { here: ['fisherman', 'soul', 'mermaid'], moods: { fisherman: 'thinking', soul: 'sad', mermaid: 'neutral' } }, { cut: true });
+      await g.scene('pier', { here: ['fisherman', 'soul', 'mermaid'], moods: { fisherman: 'thinking', soul: 'sad', mermaid: 'neutral' } }, { cut: true });
       await g.say('soul', 'Then sit with me till sunrise. Only sit. For a year I have talked to myself');
       const s = await g.choose('sit', { fisherman: [
         { id: 'sit', label: tr('Sit on the edge of the pier, beside her') },
@@ -63,8 +63,8 @@ export default {
     // 2.4: the second year
     async g => {
       const f = facts(g.state);
-      await g.scene(SCENES.pier, { here: ['fisherman', 'soul'], moods: { fisherman: 'neutral', soul: 'neutral' },
-        where: tr('In truth: the pier, the second year, the same day; he in the shallows.') });
+      await g.scene('pier', { here: ['fisherman', 'soul'], moods: { fisherman: 'neutral', soul: 'neutral' },
+        where: tr('The second year, the same day; he in the shallows.') });
       await g.plate(tr('A ring on the Soul’s finger.'));
       await g.say('soul', 'I have been in the South. The Ring of Riches. Come');
       await g.say('fisherman', 'Love is better than riches');
@@ -76,7 +76,7 @@ export default {
     // 2.5: dancing under water
     async g => {
       const f = facts(g.state);
-      await g.scene(SCENES.pier, { here: ['fisherman', 'mermaid'], moods: { fisherman: 'smile', mermaid: 'smile' }, where: DEEP() });
+      await g.scene('deep', { here: ['fisherman', 'mermaid'], moods: { fisherman: 'smile', mermaid: 'smile' } });
       await g.say('fisherman', 'Show me how you dance here');
       await g.say('mermaid', 'We do not dance. Dancing is done with feet');
       if (f.danced) {
@@ -91,8 +91,8 @@ export default {
     // 2.6: the third year
     async g => {
       const f = facts(g.state);
-      await g.scene(SCENES.pier, { here: ['fisherman', 'soul'], moods: { fisherman: 'neutral', soul: f.hard ? 'smile' : 'sad' },
-        where: tr('In truth: the pier, dawn of the third year; he in the shallows.') });
+      await g.scene('pier', { here: ['fisherman', 'soul'], moods: { fisherman: 'neutral', soul: f.hard ? 'smile' : 'sad' },
+        where: tr('Dawn of the third year; he in the shallows.') });
       await g.say('soul', 'On the square beyond the bridge, where you sold your fish, a girl dances at night. You were never there at night. Her feet are like little white doves. Come. One day');
       if (f.hard) await g.say('soul', 'You want to see feet, don’t you? Hers has none');
       else await g.say('soul', 'I am tired of walking alone. You will look — and come back');
@@ -105,7 +105,7 @@ export default {
     // 2.7: ⚑ the first hinge “One Day”
     async g => {
       const f = facts(g.state);
-      await g.scene(SCENES.pier, { here: ['fisherman', 'soul', 'mermaid'], moods: { fisherman: 'thinking', soul: 'neutral', mermaid: 'neutral' } }, { cut: true });
+      await g.scene('pier', { here: ['fisherman', 'soul', 'mermaid'], moods: { fisherman: 'thinking', soul: 'neutral', mermaid: 'neutral' } }, { cut: true });
       const d = await g.choose('day', { fisherman: [
         { id: 'go', label: tr('“I’ll go. One day.”') },
         { id: 'stay', label: tr('“No. I stay.”') },

@@ -1,11 +1,11 @@
 /* The Fisherman and his Soul — what the game draws over the scene: pale slips in the bay's moonlight (cool paper,
-   sea-dark ink), the lantern's warm yellow for what is the player's. Stage 3: plates with “Next”, the stub mini-games'
-   cards, the label of a stand-in place, the scales, the map's row of leaves. */
+   sea-dark ink), the lantern's warm yellow for what is the player's. Plates with “Next”, the label of a
+   stand-in place, the scales, the map's row of leaves. */
 #layer { --paper: #eef2f3; --paper-edge: #c3cfd6; --ink: #1d2c3d; --ink-soft: #52657a; --sea: #4f7d9c; --lantern: #e6b35a;
   --serif: Georgia, "Times New Roman", serif; }
-#layer .gauge, #layer .toasts, #layer .where, #layer .hint, #layer .title, #layer .card { pointer-events: none; }
+#layer .gauge, #layer .toasts, #layer .where, #layer .hint, #layer .title { pointer-events: none; }
 
-#layer .slip, #layer .plate, #layer .card, #layer .where, #layer .gauge .row, #layer .hint {
+#layer .slip, #layer .plate, #layer .where, #layer .gauge .row, #layer .hint {
   box-sizing: border-box; color: var(--ink); font-family: var(--serif); background: var(--paper);
   border: 1px solid var(--paper-edge); border-radius: 4px; box-shadow: 0 6px 22px rgba(20, 30, 45, 0.28); }
 
@@ -46,14 +46,6 @@
 #layer .plate .next { display: block; margin-left: auto; min-width: 110px; min-height: 44px; padding: 8px 18px; border: 0; border-radius: 22px;
   background: var(--ink); color: var(--paper); font: 600 16px/1 var(--serif); cursor: pointer; }
 #layer .plate .next:hover { background: #3b5070; }
-
-/* a stub mini-game's card, high on the right under the plate of the language */
-#layer .card { position: absolute; top: 110px; right: 14px; width: min(340px, 44vw); padding: 10px 14px;
-  border-top: 4px solid var(--lantern); }
-#layer .card .head { margin: 0 0 6px; display: flex; justify-content: space-between; gap: 10px; font-size: 16px; }
-#layer .card .gesture { color: var(--ink-soft); font-style: italic; }
-#layer .card .text { margin: 0 0 6px; font-size: 15px; line-height: 1.4; }
-#layer .card .stub { margin: 0; font-size: 13px; color: var(--ink-soft); }
 
 #layer .hint { position: absolute; bottom: 20px; left: 50%; translate: -50% 0; margin: 0; padding: 6px 16px; max-width: 80vw; font-size: 15px; }
 
