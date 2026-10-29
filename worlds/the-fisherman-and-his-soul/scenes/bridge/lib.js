@@ -84,10 +84,6 @@ function film(scene) {
   const HOME = { ...at('potter', 'door'), potter_reach: { l: 'daughter#hand_r' }, daughter_reach: { r: 'potter#hand_l' }, daughter_a: 2.15, daughter_d: 7.0 };
   // on the bridge: its road at 12 m out (the middle at −11.6, the head at −0.8)
   const ROAD_FAR = [-20, 12.0];
-  // the camera standing on the bridge's road (the operator would stand under it: the road is no floor to it — the eye
-  // over the river, raised to the road): looking along it toward the far bank, the middle ahead; and down at the bowl
-  const ON_ROAD = { ...P.CAM0, camera_x: -5.2, camera_z: 12.0, camera_yaw: 270, camera_h: 1.9 };
-  const AT_BOWL = { ...P.CAM0, camera_x: -7.4, camera_z: 12.7, camera_yaw: 268, camera_h: 1.5, camera_look: 0.18 };
   const film = {
     // ── Prologue: the morning market ──
     market: {
@@ -201,14 +197,14 @@ function film(scene) {
         // he comes to the middle; his hand reaches for the bowl, the other catches it; he stands trembling
         await P.go(s, 'fisherman', [[-8.6, 12.6]], 20);
         him.look('bowl#coins');
-        await P.cut(s, ON_ROAD);
+        P.frame(s, P.shot('fisherman', 'medium', [0.5, 0.42]), 2);
         him.reach({ r: 'bowl#coins' });
         await P.tell(s, 'beggar:reach', 2);
         him.reach(null);
         await him.do('wrist_behind');
         await P.tell(s, 'beggar:caught', 1);
         // the bowl rocks, a copper falls into the river; the old man sleeps on
-        await P.cut(s, AT_BOWL);
+        P.frame(s, P.shot('bowl#coins', 'medium', [0.5, 0.55]), 1.5);
         await s.wait(1.5);
         s.set('copper', (Number(s.get('copper')) || 0) + 1);
         await P.tell(s, 'beggar:copper', 2.5);
