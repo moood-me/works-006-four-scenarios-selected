@@ -1,4 +1,4 @@
-// The daughter's pallet by the fire, seen from above: a straw mattress, a madder-red blanket over its lower half, a
+// The daughter's pallet by the fire (before the hearth, to its left), seen from above: a straw mattress, a madder-red blanket over its lower half, a
 // pillow at its head (toward the back). Metres from its middle (y toward the viewer)
 g.fillStyle = '#c4a874';
 g.fillRect(-0.36, -0.7, 0.72, 1.4);

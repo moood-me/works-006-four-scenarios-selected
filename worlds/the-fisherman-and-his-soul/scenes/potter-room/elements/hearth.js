@@ -1,4 +1,4 @@
-// The hearth built into the left wall: a stone surround, a sooty opening, the fire in it — a layer that flickers, its
+// The hearth built into the back wall at its left: a stone surround, a sooty opening, the fire in it — a layer that flickers, its
 // glow the scene's light "fire" (`fire` 0…1: its animate; 0 — embers only), a pot hanging over it. Metres, its foot's
 // middle at the origin, facing the room
 g.fillStyle = '#8c8070';
