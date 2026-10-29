@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Coal Gate","translation":"石炭小屋の戸口","where":"worlds/small-things-like-these/scenes/coal-gate/scene.json title"},
+  {"text":"Sunday, before light. The bolt had been drawn from the outside.","translation":"日曜日、夜明けまえ。かんぬきは外から掛けられていた。","where":"worlds/small-things-like-these/scenes/coal-gate/scene.json caption"}
+]}

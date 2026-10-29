@@ -1,0 +1,13 @@
+{"strings": [
+  {"text":"27 August. Wind north. Today I am forty. Nobody knows.","translation":"8月27日。北の風。きょう40歳になる。だれも知らない。","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Ate bread. Whose, I don't know.","translation":"パンを食べた。だれのものかは知らない。","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Calm. The sea is good today.","translation":"凪。きょうの海はいい。","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Ice on the steps. Wind north.","translation":"階段に氷。北の風。","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Fog. Heard a ship. It did not come.","translation":"霧。船の音を聞いた。来なかった。","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Wind south-west. Nobody again.","translation":"南西の風。また、だれも来ない。","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"23 August. Arrived.","translation":"8月23日。到着。","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Depth: more than the rope.","translation":"深さ：ロープより深い。","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"27 August. Calm.","translation":"8月27日。静か。","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"The Round Room","translation":"丸い部屋","where":"worlds/moominpappa-at-sea/scenes/round-room/scene.json title"},
+  {"text":"The round room at the foot of the lighthouse.","translation":"灯台の根もとにある丸い部屋。","where":"worlds/moominpappa-at-sea/scenes/round-room/scene.json caption"}
+]}
