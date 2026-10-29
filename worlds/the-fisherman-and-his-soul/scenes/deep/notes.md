@@ -72,10 +72,22 @@ overhead); ≤1 of the Song — `hands` true; «Подняться» is С2's (`
 - `mermaid_near` 0…1 (М4): she slides along the slab nearer him — the script moves her seat (`mermaid_on`) from its
   right (0.58) to close beside him (0.08).
 
+## Pieces
+
+The pieces (`lib.film`, the world's `beats` from `script.js`): `deep_song` (2.1, then М4), `dance_deep` (2.5),
+`deep_dusk`, `palm_eyes` (3С.1), `white_hair`, `hands_years` («Два огня»). Variants: `sing` (deep_dusk, hands_years),
+`first` (hands_years: he / she takes the other's hand first). Not rendered at this stage.
+
 ## Contract for the check
 
 ```json
-{"keys": ["mermaid_near", "hands", "years", "dusk", "far_light", "fisherman_at"]}
+{"beats": {
+ "deep_song": {"after":[],"tells":["deep_song:sing"],"seconds":10,"show":false},
+ "dance_deep": {"after":[],"tells":["dance_deep:dance","dance_deep:laugh","dance_deep:feet","dance_deep:hide"],"seconds":16,"show":false},
+ "deep_dusk": {"after":[],"tells":["deep_dusk:begin","deep_dusk:light"],"seconds":12,"show":false},
+ "palm_eyes": {"after":["deep_dusk"],"tells":["palm_eyes:palm"],"seconds":8,"show":false},
+ "white_hair": {"after":[],"tells":["white_hair:touch"],"seconds":8,"show":false},
+ "hands_years": {"after":["white_hair"],"tells":["hands_years:hand"],"seconds":10,"show":false}
+},
+ "keys": ["mermaid_near","hands","years","dusk","far_light","fisherman_at"]}
 ```
-
-The pieces are not written yet: no `beats`. Keys asked of this scene by the mini-game `song` — the block above.

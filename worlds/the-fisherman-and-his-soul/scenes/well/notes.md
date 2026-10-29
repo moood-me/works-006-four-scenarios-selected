@@ -43,11 +43,26 @@ bucket on its rope, the lantern swinging in the hand, the mist, the fireflies, t
 - `knife_ground` — the knife on the slabs at his feet (point `knife_ground#knife`).
 - Not rendered at this stage.
 
+## Pieces
+
+The pieces (`lib.film`, the world's `beats` from `script.js`): `well_evening`, `long_look` (1.4), `dance`,
+`velvet`, `sign_velvet`, `broken`, `demand`, `dance_dawn` (1.5–1.6). The dance round the well is the scene's `round`;
+the man in black now stands at his place's keys (`velvet_a`, `velvet_d`). Variant: `stumbled` (velvet). Not rendered at
+this stage.
+
 ## Contract for the check
 
 ```json
-{"points": ["witch#tambourine", "knife_ground#knife", "sky#disc"],
- "keys": ["time", "round", "stumble", "knife_ground"]}
+{"beats": {
+ "well_evening": {"after":[],"tells":["well_evening:there"],"seconds":10,"show":false},
+ "long_look": {"after":["well_evening"],"tells":["long_look:end"],"seconds":4,"show":false},
+ "dance": {"after":[],"tells":["dance:begin"],"seconds":8,"show":false},
+ "velvet": {"after":["dance"],"tells":["velvet:bow"],"seconds":8,"show":false},
+ "sign_velvet": {"after":["velvet"],"tells":["sign_velvet:sign","sign_velvet:gone","sign_velvet:cry"],"seconds":12,"show":false},
+ "broken": {"after":["sign_velvet"],"tells":["broken:end"],"seconds":4,"show":false},
+ "demand": {"after":["broken"],"tells":["demand:promise","demand:whisper","demand:knife","demand:away"],"seconds":14,"show":false},
+ "dance_dawn": {"after":["broken"],"tells":["dance_dawn:laugh","dance_dawn:dawn","dance_dawn:hand"],"seconds":18,"show":false}
+},
+ "points": ["witch#tambourine","knife_ground#knife","sky#disc"],
+ "keys": ["time","round","stumble","knife_ground"]}
 ```
-
-The pieces are not written yet: no `beats`. Points and keys asked of this scene — the block above.
