@@ -338,7 +338,7 @@
   {"text":"continue\nthe game","translation":"continuar\nla partida","where":"games/the-summer-book/bespoke/game.js"},
   {"text":"start\nthe game","translation":"empezar\nla partida","where":"games/the-summer-book/bespoke/game.js"},
   {"text":"Finale: decided late","translation":"Final: decidió tarde","where":"games/the-summer-book/bespoke/game.js"},
-  {"text":"Finale: in full","translation":"Final: decidió a tiempo","where":"games/the-summer-book/bespoke/game.js"},
+  {"text":"Finale: decided in time","translation":"Final: decidió a tiempo","where":"games/the-summer-book/bespoke/game.js"},
   {"text":"Replay","translation":"Repetición","where":"games/the-summer-book/bespoke/map.js"},
   {"text":"continue\nthe replay","translation":"seguir con\nla repetición","where":"games/the-summer-book/bespoke/map.js"},
   {"text":"the author’s map","translation":"el mapa del autor","where":"games/the-summer-book/bespoke/map.js"},
