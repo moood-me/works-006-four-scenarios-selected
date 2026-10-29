@@ -14,7 +14,9 @@
   },
   "modules": [
     "cast",
-    "hours"
+    "hours",
+    "pieces",
+    "beats"
   ],
   "light": {
     "ambient": 0.62,
@@ -138,7 +140,9 @@
     "knot": 0,
     "splash": 0,
     "pass_light": 0,
-    "net_hole": 0
+    "net_hole": 0,
+    "looks": true,
+    "net_way": "word"
   },
   "states": {
     "boat": {
@@ -323,6 +327,25 @@
         2
       ],
       "means": "his net torn (the trace of М1, of М8б): 0 whole; 1 torn at the edge; 2 torn wider — seen on the net over the bow and in the heap"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (notes.md «Pieces»; the world's beats)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will play next (its cut made ready)"
+    },
+    "looks": {
+      "type": "boolean",
+      "means": "a piece's variant (go_word, go_free): false — she slips out not looking at him (М1б held long)"
+    },
+    "net_way": {
+      "values": [
+        "word",
+        "free"
+      ],
+      "means": "a piece's variant (evenings): how he let her go — for her word (she sings, the net full) / for nothing (the stone empty, then she by herself) — the contract's key «net», named so here: the scene's `net` is where the net is"
     }
   },
   "objects": [

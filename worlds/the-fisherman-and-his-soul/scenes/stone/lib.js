@@ -82,4 +82,240 @@ const LIGHT = {
   evening: { dusk: 1, dawn: 0 },
   dawn: { dusk: 0, dawn: 1 },
 };
-return { LIGHT, PLACES, OTHER, turnOf, place, RIBS, rib, rings, ringsMove };
+// The stone's pieces (the game's contract, game.md «Stage 5 — pieces»; notes.md «Pieces»): played by the world's
+// `beats` from the script. `film(scene)` → {name: {from, after, run}}. Each begins at its `from` (unless it follows the
+// piece named in `after`), tells its moments (`<piece>:<moment>`), and ends in a living pose.
+function film(scene) {
+  const P = kit.pieces;
+  // both people at their places at once (place's keys, turned to each other while both are here)
+  const pose = (fAt, mAt, mHere = true) => {
+    const st = { fisherman_at: fAt, mermaid_at: mAt, mermaid_here: mHere, fisherman_here: true };
+    return { fisherman_at: fAt, ...place('fisherman', fAt, st), ...(mAt ? { mermaid_at: mAt, ...place('mermaid', mAt, st) } : {}) };
+  };
+  const BOAT = { boat: true, lantern: 1, net: 'heap', haul: 1, heel: 0, boat_tilt: 0, fish: 0, knot: 0, pass_light: 0, deep_lights: false, far_light: 0 };
+  const NOBOAT = { boat: false, lantern: 0, net: 'heap', haul: 1, heel: 0, boat_tilt: 0, fish: 0, knot: 0, pass_light: 0, deep_lights: false, far_light: 0 };
+  const DO0 = { fisherman_do: null, mermaid_do: null, fisherman_reach: null, mermaid_reach: null, fisherman_on: null };
+  // his seat on the thwart (in the boat's frame, as the hull is laid: the thwart 0.55 m sternward, 0.3 over the water —
+  // 0.2 behind its middle: the cast's `seated` puts the hips that far before the point)
+  const THWART = { on: 'boat', at: [0, 0.75, 0.3] };
+  return {
+    // ── Prologue «Сеть» ──
+    night: {
+      from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, ...pose('boat', 'stone', false), ...DO0, ...P.CAM0, camera_x: 0.6, camera_z: -1.2, camera_look: -0.04 }),
+      run: async s => {
+        await s.wait(1);
+        await s.all(s.move('camera_z', 1.2, { over: 6 }), s.move('camera_x', -0.6, { over: 6 }));
+        // he casts the net: over the bow, a length out on the water
+        s.set('haul', 0);
+        s.set('net', 'over');
+        await P.tell(s, 'night:cast', 3);
+        P.frame(s, P.shot('fisherman', 'medium', [0.45, 0.42], { ...P.CAM0, camera_x: -0.6, camera_z: 1.2 }), 2);
+        P.loop(s, 'fisherman', 'haul_net');
+        s.move('heel', 0.4, { over: 2 });
+        await P.tell(s, 'night:rope', 3);
+      },
+    },
+    in_net: {
+      after: 'night',
+      from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', haul: 1, heel: 0.3, ...pose('boat', 'net'), ...DO0, fisherman_do: 'haul_net',
+        ...P.shot('mermaid', 'close', [0.5, 0.42]) }),
+      run: async s => {
+        const her = s.person('mermaid'), him = s.person('fisherman');
+        s.set('net', 'over');
+        s.move('haul', 1, { over: 1.5 });
+        await s.wait(2.5);
+        // she opens her eyes, afraid, and struggles in the net
+        her.mood('afraid');
+        P.loop(s, 'mermaid', 'struggle');
+        await P.tell(s, 'in_net:wake', 3);
+        // he holds the net's edge by her hand, and looks at her
+        him.do('stand', { loop: true });
+        s.move('heel', 0, { over: 1.5 });
+        him.reach({ r: 'net_over#knot' });
+        him.look('mermaid');
+        P.frame(s, P.shot('fisherman', 'medium', [0.62, 0.42]), 2);
+        await P.tell(s, 'in_net:hold', 4);
+      },
+    },
+    go_word: {
+      after: 'in_net',
+      from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', ...pose('boat', 'net'), ...DO0, fisherman_reach: { r: 'net_over#knot' }, knot: 1,
+        ...P.shot('mermaid', 'medium', [0.5, 0.45]) }),
+      run: async s => {
+        const her = s.person('mermaid');
+        her.do('stand', { loop: true });
+        s.set('fisherman_reach', null);
+        // she does not look back (looks: at him or, with `looks` false, away and down)
+        her.look(s.get('looks') === false ? [-1.4, 7.6, -0.6] : [0.4, 8, -0.4]);
+        s.set('mermaid_at', 'water');
+        await s.wait(1.2);
+        await s.move('mermaid_e', 0, { over: 2.5, ease: 'in' });
+        s.set('mermaid_here', false);
+        await P.tell(s, 'go_word:under', 1.5);
+      },
+    },
+    go_free: {
+      after: 'in_net',
+      from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', ...pose('boat', 'net'), ...DO0, fisherman_reach: { r: 'net_over#knot' }, knot: 1,
+        ...P.shot('mermaid', 'medium', [0.5, 0.45]) }),
+      run: async s => {
+        const her = s.person('mermaid');
+        her.do('stand', { loop: true });
+        s.set('fisherman_reach', null);
+        s.set('mermaid_at', 'water');
+        // she lingers by the bow — looking at him (with `looks` false: not at him)
+        her.look(s.get('looks') === false ? [1.6, 7.4, -0.3] : 'fisherman');
+        await P.tell(s, 'go_free:linger', 4);
+        // she goes; turns once
+        her.look(null);
+        await s.move('mermaid_a', 0.9, { over: 2 });
+        her.look('fisherman');
+        await her.do('look_back');
+        await P.tell(s, 'go_free:turn', 1);
+        await s.move('mermaid_e', 0, { over: 2.2, ease: 'in' });
+        s.set('mermaid_here', false);
+        await P.tell(s, 'go_free:under', 1);
+      },
+    },
+    evenings: {
+      from: () => ({ ...LIGHT.evening, light: 'evening', ...BOAT, ...pose('boat', 'stone'), ...DO0, mermaid_do: 'seated', ...P.CAM0 }),
+      run: async s => {
+        const him = s.person('fisherman'), her = s.person('mermaid');
+        if (s.get('net_way') !== 'free') {
+          // «за слово»: she sings on the stone looking at the water, he hauls the net full — twice over, evening into night
+          her.look([0.2, 7.4, -0.6]);
+          P.loop(s, 'mermaid', 'sing');
+          P.loop(s, 'fisherman', 'haul_net');
+          await P.tell(s, 'evenings:sing', 1);
+          for (let k = 0; k < 2; k++) {
+            s.set('net', 'over');
+            s.set('haul', 0);
+            s.set('fish', 0);
+            await s.all(s.move('haul', 1, { over: 3.5 }), s.move('fish', 1, { over: 3.5 }), s.move('dusk', k ? 0 : 0.5, { over: 3.5 }));
+            s.set('net', 'heap');
+            await s.wait(0.8);
+          }
+          s.set('light', 'night');
+        } else {
+          // «даром»: the stone empty, he sits on the thwart till the dawn greys; then she, by herself, singing to him; then empty
+          s.set('mermaid_here', false);
+          s.set('fisherman_on', THWART);
+          P.loop(s, 'fisherman', 'seated');
+          await P.tell(s, 'evenings:empty', 1);
+          await s.move('dusk', 0, { over: 3 });
+          await s.move('dawn', 0.7, { over: 3 });
+          s.set('mermaid_here', true);
+          her.look('fisherman');
+          P.loop(s, 'mermaid', 'sing');
+          await P.tell(s, 'evenings:sing', 4);
+          s.set('mermaid_here', false);
+          await s.wait(1.5);
+        }
+        await P.tell(s, 'evenings:end', 1);
+      },
+    },
+    // ── Chapter I ──
+    ask_wife: {
+      from: () => ({ ...LIGHT.night, light: 'night', ...NOBOAT, ...pose('shallows', 'stone'), fisherman_a: 3.9, fisherman_d: 4.3, fisherman_placed: 'shallows',
+        ...DO0, mermaid_do: 'seated', ...P.CAM0 }),
+      run: async s => {
+        const him = s.person('fisherman');
+        him.look('mermaid');
+        // he wades in from the right and stops knee-deep on the sandbar
+        await P.go(s, 'fisherman', [PLACES.fisherman.shallows.at], null, 'wade');
+        s.set('fisherman_turn', turnOf('fisherman', 'shallows', { mermaid_at: 'stone' }));
+        P.frame(s, P.shot('fisherman', 'full', [0.66, 0.44]), 2);
+        await P.tell(s, 'ask_wife:there', 2);
+      },
+    },
+    laugh_tail: {
+      after: 'ask_wife',
+      from: () => ({ ...LIGHT.night, light: 'night', ...NOBOAT, ...pose('shallows', 'stone'), ...DO0, mermaid_do: 'seated', ...P.shot('mermaid', 'close', [0.5, 0.42]) }),
+      run: async s => {
+        P.frame(s, P.shot('mermaid', 'close', [0.5, 0.42]), 1.2);
+        P.loop(s, 'mermaid', 'laugh');
+        await s.wait(1.2);
+        s.set('splash', (Number(s.get('splash')) || 0) + 1);
+        await P.tell(s, 'laugh_tail:splash', 2.5);
+      },
+    },
+    dive: {
+      after: 'laugh_tail',
+      from: () => ({ ...LIGHT.night, light: 'night', ...NOBOAT, ...pose('shallows', 'stone'), ...DO0, ...P.shot('mermaid', 'medium', [0.5, 0.45]) }),
+      run: async s => {
+        P.frame(s, P.shot('mermaid', 'medium', [0.5, 0.45]), 1.2);
+        P.loop(s, 'mermaid', 'laugh');
+        await s.wait(1.2);
+        // she slides off the stone into the water
+        s.set('mermaid_do', null);
+        s.set('mermaid_at', 'water');
+        s.set('splash', (Number(s.get('splash')) || 0) + 1);
+        await s.move('mermaid_e', 0, { over: 2, ease: 'in' });
+        s.set('mermaid_here', false);
+        await P.tell(s, 'dive:under', 1.5);
+      },
+    },
+    // ── Chapter III «Без него»: he does not rise ──
+    rise: {
+      from: () => ({ ...LIGHT.night, light: 'night', ...NOBOAT, far_light: 0.5, ...pose('water', null), mermaid_here: false, ...DO0, fisherman_look: 'far_lamp', ...P.CAM0 }),
+      run: async s => {
+        s.set('mermaid_here', false);
+        s.set('fisherman_look', 'far_lamp');
+        s.move('far_light', 1, { over: 9, ease: 'linear' });
+        await P.tell(s, 'rise:watch', 3);
+        P.frame(s, P.shot('fisherman', 'close', [0.5, 0.42]), 2);
+        await s.wait(3.5);
+        P.frame(s, P.CAM0, 2);
+        await s.wait(1);
+        // pulled under from below
+        await s.move('fisherman_e', -0.2, { over: 1.2, ease: 'in' });
+        s.set('fisherman_here', false);
+        await P.tell(s, 'rise:pulled', 2);
+      },
+    },
+    // ── Chapter IV: the widow's boat at sea ──
+    boat_out: {
+      from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, ...pose('boat', null), mermaid_here: false, ...DO0, ...P.CAM0, camera_x: -0.4 }),
+      run: async s => {
+        s.set('mermaid_here', false);
+        await s.wait(1.5);
+        s.set('haul', 0);
+        s.set('net', 'over');
+        await P.tell(s, 'boat_out:cast', 2);
+        P.frame(s, P.shot('fisherman', 'medium', [0.45, 0.42]), 2);
+        P.loop(s, 'fisherman', 'haul_net');
+        await s.wait(2.5);
+      },
+    },
+    keel_light: {
+      after: 'boat_out',
+      from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', haul: 1, ...pose('boat', null), mermaid_here: false, ...DO0, fisherman_do: 'haul_net',
+        ...P.shot('fisherman', 'medium', [0.45, 0.42]) }),
+      run: async s => {
+        s.set('fish', Number(s.get('fish')) || 1);
+        P.loop(s, 'fisherman', 'haul_net');
+        await s.wait(2);
+        P.frame(s, P.shot('keel_light', 'close', [0.5, 0.5]), 2);
+        await s.wait(1.5);
+        // a pale light passes under the keel
+        await s.move('pass_light', 1, { over: 1.8 });
+        await P.tell(s, 'keel_light:light', 0.6);
+        await s.move('pass_light', 0, { over: 2.2 });
+        P.frame(s, P.shot('fisherman', 'medium', [0.45, 0.42]), 2);
+        await s.wait(1);
+      },
+    },
+    // ── «Два огня»: the last shot ──
+    two_lights: {
+      from: () => ({ ...LIGHT.night, light: 'night', ...NOBOAT, deep_lights: true, far_light: 0.5, ...pose('water', null), fisherman_here: false, mermaid_here: false, ...DO0,
+        ...P.CAM0, camera_z: -0.6 }),
+      run: async s => {
+        s.set('fisherman_here', false);
+        s.set('mermaid_here', false);
+        await s.all(s.move('far_light', 1, { over: 9, ease: 'linear' }), s.move('camera_z', 0.6, { over: 9 }));
+        await P.tell(s, 'two_lights:end', 1);
+      },
+    },
+  };
+}
+return { film, LIGHT, PLACES, OTHER, turnOf, place, RIBS, rib, rings, ringsMove };
