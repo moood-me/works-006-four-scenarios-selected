@@ -19,3 +19,9 @@ for (const id of ['fisherman', 'mermaid']) {
   scene.on('change', `${id}_here`, () => face(L.OTHER[id]));
   if (scene.get(`${id}_placed`) !== scene.get(`${id}_at`)) put(id);
 }
+// The hour (hours.md): `light` sets the looks' numbers at once
+scene.kit.hours.follow(scene, 'light', L.LIGHT);
+// The boat heeling as he hauls: `heel` 0…1 as the boat's tilt, its bow dipping
+const tilt = () => scene.set('boat_tilt', -6 * (Number(scene.get('heel')) || 0));
+scene.on('change', 'heel', tilt);
+scene.on('move', 'heel', tilt);
