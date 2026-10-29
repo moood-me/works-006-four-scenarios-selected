@@ -10,5 +10,5 @@
     "immersion": 40
   },
   "world": "../../worlds/the-fisherman-and-his-soul",
-  "languages": ["en", "ru"]
+  "languages": ["en", "ru", "zh-hant"]
 }
