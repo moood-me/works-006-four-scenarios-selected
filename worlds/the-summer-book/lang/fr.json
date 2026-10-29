@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Summer Book","translation":"Le Livre d’un été","where":"worlds/the-summer-book/world.json title"},
+  {"text":"An island in a pale northern sea, one summer: a grandmother who is getting old and a six-year-old girl who lost her mother this spring. After Tove Jansson.","translation":"Une île dans une mer pâle du Nord, un été : une grand-mère qui vieillit et une petite fille de six ans qui a perdu sa mère ce printemps. D’après Tove Jansson.","where":"worlds/the-summer-book/world.json description"}
+]}
