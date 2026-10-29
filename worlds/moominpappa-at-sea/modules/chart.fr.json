@@ -1,0 +1,8 @@
+{"strings": [
+  {"text":"Moominvalley","translation":"La Vallée des Moumines","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"N","context":"the compass rose: north","translation":"N","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"The Open Sea","translation":"La haute mer","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"Lighthouse","translation":"Phare","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"The Lighthouse Island","translation":"L’île du Phare","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"Chart of the Gulf","translation":"Carte du golfe","where":"worlds/moominpappa-at-sea/modules/chart.js"}
+]}

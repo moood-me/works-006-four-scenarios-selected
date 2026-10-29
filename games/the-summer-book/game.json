@@ -10,5 +10,5 @@
     "immersion": 40
   },
   "world": "../../worlds/the-summer-book",
-  "languages": ["en", "ru", "uk", "de", "es", "ja", "be"]
+  "languages": ["en", "ru", "uk", "de", "es", "ja", "be", "fr"]
 }
