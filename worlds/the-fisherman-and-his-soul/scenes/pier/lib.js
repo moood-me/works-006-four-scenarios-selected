@@ -77,7 +77,7 @@ function film(scene) {
     widow_girl_do: null, widow_boy_do: null, witch_do: null, priest_do: null, fisherman_reach: null, soul_reach: null, mermaid_reach: null,
     girl_reach: null, fisherman_with: null, soul_with: null, witch_with: null, priest_with: null, widow_with: null, fisherman_on: null, soul_on: null,
     widow_boy_on: null, mermaid_on: null, cut: 0, cut_rough: false, under_light: 0, far_lantern: 0, wave: 0, bundle: false, drag: 0, mist: 0, snow: false,
-    lantern_lit: 1, mermaid_steps: false, fisherman_look: null, soul_look: null, mermaid_look: null };
+    lantern_lit: 1, mermaid_steps: false, mermaid_with: ['tail'], mermaid_wear: { barefoot: 'both' }, fisherman_look: null, soul_look: null, mermaid_look: null };
   // the sea's view at an hour; the shore's
   const SEA = light => ({ view: 'sea', ...VIEW.sea, ...LIGHT[light], light });
   const SHORE = light => ({ view: 'shore', ...VIEW.shore, ...LIGHT[light], light, hut: 'none', shawl: false, widow_boat: false, mound: false,

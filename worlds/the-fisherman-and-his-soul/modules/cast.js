@@ -242,7 +242,7 @@ function netCatch(F) {
   const sack = F.swing('catch', add(add(F.P('Spine1'), mul(fc, -0.2 * m)), [0, -0.05 * m, 0]), 60);
   F.bar(top, sack, 0.03 * m, 0.08 * m, [[0, [0.42, 0.33, 0.24, 1]]], 6, F.side('Chest'));
   F.ball(sack, [F.side('Chest'), [0, 1, 0], fc], [0.2 * m, 0.24 * m, 0.13 * m], [0.4, 0.32, 0.24, 1], 10);
-  for (let k = 0; k < 4; k++) F.ball(add(sack, [0.06 * m * (k - 1.5), 0.05 * m * (k % 2), -0.12 * m]), [[1, 0, 0], [0, 1, 0], [0, 0, 1]], [0.05 * m, 0.015 * m, 0.012 * m], [0.75, 0.8, 0.84, 1], 6);
+  for (let k = 0; k < 3; k++) F.ball(add(sack, [0.07 * m * (k - 1), -0.07 * m * k + 0.05 * m, -0.12 * m]), [[0.8, 0.6, 0], [-0.6, 0.8, 0], [0, 0, 1]], [0.07 * m, 0.012 * m, 0.01 * m], [0.75, 0.8, 0.84, 1], 6);
 }
 // a small reed pipe from the lips toward the hands
 function pipe(F) {

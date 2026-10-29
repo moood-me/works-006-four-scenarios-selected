@@ -285,7 +285,13 @@
     "children": false,
     "apart": false,
     "witch_way": "demanded",
-    "fish": 1
+    "fish": 1,
+    "mermaid_with": [
+      "tail"
+    ],
+    "mermaid_wear": {
+      "barefoot": "both"
+    }
   },
   "objects": [
     {
