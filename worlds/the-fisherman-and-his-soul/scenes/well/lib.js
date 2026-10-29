@@ -58,9 +58,9 @@ function film(scene) {
   // on her left, turned to her (the two of them in one shot: the choice is his — his face must be in the frame)
   const BY_RIM = [0.05, 6.75];
   const BEFORE = { fisherman_a: -0.85, fisherman_d: 6.55, fisherman_turn: 100, witch_turn: 260 };
-  // the dance seen near: the operator on the well, the circle and the two of them filling the frame (the well a quarter
-  // of its height), the moon's glade round them
-  const ROUND_SHOT = P.shot('well', 0.27, [0.5, 0.6]);
+  // the dance seen near: the operator on the well, the circle and the two of them filling the frame (the well under a
+  // quarter of the frame's height), the moon's glade round them
+  const ROUND_SHOT = P.shot('well', 0.23, [0.5, 0.6]);
   // the two after the dance: the Witch a little right of the middle, he on her left, both whole
   const TWO = P.shot('witch', 'full', [0.64, 0.45]);
   const film = {
