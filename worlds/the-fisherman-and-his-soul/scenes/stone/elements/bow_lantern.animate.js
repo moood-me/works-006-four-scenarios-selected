@@ -1,4 +1,5 @@
-// the lantern sways on its hook: a damped swing pushed by the breeze, never in a cycle one can see
+// (no lantern while the boat is not here) the lantern sways on its hook: a damped swing pushed by the breeze, never in a cycle one can see
+if (!e.state.boat) return;
 const m = e.mem;
 m.a ??= 0;
 m.v ??= 0;
