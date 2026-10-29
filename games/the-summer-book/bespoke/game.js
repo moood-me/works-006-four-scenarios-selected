@@ -302,7 +302,7 @@ export default async function (b) {
   function finale() {
     if (kept.chapter < END) return [];
     const f = facts(kept);
-    return [{ title: f.form === 'late' ? tr('Finale: decided late') : tr('Finale: in full'), weight: '⚑',
+    return [{ title: f.form === 'late' ? tr('Finale: decided late') : tr('Finale: decided in time'), weight: '⚑',
       options: ENDINGS.map(e => ({ label: e.label, state: e.id === f.ending ? 'chosen' : 'open' })) }];
   }
 }
