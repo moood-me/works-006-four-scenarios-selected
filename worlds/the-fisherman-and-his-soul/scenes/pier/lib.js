@@ -91,6 +91,11 @@ function film(scene) {
   const BY_POST = [0.3, 4.6];
   const ROOT = [-6.4, -1.6];
   const STONE_IN = [1.8, 5.6];
+  // the camera's own places on the pier (the operator always films from the shore's side — a face turned to the sea is
+  // its back): behind the pier's end over the water, looking back at the boards (the Soul's face as it turns to him);
+  // nearer the boards, the scene's own view
+  const CAM_BACK = { ...P.CAM0, camera_x: -0.4, camera_z: 5.7, camera_yaw: 195, camera_h: 0.45 };
+  const CAM_NEAR = { ...P.CAM0, camera_x: 0.2, camera_z: 1.6 };
   const film = {
     // ── Chapter I ──
     feast: {
@@ -100,13 +105,12 @@ function film(scene) {
         P.loop(s, 'girl', 'dance_light');
         P.loop(s, 'woman_a', 'clap');
         P.loop(s, 'woman_b', 'clap');
-        // he walks in from the pier's end toward the shore
-        const walking = P.go(s, 'fisherman', [PLACES.fisherman.level.at]);
-        await s.wait(2.5);
+        await s.wait(3);
         P.loop(s, 'woman_a', 'whisper');
         P.loop(s, 'woman_b', 'whisper');
-        await P.tell(s, 'feast:whisper');
-        await walking;
+        await P.tell(s, 'feast:whisper', 2);
+        // he walks in from the pier's end toward the shore
+        await P.go(s, 'fisherman', [PLACES.fisherman.level.at]);
         put(s, at('fisherman', 'level'));
         s.person('fisherman').look('girl');
         P.frame(s, P.shot('fisherman', 'medium', [0.55, 0.42]), 2);
@@ -170,7 +174,7 @@ function film(scene) {
         await soul.do('rise_ground');
         await P.tell(s, 'shadow_rises:up', 0.5);
         soul.look('fisherman');
-        await P.cut(s, P.shot('soul', 'close', [0.5, 0.4]));
+        await P.cut(s, CAM_BACK);
         await P.tell(s, 'shadow_rises:face', 2);
         P.loop(s, 'soul', 'plead');
         await s.wait(2);
@@ -179,9 +183,9 @@ function film(scene) {
     heart_cut: {
       after: 'shadow_rises',
       from: () => ({ ...SEA('evening'), ...NONE, ...at('fisherman', 'end'), fisherman_turn: 20, ...at('mermaid', 'stone'), ...at('soul', 'end'), soul_turn: 200,
-        soul_do: 'plead', soul_look: 'fisherman', ...P.shot('soul', 'close', [0.5, 0.4]) }),
+        soul_do: 'plead', soul_look: 'fisherman', ...CAM_BACK }),
       run: async s => {
-        P.open(s, { soul_here: true, ...P.shot('soul', 'close', [0.5, 0.4]) });
+        P.open(s, { soul_here: true, ...CAM_BACK });
         P.loop(s, 'soul', 'plead');
         // he turns to the water — to the stone
         await s.person('fisherman').turn(60);
@@ -209,9 +213,9 @@ function film(scene) {
     knife_ready: {
       after: ['shadow_rises', 'heart_cut', 'heart_come'],
       from: () => ({ ...SEA('evening'), ...NONE, ...at('fisherman', 'end'), ...at('mermaid', 'stone'), ...at('soul', 'end'), soul_do: 'plead',
-        ...P.shot('cutline', 'close', [0.5, 0.55]) }),
+        ...P.shot('fisherman', 'full', [0.5, 0.55]) }),
       run: async s => {
-        P.open(s, { ...at('fisherman', 'end'), ...P.shot('cutline', 'close', [0.5, 0.55]) });
+        P.open(s, { ...at('fisherman', 'end'), ...P.shot('fisherman', 'full', [0.5, 0.55]) });
         // he takes the knife and crouches at his heels, over the edge of his shadow
         s.set('fisherman_with', ['knife']);
         s.person('fisherman').look('cutline#heel');
@@ -223,9 +227,9 @@ function film(scene) {
     cut: {
       after: 'knife_ready',
       from: () => ({ ...SEA('evening'), ...NONE, cut: 1, ...at('fisherman', 'end'), fisherman_with: ['knife'], fisherman_do: 'kneel', ...at('mermaid', 'stone'),
-        ...at('soul', 'end'), soul_here: true, ...P.shot('fisherman', 'medium', [0.45, 0.45]) }),
+        ...at('soul', 'end'), soul_here: true, ...CAM_NEAR }),
       run: async s => {
-        P.open(s, { ...at('fisherman', 'end'), fisherman_with: ['knife'], ...P.shot('fisherman', 'medium', [0.45, 0.45]) });
+        P.open(s, { ...at('fisherman', 'end'), fisherman_with: ['knife'], ...CAM_NEAR });
         const him = s.person('fisherman');
         him.do('stand', { loop: true });
         // the Soul steps apart, a metre
