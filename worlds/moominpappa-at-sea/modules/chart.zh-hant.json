@@ -1,0 +1,8 @@
+{"strings": [
+  {"text":"Moominvalley","translation":"姆米谷","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"N","context":"the compass rose: north","translation":"北","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"The Open Sea","translation":"外海","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"Lighthouse","translation":"燈塔","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"The Lighthouse Island","translation":"燈塔島","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"Chart of the Gulf","translation":"海灣圖","where":"worlds/moominpappa-at-sea/modules/chart.js"}
+]}

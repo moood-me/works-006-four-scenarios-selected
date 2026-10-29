@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Open Sea","translation":"外海","where":"worlds/moominpappa-at-sea/scenes/sea/scene.json title"},
+  {"text":"The boat goes on through the night. Behind the stern, a white strip on the water.","translation":"小船整夜航行。船尾後方，水面上留下一道白色的痕跡。","where":"worlds/moominpappa-at-sea/scenes/sea/scene.json caption"}
+]}
