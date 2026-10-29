@@ -13,7 +13,9 @@
     ]
   },
   "modules": [
-    "cast"
+    "cast",
+    "pieces",
+    "beats"
   ],
   "light": {
     "ambient": 0.78,
@@ -267,7 +269,9 @@
     "mermaid_wear": {
       "barefoot": "both"
     },
-    "mermaid_near": 0
+    "mermaid_near": 0,
+    "sing": false,
+    "first": "he"
   },
   "states": {
     "fisherman_at": {
@@ -325,6 +329,25 @@
       ],
       "smooth": true,
       "means": "М4: she slides along the slab nearer him — 0 her place on its right … 1 close beside him (her seat moved; the scene's script)"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (notes.md «Pieces»; the world's beats)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will play next (its cut made ready)"
+    },
+    "sing": {
+      "type": "boolean",
+      "means": "a piece's variant (deep_dusk, hands_years): she sings (her song strong); else silent, hand in hand / she begins and stops"
+    },
+    "first": {
+      "values": [
+        "he",
+        "she"
+      ],
+      "means": "a piece's variant (hands_years): who takes the other's hand first — he («слово»), she («даром»)"
     }
   },
   "objects": [
