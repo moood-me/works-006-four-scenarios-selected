@@ -21,6 +21,8 @@ the water's glow), a fine line, a simple face (eyes, brows, a mouth) that reads 
   `frockcoat`: skirts to the knees).
 - `potter` — the potter by the bridge: a widower, broad, greying brown hair, a clay-brown apron over a pale shirt.
 - `daughter` — his daughter, six or so: small, a madder-red dress, brown hair to the shoulders.
+- `fisherman_old` — the Fisherman years on (the ending «Два огня», scene `deep`): the same man, his hair white. Not a
+  person of its own: a scene gives it as his look (`fisherman_wear`: the object `scene.kit.cast.characters.fisherman_old`).
 
 ## Things (the cast's parts: `<id>_with`)
 

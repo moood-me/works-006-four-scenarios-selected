@@ -94,6 +94,11 @@ return {
     daughter: { kind: 'shapes', style: 'bay', who: 'child', garment: 'dress', hair: 'long',
       body: { height: 0.66, head: 1.18, legs: 0.94, arms: 0.95, shoulders: 0.86, thick: 0.8 },
       colors: { skin: '#efd3b9', hair: '#7a5534', top: '#a5524a', garment: '#a5524a', bottom: '#a5524a', shoes: '#3a2a24' } },
+    // the Fisherman years on, under the water (the ending «Два огня»): the same man, his hair gone white — a scene gives
+    // it as his `fisherman_wear` (the look's object, scene.kit.cast.characters.fisherman_old)
+    fisherman_old: { kind: 'shapes', style: 'bay', who: 'man', garment: 'tunic', hair: 'short', barefoot: 'both',
+      body: FISHER_BODY,
+      colors: { skin: '#c4977a', hair: '#ebe8e1', top: '#e2d8c4', bottom: '#4f6372' } },
   },
   shapes: {
     // the world's style: the engine's flat geometry — straight edges, clean colours under the scene's light — with a
