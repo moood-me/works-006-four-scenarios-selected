@@ -20,3 +20,6 @@
   вещей). У каждой сцены — «Contract for the check» (точки и ключи; кусков ещё нет). Модули мира `hours` и `places`.
   Игре осталось: `PLACES.room` → `potter-room`, `PLACES.shore` → `{folder: 'pier', keys: {view: 'shore'}}`. Куски
   (FILM) и ~50 движений — не начаты. История — `docs/history/2026-10-29-rybak-pieces.md`.
+- Стадия 5, куски (2026-10-29, `r3/rybak-pieces`): все 101 кусок контракта во всех семи сценах, «Contract for the
+  check» с beats; 13 движений ещё ждут автора движений (`r3/rybak-motions`). Игре осталось: переставить плашки на
+  куски, `PLACES.room`, `PLACES.shore`, ключи-варианты (имена в notes сцен).
