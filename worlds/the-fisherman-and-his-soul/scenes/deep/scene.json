@@ -23,7 +23,7 @@
     "haze": 0.6,
     "hazeColor": "#4fb3b6",
     "hazeGlow": 0.6,
-    "shafts": 2.0,
+    "shafts": 4.0,
     "vignette": 0.22,
     "grain": 0.06,
     "wind": [
@@ -51,37 +51,37 @@
         70
       ],
       "color": "#fff1cf",
-      "strength": 1.2,
+      "strength": 1.4,
       "through": [
         [
           [
             -1.0,
-            5.3,
+            5.8999999999999995,
             7
           ],
           [
             0.6,
-            4.9,
+            5.5,
             7
           ],
           [
             2.3,
-            5.6,
+            6.199999999999999,
             7
           ],
           [
             2.5,
-            6.9,
+            7.5,
             7
           ],
           [
             0.9,
-            7.4,
+            8.0,
             7
           ],
           [
             -0.9,
-            6.8,
+            7.3999999999999995,
             7
           ]
         ],
@@ -297,7 +297,7 @@
         1
       ],
       "smooth": true,
-      "means": "a warm light far above going over the surface — his lantern carried along the bridge to the town (3С.1): 0 none; from just over 0 it comes in left of the middle, goes right as it rises, fades out toward 1"
+      "means": "a warm light far above going over the surface — his lantern carried along the bridge to the town (3С.1): 0 none; from just over 0 it comes in at the left, goes right over the open water as it rises, fades out toward 1"
     },
     "fisherman_a": {
       "range": [
