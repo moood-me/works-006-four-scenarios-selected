@@ -266,7 +266,8 @@
     ],
     "mermaid_wear": {
       "barefoot": "both"
-    }
+    },
+    "mermaid_near": 0
   },
   "states": {
     "fisherman_at": {
@@ -316,6 +317,14 @@
     "fisherman_placed": {
       "type": "string",
       "means": "the scene's own: the place the Fisherman was last put at"
+    },
+    "mermaid_near": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М4: she slides along the slab nearer him — 0 her place on its right … 1 close beside him (her seat moved; the scene's script)"
     }
   },
   "objects": [
