@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Magic Forest","translation":"Zaczarowany las","where":"worlds/the-summer-book/scenes/forest/scene.json title"},
+  {"text":"The island's crown: moss, grey stone and dead trees twisted by the wind.","translation":"Szczyt wyspy: mech, szary kamień i martwe drzewa poskręcane przez wiatr.","where":"worlds/the-summer-book/scenes/forest/scene.json caption"}
+]}

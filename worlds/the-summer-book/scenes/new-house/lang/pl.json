@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The New House","translation":"Nowy dom","where":"worlds/the-summer-book/scenes/new-house/scene.json title"},
+  {"text":"On the far side of the island, a new house nobody comes to: big black windows over the sea.","translation":"Po drugiej stronie wyspy nowy dom, do którego nikt nie przyjeżdża: wielkie czarne okna nad morzem.","where":"worlds/the-summer-book/scenes/new-house/scene.json caption"}
+]}

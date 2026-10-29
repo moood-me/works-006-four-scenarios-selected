@@ -1,0 +1,5 @@
+{"strings": [
+  {"text":"Adventure","translation":"Przygoda","where":"worlds/moominpappa-at-sea/scenes/valley/elements/boat.js"},
+  {"text":"Moominvalley","translation":"Dolina Muminków","where":"worlds/moominpappa-at-sea/scenes/valley/scene.json title"},
+  {"text":"The end of August in the valley. Everything is already done.","translation":"Koniec sierpnia w dolinie. Wszystko już zrobione.","where":"worlds/moominpappa-at-sea/scenes/valley/scene.json caption"}
+]}
