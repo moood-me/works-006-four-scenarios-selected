@@ -2,7 +2,7 @@
   {"text":"The Burner","translation":"Пальник","where":"worlds/moominpappa-at-sea/scenes/lantern-room/elements/sheets.js"},
   {"text":"The Pot","translation":"Каструля","where":"worlds/moominpappa-at-sea/scenes/lantern-room/elements/sheets.js"},
   {"text":"In a wind, warm the burner with paraffin till the flame goes blue. Do not let go before.","translation":"На вітрі пальник гріти гасом, доки полум’я не посиніє. Раніше не відпускати.","where":"worlds/moominpappa-at-sea/scenes/lantern-room/elements/soot.js"},
-  {"text":"The oil is thick: warm it in a pot on the stove, carry it up wrapped. On a still evening warm oil runs by itself; in a wind, only with paraffin.","translation":"Олива густа: гріти в каструлі на плиті, нести загорнутою. Тихого вечора тепла піде сама; на вітрі — тільки з гасом.","where":"worlds/moominpappa-at-sea/scenes/lantern-room/elements/soot.js"},
+  {"text":"The oil is thick: warm it in a pot on the stove, carry it up wrapped. On a still evening warm oil runs by itself; in a wind, only with paraffin.","translation":"Олія густа: гріти в каструлі на плиті, нести загорнутою. Тихого вечора тепла піде сама; на вітрі — тільки з гасом.","where":"worlds/moominpappa-at-sea/scenes/lantern-room/elements/soot.js"},
   {"text":"The Lantern Room","translation":"Ліхтарня","where":"worlds/moominpappa-at-sea/scenes/lantern-room/scene.json title"},
   {"text":"The lantern room at the top of the lighthouse.","translation":"Ліхтарня нагорі маяка.","where":"worlds/moominpappa-at-sea/scenes/lantern-room/scene.json caption"}
 ]}
