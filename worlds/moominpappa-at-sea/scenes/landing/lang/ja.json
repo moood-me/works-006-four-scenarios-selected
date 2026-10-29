@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Landing Rocks","translation":"船着き場の岩","where":"worlds/moominpappa-at-sea/scenes/landing/scene.json title"},
+  {"text":"Dawn on the island. The lighthouse is dark, and the door is locked.","translation":"島の夜明け。灯台に灯はなく、扉には鍵がかかっている。","where":"worlds/moominpappa-at-sea/scenes/landing/scene.json caption"}
+]}
