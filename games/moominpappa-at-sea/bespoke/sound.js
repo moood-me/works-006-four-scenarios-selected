@@ -1,13 +1,15 @@
 // The sounds of “Moominpappa at Sea”, made in the page (Web Audio): recordings (sounds/, CC0) and what is made here; as
 // loud as the page's "sounds" slider says (MooodVolume.output). The page runs the audio: it sounds once the browser
-// lets it (the first touch), and waits with the play as the scene's music does — paused, its scene standing or being
-// made ready —, fading out and back in.
-//   unheard() → {sounds, wake()} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
+// lets it (the first touch), and waits with the scene's music — the play paused, its scene standing —, fading out and back
+// in with it.
+//   unheard() → {sounds} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
 // One AudioContext → the master level → a compressor. Two airs a sound goes out into: the open air's (1.5 s, dark) and
 // the room's (the lighthouse's rooms: 0.5 s).
 // The beds — what lasts; one of each for the page, as loud as `level` (0 — silence, and the bed is taken down), getting
 // there over `seconds`:
-//   beds(levels, seconds) — the named beds to their levels, every other one to silence (g.beds)
+//   background(levels, seconds) — the named beds to their levels, every other one to silence: the game's background as
+//     the page sounds it (bespoke.onBackground — at a scene's cut with its music, or at once: the game declares it,
+//     g.beds and g.scene's beds, and never times it)
 //   sea — the sea on the shore · sea_in — the same heard through the lighthouse's walls (muffled) · storm — the storm
 //   · wind — low wind in random gusts (ambience.js) · gale — wind in a boat's rigging · stream — the valley's brook ·
 //   fire — a stove's fire · crickets — the August night's crickets · clock — the valley's wall clock · bees — the
@@ -313,7 +315,7 @@ export function bees(level = 1, seconds = 2) {
 
 const BEDS = { sea, sea_in, storm, wind, gale, stream, fire, crickets, clock, bees };
 export const BED_NAMES = Object.keys(BEDS);
-export function beds(levels = {}, seconds = 2) {
+export function background(levels, seconds) {
   for (const [name, play] of Object.entries(BEDS)) play(levels[name] ?? 0, seconds);
 }
 
@@ -414,17 +416,11 @@ export function pour() {
   recording('pour-627625.mp3').then(buf => { s.buffer = buf; s.start(a.currentTime, 2); s.stop(a.currentTime + 4.5); });
 }
 
-// the same, unheard: a step played unseen (jump.js) — the beds as it leaves them are heard once it is seen
+// the same, unheard: a step played unseen (jump.js) — nothing heard meanwhile: the beds are silent like what is played once
+// (the background the step declared is the jump's: j.background)
 export function unheard() {
-  const levels = {}, none = () => {};
-  const bedOf = name => (level = 1) => { levels[name] = level; };
-  return {
-    sounds: {
-      beds(set = {}) { for (const name in BEDS) levels[name] = set[name] ?? 0; },
-      ...Object.fromEntries(Object.keys(BEDS).map(name => [name, bedOf(name)])),
-      creak: none, door: none, strike: none, flare: none, howl: none, cup: none, rustle: none, splash: none, wave: none,
-      glass: none, thunder: none, pour: none,
-    },
-    wake() { for (const [name, level] of Object.entries(levels)) BEDS[name](level, 1); },
-  };
+  const none = () => {};
+  const sounds = {};
+  for (const name of [...Object.keys(BEDS), 'creak', 'door', 'strike', 'flare', 'howl', 'cup', 'rustle', 'splash', 'wave', 'glass', 'thunder', 'pour']) sounds[name] = none;
+  return { sounds };
 }

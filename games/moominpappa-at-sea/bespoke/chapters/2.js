@@ -19,8 +19,7 @@ export default {
   steps: [
     // 2.1–2.2: the lantern room; the match
     async g => {
-      g.beds({ wind: 0.3, sea: 0.2 });
-      await g.scene(SCENES.top, { beat: 'lamp_look', here: ['papa', 'my'], moods: { papa: 'thinking', my: 'smile' }, keys: isle(23, 'day') });
+      await g.scene(SCENES.top, { beat: 'lamp_look', here: ['papa', 'my'], moods: { papa: 'thinking', my: 'smile' }, keys: isle(23, 'day') }, { beds: { wind: 0.3, sea: 0.2 } });
       g.gauge('lamp');
       await g.beat('lamp_look');
       await g.play(match);
@@ -37,23 +36,20 @@ export default {
     },
     // 2.3: each to their own
     async g => {
-      g.beds({ sea: 0.5, wind: 0.12 });
-      await g.scene(SCENES.shore, { beat: 'weed', here: ['mama'], moods: { mama: 'neutral' }, keys: isle(23, 'day') });
+      await g.scene(SCENES.shore, { beat: 'weed', here: ['mama'], moods: { mama: 'neutral' }, keys: isle(23, 'day') }, { beds: { sea: 0.5, wind: 0.12 } });
       await g.beat('weed');
       if (g.state.choices.fisher === 'invite') {
         await g.scene(SCENES.cape, { beat: 'bread', here: ['fisher', 'mama'], keys: land(23, 'day') }, { cut: true });
         await g.beat('bread');
       }
-      g.beds({ wind: 0.2, sea: 0.2 });
       const set = g.told('ring:set');
-      await g.scene(SCENES.middle, { beat: 'ring', here: ['troll', 'my'], moods: { troll: 'thinking' }, keys: isle(23, 'day') }, { cut: true });
+      await g.scene(SCENES.middle, { beat: 'ring', here: ['troll', 'my'], moods: { troll: 'thinking' }, keys: isle(23, 'day') }, { cut: true, beds: { wind: 0.2, sea: 0.2 } });
       const ring = g.beat('ring');
       await set;
       await g.say('troll', 'Mine');
       await ring;
-      g.beds({ sea: 0.5, wind: 0.12 });
       const crouch = g.told('seahorses:crouch');
-      await g.scene(SCENES.shore, { beat: 'seahorses', here: ['troll'], moods: { troll: 'thinking' }, keys: isle(23, 'day') }, { cut: true });
+      await g.scene(SCENES.shore, { beat: 'seahorses', here: ['troll'], moods: { troll: 'thinking' }, keys: isle(23, 'day') }, { cut: true, beds: { sea: 0.5, wind: 0.12 } });
       const seahorses = g.beat('seahorses');
       await crouch;
       await g.say('troll', 'How beautiful you are…');
@@ -63,8 +59,7 @@ export default {
     },
     // 2.4: ⚑ Papa's day
     async g => {
-      g.beds({ wind: 0.2, sea: 0.2 });
-      await g.scene(SCENES.middle, { beat: 'day', here: ['papa'], moods: { papa: 'thinking' }, keys: isle(23, 'day') });
+      await g.scene(SCENES.middle, { beat: 'day', here: ['papa'], moods: { papa: 'thinking' }, keys: isle(23, 'day') }, { beds: { wind: 0.2, sea: 0.2 } });
       await g.beat('day');
       const day = await g.choose('day', { 'papa#chest': [
         { id: 'pool', label: tr('Measure the black pool') },
@@ -79,19 +74,16 @@ export default {
         on(g, 'sound_after:look', () => g.mood('papa', 'surprised'));
         await g.beat('sound_after');
       } else if (day === 'weed') {
-        g.beds({ sea: 0.5, wind: 0.12 });
-        await g.scene(SCENES.shore, { beat: 'armful_load', here: ['papa', 'mama'], moods: { papa: 'smile', mama: 'neutral' }, keys: isle(23, 'day') }, { cut: true });
+        await g.scene(SCENES.shore, { beat: 'armful_load', here: ['papa', 'mama'], moods: { papa: 'smile', mama: 'neutral' }, keys: isle(23, 'day') }, { cut: true, beds: { sea: 0.5, wind: 0.12 } });
         await g.beat('armful_load');
-        g.beds({ wind: 0.2, sea: 0.2 });
-        await g.scene(SCENES.middle, { beat: 'armful_in', here: ['papa', 'troll'], moods: { papa: 'smile', troll: 'thinking' }, keys: { ...isle(23, 'day'), ring: 'set' } }, { cut: true });
+        await g.scene(SCENES.middle, { beat: 'armful_in', here: ['papa', 'troll'], moods: { papa: 'smile', troll: 'thinking' }, keys: { ...isle(23, 'day'), ring: 'set' } }, { cut: true, beds: { wind: 0.2, sea: 0.2 } });
         await g.beat('armful_in');
         await g.play(armful);
         on(g, 'armful_through:gone', () => g.mood('troll', 'sad'));
         await g.beat('armful_through');
         await g.beat('regather');
-        g.beds({ sea: 0.5, wind: 0.15 });
         const packed = g.told('weed:packed'), laugh = g.told('weed:laugh');
-        await g.scene(SCENES.landing, { beat: 'weed', here: ['papa', 'mama'], moods: { papa: 'smile', mama: 'neutral' }, keys: land(23, 'day') }, { cut: true });
+        await g.scene(SCENES.landing, { beat: 'weed', here: ['papa', 'mama'], moods: { papa: 'smile', mama: 'neutral' }, keys: land(23, 'day') }, { cut: true, beds: { sea: 0.5, wind: 0.15 } });
         const weed = g.beat('weed');
         await packed;
         await g.say('mama', 'Nothing will grow here');
@@ -100,10 +92,9 @@ export default {
         g.mood('mama', 'laugh');
         await weed;
       } else {
-        g.beds({ sea: 0.55, wind: 0.25 });
         const sat = g.state.choices.fisher === 'sit';
         await g.scene(SCENES.cape, { beat: sat ? 'net_sit' : 'net_left', here: ['fisher', 'papa'], moods: { papa: 'thinking', fisher: 'neutral' },
-          keys: land(23, 'day') }, { cut: true });
+          keys: land(23, 'day') }, { cut: true, beds: { sea: 0.55, wind: 0.25 } });
         await g.beat(sat ? 'net_sit' : 'net_left');
         await g.play(knot);
         g.sound.rustle();
@@ -119,18 +110,16 @@ export default {
       }
       if (day !== 'weed') {
         // (the evening: Mama back from the shore, wet, the basket empty)
-        g.beds({ sea: 0.5, wind: 0.15 });
-        await g.scene(SCENES.landing, { beat: 'wet_back', here: ['mama'], moods: { mama: 'tired' }, keys: land(23, 'dusk') });
+        await g.scene(SCENES.landing, { beat: 'wet_back', here: ['mama'], moods: { mama: 'tired' }, keys: land(23, 'dusk') }, { beds: { sea: 0.5, wind: 0.15 } });
         await g.beat('wet_back');
       }
       g.apply('day');
     },
     // 2.5: dusk
     async g => {
-      g.beds({ sea: 0.6, wind: 0.2 });
       const stood = g.told('dusk:stood');
       on(g, 'beat:dusk', () => g.sound.splash(0.5));
-      await g.scene(SCENES.landing, { beat: 'dusk', here: ['papa'], moods: { papa: 'thinking' }, keys: land(23, 'dusk') });
+      await g.scene(SCENES.landing, { beat: 'dusk', here: ['papa'], moods: { papa: 'thinking' }, keys: land(23, 'dusk') }, { beds: { sea: 0.6, wind: 0.2 } });
       const dusk = g.beat('dusk');
       await stood;
       if (g.state.choices.day !== 'weed') await g.say('papa', 'I’ll understand you. You’ll see');
@@ -139,13 +128,11 @@ export default {
     // 2.6: supper — one lantern
     async g => {
       const { boat, fisher } = g.state.choices;
-      g.beds({ sea: 0.45, wind: 0.15 });
-      await g.scene(SCENES.shore, { beat: 'dusk_sit', here: ['groke'], keys: { ...isle(23, 'dusk'), groke_at: boat === 'hold' ? 'near' : 'edge', track: boat === 'douse' ? 1 : 0 } });
+      await g.scene(SCENES.shore, { beat: 'dusk_sit', here: ['groke'], keys: { ...isle(23, 'dusk'), groke_at: boat === 'hold' ? 'near' : 'edge', track: boat === 'douse' ? 1 : 0 } }, { beds: { sea: 0.45, wind: 0.15 } });
       await g.beat('dusk_sit');
-      g.beds({ sea_in: 0.35, wind: 0.12 });
       const sill = g.told('supper:sill'), hatch = g.told('supper:hatch');
       await g.scene(SCENES.room, { beat: 'supper', here: ['papa', 'mama', 'my', 'troll'], moods: { papa: 'thinking', mama: 'smile', my: 'smile', troll: 'thinking' },
-        keys: { ...isle(23, 'dusk'), garden: -1, stove: 'cold', firewood: false } }, { cut: true });
+        keys: { ...isle(23, 'dusk'), garden: -1, stove: 'cold', firewood: false } }, { cut: true, beds: { sea_in: 0.35, wind: 0.12 } });
       const supper = g.beat('supper');
       await sill;
       if (fisher === 'invite') await g.say('mama', 'The bread was taken');
@@ -167,10 +154,9 @@ export default {
     },
     // 2.7: ⚑ whose lantern tonight — night 1
     async g => {
-      g.beds({ sea_in: 0.3, wind: 0.1 });
       on(g, 'fill:poured', () => g.sound.pour());
       await g.scene(SCENES.room, { beat: 'fill', here: ['papa', 'mama', 'my', 'troll'], moods: { papa: 'thinking', mama: 'neutral', my: 'smile', troll: 'thinking' },
-        keys: { ...isle(23, 'night'), garden: -1 } }, { cut: true });
+        keys: { ...isle(23, 'night'), garden: -1 } }, { cut: true, beds: { sea_in: 0.3, wind: 0.1 } });
       g.title(tr('Night 1, 23/24 August'));
       await g.beat('fill');
       const night1 = await g.choose('night1', { 'lantern#flame': [
@@ -185,8 +171,7 @@ export default {
         await g.say('papa', 'Till I light it, I sleep by the lamp');
         on(g, 'n1_lamp:up', () => g.sound.creak());
         await g.beat('n1_lamp');
-        g.beds({ wind: 0.3, sea: 0.15 });
-        await g.scene(SCENES.top, { beat: 'n1_up', here: ['papa'], moods: { papa: 'thinking' }, keys: isle(23, 'night') }, { cut: true });
+        await g.scene(SCENES.top, { beat: 'n1_up', here: ['papa'], moods: { papa: 'thinking' }, keys: isle(23, 'night') }, { cut: true, beds: { wind: 0.3, sea: 0.15 } });
         await g.beat('n1_up');
         await g.play(steady);
         const read = g.told('n1_read:read'), out = g.told('n1_read:out');
@@ -197,9 +182,8 @@ export default {
         g.sound.flare(0.8);
         await g.say('papa', 'He doesn’t want to');
         await reading;
-        g.beds({ sea: 0.4, wind: 0.12 });
         on(g, 'howl:howl', () => g.sound.howl());
-        await g.scene(SCENES.shore, { beat: 'howl', here: ['groke'], keys: { ...isle(23, 'night'), lighthouse_lit: 0.25 } }, { cut: true });
+        await g.scene(SCENES.shore, { beat: 'howl', here: ['groke'], keys: { ...isle(23, 'night'), lighthouse_lit: 0.25 } }, { cut: true, beds: { sea: 0.4, wind: 0.12 } });
         await g.beat('howl');
       } else if (night1 === 'mama') {
         await g.say('papa', 'The captain sets a term. If it isn’t lit by the full moon — we turn for home');
@@ -224,18 +208,15 @@ export default {
         await g.play(lantern);
         on(g, 'n1_son:gone', () => g.sound.door());
         await g.beat('n1_son');
-        g.beds({ wind: 0.3, sea: 0.15 });
-        await g.scene(SCENES.top, { beat: 'n1_cold', here: ['papa'], moods: { papa: 'thinking' }, keys: isle(23, 'night') }, { cut: true });
+        await g.scene(SCENES.top, { beat: 'n1_cold', here: ['papa'], moods: { papa: 'thinking' }, keys: isle(23, 'night') }, { cut: true, beds: { wind: 0.3, sea: 0.15 } });
         await g.beat('n1_cold');
-        g.beds({ sea: 0.4, wind: 0.12 });
         const set = g.told('gift:set');
-        await g.scene(SCENES.shore, { beat: 'gift', here: ['troll', 'groke'], moods: { troll: 'afraid' }, keys: { ...isle(23, 'night'), groke_at: 'near', frost: 0.4 } }, { cut: true });
+        await g.scene(SCENES.shore, { beat: 'gift', here: ['troll', 'groke'], moods: { troll: 'afraid' }, keys: { ...isle(23, 'night'), groke_at: 'near', frost: 0.4 } }, { cut: true, beds: { sea: 0.4, wind: 0.12 } });
         const gift = g.beat('gift');
         await set;
         await g.say('troll', 'There. That’s for you');
         await gift;
-        g.beds({ sea_in: 0.3, wind: 0.1 });
-        await g.scene(SCENES.room, { beat: 'dawn_line', here: ['papa', 'troll'], moods: { papa: 'surprised', troll: 'tired' }, keys: { ...isle(24, 'dawn'), garden: -1 } });
+        await g.scene(SCENES.room, { beat: 'dawn_line', here: ['papa', 'troll'], moods: { papa: 'surprised', troll: 'tired' }, keys: { ...isle(24, 'dawn'), garden: -1 } }, { beds: { sea_in: 0.3, wind: 0.1 } });
         await g.beat('dawn_line');
       } else {
         await g.say('papa', 'Mama till bedtime, then me, and toward morning — you');
@@ -244,20 +225,16 @@ export default {
         await stair;
         await g.say('mama', 'All right');
         await turns;
-        g.beds({ wind: 0.3, sea: 0.15 });
-        await g.scene(SCENES.top, { beat: 'n1_half', here: ['papa'], moods: { papa: 'thinking' }, keys: isle(23, 'night') }, { cut: true });
+        await g.scene(SCENES.top, { beat: 'n1_half', here: ['papa'], moods: { papa: 'thinking' }, keys: isle(23, 'night') }, { cut: true, beds: { wind: 0.3, sea: 0.15 } });
         await g.beat('n1_half');
         await g.play(half);
         await g.beat('n1_down');
-        g.beds({ sea_in: 0.3, wind: 0.1 });
         on(g, 'n1_step:set', () => g.sound.creak());
-        await g.scene(SCENES.room, { beat: 'n1_step', here: ['papa', 'troll'], moods: { papa: 'tired', troll: 'thinking' }, keys: { ...isle(23, 'night'), garden: -1 } }, { cut: true });
+        await g.scene(SCENES.room, { beat: 'n1_step', here: ['papa', 'troll'], moods: { papa: 'tired', troll: 'thinking' }, keys: { ...isle(23, 'night'), garden: -1 } }, { cut: true, beds: { sea_in: 0.3, wind: 0.1 } });
         await g.beat('n1_step');
-        g.beds({ sea: 0.45, wind: 0.12 });
-        await g.scene(SCENES.shore, { beat: 'wade', here: ['troll', 'groke'], moods: { troll: 'afraid' }, keys: isle(23, 'night') }, { cut: true });
+        await g.scene(SCENES.shore, { beat: 'wade', here: ['troll', 'groke'], moods: { troll: 'afraid' }, keys: isle(23, 'night') }, { cut: true, beds: { sea: 0.45, wind: 0.12 } });
         await g.beat('wade');
-        g.beds({ sea_in: 0.3, wind: 0.1 });
-        await g.scene(SCENES.room, { beat: 'dawn_stair', here: ['papa'], moods: { papa: 'surprised' }, keys: { ...isle(24, 'morning'), garden: -1 } });
+        await g.scene(SCENES.room, { beat: 'dawn_stair', here: ['papa'], moods: { papa: 'surprised' }, keys: { ...isle(24, 'morning'), garden: -1 } }, { beds: { sea_in: 0.3, wind: 0.1 } });
         await g.beat('dawn_stair');
       }
       g.apply('night1');

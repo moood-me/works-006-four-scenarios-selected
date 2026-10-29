@@ -28,7 +28,7 @@ import { ENDINGS, SCALES, SCENES, context, facts, listen } from './story.js';
 import { ui } from './ui.js';
 import { trees } from './map.js';
 import { jump as unseen } from './jump.js';
-import { beds, unheard } from './sound.js';
+import { background, unheard } from './sound.js';
 import prologue from './chapters/prologue.js';
 import one from './chapters/1.js';
 import two from './chapters/2.js';
@@ -70,6 +70,8 @@ export default async function (b) {
     colors: { mark: '#f4ead2', fill: '#f4ead2', good: '#ffe08a', danger: '#c8553d', fork: '#c9d2e4', ghost: '#f4ead2' },
   });
   const hub = listen(b);
+  // (the game's background — its beds of sound — as the page sounds it: at a scene's cut with its music, or at once)
+  b.onBackground(background);
   const view = ui(b.layer);
   // PLAYS[as] played unseen: its n-th step of all (STEPS) from where the steps before leave it → {state: the play
   // after it, games: the minigames it played}
@@ -183,10 +185,10 @@ export default async function (b) {
     b.hush();
     view.quiet();
     view.gauge(null);
-    beds({ clock: 0.25, crickets: 0.15 }, 2); // (the chart on the veranda's table, an August night)
     const at = replay ? replay.run.chapter : kept.chapter; // (END: the finale's leaf, c6)
     const route = kept.chapter > 1 ? 1 : kept.chapter === 1 ? Math.min(1, kept.step / 2) : 0;
-    await b.show(SCENES.chart, { state: { shown: at, route }, captions: false });
+    // (the chart on the veranda's table, an August night)
+    await b.show(SCENES.chart, { state: { shown: at, route }, captions: false, background: { clock: 0.25, crickets: 0.15 } });
     const drawn = trees(b, sky(), { grow: reveal, author: !!author });
     const notice = replay?.done && anew() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};
     let asked = null; // (an option that would leave the replay: asked again)

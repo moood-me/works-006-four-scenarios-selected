@@ -166,6 +166,7 @@ async function step(c, s, state, where) {
   };
   g.scene = (f, o = {}, x) => {
     folder = f;
+    if (x?.beds !== undefined) declared(x.beds, `g.scene “${f}” beds`);
     if (!Object.values(FOLDERS).includes(f)) miss(`${where}: g.scene “${f}” — not one of SCENES`);
     for (const id of o.here ?? []) person(f, id, where);
     for (const id of Object.keys(o.moods ?? {})) person(f, id, where);
@@ -197,9 +198,16 @@ async function step(c, s, state, where) {
   };
   g.here = (id, on) => { person(folder, id, where); if (on) present.add(id); else present.delete(id); return here(id, on); };
   g.mood = (id, m) => { person(folder, id, where); return mood(id, m); };
-  g.beds = (levels, seconds) => {
-    for (const name of Object.keys(levels ?? {})) if (!BED_NAMES.includes(name)) miss(`${where}: g.beds — no bed “${name}” in sound.js`);
-    return beds(levels, seconds);
+  // the beds of a background the step declares (g.beds, g.scene's beds): {bed: level} of the beds sound.js has, and
+  // nothing more — the page times it (no seconds)
+  const declared = (levels, as) => {
+    if (!levels || typeof levels !== 'object' || Array.isArray(levels)) { miss(`${where}: ${as}: not {bed: level}`); return; }
+    for (const name in levels) if (!BED_NAMES.includes(name)) miss(`${where}: ${as}: no bed “${name}” in sound.js`);
+  };
+  g.beds = (levels, ...more) => {
+    declared(levels, 'g.beds');
+    if (more.length) miss(`${where}: g.beds: seconds — the page times the background`);
+    return beds(levels);
   };
   g.set = (k, v) => {
     if (k === 'beat_next') { if (cur) cur.next = v; }

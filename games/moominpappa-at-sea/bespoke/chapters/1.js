@@ -17,10 +17,9 @@ export default {
   steps: [
     // 1.1–1.2: the sea at night, the eyes behind the stern; the tiller
     async g => {
-      g.beds({ sea: 0.45, gale: 0.25 });
       const star = g.told('night:star');
       await g.scene(SCENES.sea, { beat: 'night', here: ['papa', 'mama', 'troll', 'my', 'groke'], moods: { papa: 'smile', mama: 'tired', troll: 'afraid' },
-        keys: { ...moon(22), calm: 0.8 } });
+        keys: { ...moon(22), calm: 0.8 } }, { beds: { sea: 0.45, gale: 0.25 } });
       const night = g.beat('night');
       await star;
       await g.say('papa', 'We steer by that star. The captain knows the way');
@@ -30,10 +29,9 @@ export default {
     },
     // 1.3: ⚑ the lantern in the boat
     async g => {
-      g.beds({ sea: 0.45, gale: 0.2 });
       const strip = g.told('glance:strip');
       await g.scene(SCENES.sea, { beat: 'glance', here: ['papa', 'mama', 'troll', 'my', 'groke'], moods: { papa: 'neutral', mama: 'tired', troll: 'afraid' },
-        keys: { ...moon(22), calm: 0.8 } }, { cut: true });
+        keys: { ...moon(22), calm: 0.8 } }, { cut: true, beds: { sea: 0.45, gale: 0.2 } });
       const glance = g.beat('glance');
       await strip;
       await g.say('papa', 'The moon’s path. Pretty');
@@ -67,10 +65,9 @@ export default {
     // 1.4: the island at dawn, the key under the arrow
     async g => {
       const { boat } = g.state.choices;
-      g.beds({ sea: 0.5, wind: 0.2 });
       const door = g.told('arrive:door'), arrow = g.told('arrive:arrow');
       await g.scene(SCENES.landing, { beat: 'arrive', here: ['papa', 'mama', 'troll', 'my'], moods: { papa: 'smile', mama: 'tired', troll: 'thinking' },
-        keys: { ...land(23, 'dawn'), frost_patch: boat === 'keep' } }, { cut: boat === 'hold' });
+        keys: { ...land(23, 'dawn'), frost_patch: boat === 'keep' } }, { cut: boat === 'hold', beds: { sea: 0.5, wind: 0.2 } });
       g.title(tr('23 August'));
       const arrive = g.beat('arrive');
       await door;
@@ -89,9 +86,8 @@ export default {
     },
     // 1.5: inside; the can on the shelf; the keeper's wall
     async g => {
-      g.beds({ sea_in: 0.4, wind: 0.12 });
       await g.scene(SCENES.room, { beat: 'can_in', here: ['papa', 'mama', 'my', 'troll'], moods: { papa: 'smile', mama: 'neutral', my: 'smile', troll: 'thinking' },
-        keys: { ...isle(23, 'day'), garden: -1, sill: -1, log: 0, flame: 'out' } });
+        keys: { ...isle(23, 'day'), garden: -1, sill: -1, log: 0, flame: 'out' } }, { beds: { sea_in: 0.4, wind: 0.12 } });
       await g.beat('can_in');
       await g.play(can);
       g.gauge('paraffin');
@@ -118,9 +114,8 @@ export default {
     },
     // 1.6–1.7: the cape; ⚑ the Fisherman
     async g => {
-      g.beds({ sea: 0.55, wind: 0.25 });
       await g.scene(SCENES.cape, { beat: 'approach', here: ['fisher', 'papa', 'mama'], moods: { papa: 'smile', fisher: 'neutral', mama: 'tired' },
-        keys: land(23, 'day') });
+        keys: land(23, 'day') }, { beds: { sea: 0.55, wind: 0.25 } });
       await g.beat('approach');
       const fisher = await g.choose('fisher', { 'fisher#chest': [
         { id: 'keeper', label: tr('“We are the new keepers. If anything happens — you know where to find us.”') },
