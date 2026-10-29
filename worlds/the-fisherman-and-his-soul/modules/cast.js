@@ -10,10 +10,11 @@ const FLAME = [1, 0.84, 0.52, 2];
 const HOOP = [0.55, 0.38, 0.24, 1];
 const SKIN = [0.88, 0.8, 0.66, 1];
 const BRASS = [0.78, 0.64, 0.36, 1];
+const GLASS_OUT = [0.36, 0.34, 0.3, 1];
 // the Fisherman's lantern hanging from a hand by its bail, swinging a little late as the hand moves: a dark iron cap and
 // foot, the glass between them glowing (tone 2); the flame is the person's point `flame` — the scene's light shines
 // from it ("at": "<id>#flame")
-function lantern(F, hand) {
+function lantern(F, hand, glass = FLAME) {
   const { add, sub, mul, dot, cross, unit } = V();
   const m = F.fit.h;
   const h = F.P(hand);
@@ -23,7 +24,7 @@ function lantern(F, hand) {
   const axes = [cross(up, fwd), up, fwd];
   F.bar(add(mid, mul(up, 0.1 * m)), h, 0.005 * m, 0.005 * m, [[0, IRON]], 5, fwd);
   F.ball(add(mid, mul(up, 0.085 * m)), axes, [0.05 * m, 0.022 * m, 0.05 * m], IRON, 8, 2.4);
-  F.ball(mid, axes, [0.04 * m, 0.065 * m, 0.04 * m], FLAME, 8, 2.4);
+  F.ball(mid, axes, [0.04 * m, 0.065 * m, 0.04 * m], glass, 8, 2.4);
   F.ball(add(mid, mul(up, -0.072 * m)), axes, [0.048 * m, 0.012 * m, 0.048 * m], IRON, 8, 2.4);
   F.point('flame', mid);
 }
@@ -300,6 +301,7 @@ return {
     },
     parts: {
       lantern: { name: 'lantern', draw: F => lantern(F, 'RightHand') },
+      lantern_out: { name: 'lantern, put out', draw: F => lantern(F, 'RightHand', GLASS_OUT) },
       tambourine: { name: 'tambourine', draw: F => tambourine(F) },
       tail: { name: 'tail', draw: F => tail(F) },
       knife: { name: 'knife', draw: F => knife(F, STEEL) },

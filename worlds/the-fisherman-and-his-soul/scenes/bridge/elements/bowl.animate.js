@@ -1,4 +1,5 @@
 // the bowl rocks a moment each time a copper is knocked out of it (`copper` counted up), settling
+if (e.state.beggar_here === false) return;
 const m = e.mem;
 const n = e.state.copper ?? 0;
 if (m.n == null) m.n = n;

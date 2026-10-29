@@ -40,7 +40,8 @@ the water's glow), a fine line, a simple face (eyes, brows, a mouth) that reads 
 ## Things (the cast's parts: `<id>_with`)
 
 - `lantern` — the Fisherman's lantern hanging from the right hand by its bail, swinging a little late; its glass glows,
-  its flame is the person's point `#flame` (the scene's light: `"at": "<id>#flame"`).
+  its flame is the person's point `#flame` (the scene's light: `"at": "<id>#flame"`). `lantern_out` — the same lantern put
+  out: its glass dark (the scene's light at it off).
 - `tambourine` — a tambourine lying on the lap between the hands, a little above the dress (for sitting); point
   `#tambourine`.
 - `tail` — the Mermaid's tail over her legs: a silver-green tube from the hips down to the ankles and a wide flat fluke
