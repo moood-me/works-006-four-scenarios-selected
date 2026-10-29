@@ -35,3 +35,5 @@ scene.on('change', 'round_angle', dancing);
 scene.on('move', 'stumble', dancing);
 scene.on('change', 'stumble', dancing);
 if (scene.get('round')) start();
+// The pieces (lib.film, played by `beat` through the world's `beats`)
+scene.kit.beats.play(scene, L.film(scene));
