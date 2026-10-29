@@ -1,0 +1,13 @@
+{"strings": [
+  {"text":"27 August. Wind north. Today I am forty. Nobody knows.","translation":"27 de agosto. Vento norte. Hoje faço quarenta anos. Ninguém sabe.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Ate bread. Whose, I don't know.","translation":"Comi pão. De quem, não sei.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Calm. The sea is good today.","translation":"Calmaria. O mar está bom hoje.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Ice on the steps. Wind north.","translation":"Gelo nos degraus. Vento norte.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Fog. Heard a ship. It did not come.","translation":"Neblina. Ouvi um navio. Não veio.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Wind south-west. Nobody again.","translation":"Vento sudoeste. Ninguém outra vez.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"23 August. Arrived.","translation":"23 de agosto. Chegamos.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Depth: more than the rope.","translation":"Profundidade: mais que a corda.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"27 August. Calm.","translation":"27 de agosto. Calmaria.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"The Round Room","translation":"A sala redonda","where":"worlds/moominpappa-at-sea/scenes/round-room/scene.json title"},
+  {"text":"The round room at the foot of the lighthouse.","translation":"A sala redonda, ao pé do farol.","where":"worlds/moominpappa-at-sea/scenes/round-room/scene.json caption"}
+]}
