@@ -24,6 +24,7 @@
     "looks": {
       "morning": {
         "ambient": 0.88,
+        "inside": 0.85,
         "ambientColor": "#e8e4dc",
         "haze": 0.05,
         "hazeColor": "#b7c2d2",

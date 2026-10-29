@@ -9,10 +9,20 @@ for (let i = 0; i < 8; i++) {
   g.lineTo(0.12, -0.03 - 0.09 * e.anim.hash(i, 1));
   g.stroke();
 }
-g.fillStyle = '#fbfaf4';
+g.strokeStyle = '#9a968a';
+g.lineWidth = 0.005;
 for (let i = 0; i < 8; i++) {
+  const x = 0.14 + 0.08 * e.anim.hash(i, 2);
+  const y = -0.03 - 0.09 * e.anim.hash(i, 1);
+  const r = 0.03 + 0.012 * e.anim.hash(i, 3);
+  g.fillStyle = '#fdfcf6';
   g.beginPath();
-  g.arc(0.14 + 0.08 * e.anim.hash(i, 2), -0.03 - 0.09 * e.anim.hash(i, 1), 0.03 + 0.012 * e.anim.hash(i, 3), 0, Math.PI * 2);
+  g.arc(x, y, r, 0, Math.PI * 2);
+  g.fill();
+  g.stroke();
+  g.fillStyle = '#e2b43a';
+  g.beginPath();
+  g.arc(x, y, r * 0.32, 0, Math.PI * 2);
   g.fill();
 }
 e.at(0.1, -0.06, 'flowers');
