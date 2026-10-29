@@ -84,10 +84,12 @@ function film(scene) {
   const HOME = { ...at('potter', 'door'), potter_reach: { l: 'daughter#hand_r' }, daughter_reach: { r: 'potter#hand_l' }, daughter_a: 2.15, daughter_d: 7.0 };
   // on the bridge: its road at 12 m out (the middle at −11.6, the head at −0.8)
   const ROAD_FAR = [-20, 12.0];
-  // the camera standing on the bridge's road (the operator would stand under it: the road is no floor to it — the eye
-  // over the river, raised to the road): looking along it toward the far bank, the middle ahead; and down at the bowl
-  const ON_ROAD = { ...P.CAM0, camera_x: -5.2, camera_z: 12.0, camera_yaw: 270, camera_h: 1.9 };
-  const AT_BOWL = { ...P.CAM0, camera_x: -7.4, camera_z: 12.7, camera_yaw: 268, camera_h: 1.5, camera_look: 0.18 };
+  // the beggar's piece is filmed from the camera's own place on the bridge's road (a `walk` scene's operator films from
+  // the viewer's side: the Fisherman facing the far parapet would be his back, the bowl hidden behind him): looking
+  // along the road toward the far bank, the middle ahead; and down at the bowl. Heights over the road (the `deck` walk
+  // plane is the floor under the eye)
+  const ON_ROAD = { ...P.CAM0, camera_x: -5.2, camera_z: 12.0, camera_yaw: 270, camera_h: -0.1 };
+  const AT_BOWL = { ...P.CAM0, camera_x: -7.4, camera_z: 12.7, camera_yaw: 268, camera_h: -0.5, camera_look: 0.18 };
   const film = {
     // ── Prologue: the morning market ──
     market: {
