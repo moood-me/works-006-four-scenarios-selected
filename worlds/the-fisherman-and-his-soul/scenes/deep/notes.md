@@ -15,8 +15,8 @@ fish, the bubbles, the motes, the net of light on the surface and their breath.
   at the eye's level (`hazeColor` `#4fb3b6`, so the far sand fades into it). Its shader (`sky.wgsl`) lays a wavering
   net of light over the surface and the warm glow of `far_light`; `sky.animate.js` gives it `dusk` and where the glow
   is. Its painting reads `dusk` (painted again when it is set).
-- The light: `sun` — far, ahead a little right, high (`from` [20, 70]: the shafts read looking toward it), coming in only `through` seven
-  pools of the surface at 7 m (flat polygons): the shafts in the haze (`shafts` 4) and the bright patches on the sand.
+- The light: `sun` — far, behind the viewer on the right, high (`from` [160, 72]: their faces lit), coming in only `through` seven
+  pools of the surface at 7 m (flat polygons): the shafts in the haze (`shafts` 3) and the bright patches on the sand.
   The first pool is placed so that its patch falls on the two of them; the rest over the weed, the stone, far out.
   `ambient` 0.78 turquoise keeps everything outside the patches bright.
 - `rock` — the stone's foot (a form of its own, not С2's: 9 m of it, up past the top of the view) at (3.2, 9); its

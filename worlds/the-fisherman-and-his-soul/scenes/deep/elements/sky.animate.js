@@ -1,4 +1,4 @@
-// the shader's numbers from the state: the dusk's dimming; the lantern far above going from the left of the middle to
+// the shader's numbers from the state: the dusk's dimming; the lantern far above going from the left to
 // the right (over the open water left of the stone) as `far_light` goes 0 → 1, coming in at its start and fading out at its end
 const s = e.state;
 const k = s.far_light ?? 0;
