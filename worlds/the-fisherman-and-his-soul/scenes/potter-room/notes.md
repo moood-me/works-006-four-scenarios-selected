@@ -49,7 +49,13 @@ the mini-game's mark is `fisherman#cup`, the cast part's point.
   (its fire hidden), the walls' patches painted past their boxes, the potter's back to us. Mended: the hearth in the
   back wall, the bench by it under the shelf, the plaster clipped and quieter, the ceiling lighter, a lamp on the shelf
   (faces by the shelf lit), the potter turned to the room. Second render: as meant — warm, the faces read.
-- `measure_scene`: see below (once, as a new scene).
+- `measure_scene` (once, as a new scene; `c867840`, T4): desktop / laptop / phone fail 3 / 3 / 3 of 17. The scene
+  thread's GC (2.25 ms against 2) and allocation a frame (25–29 KB against 1 KB) — the engine's own modules
+  (people/player.js, people/cloth.js, render/sky.js…; the scene's own code 27 bytes a frame), as in the other scenes; the
+  laptop's frames p95 16.8 against 16.7 (one display period); the desktop's soft run in the zoom 1.45 s (by motion: 235
+  pages first wanted in a second against the 120 its one painter gives — the wheel walking in toward the walls). Mended:
+  the viewer walks in at most 1.0 m (was 1.6) — less of the room's walls and floor asked finer at once. Not measured
+  again (one measuring a new scene, tonight's load).
 
 ## Contract for the check
 
