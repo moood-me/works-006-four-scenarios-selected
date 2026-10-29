@@ -269,7 +269,7 @@ export default async function (b) {
     const title = tr('Finale');
     if (kept.chapter < END) return { number: title, title, kind: 'future', rows: [], go: null };
     const f = facts(kept);
-    return { number: '', title, kind: 'end', rows: [{ title: f.form === 'late' ? tr('decided late') : tr('in full'), weight: '⚑',
+    return { number: '', title, kind: 'end', rows: [{ title: f.form === 'late' ? tr('decided late') : tr('decided in time'), weight: '⚑',
       options: ENDINGS.map(e => ({ label: e.label, state: e.id === f.ending ? 'chosen' : 'open' })) }], go: null };
   }
 }
