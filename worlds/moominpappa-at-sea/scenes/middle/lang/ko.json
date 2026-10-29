@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Middle of the Island","translation":"섬 한가운데","where":"worlds/moominpappa-at-sea/scenes/middle/scene.json title"},
+  {"text":"Among the pines, a clearing, and a pool so black it seems to have no bottom.","translation":"소나무들 사이의 빈터, 그리고 바닥이 없는 것처럼 보일 만큼 새까만 웅덩이.","where":"worlds/moominpappa-at-sea/scenes/middle/scene.json caption"}
+]}

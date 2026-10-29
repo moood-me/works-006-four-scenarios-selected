@@ -1,0 +1,8 @@
+{"strings": [
+  {"text":"The Burner","translation":"버너","where":"worlds/moominpappa-at-sea/scenes/lantern-room/elements/sheets.js"},
+  {"text":"The Pot","translation":"냄비","where":"worlds/moominpappa-at-sea/scenes/lantern-room/elements/sheets.js"},
+  {"text":"In a wind, warm the burner with paraffin till the flame goes blue. Do not let go before.","translation":"바람이 불 때는 불꽃이 파래질 때까지 등유으로 버너를 데울 것. 그 전에 손을 떼지 말 것.","where":"worlds/moominpappa-at-sea/scenes/lantern-room/elements/soot.js"},
+  {"text":"The oil is thick: warm it in a pot on the stove, carry it up wrapped. On a still evening warm oil runs by itself; in a wind, only with paraffin.","translation":"기름이 걸쭉하다: 난로 위 냄비에 데워서 싸매어 들고 올라갈 것. 바람 없는 저녁에는 데운 기름이 저절로 흐르고, 바람이 불 때는 등유이 있어야만 흐른다.","where":"worlds/moominpappa-at-sea/scenes/lantern-room/elements/soot.js"},
+  {"text":"The Lantern Room","translation":"등롱실","where":"worlds/moominpappa-at-sea/scenes/lantern-room/scene.json title"},
+  {"text":"The lantern room at the top of the lighthouse.","translation":"등대 꼭대기의 등롱실.","where":"worlds/moominpappa-at-sea/scenes/lantern-room/scene.json caption"}
+]}

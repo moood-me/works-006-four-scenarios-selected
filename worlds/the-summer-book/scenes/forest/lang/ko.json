@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Magic Forest","translation":"마법의 숲","where":"worlds/the-summer-book/scenes/forest/scene.json title"},
+  {"text":"The island's crown: moss, grey stone and dead trees twisted by the wind.","translation":"섬의 꼭대기: 이끼, 회색 바위, 그리고 바람에 비틀린 죽은 나무들.","where":"worlds/the-summer-book/scenes/forest/scene.json caption"}
+]}

@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Fisherman's Cape","translation":"어부의 곶","where":"worlds/moominpappa-at-sea/scenes/cape/scene.json title"},
+  {"text":"The Fisherman sits with his net, his side to the lighthouse. Papa sits down beside him and says nothing.","translation":"어부가 그물을 들고 등대 쪽으로 옆모습을 보인 채 앉아 있다. 무민파파가 그 곁에 앉아 아무 말도 하지 않는다.","where":"worlds/moominpappa-at-sea/scenes/cape/scene.json caption"}
+]}

@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Stone","translation":"바위","where":"worlds/the-fisherman-and-his-soul/scenes/stone/scene.json title"},
+  {"text":"The stone in the middle of the bay, in the moonlight.","translation":"달빛 속, 만 한가운데의 바위.","where":"worlds/the-fisherman-and-his-soul/scenes/stone/scene.json caption"}
+]}

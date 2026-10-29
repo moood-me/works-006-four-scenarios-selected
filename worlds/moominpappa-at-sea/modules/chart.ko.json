@@ -1,0 +1,8 @@
+{"strings": [
+  {"text":"Moominvalley","translation":"무민 골짜기","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"N","context":"the compass rose: north","translation":"북","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"The Open Sea","translation":"먼바다","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"Lighthouse","translation":"등대","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"The Lighthouse Island","translation":"등대섬","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"Chart of the Gulf","translation":"만의 해도","where":"worlds/moominpappa-at-sea/modules/chart.js"}
+]}

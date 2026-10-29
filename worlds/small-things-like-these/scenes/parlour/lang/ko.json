@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Mother Superior's Parlour","translation":"수녀원장의 응접실","where":"worlds/small-things-like-these/scenes/parlour/scene.json title"},
+  {"text":"Sunday, before light. In the parlour the laundry cannot be heard.","translation":"일요일, 아직 어둡다. 응접실에서는 세탁소 소리가 들리지 않는다.","where":"worlds/small-things-like-these/scenes/parlour/scene.json caption"}
+]}
