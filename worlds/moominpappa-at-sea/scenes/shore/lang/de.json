@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Beach","translation":"Der Strand","where":"worlds/moominpappa-at-sea/scenes/shore/scene.json title"},
+  {"text":"The sand by the water. At night the Groke comes here and sits facing the lights.","translation":"Der Sand am Wasser. Nachts kommt die Morra hierher und setzt sich mit dem Gesicht zu den Lichtern.","where":"worlds/moominpappa-at-sea/scenes/shore/scene.json caption"}
+]}
