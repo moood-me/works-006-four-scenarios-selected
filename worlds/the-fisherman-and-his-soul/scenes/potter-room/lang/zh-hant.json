@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Potter's Room","translation":"陶匠的屋子","where":"worlds/the-fisherman-and-his-soul/scenes/potter-room/scene.json title"},
+  {"text":"The potter's low room by the bridge. The hearth, the shelf with the silver cup.","translation":"橋邊陶匠低矮的屋子。爐火，擺著銀杯的架子。","where":"worlds/the-fisherman-and-his-soul/scenes/potter-room/scene.json caption"}
+]}
