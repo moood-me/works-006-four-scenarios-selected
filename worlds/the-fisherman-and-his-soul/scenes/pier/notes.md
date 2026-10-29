@@ -84,7 +84,11 @@ lantern's dark glass).
   with her.
 - The shore at morning with the hut, the widow and her children, the mound, the wave at 0.6: the ground was painted
   upside down (the field by the water) — mended; the far hills put farther; the boat moved behind the hut (it filled the
-  foreground). Not rendered again after these (few renders tonight): the next look at the shore is the pieces'.
+  foreground). Rendered again: the shore right — sand, the bank and the field, the hut, the rail with the net, the
+  bundle, the far hills small. But the sea's far cards (`far_shore`, `far_ridge`) stood huge over the land: a card with
+  no `facing` is turned to the eye — a kilometre-wide card turned to an eye looking back swings into its view. They and
+  the other far cards (`town`, `mist`, `mist_near`, `far_lamp`) now say `"facing": 180` (what they were turned to from
+  the start anyway): checked in a render — gone from the shore's view, the sea's view as before.
 
 ## Wanted from the engine / not here
 
