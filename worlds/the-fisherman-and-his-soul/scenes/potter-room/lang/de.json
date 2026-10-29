@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Potter's Room","translation":"Die Stube des Töpfers","where":"worlds/the-fisherman-and-his-soul/scenes/potter-room/scene.json title"},
+  {"text":"The potter's low room by the bridge. The hearth, the shelf with the silver cup.","translation":"Die niedrige Stube des Töpfers an der Brücke. Der Herd, das Bord mit dem silbernen Becher.","where":"worlds/the-fisherman-and-his-soul/scenes/potter-room/scene.json caption"}
+]}
