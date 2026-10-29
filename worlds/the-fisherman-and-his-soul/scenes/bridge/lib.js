@@ -86,8 +86,8 @@ function film(scene) {
   const ROAD_FAR = [-20, 12.0];
   // the beggar's piece is filmed from the camera's own place on the bridge's road (a `walk` scene's operator films from
   // the viewer's side: the Fisherman facing the far parapet would be his back, the bowl hidden behind him): looking
-  // along the road toward the far bank, the middle ahead; and down at the bowl. Heights as over the land (the eye is no
-  // longer dropped to the river under the road)
+  // along the road toward the far bank, the middle ahead; and down at the bowl. Heights over the road (the `deck` walk
+  // plane is the floor under the eye)
   const ON_ROAD = { ...P.CAM0, camera_x: -5.2, camera_z: 12.0, camera_yaw: 270, camera_h: -0.1 };
   const AT_BOWL = { ...P.CAM0, camera_x: -7.4, camera_z: 12.7, camera_yaw: 268, camera_h: -0.5, camera_look: 0.18 };
   const film = {
