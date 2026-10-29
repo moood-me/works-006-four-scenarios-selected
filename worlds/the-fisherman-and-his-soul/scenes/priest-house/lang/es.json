@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Priest's House","translation":"La casa del Sacerdote","where":"worlds/the-fisherman-and-his-soul/scenes/priest-house/scene.json title"},
+  {"text":"A white room on the hill. Candles on the altar, the door open on the night.","translation":"Una habitación blanca en la colina. Velas en el altar, la puerta abierta a la noche.","where":"worlds/the-fisherman-and-his-soul/scenes/priest-house/scene.json caption"}
+]}
