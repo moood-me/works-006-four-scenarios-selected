@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Fisherman's Cape","translation":"El cabo del Pescador","where":"worlds/moominpappa-at-sea/scenes/cape/scene.json title"},
+  {"text":"The Fisherman sits with his net, his side to the lighthouse. Papa sits down beside him and says nothing.","translation":"El Pescador está sentado con su red, de lado al faro. Papá se sienta junto a él y no dice nada.","where":"worlds/moominpappa-at-sea/scenes/cape/scene.json caption"}
+]}
