@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Pier","translation":"El embarcadero","where":"worlds/the-fisherman-and-his-soul/scenes/pier/scene.json title"},
+  {"text":"The moon over the bay. The pier, the stone in the water.","translation":"La luna sobre la bahía. El embarcadero, la piedra en el agua.","where":"worlds/the-fisherman-and-his-soul/scenes/pier/scene.json caption"}
+]}
