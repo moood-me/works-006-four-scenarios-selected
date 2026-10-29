@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The House","translation":"La casa","where":"worlds/the-summer-book/scenes/house/scene.json title"},
+  {"text":"Morning on the glazed veranda; the sea in every pane.","translation":"Mañana en la veranda acristalada; el mar en cada cristal.","where":"worlds/the-summer-book/scenes/house/scene.json caption"}
+]}

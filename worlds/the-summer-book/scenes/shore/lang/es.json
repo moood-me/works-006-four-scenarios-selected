@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Shore by the House","translation":"La orilla junto a la casa","where":"worlds/the-summer-book/scenes/shore/scene.json title"},
+  {"text":"June on the island. The sea lies still as glass.","translation":"Junio en la isla. El mar está quieto como un cristal.","where":"worlds/the-summer-book/scenes/shore/scene.json caption"}
+]}
