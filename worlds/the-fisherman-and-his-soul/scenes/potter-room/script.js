@@ -10,6 +10,7 @@ scene.on('move', 'door', door);
 door();
 const [A, B] = L.CARRY;
 const carry = () => {
+  if (scene.get('cup_at') !== 'hand') return;
   const u = Math.min(1, Math.max(0, Number(scene.get('carry')) || 0));
   scene.set('fisherman_a', A[0] + (B[0] - A[0]) * u);
   scene.set('fisherman_d', A[1] + (B[1] - A[1]) * u);
@@ -30,3 +31,5 @@ scene.on('change', 'carry', carry);
 scene.on('move', 'cup_tilt', hand);
 scene.on('change', 'cup_tilt', hand);
 scene.on('change', 'cup_at', v => { if (v === 'shelf') scene.set('fisherman_reach', null); });
+// The pieces (lib.film, played by `beat` through the world's `beats`)
+scene.kit.beats.play(scene, L.film(scene));
