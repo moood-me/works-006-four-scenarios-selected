@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Mother Superior's Parlour","translation":"El recibidor de la madre superiora","where":"worlds/small-things-like-these/scenes/parlour/scene.json title"},
+  {"text":"Sunday, before light. In the parlour the laundry cannot be heard.","translation":"Domingo, antes del alba. En el recibidor no se oye la lavandería.","where":"worlds/small-things-like-these/scenes/parlour/scene.json caption"}
+]}

@@ -1,0 +1,8 @@
+{"strings": [
+  {"text":"The house","translation":"La casa","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The magic forest","translation":"El bosque mágico","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The new house","translation":"La casa nueva","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The cape","translation":"El cabo","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The Island","translation":"La isla","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The Map","translation":"El mapa","where":"worlds/the-summer-book/scenes/map/scene.json title"}
+]}
