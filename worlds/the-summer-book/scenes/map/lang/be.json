@@ -1,0 +1,8 @@
+{"strings": [
+  {"text":"The house","translation":"Дом","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The magic forest","translation":"Чароўны лес","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The new house","translation":"Чужы дом","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The cape","translation":"Мыс","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The Island","translation":"Востраў","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The Map","translation":"Карта","where":"worlds/the-summer-book/scenes/map/scene.json title"}
+]}
