@@ -13,7 +13,11 @@
     ]
   },
   "modules": [
-    "cast"
+    "cast",
+    "hours",
+    "places",
+    "pieces",
+    "beats"
   ],
   "light": {
     "ambient": 0.62,
@@ -30,7 +34,62 @@
       1,
       0.2,
       0.35
-    ]
+    ],
+    "looks": {
+      "dusk": {
+        "ambient": 0.74,
+        "ambientColor": "#c4a8b8",
+        "haze": 0.14,
+        "hazeColor": "#6e5a7c",
+        "shafts": 0.3,
+        "lights": {
+          "moon": 0
+        }
+      },
+      "dawn": {
+        "ambient": 0.9,
+        "ambientColor": "#dde1ea",
+        "haze": 0.22,
+        "hazeColor": "#b0b8c8",
+        "hazeGlow": 0.6,
+        "shafts": 0.25,
+        "lights": {
+          "moon": 0.15
+        }
+      },
+      "day": {
+        "ambient": 1.0,
+        "ambientColor": "#f2eee4",
+        "haze": 0.1,
+        "hazeColor": "#b8c8d8",
+        "hazeGlow": 0.3,
+        "shafts": 0.12,
+        "lights": {
+          "moon": 0,
+          "lantern": 0.35
+        }
+      },
+      "mist": {
+        "haze": 0.55,
+        "hazeColor": "#c4ccd8",
+        "hazeGlow": 1.0,
+        "shafts": 0.4
+      },
+      "wave": {
+        "ambient": 0.68,
+        "ambientColor": "#9aa6ae",
+        "haze": 0.3,
+        "hazeColor": "#3c4a50",
+        "saturation": 0.8,
+        "tint": "#3a5050",
+        "tintStrength": 0.12,
+        "wind": [
+          1,
+          0.3,
+          1.2
+        ]
+      }
+    }
   },
   "lights": [
     {
@@ -46,7 +105,65 @@
       "strength": 1.6,
       "reach": 7,
       "flicker": 0.12,
-      "glow": 0.35
+      "glow": 0.35,
+      "on": "lantern_lit"
+    },
+    {
+      "id": "lantern_low",
+      "of": "lantern_boards#flame",
+      "on": "lantern_lit",
+      "color": "#ffc27a",
+      "strength": 1.4,
+      "reach": 6,
+      "flicker": 0.12,
+      "glow": 0.3
+    },
+    {
+      "id": "lantern_f",
+      "at": "fisherman#flame",
+      "on": "lantern_lit",
+      "color": "#ffbf72",
+      "strength": 1.6,
+      "reach": 6,
+      "flicker": 0.12,
+      "glow": 0.3
+    },
+    {
+      "id": "lantern_s",
+      "at": "soul#flame",
+      "on": "lantern_lit",
+      "color": "#ffbf72",
+      "strength": 1.6,
+      "reach": 6,
+      "flicker": 0.12,
+      "glow": 0.3
+    },
+    {
+      "id": "moon_low",
+      "from": "sky#low",
+      "color": "#f6d8b0",
+      "strength": 0.8,
+      "on": "dusk"
+    },
+    {
+      "id": "sun_dawn",
+      "from": [
+        60,
+        5
+      ],
+      "color": "#ffe0bc",
+      "strength": 0.75,
+      "on": "dawn"
+    },
+    {
+      "id": "sun",
+      "from": [
+        -40,
+        50
+      ],
+      "color": "#fff1dc",
+      "strength": 1.0,
+      "on": "day"
     }
   ],
   "state": {
@@ -64,13 +181,134 @@
       0.2,
       3.6,
       3.5
-    ]
+    ],
+    "light": "night",
+    "dusk": 0,
+    "dawn": 0,
+    "day": 0,
+    "mist": 0,
+    "snow": false,
+    "snowfall": 0,
+    "view": "sea",
+    "camera_x": 0,
+    "camera_z": 0,
+    "camera_yaw": 0,
+    "lantern_at": "post",
+    "lantern_lit": 1,
+    "knife": "none",
+    "rust": false,
+    "net_rail": true,
+    "net_hole": 0,
+    "hut": "none",
+    "shawl": false,
+    "widow_boat": false,
+    "wave": 0,
+    "surge_d": 6.4,
+    "surge_e": -0.9,
+    "mound": false,
+    "linen": false,
+    "shells": false,
+    "under_light": 0,
+    "far_lantern": 0,
+    "cut": 0,
+    "cut_rough": false,
+    "bundle": false,
+    "drag": 0,
+    "bundle_a": 0.8,
+    "bundle_d": 1.0,
+    "soul_smoke": 0,
+    "fisherman_at": "end",
+    "fisherman_a": -0.15,
+    "fisherman_d": 4.75,
+    "fisherman_e": 0,
+    "fisherman_placed": "end",
+    "soul_at": "end",
+    "soul_a": -0.9,
+    "soul_d": 4.1,
+    "soul_e": 0,
+    "soul_placed": "end",
+    "mermaid_at": "pier",
+    "mermaid_a": 1.3,
+    "mermaid_d": 4.4,
+    "mermaid_e": 0.8,
+    "mermaid_placed": "pier",
+    "girl_here": false,
+    "girl_at": "feast",
+    "girl_placed": "feast",
+    "girl_a": -2.3,
+    "girl_d": 2.7,
+    "woman_a_here": false,
+    "woman_a_at": "feast",
+    "woman_a_placed": "feast",
+    "woman_a_a": -3.2,
+    "woman_a_d": 1.9,
+    "woman_b_here": false,
+    "woman_b_at": "feast",
+    "woman_b_placed": "feast",
+    "woman_b_a": -3.6,
+    "woman_b_d": 1.4,
+    "widow_here": false,
+    "widow_at": "boat",
+    "widow_placed": "boat",
+    "widow_a": -0.6,
+    "widow_d": -3.3,
+    "widow_girl_here": false,
+    "widow_girl_at": "boat",
+    "widow_girl_placed": "boat",
+    "widow_girl_a": -0.2,
+    "widow_girl_d": -3.8,
+    "widow_boy_here": false,
+    "widow_boy_at": "boat",
+    "widow_boy_placed": "boat",
+    "widow_boy_a": 0.25,
+    "widow_boy_d": -3.1,
+    "witch_here": false,
+    "witch_at": "shore",
+    "witch_placed": "shore",
+    "witch_a": 2.6,
+    "witch_d": 0.1,
+    "priest_here": false,
+    "priest_at": "shore",
+    "priest_placed": "shore",
+    "priest_a": 0.2,
+    "priest_d": -0.6,
+    "fin_a": 2.05,
+    "fin_d": 5.6,
+    "years": false,
+    "smell": false,
+    "hard": false,
+    "song": false,
+    "looked": true,
+    "thrown": false,
+    "boy": false,
+    "thief": false,
+    "children": false,
+    "apart": false,
+    "witch_way": "demanded",
+    "fish": 1,
+    "mermaid_with": [
+      "tail"
+    ],
+    "mermaid_wear": {
+      "barefoot": "both"
+    }
   },
   "objects": [
     {
       "id": "sky",
       "name": "Night sky and the moon",
-      "sky": true
+      "sky": true,
+      "uniforms": {
+        "dusk": 0,
+        "dawn": 0,
+        "day": 0
+      },
+      "box": [
+        -3.28,
+        -0.35,
+        3.0,
+        1.25
+      ]
     },
     {
       "id": "clouds",
@@ -89,7 +327,8 @@
         -62,
         920,
         4
-      ]
+      ],
+      "facing": 180
     },
     {
       "id": "far_shore",
@@ -103,7 +342,8 @@
         -40,
         480,
         4
-      ]
+      ],
+      "facing": 180
     },
     {
       "id": "town",
@@ -117,7 +357,8 @@
         -22,
         270,
         4
-      ]
+      ],
+      "facing": 180
     },
     {
       "id": "water",
@@ -133,7 +374,8 @@
         "fade": 0,
         "rough": 0.45,
         "ripple": 0.5
-      }
+      },
+      "water": true
     },
     {
       "id": "mist",
@@ -147,7 +389,185 @@
         -7,
         90,
         1
+      ],
+      "facing": 180
+    },
+    {
+      "id": "far_back",
+      "name": "Hills inland and the far shore",
+      "across": -1000,
+      "distance": -520,
+      "facing": 70,
+      "height": 40,
+      "box": [
+        -620,
+        -40,
+        620,
+        4
       ]
+    },
+    {
+      "id": "ground",
+      "name": "The shore: sand, the bank, the field",
+      "plane": true,
+      "drape": true,
+      "across": -10,
+      "distance": -21,
+      "width": 70,
+      "depth": 48
+    },
+    {
+      "id": "linen",
+      "name": "Linen bleaching on the field",
+      "plane": true,
+      "across": -4,
+      "distance": -16,
+      "elevation": 2.02,
+      "width": 8,
+      "depth": 5
+    },
+    {
+      "id": "shells",
+      "name": "Shells at the field's corner",
+      "plane": true,
+      "across": -4.2,
+      "distance": -11.9,
+      "elevation": 2.02,
+      "width": 1.4,
+      "depth": 0.8
+    },
+    {
+      "id": "mound",
+      "name": "A mound at the field's edge",
+      "across": -2.6,
+      "distance": -11.6,
+      "facing": 70,
+      "height": 0.5,
+      "box": [
+        -1.2,
+        -0.5,
+        1.2,
+        0.02
+      ],
+      "shadow": true
+    },
+    {
+      "id": "rail",
+      "name": "The rail with his net at the pier's root",
+      "across": -6.0,
+      "distance": -1.2,
+      "facing": 80,
+      "height": 1.4,
+      "box": [
+        -1.5,
+        -1.42,
+        1.5,
+        0.02
+      ],
+      "shadow": true
+    },
+    {
+      "id": "hut",
+      "name": "His hut of willow rods",
+      "across": 0.5,
+      "distance": -2.0,
+      "facing": 60,
+      "height": 1.9,
+      "box": [
+        -1.3,
+        -1.9,
+        2.0,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "boat_ashore",
+      "name": "The widow's boat drawn up",
+      "across": -1.6,
+      "distance": -4.4,
+      "facing": 61,
+      "height": 1.0,
+      "box": [
+        -2.3,
+        -1.0,
+        2.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "surge",
+      "name": "The sea coming over the sand",
+      "plane": true,
+      "across": -10,
+      "distance": 6.4,
+      "elevation": -0.9,
+      "width": 40,
+      "depth": 8,
+      "place": {
+        "distance": "surge_d",
+        "elevation": "surge_e"
+      }
+    },
+    {
+      "id": "bundle",
+      "name": "Her body wrapped in his net",
+      "across": 0.8,
+      "distance": 1.0,
+      "facing": 70,
+      "height": 0.55,
+      "box": [
+        -1.25,
+        -0.55,
+        1.0,
+        0.02
+      ],
+      "place": {
+        "across": "bundle_a",
+        "distance": "bundle_d"
+      }
+    },
+    {
+      "id": "under",
+      "name": "A pale light under the water by the stone",
+      "plane": true,
+      "glows": true,
+      "across": 2.0,
+      "distance": 5.5,
+      "elevation": -0.47,
+      "width": 2.4,
+      "depth": 2.4
+    },
+    {
+      "id": "far_lamp",
+      "name": "His lantern going to the town",
+      "across": 330,
+      "distance": 880,
+      "elevation": 1.92,
+      "height": 20,
+      "box": [
+        -170,
+        -30,
+        100,
+        4
+      ],
+      "facing": 180
+    },
+    {
+      "id": "mist_near",
+      "name": "Mist on the water near the pier",
+      "across": 0,
+      "distance": 14,
+      "elevation": 1.92,
+      "height": 4,
+      "box": [
+        -40,
+        -4,
+        40,
+        0.5
+      ],
+      "facing": 180
     },
     {
       "id": "rock",
@@ -175,7 +595,11 @@
         -0.78,
         0.38,
         0.06
-      ]
+      ],
+      "place": {
+        "across": "fin_a",
+        "distance": "fin_d"
+      }
     },
     {
       "id": "pier_deck",
@@ -253,6 +677,72 @@
       "shadow": true
     },
     {
+      "id": "lantern_boards",
+      "name": "His lantern on the boards",
+      "across": 0.42,
+      "distance": 4.3,
+      "elevation": 2.55,
+      "height": 0.4,
+      "box": [
+        -0.1,
+        -0.4,
+        0.1,
+        0.01
+      ]
+    },
+    {
+      "id": "knife_boards",
+      "name": "The knife on the boards",
+      "plane": true,
+      "across": 0.2,
+      "distance": 4.55,
+      "elevation": 0.155,
+      "width": 0.4,
+      "depth": 0.4
+    },
+    {
+      "id": "cutline",
+      "name": "The line of his shadow at his soles",
+      "plane": true,
+      "across": -0.15,
+      "distance": 4.75,
+      "elevation": 0.156,
+      "width": 0.6,
+      "depth": 0.6
+    },
+    {
+      "id": "snowfall_air",
+      "name": "Snow falling",
+      "particles": {
+        "kind": "snow",
+        "amount": "snowfall"
+      }
+    },
+    {
+      "id": "soul_smoke",
+      "name": "Smoke off the Soul's left hand",
+      "particles": {
+        "kind": "smoke",
+        "at": "soul#hand_l",
+        "amount": "soul_smoke",
+        "rate": 8,
+        "life": [
+          1.2,
+          2.2
+        ],
+        "speed": [
+          0.02,
+          0.08
+        ],
+        "color": "#c4c9d6",
+        "opacity": 0.55,
+        "size": [
+          0.04,
+          0.2
+        ]
+      }
+    },
+    {
       "id": "rings",
       "name": "Rings on the water",
       "plane": true,
@@ -260,7 +750,11 @@
       "distance": 4.4,
       "elevation": -0.47,
       "width": 1.6,
-      "depth": 1.6
+      "depth": 1.6,
+      "place": {
+        "across": "mermaid_a",
+        "distance": "mermaid_d"
+      }
     },
     {
       "id": "reeds",
@@ -295,7 +789,12 @@
         "turn": 150
       },
       "across": -0.15,
-      "distance": 4.75
+      "distance": 4.75,
+      "place": {
+        "across": "fisherman_a",
+        "distance": "fisherman_d",
+        "elevation": "fisherman_e"
+      }
     },
     {
       "id": "soul",
@@ -307,7 +806,12 @@
       },
       "across": -0.9,
       "distance": 4.1,
-      "shadow": false
+      "shadow": false,
+      "place": {
+        "across": "soul_a",
+        "distance": "soul_d",
+        "elevation": "soul_e"
+      }
     },
     {
       "id": "mermaid",
@@ -319,7 +823,638 @@
       },
       "across": 1.3,
       "distance": 4.4,
-      "elevation": 0.8
+      "place": {
+        "across": "mermaid_a",
+        "distance": "mermaid_d",
+        "elevation": "mermaid_e"
+      }
+    },
+    {
+      "id": "girl",
+      "name": "The girl who dances",
+      "person": {
+        "cast": "cast",
+        "who": "girl",
+        "turn": 120
+      },
+      "across": -2.3,
+      "distance": 2.7,
+      "place": {
+        "across": "girl_a",
+        "distance": "girl_d"
+      }
+    },
+    {
+      "id": "woman_a",
+      "name": "A woman of the village, in a kerchief",
+      "person": {
+        "cast": "cast",
+        "who": "woman_a",
+        "turn": 70
+      },
+      "across": -3.2,
+      "distance": 1.9,
+      "place": {
+        "across": "woman_a_a",
+        "distance": "woman_a_d"
+      }
+    },
+    {
+      "id": "woman_b",
+      "name": "A woman of the village, in brown",
+      "person": {
+        "cast": "cast",
+        "who": "woman_b",
+        "turn": 60
+      },
+      "across": -3.6,
+      "distance": 1.4,
+      "place": {
+        "across": "woman_b_a",
+        "distance": "woman_b_d"
+      }
+    },
+    {
+      "id": "widow",
+      "name": "The widow",
+      "person": {
+        "cast": "cast",
+        "who": "widow",
+        "turn": 250
+      },
+      "across": -0.6,
+      "distance": -3.3,
+      "place": {
+        "across": "widow_a",
+        "distance": "widow_d"
+      }
+    },
+    {
+      "id": "widow_girl",
+      "name": "The widow's daughter",
+      "person": {
+        "cast": "cast",
+        "who": "widow_girl",
+        "turn": 250
+      },
+      "across": -0.2,
+      "distance": -3.8,
+      "place": {
+        "across": "widow_girl_a",
+        "distance": "widow_girl_d"
+      }
+    },
+    {
+      "id": "widow_boy",
+      "name": "The widow's son",
+      "person": {
+        "cast": "cast",
+        "who": "widow_boy",
+        "turn": 250
+      },
+      "across": 0.25,
+      "distance": -3.1,
+      "place": {
+        "across": "widow_boy_a",
+        "distance": "widow_boy_d"
+      }
+    },
+    {
+      "id": "witch",
+      "name": "The Witch",
+      "person": {
+        "cast": "cast",
+        "who": "witch",
+        "turn": 270
+      },
+      "across": 2.6,
+      "distance": 0.1,
+      "place": {
+        "across": "witch_a",
+        "distance": "witch_d"
+      }
+    },
+    {
+      "id": "priest",
+      "name": "The Priest",
+      "person": {
+        "cast": "cast",
+        "who": "priest",
+        "turn": 80
+      },
+      "across": 0.2,
+      "distance": -0.6,
+      "place": {
+        "across": "priest_a",
+        "distance": "priest_d"
+      }
     }
-  ]
+  ],
+  "states": {
+    "light": {
+      "values": [
+        "night",
+        "dawn",
+        "noon",
+        "evening",
+        "morning"
+      ],
+      "means": "the hour (hours.md): night — the full moon high (the default); dawn — a misty dawn, a pale low sun; noon — a bright day (the feast, 1.3); evening — the moon rising low behind the pier's end (1.7); morning — a pale morning (its mist: `mist`). Sets dusk, dawn, day at once"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (hours.md): the evening's share, from `light`"
+    },
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (hours.md): the dawn's share, from `light`"
+    },
+    "day": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (hours.md): the day's share, from `light`"
+    },
+    "mist": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "mist on the water and the shore: 0 none … 1 thick (the near banks, the haze)"
+    },
+    "snow": {
+      "type": "boolean",
+      "means": "winter (4.3): snow on the boards and the sand, the water's edge frozen, snow falling"
+    },
+    "snowfall": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the scene's own: how much snow falls, set from snow"
+    },
+    "view": {
+      "values": [
+        "sea",
+        "shore"
+      ],
+      "means": "which way the scene looks: sea — out over the bay to the stone (the default, the scene's camera); shore — back along the beach toward the land: the water's edge, the hut, the widow's boat, the rail with his net at the pier's root, the bank and the field on its top (the game's place `shore`). Sets the camera's keys at once"
+    },
+    "lantern_at": {
+      "values": [
+        "post",
+        "boards",
+        "none"
+      ],
+      "means": "his lantern: post — hung on the hook, lit (the default); boards — standing on the boards by the post, lit (after 1.10); none — the hook empty: someone carries it (`<id>_with: [\"lantern\"]`)"
+    },
+    "lantern_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lantern's light wherever it is (on the hook, on the boards, in a hand): 1 lit … 0 out (2.2 the Soul puts it out; the cast's part `lantern_out` is its dark glass)"
+    },
+    "knife": {
+      "values": [
+        "none",
+        "post",
+        "boards",
+        "mound"
+      ],
+      "means": "the Witch's knife: none; post — driven into the lantern post at chest height, its green snakeskin handle out (point lantern_post#knife); boards — lying on the boards, thrown (М6's miss; point knife_boards#knife); mound — laid at the mound's head («Фонарь на мостках»)"
+    },
+    "rust": {
+      "type": "boolean",
+      "means": "the knife rusty (chapter 4 on)"
+    },
+    "net_rail": {
+      "type": "boolean",
+      "means": "his net hung on the rail at the pier's root (the default true)"
+    },
+    "net_hole": {
+      "values": [
+        0,
+        1,
+        2
+      ],
+      "means": "his net torn (the traces of М1, М8б): 0 whole; 1 torn at the edge; 2 torn wider — on the rail, round her (bundle)"
+    },
+    "hut": {
+      "values": [
+        "none",
+        "half",
+        "built",
+        "gone"
+      ],
+      "means": "the hut of willow rods by the water (chapter 4): none; half — its rods, half woven; built — whole and thatched; gone — strewn rods (the wave took it)"
+    },
+    "shawl": {
+      "type": "boolean",
+      "means": "the Witch's shawl and a loaf laid by the hut's door (4.4 «плясал»)"
+    },
+    "widow_boat": {
+      "type": "boolean",
+      "means": "the widow's husband's boat drawn up on the sand"
+    },
+    "wave": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the sea: 0 calm … 0.3 dark and coming (the light darkens, the wind up) … 1 the black wave over the sand to the hut, covering what lies there"
+    },
+    "surge_d": {
+      "type": "number",
+      "means": "the scene's own: where the wave's sheet is, set from wave"
+    },
+    "surge_e": {
+      "type": "number",
+      "means": "the scene's own: how high the wave's sheet is, set from wave"
+    },
+    "mound": {
+      "type": "boolean",
+      "means": "a fresh mound at the field's edge («Фонарь на мостках»; its head: point mound#head)"
+    },
+    "linen": {
+      "type": "boolean",
+      "means": "linen laid out to bleach on the field"
+    },
+    "shells": {
+      "type": "boolean",
+      "means": "shells laid at the field's corner — the unmarked graves"
+    },
+    "under_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "a pale light under the water by the stone, not rising (4.1)"
+    },
+    "far_lantern": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "his lantern far away going to the town: 0 none; 0+ on the shore road, 0.5 at the bridge's end, 1 at the hill's top, going over (2.7 «нет», «Два огня»)"
+    },
+    "cut": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the knife's cut along the edge of his shadow at his soles (М3, М6): 0 none … 1 drawn heel to toe, a thin line of light (points cutline#heel, cutline#toe)"
+    },
+    "cut_rough": {
+      "type": "boolean",
+      "means": "the cut uneven (М3's miss)"
+    },
+    "bundle": {
+      "type": "boolean",
+      "means": "her body wrapped in his net, lying on the sand (4.8; point bundle#rope at its landward end)"
+    },
+    "drag": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the bundle drawn from the water's edge (0) up the sand to the field's edge (1) (М8б)"
+    },
+    "bundle_a": {
+      "type": "number",
+      "means": "the scene's own: where the bundle lies, metres right, set from drag"
+    },
+    "bundle_d": {
+      "type": "number",
+      "means": "the scene's own: where the bundle lies, metres ahead, set from drag"
+    },
+    "soul_smoke": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the trace of the knife's miss (М3): smoke rising off the Soul's left hand (0 none, 1 — wherever the Soul is seen after 1.10)"
+    },
+    "fisherman_at": {
+      "values": [
+        "end",
+        "edge",
+        "level",
+        "shallows",
+        "post",
+        "under",
+        "hut",
+        "sand",
+        "field"
+      ],
+      "means": "where fisherman is (lib.PLACES, places.md; notes.md): set — put there at once"
+    },
+    "fisherman_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "fisherman_a": {
+      "type": "number",
+      "means": "the scene's own: where fisherman stands, metres right"
+    },
+    "fisherman_d": {
+      "type": "number",
+      "means": "the scene's own: where fisherman stands, metres ahead"
+    },
+    "soul_at": {
+      "values": [
+        "end",
+        "edge",
+        "walk",
+        "hut"
+      ],
+      "means": "where soul is (lib.PLACES, places.md; notes.md): set — put there at once"
+    },
+    "soul_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "soul_a": {
+      "type": "number",
+      "means": "the scene's own: where soul stands, metres right"
+    },
+    "soul_d": {
+      "type": "number",
+      "means": "the scene's own: where soul stands, metres ahead"
+    },
+    "mermaid_at": {
+      "values": [
+        "pier",
+        "stone",
+        "sand"
+      ],
+      "means": "where mermaid is (lib.PLACES, places.md; notes.md): set — put there at once"
+    },
+    "mermaid_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "mermaid_a": {
+      "type": "number",
+      "means": "the scene's own: where mermaid stands, metres right"
+    },
+    "mermaid_d": {
+      "type": "number",
+      "means": "the scene's own: where mermaid stands, metres ahead"
+    },
+    "girl_at": {
+      "values": [
+        "feast"
+      ],
+      "means": "where girl is (lib.PLACES, places.md; notes.md): set — put there at once"
+    },
+    "girl_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "girl_a": {
+      "type": "number",
+      "means": "the scene's own: where girl stands, metres right"
+    },
+    "girl_d": {
+      "type": "number",
+      "means": "the scene's own: where girl stands, metres ahead"
+    },
+    "woman_a_at": {
+      "values": [
+        "feast",
+        "shore"
+      ],
+      "means": "where woman_a is (lib.PLACES, places.md; notes.md): set — put there at once"
+    },
+    "woman_a_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "woman_a_a": {
+      "type": "number",
+      "means": "the scene's own: where woman_a stands, metres right"
+    },
+    "woman_a_d": {
+      "type": "number",
+      "means": "the scene's own: where woman_a stands, metres ahead"
+    },
+    "woman_b_at": {
+      "values": [
+        "feast",
+        "shore"
+      ],
+      "means": "where woman_b is (lib.PLACES, places.md; notes.md): set — put there at once"
+    },
+    "woman_b_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "woman_b_a": {
+      "type": "number",
+      "means": "the scene's own: where woman_b stands, metres right"
+    },
+    "woman_b_d": {
+      "type": "number",
+      "means": "the scene's own: where woman_b stands, metres ahead"
+    },
+    "widow_at": {
+      "values": [
+        "boat",
+        "sand",
+        "away"
+      ],
+      "means": "where widow is (lib.PLACES, places.md; notes.md): set — put there at once"
+    },
+    "widow_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "widow_a": {
+      "type": "number",
+      "means": "the scene's own: where widow stands, metres right"
+    },
+    "widow_d": {
+      "type": "number",
+      "means": "the scene's own: where widow stands, metres ahead"
+    },
+    "widow_girl_at": {
+      "values": [
+        "boat",
+        "field"
+      ],
+      "means": "where widow_girl is (lib.PLACES, places.md; notes.md): set — put there at once"
+    },
+    "widow_girl_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "widow_girl_a": {
+      "type": "number",
+      "means": "the scene's own: where widow_girl stands, metres right"
+    },
+    "widow_girl_d": {
+      "type": "number",
+      "means": "the scene's own: where widow_girl stands, metres ahead"
+    },
+    "widow_boy_at": {
+      "values": [
+        "boat",
+        "end",
+        "field"
+      ],
+      "means": "where widow_boy is (lib.PLACES, places.md; notes.md): set — put there at once"
+    },
+    "widow_boy_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "widow_boy_a": {
+      "type": "number",
+      "means": "the scene's own: where widow_boy stands, metres right"
+    },
+    "widow_boy_d": {
+      "type": "number",
+      "means": "the scene's own: where widow_boy stands, metres ahead"
+    },
+    "witch_at": {
+      "values": [
+        "shore",
+        "end"
+      ],
+      "means": "where witch is (lib.PLACES, places.md; notes.md): set — put there at once"
+    },
+    "witch_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "witch_a": {
+      "type": "number",
+      "means": "the scene's own: where witch stands, metres right"
+    },
+    "witch_d": {
+      "type": "number",
+      "means": "the scene's own: where witch stands, metres ahead"
+    },
+    "priest_at": {
+      "values": [
+        "shore",
+        "end",
+        "post",
+        "mound"
+      ],
+      "means": "where priest is (lib.PLACES, places.md; notes.md): set — put there at once"
+    },
+    "priest_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "priest_a": {
+      "type": "number",
+      "means": "the scene's own: where priest stands, metres right"
+    },
+    "priest_d": {
+      "type": "number",
+      "means": "the scene's own: where priest stands, metres ahead"
+    },
+    "fisherman_e": {
+      "type": "number",
+      "means": "the scene's own: how high over the bay's floor fisherman stands (in the water)"
+    },
+    "soul_e": {
+      "type": "number",
+      "means": "the scene's own: how high over the bay's floor soul stands (in the water)"
+    },
+    "mermaid_e": {
+      "type": "number",
+      "means": "the scene's own: how high over the bay's floor mermaid stands (in the water)"
+    },
+    "fin_a": {
+      "type": "number",
+      "means": "the scene's own: where her tail's fluke rises behind her, set from where she is"
+    },
+    "fin_d": {
+      "type": "number",
+      "means": "the scene's own: where her tail's fluke rises behind her, set from where she is"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (notes.md «Pieces»; the world's beats)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will play next (its cut made ready)"
+    },
+    "years": {
+      "type": "boolean",
+      "means": "the Fisherman years on: his white hair (the cast's fisherman_old as his look) — «Фонарь на мостках»'s last shot"
+    },
+    "smell": {
+      "type": "boolean",
+      "means": "a piece's variant (moonrise): «плясал с ней» — the camera goes to her for her line"
+    },
+    "hard": {
+      "type": "boolean",
+      "means": "a piece's variant (laugh_go, soul_leaves): the Soul hardened — an angry laugh; the lantern dark, no turn"
+    },
+    "song": {
+      "type": "boolean",
+      "means": "a piece's variant (third_year, fourth_year): her song — a faint light under the water by the stone; else the stone empty"
+    },
+    "looked": {
+      "type": "boolean",
+      "means": "a piece's variant (sink): he looks once at the pier before he goes (false: М9's fingers slipped)"
+    },
+    "thrown": {
+      "type": "boolean",
+      "means": "a piece's variant (knife_back): М6 missed — he throws the knife on the boards, then picks it up"
+    },
+    "boy": {
+      "type": "boolean",
+      "means": "a piece's variant (old_lantern): «вышел» — the widow's boy sits beside him knotting a new net"
+    },
+    "thief": {
+      "type": "boolean",
+      "means": "a piece's variant (widow): she has heard he is a thief — she looks at him long and keeps the children behind her"
+    },
+    "children": {
+      "type": "boolean",
+      "means": "a piece's variant (sea_comes): «вышел» — the children run up the shore"
+    },
+    "apart": {
+      "type": "boolean",
+      "means": "a piece's variant (morning_two): М8 slipped — they lie side by side, fingers almost touching"
+    },
+    "witch_way": {
+      "values": [
+        "demanded",
+        "danced"
+      ],
+      "means": "a piece's variant (witch_shore; the contract's key «witch», named so: `witch` is a person here): demanded — she stops, laughs, walks on; danced — she lays bread and her shawl by the hut, goes looking back"
+    },
+    "fish": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "a piece's variant (dawn_shore): the catch he carries up (1 full, 0.5 half — М7's miss); the sack on his shoulder is the cast's net_catch"
+    }
+  }
 }

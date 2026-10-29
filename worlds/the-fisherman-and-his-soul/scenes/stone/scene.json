@@ -1,0 +1,729 @@
+{
+  "engine": 3,
+  "title": "The Stone",
+  "caption": "The stone in the middle of the bay, in the moonlight.",
+  "horizon": 0.42,
+  "camera": {
+    "mode": "walk",
+    "area": [
+      0.5,
+      0.5,
+      0,
+      2.6
+    ]
+  },
+  "modules": [
+    "cast",
+    "hours",
+    "pieces",
+    "beats"
+  ],
+  "light": {
+    "ambient": 0.62,
+    "ambientColor": "#93a8d8",
+    "saturation": 1.0,
+    "bounce": 0.4,
+    "haze": 0.1,
+    "hazeColor": "#25365a",
+    "hazeGlow": 1.0,
+    "shafts": 0.35,
+    "vignette": 0.32,
+    "grain": 0.08,
+    "wind": [
+      1,
+      0.2,
+      0.35
+    ],
+    "looks": {
+      "dusk": {
+        "ambient": 0.74,
+        "ambientColor": "#c8a9b4",
+        "haze": 0.14,
+        "hazeColor": "#7a6680",
+        "shafts": 0.3,
+        "tint": "#ff9c70",
+        "tintStrength": 0.08,
+        "lights": {
+          "moon": 0.45
+        }
+      },
+      "dawn": {
+        "ambient": 0.92,
+        "ambientColor": "#dfe2ea",
+        "haze": 0.2,
+        "hazeColor": "#b4bccc",
+        "hazeGlow": 0.6,
+        "shafts": 0.25,
+        "lights": {
+          "moon": 0.2
+        }
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "moon",
+      "from": "sky#disc",
+      "color": "#c3d2f2",
+      "strength": 0.85
+    },
+    {
+      "id": "lantern",
+      "of": "bow_lantern#flame",
+      "on": "lantern",
+      "color": "#ffc27a",
+      "strength": 1.6,
+      "reach": 6,
+      "flicker": 0.12,
+      "glow": 0.35
+    },
+    {
+      "id": "sun_dusk",
+      "from": [
+        -70,
+        6
+      ],
+      "color": "#ffb38a",
+      "strength": 0.7,
+      "on": "dusk"
+    },
+    {
+      "id": "sun_dawn",
+      "from": [
+        40,
+        4
+      ],
+      "color": "#ffe0bc",
+      "strength": 0.75,
+      "on": "dawn"
+    }
+  ],
+  "state": {
+    "boat": true,
+    "lantern": 1,
+    "net": "heap",
+    "fisherman_at": "boat",
+    "mermaid_at": "stone",
+    "deep_lights": false,
+    "far_light": 0,
+    "fisherman_a": -1.88,
+    "fisherman_d": 5.59,
+    "fisherman_e": 0,
+    "fisherman_placed": "boat",
+    "fisherman_turn": 127,
+    "fisherman_look": "mermaid",
+    "mermaid_a": 0.78,
+    "mermaid_d": 6.4,
+    "mermaid_e": 0,
+    "mermaid_placed": "stone",
+    "mermaid_on": [
+      0.78,
+      6.4,
+      3.15
+    ],
+    "mermaid_do": "seated",
+    "mermaid_turn": 217,
+    "mermaid_look": "fisherman",
+    "mermaid_with": [
+      "tail"
+    ],
+    "mermaid_wear": {
+      "barefoot": "both"
+    },
+    "light": "night",
+    "dusk": 0,
+    "dawn": 0,
+    "haul": 1,
+    "heel": 0,
+    "boat_tilt": 0,
+    "fish": 0,
+    "knot": 0,
+    "splash": 0,
+    "pass_light": 0,
+    "net_hole": 0,
+    "looks": true,
+    "net_way": "word"
+  },
+  "states": {
+    "boat": {
+      "type": "boolean",
+      "means": "his boat moored by the stone's left (its lantern on the bow, his net in it); false — the bay empty but for the stone"
+    },
+    "lantern": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lantern on the boat's bow: 1 lit, 0 out (only while the boat is here)"
+    },
+    "net": {
+      "values": [
+        "heap",
+        "over"
+      ],
+      "means": "his net: heaped in the boat by the thwart / hauled over the bow into the water (П.2–П.3; round her shoulders when she is in it)"
+    },
+    "fisherman_at": {
+      "values": [
+        "boat",
+        "shallows",
+        "water"
+      ],
+      "means": "where the Fisherman is (lib.PLACES): standing in his boat by the bow / knee-deep on the sandbar at the stone's right front (1.1) / to the shoulders in the deep water before the stone (3С.1); set, put there at once"
+    },
+    "mermaid_at": {
+      "values": [
+        "stone",
+        "water",
+        "net"
+      ],
+      "means": "where the Mermaid is (lib.PLACES): sitting on the edge of the stone's flat top, her tail hanging down its front / to the shoulders in the water at its left front / to the shoulders off the boat's bow, in his net (П.3); set, put there at once. Her not here (mermaid_here false) — the stone empty"
+    },
+    "deep_lights": {
+      "type": "boolean",
+      "means": "two pale lights under the water before the stone (the ending «Два огня»)"
+    },
+    "far_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "a lantern far away on the right going to the town: 0 none; 0+ on the shore road, 0.5 at the bridge's end, 1 at the hill's top, going over (3С.1, «Два огня»)"
+    },
+    "fisherman_a": {
+      "range": [
+        -6,
+        6
+      ],
+      "means": "the scene's own: where the Fisherman stands across, set from fisherman_at"
+    },
+    "fisherman_d": {
+      "range": [
+        0,
+        10
+      ],
+      "means": "the scene's own: where the Fisherman stands ahead, set from fisherman_at"
+    },
+    "fisherman_e": {
+      "range": [
+        -1,
+        1
+      ],
+      "means": "the scene's own: how high over the bay's floor the Fisherman stands (in the deep water), set from fisherman_at"
+    },
+    "fisherman_placed": {
+      "type": "string",
+      "means": "the scene's own: the place the Fisherman was last put at"
+    },
+    "mermaid_a": {
+      "range": [
+        -6,
+        6
+      ],
+      "means": "the scene's own: where the Mermaid stands across, set from mermaid_at"
+    },
+    "mermaid_d": {
+      "range": [
+        0,
+        10
+      ],
+      "means": "the scene's own: where the Mermaid stands ahead, set from mermaid_at"
+    },
+    "mermaid_e": {
+      "range": [
+        -1,
+        1
+      ],
+      "means": "the scene's own: how high over the bay's floor the Mermaid stands (in the deep water), set from mermaid_at"
+    },
+    "mermaid_placed": {
+      "type": "string",
+      "means": "the scene's own: the place the Mermaid was last put at"
+    },
+    "light": {
+      "values": [
+        "night",
+        "evening",
+        "dawn"
+      ],
+      "means": "the hour (hours.md): night — the full moon high (the default); evening — an evening going into night, rose and amber low over the far shore, the moon pale; dawn — the sky greying, pearl low, the moon faint. Sets dusk and dawn at once"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (hours.md): how much of the evening's light and sky — set from `light`; a piece moves it slowly (evening → night)"
+    },
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (hours.md): how much of the dawn's light and sky — set from `light`; a piece moves it slowly (night → dawn)"
+    },
+    "haul": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "his net drawn in (М1, М7): 0 — cast, a length out on the water off the bow; 1 — drawn in under the stem (with her in it, П.3). Only with `net` over"
+    },
+    "heel": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the boat heeling under the net's weight as he hauls: 0 level … 1 the bow dipped (the script turns it into boat_tilt)"
+    },
+    "boat_tilt": {
+      "range": [
+        -10,
+        10
+      ],
+      "means": "the scene's own: the boat's tilt in degrees, set from heel"
+    },
+    "fish": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the catch in the net over the bow: 0 empty … 1 full of fish (П.5, М7; 0.5 — half a net)"
+    },
+    "knot": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the knot of the net by her hand (М1б): 0 tight … 1 loose (she can slip out)"
+    },
+    "splash": {
+      "range": [
+        0,
+        100000
+      ],
+      "means": "a pulse: each new value (counted up) — her tail beats the water, a splash at her feet"
+    },
+    "pass_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "a pale light passing under the boat's keel (4.6): move it 0 → 1 → 0"
+    },
+    "net_hole": {
+      "values": [
+        0,
+        1,
+        2
+      ],
+      "means": "his net torn (the trace of М1, of М8б): 0 whole; 1 torn at the edge; 2 torn wider — seen on the net over the bow and in the heap"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (notes.md «Pieces»; the world's beats)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will play next (its cut made ready)"
+    },
+    "looks": {
+      "type": "boolean",
+      "means": "a piece's variant (go_word, go_free): false — she slips out not looking at him (М1б held long)"
+    },
+    "net_way": {
+      "values": [
+        "word",
+        "free"
+      ],
+      "means": "a piece's variant (evenings): how he let her go — for her word (she sings, the net full) / for nothing (the stone empty, then she by herself) — the contract's key «net», named so here: the scene's `net` is where the net is"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Night sky and the moon",
+      "sky": true,
+      "uniforms": {
+        "dusk": 0,
+        "dawn": 0
+      }
+    },
+    {
+      "id": "clouds",
+      "name": "Thin clouds",
+      "sky": true
+    },
+    {
+      "id": "far_ridge",
+      "name": "Far ridge",
+      "across": -800,
+      "distance": 2500,
+      "elevation": 1.97,
+      "height": 60,
+      "box": [
+        -2620,
+        -62,
+        920,
+        4
+      ]
+    },
+    {
+      "id": "far_shore",
+      "name": "Far shore with the fir wood",
+      "across": -300,
+      "distance": 600,
+      "elevation": 1.97,
+      "height": 40,
+      "box": [
+        -770,
+        -40,
+        480,
+        4
+      ]
+    },
+    {
+      "id": "town",
+      "name": "The town of lights",
+      "across": 420,
+      "distance": 900,
+      "elevation": 1.97,
+      "height": 20,
+      "box": [
+        -270,
+        -22,
+        270,
+        4
+      ]
+    },
+    {
+      "id": "far_lamp",
+      "name": "A lantern going to the town",
+      "across": 330,
+      "distance": 880,
+      "elevation": 1.97,
+      "height": 20,
+      "box": [
+        -170,
+        -30,
+        100,
+        4
+      ]
+    },
+    {
+      "id": "water",
+      "name": "The bay",
+      "plane": true,
+      "water": true,
+      "across": 0,
+      "distance": 3000,
+      "elevation": -0.63,
+      "width": 8000,
+      "depth": 6000,
+      "reflect": {
+        "strength": 0.5,
+        "fade": 0,
+        "rough": 0.45,
+        "ripple": 0.5
+      }
+    },
+    {
+      "id": "mist",
+      "name": "Mist on the water",
+      "across": 0,
+      "distance": 45,
+      "elevation": 1.97,
+      "height": 7,
+      "box": [
+        -90,
+        -7,
+        90,
+        1
+      ]
+    },
+    {
+      "id": "deep",
+      "name": "Two lights under the water",
+      "plane": true,
+      "glows": true,
+      "across": 0.55,
+      "distance": 5.75,
+      "elevation": -0.62,
+      "width": 1.6,
+      "depth": 0.8
+    },
+    {
+      "id": "rock",
+      "name": "The stone",
+      "across": 1.2,
+      "distance": 6.8,
+      "onLand": false,
+      "elevation": -2.6,
+      "height": 3.6,
+      "box": [
+        -4.4,
+        -3.6,
+        4.4,
+        0
+      ],
+      "shadow": true
+    },
+    {
+      "id": "deck",
+      "name": "The pier",
+      "plane": true,
+      "walk": true,
+      "across": 0,
+      "distance": -1.3,
+      "elevation": 0.05,
+      "width": 1.5,
+      "depth": 9.4
+    },
+    {
+      "id": "deck_end",
+      "name": "The pier's end",
+      "across": 0,
+      "distance": 3.4,
+      "onLand": false,
+      "elevation": 0.05,
+      "facing": 180,
+      "height": 0.3,
+      "box": [
+        -0.8,
+        -0.02,
+        0.8,
+        0.28
+      ]
+    },
+    {
+      "id": "posts",
+      "name": "The pier's end posts",
+      "height": 2.77,
+      "box": [
+        -0.1,
+        -2.77,
+        0.1,
+        0.02
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": -0.7,
+          "distance": 3.35
+        },
+        {
+          "across": 0.7,
+          "distance": 3.35
+        }
+      ]
+    },
+    {
+      "id": "boat",
+      "name": "His boat",
+      "unseen": true,
+      "across": -2.6,
+      "distance": 5.4,
+      "onLand": false,
+      "elevation": -0.63,
+      "facing": 75,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ],
+      "place": {
+        "tilt": "boat_tilt"
+      }
+    },
+    {
+      "id": "hull",
+      "name": "The boat's hull",
+      "on": "boat",
+      "across": 0,
+      "distance": 0,
+      "elevation": 0,
+      "shadow": true,
+      "box": [
+        -1.1,
+        -3.3,
+        1.1,
+        0
+      ]
+    },
+    {
+      "id": "transom",
+      "name": "The boat's stern board",
+      "on": "boat",
+      "across": 0,
+      "distance": 1.6,
+      "elevation": 0,
+      "facing": 0,
+      "box": [
+        -0.55,
+        -0.6,
+        0.55,
+        0.2
+      ]
+    },
+    {
+      "id": "boards",
+      "name": "The boat's floorboards",
+      "plane": true,
+      "walk": true,
+      "on": "boat",
+      "across": 0,
+      "distance": 0.1,
+      "elevation": 0.05,
+      "width": 0.7,
+      "depth": 2.2
+    },
+    {
+      "id": "thwart",
+      "name": "The boat's thwart",
+      "plane": true,
+      "on": "boat",
+      "across": 0,
+      "distance": 0.55,
+      "elevation": 0.3,
+      "width": 1.2,
+      "depth": 0.22,
+      "shadow": true
+    },
+    {
+      "id": "net_heap",
+      "name": "His net in the boat",
+      "on": "boat",
+      "across": 0.05,
+      "distance": 1.05,
+      "elevation": 0.05,
+      "box": [
+        -0.45,
+        -0.32,
+        0.45,
+        0.02
+      ]
+    },
+    {
+      "id": "bow_lantern",
+      "name": "The lantern on the bow",
+      "on": "boat",
+      "across": 0,
+      "distance": -1.62,
+      "elevation": 0.58,
+      "box": [
+        -0.06,
+        -0.66,
+        0.38,
+        0.06
+      ]
+    },
+    {
+      "id": "net_over",
+      "name": "His net over the bow",
+      "across": -0.62,
+      "distance": 5.6,
+      "onLand": false,
+      "elevation": -0.63,
+      "box": [
+        -0.56,
+        -0.66,
+        0.6,
+        0.06
+      ]
+    },
+    {
+      "id": "keel_light",
+      "name": "A pale light under the keel",
+      "plane": true,
+      "glows": true,
+      "across": -2.4,
+      "distance": 5.5,
+      "elevation": -0.62,
+      "width": 3.2,
+      "depth": 1.8
+    },
+    {
+      "id": "rings_m",
+      "name": "Rings round her",
+      "plane": true,
+      "across": 0.78,
+      "distance": 6.4,
+      "elevation": -0.62,
+      "width": 1.6,
+      "depth": 1.6,
+      "place": {
+        "across": "mermaid_a",
+        "distance": "mermaid_d"
+      }
+    },
+    {
+      "id": "rings_f",
+      "name": "Rings round him",
+      "plane": true,
+      "across": -1.88,
+      "distance": 5.59,
+      "elevation": -0.62,
+      "width": 1.6,
+      "depth": 1.6,
+      "place": {
+        "across": "fisherman_a",
+        "distance": "fisherman_d"
+      }
+    },
+    {
+      "id": "splash",
+      "name": "Her tail beating the water",
+      "particles": {
+        "kind": "splashes",
+        "at": "mermaid#feet",
+        "burst": {
+          "on": "splash",
+          "count": 40
+        }
+      }
+    },
+    {
+      "id": "fisherman",
+      "name": "The Fisherman",
+      "person": {
+        "cast": "cast",
+        "who": "fisherman",
+        "turn": 127
+      },
+      "across": -1.88,
+      "distance": 5.59,
+      "place": {
+        "across": "fisherman_a",
+        "distance": "fisherman_d",
+        "elevation": "fisherman_e"
+      }
+    },
+    {
+      "id": "mermaid",
+      "name": "The Mermaid",
+      "person": {
+        "cast": "cast",
+        "who": "mermaid",
+        "turn": 217
+      },
+      "across": 0.78,
+      "distance": 6.4,
+      "place": {
+        "across": "mermaid_a",
+        "distance": "mermaid_d",
+        "elevation": "mermaid_e"
+      }
+    }
+  ]
+}

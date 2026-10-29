@@ -4,10 +4,6 @@
 //     met — its name, its pips, the side it leans to; null — none (the map, the epilogue)
 //   view.toast(text, kind, arrows) — a slip in the corner: 'scale' (a scale moved: its side and arrows), 'rule' (what
 //     a scale means, the first time), 'mark' (remembered); three at most
-//   view.plate(text, {signal}) — a plate low over the scene: what happens here that the scene does not show, and
-//     “Next”; → once it is pressed (or Space / Enter)
-//   view.sheet(title, lines, {signal}) — the same, a list
-//   view.card(title, gesture, text) — the card of a stub mini-game, high on the right: what it will be; → takes it away
 //   view.where(text | null) — the label high on the left: where this really happens (a stand-in scene)
 //   view.hint(text) — one line low in the middle; → a function that takes it away
 //   view.title(text, {signal}) — words in the middle of the frame; → once they have gone (9 s)
@@ -32,21 +28,6 @@ export function ui(layer) {
   const label = el('p', 'where', layer);
   label.hidden = true;
   let hinted = () => {};
-  // a plate (or a sheet) waiting for “Next”: one at a time
-  function plate(fill, { signal } = {}) {
-    const p = el('div', 'plate', layer);
-    fill(p);
-    const next = button(tr('Next'), '', null, 'next');
-    p.append(next);
-    requestAnimationFrame(() => p.classList.add('on'));
-    return new Promise(ok => {
-      const done = () => { removeEventListener('keydown', key, true); p.remove(); ok(); };
-      const key = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); done(); } };
-      next.onclick = done;
-      addEventListener('keydown', key, true);
-      signal?.addEventListener('abort', () => { removeEventListener('keydown', key, true); p.remove(); });
-    });
-  }
   return {
     gauge(state) {
       gauge.replaceChildren();
@@ -69,25 +50,6 @@ export function ui(layer) {
       const stay = kind === 'rule' ? 8000 : 5000;
       setTimeout(() => slip.classList.add('gone'), stay);
       setTimeout(() => slip.remove(), stay + 1200);
-    },
-    plate(text, opts) {
-      return plate(p => { el('p', 'text', p).textContent = text; }, opts);
-    },
-    sheet(title, lines, opts) {
-      return plate(p => {
-        el('h3', '', p).textContent = title;
-        const list = el('ul', '', p);
-        for (const line of lines) el('li', '', list).textContent = line;
-      }, opts);
-    },
-    card(title, gesture, text) {
-      const c = el('div', 'card', layer);
-      const head = el('p', 'head', c);
-      el('b', '', head).textContent = title;
-      el('span', 'gesture', head).textContent = gesture;
-      el('p', 'text', c).textContent = text;
-      el('p', 'stub', c).textContent = tr('A mini-game to be: for now, press the mark.');
-      return () => c.remove();
     },
     where(text) {
       label.hidden = !text;

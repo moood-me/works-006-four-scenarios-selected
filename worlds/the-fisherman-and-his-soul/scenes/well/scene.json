@@ -13,31 +13,56 @@
     ]
   },
   "modules": [
-    "cast"
+    "cast",
+    "hours",
+    "pieces",
+    "beats"
   ],
   "light": {
-    "ambient": 0.6,
-    "ambientColor": "#8fa6d8",
+    "ambient": 0.9,
+    "ambientColor": "#9fb4e0",
     "saturation": 1.0,
     "bounce": 0.4,
-    "haze": 0.16,
+    "haze": 0.1,
     "hazeColor": "#22325a",
     "hazeGlow": 1.2,
     "shafts": 0.45,
-    "vignette": 0.34,
+    "vignette": 0.22,
     "grain": 0.08,
     "wind": [
       1,
       0.2,
       0.3
-    ]
+    ],
+    "looks": {
+      "dusk": {
+        "ambient": 0.78,
+        "ambientColor": "#b6a8c8",
+        "haze": 0.2,
+        "hazeColor": "#5a5478",
+        "shafts": 0.2,
+        "lights": {
+          "moon": 0
+        }
+      },
+      "dawn": {
+        "ambient": 0.9,
+        "ambientColor": "#d8dde8",
+        "haze": 0.24,
+        "hazeColor": "#a8b2c4",
+        "shafts": 0.3,
+        "lights": {
+          "moon": 0.25
+        }
+      }
+    }
   },
   "lights": [
     {
       "id": "moon",
       "from": "sky#disc",
       "color": "#c3d2f2",
-      "strength": 0.9
+      "strength": 1.35
     },
     {
       "id": "lantern",
@@ -47,6 +72,26 @@
       "reach": 6,
       "flicker": 0.12,
       "glow": 0.3
+    },
+    {
+      "id": "sun_dusk",
+      "from": [
+        -60,
+        5
+      ],
+      "color": "#ffb08a",
+      "strength": 0.6,
+      "on": "dusk"
+    },
+    {
+      "id": "sun_dawn",
+      "from": [
+        30,
+        4
+      ],
+      "color": "#ffe0bc",
+      "strength": 0.7,
+      "on": "dawn"
     }
   ],
   "state": {
@@ -64,13 +109,31 @@
     ],
     "witch_look": "fisherman",
     "witch_mood": "smile",
-    "velvet_look": "fisherman"
+    "velvet_look": "fisherman",
+    "time": "midnight",
+    "dusk": 0,
+    "dawn": 0,
+    "round": false,
+    "round_angle": 0,
+    "stumble": 0,
+    "knife_ground": false,
+    "fisherman_a": -0.98,
+    "fisherman_d": 6.81,
+    "witch_a": 0.34,
+    "witch_d": 7.29,
+    "velvet_a": 3.5,
+    "velvet_d": 10.4,
+    "stumbled": false
   },
   "objects": [
     {
       "id": "sky",
       "name": "Night sky and the full moon",
-      "sky": true
+      "sky": true,
+      "uniforms": {
+        "dusk": 0,
+        "dawn": 0
+      }
     },
     {
       "id": "clouds",
@@ -491,6 +554,16 @@
       "shadow": true
     },
     {
+      "id": "knife_ground",
+      "name": "The knife on the slabs",
+      "plane": true,
+      "across": -0.55,
+      "distance": 6.45,
+      "elevation": 0.02,
+      "width": 0.5,
+      "depth": 0.5
+    },
+    {
       "id": "grass",
       "name": "Tall grass",
       "height": 0.9,
@@ -570,7 +643,11 @@
         "turn": 110
       },
       "across": -0.98,
-      "distance": 6.81
+      "distance": 6.81,
+      "place": {
+        "across": "fisherman_a",
+        "distance": "fisherman_d"
+      }
     },
     {
       "id": "witch",
@@ -582,7 +659,11 @@
         "does": "seated"
       },
       "across": 0.34,
-      "distance": 7.29
+      "distance": 7.29,
+      "place": {
+        "across": "witch_a",
+        "distance": "witch_d"
+      }
     },
     {
       "id": "velvet",
@@ -594,7 +675,93 @@
         "does": "hands_behind"
       },
       "across": 3.5,
-      "distance": 10.4
+      "distance": 10.4,
+      "place": {
+        "across": "velvet_a",
+        "distance": "velvet_d"
+      }
     }
-  ]
+  ],
+  "states": {
+    "time": {
+      "values": [
+        "midnight",
+        "evening",
+        "dawn"
+      ],
+      "means": "the hour (hours.md): midnight — the full moon over the firs (the default); evening — dusk, the moon not up (1.4); dawn — the moon pale, the sky greying (1.6 «до рассвета»). Sets dusk and dawn at once"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (hours.md): how much of the evening — set from `time`; a piece may move it"
+    },
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (hours.md): how much of the dawn — set from `time`; a piece moves it slowly (midnight → dawn)"
+    },
+    "round": {
+      "type": "boolean",
+      "means": "the dance (1.5–1.6): while set, the Fisherman and the Witch go round the well on a circle, on its opposite sides, turned to each other across it (the Witch off the rim); the scene moves them (their motions are the piece's)"
+    },
+    "round_angle": {
+      "type": "number",
+      "means": "the scene's own: where on the circle the dance is (radians, the Fisherman's)"
+    },
+    "stumble": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "a pulse (М2's miss): 1 → 0 — he stumbles a step out of the circle and back"
+    },
+    "knife_ground": {
+      "type": "boolean",
+      "means": "the Witch's knife lying on the slabs at his feet (1.6 «требовать»: she throws it down); point knife_ground#knife"
+    },
+    "fisherman_a": {
+      "type": "number",
+      "means": "where the Fisherman stands, metres right (-0.98 before the Witch; set by the dance)"
+    },
+    "fisherman_d": {
+      "type": "number",
+      "means": "where the Fisherman stands, metres ahead (6.81; set by the dance)"
+    },
+    "witch_a": {
+      "type": "number",
+      "means": "where the Witch stands when off the rim, metres right (set by the dance)"
+    },
+    "witch_d": {
+      "type": "number",
+      "means": "where the Witch stands when off the rim, metres ahead (set by the dance)"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the piece playing (notes.md «Pieces»; the world's beats)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the piece the game will play next (its cut made ready)"
+    },
+    "stumbled": {
+      "type": "boolean",
+      "means": "a piece's variant (velvet): М2 missed — she laughs as she pulls him"
+    },
+    "velvet_a": {
+      "type": "number",
+      "means": "where the man in black stands, metres right (3.5 by his fir)"
+    },
+    "velvet_d": {
+      "type": "number",
+      "means": "where the man in black stands, metres ahead (10.4)"
+    }
+  }
 }
