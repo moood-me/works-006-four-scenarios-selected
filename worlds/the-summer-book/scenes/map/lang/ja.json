@@ -1,0 +1,8 @@
+{"strings": [
+  {"text":"The house","translation":"家","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The magic forest","translation":"魔法の森","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The new house","translation":"新しい家","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The cape","translation":"岬","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The Island","translation":"島","where":"worlds/the-summer-book/scenes/map/elements/sheet.js"},
+  {"text":"The Map","translation":"地図","where":"worlds/the-summer-book/scenes/map/scene.json title"}
+]}
