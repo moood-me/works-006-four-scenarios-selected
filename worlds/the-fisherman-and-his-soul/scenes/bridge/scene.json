@@ -13,7 +13,9 @@
     ]
   },
   "modules": [
-    "cast"
+    "cast",
+    "hours",
+    "places"
   ],
   "light": {
     "ambient": 0.6,
@@ -30,7 +32,43 @@
       1,
       0.2,
       0.3
-    ]
+    ],
+    "looks": {
+      "dusk": {
+        "ambient": 0.76,
+        "ambientColor": "#c0a8bc",
+        "haze": 0.16,
+        "hazeColor": "#6a5a7a",
+        "shafts": 0.25,
+        "lights": {
+          "moon": 0.4
+        }
+      },
+      "dawn": {
+        "ambient": 0.9,
+        "ambientColor": "#dfe2ea",
+        "haze": 0.18,
+        "hazeColor": "#b0b8c8",
+        "lights": {
+          "moon": 0.2
+        }
+      },
+      "day": {
+        "ambient": 1.0,
+        "ambientColor": "#f2eee6",
+        "haze": 0.1,
+        "hazeColor": "#b8c6d6",
+        "hazeGlow": 0.3,
+        "shafts": 0.15,
+        "lights": {
+          "moon": 0,
+          "lamp_head": 0.15,
+          "lamp_near": 0.15,
+          "lamp_far": 0.15,
+          "hearth": 0.5
+        }
+      }
+    }
   },
   "lights": [
     {
@@ -56,7 +94,8 @@
       "color": "#ffa860",
       "strength": 1.5,
       "reach": 5,
-      "flicker": 0.18
+      "flicker": 0.18,
+      "on": "door"
     },
     {
       "id": "lamp_head",
@@ -90,6 +129,35 @@
       "reach": 7,
       "flicker": 0.06,
       "glow": 0.25
+    },
+    {
+      "id": "sun_dusk",
+      "from": [
+        -80,
+        5
+      ],
+      "color": "#ffb08a",
+      "strength": 0.6,
+      "on": "dusk"
+    },
+    {
+      "id": "sun",
+      "from": [
+        -50,
+        35
+      ],
+      "color": "#fff1dc",
+      "strength": 1.0,
+      "on": "day"
+    },
+    {
+      "id": "soul_lantern",
+      "at": "soul#flame",
+      "color": "#ffbf72",
+      "strength": 1.6,
+      "reach": 6,
+      "flicker": 0.12,
+      "glow": 0.3
     }
   ],
   "state": {
@@ -104,13 +172,68 @@
     "daughter_look": "fisherman",
     "daughter_reach": {
       "r": "potter#hand_l"
-    }
+    },
+    "time": "night",
+    "dusk": 0,
+    "dawn": 0,
+    "day": 0,
+    "square": false,
+    "door": 1,
+    "door_turn": 350,
+    "copper": 0,
+    "soul_smoke": 0,
+    "fisherman_at": "lane",
+    "fisherman_a": -0.5,
+    "fisherman_d": 8.4,
+    "fisherman_placed": "lane",
+    "potter_at": "door",
+    "potter_a": 1.8,
+    "potter_d": 7.6,
+    "potter_placed": "door",
+    "soul_at": "lane",
+    "soul_a": -0.5,
+    "soul_d": 8.4,
+    "soul_placed": "lane",
+    "soul_here": false,
+    "soul_with": [
+      "lantern"
+    ],
+    "beggar_at": "parapet",
+    "beggar_a": -9.2,
+    "beggar_d": 13.55,
+    "beggar_on": [
+      -9.2,
+      13.5,
+      3.82
+    ],
+    "beggar_placed": "parapet",
+    "beggar_here": false,
+    "beggar_mood": "eyes_closed",
+    "musician_a_here": false,
+    "musician_a_a": -0.9,
+    "musician_a_d": 11.6,
+    "musician_b_here": false,
+    "musician_b_a": -0.2,
+    "musician_b_d": 11.9,
+    "woman_a_here": false,
+    "woman_a_a": 1.0,
+    "woman_a_d": 8.6,
+    "woman_b_here": false,
+    "woman_b_a": 1.5,
+    "woman_b_d": 9.0,
+    "woman_a_look": "woman_b",
+    "woman_b_look": "woman_a"
   },
   "objects": [
     {
       "id": "sky",
       "name": "Night sky and the moon",
-      "sky": true
+      "sky": true,
+      "uniforms": {
+        "dusk": 0,
+        "dawn": 0,
+        "day": 0
+      }
     },
     {
       "id": "clouds",
@@ -155,7 +278,8 @@
         "fade": 0,
         "rough": 0.3,
         "ripple": 0.45
-      }
+      },
+      "water": true
     },
     {
       "id": "far_bank",
@@ -699,6 +823,149 @@
       ]
     },
     {
+      "id": "door_leaf",
+      "name": "The potter's door",
+      "across": 2.575,
+      "distance": 6.85,
+      "facing": 270,
+      "height": 2,
+      "box": [
+        -1.02,
+        -2,
+        0.02,
+        0.02
+      ],
+      "shadow": true,
+      "place": {
+        "facing": "door_turn"
+      }
+    },
+    {
+      "id": "lanterns",
+      "name": "Lanterns across the lane",
+      "across": -1.5,
+      "distance": 9.6,
+      "height": 3.5,
+      "box": [
+        -0.2,
+        -3.5,
+        4.3,
+        0.05
+      ]
+    },
+    {
+      "id": "circle",
+      "name": "The empty circle on the cobbles",
+      "plane": true,
+      "across": 0.4,
+      "distance": 9.8,
+      "elevation": 0.015,
+      "width": 2.8,
+      "depth": 2.8
+    },
+    {
+      "id": "stall",
+      "name": "The potter's stall",
+      "across": 1.7,
+      "distance": 10.2,
+      "height": 1.1,
+      "box": [
+        -0.85,
+        -1.1,
+        0.85,
+        0.02
+      ],
+      "shadow": true
+    },
+    {
+      "id": "landing",
+      "name": "The landing under the bridge's end",
+      "plane": true,
+      "walk": true,
+      "across": -2.3,
+      "distance": 11.4,
+      "elevation": -1.75,
+      "width": 1.2,
+      "depth": 2.2
+    },
+    {
+      "id": "landing_face",
+      "name": "The landing's face and steps",
+      "across": -2.9,
+      "distance": 11.4,
+      "elevation": 1.5,
+      "facing": 270,
+      "height": 2,
+      "box": [
+        -1.12,
+        -2.05,
+        1.12,
+        0.02
+      ]
+    },
+    {
+      "id": "bowl",
+      "name": "The beggar's bowl",
+      "across": -8.75,
+      "distance": 13.2,
+      "elevation": 3.52,
+      "height": 0.15,
+      "box": [
+        -0.16,
+        -0.15,
+        0.16,
+        0.02
+      ]
+    },
+    {
+      "id": "coin",
+      "name": "A copper falling into the river",
+      "across": -8.75,
+      "distance": 14.4,
+      "elevation": 1.5,
+      "height": 2.9,
+      "box": [
+        -0.06,
+        -2.9,
+        0.06,
+        0.05
+      ]
+    },
+    {
+      "id": "coin_splash",
+      "name": "The copper's splash",
+      "particles": {
+        "kind": "splashes",
+        "at": [
+          -8.75,
+          14.4,
+          1.52
+        ],
+        "burst": {
+          "on": "copper",
+          "count": 14
+        },
+        "size": [
+          0.03,
+          0.02
+        ]
+      }
+    },
+    {
+      "id": "soul_smoke",
+      "name": "Smoke off the Soul's left hand",
+      "particles": {
+        "kind": "smoke",
+        "at": "soul#hand_l",
+        "amount": "soul_smoke",
+        "color": "#8a92a8",
+        "size": [
+          0.05,
+          0.25
+        ]
+      }
+    },
+    {
       "id": "fisherman",
       "name": "The Fisherman",
       "person": {
@@ -707,7 +974,11 @@
         "turn": 110
       },
       "across": -0.5,
-      "distance": 8.4
+      "distance": 8.4,
+      "place": {
+        "across": "fisherman_a",
+        "distance": "fisherman_d"
+      }
     },
     {
       "id": "potter",
@@ -718,7 +989,11 @@
         "turn": 235
       },
       "across": 1.8,
-      "distance": 7.6
+      "distance": 7.6,
+      "place": {
+        "across": "potter_a",
+        "distance": "potter_d"
+      }
     },
     {
       "id": "daughter",
@@ -730,6 +1005,281 @@
       },
       "across": 2.15,
       "distance": 7
+    },
+    {
+      "id": "soul",
+      "name": "His Soul",
+      "person": {
+        "cast": "cast",
+        "who": "soul",
+        "turn": 110
+      },
+      "across": -0.5,
+      "distance": 8.4,
+      "place": {
+        "across": "soul_a",
+        "distance": "soul_d"
+      },
+      "shadow": false
+    },
+    {
+      "id": "beggar",
+      "name": "The old beggar",
+      "person": {
+        "cast": "cast",
+        "who": "beggar",
+        "turn": 180,
+        "does": "seated"
+      },
+      "across": -9.2,
+      "distance": 13.55,
+      "place": {
+        "across": "beggar_a",
+        "distance": "beggar_d"
+      }
+    },
+    {
+      "id": "musician_a",
+      "name": "The fiddler",
+      "person": {
+        "cast": "cast",
+        "who": "musician_a",
+        "turn": 160
+      },
+      "across": -0.9,
+      "distance": 11.6,
+      "place": {
+        "across": "musician_a_a",
+        "distance": "musician_a_d"
+      }
+    },
+    {
+      "id": "musician_b",
+      "name": "The piper",
+      "person": {
+        "cast": "cast",
+        "who": "musician_b",
+        "turn": 190
+      },
+      "across": -0.2,
+      "distance": 11.9,
+      "place": {
+        "across": "musician_b_a",
+        "distance": "musician_b_d"
+      }
+    },
+    {
+      "id": "woman_a",
+      "name": "A woman of the village, in a kerchief",
+      "person": {
+        "cast": "cast",
+        "who": "woman_a",
+        "turn": 200
+      },
+      "across": 1.0,
+      "distance": 8.6,
+      "place": {
+        "across": "woman_a_a",
+        "distance": "woman_a_d"
+      }
+    },
+    {
+      "id": "woman_b",
+      "name": "A woman of the village, in brown",
+      "person": {
+        "cast": "cast",
+        "who": "woman_b",
+        "turn": 230
+      },
+      "across": 1.5,
+      "distance": 9.0,
+      "place": {
+        "across": "woman_b_a",
+        "distance": "woman_b_d"
+      }
     }
-  ]
+  ],
+  "states": {
+    "time": {
+      "values": [
+        "night",
+        "evening",
+        "morning"
+      ],
+      "means": "the hour (hours.md): night — the moon, the lamps, the town's windows (the default); evening — dusk, rose low over the bay (3.1, 3Л); morning — a clear day, the market (the stall out: 3.7, 3С.2's rumour, 3Л's door). Sets dusk, dawn, day at once"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (hours.md): the evening's share, from `time`"
+    },
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (hours.md): the dawn's share, from `time`"
+    },
+    "day": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (hours.md): the morning's day light, from `time`"
+    },
+    "square": {
+      "type": "boolean",
+      "means": "the square's night (3.2): lanterns hung across the lane, the empty circle on the cobbles, the potter's stall out with coppers (point stall#coppers); the musicians are people (musician_a_here, musician_b_here)"
+    },
+    "door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the potter's door: 0 shut (the leaf over the lit room, the hearth's light gone from the lane) … 1 open into the room"
+    },
+    "door_turn": {
+      "range": [
+        270,
+        350
+      ],
+      "means": "the scene's own: the door leaf's turn, set from door"
+    },
+    "copper": {
+      "range": [
+        0,
+        100000
+      ],
+      "means": "a pulse: each new value (counted up) — the beggar's bowl rocks and a copper falls from the far parapet into the river (3.7б)"
+    },
+    "soul_smoke": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the trace of the knife's miss (М3): smoke rising off the Soul's left hand (0 none, 1 — wherever the Soul is seen after 1.10)"
+    },
+    "fisherman_at": {
+      "values": [
+        "lane",
+        "under",
+        "head",
+        "mid",
+        "stall",
+        "door"
+      ],
+      "means": "where fisherman is (lib.PLACES, places.md): set — put there at once"
+    },
+    "fisherman_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "soul_at": {
+      "values": [
+        "lane",
+        "under",
+        "head",
+        "mid",
+        "stall",
+        "door"
+      ],
+      "means": "where soul is (lib.PLACES, places.md): set — put there at once"
+    },
+    "soul_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "potter_at": {
+      "values": [
+        "door",
+        "stall",
+        "doorway"
+      ],
+      "means": "where potter is (lib.PLACES, places.md): set — put there at once"
+    },
+    "potter_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "beggar_at": {
+      "values": [
+        "parapet"
+      ],
+      "means": "where beggar is (lib.PLACES, places.md): set — put there at once"
+    },
+    "beggar_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "fisherman_a": {
+      "type": "number",
+      "means": "the scene's own: where fisherman stands, metres right"
+    },
+    "fisherman_d": {
+      "type": "number",
+      "means": "the scene's own: where fisherman stands, metres ahead"
+    },
+    "soul_a": {
+      "type": "number",
+      "means": "the scene's own: where soul stands, metres right"
+    },
+    "soul_d": {
+      "type": "number",
+      "means": "the scene's own: where soul stands, metres ahead"
+    },
+    "potter_a": {
+      "type": "number",
+      "means": "the scene's own: where potter stands, metres right"
+    },
+    "potter_d": {
+      "type": "number",
+      "means": "the scene's own: where potter stands, metres ahead"
+    },
+    "beggar_a": {
+      "type": "number",
+      "means": "the scene's own: where beggar stands, metres right"
+    },
+    "beggar_d": {
+      "type": "number",
+      "means": "the scene's own: where beggar stands, metres ahead"
+    },
+    "musician_a_a": {
+      "type": "number",
+      "means": "the scene's own: where musician_a stands, metres right"
+    },
+    "musician_a_d": {
+      "type": "number",
+      "means": "the scene's own: where musician_a stands, metres ahead"
+    },
+    "musician_b_a": {
+      "type": "number",
+      "means": "the scene's own: where musician_b stands, metres right"
+    },
+    "musician_b_d": {
+      "type": "number",
+      "means": "the scene's own: where musician_b stands, metres ahead"
+    },
+    "woman_a_a": {
+      "type": "number",
+      "means": "the scene's own: where woman_a stands, metres right"
+    },
+    "woman_a_d": {
+      "type": "number",
+      "means": "the scene's own: where woman_a stands, metres ahead"
+    },
+    "woman_b_a": {
+      "type": "number",
+      "means": "the scene's own: where woman_b stands, metres right"
+    },
+    "woman_b_d": {
+      "type": "number",
+      "means": "the scene's own: where woman_b stands, metres ahead"
+    }
+  }
 }
