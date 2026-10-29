@@ -53,3 +53,14 @@ overhead); ≤1 of the Song — `hands` true; «Подняться» is С2's (`
   needs motions of the cast.
 - The cast's `seated` sits with the knees apart: her shins show a little at the tail's sides (as on `stone`).
 - Her hiding her face in her hair (2.5), her palm over his eyes (3С.1), the dance — stage 5's motions.
+- The engine draws the `shafts` of a light coming `through` the surface's pools as a bright glow in the water toward
+  the light (and the pools' patches on the sand), not as separate columns of light: tried with the sun behind the
+  viewer and ahead of him (`from` [20, 70], `shafts` up to 4) — no columns either way. Kept behind (their faces lit).
+  Wanted from the engine, or a word on how columns are meant to show.
+- `measure_scene` (2026-10-29, `3e2ef8b`, T4): desktop / laptop / phone fail 5 / 6 / 3 of 17 — the scene thread's JS
+  (median 3.4–3.9 ms against 3), its GC (2.5–2.8 against 2), allocation a frame (21–25 KB against 1 KB; as on `stone`,
+  the scene's own code allocates almost nothing a frame — the rest is the engine's), laptop frames p95 16.8 against
+  16.7; and the **soft run in zoom** (2.8 / 1.9 / 3.4 s against 0.5 / 0.5 / 1: walking in toward the two of them asks
+  371 / 282 / 137 new pages in a second against the 120 / 120 / 30 the tier's painters give — the sand plane, the
+  stone's form and the slab seen close). Not mended yet: lighten what the walk in reveals (a smaller or coarser sand
+  plane near, a narrower `area`) — the next step here. GPU ~5 ms, view pages ~460–534 of 1420, open 3.3 s.
