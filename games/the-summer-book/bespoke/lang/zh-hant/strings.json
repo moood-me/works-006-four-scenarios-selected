@@ -338,7 +338,7 @@
   {"text":"continue\nthe game","translation":"繼續\n遊戲","where":"games/the-summer-book/bespoke/game.js"},
   {"text":"start\nthe game","translation":"開始\n遊戲","where":"games/the-summer-book/bespoke/game.js"},
   {"text":"Finale: decided late","translation":"結局：決定得太晚","where":"games/the-summer-book/bespoke/game.js"},
-  {"text":"Finale: in full","translation":"結局：及時決定","where":"games/the-summer-book/bespoke/game.js"},
+  {"text":"Finale: decided in time","translation":"結局：及時決定","where":"games/the-summer-book/bespoke/game.js"},
   {"text":"Replay","translation":"重玩","where":"games/the-summer-book/bespoke/map.js"},
   {"text":"continue\nthe replay","translation":"繼續\n重玩","where":"games/the-summer-book/bespoke/map.js"},
   {"text":"the author’s map","translation":"作者地圖","where":"games/the-summer-book/bespoke/map.js"},
