@@ -67,10 +67,11 @@ function rings(e) {
   }
 }
 // each ring widens and fades, a third of the way behind the one before, slowly; none while `shown` is false
+const RINGS = ['ring0', 'ring1', 'ring2'];
 function ringsMove(e, shown, phase) {
   for (let k = 0; k < 3; k++) {
     const u = (e.t / 4.5 + k / 3 + phase) % 1;
-    const ring = e.layer(`ring${k}`);
+    const ring = e.layer(RINGS[k]);
     ring.scale = 0.45 + 0.55 * u;
     ring.alpha = shown ? Math.sin(Math.PI * u) * (1 - u) : 0;
   }

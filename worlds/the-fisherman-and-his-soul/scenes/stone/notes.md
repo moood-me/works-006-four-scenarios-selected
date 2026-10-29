@@ -49,4 +49,9 @@ one here, `deep_lights`, `far_light` toward 1.
 - The tail covers her legs, but the cast's `seated` sits with the knees apart: her shins show a little at its sides.
   A seated loop with the legs together (a mermaid's) would mend it — a motion, not this scene's.
 - The far lantern at ~880 m is a small glow: seen, but not much. Frame it closer in a piece if it must read.
-- `measure_scene`: see the history note `docs/history/2026-10-29-rybak-stone.md`.
+- `measure_scene` (2026-10-29, `76e26fa`, T4): desktop / laptop / phone fail 5 / 4 / 5 of 17 — all the scene thread's
+  JS (median ~5 ms against 3), its GC (2.4–2.8 ms against 2) and its allocation a frame (31–41 KB against 1 KB), the
+  allocation judged being the engine's own modules (sheets/cache, people/player, render/…; the scene's code ~1 KB a
+  frame, most of it the tail part drawn each frame and the rings' animate — the latter since made allocation-free);
+  frames p95 16.8 against 16.7 (one display period). GPU ~5 ms, soft run 0, pages ~330–400 of 1420, open 3.2 s.
+  Not chased further here: the judged part is the engine's.
