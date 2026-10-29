@@ -28,6 +28,11 @@ return {
     await s.until(() => next.ready);
     next.cut();
   },
+  // what a piece that follows another needs of its own opening: its `from` values that differ now, set at once (a piece
+  // played after the one before in the same opening is not cut to its `from` — beats.md); a camera's change is a cut
+  open(s, values) {
+    for (const [k, v] of Object.entries(values)) if (JSON.stringify(s.get(k)) !== JSON.stringify(v)) s.set(k, v);
+  },
   // the camera's keys set (the operator glides there over `glide` seconds)
   frame(s, values, glide = 1.5) {
     s.set('camera_glide', glide);

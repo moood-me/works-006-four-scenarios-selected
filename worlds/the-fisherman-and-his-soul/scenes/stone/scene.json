@@ -194,21 +194,21 @@
     },
     "fisherman_a": {
       "range": [
-        -3,
-        3
+        -6,
+        6
       ],
       "means": "the scene's own: where the Fisherman stands across, set from fisherman_at"
     },
     "fisherman_d": {
       "range": [
-        4,
-        8
+        0,
+        10
       ],
       "means": "the scene's own: where the Fisherman stands ahead, set from fisherman_at"
     },
     "fisherman_e": {
       "range": [
-        0,
+        -1,
         1
       ],
       "means": "the scene's own: how high over the bay's floor the Fisherman stands (in the deep water), set from fisherman_at"
@@ -219,21 +219,21 @@
     },
     "mermaid_a": {
       "range": [
-        -3,
-        3
+        -6,
+        6
       ],
       "means": "the scene's own: where the Mermaid stands across, set from mermaid_at"
     },
     "mermaid_d": {
       "range": [
-        4,
-        8
+        0,
+        10
       ],
       "means": "the scene's own: where the Mermaid stands ahead, set from mermaid_at"
     },
     "mermaid_e": {
       "range": [
-        0,
+        -1,
         1
       ],
       "means": "the scene's own: how high over the bay's floor the Mermaid stands (in the deep water), set from mermaid_at"

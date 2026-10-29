@@ -8,6 +8,8 @@ pieces») are each scene's `FILM` in its lib (`film(scene)` → the beats), play
   (the pier's shore view gives its own base: its camera keys).
 - `at(PLACES, id, name)` — the keys a cut sets to put someone at a named place (places.md): `_at`, `_placed`, `_a`,
   `_d`, `_e`, `_turn`, `_on` — so a shot made ready ahead has them (a script's reaction to `_at` would come after it).
+- `open(s, values)` — a piece that follows another sets what its own opening needs that differs (it is not cut to its
+  `from`); a shot's keys changed so are a cut.
 - `tell(s, text, hold)` — a moment told, held; `cut(s, values)` — a cut to a shot made ready first; `frame(s, values,
   glide)` — the camera moved; `go(s, id, pts, turn, gait)` — a walk, then a turn; `loop(s, id, motion)`.
 

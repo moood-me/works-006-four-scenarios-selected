@@ -94,11 +94,11 @@ function film(scene) {
   };
   const BOAT = { boat: true, lantern: 1, net: 'heap', haul: 1, heel: 0, boat_tilt: 0, fish: 0, knot: 0, pass_light: 0, deep_lights: false, far_light: 0 };
   const NOBOAT = { boat: false, lantern: 0, net: 'heap', haul: 1, heel: 0, boat_tilt: 0, fish: 0, knot: 0, pass_light: 0, deep_lights: false, far_light: 0 };
-  const DO0 = { fisherman_do: null, mermaid_do: null, fisherman_reach: null, mermaid_reach: null, fisherman_on: null };
+  const DO0 = { fisherman_do: null, mermaid_do: null, fisherman_reach: null, mermaid_reach: null, fisherman_on: null, mermaid_steps: false };
   // his seat on the thwart (in the boat's frame, as the hull is laid: the thwart 0.55 m sternward, 0.3 over the water —
   // 0.2 behind its middle: the cast's `seated` puts the hips that far before the point)
   const THWART = { on: 'boat', at: [0, 0.75, 0.3] };
-  return {
+  const film = {
     // ── Prologue «Сеть» ──
     night: {
       from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, ...pose('boat', 'stone', false), ...DO0, ...P.CAM0, camera_x: 0.6, camera_z: -1.2, camera_look: -0.04 }),
@@ -109,7 +109,7 @@ function film(scene) {
         s.set('haul', 0);
         s.set('net', 'over');
         await P.tell(s, 'night:cast', 3);
-        P.frame(s, P.shot('fisherman', 'medium', [0.45, 0.42], { ...P.CAM0, camera_x: -0.6, camera_z: 1.2 }), 2);
+        P.frame(s, P.shot('fisherman', 'medium', [0.45, 0.42]), 2);
         P.loop(s, 'fisherman', 'haul_net');
         s.move('heel', 0.4, { over: 2 });
         await P.tell(s, 'night:rope', 3);
@@ -120,6 +120,7 @@ function film(scene) {
       from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', haul: 1, heel: 0.3, ...pose('boat', 'net'), ...DO0, fisherman_do: 'haul_net',
         ...P.shot('mermaid', 'close', [0.5, 0.42]) }),
       run: async s => {
+        P.open(s, film.in_net.from());
         const her = s.person('mermaid'), him = s.person('fisherman');
         s.set('net', 'over');
         s.move('haul', 1, { over: 1.5 });
@@ -142,6 +143,7 @@ function film(scene) {
       from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', ...pose('boat', 'net'), ...DO0, fisherman_reach: { r: 'net_over#knot' }, knot: 1,
         ...P.shot('mermaid', 'medium', [0.5, 0.45]) }),
       run: async s => {
+        P.open(s, film.go_word.from());
         const her = s.person('mermaid');
         her.do('stand', { loop: true });
         s.set('fisherman_reach', null);
@@ -159,6 +161,7 @@ function film(scene) {
       from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', ...pose('boat', 'net'), ...DO0, fisherman_reach: { r: 'net_over#knot' }, knot: 1,
         ...P.shot('mermaid', 'medium', [0.5, 0.45]) }),
       run: async s => {
+        P.open(s, film.go_free.from());
         const her = s.person('mermaid');
         her.do('stand', { loop: true });
         s.set('fisherman_reach', null);
@@ -243,6 +246,7 @@ function film(scene) {
       after: 'laugh_tail',
       from: () => ({ ...LIGHT.night, light: 'night', ...NOBOAT, ...pose('shallows', 'stone'), ...DO0, ...P.shot('mermaid', 'medium', [0.5, 0.45]) }),
       run: async s => {
+        P.open(s, film.laugh_tail.from());
         P.frame(s, P.shot('mermaid', 'medium', [0.5, 0.45]), 1.2);
         P.loop(s, 'mermaid', 'laugh');
         await s.wait(1.2);
@@ -259,6 +263,7 @@ function film(scene) {
     rise: {
       from: () => ({ ...LIGHT.night, light: 'night', ...NOBOAT, far_light: 0.5, ...pose('water', null), mermaid_here: false, ...DO0, fisherman_look: 'far_lamp', ...P.CAM0 }),
       run: async s => {
+        P.open(s, film.dive.from());
         s.set('mermaid_here', false);
         s.set('fisherman_look', 'far_lamp');
         s.move('far_light', 1, { over: 9, ease: 'linear' });
@@ -292,10 +297,11 @@ function film(scene) {
       from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', haul: 1, ...pose('boat', null), mermaid_here: false, ...DO0, fisherman_do: 'haul_net',
         ...P.shot('fisherman', 'medium', [0.45, 0.42]) }),
       run: async s => {
+        P.open(s, film.keel_light.from());
         s.set('fish', Number(s.get('fish')) || 1);
         P.loop(s, 'fisherman', 'haul_net');
         await s.wait(2);
-        P.frame(s, P.shot('keel_light', 'close', [0.5, 0.5]), 2);
+        P.frame(s, P.shot('keel_light', 'wide', [0.5, 0.55]), 2);
         await s.wait(1.5);
         // a pale light passes under the keel
         await s.move('pass_light', 1, { over: 1.8 });
@@ -317,5 +323,6 @@ function film(scene) {
       },
     },
   };
+  return film;
 }
 return { film, LIGHT, PLACES, OTHER, turnOf, place, RIBS, rib, rings, ringsMove };

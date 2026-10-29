@@ -1,6 +1,7 @@
 // the net drawn in toward the bow as it is hauled (`haul` 0 → 1: from a length out on the water to under the stem), the
 // catch coming up with it (`fish`), the knot by her hand loosening (`knot`)
 const s = e.state;
+if (!s.boat || s.net !== 'over') return;
 const c = e.anim.clamp;
 const out = 1 - c(s.haul ?? 1, 0, 1);
 const ropes = e.layer('ropes');
