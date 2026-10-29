@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Priest's House","translation":"사제의 집","where":"worlds/the-fisherman-and-his-soul/scenes/priest-house/scene.json title"},
+  {"text":"A white room on the hill. Candles on the altar, the door open on the night.","translation":"언덕 위의 하얀 방. 제단 위의 촛불, 밤을 향해 열린 문.","where":"worlds/the-fisherman-and-his-soul/scenes/priest-house/scene.json caption"}
+]}
