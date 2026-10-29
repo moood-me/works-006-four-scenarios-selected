@@ -1,9 +1,7 @@
 // The sounds of “The Summer Book”, made in the page (Web Audio): recordings (sounds/, CC0) and what is made here; as
-// loud as the page's "sounds" slider says (MooodVolume.output). The page may be heard only after the player's first
-// touch: game.js wakes it as the map is left (a touch); till then its time stands, and what was asked for begins at the
-// touch. Made after «Papa and the Sea»'s (its sound.js).
-//   wake() — the page may be heard from now on (game.js: as the map is left — a touch; again, it changes nothing)
-//   pause(on) — all of it stands while the play is paused (the page's ⏸: game.js b.onPause) and goes on from there after
+// loud as the page's "sounds" slider says (MooodVolume.output). The page runs the audio: it sounds once the browser
+// lets it (the first touch), and waits with the play as the scene's music does — paused, its scene standing or being
+// made ready —, fading out and back in. Made after «Papa and the Sea»'s (its sound.js).
 //   unheard() → {sounds, wake()} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
 // One AudioContext → the master level → a compressor. Two airs a sound goes out into: the open air's (1.5 s, dark) and
 // the room's (the house's rooms: 0.5 s).
@@ -19,7 +17,7 @@
 //   hiss (the cat in the basket) · cough({wall}) (Papa on the veranda, through the wall; wall: false — Grandmother, near)
 import { built, kit } from './ambience.js';
 
-let ctx = null, master = null, rooms = null, still = null, awake = false, held = false;
+let ctx = null, master = null, rooms = null, still = null;
 // a room's tail: decaying noise, low-passed by `dark` (0 bright … 1 dull)
 function impulse(a, seconds, curve, dark) {
   const n = Math.floor(a.sampleRate * seconds), ir = a.createBuffer(2, n, a.sampleRate);
@@ -36,7 +34,6 @@ function impulse(a, seconds, curve, dark) {
 function audio() {
   if (!ctx) {
     ctx = new AudioContext();
-    if (!awake) ctx.suspend();
     const limit = ctx.createDynamicsCompressor();
     limit.threshold.value = -12;
     limit.ratio.value = 4;
@@ -55,20 +52,7 @@ function audio() {
     still.gain.value = 0;
     still.connect(master);
   }
-  if (awake && !held && ctx.state === 'suspended') ctx.resume();
   return ctx;
-}
-export function wake() {
-  // (a context the browser held back resumes at the next touch)
-  if (!awake) for (const touch of ['pointerdown', 'keydown']) addEventListener(touch, audio, { once: true, capture: true });
-  awake = true;
-  audio();
-}
-export function pause(on) {
-  held = !!on;
-  if (!ctx || !awake) return;
-  if (held) ctx.suspend();
-  else ctx.resume();
 }
 
 // where a sound goes: straight out, and `wet` of it into a room's air ('open' — open, or 'room' — a small room)
@@ -398,7 +382,6 @@ export function unheard() {
   const bedOf = name => (level = 1) => { levels[name] = level; };
   return {
     sounds: {
-      wake: none,
       beds(set = {}) { for (const name in BEDS) levels[name] = set[name] ?? 0; },
       ...Object.fromEntries(Object.keys(BEDS).map(name => [name, bedOf(name)])),
       creak: none, door: none, strike: none, knife: none, cup: none, rustle: none, splash: none, thunder: none, knock: none,

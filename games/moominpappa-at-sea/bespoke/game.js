@@ -28,7 +28,7 @@ import { ENDINGS, SCALES, SCENES, context, facts, listen } from './story.js';
 import { ui } from './ui.js';
 import { trees } from './map.js';
 import { jump as unseen } from './jump.js';
-import { beds, wake, unheard, pause } from './sound.js';
+import { beds, unheard } from './sound.js';
 import prologue from './chapters/prologue.js';
 import one from './chapters/1.js';
 import two from './chapters/2.js';
@@ -65,7 +65,6 @@ export const fresh = () => ({
 
 export default async function (b) {
   await b.css('ui.css');
-  b.onPause(pause);
   b.minigame.style({
     font: 'Georgia, "Times New Roman", serif',
     colors: { mark: '#f4ead2', fill: '#f4ead2', good: '#ffe08a', danger: '#c8553d', fork: '#c9d2e4', ghost: '#f4ead2' },
@@ -109,7 +108,6 @@ export default async function (b) {
   for (let after = {}; ;) {
     const to = await map(after);
     after = {};
-    wake(); // (a touch: the page may be heard from now on)
     if (to === 'drop') { replay = null; continue; }
     if (to === 'keep') { await keepReplay(); if (kept.chapter === END) ended(); continue; }
     if (to === 'main' || to === 'back') replay = null;
