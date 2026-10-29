@@ -156,5 +156,77 @@
         0
       ]
     }
-  ]
+  ],
+  "music": {
+    "bpm": 64,
+    "density": 0.2,
+    "brightness": 0.45,
+    "scale": "G_MAJOR_E_MINOR",
+    "prompts": [
+      {
+        "text": "Sparse solo piano, slow and unhurried, with long silences, like light on still water",
+        "weight": 1.1
+      },
+      {
+        "text": "Nordic folk melody on a single wooden flute, distant and breathy, over a soft drone",
+        "weight": 0.5
+      },
+      {
+        "text": "Gentle nylon-string guitar picking, quiet and intimate, a summer morning by the sea",
+        "weight": 0
+      },
+      {
+        "text": "Warm ambient pads with slow swells, pearl-grey and calm, barely moving",
+        "weight": 0
+      },
+      {
+        "text": "Celesta and music box notes, childlike and a little sad",
+        "weight": 0.4
+      },
+      {
+        "text": "Low cello long tones, tender and grave, an old woman remembering",
+        "weight": 0
+      },
+      {
+        "text": "Kantele plucked softly, Finnish archipelago, open fifths, airy",
+        "weight": 0.8
+      },
+      {
+        "text": "Solo accordion, slow waltz, faded and wistful, far away across the water",
+        "weight": 0
+      },
+      {
+        "text": "Soft string quartet, chamber music, restrained and bittersweet",
+        "weight": 0
+      },
+      {
+        "text": "Glass harmonica shimmer, cold clear air, high and fragile",
+        "weight": 0
+      },
+      {
+        "text": "Minimalist marimba patterns, gentle and repeating, like small waves",
+        "weight": 0
+      },
+      {
+        "text": "Harmonium chords breathing slowly, a quiet chapel by the sea",
+        "weight": 0
+      },
+      {
+        "text": "Clarinet in its low register, dry and humorous, a little crooked tune",
+        "weight": 0
+      },
+      {
+        "text": "Felt piano with tape hiss, close and soft, lullaby feel",
+        "weight": 0
+      },
+      {
+        "text": "Distant church bell and sea wind textures, sparse, mostly silence",
+        "weight": 0
+      },
+      {
+        "text": "Harp arpeggios, slow, luminous, early summer dawn",
+        "weight": 0
+      }
+    ]
+  }
 }

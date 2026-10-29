@@ -186,5 +186,77 @@
         0
       ]
     }
-  ]
+  ],
+  "music": {
+    "bpm": 66,
+    "density": 0.25,
+    "brightness": 0.45,
+    "scale": "D_MAJOR_B_MINOR",
+    "prompts": [
+      {
+        "text": "Solo nylon-string guitar picking a slow, plain northern folk tune, close and intimate, sea wind behind it",
+        "weight": 1
+      },
+      {
+        "text": "Soft accordion holding long quiet chords, a little out of breath, a Finnish summer evening by the shore",
+        "weight": 0
+      },
+      {
+        "text": "Sparse felt piano, three notes and a long pause, cold clear morning air, gentle melancholy",
+        "weight": 0.4
+      },
+      {
+        "text": "A small clarinet melody, wistful and a little comic, like a story told to a child, over a bowed double bass",
+        "weight": 0.6
+      },
+      {
+        "text": "Glassy harmonium drones with the hiss of waves on granite, slow and wide, almost still",
+        "weight": 0.8
+      },
+      {
+        "text": "Music box playing a lullaby slightly out of tune, far away, nostalgic",
+        "weight": 0
+      },
+      {
+        "text": "Solo cello, long low phrases, lonely lighthouse at dawn, restrained and warm",
+        "weight": 0
+      },
+      {
+        "text": "Kantele plucked softly, open fifths, Nordic folk, bright and bare",
+        "weight": 0
+      },
+      {
+        "text": "Brushed snare and upright bass, a slow cheerful waltz, a family on a boat trip",
+        "weight": 0
+      },
+      {
+        "text": "Whistled melody over a ukulele, light-hearted, a proud father setting out on an adventure",
+        "weight": 0
+      },
+      {
+        "text": "Strings swelling slowly into a wide open chord, the sea and the sky, hopeful and sad at once",
+        "weight": 0
+      },
+      {
+        "text": "Wind chimes and low synth pad, the bare island at night, the moon on the water",
+        "weight": 0
+      },
+      {
+        "text": "Tin whistle and frame drum, a storm coming up over the sea, restless",
+        "weight": 0
+      },
+      {
+        "text": "A celesta and a flute, an imaginary garden painted on a wall, bees and summer warmth",
+        "weight": 0
+      },
+      {
+        "text": "Low drone of a foghorn-like brass note under thin high violins, a dark lighthouse, waiting",
+        "weight": 0
+      },
+      {
+        "text": "Children's choir humming wordlessly, very far off, a memory of a valley",
+        "weight": 0
+      }
+    ]
+  }
 }
