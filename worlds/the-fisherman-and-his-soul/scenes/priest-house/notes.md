@@ -47,6 +47,20 @@ candles and the lamp burn in both). `flowers`: none / altar / threshold. `bench_
 
 The Soul is not here in any moment (in 1.2 it is still in him: one shadow).
 
+## Renders and the measuring
+
+- Renders (2026-10-29, GPU service): the night picture (the default state); the morning with the Priest on the threshold,
+  the women and the Witch, the flowers on the altar; the morning with the bench knocked over and the flowers on the
+  threshold. Fixed after them: walls clipped to their boxes, candles and lamp softer (the room was all orange), the
+  Fisherman's seat point 0.2 m back, `ambient` 0.72, the morning's `inside` 0.85 (the Priest was a silhouette against the
+  bright door), the white flowers outlined with yellow eyes (white on the white wall).
+- `measure_scene` (`c15bbbf`, T4): desktop / laptop / phone fail 4 / 3 / 2 of 17 — the scene thread's JS (median 3.1
+  against 3, p99 6–7 against 6), its GC (2.3–3.1 ms against 2) and allocation a frame (~40 KB against 1 KB), the judged
+  part being the engine's own modules (people/player.js, people/cloth.js, render/quads.js…); the scene's own code 273
+  bytes a frame. Frames p95 16.7, GPU ~4.8 ms, soft run 0.18 s, pages ~435–523 of 1419, open 4.5 s. Not chased here: the
+  judged part is the engine's. Noted: the report counts 5 persons drawn though three of them are `_here` false.
+
 ## Wanted from the engine / not yet
 
-- Nothing found missing yet (see the history note for the renders).
+- Nothing missing for this scene. The Fisherman's sign on the threshold (1.2), rising from the bench, the Priest's
+  gestures — stage 5 motions.
