@@ -60,9 +60,11 @@ the mist on the water, the chimney's smoke, the lamps' and the hearth's flicker,
 The pieces (`lib.film`, the world's `beats` from `script.js`): `market` (the prologue's morning: the cast's
 `fish`), `under_bridge`, `over_bridge`, `square`, `hand_itself`, `shrug_back`, `bridge_dawn`, `beggar`, `soul_town`,
 `rumour`, `door_potter`, `door_shut`. Variant: `slow` (door_shut). The daughter now stands at her place's keys. Sheet
-(2026-10-29): as meant but the beggar's piece — the operator, framing the Fisherman on the bridge, stood under it by the
-water (the bridge's road is no floor to it) and then inside the old man: it is filmed now from the camera's own place
-on the road (`ON_ROAD`, `AT_BOWL`).
+(2026-10-29): as meant. The beggar's piece is filmed from the camera's own places on the road (`ON_ROAD`, `AT_BOWL`):
+in a `walk` scene the operator films from the viewer's side, and the Fisherman faces the far parapet — framed, he is
+his back and the bowl is hidden behind him (render 2715). Their heights are over the road as over the land (engine
+`engine3-camera-water`: the eye no longer drops to the river under the road; before it, `camera_h` 1.9 and 1.5 made up
+for the river's −2 m — with the new engine they would put the eye 2 m too high).
 
 ## Contract for the check
 
