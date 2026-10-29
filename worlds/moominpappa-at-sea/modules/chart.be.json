@@ -1,0 +1,8 @@
+{"strings": [
+  {"text":"Moominvalley","translation":"Мумі-даліна","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"N","context":"the compass rose: north","translation":"Пн","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"The Open Sea","translation":"Адкрытае мора","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"Lighthouse","translation":"Маяк","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"The Lighthouse Island","translation":"Востраў маяка","where":"worlds/moominpappa-at-sea/modules/chart.js"},
+  {"text":"Chart of the Gulf","translation":"Карта заліва","where":"worlds/moominpappa-at-sea/modules/chart.js"}
+]}
