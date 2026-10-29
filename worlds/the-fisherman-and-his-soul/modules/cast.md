@@ -63,3 +63,62 @@ the water's glow), a fine line, a simple face (eyes, brows, a mouth) that reads 
 
 - `seated` — sits upright, the hands resting in the lap, breathing (a loop; on a seat through `<id>_on`).
 - `hands_behind` — stands still, the hands clasped behind the back, looking ahead (a loop).
+
+Stage 5's motions (Kimodo, made and looked at 2026-10-29: `docs/history/2026-10-29-rybak-motions.md`; a loop unless
+«once»). Where Kimodo gives only the nearest thing, it says so — the scene finishes it (`_reach`, `_look`, `_mood`, parts).
+
+- `haul_net` — pulls a rope hand over hand, knees bent, leaning back.
+- `struggle` — flails both arms, twists the shoulders (caught in the net).
+- `laugh` — laughs hard, the head back, then doubled over.
+- `sign` (once) — the right palm to the forehead, then down to the chest (lands nearer the throat than the heart).
+- `rise_sharp` (once) — up quickly from a seat.
+- `point_away` (once) — flings the right arm forward and up, pointing, held.
+- `dance_light` — light steps turning, the arms out (made on the girl's look).
+- `clap` — claps at the chest in rhythm.
+- `whisper` — leans a little, the right hand beside the mouth.
+- `clumsy_dance` (once) — stumbling steps, the arms out, rights himself (the laugh: `_mood`).
+- `look_back` (once) — walks, stops, turns the shoulders back, faces forward again.
+- `swing_feet` — **near only**: seated, kicks a leg up twice, then sits still; Kimodo would not swing the legs in five
+  takes. On a high seat (`_on`) the legs hang anyway.
+- `dance_tambourine` — the left hand held up high all through, the right low, knees bent, swaying (no beat on it).
+- `dance_round` — the arms raised, stepping side to side.
+- `pull_hands` (once) — walks backward, the arms out, palms up (the hands meet through `_reach`).
+- `pant` — bent, the hands on the knees, breathing hard.
+- `throw_down` (once) — bends, the right hand flicks down by the knee.
+- `hold_out` — both arms held straight out at shoulder height, then drawn back to the chest.
+- `kneel` — kneels upright-ish, the hands on the thighs.
+- `bend_over` (once) — made going on from `kneel`: bows forward over the ground before the knees.
+- `cut_shadow` (once) — crouched low, the right hand along the ground before the feet (the line itself: the scene's `cut`).
+- `stab_post` (once) — the right hand thrust forward at chest-to-shoulder height and held (Kimodo makes «stab/knife» a
+  boxer's jab; this one is held by a hand constraint).
+- `pull_knife` (once) — the right arm reaches forward, grips, pulls back to the chest.
+- `rise_ground` (once) — from flat on the back, sits up, crouches, stands.
+- `plead` — bent forward, both open hands out, palms up.
+- `sit_edge` — seated, the hands resting at the hips (on a high seat through `_on` the legs hang).
+- `call_out` — both hands cupped at the mouth, calling.
+- `hang_lantern` (once) — the right hand up in front at head height, holds, lowers.
+- `weave` — kneeling, bent low, the hands working on the ground before the knees.
+- `sit_ground` — on the ground, knees up, the arms round them.
+- `drag_back` — walks backward, knees bent, leaning back, the hands low in front.
+- `lie_still` — on the back, still.
+- `fall_beside` (once) — **near only**: drops to the knees and folds forward to the ground (a collapse — not onto the
+  side; five takes would not lie down sideways).
+- `bless` (once) — the right hand raised, slow wide strokes in the air.
+- `throw_far` (once) — an overhand throw with the right arm.
+- `preach` — open hands at chest height, slow gestures.
+- `sing` — seated, the head and shoulders barely swaying (Kimodo has no singing: the song is the sound).
+- `hide_face` — kneeling (not seated), bows and covers the face with both hands.
+- `lie_bench` — lies curled on the side, still.
+- `sleep_floor` — curled on the side, still.
+- `search` — bends, both hands moving things in front at waist height (not a high shelf).
+- `wrist_behind` (once) — both hands go behind the back and stay there.
+- `shrug` (once) — a small lift of the shoulders with a tilt of the head (hardly seen far off).
+- `hands_under` — seated, the hands together low in the lap between the thighs.
+- `sleep_wall` — sits on the ground, the legs out, the head dropped on the arms over the knees (made on the beggar's look).
+- `lay_down` (once) — bends, crouches, sets something down, stands.
+- `knot_net` — seated, the hands working together in the lap.
+- `run` — a steady run.
+- `shield` (once) — stoops, the arms out and back behind her (made on the widow's look).
+- `play_fiddle` — the left hand up by the left of the head, the right arm bowing (made on musician_a's look).
+- `play_pipe` — both hands together at the mouth.
+- `wade` — bent forward, the arms pushing ahead, wide heavy strides (Kimodo has no water; the water hides the legs).
