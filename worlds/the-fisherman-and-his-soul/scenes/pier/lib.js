@@ -48,9 +48,9 @@ const PLACES = {
   girl: { feast: { at: [-2.3, 2.7], turn: 120 } },
   woman_a: { feast: { at: [-3.2, 1.9], turn: 70 }, shore: { at: [2.0, -0.6], turn: 260 } },
   woman_b: { feast: { at: [-3.6, 1.4], turn: 60 }, shore: { at: [2.4, -0.2], turn: 250 } },
-  widow: { boat: { at: [3.0, -0.9], turn: 250 }, sand: { at: [1.9, -0.3], turn: 250 }, away: { at: [8.5, 1.0], turn: 80 } },
-  widow_girl: { boat: { at: [3.4, -1.4], turn: 250 }, field: { at: [-3.6, -10.9], turn: 60 } },
-  widow_boy: { boat: { at: [3.7, -0.7], turn: 250 }, end: { at: [-0.55, 4.45], turn: 150, on: [-0.55, 4.45, 2.55] }, field: { at: [-3.2, -11.2], turn: 60 } },
+  widow: { boat: { at: [-0.6, -3.3], turn: 70 }, sand: { at: [1.9, -0.3], turn: 250 }, away: { at: [8.5, 1.0], turn: 80 } },
+  widow_girl: { boat: { at: [-0.2, -3.8], turn: 70 }, field: { at: [-3.6, -10.9], turn: 60 } },
+  widow_boy: { boat: { at: [0.25, -3.1], turn: 70 }, end: { at: [-0.55, 4.45], turn: 150, on: [-0.55, 4.45, 2.55] }, field: { at: [-3.2, -11.2], turn: 60 } },
   witch: { shore: { at: [2.6, 0.1], turn: 270 }, end: { at: [-0.25, 4.55], turn: 150 } },
   priest: { shore: { at: [0.2, -0.6], turn: 80 }, end: { at: [-0.1, 4.65], turn: 150 }, post: { at: [0.45, 4.3], turn: 60 }, mound: { at: [-2.0, -10.5], turn: 250 } },
 };

@@ -30,12 +30,12 @@ bank.addColorStop(0, snow ? 'rgba(220, 226, 236, 0)' : 'rgba(120, 132, 86, 0)');
 bank.addColorStop(0.25, snow ? '#dde3ec' : '#7d8a58');
 bank.addColorStop(1, snow ? '#e8ecf2' : '#6f7e4c');
 g.fillStyle = bank;
-g.fillRect(-35, Y(-5.5), 70, -6);
+g.fillRect(-35, Y(-5.5), 70, 6);
 g.fillStyle = snow ? '#eef1f6' : '#8a9a5c';
-g.fillRect(-35, -24, 70, Y(-11.5) + 24);
+g.fillRect(-35, Y(-11.5), 70, 24 - Y(-11.5));
 for (let i = 0; i < 400; i++) {
   const x = -35 + 70 * e.anim.hash(i, 21);
-  const y = -24 + (Y(-6) + 24) * e.anim.hash(i, 22);
+  const y = Y(-6) + (24 - Y(-6)) * e.anim.hash(i, 22);
   g.fillStyle = snow ? 'rgba(190, 200, 214, 0.4)' : (e.anim.hash(i, 23) > 0.5 ? 'rgba(96, 110, 62, 0.45)' : 'rgba(150, 160, 98, 0.4)');
   g.fillRect(x, y, 0.08 + 0.12 * e.anim.hash(i, 24), 0.3 + 0.5 * e.anim.hash(i, 25));
 }

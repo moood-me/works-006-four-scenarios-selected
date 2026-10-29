@@ -248,18 +248,18 @@
     "widow_here": false,
     "widow_at": "boat",
     "widow_placed": "boat",
-    "widow_a": 3.0,
-    "widow_d": -0.9,
+    "widow_a": -0.6,
+    "widow_d": -3.3,
     "widow_girl_here": false,
     "widow_girl_at": "boat",
     "widow_girl_placed": "boat",
-    "widow_girl_a": 3.4,
-    "widow_girl_d": -1.4,
+    "widow_girl_a": -0.2,
+    "widow_girl_d": -3.8,
     "widow_boy_here": false,
     "widow_boy_at": "boat",
     "widow_boy_placed": "boat",
-    "widow_boy_a": 3.7,
-    "widow_boy_d": -0.7,
+    "widow_boy_a": 0.25,
+    "widow_boy_d": -3.1,
     "witch_here": false,
     "witch_at": "shore",
     "witch_placed": "shore",
@@ -369,8 +369,8 @@
     {
       "id": "far_back",
       "name": "Hills inland and the far shore",
-      "across": -500,
-      "distance": -260,
+      "across": -1000,
+      "distance": -520,
       "facing": 70,
       "height": 40,
       "box": [
@@ -458,9 +458,9 @@
     {
       "id": "boat_ashore",
       "name": "The widow's boat drawn up",
-      "across": 3.5,
-      "distance": -1.6,
-      "facing": 59,
+      "across": -1.6,
+      "distance": -4.4,
+      "facing": 61,
       "height": 1.0,
       "box": [
         -2.3,
@@ -836,8 +836,8 @@
         "who": "widow",
         "turn": 250
       },
-      "across": 3.0,
-      "distance": -0.9,
+      "across": -0.6,
+      "distance": -3.3,
       "place": {
         "across": "widow_a",
         "distance": "widow_d"
@@ -851,8 +851,8 @@
         "who": "widow_girl",
         "turn": 250
       },
-      "across": 3.4,
-      "distance": -1.4,
+      "across": -0.2,
+      "distance": -3.8,
       "place": {
         "across": "widow_girl_a",
         "distance": "widow_girl_d"
@@ -866,8 +866,8 @@
         "who": "widow_boy",
         "turn": 250
       },
-      "across": 3.7,
-      "distance": -0.7,
+      "across": 0.25,
+      "distance": -3.1,
       "place": {
         "across": "widow_boy_a",
         "distance": "widow_boy_d"
