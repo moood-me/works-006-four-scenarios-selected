@@ -1,0 +1,13 @@
+{"strings": [
+  {"text":"27 August. Wind north. Today I am forty. Nobody knows.","translation":"27 серпня. Вітер норд. Мені сьогодні сорок. Ніхто не знає.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Ate bread. Whose, I don't know.","translation":"З’їв хліб. Чий — не знаю.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Calm. The sea is good today.","translation":"Штиль. Море сьогодні добре.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Ice on the steps. Wind north.","translation":"На сходах лід. Вітер норд.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Fog. Heard a ship. It did not come.","translation":"Туман. Чув судно. Не підійшло.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Wind south-west. Nobody again.","translation":"Вітер зюйд-вест. Знову ніхто.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"23 August. Arrived.","translation":"23 серпня. Прибули.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"Depth: more than the rope.","translation":"Глибина: більша за мотузку.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"27 August. Calm.","translation":"27 серпня. Тихо.","where":"worlds/moominpappa-at-sea/scenes/round-room/elements/wall_a.js"},
+  {"text":"The Round Room","translation":"Кругла кімната","where":"worlds/moominpappa-at-sea/scenes/round-room/scene.json title"},
+  {"text":"The round room at the foot of the lighthouse.","translation":"Кругла кімната біля підніжжя маяка.","where":"worlds/moominpappa-at-sea/scenes/round-room/scene.json caption"}
+]}

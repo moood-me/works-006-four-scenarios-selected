@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Middle of the Island","translation":"Середина острова","where":"worlds/moominpappa-at-sea/scenes/middle/scene.json title"},
+  {"text":"Among the pines, a clearing, and a pool so black it seems to have no bottom.","translation":"Серед сосонок — галявина і вир, такий чорний, що в нього ніби немає дна.","where":"worlds/moominpappa-at-sea/scenes/middle/scene.json caption"}
+]}

@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Magic Forest","translation":"Чарівний ліс","where":"worlds/the-summer-book/scenes/forest/scene.json title"},
+  {"text":"The island's crown: moss, grey stone and dead trees twisted by the wind.","translation":"Маківка острова: мох, сірий камінь і мертві дерева, скручені вітром.","where":"worlds/the-summer-book/scenes/forest/scene.json caption"}
+]}
