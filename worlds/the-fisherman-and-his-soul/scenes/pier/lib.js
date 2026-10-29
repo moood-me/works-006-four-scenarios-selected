@@ -94,7 +94,7 @@ function film(scene) {
   const SHORE_FIELD = { ...P.CAM0, camera_x: 0.6, camera_z: -7.8, camera_yaw: 222, camera_look: 0.06 };
   // near the two on the sand by the water, on the wide view's own line (the water and the wave on the right): his
   // face, her hand in his, the sea coming — the choice and «Holding Her» (М8) are played here
-  const SHORE_NEAR = { ...P.CAM0, camera_x: 3.3, camera_z: 0.95, camera_yaw: 250, camera_look: 0.12 };
+  const SHORE_NEAR = { ...P.CAM0, camera_x: 3.8, camera_z: 1.1, camera_yaw: 254, camera_look: 0.3 };
   const put = (s, o) => { for (const [k, v] of Object.entries(o)) s.set(k, v); };
   // an object without some of its keys (a piece's `from` that leaves a key to the game)
   const without = (o, ...ks) => Object.fromEntries(Object.entries(o).filter(([k]) => !ks.includes(k)));
