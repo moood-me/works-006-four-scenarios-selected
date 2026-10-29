@@ -269,7 +269,9 @@
     "priest_at": "shore",
     "priest_placed": "shore",
     "priest_a": 0.2,
-    "priest_d": -0.6
+    "priest_d": -0.6,
+    "fin_a": 2.05,
+    "fin_d": 5.6
   },
   "objects": [
     {
@@ -567,7 +569,11 @@
         -0.78,
         0.38,
         0.06
-      ]
+      ],
+      "place": {
+        "across": "fin_a",
+        "distance": "fin_d"
+      }
     },
     {
       "id": "pier_deck",
@@ -693,10 +699,20 @@
         "kind": "smoke",
         "at": "soul#hand_l",
         "amount": "soul_smoke",
-        "color": "#8a92a8",
+        "rate": 8,
+        "life": [
+          1.2,
+          2.2
+        ],
+        "speed": [
+          0.02,
+          0.08
+        ],
+        "color": "#c4c9d6",
+        "opacity": 0.55,
         "size": [
-          0.05,
-          0.25
+          0.04,
+          0.2
         ]
       }
     },
@@ -708,7 +724,11 @@
       "distance": 4.4,
       "elevation": -0.47,
       "width": 1.6,
-      "depth": 1.6
+      "depth": 1.6,
+      "place": {
+        "across": "mermaid_a",
+        "distance": "mermaid_d"
+      }
     },
     {
       "id": "reeds",
@@ -1339,6 +1359,14 @@
     "mermaid_e": {
       "type": "number",
       "means": "the scene's own: how high over the bay's floor mermaid stands (in the water)"
+    },
+    "fin_a": {
+      "type": "number",
+      "means": "the scene's own: where her tail's fluke rises behind her, set from where she is"
+    },
+    "fin_d": {
+      "type": "number",
+      "means": "the scene's own: where her tail's fluke rises behind her, set from where she is"
     }
   }
 }

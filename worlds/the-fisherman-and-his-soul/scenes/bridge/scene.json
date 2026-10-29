@@ -958,10 +958,20 @@
         "kind": "smoke",
         "at": "soul#hand_l",
         "amount": "soul_smoke",
-        "color": "#8a92a8",
+        "rate": 8,
+        "life": [
+          1.2,
+          2.2
+        ],
+        "speed": [
+          0.02,
+          0.08
+        ],
+        "color": "#c4c9d6",
+        "opacity": 0.55,
         "size": [
-          0.05,
-          0.25
+          0.04,
+          0.2
         ]
       }
     },

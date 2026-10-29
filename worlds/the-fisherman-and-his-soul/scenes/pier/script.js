@@ -20,3 +20,8 @@ drag();
 const snow = () => scene.set('snowfall', scene.get('snow') ? 0.6 : 0);
 scene.on('change', 'snow', snow);
 snow();
+// her tail's fluke rises behind her wherever she is in the water (0.75 m right of her, 1.2 m behind)
+const fin = () => { scene.set('fin_a', (Number(scene.get('mermaid_a')) || 0) + 0.75); scene.set('fin_d', (Number(scene.get('mermaid_d')) || 0) + 1.2); };
+scene.on('change', 'mermaid_a', fin);
+scene.on('change', 'mermaid_d', fin);
+fin();
