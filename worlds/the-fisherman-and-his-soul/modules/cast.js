@@ -46,6 +46,21 @@ function tambourine(F) {
   }
   F.point('tambourine', c);
 }
+// the Mermaid's tail over her legs: one silver-green tube from her hips down between her knees to her ankles,
+// tapering, and a wide flat fluke where her feet are (her feet in it) — sitting on the stone it hangs down its front;
+// in the water it is under it (the scene gives it: `<id>_with: ["tail"]`)
+const TAIL = [0.55, 0.72, 0.69, 1];
+const FLUKE = [0.47, 0.64, 0.62, 1];
+function tail(F) {
+  const { add, sub, mul, mix, cross, unit } = V();
+  const m = F.fit.h;
+  const ankles = mix(F.P('LeftFoot'), F.P('RightFoot'), 0.5);
+  F.tube([mix(F.P('LeftLeg'), F.P('RightLeg'), 0.5), mix(F.P('LeftShin'), F.P('RightShin'), 0.5), ankles],
+    [[0, 0.16 * m], [1, 0.115 * m], [2, 0.065 * m]], [[0, TAIL]], 12, F.fwd('Hips'));
+  const along = unit(sub(mix(F.P('LeftToeEnd'), F.P('RightToeEnd'), 0.5), ankles));
+  const across = unit(sub(F.P('LeftFoot'), F.P('RightFoot')));
+  F.ball(add(ankles, mul(along, 0.09 * m)), [across, unit(cross(across, along)), along], [0.17 * m, 0.022 * m, 0.1 * m], FLUKE, 12);
+}
 return {
   ...data,
   characters: {
@@ -89,6 +104,7 @@ return {
     parts: {
       lantern: { name: 'lantern', draw: F => lantern(F, 'RightHand') },
       tambourine: { name: 'tambourine', draw: F => tambourine(F) },
+      tail: { name: 'tail', draw: F => tail(F) },
     },
   },
 };

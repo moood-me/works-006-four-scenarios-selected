@@ -28,6 +28,9 @@ the water's glow), a fine line, a simple face (eyes, brows, a mouth) that reads 
   its flame is the person's point `#flame` (the scene's light: `"at": "<id>#flame"`).
 - `tambourine` — a tambourine lying on the lap between the hands, a little above the dress (for sitting); point
   `#tambourine`.
+- `tail` — the Mermaid's tail over her legs: a silver-green tube from the hips down to the ankles and a wide flat fluke
+  at the feet (sitting on the stone it hangs down its front). Given by a scene (`mermaid_with: ["tail"]`), not her look's
+  own: in the water it is hidden anyway.
 
 ## Motions
 
