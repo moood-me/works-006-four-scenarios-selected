@@ -177,3 +177,10 @@ behind the viewer's right shoulder, seen from neither view (checked in the shore
  "points": ["cutline#heel","cutline#toe","lantern_post#grip","lantern_post#knife","knife_boards#knife","bundle#rope","mound#head","sky#disc","sky#low"],
  "keys": ["light", "years","mist","snow","view","lantern_at","lantern_lit","knife","rust","net_rail","net_hole","hut","shawl","widow_boat","wave","mound","linen","shells","under_light","far_lantern","cut","cut_rough","bundle","drag","soul_smoke","fisherman_at","soul_at","mermaid_at","girl_at","woman_a_at","woman_b_at","widow_at","widow_girl_at","widow_boy_at","witch_at","priest_at"]}
 ```
+
+## Fixes after the browser test (2026-10-29, r3/rybak-fix)
+
+- `shawl` is no longer cleared by every shore piece's `from` (SHORE): laid in `witch_shore`, it is the game's to keep
+  on every shore opened after (chapter 4), and the wave takes it with the hut (`fall_by`).
+- `sea_comes` ends cut near the two on the sand (`SHORE_NEAR`: his face, her hand, the wave on the right) — the
+  choice «The Wave» and «Holding Her» are played there; `covered` goes back wide.

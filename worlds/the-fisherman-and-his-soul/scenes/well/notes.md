@@ -66,3 +66,13 @@ this stage.
  "points": ["witch#tambourine","knife_ground#knife","sky#disc"],
  "keys": ["time","round","stumble","knife_ground"]}
 ```
+
+## Fixes after the browser test (2026-10-29, r3/rybak-fix)
+
+- Midnight brighter, the moon's glade bold: ambient 0.9 (was 0.6), moon 1.35 (0.9), haze 0.1, vignette 0.22 — the
+  lantern is not in his hand during the dance, the moon is all the light there is.
+- The dance (`dance`, `velvet`, `dance_dawn`) is shot near: the operator on the well (`ROUND_SHOT`, the well under a
+  quarter of the frame), the two dancers and her tambourine large.
+- After the dance (`broken`, `demand`, `dance_dawn`) he stands before her on her left (`BEFORE`), both in one full
+  shot (`TWO`): the choice that follows is his, his face must be in the frame (it was cut off at the left edge — the
+  game stalled on a mark nobody saw).

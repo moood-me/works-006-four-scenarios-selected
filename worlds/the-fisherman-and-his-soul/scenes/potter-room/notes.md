@@ -79,3 +79,8 @@ stage.
  "points": ["bench#seat","shelf#cup","shelf#bread","hearth#fire","fisherman#cup"],
  "keys": ["fire","morning","door","cup_at","cup_tilt","carry","soul_smoke","fisherman_at","potter_at","daughter_at","soul_at"]}
 ```
+
+## Fixes after the browser test (2026-10-29, r3/rybak-fix)
+
+- The walls' plaster (`lib.wall`): the big soft translucent blots (up to a metre) read as haze in the air before the
+  faces — now small faint flecks, a few centimetres.
