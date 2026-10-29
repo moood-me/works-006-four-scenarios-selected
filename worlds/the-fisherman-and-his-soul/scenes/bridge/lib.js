@@ -52,4 +52,26 @@ function house(g, e, k) {
     }
   }
 }
-return { house };
+// the hours (hours.md): the numbers each word of `time` sets
+const TIME = {
+  night: { dusk: 0, dawn: 0, day: 0 },
+  evening: { dusk: 1, dawn: 0, day: 0 },
+  morning: { dusk: 0, dawn: 0, day: 1 },
+};
+// the people's named places (places.md): at — [across, distance], turn, on — a seat. The lane before the bridge's head
+// (where he comes off it), under the bridge's end on the landing by the water (3.1), the bridge's head, its middle, before
+// the potter's stall, before his door (the door at 7.4 on the right), the doorway; the beggar sat against the far
+// parapet midway (on a stone step at its foot), facing the road
+const LANE = { at: [-0.5, 8.4], turn: 110 };
+const UNDER = { at: [-2.3, 11.6], turn: 250 };
+const HEAD = { at: [-0.8, 12.2], turn: 270 };
+const MID = { at: [-11.6, 12.0], turn: 270 };
+const STALL = { at: [1.0, 9.6], turn: 60 };
+const DOOR = { at: [1.75, 7.4], turn: 90 };
+const PLACES = {
+  fisherman: { lane: LANE, under: UNDER, head: HEAD, mid: MID, stall: STALL, door: DOOR },
+  soul: { lane: LANE, under: UNDER, head: HEAD, mid: MID, stall: STALL, door: DOOR },
+  potter: { door: { at: [1.8, 7.6], turn: 235 }, stall: { at: [2.25, 10.5], turn: 250 }, doorway: { at: [2.35, 7.4], turn: 270 } },
+  beggar: { parapet: { at: [-9.2, 13.55], turn: 180, on: [-9.2, 13.5, 3.82] } },
+};
+return { house, TIME, PLACES };

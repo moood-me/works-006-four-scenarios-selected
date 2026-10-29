@@ -1,0 +1,676 @@
+{
+  "engine": 3,
+  "title": "The Potter's Room",
+  "caption": "The potter's low room by the bridge. The hearth, the shelf with the silver cup.",
+  "horizon": 0.47,
+  "camera": {
+    "mode": "walk",
+    "area": [
+      0.8,
+      0.8,
+      0,
+      1.0
+    ]
+  },
+  "modules": [
+    "cast",
+    "places"
+  ],
+  "light": {
+    "ambient": 0.82,
+    "ambientColor": "#b8b0c8",
+    "inside": 0.5,
+    "saturation": 1.0,
+    "bounce": 0.6,
+    "haze": 0.06,
+    "hazeColor": "#2a2a40",
+    "hazeGlow": 0.7,
+    "shafts": 0.3,
+    "vignette": 0.3,
+    "grain": 0.08,
+    "wind": [
+      1,
+      0.2,
+      0.2
+    ],
+    "looks": {
+      "morning": {
+        "ambient": 0.88,
+        "ambientColor": "#e6e0d4",
+        "inside": 0.8,
+        "shafts": 0.35,
+        "lights": {
+          "moon": 0
+        }
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "moon",
+      "from": [
+        25,
+        30
+      ],
+      "through": [
+        "window_opening"
+      ],
+      "color": "#c9d6f4",
+      "strength": 0.6
+    },
+    {
+      "id": "sun",
+      "from": [
+        20,
+        12
+      ],
+      "through": [
+        "window_opening"
+      ],
+      "color": "#ffdcae",
+      "strength": 0.9,
+      "on": "morning"
+    },
+    {
+      "id": "window_air",
+      "of": "window_opening",
+      "daylight": 0.8,
+      "reach": 4
+    },
+    {
+      "id": "fire",
+      "of": "hearth#flame",
+      "on": "fire",
+      "color": "#ffa65c",
+      "strength": 1.6,
+      "reach": 7,
+      "flicker": 0.22,
+      "glow": 0.25
+    },
+    {
+      "id": "lantern_f",
+      "at": "fisherman#flame",
+      "color": "#ffbf72",
+      "strength": 1.3,
+      "reach": 5,
+      "flicker": 0.12,
+      "glow": 0.25
+    },
+    {
+      "id": "lantern_s",
+      "at": "soul#flame",
+      "color": "#ffbf72",
+      "strength": 1.3,
+      "reach": 5,
+      "flicker": 0.12,
+      "glow": 0.25
+    },
+    {
+      "id": "lamp",
+      "of": "shelf#lamp",
+      "color": "#ffc57a",
+      "strength": 1.0,
+      "reach": 4.5,
+      "flicker": 0.1,
+      "glow": 0.12
+    }
+  ],
+  "state": {
+    "fire": 1,
+    "morning": 0,
+    "door": 0,
+    "door_turn": 270,
+    "cup_at": "shelf",
+    "cup_tilt": 0,
+    "carry": 0,
+    "soul_smoke": 0,
+    "fisherman_at": "bench",
+    "fisherman_a": -0.5,
+    "fisherman_d": 4.17,
+    "fisherman_on": [
+      -0.5,
+      4.37,
+      0.45
+    ],
+    "fisherman_placed": "bench",
+    "fisherman_look": "potter",
+    "potter_at": "shelf",
+    "potter_a": 1.05,
+    "potter_d": 4.35,
+    "potter_placed": "shelf",
+    "potter_look": "fisherman",
+    "daughter_at": "pallet",
+    "daughter_a": -2.1,
+    "daughter_d": 3.6,
+    "daughter_placed": "pallet",
+    "daughter_mood": "eyes_closed",
+    "soul_at": "door",
+    "soul_a": 2.15,
+    "soul_d": 1.65,
+    "soul_placed": "door",
+    "soul_here": false
+  },
+  "states": {
+    "fire": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the hearth: 1 a good fire (evening) … 0.2 low at night … 0 embers; its light with it"
+    },
+    "morning": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "0 night: the window dark blue, the moon's light in at it; 1 morning: the window pale, the sun's first light in at it (3.5, 3.6)"
+    },
+    "door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the door to the lane: 0 shut … 1 open into the room"
+    },
+    "door_turn": {
+      "range": [
+        270,
+        355
+      ],
+      "means": "the scene's own: the door leaf's turn, set from door"
+    },
+    "cup_at": {
+      "values": [
+        "shelf",
+        "hand",
+        "bag",
+        "gone"
+      ],
+      "means": "the silver cup: shelf — on the shelf behind the loaf (point shelf#cup); hand — in someone's hand (the cast's part `cup`: `<id>_with`); bag — in the Fisherman's shoulder bag (the part `bag`); gone — not here. The shelf shows it only at shelf"
+    },
+    "cup_tilt": {
+      "range": [
+        -1,
+        1
+      ],
+      "smooth": true,
+      "means": "М5: how the carried cup tips — the hand holding it swayed to one side or the other (the script: fisherman_reach), while cup_at is hand"
+    },
+    "carry": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "М5: the Fisherman carrying the cup from before the bench (0) to the shelf (1) — the scene walks him"
+    },
+    "soul_smoke": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the trace of the knife's miss (М3): smoke rising off the Soul's left hand (wherever the Soul is seen after 1.10)"
+    },
+    "fisherman_at": {
+      "values": [
+        "bench",
+        "stand",
+        "shelf",
+        "door"
+      ],
+      "means": "where fisherman is (lib.PLACES, places.md; notes.md): set — put there at once"
+    },
+    "fisherman_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "fisherman_a": {
+      "type": "number",
+      "means": "the scene's own: where fisherman stands, metres right"
+    },
+    "fisherman_d": {
+      "type": "number",
+      "means": "the scene's own: where fisherman stands, metres ahead"
+    },
+    "potter_at": {
+      "values": [
+        "shelf",
+        "hearth",
+        "bed",
+        "door",
+        "by_daughter"
+      ],
+      "means": "where potter is (lib.PLACES, places.md; notes.md): set — put there at once"
+    },
+    "potter_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "potter_a": {
+      "type": "number",
+      "means": "the scene's own: where potter stands, metres right"
+    },
+    "potter_d": {
+      "type": "number",
+      "means": "the scene's own: where potter stands, metres ahead"
+    },
+    "daughter_at": {
+      "values": [
+        "pallet",
+        "behind",
+        "door"
+      ],
+      "means": "where daughter is (lib.PLACES, places.md; notes.md): set — put there at once"
+    },
+    "daughter_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "daughter_a": {
+      "type": "number",
+      "means": "the scene's own: where daughter stands, metres right"
+    },
+    "daughter_d": {
+      "type": "number",
+      "means": "the scene's own: where daughter stands, metres ahead"
+    },
+    "soul_at": {
+      "values": [
+        "door",
+        "shelf",
+        "over_girl"
+      ],
+      "means": "where soul is (lib.PLACES, places.md; notes.md): set — put there at once"
+    },
+    "soul_placed": {
+      "type": "string",
+      "means": "the scene's own: the place last put"
+    },
+    "soul_a": {
+      "type": "number",
+      "means": "the scene's own: where soul stands, metres right"
+    },
+    "soul_d": {
+      "type": "number",
+      "means": "the scene's own: where soul stands, metres ahead"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "The sky through the window",
+      "sky": true,
+      "uniforms": {
+        "dawn": 0
+      }
+    },
+    {
+      "id": "outside",
+      "name": "The bridge across the river",
+      "across": 4,
+      "distance": 60,
+      "elevation": -8,
+      "height": 19,
+      "box": [
+        -30,
+        -19,
+        30,
+        0.2
+      ]
+    },
+    {
+      "id": "floor",
+      "name": "The floor",
+      "plane": true,
+      "walk": true,
+      "across": 0,
+      "distance": 2.8,
+      "elevation": 0,
+      "width": 5.4,
+      "depth": 4.6,
+      "inside": true
+    },
+    {
+      "id": "ceiling",
+      "name": "The low ceiling",
+      "plane": true,
+      "across": 0,
+      "distance": 2.8,
+      "elevation": 2.5,
+      "width": 5.4,
+      "depth": 4.6,
+      "inside": true
+    },
+    {
+      "id": "wall_back",
+      "name": "The back wall with the window",
+      "across": 0,
+      "distance": 5.1,
+      "facing": 180,
+      "height": 2.5,
+      "box": [
+        -2.75,
+        -2.5,
+        2.75,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "window_opening",
+      "name": "The window",
+      "unseen": true,
+      "across": 1.8,
+      "distance": 5.12,
+      "facing": 180,
+      "elevation": 0.95,
+      "height": 0.8,
+      "box": [
+        -0.4,
+        -0.8,
+        0.4,
+        0
+      ]
+    },
+    {
+      "id": "window_bars",
+      "name": "The window's frame",
+      "across": 0,
+      "distance": 5.08,
+      "facing": 180,
+      "height": 2,
+      "box": [
+        -0.1,
+        -1.85,
+        2.4,
+        -0.85
+      ],
+      "inside": true
+    },
+    {
+      "id": "wall_left",
+      "name": "The left wall",
+      "across": -2.7,
+      "distance": 0.5,
+      "facing": 90,
+      "height": 2.5,
+      "box": [
+        -0.05,
+        -2.5,
+        4.65,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "wall_right",
+      "name": "The right wall with the door",
+      "across": 2.7,
+      "distance": 5.1,
+      "facing": 270,
+      "height": 2.5,
+      "box": [
+        -0.05,
+        -2.5,
+        4.65,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "lane",
+      "name": "The lane beyond the door",
+      "across": 3.9,
+      "distance": 1.65,
+      "facing": 270,
+      "height": 3,
+      "box": [
+        -2,
+        -3,
+        2,
+        0.05
+      ]
+    },
+    {
+      "id": "door_opening",
+      "name": "The doorway",
+      "unseen": true,
+      "across": 2.71,
+      "distance": 1.65,
+      "facing": 270,
+      "height": 1.95,
+      "box": [
+        -0.45,
+        -1.95,
+        0.45,
+        0
+      ]
+    },
+    {
+      "id": "door_leaf",
+      "name": "The door",
+      "across": 2.68,
+      "distance": 2.1,
+      "facing": 270,
+      "height": 1.95,
+      "box": [
+        -0.02,
+        -1.95,
+        0.92,
+        0.02
+      ],
+      "shadow": true,
+      "place": {
+        "facing": "door_turn"
+      },
+      "inside": true
+    },
+    {
+      "id": "hearth",
+      "name": "The hearth in the back wall",
+      "across": -1.75,
+      "distance": 5.06,
+      "facing": 180,
+      "height": 1.45,
+      "box": [
+        -0.72,
+        -1.45,
+        0.72,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "embers",
+      "name": "Sparks from the fire",
+      "inside": true,
+      "particles": {
+        "kind": "embers",
+        "at": [
+          -1.75,
+          4.95,
+          0.2
+        ],
+        "amount": "fire",
+        "rate": 3
+      }
+    },
+    {
+      "id": "bench",
+      "name": "The bench by the hearth",
+      "across": -0.5,
+      "distance": 4.0,
+      "facing": 180,
+      "height": 0.45,
+      "box": [
+        -0.78,
+        -0.47,
+        0.78,
+        0.02
+      ],
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "bench_top",
+      "name": "The bench's seat",
+      "plane": true,
+      "walk": true,
+      "across": -0.5,
+      "distance": 4.17,
+      "elevation": 0.45,
+      "width": 1.5,
+      "depth": 0.34,
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "shelf",
+      "name": "The shelf with the silver cup",
+      "across": 0.55,
+      "distance": 5.05,
+      "elevation": 1.25,
+      "facing": 180,
+      "height": 0.4,
+      "box": [
+        -0.62,
+        -0.3,
+        0.62,
+        0.24
+      ],
+      "inside": true
+    },
+    {
+      "id": "pallet",
+      "name": "The daughter's pallet",
+      "plane": true,
+      "across": -2.1,
+      "distance": 3.6,
+      "elevation": 0.06,
+      "width": 0.8,
+      "depth": 1.45,
+      "inside": true
+    },
+    {
+      "id": "bed_top",
+      "name": "The potter's bed",
+      "plane": true,
+      "walk": true,
+      "across": 2.15,
+      "distance": 3.6,
+      "elevation": 0.45,
+      "width": 0.9,
+      "depth": 1.9,
+      "inside": true
+    },
+    {
+      "id": "bed_side",
+      "name": "The bed's side",
+      "across": 1.7,
+      "distance": 3.6,
+      "facing": 270,
+      "height": 0.45,
+      "box": [
+        -0.97,
+        -0.47,
+        0.97,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "soul_smoke",
+      "name": "Smoke off the Soul's left hand",
+      "inside": true,
+      "particles": {
+        "kind": "smoke",
+        "at": "soul#hand_l",
+        "amount": "soul_smoke",
+        "rate": 8,
+        "life": [
+          1.2,
+          2.2
+        ],
+        "speed": [
+          0.02,
+          0.08
+        ],
+        "color": "#c4c9d6",
+        "opacity": 0.55,
+        "size": [
+          0.04,
+          0.2
+        ]
+      }
+    },
+    {
+      "id": "fisherman",
+      "name": "The Fisherman",
+      "person": {
+        "cast": "cast",
+        "who": "fisherman",
+        "turn": 180,
+        "does": "seated"
+      },
+      "across": -0.5,
+      "distance": 4.17,
+      "place": {
+        "across": "fisherman_a",
+        "distance": "fisherman_d"
+      },
+      "inside": true
+    },
+    {
+      "id": "potter",
+      "name": "The potter",
+      "person": {
+        "cast": "cast",
+        "who": "potter",
+        "turn": 230
+      },
+      "across": 1.05,
+      "distance": 4.35,
+      "place": {
+        "across": "potter_a",
+        "distance": "potter_d"
+      },
+      "inside": true
+    },
+    {
+      "id": "daughter",
+      "name": "The potter's daughter",
+      "person": {
+        "cast": "cast",
+        "who": "daughter",
+        "turn": 180
+      },
+      "across": -2.1,
+      "distance": 3.6,
+      "place": {
+        "across": "daughter_a",
+        "distance": "daughter_d"
+      },
+      "inside": true
+    },
+    {
+      "id": "soul",
+      "name": "His Soul",
+      "person": {
+        "cast": "cast",
+        "who": "soul",
+        "turn": 270
+      },
+      "across": 2.15,
+      "distance": 1.65,
+      "place": {
+        "across": "soul_a",
+        "distance": "soul_d"
+      },
+      "inside": true,
+      "shadow": false
+    }
+  ]
+}

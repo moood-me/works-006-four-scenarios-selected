@@ -1,6 +1,10 @@
-// stars: one in some cells of a grid over the sky, each its own size and its own slow twinkle; none near the horizon
-// and none in the moon's glow
+// the night (its painting), the dusk (layer 1), the dawn (layer 2), the day (layer 3) shown over it by their uniforms; stars in
+// the night: one in some cells of a grid over the sky, each its own size and its own slow twinkle, none near the
+// horizon and none in the moon's glow, going as the night goes
 fn shade(painted: vec4f, at: vec2f, uv: vec2f) -> vec4f {
+  var c = mix(painted, layer(1, at), u_dusk);
+  c = mix(c, layer(2, at), u_dawn);
+  c = mix(c, layer(3, at), u_day);
   let grid = 64.0;
   let cell = floor(at * grid);
   let h = hash2(cell);
@@ -12,6 +16,7 @@ fn shade(painted: vec4f, at: vec2f, uv: vec2f) -> vec4f {
   let twinkle = 0.6 + 0.4 * sin(u_time * (0.5 + 1.4 * hash2(cell + vec2f(2.0, 8.0))) + h * 40.0);
   let high = 1.0 - smoothstep(0.24, 0.46, at.y);
   let clear = smoothstep(0.07, 0.15, length(at - vec2f(0.33, 0.12)));
-  emission = vec3f(0.82, 0.88, 1.0) * star * twinkle * high * clear * 1.6;
-  return painted;
+  let night = (1.0 - u_dusk) * (1.0 - u_dawn) * (1.0 - u_day);
+  emission = vec3f(0.82, 0.88, 1.0) * star * twinkle * high * clear * 1.6 * night;
+  return c;
 }

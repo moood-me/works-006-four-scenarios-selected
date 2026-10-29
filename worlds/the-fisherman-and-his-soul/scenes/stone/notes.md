@@ -55,3 +55,28 @@ one here, `deep_lights`, `far_light` toward 1.
   frame, most of it the tail part drawn each frame and the rings' animate — the latter since made allocation-free);
   frames p95 16.8 against 16.7 (one display period). GPU ~5 ms, soft run 0, pages ~330–400 of 1420, open 3.2 s.
   Not chased further here: the judged part is the engine's.
+
+## Stage 5: the hours, the net, the boat (2026-10-29, r3/rybak-pieces)
+
+- The hours (modules `hours`, hours.md): `light` night / evening / dawn → `dusk`, `dawn` (looks; the sky's layers by its
+  shader — the evening rose and amber low, the moon pale; the dawn pearl, the moon faint; the low suns `sun_dusk`,
+  `sun_dawn`). A piece going from evening into night moves `dusk` itself, then names `light`.
+- The net (`net_over`): `haul` 0 → 1 draws it in from a length out on the water to under the stem (layers `ropes`,
+  `mesh`, `fish` moved by its animate — nothing repainted); `fish` 0…1 the catch in it; `knot` 0…1 the knot by her hand
+  loosening; `net_hole` 0 / 1 / 2 torn at its far edge, wider (painted once a change) — in the heap too (`net_heap`).
+  Points `net_over#rope` (the hauling rope at the stem), `net_over#knot` (by her hand) — only while `net` is over and the
+  boat here.
+- `heel` 0…1 — the boat dipping its bow under the net's weight: the script turns it into `boat_tilt` (−6° at 1), the
+  boat's anchor's `tilt` (everything on it goes with it).
+- `splash` — a pulse (count it up): her tail beats the water (particles `splash` at `mermaid#feet`).
+- `pass_light` 0 → 1 → 0 — a pale light passing under the keel (`keel_light`: a glow on the water under the hull).
+- Not rendered at this stage (few renders tonight): the net's layers and the dusk are the pieces' first look.
+
+## Contract for the check
+
+```json
+{"points": ["net_over#rope", "net_over#knot", "sky#disc"],
+ "keys": ["light", "boat", "lantern", "net", "haul", "heel", "fish", "knot", "splash", "pass_light", "net_hole", "deep_lights", "far_light", "fisherman_at", "mermaid_at"]}
+```
+
+The pieces are not written yet: no `beats`. Points and keys the mini-games and the pieces ask of this scene — the block above.

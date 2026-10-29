@@ -27,16 +27,37 @@ the water's glow), a fine line, a simple face (eyes, brows, a mouth) that reads 
   a brown dress, hair in a bun, a pale shawl (`scarf`).
 - `fisherman_old` — the Fisherman years on (the ending «Два огня», scene `deep`): the same man, his hair white. Not a
   person of its own: a scene gives it as his look (`fisherman_wear`: the object `scene.kit.cast.characters.fisherman_old`).
+- `girl` — the girl dancing barefoot on the pier at the feast (1.3): fifteen or so, a light linen dress, long brown hair,
+  a red ribbon (the cast's part `ribbon`, her look's own).
+- `widow` — the widow of the bay (chapter 4): a dark shawl over her head (`hood`), a plain dark dress.
+- `widow_girl`, `widow_boy` — her children, barefoot: a girl of nine in a faded blue dress, a boy of six in a big shirt.
+- `beggar` — the old beggar asleep on the bridge (3.7б): stooped, a ragged brown coat, grey hair and a grey beard
+  (`beard`, his look's own).
+- `musician_a` — a fiddler (the square, 3.2): a red waistcoat (`jacket`), a cap, the fiddle (`fiddle`, his look's own:
+  under the chin to the left hand, the bow in the right — it reads as playing with the arms up, `play_fiddle`).
+- `musician_b` — a younger piper in green, the reed pipe from the lips to the hands (`pipe`, his look's own).
 
 ## Things (the cast's parts: `<id>_with`)
 
 - `lantern` — the Fisherman's lantern hanging from the right hand by its bail, swinging a little late; its glass glows,
-  its flame is the person's point `#flame` (the scene's light: `"at": "<id>#flame"`).
+  its flame is the person's point `#flame` (the scene's light: `"at": "<id>#flame"`). `lantern_out` — the same lantern put
+  out: its glass dark (the scene's light at it off).
 - `tambourine` — a tambourine lying on the lap between the hands, a little above the dress (for sitting); point
   `#tambourine`.
 - `tail` — the Mermaid's tail over her legs: a silver-green tube from the hips down to the ankles and a wide flat fluke
   at the feet (sitting on the stone it hangs down its front). Given by a scene (`mermaid_with: ["tail"]`), not her look's
   own: in the water it is hidden anyway.
+- `knife` — the Witch's knife in the right fist: a green snakeskin handle, the blade on past the knuckles as the hand
+  points (point `#blade`); `knife_rusty` — the same, the blade rust-brown (chapter 4 on).
+- `cup` — the potter's silver cup held upright in the right hand (point `#cup`: the bowl).
+- `bag` — a canvas shoulder bag: the strap from the right shoulder across the chest, the bag on the left hip, swinging.
+- `bread` — a round loaf between the hands (point `#bread`).
+- `ring` — a gold ring on the third finger of the right hand (point `#ring`) — the Soul's (2.4).
+- `tambourine_hand` — the tambourine held up in the left hand, its face turned out (dancing; point `#tambourine`).
+- `bundles` — the widow's: a cloth bundle hanging from the right hand, a bigger one on the back.
+- `beard`, `ribbon`, `fiddle`, `pipe` — the looks' own (above).
+- The Soul's left hand «like smoke» (the knife's miss, М3) is not a look: the scenes where the Soul is seen give smoke
+  rising off `soul#hand_l` by their key `soul_smoke` (particles: people are drawn opaque, a hand cannot blur).
 
 ## Motions
 
