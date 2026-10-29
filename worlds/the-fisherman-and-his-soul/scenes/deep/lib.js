@@ -8,11 +8,11 @@
 //   mermaid: sand — sitting on the slab's right, her tail hanging down its front (always: she never stands).
 const PLACES = {
   fisherman: {
-    sand: { at: [-0.42, 4.22], on: [-0.42, 4.22, 0.4], do: 'seated', turn: 160 },
-    standing: { at: [-0.6, 3.25], turn: 150 },
+    sand: { at: [-0.62, 4.22], on: [-0.62, 4.22, 0.4], do: 'seated', turn: 160 },
+    standing: { at: [-0.75, 3.25], turn: 150 },
   },
   mermaid: {
-    sand: { at: [0.38, 4.22], on: [0.38, 4.22, 0.4], do: 'seated', turn: 200 },
+    sand: { at: [0.58, 4.22], on: [0.58, 4.22, 0.4], do: 'seated', turn: 200 },
   },
 };
 const OTHER = { fisherman: 'mermaid', mermaid: 'fisherman' };

@@ -15,8 +15,8 @@ fish, the bubbles, the motes, the net of light on the surface and their breath.
   at the eye's level (`hazeColor` `#4fb3b6`, so the far sand fades into it). Its shader (`sky.wgsl`) lays a wavering
   net of light over the surface and the warm glow of `far_light`; `sky.animate.js` gives it `dusk` and where the glow
   is. Its painting reads `dusk` (painted again when it is set).
-- The light: `sun` — far, from behind the viewer on the right, high (`from` [160, 72]), coming in only `through` seven
-  pools of the surface at 7 m (flat polygons): the shafts in the haze (`shafts` 1.2) and the bright patches on the sand.
+- The light: `sun` — far, ahead a little right, high (`from` [20, 70]: the shafts read looking toward it), coming in only `through` seven
+  pools of the surface at 7 m (flat polygons): the shafts in the haze (`shafts` 2) and the bright patches on the sand.
   The first pool is placed so that its patch falls on the two of them; the rest over the weed, the stone, far out.
   `ambient` 0.78 turquoise keeps everything outside the patches bright.
 - `rock` — the stone's foot (a form of its own, not С2's: 9 m of it, up past the top of the view) at (3.2, 9); its
@@ -29,8 +29,8 @@ fish, the bubbles, the motes, the net of light on the surface and their breath.
   6.5 m out going left behind the two. `bubbles`, `bubbles_weed` — bubbles rising by the stone's foot and by the left
   weed; `motes` — specks in the water, lit in the shafts.
 - People (`lib.PLACES`; `script.js`): `mermaid` always sitting (`seated`) on the slab's right, `mermaid_on`
-  [0.38, 4.22, 0.4], her tail (`mermaid_with: ["tail"]`, barefoot) hanging down its front; `fisherman_at`: `sand` —
-  sitting on its left, `fisherman_on` [-0.42, 4.22, 0.4]; `standing` — on his feet on the sand before her (-0.6, 3.25).
+  [0.58, 4.22, 0.4], her tail (`mermaid_with: ["tail"]`, barefoot) hanging down its front; `fisherman_at`: `sand` —
+  sitting on its left, `fisherman_on` [-0.62, 4.22, 0.4]; `standing` — on his feet on the sand before her (-0.75, 3.25).
   Each turned half toward the other, half toward the viewer, and looking at the other while both are here (set anew
   when `fisherman_at`, `fisherman_here`, `mermaid_here` change — a game sets a look of its own after that, e.g.
   `mermaid_look: "fisherman#feet"` in 2.5). `hands` — her right hand in his left (`<id>_reach`) while he sits.
