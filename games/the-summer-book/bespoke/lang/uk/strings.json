@@ -338,7 +338,7 @@
   {"text":"continue\nthe game","translation":"продовжити\nгру","where":"games/the-summer-book/bespoke/game.js"},
   {"text":"start\nthe game","translation":"почати\nгру","where":"games/the-summer-book/bespoke/game.js"},
   {"text":"Finale: decided late","translation":"Фінал: вирішила пізно","where":"games/the-summer-book/bespoke/game.js"},
-  {"text":"Finale: in full","translation":"Фінал: вирішила вчасно","where":"games/the-summer-book/bespoke/game.js"},
+  {"text":"Finale: decided in time","translation":"Фінал: вирішила вчасно","where":"games/the-summer-book/bespoke/game.js"},
   {"text":"Replay","translation":"Перегравання","where":"games/the-summer-book/bespoke/map.js"},
   {"text":"continue\nthe replay","translation":"продовжити\nперегравання","where":"games/the-summer-book/bespoke/map.js"},
   {"text":"the author’s map","translation":"мапа автора","where":"games/the-summer-book/bespoke/map.js"},
