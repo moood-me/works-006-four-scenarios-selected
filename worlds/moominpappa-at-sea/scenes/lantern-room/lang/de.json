@@ -1,0 +1,8 @@
+{"strings": [
+  {"text":"The Burner","translation":"Der Brenner","where":"worlds/moominpappa-at-sea/scenes/lantern-room/elements/sheets.js"},
+  {"text":"The Pot","translation":"Der Topf","where":"worlds/moominpappa-at-sea/scenes/lantern-room/elements/sheets.js"},
+  {"text":"In a wind, warm the burner with paraffin till the flame goes blue. Do not let go before.","translation":"Bei Wind den Brenner mit Petroleum vorwärmen, bis die Flamme blau wird. Vorher nicht loslassen.","where":"worlds/moominpappa-at-sea/scenes/lantern-room/elements/soot.js"},
+  {"text":"The oil is thick: warm it in a pot on the stove, carry it up wrapped. On a still evening warm oil runs by itself; in a wind, only with paraffin.","translation":"Das Öl ist dick: im Topf auf dem Herd wärmen, eingewickelt hinauftragen. An einem stillen Abend läuft warmes Öl von selbst; bei Wind nur mit Petroleum.","where":"worlds/moominpappa-at-sea/scenes/lantern-room/elements/soot.js"},
+  {"text":"The Lantern Room","translation":"Die Laternenkammer","where":"worlds/moominpappa-at-sea/scenes/lantern-room/scene.json title"},
+  {"text":"The lantern room at the top of the lighthouse.","translation":"Die Laternenkammer oben im Leuchtturm.","where":"worlds/moominpappa-at-sea/scenes/lantern-room/scene.json caption"}
+]}

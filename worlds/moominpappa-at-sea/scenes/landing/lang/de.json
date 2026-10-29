@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Landing Rocks","translation":"Die Felsen am Anleger","where":"worlds/moominpappa-at-sea/scenes/landing/scene.json title"},
+  {"text":"Dawn on the island. The lighthouse is dark, and the door is locked.","translation":"Morgengrauen auf der Insel. Der Leuchtturm ist dunkel, und die Tür ist verschlossen.","where":"worlds/moominpappa-at-sea/scenes/landing/scene.json caption"}
+]}
