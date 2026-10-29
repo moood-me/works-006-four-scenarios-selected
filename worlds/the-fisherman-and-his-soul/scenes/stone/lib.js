@@ -11,7 +11,7 @@ const PLACES = {
   fisherman: {
     boat: { at: [-1.88, 5.59, 0], turn: 130 },
     shallows: { at: [2.4, 5.8, 0], turn: 225 },
-    water: { at: [0.2, 4.9, 0.7], turn: 150 },
+    water: { at: [0.2, 4.9, 0.6], turn: 150 },
   },
   mermaid: {
     stone: { at: [0.78, 6.4, 0], on: [0.78, 6.4, 3.15], do: 'seated', turn: 215 },
