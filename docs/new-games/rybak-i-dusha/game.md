@@ -103,7 +103,7 @@ here first. The scenario is `scenario.md` (§5 steps, §7 mini-games, §10 final
 | `priest` | `priest-house` (С3) | the white room on the hill |
 | `well` | `well` (С4) | the glade in the fir wood |
 | `bridge` | `bridge` (С5) | the town's end of the bridge, the quay lane (the square's end), the potter's house from outside |
-| `room` | the potter's room (С5) — **ask 6** | inside the potter's house |
+| `room` | `potter-room` (С5, inside) — **ask 6** | inside the potter's house |
 | `deep` | `deep` (С6) | under the water by the stone |
 
 ### People in the scenes (element ids = the game's people.json keys)
@@ -164,13 +164,13 @@ Looks by `<id>_wear`: `soul_smoke` (the trace above), `fisherman_old` (white hai
    `woman_a`, `woman_b` at the morning market (3С.2's rumour).
 5. **The deep** gets: `mermaid_near` 0..1 (she slides nearer him on the slab — М4); the rest it has (`fisherman_at`,
    `hands`, `years`, `dusk`, `far_light`).
-6. **The potter's room** (С5's inside; the bridge shows it only from outside): the low room — the hearth (`fire`
-   0..1), the bench by it (point `bench#seat`; one lies on it asleep), the shelf with the silver cup and the loaf
+6. **A new scene `potter-room`** (С5's inside, a small interior in the same look as the others; the bridge shows the
+   house only from outside): the low room — the hearth (`fire` 0..1), the bench by it (point `bench#seat`; one lies on it asleep), the shelf with the silver cup and the loaf
    (points `shelf#cup`, `shelf#bread`: behind the bread), the daughter's pallet by the fire, the potter's bed, the door
    (`door` 0..1) and the window onto the bridge; `morning` 0..1; `cup_at` `shelf` / `hand` (in a person's hand: the
    cast's part `cup`) / `bag` (in the Fisherman's shoulder bag) / `gone`; people `fisherman`, `potter`, `daughter`,
-   `soul`. Either a scene of its own (`room`) or the bridge's house opened with a camera of its own — the pieces'
-   author decides; the game's place `room` names it.
+   `soul`. Decided by the lead (2026-10-29): a scene of its own, not the bridge's house opened up; the game's place
+   `room` is it.
 7. **The cast**: parts `knife` (the Witch's knife, a green snakeskin handle; `knife_rusty`), `cup` (the silver cup,
    point `#cup`), `bag` (a shoulder bag), `bread` (a round loaf), `ring` (a ring on the Soul's finger, seen close),
    `tambourine_hand` (held up in the left hand — dancing; point `#tambourine`), `bundles` (the widow's); looks
