@@ -3,7 +3,8 @@
 // painted at the other end too)
 const W = 36;
 const shoal = (name, n, dir, y0, seed, speed) => {
-  e.layer(name, { box: [-W / 2, -4.5, W / 2, 0.5], drift: [dir * speed, 0] }, g => {
+  // its own box only the band it swims in (0.8 m over and under its middle)
+  e.layer(name, { box: [-W / 2, y0 - 0.85, W / 2, y0 + 0.85], drift: [dir * speed, 0] }, g => {
     for (let i = 0; i < n; i++) {
       const group = i % 2 ? -6 : 7;
       const x = group + 7 * (e.anim.hash(i, seed) - 0.5) * (1 + e.anim.hash(i, seed + 1));
