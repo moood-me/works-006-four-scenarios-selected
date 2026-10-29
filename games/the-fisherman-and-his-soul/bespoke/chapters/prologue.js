@@ -22,7 +22,7 @@ export default {
       await g.plate(tr('The moon’s path on the water, the boat by the stone, a lantern on the bow. The Fisherman draws in his net — it is heavy, the boat heels.'));
       g.set('net', 'over');
       const { torn } = await g.play(net);
-      if (torn) g.mark('torn', true, null);
+      if (torn) g.mark('torn', 1, null);
       await g.say('fisherman', 'Either all the fish of the sea — or trouble');
       await g.scene('stone', { here: ['fisherman', 'mermaid'], moods: { fisherman: 'neutral', mermaid: 'eyes_closed' }, keys: STONE.net }, { cut: true });
       await g.plate(tr('In the net, asleep, lies a little Mermaid: her hair is like wet gold, her tail is silver. She opens her eyes — and struggles.'));
@@ -75,11 +75,15 @@ export default {
         await g.plate(tr('The evenings go by one after another. Every evening he calls — and she is on the stone; every evening she sings, and the fish come into his net. She sings looking at the fish.'));
       } else {
         g.here('mermaid', false);
+        g.set('fish', 0);
         await g.plate(tr('The first nights — an empty sea; he sits in the boat till dawn.'));
+        g.set('light', 'dawn');
+        g.set('light', 'evening');
         g.here('mermaid', true);
         await g.plate(tr('Then she is on the stone by herself, before any call, and sings looking at him. And then again an evening when the stone is empty and the net is empty: he does not call, he only waits.'));
       }
       await g.scene('bridge', { here: ['fisherman', 'potter', 'daughter'], moods: { fisherman: 'neutral', potter: 'smile' },
+        keys: { time: 'morning', fisherman_at: 'stall', potter_at: 'stall' },
         where: tr('Morning: the market on the square beyond the bridge, an hour’s walk from the bay.') });
       await g.plate(tr('The potter takes his fish; the Fisherman does not count the money, and by noon he is already walking back to the water.'));
       await g.say('narrator', 'And he had more fish than all the fishermen of the bay; but he looked only at the stone');

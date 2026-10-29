@@ -34,4 +34,12 @@ function fir(g, h, seed, colors) {
     g.fill();
   }
 }
-return { fir };
+// the hours (hours.md): the numbers each word of `time` sets
+const TIME = {
+  midnight: { dusk: 0, dawn: 0 },
+  evening: { dusk: 1, dawn: 0 },
+  dawn: { dusk: 0, dawn: 1 },
+};
+// the dance's circle round the well (its centre, metres; its radius), a lap's seconds, the steps a lap is moved in
+const ROUND = { at: [0.9, 7.5], r: 1.3, lap: 16, steps: 8 };
+return { fir, TIME, ROUND };

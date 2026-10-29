@@ -76,4 +76,10 @@ function ringsMove(e, shown, phase) {
     ring.alpha = shown ? Math.sin(Math.PI * u) * (1 - u) : 0;
   }
 }
-return { PLACES, OTHER, turnOf, place, RIBS, rib, rings, ringsMove };
+// the hours (hours.md): the numbers each word of `light` sets
+const LIGHT = {
+  night: { dusk: 0, dawn: 0 },
+  evening: { dusk: 1, dawn: 0 },
+  dawn: { dusk: 0, dawn: 1 },
+};
+return { LIGHT, PLACES, OTHER, turnOf, place, RIBS, rib, rings, ringsMove };

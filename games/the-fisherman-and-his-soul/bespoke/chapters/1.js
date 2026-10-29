@@ -2,8 +2,7 @@
 // feast on the pier — the sign “Stop” (danced or passed by); the Witch at the well, the dance at full moon, the man in
 // black velvet, the sign he makes without thinking; the choice with the Witch; moonrise: the shadow rises — the Soul
 // asks for a heart; the choice of the heart; the knife; the sea takes him.
-// Places: the stone, the Priest's house, the pier, the well (the girl and the women of the feast heard till the pier
-// has them).
+// Places: the stone, the Priest's house, the pier (the feast: the girl, the women), the well.
 // Reads: marks.net. Leaves: choices.stop, witch, heart; marks.danced, witch, come; scales.soul, song; the traces of М2
 // (he stumbled in the dance) and М3 (marks.rough: the Soul's left hand like smoke).
 import { PRIEST, STONE } from '../story.js';
@@ -50,10 +49,11 @@ export default {
     },
     // 1.3: the feast on the pier; the sign “Stop”
     async g => {
-      await g.scene('pier', { here: ['fisherman', 'girl', 'woman_a', 'woman_b'], moods: { fisherman: 'neutral' },
-        where: tr('Noon; a feast in the village.') });
+      await g.scene('pier', { here: ['fisherman', 'girl', 'woman_a', 'woman_b'], moods: { fisherman: 'neutral', girl: 'laugh', woman_a: 'smile', woman_b: 'smile' },
+        keys: { light: 'noon', fisherman_at: 'end', girl_at: 'feast', woman_a_at: 'feast', woman_b_at: 'feast' } });
       await g.plate(tr('Noon. On the pier a girl dances barefoot, the others clap. The Fisherman walks past, toward the wood.'));
       await g.say('women', 'By the well in the fir wood lives one who knows', 'woman_a');
+      g.set('fisherman_at', 'level');
       await g.plate(tr('He comes level with the dancing girl.'));
       const stop = await g.interrupt('stop', { fisherman: [{ id: 'danced', label: tr('Stop') }] }, { id: 'passed' }, 3000,
         tr('A girl dancing barefoot on the boards.'));
@@ -63,14 +63,14 @@ export default {
         g.mood('fisherman', 'laugh');
         await g.plate(tr('Two clumsy steps — and he laughs, for the first time in the game. His shadow on the boards dances with him.'));
       } else {
+        g.here('fisherman', false);
         await g.plate(tr('He walks past. He looks back once.'));
       }
       g.apply('stop');
     },
     // 1.4: the well
     async g => {
-      await g.scene('well', { here: ['fisherman', 'witch'], moods: { fisherman: 'neutral', witch: 'smile' },
-        where: tr('Evening; the moon is not up yet.') });
+      await g.scene('well', { here: ['fisherman', 'witch'], moods: { fisherman: 'neutral', witch: 'smile' }, keys: { time: 'evening' } });
       await g.plate(tr('The red-haired Witch sits on the rim of the well, swinging her bare feet.'));
       await g.say('witch', 'What do you want? Wind? Fish? No. I know. To send your soul away');
       await g.say('fisherman', 'Tell me how');
@@ -87,6 +87,7 @@ export default {
       await g.plate(tr('The Witch beats her tambourine; they dance facing each other round the well.'));
       const { stumbled } = await g.play(dance);
       if (stumbled) await g.plate(tr('He stumbles out of her beat; she pulls him by the hands, harder, and laughs.'));
+      g.set('round', false);
       g.here('velvet', true);
       await g.plate(tr('By the last fir stands a man in black velvet, pale, watching. The Witch pulls the Fisherman toward him.'));
       await g.say('witch', 'Bow to him');
@@ -110,6 +111,7 @@ export default {
         await g.say('fisherman', 'You promised');
         await g.plate(tr('She looks at him a long time.'));
         await g.say('witch', 'I promised');
+        g.set('knife_ground', true);
         await g.plate(tr('In a whisper she tells him the rule — and throws a knife at his feet.'));
         await g.say('witch', 'Take it. Cut. You will see for yourself what comes of a man without one');
         g.mood('witch', 'sad');
@@ -119,8 +121,10 @@ export default {
         g.mood('witch', 'surprised');
         await g.plate(tr('She stands still — then laughs, a different laugh.'));
         g.mood('witch', 'smile');
+        g.set('round', true);
         await g.plate(tr('They dance, the two of them, slowly, till the moon grows pale. At dawn she gives him the knife and the rule without a word, and keeps his hand on the hilt longer than she needs to.'));
       }
+      if (w === 'dance') { g.set('round', false); g.set('time', 'dawn'); }
       await g.plate(tr('The rule: “At moonrise stand by the water with your back to the moon. The shadow at your feet is the body of your soul. Cut it from your feet with this knife.” The knife has a handle of green snakeskin.'));
       g.apply('witch');
     },
@@ -128,7 +132,7 @@ export default {
     async g => {
       const { witch } = g.state.choices;
       await g.scene('pier', { here: ['fisherman', 'mermaid'], moods: { fisherman: 'neutral', mermaid: 'neutral' },
-        where: tr('The next evening, moonrise.') });
+        keys: { light: 'evening', mermaid_at: 'stone', lantern_at: 'post' }, where: tr('The next evening.') });
       await g.plate(tr('The Fisherman on the pier with his back to the moon; his shadow is long, right down to the water. By the stone the Mermaid watches.'));
       if (witch === 'dance') {
         g.mood('mermaid', 'sad');
@@ -143,7 +147,8 @@ export default {
     },
     // 1.9: the choice of the heart
     async g => {
-      await g.scene('pier', { here: ['fisherman', 'soul', 'mermaid'], moods: { fisherman: 'thinking', soul: 'afraid', mermaid: 'neutral' } }, { cut: true });
+      await g.scene('pier', { here: ['fisherman', 'soul', 'mermaid'], moods: { fisherman: 'thinking', soul: 'afraid', mermaid: 'neutral' },
+        keys: { light: 'evening', mermaid_at: 'stone' } }, { cut: true });
       const h = await g.choose('heart', { fisherman: [
         { id: 'ask', label: tr('“And what would I love her with?”') },
         { id: 'cut', label: tr('Not look at it. Cut.') },
@@ -170,16 +175,23 @@ export default {
     },
     // 1.10–1.11: the knife; the sea takes him
     async g => {
-      await g.scene('pier', { here: ['fisherman', 'soul', 'mermaid'], moods: { fisherman: 'neutral', soul: 'neutral', mermaid: 'neutral' } }, { cut: true });
+      await g.scene('pier', { here: ['fisherman', 'soul', 'mermaid'], moods: { fisherman: 'neutral', soul: 'neutral', mermaid: 'neutral' },
+        keys: { light: 'evening', mermaid_at: 'stone', fisherman_with: ['knife'] } }, { cut: true });
       const { rough } = await g.play(knife);
       if (rough) {
         g.mark('rough', true, null);
+        g.set('soul_smoke', 1);
         await g.plate(tr('The cut goes uneven: the Soul’s left hand stays blurred, like smoke.'));
       }
+      g.set('fisherman_with', []);
+      g.set('knife', 'post');
+      g.set('lantern_at', 'boards');
       await g.plate(tr('The shadow comes away; the Soul stands apart. The Fisherman drives the knife into the post of the pier and leaves his lantern on the boards.'));
       g.here('fisherman', false);
       await g.plate(tr('He walks into the water, away from the pier, toward the stone. The Mermaid waits by the stone till he is far from the Soul — then laughs, takes his hand, and they go under.'));
       g.mood('soul', 'sad');
+      g.set('lantern_at', 'none');
+      g.set('soul_with', ['lantern']);
       await g.plate(tr('On the pier the Soul picks up his lantern and looks at the water.'));
       await g.say('narrator', 'And the sea took him');
     },

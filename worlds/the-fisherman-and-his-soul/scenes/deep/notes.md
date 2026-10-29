@@ -66,3 +66,16 @@ overhead); ≤1 of the Song — `hands` true; «Подняться» is С2's (`
   allocators are people/cloth.js, people/player.js, render/sky.js, render/views.js; the scene's code allocates almost
   nothing a frame), frames p95 16.8 against 16.7 (one display period) on desktop and phone. GPU ~5 ms, view pages
   ~400–500 of 1420, open ~3.3 s.
+
+## Stage 5 (2026-10-29, r3/rybak-pieces)
+
+- `mermaid_near` 0…1 (М4): she slides along the slab nearer him — the script moves her seat (`mermaid_on`) from its
+  right (0.58) to close beside him (0.08).
+
+## Contract for the check
+
+```json
+{"keys": ["mermaid_near", "hands", "years", "dusk", "far_light", "fisherman_at"]}
+```
+
+The pieces are not written yet: no `beats`. Keys asked of this scene by the mini-game `song` — the block above.

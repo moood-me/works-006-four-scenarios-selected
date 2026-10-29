@@ -13,7 +13,8 @@
     ]
   },
   "modules": [
-    "cast"
+    "cast",
+    "hours"
   ],
   "light": {
     "ambient": 0.62,
@@ -30,7 +31,32 @@
       1,
       0.2,
       0.35
-    ]
+    ],
+    "looks": {
+      "dusk": {
+        "ambient": 0.74,
+        "ambientColor": "#c8a9b4",
+        "haze": 0.14,
+        "hazeColor": "#7a6680",
+        "shafts": 0.3,
+        "tint": "#ff9c70",
+        "tintStrength": 0.08,
+        "lights": {
+          "moon": 0.45
+        }
+      },
+      "dawn": {
+        "ambient": 0.92,
+        "ambientColor": "#dfe2ea",
+        "haze": 0.2,
+        "hazeColor": "#b4bccc",
+        "hazeGlow": 0.6,
+        "shafts": 0.25,
+        "lights": {
+          "moon": 0.2
+        }
+      }
+    }
   },
   "lights": [
     {
@@ -48,6 +74,26 @@
       "reach": 6,
       "flicker": 0.12,
       "glow": 0.35
+    },
+    {
+      "id": "sun_dusk",
+      "from": [
+        -70,
+        6
+      ],
+      "color": "#ffb38a",
+      "strength": 0.7,
+      "on": "dusk"
+    },
+    {
+      "id": "sun_dawn",
+      "from": [
+        40,
+        4
+      ],
+      "color": "#ffe0bc",
+      "strength": 0.75,
+      "on": "dawn"
     }
   ],
   "state": {
@@ -81,7 +127,18 @@
     ],
     "mermaid_wear": {
       "barefoot": "both"
-    }
+    },
+    "light": "night",
+    "dusk": 0,
+    "dawn": 0,
+    "haul": 1,
+    "heel": 0,
+    "boat_tilt": 0,
+    "fish": 0,
+    "knot": 0,
+    "splash": 0,
+    "pass_light": 0,
+    "net_hole": 0
   },
   "states": {
     "boat": {
@@ -180,13 +237,103 @@
     "mermaid_placed": {
       "type": "string",
       "means": "the scene's own: the place the Mermaid was last put at"
+    },
+    "light": {
+      "values": [
+        "night",
+        "evening",
+        "dawn"
+      ],
+      "means": "the hour (hours.md): night — the full moon high (the default); evening — an evening going into night, rose and amber low over the far shore, the moon pale; dawn — the sky greying, pearl low, the moon faint. Sets dusk and dawn at once"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (hours.md): how much of the evening's light and sky — set from `light`; a piece moves it slowly (evening → night)"
+    },
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scene's own (hours.md): how much of the dawn's light and sky — set from `light`; a piece moves it slowly (night → dawn)"
+    },
+    "haul": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "his net drawn in (М1, М7): 0 — cast, a length out on the water off the bow; 1 — drawn in under the stem (with her in it, П.3). Only with `net` over"
+    },
+    "heel": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the boat heeling under the net's weight as he hauls: 0 level … 1 the bow dipped (the script turns it into boat_tilt)"
+    },
+    "boat_tilt": {
+      "range": [
+        -10,
+        10
+      ],
+      "means": "the scene's own: the boat's tilt in degrees, set from heel"
+    },
+    "fish": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the catch in the net over the bow: 0 empty … 1 full of fish (П.5, М7; 0.5 — half a net)"
+    },
+    "knot": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the knot of the net by her hand (М1б): 0 tight … 1 loose (she can slip out)"
+    },
+    "splash": {
+      "range": [
+        0,
+        100000
+      ],
+      "means": "a pulse: each new value (counted up) — her tail beats the water, a splash at her feet"
+    },
+    "pass_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "a pale light passing under the boat's keel (4.6): move it 0 → 1 → 0"
+    },
+    "net_hole": {
+      "values": [
+        0,
+        1,
+        2
+      ],
+      "means": "his net torn (the trace of М1, of М8б): 0 whole; 1 torn at the edge; 2 torn wider — seen on the net over the bow and in the heap"
     }
   },
   "objects": [
     {
       "id": "sky",
       "name": "Night sky and the moon",
-      "sky": true
+      "sky": true,
+      "uniforms": {
+        "dusk": 0,
+        "dawn": 0
+      }
     },
     {
       "id": "clouds",
@@ -371,7 +518,10 @@
         -0.1,
         0.05,
         0
-      ]
+      ],
+      "place": {
+        "tilt": "boat_tilt"
+      }
     },
     {
       "id": "hull",
@@ -470,6 +620,17 @@
       ]
     },
     {
+      "id": "keel_light",
+      "name": "A pale light under the keel",
+      "plane": true,
+      "glows": true,
+      "across": -2.4,
+      "distance": 5.5,
+      "elevation": -0.62,
+      "width": 3.2,
+      "depth": 1.8
+    },
+    {
       "id": "rings_m",
       "name": "Rings round her",
       "plane": true,
@@ -495,6 +656,18 @@
       "place": {
         "across": "fisherman_a",
         "distance": "fisherman_d"
+      }
+    },
+    {
+      "id": "splash",
+      "name": "Her tail beating the water",
+      "particles": {
+        "kind": "splashes",
+        "at": "mermaid#feet",
+        "burst": {
+          "on": "splash",
+          "count": 40
+        }
       }
     },
     {

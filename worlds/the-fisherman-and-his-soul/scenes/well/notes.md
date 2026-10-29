@@ -29,3 +29,25 @@ bucket on its rope, the lantern swinging in the hand, the mist, the fireflies, t
 
 - The Witch should swing her bare feet (the scenario: «болтает босыми ногами»): the motion service was paused when
   this was made; `seated` (hands in the lap) stands in. A swinging-feet seated loop can replace it in the cast.
+
+## Stage 5: the hours, the dance, the knife (2026-10-29, r3/rybak-pieces)
+
+- The hours (hours.md): `time` midnight / evening / dawn → `dusk`, `dawn` (the evening: dusk, the moon not up; the dawn:
+  pale, the moon faint). The sky's layers by its shader.
+- People now stand at their place's keys (`fisherman_a`, `_d`, `witch_a`, `_d`; the Witch sits on the rim by `witch_on`).
+- `round` — the dance: while set, the script moves the Fisherman and the Witch round the well on a circle of 1.3 m, on
+  its opposite sides, each turned to the other across it (lib.ROUND: a lap in 16 s, moved in eight steps of the clock;
+  the Witch let off the rim — `witch_on` null). Their motions (`dance_round`, `dance_tambourine`) are the pieces'; the
+  tambourine held up is the cast's `tambourine_hand` (point `witch#tambourine`).
+- `stumble` — a pulse (1 → 0): he is thrown 0.3 m out of the circle and back.
+- `knife_ground` — the knife on the slabs at his feet (point `knife_ground#knife`).
+- Not rendered at this stage.
+
+## Contract for the check
+
+```json
+{"points": ["witch#tambourine", "knife_ground#knife", "sky#disc"],
+ "keys": ["time", "round", "stumble", "knife_ground"]}
+```
+
+The pieces are not written yet: no `beats`. Points and keys asked of this scene — the block above.

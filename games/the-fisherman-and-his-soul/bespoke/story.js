@@ -1,10 +1,10 @@
 // What a chapter's steps play with: context(b, view, hub, state, j, {forward}) → g. Its state is a working copy — kept
 // only once the step is done (game.js). A step left behind (the player went to the map: ☰) does nothing more and never
 // ends: whatever it still calls returns a promise that never settles.
-// Stage 5 of the game (moood-me/moood docs/writing/game-stages.md), under way: the places on their own scenes (PLACES;
-// the potter's room and the shore still stand in others till their scenes come), the people where the scenes
-// have them, the mini-games real (minigames/); what the scenes' pieces will show is a plate with “Next” (g.plate,
-// g.sheet) till the pieces come (the contract: docs/new-games/rybak-i-dusha/game.md «Stage 5 — pieces»).
+// Stage 5 of the game (moood-me/moood docs/writing/game-stages.md), under way: every place on its own scene (PLACES),
+// the people at the places the scenario puts them (the scenes' `<id>_at`), the mini-games real (minigames/); what the
+// scenes' pieces will show is a plate with “Next” (g.plate, g.sheet) till the pieces come (the contract:
+// docs/new-games/rybak-i-dusha/game.md «Stage 5 — pieces»).
 //   g.state — what the play carries: {scales, shown, marks, choices} (game.js); what follows from it: facts(g.state)
 //   g.signal — aborts when the step is left
 //   g.scene(place, {beat, here, moods, keys, where}, {cut}) — that place of the game (PLACES: the world's scene it is
@@ -12,7 +12,8 @@
 //     are there — those of them the scene has (`<id>_here`, the engine's key; whom it has not are not seen: voices
 //     only) —, their faces as `moods` say ({id: mood}); `keys` — values of the scene's own keys (its scene.json's
 //     states) or a person's (`<id>_with`…); `where` — a label of the step's own, what the scene cannot show yet (the
-//     hour, the year) — over the place's. Always opened anew; `cut` — in one cut, else through black
+//     year) — over the place's. The traces the play carries (TRACES) are given to every scene that has their keys.
+//     Always opened anew; `cut` — in one cut, else through black
 //   g.beat(name, {wait}) — a piece of the shown scene (its key `beat`; world module `beats`); → once it has ended (the
 //     scene tells `beat:<name>`), or at once with wait: false; g.scene(place, {beat}) opens the scene on it.
 //     g.told(text, ms) — till the scene tells `text` (→ true) or ms pass (→ false). piece(g, name, {moment: fn}) — the
@@ -52,22 +53,25 @@
 // (a dry run: game.js, check/run.mjs): then nothing of it is said, shown or heard, a plate goes by at once, and a
 // minigame gives its `skipped` (or what the dry run asks: j.result — check/run.mjs plays the misses too).
 
-// The game's places (scenario §4) and the world's scene each is played on — the one map of them: a place whose own
-// scene is not made yet stands in one of the ready ones, its people there, and `where` says (a label high on the left)
-// where it really is. When the place's own scene comes, its line here becomes `{ folder: '<its folder>' }` (the shore:
-// `{ folder: 'pier', keys: { view: 'shore' } }`) — nothing else changes: the steps name places, never folders. (The
-// pier is also the map's background, game.js.)
+// The game's places (scenario §4) and the world's scene each is played on — the one map of them (a place may also be a
+// scene seen its own way: `keys`; a place whose scene is not made yet would stand in a ready one, `where` saying where
+// it really is). The steps name places, never folders. (The pier is also the map's background, game.js.)
 export const PLACES = {
   pier: { folder: 'pier' }, // С1 the pier
-  // С1 seen toward the land (the pieces' contract: the pier's key `view`); till then the pier, said by the label
-  shore: { folder: 'pier', where: tr('In truth: the shore by the pier — the sand, the rail with his net; up the bank, the field where the linen is bleached.') },
+  shore: { folder: 'pier', keys: { view: 'shore' } }, // С1 seen toward the land: the sand, the hut, the field
   stone: { folder: 'stone' }, // С2 the stone (and the boat by it, at sea)
   priest: { folder: 'priest-house' }, // С3 the Priest's house
   well: { folder: 'well' }, // С4 the well
   bridge: { folder: 'bridge' }, // С5 the bridge and the town
-  // С5 inside: the scene `potter-room` (asked of the world); till then the bridge, the potter's house seen from outside
-  room: { folder: 'bridge', where: tr('In truth: inside the potter’s house — the hearth, the bench, the shelf with the silver cup.') },
+  room: { folder: 'potter-room' }, // С5 inside: the potter's room
   deep: { folder: 'deep' }, // С6 the deep
+};
+// The traces the play carries (scenario §7: what a missed mini-game leaves), by the scenes' keys: the net torn on the
+// night he caught her (marks.torn: 1 at the edge, 2 wider — М1, М8б) wherever his net is seen; the Soul's left hand like
+// smoke (marks.rough — М3) wherever the Soul is
+export const TRACES = {
+  net_hole: m => m.torn ?? 0,
+  soul_smoke: m => (m.rough ? 1 : 0),
 };
 // The people the steps name who never speak (people.json has the ones heard): the scenes' elements, seen as the scenes
 // get them (the pieces' contract, game.md)
@@ -76,8 +80,8 @@ export const SILENT = ['velvet', 'daughter', 'woman_a', 'woman_b', 'widow_girl',
 // `<id>_at`; `here` says who is there.
 export const STONE = {
   night: { boat: true, lantern: 1, net: 'heap', fisherman_at: 'boat' }, // П.1–П.2: the boat by the stone, the net in it
-  net: { boat: true, lantern: 1, net: 'over', fisherman_at: 'boat', mermaid_at: 'net' }, // П.3–П.4: she in his net
-  evenings: { boat: true, lantern: 1, net: 'heap', fisherman_at: 'boat', mermaid_at: 'stone' }, // П.5: she on the stone
+  net: { boat: true, lantern: 1, net: 'over', haul: 1, fisherman_at: 'boat', mermaid_at: 'net' }, // П.3–П.4: she in his net
+  evenings: { light: 'evening', boat: true, lantern: 1, net: 'over', haul: 1, fish: 1, fisherman_at: 'boat', mermaid_at: 'stone' }, // П.5: she on the stone
   ask: { boat: false, lantern: 0, fisherman_at: 'shallows', mermaid_at: 'stone' }, // 1.1: he knee-deep by the stone
   rise: { boat: false, lantern: 0, fisherman_at: 'water', far_light: 0.5 }, // 3С.1 «Подняться»: his lantern far away
   sea: { boat: true, lantern: 1, net: 'heap', fisherman_at: 'boat' }, // 4.5–4.6: the widow's boat at sea, at night
@@ -251,6 +255,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       const st = {};
       for (const id of people) st[`${id}_here`] = present.has(id);
       for (const [id, mood] of Object.entries(moods)) if (people.has(id)) st[`${id}_mood`] = mood;
+      for (const [k, of] of Object.entries(TRACES)) if (spec.states?.[k]) st[k] = of(state.marks);
       Object.assign(st, at.keys ?? {}, keys);
       if (beat) st.beat = beat;
       if (unseen()) {

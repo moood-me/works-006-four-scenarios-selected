@@ -6,11 +6,14 @@
 //   Without Him: the deep, his lantern going over the bridge — the sign “Rise”; the town — the Soul with his face takes
 // the cup (the rumour, always); the fourth year — the Soul with the cup; ⚑ the last call; “I'll go”: the house by the
 // bridge, the choice of how he gives the cup back.
-// Places: the bridge, the potter's room (standing in the bridge till its scene comes), the deep, the stone («Подняться»), the pier.
+// Places: the bridge (the square, the beggar), the potter's room, the deep, the stone («Подняться»), the pier.
 // Reads: choices.day; scales.soul, song. Leaves: choices.wait, cup, rise, last, giveback; marks.thief; scales.soul, song.
 // М5 rang — no bread, the potter not sure; М9 held long — he goes under not looking back.
 import { DEEP, STONE, facts } from '../story.js';
 import { cup, post } from '../minigames/all.js';
+
+// the pier on the Soul's last day: the fourth year's dawn, he in the shallows, the Soul with the lantern and the cup
+const LAST = { light: 'dawn', mist: 0.6, fisherman_at: 'shallows', soul_at: 'end', soul_with: ['lantern', 'cup'], lantern_at: 'none', knife: 'post' };
 
 const went = g => g.state.choices.day !== 'stay';
 
@@ -32,9 +35,12 @@ export default {
     // 3.1: the bridge at evening
     async g => {
       if (!went(g)) return;
-      await g.scene('bridge', { here: ['fisherman'], moods: { fisherman: 'thinking' }, where: tr('Evening.') });
+      await g.scene('bridge', { here: ['fisherman'], moods: { fisherman: 'thinking' },
+        keys: { time: 'evening', fisherman_at: 'under', fisherman_with: ['lantern'] } });
       await g.plate(tr('All day he has sat under the bridge by the water. From within:'));
       await g.say('soul', 'She dances at night');
+      g.set('time', 'night');
+      g.set('fisherman_at', 'head');
       await g.plate(tr('Evening. He walks over the bridge with the lantern; beyond it, the lights — he has never seen this town at night.'));
       await g.say('soul', 'Do you hear? Music');
       await g.plate(tr('He feels chilly, though it is warm.'));
@@ -43,7 +49,7 @@ export default {
     async g => {
       if (!went(g)) return;
       await g.scene('bridge', { here: ['fisherman', 'potter', 'musician_a', 'musician_b'], moods: { fisherman: 'neutral', potter: 'smile' },
-        where: tr('The square beyond the bridge — lanterns, musicians, an empty circle on the stones.') });
+        keys: { square: true, fisherman_at: 'stall', potter_at: 'stall', fisherman_with: ['lantern'] } });
       await g.say('potter', 'The fisherman from the bay? Three years nobody saw you');
       await g.say('fisherman', 'A girl dances here…');
       await g.say('potter', 'A dancer? Never seen one. Who knows who dances of an evening');
@@ -55,19 +61,23 @@ export default {
     // 3.3: the choice “wait”
     async g => {
       if (!went(g)) return;
-      await g.scene('bridge', { here: ['fisherman', 'potter', 'musician_a', 'musician_b'], moods: { fisherman: 'thinking', potter: 'neutral' } }, { cut: true });
+      await g.scene('bridge', { here: ['fisherman', 'potter', 'musician_a', 'musician_b'], moods: { fisherman: 'thinking', potter: 'neutral' },
+        keys: { square: true, fisherman_at: 'stall', potter_at: 'stall', fisherman_with: ['lantern'] } }, { cut: true });
       const w = await g.choose('wait', { fisherman: [
         { id: 'wait', label: tr('“I’ll wait till tomorrow.”') },
         { id: 'back', label: tr('“No. Back, now.”') },
       ] });
       if (w === 'wait') {
         await g.say('fisherman', 'I’ll wait till tomorrow');
-        g.here('daughter', true);
+        await g.scene('room', { here: ['fisherman', 'potter', 'daughter'], moods: { fisherman: 'neutral', potter: 'neutral', daughter: 'eyes_closed' },
+          keys: { fire: 1, morning: 0, cup_at: 'shelf', fisherman_at: 'stand', potter_at: 'shelf', daughter_at: 'pallet' } });
         await g.plate(tr('The house by the bridge: by the fire the little daughter sleeps; on the shelf, a silver cup.'));
         await g.say('potter', 'My wife’s. We drank from it at our wedding');
+        g.set('fisherman_at', 'bench');
         await g.plate(tr('Bread, the fire. He sits down on the bench and keeps his hands under him.'));
       } else {
         await g.say('fisherman', 'No. Back, now');
+        g.set('fisherman_at', 'head');
         await g.plate(tr('The potter shrugs. He turns onto the bridge. From within — not a laugh: silence.'));
       }
       g.apply('wait');
@@ -76,8 +86,9 @@ export default {
     async g => {
       if (!went(g) || g.state.choices.wait === 'back') return;
       await g.scene('room', { here: ['fisherman', 'potter', 'daughter'], moods: { fisherman: 'eyes_closed', potter: 'eyes_closed', daughter: 'eyes_closed' },
-        where: tr('In truth: inside the potter’s house, night, the fire low.') });
+        keys: { fire: 0.2, morning: 0, cup_at: 'shelf', fisherman_at: 'bench', potter_at: 'bed', daughter_at: 'pallet' } });
       await g.plate(tr('The Fisherman sleeps on the bench by the fire. He gets up — with his eyes shut, one shadow at his feet — goes to the shelf, takes the cup, puts it in his bag and lies down again.'));
+      g.set('cup_at', 'bag');
       g.mood('daughter', 'afraid');
       await g.plate(tr('The girl half opens her eyes: the guest is walking with his eyes shut. She squeezes them shut. The Fisherman does not know.'));
     },
@@ -85,7 +96,7 @@ export default {
     async g => {
       if (!went(g) || g.state.choices.wait === 'back') return;
       await g.scene('room', { here: ['fisherman', 'potter', 'daughter'], moods: { fisherman: 'neutral', potter: 'sad', daughter: 'neutral' },
-        where: tr('In truth: inside the potter’s house, morning.') });
+        keys: { fire: 0.4, morning: 1, cup_at: 'bag', fisherman_at: 'bench', potter_at: 'shelf', daughter_at: 'pallet' } });
       await g.say('potter', 'The cup… My wife’s. Have you seen it?');
       g.mood('fisherman', 'afraid');
       await g.plate(tr('The Fisherman reaches for his bag — it is heavy. From within:'));
@@ -95,22 +106,32 @@ export default {
     async g => {
       if (!went(g) || g.state.choices.wait === 'back') return;
       await g.scene('room', { here: ['fisherman', 'potter', 'daughter'], moods: { fisherman: 'thinking', potter: 'sad', daughter: 'neutral' },
-        where: tr('In truth: inside the potter’s house, morning.') }, { cut: true });
+        keys: { fire: 0.4, morning: 1, cup_at: 'bag', fisherman_at: 'bench', potter_at: 'shelf', daughter_at: 'pallet' } }, { cut: true });
       const c = await g.choose('cup', { fisherman: [
         { id: 'confess', label: tr('“It was I who took it.”') },
         { id: 'quiet', label: tr('Put it back quietly') },
       ] });
       if (c === 'confess') {
+        g.set('cup_at', 'hand');
+        g.set('fisherman_with', ['cup']);
         await g.plate(tr('He takes out the cup.'));
         await g.say('fisherman', 'I don’t remember how. But the hands are mine');
+        g.set('fisherman_with', []);
+        g.set('potter_with', ['cup']);
         await g.plate(tr('The potter takes it and looks at it a long time.'));
         await g.say('potter', 'I gave you bread. Go');
         g.mood('daughter', 'afraid');
+        g.set('daughter_at', 'behind');
         await g.plate(tr('The girl hides behind her father. From within, quietly:'));
         await g.say('soul', 'You said: I');
       } else {
+        g.set('potter_at', 'by_daughter');
+        g.set('fisherman_at', 'stand');
+        g.set('cup_at', 'hand');
+        g.set('fisherman_with', ['cup']);
         await g.plate(tr('While the potter bends over his daughter, the Fisherman sets the cup on the shelf behind the bread.'));
         const { rang } = await g.play(cup);
+        g.set('fisherman_with', []);
         if (rang) {
           await g.plate(tr('The cup rings against the shelf. The potter turns, sees it there, and looks at his guest a long time. He gives no bread. From within:'));
           await g.say('soul', 'Not sure. And not being sure — he keeps quiet');
@@ -126,7 +147,7 @@ export default {
     // 3.7: the bridge at dawn (waited)
     async g => {
       if (!went(g) || g.state.choices.wait === 'back') return;
-      await g.scene('bridge', { here: ['fisherman'], moods: { fisherman: 'sad' }, where: tr('Morning; he walks back toward the sea.') });
+      await g.scene('bridge', { here: ['fisherman'], moods: { fisherman: 'sad' }, keys: { time: 'morning', fisherman_at: 'mid', fisherman_with: ['lantern'] } });
       await g.say('soul', 'You won’t wait for the evening? Quite right. There is no dancer. There never was');
       await g.say('fisherman', 'You are cruel');
       await g.say('soul', 'You sent me away without a heart. I learned from the world');
@@ -135,8 +156,9 @@ export default {
     // 3.7б: the bridge at night (back at once)
     async g => {
       if (!went(g) || g.state.choices.wait !== 'back') return;
-      await g.scene('bridge', { here: ['fisherman', 'beggar'], moods: { fisherman: 'afraid' },
-        where: tr('The middle of the bridge, night; an old beggar asleep there, a bowl of coppers at his feet.') });
+      await g.scene('bridge', { here: ['fisherman', 'beggar'], moods: { fisherman: 'afraid', beggar: 'eyes_closed' },
+        keys: { time: 'night', fisherman_at: 'mid', beggar_at: 'parapet', fisherman_with: ['lantern'] } });
+      g.set('copper', 1);
       await g.plate(tr('The Fisherman’s hand reaches by itself for the bowl; he catches it with the other and stands so, holding himself, till the trembling passes. The bowl rocks, a copper falls into the river; the old man does not wake.'));
       await g.say('soul', 'You did not give me my day. And she does dance, you know. You never looked');
       await g.say('fisherman', 'You are cruel');
@@ -171,45 +193,58 @@ export default {
       if (went(g)) return;
       const f = facts(g.state);
       await g.scene('bridge', { here: ['soul', 'potter', 'daughter'], moods: { soul: 'neutral', potter: 'smile', daughter: 'neutral' },
-        where: tr('Evening. The one with his face and his lantern is the Soul: people see the Fisherman.') });
+        keys: { time: 'evening', soul_at: 'lane', soul_with: ['lantern'], potter_at: 'door' },
+        where: tr('The one with his face and his lantern is the Soul: people see the Fisherman.') });
       await g.say('potter', 'The fisherman from the bay? Three years nobody saw you. Sleep at my place; it is cold');
       await g.scene('room', { here: ['soul', 'potter', 'daughter'], moods: { soul: f.hard ? 'angry' : 'sad', potter: 'eyes_closed', daughter: 'eyes_closed' },
-        where: tr('In truth: inside the potter’s house, night.') });
+        keys: { fire: 0.2, morning: 0, cup_at: 'shelf', door: 0, soul_at: f.hard ? 'shelf' : 'over_girl', soul_with: ['lantern'], potter_at: 'bed', daughter_at: 'pallet' } });
       if (f.hard) await g.plate(tr('Night. The Soul goes straight to the shelf, takes the cup, and leaves the door wide open.'));
       else await g.plate(tr('Night. The Soul stands over the sleeping girl — a long time — then takes the cup.'));
+      g.set('cup_at', 'hand');
+      g.set('soul_with', ['lantern', 'cup']);
+      if (f.hard) g.set('door', 1, 1);
       g.mood('potter', 'afraid');
       await g.plate(tr('The potter wakes; in the lantern’s light he sees the face.'));
       await g.say('potter', 'Fisherman!..');
       g.here('soul', false);
-      await g.plate(tr('The Soul goes off into the dark. Morning, the market: “The fisherman from the bay is a thief.”'));
+      await g.plate(tr('The Soul goes off into the dark.'));
+      await g.scene('bridge', { here: ['potter', 'woman_a', 'woman_b'], moods: { potter: 'sad' }, keys: { time: 'morning', potter_at: 'stall' } });
+      await g.plate(tr('Morning, the market: “The fisherman from the bay is a thief.”'));
       g.mark('thief', true, tr('By morning the whole market knows: the fisherman from the bay is a thief.'));
     },
     // 3С.3: the fourth year
     async g => {
       if (went(g)) return;
       const f = facts(g.state);
-      await g.scene('pier', { here: ['fisherman', 'soul'], moods: { fisherman: 'neutral', soul: f.hard ? 'smile' : 'sad' },
-        where: tr('The fourth year; he in the shallows. In the Soul’s hands — the potter’s cup.') });
+      await g.scene('pier', { here: ['fisherman', 'soul'], moods: { fisherman: 'neutral', soul: f.hard ? 'smile' : 'sad' }, keys: LAST,
+        where: tr('The fourth year.') });
       await g.say('soul', 'Your hands did it. I have no others');
       await g.plate(tr('He comes up onto the shallows.'));
       await g.say('fisherman', 'Take it back');
       await g.say('soul', 'Give it back? I don’t know how. Give it back with your own hands — or not at all');
       await g.wait(1500);
       await g.say('soul', 'I call for the last time. Next year I shall forget the way');
-      if (f.sounds) await g.plate(tr('From below, her song calls.'));
+      if (f.sounds) {
+        g.set('under_light', 1, 2);
+        await g.plate(tr('From below, her song calls.'));
+      }
       else await g.plate(tr('Silence.'));
     },
     // 3С.4: ⚑ the last call
     async g => {
       if (went(g)) return;
-      await g.scene('pier', { here: ['fisherman', 'soul', 'mermaid'], moods: { fisherman: 'thinking', soul: 'neutral', mermaid: 'neutral' } }, { cut: true });
+      await g.scene('pier', { here: ['fisherman', 'soul', 'mermaid'], moods: { fisherman: 'thinking', soul: 'neutral', mermaid: 'neutral' },
+        keys: { ...LAST, mermaid_at: 'stone' } }, { cut: true });
       const l = await g.choose('last', { fisherman: [
         { id: 'go', label: tr('“I’ll go. I’ll give the cup back.”') },
         { id: 'no', label: tr('“No.”') },
       ] });
       if (l === 'go') {
         await g.say('fisherman', 'I’ll go. I’ll give the cup back');
+        g.set('fisherman_at', 'end');
         await g.plate(tr('He looks a long time at the knife in the post. The Soul gives him the lantern and the cup and goes into his shadow.'));
+        g.set('soul_with', []);
+        g.set('fisherman_with', ['lantern', 'cup']);
         g.here('soul', false);
         g.mood('mermaid', 'sad');
         await g.plate(tr('By the stone the Mermaid sees it, and goes under.'));
@@ -218,8 +253,10 @@ export default {
         await g.say('fisherman', 'I’ll give it back — and come back');
       } else {
         await g.say('fisherman', 'No');
+        g.set('fisherman_at', 'post');
         await g.plate(tr('He turns away from the pier.'));
         const { long } = await g.play(post);
+        g.set('fisherman_at', 'under');
         g.here('fisherman', false);
         await g.plate(long ? tr('His fingers slip from the post by themselves; he goes under without looking back at the pier.')
           : tr('He lets go of the post, looks once at the pier — and goes under the water.'));
@@ -230,7 +267,9 @@ export default {
     async g => {
       if (went(g) || g.state.choices.last !== 'go') return;
       await g.scene('bridge', { here: ['fisherman', 'potter', 'daughter'], moods: { fisherman: 'neutral', potter: 'angry', daughter: 'afraid' },
-        where: tr('Morning, the potter’s door, a day’s walk from the bay; the Soul is in him.') });
+        keys: { time: 'morning', door: 0, fisherman_at: 'door', potter_at: 'doorway', fisherman_with: ['lantern', 'cup'] },
+        where: tr('A day’s walk from the bay; the Soul is in him.') });
+      g.set('door', 1, 1);
       await g.plate(tr('The potter opens the door.'));
       await g.say('potter', 'You!..');
       await g.plate(tr('His daughter behind him. The Fisherman holds out the cup.'));
@@ -240,13 +279,19 @@ export default {
       ] });
       if (b === 'confess') {
         await g.say('fisherman', 'It was I who took it');
+        g.set('fisherman_with', ['lantern']);
+        g.set('potter_with', ['cup']);
         await g.plate(tr('The potter takes it.'));
         await g.say('potter', 'Came himself… A thief — and came');
+        g.set('door', 0, 6);
         await g.plate(tr('He does not shut the door at once.'));
       } else {
         await g.say('fisherman', 'I found it by the bridge');
+        g.set('fisherman_with', ['lantern']);
+        g.set('potter_with', ['cup']);
         await g.plate(tr('The potter takes it. He saw the face that night.'));
         await g.say('potter', 'Found it, then');
+        g.set('door', 0, 0.6);
         await g.plate(tr('The door shuts.'));
       }
       g.apply('giveback');

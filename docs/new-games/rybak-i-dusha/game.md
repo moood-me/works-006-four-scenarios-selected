@@ -5,14 +5,14 @@
 Сценарий — `scenario.md`; здесь — как он лёг в код.
 
 - **Игра:** `games/the-fisherman-and-his-soul` (bespoke) этого репозитория; **мир:** `worlds/the-fisherman-and-his-soul`.
-- **Места** (`story.js PLACES`): `stone` — сцена `stone` (С2; и лодка в море), `pier` — `pier` (С1), `priest` —
-  `priest-house` (С3), `well` — `well` (С4), `bridge` — `bridge` (С5). Пока стоят в чужих сценах с ярлыком «На самом
-  деле: …»: `shore` (берег, шалаш, поле — в `pier`, до её вида на берег), `room` (дом гончара внутри — в `bridge`, до
-  сцены `potter-room`). `deep` — сцена `deep` (С6, слита 2026-10-29). Моменты сцен — ключи из их notes.md (`STONE`,
-  `DEEP`, `PRIEST`). Ярлык шага (`where`) говорит час и год, пока сцена их не показывает.
-- **Люди** — по id сцен; кого у сцены ещё нет — слышно, не видно (`SILENT` — те, кто молчит: `velvet`, `daughter`,
-  `woman_a`, `woman_b`, `widow_girl`, `widow_boy`, `beggar`, `musician_a`, `musician_b`). Голос «women» — над
-  `woman_a`.
+- **Места** (`story.js PLACES`): `stone` — сцена `stone` (С2; и лодка в море), `pier` — `pier` (С1), `shore` — `pier`
+  с `view: shore` (берег: шалаш, лодка вдовы, поле, холм), `priest` — `priest-house` (С3), `well` — `well` (С4),
+  `bridge` — `bridge` (С5: площадь, нищий), `room` — `potter-room` (С5 внутри), `deep` — `deep` (С6). Моменты — ключи
+  из notes.md сцен (`STONE`, `DEEP`, `PRIEST`; в главах — часы `light`/`time`, места людей `<id>_at`, фонарь, нож,
+  шалаш, волна). Ярлык шага (`where`) — только год и то, чего сцена не покажет (Душа с его лицом; Рыбак стар).
+  Следы (`TRACES`): дыра в сети (`net_hole`), дым с левой руки Души (`soul_smoke`) — каждой сцене, у которой есть ключ.
+- **Люди** — по id сцен, там, где их ставит сценарий (`SILENT` — те, кто молчит: `velvet`, `daughter`, `woman_a`,
+  `woman_b`, `widow_girl`, `widow_boy`, `beggar`, `musician_a`, `musician_b`). Голос «women» — над `woman_a`.
 - **Каркас** — как у «Папы и моря» и «Кентервиля» (`bespoke/game.js`, `story.js`, `jump.js`, `ui.js`, `map.js`,
   `minigames/`, `check/run.mjs`). Своё: `g.interrupt(choice, offers, otherwise, ms, phrase)` — знак (одно касание
   точки за `ms`, дуга времени тает; не тронут — `otherwise`), у главы `skip(r)` — глава не на этом пути (глава 4 на
