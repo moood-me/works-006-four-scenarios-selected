@@ -260,7 +260,7 @@
   {"text":"start\nthe game","translation":"почати\nгру","where":"games/moominpappa-at-sea/bespoke/game.js"},
   {"text":"Finale","translation":"Фінал","where":"games/moominpappa-at-sea/bespoke/game.js"},
   {"text":"decided late","translation":"вирішив пізно","where":"games/moominpappa-at-sea/bespoke/game.js"},
-  {"text":"in full","translation":"вирішив вчасно","where":"games/moominpappa-at-sea/bespoke/game.js"},
+  {"text":"decided in time","translation":"вирішив вчасно","where":"games/moominpappa-at-sea/bespoke/game.js"},
   {"text":"Replay","translation":"Перегравання","where":"games/moominpappa-at-sea/bespoke/map.js"},
   {"text":"continue\nthe replay","translation":"продовжити\nперегравання","where":"games/moominpappa-at-sea/bespoke/map.js"},
   {"text":"the author’s map","translation":"мапа автора","where":"games/moominpappa-at-sea/bespoke/map.js"},

@@ -260,7 +260,7 @@
   {"text":"start\nthe game","translation":"commencer\nla partie","where":"games/moominpappa-at-sea/bespoke/game.js"},
   {"text":"Finale","translation":"Finale","where":"games/moominpappa-at-sea/bespoke/game.js"},
   {"text":"decided late","translation":"décidé tard","where":"games/moominpappa-at-sea/bespoke/game.js"},
-  {"text":"in full","translation":"décidé à temps","where":"games/moominpappa-at-sea/bespoke/game.js"},
+  {"text":"decided in time","translation":"décidé à temps","where":"games/moominpappa-at-sea/bespoke/game.js"},
   {"text":"Replay","translation":"Reprise","where":"games/moominpappa-at-sea/bespoke/map.js"},
   {"text":"continue\nthe replay","translation":"continuer\nla reprise","where":"games/moominpappa-at-sea/bespoke/map.js"},
   {"text":"the author’s map","translation":"la carte de l’auteur","where":"games/moominpappa-at-sea/bespoke/map.js"},

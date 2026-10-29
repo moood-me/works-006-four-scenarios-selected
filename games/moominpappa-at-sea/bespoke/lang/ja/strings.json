@@ -260,7 +260,7 @@
   {"text":"start\nthe game","translation":"ゲームを\nはじめる","where":"games/moominpappa-at-sea/bespoke/game.js"},
   {"text":"Finale","translation":"フィナーレ","where":"games/moominpappa-at-sea/bespoke/game.js"},
   {"text":"decided late","translation":"遅れて決めた","where":"games/moominpappa-at-sea/bespoke/game.js"},
-  {"text":"in full","translation":"間にあって決めた","where":"games/moominpappa-at-sea/bespoke/game.js"},
+  {"text":"decided in time","translation":"間にあって決めた","where":"games/moominpappa-at-sea/bespoke/game.js"},
   {"text":"Replay","translation":"やりなおし","where":"games/moominpappa-at-sea/bespoke/map.js"},
   {"text":"continue\nthe replay","translation":"やりなおしを\nつづける","where":"games/moominpappa-at-sea/bespoke/map.js"},
   {"text":"the author’s map","translation":"作者の地図","where":"games/moominpappa-at-sea/bespoke/map.js"},
