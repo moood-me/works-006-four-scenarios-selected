@@ -22,19 +22,17 @@ export default {
   steps: [
     // 3.1: the forest spins
     async g => {
-      g.beds({ wind: 0.2, trees: 0.5 });
       await piece(g, 'swim', { animals: async () => g.title(tr('The end of July')), up: async () => g.mood('grandma', 'tired') },
-        () => g.scene(SCENES.forest, { beat: 'swim', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'smile' }, keys: JULY }));
+        () => g.scene(SCENES.forest, { beat: 'swim', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'smile' }, keys: JULY }, { beds: { wind: 0.2, trees: 0.5 } }));
       // (the horizon not kept: she sits longer, Sophia comes closer — the forest's `slips` in the fall)
       g.mark('dizzy', (await g.play(moss)).slips > 0, null);
     },
     // 3.2: ⚑ whom to tell
     async g => {
       const f = facts(g.state);
-      g.beds({ wind: 0.2, trees: 0.5 });
       await piece(g, 'fall', {
         near: () => (f.sophia >= 3 ? undefined : g.say('sophia', 'What’s wrong?!')),
-      }, () => g.scene(SCENES.forest, { beat: 'fall', here: ['grandma', 'sophia'], moods: { grandma: 'tired', sophia: 'afraid' }, keys: JULY }, { cut: true }));
+      }, () => g.scene(SCENES.forest, { beat: 'fall', here: ['grandma', 'sophia'], moods: { grandma: 'tired', sophia: 'afraid' }, keys: JULY }, { cut: true, beds: { wind: 0.2, trees: 0.5 } }));
       const head = await g.choose('head', { 'stump#seat': [
         { id: 'papa', label: tr('“Run for Papa”') },
         { id: 'sophia', label: tr('“It’s my head. I’m old. Some day I’ll sit down like this — and not get up. Then run for Papa. Not today”') },
@@ -58,8 +56,7 @@ export default {
           back: async () => g.mood('sophia', 'sad'),
         });
         if (f.nets === 'net') {
-          g.beds({ sea: 0.3 });
-          await g.scene(SCENES.shore, { beat: 'step_beside', here: ['grandma', 'papa'], moods: { grandma: 'tired', papa: 'sad' }, keys: hour('day') });
+          await g.scene(SCENES.shore, { beat: 'step_beside', here: ['grandma', 'papa'], moods: { grandma: 'tired', papa: 'sad' }, keys: hour('day') }, { beds: { sea: 0.3 } });
           await g.beat('step_beside');
         }
       } else if (head === 'sophia') {
@@ -100,10 +97,9 @@ export default {
     async g => {
       const f = facts(g.state);
       if (f.head === 'papa') {
-        g.beds({ sea_in: 0.25 });
         await piece(g, 'doctor', {
           said: () => g.say('papa', 'I’ve written to the doctor. The boat’s on Thursday. In autumn — to us, in town. To winter near us'),
-        }, () => g.scene(SCENES.house, { beat: 'doctor', here: HOME, moods: { papa: 'thinking', grandma: 'neutral' }, keys: hour('dusk') }));
+        }, () => g.scene(SCENES.house, { beat: 'doctor', here: HOME, moods: { papa: 'thinking', grandma: 'neutral' }, keys: hour('dusk') }, { beds: { sea_in: 0.25 } }));
         await g.play(cup);
         await piece(g, 'doctor_after', {
           chair: () => g.say('grandma', 'All right. Only don’t put a chair for me by the gate'),
@@ -113,20 +109,17 @@ export default {
           },
         });
       } else if (f.head === 'sophia') {
-        g.beds({ sea_in: 0.2 });
-        await g.scene(SCENES.house, { beat: 'palm_night', here: HOME, moods: { grandma: 'neutral', sophia: 'thinking' }, keys: hour('night') });
+        await g.scene(SCENES.house, { beat: 'palm_night', here: HOME, moods: { grandma: 'neutral', sophia: 'thinking' }, keys: hour('night') }, { beds: { sea_in: 0.2 } });
         await g.beat('palm_night');
         // (she moved: «You’re not asleep?» in the mini-game — Sophia goes back without the whisper)
         const { moved } = await g.play(still);
         await piece(g, 'not_today', { whisper: () => (moved ? undefined : g.say('sophia', 'Not today')) });
       } else {
-        g.beds({ wind: 0.15, trees: 0.4 });
-        await g.scene(SCENES.forest, { beat: 'night_path', here: ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'smile' }, keys: { ...hour('night'), boat_out: true } });
+        await g.scene(SCENES.forest, { beat: 'night_path', here: ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'smile' }, keys: { ...hour('night'), boat_out: true } }, { beds: { wind: 0.15, trees: 0.4 } });
         await g.beat('night_path');
         await g.play(stones);
         await g.beat('into_trees');
-        g.beds({ sea: 0.2 });
-        await g.scene(SCENES.newHouse, { beat: 'window', here: ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'surprised' }, keys: hour('night') }, { cut: true });
+        await g.scene(SCENES.newHouse, { beat: 'window', here: ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'surprised' }, keys: hour('night') }, { cut: true, beds: { sea: 0.2 } });
         await g.beat('window');
         g.beds({ sea_in: 0.15 });
         await g.beat('inside');
@@ -142,13 +135,12 @@ export default {
         });
         await piece(g, 'look', { up: () => g.say('grandma', 'Come on') });
         await g.beat('seal');
-        g.beds({ sea: 0.3 });
         await piece(g, 'home_late', {
           crazy: async () => {
             await g.say('sophia', 'You’re crazy!');
             await g.say('grandma', 'Yes');
           },
-        }, () => g.scene(SCENES.shore, { beat: 'home_late', here: ['grandma', 'sophia'], moods: { grandma: 'tired', sophia: 'laugh' }, keys: { ...hour('night'), boat_out: true } }));
+        }, () => g.scene(SCENES.shore, { beat: 'home_late', here: ['grandma', 'sophia'], moods: { grandma: 'tired', sophia: 'laugh' }, keys: { ...hour('night'), boat_out: true } }, { beds: { sea: 0.3 } }));
         g.scale('strength', -1);
         g.mark('someday', 'kept', tr('“At night. Some day” — kept.'));
       }
@@ -156,14 +148,13 @@ export default {
     // 3.4: the storm; ⚑ what to give her
     async g => {
       const f = facts(g.state);
-      g.beds({ sea_in: 0.3, storm: 0.5 });
       on(g, 'thunder:up', () => g.sound.thunder(1));
       await piece(g, 'thunder', {
         asked: async () => {
           await g.say('sophia', 'It was me who asked. Then, in the calm');
           if (f.mama === 'sky') await g.say('sophia', 'Does Mama see what I’ve done?');
         },
-      }, () => g.scene(SCENES.house, { beat: 'thunder', here: HOME, moods: { grandma: 'neutral', sophia: 'afraid' }, keys: { ...hour('night'), storm: 1 } }));
+      }, () => g.scene(SCENES.house, { beat: 'thunder', here: HOME, moods: { grandma: 'neutral', sophia: 'afraid' }, keys: { ...hour('night'), storm: 1 } }, { beds: { sea_in: 0.3, storm: 0.5 } }));
       g.each('flash:strike', () => g.sound.thunder(0.7));
       const storm = await g.choose('storm', { 'sophia#chest': [
         { id: 'porch', label: tr('“Let’s go out on the porch. Let’s look at it”') },
@@ -174,8 +165,7 @@ export default {
         await g.say('grandma', 'Let’s go out on the porch. Let’s look at it');
         on(g, 'porch_go:out', () => g.sound.creak());
         await g.beat('porch_go');
-        g.beds({ sea: 0.4, storm: 1 });
-        await g.scene(SCENES.shore, { beat: 'rail', here: ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'laugh' }, keys: { ...hour('night'), storm: 1 } }, { cut: true });
+        await g.scene(SCENES.shore, { beat: 'rail', here: ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'laugh' }, keys: { ...hour('night'), storm: 1 } }, { cut: true, beds: { sea: 0.4, storm: 1 } });
         g.each('flash:strike', () => g.sound.thunder(1));
         await g.beat('rail');
         await g.play(rail);
@@ -188,8 +178,7 @@ export default {
           ...(f.knew ? { papa: () => g.say('papa', 'Mamma. Indoors') } : {}),
         });
         if (!f.knew) {
-          g.beds({ sea_in: 0.3, storm: 0.5 });
-          await g.scene(SCENES.house, { beat: 'storm_cot', here: HOME, moods: { papa: 'sad' }, keys: { ...hour('night'), storm: 1 } }, { cut: true });
+          await g.scene(SCENES.house, { beat: 'storm_cot', here: HOME, moods: { papa: 'sad' }, keys: { ...hour('night'), storm: 1 } }, { cut: true, beds: { sea_in: 0.3, storm: 0.5 } });
           await g.beat('storm_cot');
         }
       } else if (storm === 'blanket') {
@@ -215,7 +204,6 @@ export default {
     },
     // 3.5: the morning after
     async g => {
-      g.beds({ sea: 0.4 });
       await piece(g, 'circles', {
         tent: () => g.say('sophia', 'I want a tent. My own. To sleep on my own'),
         list: () => g.say('papa', 'I’ll order one'),
@@ -225,7 +213,7 @@ export default {
             await g.say('grandma', 'We’ll see');
           },
         } : {}),
-      }, () => g.scene(SCENES.shore, { beat: 'circles', here: ['sophia', 'papa', 'grandma'], moods: { sophia: 'smile', papa: 'neutral', grandma: 'neutral' }, keys: { ...hour('day'), weed: true } }));
+      }, () => g.scene(SCENES.shore, { beat: 'circles', here: ['sophia', 'papa', 'grandma'], moods: { sophia: 'smile', papa: 'neutral', grandma: 'neutral' }, keys: { ...hour('day'), weed: true } }, { beds: { sea: 0.4 } }));
     },
   ],
 };

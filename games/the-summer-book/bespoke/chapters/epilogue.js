@@ -24,7 +24,6 @@ export default {
     async g => {
       const f = facts(g.state);
       const label = { window: tr('The Window'), tent: tr('The Tent'), oars: tr('The Oars'), shawl: tr('The Shawl on the Stone') }[f.ending];
-      g.beds({ sea: 0.4 });
       if (f.ending === 'tent') {
         await piece(g, 'peg', {
           peg: async () => {
@@ -32,7 +31,7 @@ export default {
             await g.say('papa', 'The winter will carry it off', 'papa');
           },
           mine: () => g.say('sophia', 'It won’t. It’s mine'),
-        }, () => g.scene(SCENES.cape, { beat: 'peg', here: ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'neutral' }, keys: MORNING }));
+        }, () => g.scene(SCENES.cape, { beat: 'peg', here: ['grandma', 'sophia'], moods: { grandma: 'smile', sophia: 'neutral' }, keys: MORNING }, { beds: { sea: 0.4 } }));
         await piece(g, 'weigh', {
           winter: () => (f.knew ? g.say('papa', 'You’ll winter with us. The doctor will come every week', 'papa')
             : g.say('papa', 'You’ll winter with us. The doctor will come', 'papa')),
@@ -40,18 +39,16 @@ export default {
       }
       // the signs of the play (§9), in every ending: the pouch, the shell or the pocket; the hat; the graves or the basket
       await piece(g, 'last_morning', { boat: async () => (f.ending === 'tent' ? undefined : g.title(label)) },
-        () => g.scene(SCENES.shore, { beat: 'last_morning', here: ALL, moods: { grandma: 'neutral', sophia: 'neutral', papa: 'neutral' }, keys: SHORE }, { cut: f.ending === 'tent' }));
+        () => g.scene(SCENES.shore, { beat: 'last_morning', here: ALL, moods: { grandma: 'neutral', sophia: 'neutral', papa: 'neutral' }, keys: SHORE }, { cut: f.ending === 'tent', beds: { sea: 0.4 } }));
       if (f.bird === 'out') on(g, 'signs:bird', () => g.sound.hiss()); // (the cat in the basket)
       await g.beat('signs');
       if (f.mama === 'moon') {
-        g.beds({ sea_in: 0.3 });
         await piece(g, 'hat_leave', {
           touch: () => g.say('sophia', 'Till summer'),
-        }, () => g.scene(SCENES.house, { beat: 'hat_leave', here: ALL, moods: { sophia: 'sad' }, keys: MORNING }, { cut: true }));
-        g.beds({ sea: 0.4 });
+        }, () => g.scene(SCENES.house, { beat: 'hat_leave', here: ALL, moods: { sophia: 'sad' }, keys: MORNING }, { cut: true, beds: { sea_in: 0.3 } }));
       }
       // the way to the boat: its piece opened anew (its own places and camera), a cut from the signs or the house
-      const open = name => () => g.scene(SCENES.shore, { beat: name, here: ALL, keys: SHORE }, { cut: true });
+      const open = name => () => g.scene(SCENES.shore, { beat: name, here: ALL, keys: SHORE }, { cut: true, beds: { sea: 0.4 } });
       const way = f.strength >= 3 ? 'walk_self' : f.strength >= 1 ? 'walk_arm' : 'walk_slow';
       if (f.ending === 'window') {
         await open(way)();
@@ -64,14 +61,12 @@ export default {
           });
         }
         await g.play(gangway);
-        g.beds({ sea: 0.35, motor: 0.2 });
-        await g.scene(SCENES.sea, { beat: 'aboard', here: ALL, keys: MORNING }, { cut: true });
+        await g.scene(SCENES.sea, { beat: 'aboard', here: ALL, keys: MORNING }, { cut: true, beds: { sea: 0.35, motor: 0.2 } });
         await g.beat('aboard');
       } else if (f.ending === 'tent') {
         await open('tent_walk')();
         await g.beat('tent_walk');
-        g.beds({ sea: 0.35, motor: 0.2 });
-        await g.scene(SCENES.sea, { beat: f.sophia >= 3 ? 'come_over' : 'hand_in_hand', here: ALL, moods: { grandma: 'smile', papa: 'sad' }, keys: MORNING }, { cut: true });
+        await g.scene(SCENES.sea, { beat: f.sophia >= 3 ? 'come_over' : 'hand_in_hand', here: ALL, moods: { grandma: 'smile', papa: 'sad' }, keys: MORNING }, { cut: true, beds: { sea: 0.35, motor: 0.2 } });
         await g.beat(f.sophia >= 3 ? 'come_over' : 'hand_in_hand');
         await g.play(hold);
         await g.beat('eyes_closed');
@@ -99,8 +94,7 @@ export default {
           },
           doctor: () => g.say('papa', 'In town — a doctor'),
         }, open('shawl_walk'));
-        g.beds({ sea: 0.35, motor: 0.2 });
-        await g.scene(SCENES.sea, { beat: 'aboard', here: ALL, keys: MORNING }, { cut: true });
+        await g.scene(SCENES.sea, { beat: 'aboard', here: ALL, keys: MORNING }, { cut: true, beds: { sea: 0.35, motor: 0.2 } });
         g.set('beat_next', 'swell');
         await g.beat('aboard');
         await g.beat('swell');
@@ -110,9 +104,8 @@ export default {
     // the motor; the island from the water; the lines in the boat; into the white
     async g => {
       const f = facts(g.state);
-      g.beds({ sea: 0.35, motor: 0.3 });
       // (the Oars: the same crossing — the dinghy is still at the big boat's side)
-      await g.scene(SCENES.sea, { beat: 'motor', here: ALL, keys: { ...MORNING, dinghy: f.ending !== 'oars' } }, { cut: true });
+      await g.scene(SCENES.sea, { beat: 'motor', here: ALL, keys: { ...MORNING, dinghy: f.ending !== 'oars' } }, { cut: true, beds: { sea: 0.35, motor: 0.3 } });
       await g.beat('motor');
       // the island from the water (§10), by the marks (the shell taken off the rail in the signs); the new house
       await g.scene(SCENES.shore, { beat: 'from_water', here: [], keys: { ...SHORE, shell: false } }, { cut: true });
@@ -190,8 +183,7 @@ export default {
         });
       } else if (f.ending === 'oars') await g.beat('oars_last');
       else {
-        g.beds({ sea: 0.3, motor: 0.15 });
-        await g.scene(SCENES.cape, { beat: f.ending === 'tent' ? 'tent_shot' : 'shawl_shot', here: [], keys: { ...MORNING, ...(f.ending === 'tent' ? { stones: true } : { shawl: 'ledge' }) } }, { cut: true });
+        await g.scene(SCENES.cape, { beat: f.ending === 'tent' ? 'tent_shot' : 'shawl_shot', here: [], keys: { ...MORNING, ...(f.ending === 'tent' ? { stones: true } : { shawl: 'ledge' }) } }, { cut: true, beds: { sea: 0.3, motor: 0.15 } });
         await g.beat(f.ending === 'tent' ? 'tent_shot' : 'shawl_shot');
       }
     },

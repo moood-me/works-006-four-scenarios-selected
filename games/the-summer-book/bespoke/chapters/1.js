@@ -19,21 +19,19 @@ export default {
   steps: [
     // 1.1: the house in the morning
     async g => {
-      g.beds({ sea_in: 0.3 });
       await piece(g, 'morning', {
         hat: async () => g.title(tr('June')),
         knife: async () => {
           await g.say('papa', 'Mamma, don’t go far');
           await g.say('grandma', 'I won’t');
         },
-      }, () => g.scene(SCENES.house, { beat: 'morning', here: ['papa', 'grandma', 'sophia'], moods: { papa: 'thinking', grandma: 'neutral', sophia: 'sad' }, keys: DAY }));
+      }, () => g.scene(SCENES.house, { beat: 'morning', here: ['papa', 'grandma', 'sophia'], moods: { papa: 'thinking', grandma: 'neutral', sophia: 'sad' }, keys: DAY }, { beds: { sea_in: 0.3 } }));
       await g.beat('morning_go');
     },
     // 1.2: the forest; the knife; the palm on the trunk
     async g => {
-      g.beds({ wind: 0.3, trees: 0.4 });
       on(g, 'carve:sat', () => g.sound.knife());
-      await g.scene(SCENES.forest, { beat: 'carve', here: ['grandma', 'sophia'], moods: { grandma: 'thinking', sophia: 'smile' }, keys: DAY });
+      await g.scene(SCENES.forest, { beat: 'carve', here: ['grandma', 'sophia'], moods: { grandma: 'thinking', sophia: 'smile' }, keys: DAY }, { beds: { wind: 0.3, trees: 0.4 } });
       await g.beat('carve');
       // (one flipper split off: the insert shows it, and the seal in the moss at the end of July — the forest's `flipper`)
       g.mark('flipper', (await g.play(knife)).flipper, null);
@@ -45,14 +43,13 @@ export default {
     },
     // 1.3: ⚑ the cigarette
     async g => {
-      g.beds({ wind: 0.3, trees: 0.4 });
       on(g, 'match:strike', () => g.sound.strike());
       await piece(g, 'match', {
         behind: async () => {
           g.mood('sophia', 'angry');
           await g.say('sophia', 'Papa doesn’t allow it!');
         },
-      }, () => g.scene(SCENES.forest, { beat: 'match', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'neutral' }, keys: DAY }, { cut: true }));
+      }, () => g.scene(SCENES.forest, { beat: 'match', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'neutral' }, keys: DAY }, { cut: true, beds: { wind: 0.3, trees: 0.4 } }));
       const smoke = await g.choose('smoke', { 'grandma#chest': [
         { id: 'secret', label: tr('“It’s our secret”') },
         { id: 'tell', label: tr('“Tell him if you want. You decide”') },
@@ -63,23 +60,20 @@ export default {
         g.mood('sophia', 'smile');
         await g.say('sophia', 'Ours');
         await g.beat('ours');
-        g.beds({ sea_in: 0.3 });
         await piece(g, 'supper_table', {
           sat: async () => {
             await g.say('papa', 'Mamma, you’re coughing');
             await g.say('sophia', 'It’s the wind!');
           },
-        }, () => g.scene(SCENES.house, { beat: 'supper_table', here: ['papa', 'grandma', 'sophia'], moods: { papa: 'neutral', grandma: 'neutral', sophia: 'smile' }, keys: hour('dusk') }));
+        }, () => g.scene(SCENES.house, { beat: 'supper_table', here: ['papa', 'grandma', 'sophia'], moods: { papa: 'neutral', grandma: 'neutral', sophia: 'smile' }, keys: hour('dusk') }, { beds: { sea_in: 0.3 } }));
       } else if (smoke === 'tell') {
         await g.say('grandma', 'Tell him if you want. You decide');
         g.mood('sophia', 'thinking');
         await g.beat('think');
-        g.beds({ sea_in: 0.3 });
         await piece(g, 'supper_table', {
           sat: () => g.say('sophia', 'Grandmother smokes'),
-        }, () => g.scene(SCENES.house, { beat: 'supper_table', here: ['papa', 'grandma', 'sophia'], moods: { papa: 'neutral', grandma: 'neutral', sophia: 'thinking' }, keys: hour('dusk') }));
-        g.beds({ sea: 0.35 });
-        await g.scene(SCENES.shore, { beat: 'shell', here: ['grandma', 'papa'], moods: { grandma: 'neutral', papa: 'thinking' }, keys: DAY });
+        }, () => g.scene(SCENES.house, { beat: 'supper_table', here: ['papa', 'grandma', 'sophia'], moods: { papa: 'neutral', grandma: 'neutral', sophia: 'thinking' }, keys: hour('dusk') }, { beds: { sea_in: 0.3 } }));
+        await g.scene(SCENES.shore, { beat: 'shell', here: ['grandma', 'papa'], moods: { grandma: 'neutral', papa: 'thinking' }, keys: DAY }, { beds: { sea: 0.35 } });
         await g.beat('shell');
       } else {
         await g.say('grandma', 'You’re right');
@@ -89,7 +83,6 @@ export default {
     },
     // 1.4: Eriksson with the post; push off
     async g => {
-      g.beds({ sea: 0.45 });
       await piece(g, 'eriksson', {
         post: async () => {
           await g.say('eriksson', 'You’ve got old');
@@ -98,7 +91,7 @@ export default {
         },
         knees: () => g.say('grandma', 'Some other time'),
         look: () => g.say('eriksson', 'Don’t hold your girl back'),
-      }, () => g.scene(SCENES.shore, { beat: 'eriksson', here: ['grandma', 'sophia', 'eriksson'], moods: { grandma: 'neutral', sophia: 'thinking', eriksson: 'neutral' }, keys: DAY }));
+      }, () => g.scene(SCENES.shore, { beat: 'eriksson', here: ['grandma', 'sophia', 'eriksson'], moods: { grandma: 'neutral', sophia: 'thinking', eriksson: 'neutral' }, keys: DAY }, { beds: { sea: 0.45 } }));
       g.set('oar', (await g.play(push)).long); // (held long: Eriksson pushes off with his oar)
       await piece(g, 'eriksson_off', {
         ask: async () => {
@@ -109,7 +102,6 @@ export default {
     },
     // 1.5: the nets in the evening; ⚑ “tell me, if anything”
     async g => {
-      g.beds({ sea: 0.35 });
       on(g, 'nets:coffee', () => g.sound.cup());
       await piece(g, 'nets', {
         sat: async () => {
@@ -117,7 +109,7 @@ export default {
           await g.wait(1500);
           await g.say('papa', 'I’m not going to be the last to know any more');
         },
-      }, () => g.scene(SCENES.shore, { beat: 'nets', here: ['papa', 'grandma'], moods: { papa: 'thinking', grandma: 'neutral' }, keys: DUSK }));
+      }, () => g.scene(SCENES.shore, { beat: 'nets', here: ['papa', 'grandma'], moods: { papa: 'thinking', grandma: 'neutral' }, keys: DUSK }, { beds: { sea: 0.35 } }));
       const nets = await g.choose('nets', { 'net#knot': [
         { id: 'say', label: tr('“I’ll tell you”') },
         { id: 'nothing', label: tr('“There’s nothing to tell”') },

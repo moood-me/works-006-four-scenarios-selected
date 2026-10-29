@@ -17,13 +17,12 @@ export default {
   steps: [
     // П.1–П.3: dawn, the teeth in the peonies, the question; the hat on its nail, Papa asleep
     async g => {
-      g.beds({ sea: 0.35 });
       await piece(g, 'peonies', {
         start: async () => {
           g.title(tr('The Summer Book'));
           await g.say('narrator', 'This spring Sophia’s mother died. That summer, as always, they lived on the island: Papa, Sophia and Grandmother');
         },
-      }, () => g.scene(SCENES.shore, { beat: 'peonies', here: ['grandma'], moods: { grandma: 'thinking' }, keys: DAWN }));
+      }, () => g.scene(SCENES.shore, { beat: 'peonies', here: ['grandma'], moods: { grandma: 'thinking' }, keys: DAWN }, { beds: { sea: 0.35 } }));
       await g.play(peonies);
       g.here('sophia', true);
       await piece(g, 'teeth', {
@@ -49,10 +48,9 @@ export default {
     },
     // П.4–П.5: the ledge; ⚑ where the bottom is
     async g => {
-      g.beds({ sea: 0.45 });
       await piece(g, 'ledge', {
         edge: () => g.say('sophia', 'I want to see where the bottom is'),
-      }, () => g.scene(SCENES.shore, { beat: 'ledge', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'smile' }, keys: DAWN }, { cut: true }));
+      }, () => g.scene(SCENES.shore, { beat: 'ledge', here: ['grandma', 'sophia'], moods: { grandma: 'neutral', sophia: 'smile' }, keys: DAWN }, { cut: true, beds: { sea: 0.45 } }));
       const bottom = await g.choose('bottom', { 'sophia#chest': [
         { id: 'hold', label: tr('Hold her by the hand') },
         { id: 'go', label: tr('“Go on. I’m watching”') },
