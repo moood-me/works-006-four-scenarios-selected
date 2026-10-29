@@ -29,8 +29,9 @@ const start = () => {
 };
 scene.every(R.lap / R.steps, step);
 scene.on('change', 'round', v => { if (v) start(); });
-scene.on('move', 'round_angle', put);
-scene.on('change', 'round_angle', put);
-scene.on('move', 'stumble', put);
-scene.on('change', 'stumble', put);
+const dancing = () => { if (scene.get('round')) put(); };
+scene.on('move', 'round_angle', dancing);
+scene.on('change', 'round_angle', dancing);
+scene.on('move', 'stumble', dancing);
+scene.on('change', 'stumble', dancing);
 if (scene.get('round')) start();
