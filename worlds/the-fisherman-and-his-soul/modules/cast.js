@@ -254,11 +254,11 @@ return {
     woman_b: { kind: 'shapes', style: 'bay', who: 'woman', garment: 'dress', hair: 'bun', scarf: true,
       body: { height: 0.9, thick: 1.04, shoulders: 0.95, neck: 0.98 },
       colors: { skin: '#d9a985', hair: '#6a5240', top: '#8a6448', garment: '#8a6448', bottom: '#8a6448', shoes: '#3a2e26', accent: '#e2d6bc' } },
-    // the Fisherman years on («Фонарь на мостках»'s last shot, «Два огня»): the same man, his hair gone white — a whole
-    // look of his, given by a piece (`fisherman_wear`: this object, scene.kit.cast.characters.fisherman_old)
+    // the Fisherman years on, under the water (the ending «Два огня»): the same man, his hair gone white — a scene gives
+    // it as his `fisherman_wear` (the look's object, scene.kit.cast.characters.fisherman_old)
     fisherman_old: { kind: 'shapes', style: 'bay', who: 'man', garment: 'tunic', hair: 'short', barefoot: 'both',
       body: FISHER_BODY,
-      colors: { skin: '#c4977a', hair: '#e8e4dc', top: '#d8cfbc', bottom: '#4f6372' } },
+      colors: { skin: '#c4977a', hair: '#ebe8e1', top: '#e2d8c4', bottom: '#4f6372' } },
     // the girl who dances barefoot on the pier at the feast (1.3): fifteen or so, slight, a light linen dress, brown hair
     // long and loose, a red ribbon in it
     girl: { kind: 'shapes', style: 'bay', who: 'woman', garment: 'dress', hair: 'long', barefoot: 'both', parts: ['ribbon'],
