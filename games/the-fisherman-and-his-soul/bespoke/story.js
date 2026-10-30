@@ -376,12 +376,14 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       if (gone() || !delta) return;
       const S = SCALES[name], was = state.scales[name];
       state.scales[name] = Math.min(S.max, Math.max(S.min, was + delta));
-      const moved = state.scales[name] - was, first = state.shown[name] !== true;
+      const first = state.shown[name] !== true;
       g.gauge(name);
-      // (its first setting is no move: the gauge and its rule say where it stands)
-      if (unseen() || !moved || first) return;
-      view.toast(moved > 0 ? S.up : S.down, 'scale');
-      view.gauge(state);
+      // (its first setting is no move: the gauge and its rule say where it stands. After it every choice that moves it
+      // is answered — its row flashes, the slip says which way — even at its end, where the pips cannot go further:
+      // 2026-10-30, a player whose choices kept the Soul at its softest saw nothing ever change)
+      if (unseen() || first) return;
+      view.toast(delta > 0 ? S.up : S.down, 'scale');
+      view.gauge(state, name);
     },
     gauge(name) {
       if (gone()) return;
@@ -389,7 +391,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
         state.shown[name] = true;
         if (!unseen()) view.toast(SCALES[name].rule, 'rule');
       }
-      if (!unseen()) view.gauge(state);
+      if (!unseen()) view.gauge(state, name);
     },
     mark(key, value, text) {
       if (gone()) return;

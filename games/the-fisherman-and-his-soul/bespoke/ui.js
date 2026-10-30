@@ -1,6 +1,7 @@
 // What the game shows over the scene (bespoke.layer), in the bay's night: pale slips, sea-dark ink, the lantern's warm
 // yellow for what is the player's to press.
-//   view.gauge({scales, shown} | null) — the scales low on the left (story.js SCALES, ORDER): each one the player has
+//   view.gauge({scales, shown} | null, moved) — the scales low on the left (`moved`: the one a choice has just touched —
+//     its row flashes) (story.js SCALES, ORDER): each one the player has
 //     met — its name, its pips, the side it leans to (a word); null — none (the map, the epilogue)
 //   view.toast(text, kind, arrows) — a slip in the corner: 'scale' (a scale moved: the side it moved to), 'rule' (what
 //     a scale means, the first time), 'mark' (remembered); three at most
@@ -30,13 +31,13 @@ export function ui(layer) {
   label.hidden = true;
   let hinted = () => {};
   return {
-    gauge(state) {
+    gauge(state, moved = null) {
       gauge.replaceChildren();
       if (!state) return;
       for (const name of ORDER) {
         if (!state.shown[name]) continue;
         const S = SCALES[name], v = state.scales[name];
-        const row = el('div', 'row', gauge);
+        const row = el('div', name === moved ? 'row moved' : 'row', gauge);
         el('span', 'name', row).textContent = S.name;
         const pips = el('span', 'pips', row);
         for (let i = S.min + 1; i <= S.max; i++) el('i', i <= v ? 'on' : '', pips);

@@ -158,6 +158,8 @@ export default {
         await g.beat('heart_come');
       }
       g.apply('heart');
+      // (the Soul's scale is met here whatever was chosen: “come” sets it no way, and it stands where it starts)
+      g.gauge('soul');
     },
     // 1.10–1.11: the knife; the sea takes him
     async g => {

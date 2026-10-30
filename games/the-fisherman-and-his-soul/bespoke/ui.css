@@ -18,6 +18,9 @@
 #layer .gauge .pips i { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--sea); }
 #layer .gauge .pips i.on { background: var(--sea); }
 #layer .gauge .value { font-style: italic; opacity: 0.85; }
+/* a scale a choice has just touched: its row flashes the lantern's yellow and settles */
+#layer .gauge .row.moved { animation: moved 2.4s ease-out; transform-origin: left center; }
+@keyframes moved { 0%, 30% { background: var(--lantern); transform: scale(1.08); } 100% { background: var(--paper); transform: none; } }
 
 /* the slips, high on the right */
 #layer .toasts { position: absolute; top: 64px; right: 14px; display: flex; flex-direction: column;
