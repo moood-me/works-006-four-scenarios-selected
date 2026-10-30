@@ -91,3 +91,8 @@ The pieces (`lib.film`, the world's `beats` from `script.js`): `deep_song` (2.1,
 },
  "keys": ["mermaid_near","hands","years","dusk","far_light","fisherman_at"]}
 ```
+
+## Polish (2026-10-30, r3/polish-rybak)
+
+- `deep_song` ends on the two of them whole (М4, «touch nothing», is played on it; the medium on her cut him off). Her
+  song is the game's (the music's voice weight 0).

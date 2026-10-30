@@ -186,3 +186,23 @@ behind the viewer's right shoulder, seen from neither view (checked in the shore
   on every shore opened after (chapter 4), and the wave takes it with the hut (`fall_by`).
 - `sea_comes` ends cut near the two on the sand (`SHORE_NEAR`: his face, her hand, the wave on the right) — the
   choice «The Wave» and «Holding Her» are played there; `covered` goes back wide.
+
+## Polish (2026-10-30, r3/polish-rybak)
+
+After a reviewer's renders: what the player must see was not in the frame. Rendered on the service after each pass.
+
+- Moonrise (1.7–1.10): he stands with his back to the moon (`BACK_TO_MOON` 205 — he faces us; was 20, his face to the
+  moon right after the rule «back to the moon»). The Soul rises beside him on his left (`SOUL_RISE` −1.0, 4.6, turned to
+  him); its plea on its face from the water's side (`CAM_BACK`, held 8 s), then the two of them (`TWO`) as he chooses.
+  `knife_ready`: the Soul steps back pleading; he is framed whole (`KNEEL` — nearer, the Soul filled the frame), the knife
+  in his hand seen.
+- The feast (1.3): the girl a step from where he comes level (`girl` feast −2.95, 2.45); the women on the root's side
+  (not between us and her); the shots: the girl dancing, the women whispering (wide), the two of them as he comes level
+  (`LEVEL`; `danced`/`passed` open on it).
+- The third year and the fourth (2.6, 3С.3): the Soul's words said on its face (`SPEAKS` = `CAM_BACK`; the lantern's
+  post stood between our side and him in the water); then pieces of their own, `third_stone` / `fourth_stone` (the
+  scene's own camera on the bay — the pier, the two, the stone and her light; then medium on him for the choice).
+- `go_day`: three strides through the shallows (`wade`), up onto the boards at the end, to his place — no more at once
+  on the boards. Anyone put on the boards from the water stands at 0 (`at()` sets `<id>_e` 0 for the three who stand in
+  the water; the places module likewise): he hung over the boards at the water's height.
+- Her song is the game's now (the music has no voice: its prompt's weight 0).

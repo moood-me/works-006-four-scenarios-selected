@@ -105,3 +105,11 @@ in the hull).
  "points": ["net_over#rope","net_over#knot","sky#disc"],
  "keys": ["light","boat","lantern","net","haul","heel","fish","knot","splash","pass_light","net_hole","deep_lights","far_light","fisherman_at","mermaid_at"]}
 ```
+
+## Polish (2026-10-30, r3/polish-rybak)
+
+- In the net (П.3–П.4): she turned to us (`IN_NET`); the two framed from the pier's end with the camera's own keys
+  (`HOLD`) — an operator on someone in the water puts its eye over the bay's floor, at the water's face, under the net
+  (the back of her head behind the net's ropes, then his legs). `go_word`/`go_free` keep that shot.
+- «Два огня»: the two lights under the water larger and brighter, the far lantern going over the hill brighter (its
+  glow 14 m) — they were points.

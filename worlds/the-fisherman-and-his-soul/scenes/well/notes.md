@@ -76,3 +76,11 @@ this stage.
 - After the dance (`broken`, `demand`, `dance_dawn`) he stands before her on her left (`BEFORE`), both in one full
   shot (`TWO`): the choice that follows is his, his face must be in the frame (it was cut off at the left edge — the
   game stalled on a mark nobody saw).
+
+## Polish (2026-10-30, r3/polish-rybak)
+
+- The man in black stands on the glade's near left edge (`VELVET` −2.4, 5.6, turned 150 — toward us and the glade),
+  out of the firs there and back into them (`FROM_WOOD`, `INTO_WOOD`): at 10 m by the far fir he was a speck, and his
+  close shot was the back of his head. The camera goes to him as he steps out; the Witch pulls the Fisherman before him
+  (`PULLED`, a cut); the sign is on the Fisherman waist up (`SIGN`: his face and his hand at his brow, turned to the
+  man) — it was a close shot of his shoulder. Rendered: the man's face, the sign, the man going.

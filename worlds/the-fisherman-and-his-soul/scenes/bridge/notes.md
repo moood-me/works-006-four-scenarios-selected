@@ -87,3 +87,10 @@ framed on `bowl#coins` (0.15 m tall) puts the lens 0.6 m from it, inside the Fis
  "points": ["stall#coppers","bowl#coins","cottage_glow#cup","sky#disc"],
  "keys": ["time","square","door","copper","soul_smoke","fisherman_at","soul_at","potter_at","beggar_at"]}
 ```
+
+## Polish (2026-10-30, r3/polish-rybak)
+
+- At the stall (3.2): the Fisherman by its left end, turned half to us (`AT_STALL` 0.55, 10.05, 140), the potter
+  before its right end (`stall` 2.0, 9.7, 280); the coppers moved to the stall's left end, by his hand (the pots to the
+  right): before the stall he was his back, and the close shot of his face was the back of his head. `hand_itself`
+  opens near on the coppers (`COPPERS`) and ends on his face looking down before him.

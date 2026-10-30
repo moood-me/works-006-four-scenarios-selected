@@ -10,3 +10,6 @@ person's `_on`: `[across, distance, elevation]`); each person there has `"place"
 `scene.kit.places.follow(scene, scene.lib.PLACES)`: `<id>_at` set — put there at once (place, turn, seat); on opening,
 put where `<id>_at` says unless `<id>_placed` says it is done. What they do there (`_do`), look at, reach for — the game's
 and the pieces'; a walk from one place to another — a piece's (`walk`, then `<id>_at` named as it ends: nothing moves).
+
+- (2026-10-30) A place without a height (on the boards, on the land) puts `<id>_e` at 0 in a scene that has it, so that
+  one come up out of the water stands on the boards, not over them at the height the water had.
