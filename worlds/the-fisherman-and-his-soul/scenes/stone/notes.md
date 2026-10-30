@@ -127,3 +127,4 @@ in the hull).
   growing quiet); `laugh_tail` on a medium shot.
 - (seventh round) `in_net`: `WAKE` — nearer her as she wakes; then he kneels where he stands in the boat, bent over
   the net, his hand on its edge by hers (`go_word`, `go_free` begin kneeling). Moved toward the bow he was not seen.
+- `boat_out` ends on `AT_BOW` (the rope and the net in the frame for М7), as `night` does for М1.
