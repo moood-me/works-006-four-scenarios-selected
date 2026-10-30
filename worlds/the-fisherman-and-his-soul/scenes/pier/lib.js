@@ -32,6 +32,7 @@ const PLACES = {
     under: { at: [1.4, 5.6, 0], turn: 200 },
     hut: { at: [1.4, -2.6], turn: 70 },
     sand: { at: [1.0, 0.3], turn: 20 },
+    found: { at: [0.9, 0.55], turn: 20 },
     field: { at: [-2.4, -10.2], turn: 60 },
   },
   soul: {
@@ -44,6 +45,8 @@ const PLACES = {
     pier: { at: [1.3, 4.4, 0.8], turn: 225 },
     stone: { at: [1.8, 5.6, 0.85], turn: 220 },
     sand: { at: [1.0, 1.0, 0], turn: 90 },
+    // (found with him in the morning: lying along him at his side — his `found`)
+    found: { at: [1.32, 0.4, 0], turn: 20 },
   },
   girl: { feast: { at: [-2.6, 2.2], turn: 60 } },
   woman_a: { feast: { at: [-3.05, 1.3], turn: 40 }, shore: { at: [2.0, -0.6], turn: 260 } },
@@ -1022,12 +1025,11 @@ function film(scene) {
     },
     // «Белые цветы» on the shore
     morning_two: {
-      from: () => ({ ...SHORE('morning'), ...NONE, mist: 1, lantern_at: 'post', hut: 'gone', ...at('fisherman', 'sand'), fisherman_a: 0.9, fisherman_d: 0.55,
-        fisherman_do: 'lie_still', ...at('mermaid', 'sand'), mermaid_do: 'lie_still', mermaid_mood: 'eyes_closed', ...at('priest', 'shore'), priest_a: -4,
+      from: () => ({ ...SHORE('morning'), ...NONE, mist: 1, lantern_at: 'post', hut: 'gone', ...at('fisherman', 'found'),
         // (found together: she lies along him, at his side, as he holds her — unless М8 let her slip: then a little apart,
         // across, where the wave left her)
-        ...(scene.get('apart') ? {} : { mermaid_a: 1.3, mermaid_d: 0.42, mermaid_turn: 20 }),
-        priest_d: -3, soul_here: false, ...WIDE_SHORE }),
+        fisherman_do: 'lie_still', ...at('mermaid', scene.get('apart') ? 'sand' : 'found'), mermaid_do: 'lie_still', mermaid_mood: 'eyes_closed',
+        ...at('priest', 'shore'), priest_a: -4, priest_d: -3, soul_here: false, ...WIDE_SHORE }),
       run: async s => {
         P.loop(s, 'fisherman', 'lie_still');
         // holding her — or (apart) beside her, fingers almost touching

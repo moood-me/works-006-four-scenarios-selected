@@ -63,9 +63,9 @@ what lies there).
 
 | who | places |
 | --- | --- |
-| `fisherman` | `end` (the boards by the post, default), `edge` (sat on the pier's edge, legs over the water), `level` (on the boards level with the girl, 1.3), `shallows` (in the water by the pier's end to the waist), `post` (in the water by the lantern post, holding it — М9), `under` (gone under), `hut`, `sand` (by her on the sand), `field` (the field's edge) |
+| `fisherman` | `end` (the boards by the post, default), `edge` (sat on the pier's edge, legs over the water), `level` (on the boards level with the girl, 1.3), `shallows` (in the water by the pier's end to the waist), `post` (in the water by the lantern post, holding it — М9), `under` (gone under), `hut`, `sand` (by her on the sand), `found` (lying on the sand in the morning, the Epilogue's), `field` (the field's edge) |
 | `soul` | `end` (default), `edge` (beside him), `walk` (gone up the pier to its root), `hut` |
-| `mermaid` | `pier` (by the pier's end, default), `stone` (to the shoulders by the stone), `sand` (on the sand — lying is a motion of the pieces) |
+| `mermaid` | `pier` (by the pier's end, default), `stone` (to the shoulders by the stone), `sand` (on the sand — lying is a motion of the pieces), `found` (along him at his side, the Epilogue's morning) |
 | `girl` | `feast` |
 | `woman_a`, `woman_b` | `feast`, `shore` |
 | `widow` | `boat`, `sand`, `away` (gone along the shore toward the bridge, past the shore's view) |
