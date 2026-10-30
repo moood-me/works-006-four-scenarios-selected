@@ -129,7 +129,7 @@ function film(scene) {
     // ── Chapter I ──
     feast: {
       from: () => ({ ...SEA('noon'), ...NONE, knife: 'none', ...at('fisherman', 'end'), ...at('girl', 'feast'), ...at('woman_a', 'feast'),
-        ...at('woman_b', 'feast'), girl_do: 'dance_light', woman_a_do: 'clap', woman_b_do: 'clap', ...P.shot('girl', 'full', [0.45, 0.55]) }),
+        ...at('woman_b', 'feast'), girl_do: 'dance_light', woman_a_do: 'clap', woman_b_do: 'clap', ...P.shot('girl', 'wide', [0.45, 0.6]) }),
       run: async s => {
         P.loop(s, 'girl', 'dance_light');
         P.loop(s, 'woman_a', 'clap');
@@ -900,7 +900,7 @@ function film(scene) {
         const him = s.person('fisherman');
         him.look('mermaid');
         // (the widow's children, if they are there, step back up the sand: she is seen)
-        for (const [id, to] of [['widow_girl', [2.4, -1.2]], ['widow_boy', [2.0, -1.6]]]) if (s.get(`${id}_here`)) P.go(s, id, [to], 250);
+        for (const [id, to] of [['widow', [3.0, -1.0]], ['widow_girl', [2.4, -1.6]], ['widow_boy', [2.0, -2.0]]]) if (s.get(`${id}_here`)) P.go(s, id, [to], 250);
         await him.do('kneel');
         // near the two of them as he bends to her and kisses her, and says what he says (the game's, after): his face,
         // hers (2026-10-30: it was said on a side shot from afar)
@@ -915,8 +915,8 @@ function film(scene) {
         soul_here: false, ...WIDE_SHORE }),
       run: async s => {
         P.open(s, WIDE_SHORE);
-        // the sea darkens and comes
-        await s.move('wave', 0.3, { over: 4 });
+        // the sea darkens and comes (the morning's light going out of the sky with it)
+        await s.all(s.move('wave', 0.3, { over: 4 }), s.move('dawn', 0.35, { over: 4 }), s.move('day', 0, { over: 4 }));
         await P.tell(s, 'sea_comes:dark', 1);
         // (the children run up the shore, if they are there)
         if (s.get('children')) {
