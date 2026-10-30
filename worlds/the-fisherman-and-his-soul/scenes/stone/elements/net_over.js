@@ -69,19 +69,21 @@ e.layer('fish', { pivot: [-0.44, -0.02] }, g => {
     g.fill();
   }
 });
-// the knot by her hand: a loop of twine over a float, its ends
-e.layer('knot', { pivot: [0.1, -0.08] }, g => {
+// the knot by her hand: a loop of twine over a float, its ends — by her left hand at the floats, beside her (not over
+// her face: М1б's sign is her face growing quiet)
+const KX = -0.2, KY = 0;
+e.layer('knot', { pivot: [KX, KY] }, g => {
   g.strokeStyle = '#9a7a56';
   g.lineWidth = 0.012;
   g.beginPath();
-  g.ellipse(0.1, -0.08, 0.025, 0.018, 0.4, 0, Math.PI * 2);
+  g.ellipse(KX, KY, 0.025, 0.018, 0.4, 0, Math.PI * 2);
   g.stroke();
   g.beginPath();
-  g.moveTo(0.12, -0.07);
-  g.quadraticCurveTo(0.16, -0.05, 0.15, -0.01);
-  g.moveTo(0.08, -0.07);
-  g.quadraticCurveTo(0.05, -0.04, 0.07, 0);
+  g.moveTo(KX + 0.02, KY + 0.01);
+  g.quadraticCurveTo(KX + 0.06, KY + 0.03, KX + 0.05, KY + 0.05);
+  g.moveTo(KX - 0.02, KY + 0.01);
+  g.quadraticCurveTo(KX - 0.05, KY + 0.04, KX - 0.03, KY + 0.05);
   g.stroke();
 });
 e.at(-0.42, -0.58, 'rope');
-e.at(0.1, -0.08, 'knot');
+e.at(KX, KY, 'knot');

@@ -85,13 +85,13 @@
   {"text":"Like this — the way they do on the pier","who":"fisherman","translation":"이렇게 — 선창에서 추는 것처럼","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"Show me how you dance here","who":"fisherman","translation":"여기서는 어떻게 춤추는지 보여 줘","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"We do not dance. Dancing is done with feet","who":"mermaid","translation":"우리는 춤추지 않아. 춤은 발로 추는 거잖아","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
-  {"text":"The third year.","translation":"셋째 해.","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"On the square beyond the bridge, where you sold your fish, a girl dances at night. You were never there at night. Her feet are like little white doves. Come. One day","who":"soul","translation":"네가 생선을 팔던 다리 너머 광장에서, 밤마다 한 처녀가 춤을 춰. 너는 밤에 거기 가 본 적이 없지. 그 처녀의 발은 작고 하얀 비둘기 같아. 가자. 하루만","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"You want to see feet, don’t you? Hers has none","who":"soul","translation":"발을 보고 싶은 거잖아, 그렇지? 네 그녀에게는 발이 없으니","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"I am tired of walking alone. You will look — and come back","who":"soul","translation":"혼자 다니는 데 지쳤어. 보기만 하고 — 돌아오면 돼","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"You stopped that time on the pier. I remember — I danced with you","who":"soul","translation":"그때 선창에서 너는 멈춰 섰지. 기억해 — 나는 너와 함께 춤췄어","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"You looked back that time on the pier. I remember","who":"soul","translation":"그때 선창에서 너는 돌아보았지. 기억해","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"To walk on the earth, let me in. On the shore I will come out again","who":"soul","translation":"땅 위를 걸으려면 나를 들여보내. 바닷가에 가면 다시 나올게","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
+  {"text":"The third year.","translation":"셋째 해.","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"I’ll go. One day","who":"fisherman","translation":"갈게. 하루만","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"I will come back","who":"fisherman","translation":"돌아올게","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"No. I stay","who":"fisherman","translation":"아니. 남을 거야","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
@@ -341,5 +341,6 @@
   {"text":"You promised the Soul: once a year you will come out to her.","translation":"영혼에게 약속했다: 일 년에 한 번 영혼에게 나가겠다고.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
   {"text":"By evening the whole market knows: the fisherman from the bay is a thief.","translation":"저녁이 되자 온 시장이 안다: 만의 어부는 도둑이라고.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
   {"text":"You went out for the widow’s children.","translation":"과부의 아이들을 위해 바다로 나갔다.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
-  {"text":"You stayed by the water. The widow’s children went away.","translation":"물가에 남았다. 과부의 아이들은 떠났다.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"}
+  {"text":"You stayed by the water. The widow’s children went away.","translation":"물가에 남았다. 과부의 아이들은 떠났다.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
+  {"text":"Next","translation":"다음","where":"games/the-fisherman-and-his-soul/bespoke/ui.js"}
 ]}

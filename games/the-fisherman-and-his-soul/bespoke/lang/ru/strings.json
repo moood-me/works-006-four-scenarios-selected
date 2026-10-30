@@ -85,13 +85,13 @@
   {"text":"Like this — the way they do on the pier","who":"fisherman","translation":"Вот так — как на мостках","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"Show me how you dance here","who":"fisherman","translation":"Покажи, как у вас пляшут","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"We do not dance. Dancing is done with feet","who":"mermaid","translation":"У нас не пляшут. Пляшут ногами","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
-  {"text":"The third year.","translation":"Год третий.","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"On the square beyond the bridge, where you sold your fish, a girl dances at night. You were never there at night. Her feet are like little white doves. Come. One day","who":"soul","translation":"На площади за мостом, где ты продавал рыбу, по ночам пляшет девушка. Ты там ночью не бывал. Ноги у неё — как белые голубки. Пойдём. Один день","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"You want to see feet, don’t you? Hers has none","who":"soul","translation":"Ты ведь хочешь увидеть ноги. У твоей-то их нет","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"I am tired of walking alone. You will look — and come back","who":"soul","translation":"Я устала ходить одна. Посмотришь — и вернёшься","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"You stopped that time on the pier. I remember — I danced with you","who":"soul","translation":"Ты тогда остановился на мостках. Я помню — я плясала с тобой","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"You looked back that time on the pier. I remember","who":"soul","translation":"Ты тогда оглянулся на мостках. Я помню","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"To walk on the earth, let me in. On the shore I will come out again","who":"soul","translation":"Чтобы идти по земле, впусти меня. На берегу я выйду снова","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
+  {"text":"The third year.","translation":"Год третий.","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"I’ll go. One day","who":"fisherman","translation":"Пойду. Один день","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"I will come back","who":"fisherman","translation":"Я вернусь","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"No. I stay","who":"fisherman","translation":"Нет. Останусь","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
@@ -341,5 +341,6 @@
   {"text":"You promised the Soul: once a year you will come out to her.","translation":"Ты обещал Душе: раз в год выйдешь к ней.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
   {"text":"By evening the whole market knows: the fisherman from the bay is a thief.","translation":"К вечеру весь рынок знает: рыбак из бухты — вор.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
   {"text":"You went out for the widow’s children.","translation":"Ты вышел в море ради детей вдовы.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
-  {"text":"You stayed by the water. The widow’s children went away.","translation":"Ты остался у воды. Дети вдовы ушли.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"}
+  {"text":"You stayed by the water. The widow’s children went away.","translation":"Ты остался у воды. Дети вдовы ушли.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
+  {"text":"Next","translation":"Дальше","where":"games/the-fisherman-and-his-soul/bespoke/ui.js"}
 ]}

@@ -48,6 +48,7 @@
 //   g.gauge(name) — the scale is shown from now on; its one line of what it means said once
 //   g.mark(key, value, text) — remembered (state.marks[key]); text — what the player is told; null — told nothing
 //   g.title(text) — words over the scene, as a film's title; → once they have gone
+//   g.next() — a pause the player ends: “Next” low over the scene; → once it is pressed
 //   g.done() → once the step's code is through: the page's ⏭ taken back; g.leave() — the step left behind (game.js)
 // The page's ⏭ (bespoke.forward) is the step's while it is played ({forward}: whether the player has seen the step —
 // game.js): where the step is seen, pressed, the step goes on at once to its next interaction — the next line said,
@@ -399,6 +400,12 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       if (gone()) return never;
       if (fast) await alive(land());
       return unseen() ? sleep(9000) : alive(view.title(text, { signal: left.signal }));
+    },
+    async next() {
+      if (gone()) return never;
+      if (unseen()) return;
+      if (fast) await alive(land());
+      return alive(view.next({ signal: left.signal }));
     },
     async done() {
       await land();

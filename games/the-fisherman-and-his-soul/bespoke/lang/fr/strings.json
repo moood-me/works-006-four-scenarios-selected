@@ -85,13 +85,13 @@
   {"text":"Like this — the way they do on the pier","who":"fisherman","translation":"Comme ceci — comme on fait sur le ponton","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"Show me how you dance here","who":"fisherman","translation":"Montre-moi comment on danse chez vous","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"We do not dance. Dancing is done with feet","who":"mermaid","translation":"Chez nous on ne danse pas. On danse avec les pieds","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
-  {"text":"The third year.","translation":"La troisième année.","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"On the square beyond the bridge, where you sold your fish, a girl dances at night. You were never there at night. Her feet are like little white doves. Come. One day","who":"soul","translation":"Sur la place au-delà du pont, où tu vendais ton poisson, une jeune fille danse la nuit. Tu n’y es jamais allé la nuit. Ses pieds sont comme de petites colombes blanches. Viens. Un seul jour","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"You want to see feet, don’t you? Hers has none","who":"soul","translation":"Tu veux voir des pieds, n’est-ce pas ? La tienne n’en a point","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"I am tired of walking alone. You will look — and come back","who":"soul","translation":"Je suis lasse de marcher seule. Tu regarderas — et tu reviendras","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"You stopped that time on the pier. I remember — I danced with you","who":"soul","translation":"Tu t’es arrêté, cette fois-là, sur le ponton. Je m’en souviens — j’ai dansé avec toi","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"You looked back that time on the pier. I remember","who":"soul","translation":"Tu t’es retourné, cette fois-là, sur le ponton. Je m’en souviens","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"To walk on the earth, let me in. On the shore I will come out again","who":"soul","translation":"Pour marcher sur la terre, laisse-moi entrer en toi. Sur le rivage je ressortirai","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
+  {"text":"The third year.","translation":"La troisième année.","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"I’ll go. One day","who":"fisherman","translation":"J’irai. Un seul jour","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"I will come back","who":"fisherman","translation":"Je reviendrai","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"No. I stay","who":"fisherman","translation":"Non. Je reste","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
@@ -341,5 +341,6 @@
   {"text":"You promised the Soul: once a year you will come out to her.","translation":"Tu as promis à l’Âme : une fois l’an, tu sortiras vers elle.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
   {"text":"By evening the whole market knows: the fisherman from the bay is a thief.","translation":"Au soir, tout le marché le sait : le pêcheur de la baie est un voleur.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
   {"text":"You went out for the widow’s children.","translation":"Tu es sorti en mer pour les enfants de la veuve.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
-  {"text":"You stayed by the water. The widow’s children went away.","translation":"Tu es resté au bord de l’eau. Les enfants de la veuve sont partis.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"}
+  {"text":"You stayed by the water. The widow’s children went away.","translation":"Tu es resté au bord de l’eau. Les enfants de la veuve sont partis.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
+  {"text":"Next","translation":"Suivant","where":"games/the-fisherman-and-his-soul/bespoke/ui.js"}
 ]}

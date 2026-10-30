@@ -98,3 +98,9 @@
 #underlay .map .author { flex: 0 0 auto; align-self: center; min-height: 44px; padding: 10px 14px; border-radius: 4px; background: var(--paper);
   border: 1px dashed var(--ink-soft); font-size: 14px; color: var(--ink-soft); }
 #underlay .map .away { margin: 0; font-size: 14px; font-style: italic; color: var(--pencil); }
+/* “Next” between the epilogue's two parts: low in the middle, the lantern's yellow (what is the player's) */
+#layer .next { position: absolute; left: 50%; bottom: 24px; translate: -50% 0; min-width: 120px; min-height: 44px; padding: 8px 22px;
+  border: 0; border-radius: 22px; background: var(--lantern); color: var(--ink); font: 18px var(--serif); cursor: pointer;
+  box-shadow: 0 6px 22px rgba(20, 30, 45, 0.35); opacity: 0; transition: opacity 0.6s; }
+#layer .next.on { opacity: 1; }
+#layer .next:hover { filter: brightness(1.08); }

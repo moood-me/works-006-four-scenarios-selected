@@ -248,9 +248,10 @@ function film(scene) {
     },
     laugh_tail: {
       after: 'ask_wife',
-      from: () => ({ ...LIGHT.night, light: 'night', ...NOBOAT, ...pose('shallows', 'stone'), ...DO0, mermaid_do: 'seated', ...P.shot('mermaid', 'close', [0.5, 0.42]) }),
+      from: () => ({ ...LIGHT.night, light: 'night', ...NOBOAT, ...pose('shallows', 'stone'), ...DO0, mermaid_do: 'seated', ...P.shot('mermaid', 'medium', [0.5, 0.45]) }),
       run: async s => {
-        P.frame(s, P.shot('mermaid', 'close', [0.5, 0.42]), 1.2);
+        // (her laugh on a medium shot, her tail splashing in it: close, the figure's plainness showed more than the laugh)
+        P.frame(s, P.shot('mermaid', 'medium', [0.5, 0.45]), 1.2);
         P.loop(s, 'mermaid', 'laugh');
         await s.wait(1.2);
         s.set('splash', (Number(s.get('splash')) || 0) + 1);

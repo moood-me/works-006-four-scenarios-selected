@@ -88,6 +88,9 @@ function film(scene) {
   // the two of them near, side by side on the sand, both faces (his white hair, her hand at it) — the operator on her
   // with him on the left (a close shot of him alone was the back of his head: he is turned to her)
   const TWO_NEAR = P.shot('mermaid', 1.5, [0.62, 0.42]);
+  // the two of them sitting whole, a little further (the years: his white hair and beard read as an old man's at this
+  // size; nearer, the beard was a mask)
+  const TWO_SEATED = P.shot('mermaid', 0.8, [0.62, 0.5]);
   const film = {
     deep_song: {
       from: () => ({ ...BASE, ...pose('sand'), ...P.CAM0, camera_pitch: 35, camera_z: -0.3 }),
@@ -146,7 +149,7 @@ function film(scene) {
       },
     },
     white_hair: {
-      from: () => ({ ...BASE, years: true, ...pose('sand'), ...TWO_NEAR }),
+      from: () => ({ ...BASE, years: true, ...pose('sand'), ...TWO_SEATED }),
       run: async s => {
         await s.wait(1.5);
         // she touches his hair

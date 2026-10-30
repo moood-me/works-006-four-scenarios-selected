@@ -85,13 +85,13 @@
   {"text":"Like this — the way they do on the pier","who":"fisherman","translation":"こうだよ――桟橋でやるみたいに","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"Show me how you dance here","who":"fisherman","translation":"ここではどんなふうに踊るのか、見せてくれ","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"We do not dance. Dancing is done with feet","who":"mermaid","translation":"わたしたちは踊らないの。踊るのは足でするものでしょう","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
-  {"text":"The third year.","translation":"三年目。","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"On the square beyond the bridge, where you sold your fish, a girl dances at night. You were never there at night. Her feet are like little white doves. Come. One day","who":"soul","translation":"あなたが魚を売っていた橋の向こうの広場で、夜ごと娘が踊っているの。あなたは夜にあそこへ行ったことがなかったわね。その足は、小さな白い鳩のよう。行きましょう。一日だけ","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"You want to see feet, don’t you? Hers has none","who":"soul","translation":"足が見たいんでしょう？ あなたの恋人には、足がないものね","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"I am tired of walking alone. You will look — and come back","who":"soul","translation":"ひとりで歩くのに疲れたの。見て――それから帰ってくればいい","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"You stopped that time on the pier. I remember — I danced with you","who":"soul","translation":"あのとき、あなたは桟橋で立ちどまったわね。おぼえてる――わたしもいっしょに踊ったもの","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"You looked back that time on the pier. I remember","who":"soul","translation":"あのとき、あなたは桟橋でふりかえったわね。おぼえてる","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"To walk on the earth, let me in. On the shore I will come out again","who":"soul","translation":"陸を歩くには、わたしをなかに入れて。岸に着いたら、また出ていくから","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
+  {"text":"The third year.","translation":"三年目。","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"I’ll go. One day","who":"fisherman","translation":"行く。一日だけ","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"I will come back","who":"fisherman","translation":"帰ってくる","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"No. I stay","who":"fisherman","translation":"いや。おれは残る","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
@@ -341,5 +341,6 @@
   {"text":"You promised the Soul: once a year you will come out to her.","translation":"あなたは魂に約束した：年に一度、魂のもとへ出ていくと。","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
   {"text":"By evening the whole market knows: the fisherman from the bay is a thief.","translation":"夕方には市場じゅうが知っている――入り江の漁師は泥棒だと。","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
   {"text":"You went out for the widow’s children.","translation":"あなたはやもめの子どもたちのために海へ出た。","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
-  {"text":"You stayed by the water. The widow’s children went away.","translation":"あなたは水辺にとどまった。やもめの子どもたちは去っていった。","where":"games/the-fisherman-and-his-soul/bespoke/story.js"}
+  {"text":"You stayed by the water. The widow’s children went away.","translation":"あなたは水辺にとどまった。やもめの子どもたちは去っていった。","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
+  {"text":"Next","translation":"次へ","where":"games/the-fisherman-and-his-soul/bespoke/ui.js"}
 ]}

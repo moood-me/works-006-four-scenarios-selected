@@ -70,8 +70,9 @@ export default {
         }
       }
     },
-    // part two: years later; the last shot
+    // part two: years later; the last shot (“Next” first: the pause between the parts is the player's)
     async g => {
+      await g.next();
       const f = facts(g.state);
       if (f.ending === 'flowers') {
         await piece(g, 'feast_flowers', {

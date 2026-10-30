@@ -7,6 +7,7 @@
 //   view.where(text | null) — the label high on the left: where this really happens (a stand-in scene)
 //   view.hint(text) — one line low in the middle; → a function that takes it away
 //   view.title(text, {signal}) — words in the middle of the frame; → once they have gone (9 s)
+//   view.next({signal}) — “Next” low in the middle, the lantern's yellow (Enter or Space too); → once pressed
 //   view.quiet() — what a chapter left showing (its slips, its hint, its label) taken away: the map comes
 //   view.author({chapters, plays: [labels], at() → {chapter, step}, games(as, chapter, step) → promise of [titles of
 //     its minigames], go(as, chapter, step, game)}) — the author's map, opened by his sign on the map (→ toggle)
@@ -70,6 +71,19 @@ export function ui(layer) {
         const timers = [setTimeout(() => t.classList.add('on'), 60), setTimeout(() => t.classList.remove('on'), 6600),
           setTimeout(() => { t.remove(); ok(); }, 9000)];
         signal?.addEventListener('abort', () => { timers.forEach(clearTimeout); t.remove(); ok(); });
+      });
+    },
+    next({ signal } = {}) {
+      const n = button(tr('Next'), '', null, 'next');
+      layer.append(n);
+      requestAnimationFrame(() => n.classList.add('on'));
+      return new Promise(ok => {
+        const gone = () => { removeEventListener('keydown', key, true); n.remove(); };
+        const done = () => { gone(); ok(); };
+        const key = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); done(); } };
+        n.onclick = done;
+        addEventListener('keydown', key, true);
+        signal?.addEventListener('abort', gone);
       });
     },
     quiet() {

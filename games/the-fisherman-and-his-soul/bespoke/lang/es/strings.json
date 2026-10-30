@@ -85,13 +85,13 @@
   {"text":"Like this — the way they do on the pier","who":"fisherman","translation":"Así, como en el embarcadero","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"Show me how you dance here","who":"fisherman","translation":"Enséñame cómo se baila aquí","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"We do not dance. Dancing is done with feet","who":"mermaid","translation":"Aquí no se baila. Se baila con los pies","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
-  {"text":"The third year.","translation":"El tercer año.","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"On the square beyond the bridge, where you sold your fish, a girl dances at night. You were never there at night. Her feet are like little white doves. Come. One day","who":"soul","translation":"En la plaza al otro lado del puente, donde vendías tu pescado, de noche baila una muchacha. Tú nunca estuviste allí de noche. Sus pies son como palomitas blancas. Ven. Un día","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"You want to see feet, don’t you? Hers has none","who":"soul","translation":"Quieres ver unos pies, ¿verdad? La tuya no tiene","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"I am tired of walking alone. You will look — and come back","who":"soul","translation":"Estoy cansada de andar sola. Mirarás, y volverás","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"You stopped that time on the pier. I remember — I danced with you","who":"soul","translation":"Aquella vez te paraste en el embarcadero. Lo recuerdo: yo bailé contigo","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"You looked back that time on the pier. I remember","who":"soul","translation":"Aquella vez miraste atrás en el embarcadero. Lo recuerdo","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"To walk on the earth, let me in. On the shore I will come out again","who":"soul","translation":"Para andar por la tierra, déjame entrar. En la orilla volveré a salir","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
+  {"text":"The third year.","translation":"El tercer año.","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"I’ll go. One day","who":"fisherman","translation":"Iré. Un día","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"I will come back","who":"fisherman","translation":"Volveré","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
   {"text":"No. I stay","who":"fisherman","translation":"No. Me quedo","where":"games/the-fisherman-and-his-soul/bespoke/chapters/2.js"},
@@ -341,5 +341,6 @@
   {"text":"You promised the Soul: once a year you will come out to her.","translation":"Le prometiste al Alma: una vez al año saldrás a su encuentro.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
   {"text":"By evening the whole market knows: the fisherman from the bay is a thief.","translation":"Al anochecer todo el mercado lo sabe: el pescador de la bahía es un ladrón.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
   {"text":"You went out for the widow’s children.","translation":"Saliste al mar por los niños de la viuda.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
-  {"text":"You stayed by the water. The widow’s children went away.","translation":"Te quedaste junto al agua. Los niños de la viuda se fueron.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"}
+  {"text":"You stayed by the water. The widow’s children went away.","translation":"Te quedaste junto al agua. Los niños de la viuda se fueron.","where":"games/the-fisherman-and-his-soul/bespoke/story.js"},
+  {"text":"Next","translation":"Siguiente","where":"games/the-fisherman-and-his-soul/bespoke/ui.js"}
 ]}
