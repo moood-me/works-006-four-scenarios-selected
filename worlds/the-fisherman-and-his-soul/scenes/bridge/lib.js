@@ -67,11 +67,14 @@ const UNDER = { at: [-2.3, 11.6], turn: 250 };
 const HEAD = { at: [-0.8, 12.2], turn: 270 };
 const MID = { at: [-11.6, 12.0], turn: 270 };
 const STALL = { at: [1.0, 9.6], turn: 60 };
+// the Fisherman at the stall: at its right end by the coppers, turned to the potter behind it on the left — his face
+// and his hands toward us (the operator films from our side: before the stall he would be his back)
+const AT_STALL = { at: [2.85, 10.6], turn: 240 };
 const DOOR = { at: [1.75, 7.4], turn: 90 };
 const PLACES = {
-  fisherman: { lane: LANE, under: UNDER, head: HEAD, mid: MID, stall: STALL, door: DOOR },
+  fisherman: { lane: LANE, under: UNDER, head: HEAD, mid: MID, stall: AT_STALL, door: DOOR },
   soul: { lane: LANE, under: UNDER, head: HEAD, mid: MID, stall: STALL, door: DOOR },
-  potter: { door: { at: [1.8, 7.6], turn: 235 }, stall: { at: [2.25, 10.5], turn: 250 }, doorway: { at: [2.35, 7.4], turn: 270 } },
+  potter: { door: { at: [1.8, 7.6], turn: 235 }, stall: { at: [1.25, 10.8], turn: 115 }, doorway: { at: [2.35, 7.4], turn: 270 } },
   beggar: { parapet: { at: [-9.2, 13.55], turn: 180, on: [-9.2, 13.5, 3.82] } },
 };
 // The bridge's pieces (the game's contract, game.md «Stage 5 — pieces»; notes.md «Pieces»): played by the world's
@@ -89,6 +92,8 @@ function film(scene) {
   // along the road toward the far bank, the middle ahead; and down at the bowl. Heights over the road (the `deck` walk
   // plane is the floor under the eye)
   const ON_ROAD = { ...P.CAM0, camera_x: -5.2, camera_z: 12.0, camera_yaw: 270, camera_h: -0.1 };
+  // his hand reaching for the coppers on the stall: the coppers and the hand, near
+  const COPPERS = P.shot('stall#coppers', 0.9, [0.45, 0.55]);
   const AT_BOWL = { ...P.CAM0, camera_x: -7.4, camera_z: 12.7, camera_yaw: 268, camera_h: -0.5, camera_look: 0.18 };
   const film = {
     // ── Prologue: the morning market ──
@@ -98,7 +103,7 @@ function film(scene) {
       run: async s => {
         const him = s.person('fisherman');
         // he comes off the bridge to the potter's stall, gives the fish, takes the coins without counting them
-        await P.go(s, 'fisherman', [[-0.8, 12.2], PLACES.fisherman.stall.at], 60);
+        await P.go(s, 'fisherman', [[-0.8, 12.2], [1.8, 11.3], PLACES.fisherman.stall.at], AT_STALL.turn);
         him.look('potter');
         P.frame(s, P.shot('fisherman', 'medium', [0.4, 0.42]), 2);
         await him.do('hold_out');
@@ -138,7 +143,7 @@ function film(scene) {
       run: async s => {
         P.loop(s, 'musician_a', 'play_fiddle');
         P.loop(s, 'musician_b', 'play_pipe');
-        await P.go(s, 'fisherman', [PLACES.fisherman.stall.at], 60);
+        await P.go(s, 'fisherman', [[1.8, 11.3], PLACES.fisherman.stall.at], AT_STALL.turn);
         s.person('fisherman').look('potter');
         P.frame(s, P.shot('fisherman', 'medium', [0.4, 0.42]), 2);
         await P.tell(s, 'square:met', 2);
@@ -148,9 +153,9 @@ function film(scene) {
       after: 'square',
       from: () => ({ ...TIME.night, time: 'night', ...DO0, square: true, ...at('potter', 'stall'), potter_look: 'fisherman', potter_reach: null,
         musician_a_do: 'play_fiddle', musician_b_do: 'play_pipe', ...at('fisherman', 'stall'), fisherman_with: ['lantern'], fisherman_look: 'potter',
-        ...P.shot('fisherman#hand_r', 'close', [0.5, 0.5]) }),
+        ...COPPERS }),
       run: async s => {
-        P.open(s, P.shot('fisherman#hand_r', 'close', [0.5, 0.5]));
+        P.open(s, COPPERS);
         const him = s.person('fisherman');
         // his right hand reaches by itself for the coppers; he looks at it
         him.reach({ r: 'stall#coppers' });

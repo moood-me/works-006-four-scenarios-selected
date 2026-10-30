@@ -98,6 +98,10 @@ function film(scene) {
   // his seat on the thwart (in the boat's frame, as the hull is laid: the thwart 0.55 m sternward, 0.3 over the water —
   // 0.2 behind its middle: the cast's `seated` puts the hips that far before the point)
   const THWART = { on: 'boat', at: [0, 0.75, 0.3] };
+  // in his net (П.3–П.4): she turned to us, more than to him (her face seen from our side, not her hair — the operator
+  // films from the viewer's side); the two framed together as he holds the net and chooses
+  const IN_NET = { mermaid_turn: 195 };
+  const HOLD = P.shot('mermaid', 'full', [0.62, 0.5]);
   const film = {
     // ── Prologue «Сеть» ──
     night: {
@@ -118,7 +122,7 @@ function film(scene) {
     in_net: {
       after: 'night',
       from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', haul: 1, heel: 0.3, ...pose('boat', 'net'), ...DO0, fisherman_do: 'haul_net',
-        ...P.shot('mermaid', 'close', [0.5, 0.42]) }),
+        ...IN_NET, ...P.shot('mermaid', 'medium', [0.5, 0.45]) }),
       run: async s => {
         P.open(s, film.in_net.from());
         const her = s.person('mermaid'), him = s.person('fisherman');
@@ -134,13 +138,15 @@ function film(scene) {
         s.move('heel', 0, { over: 1.5 });
         him.reach({ r: 'net_over#knot' });
         him.look('mermaid');
-        P.frame(s, P.shot('fisherman', 'medium', [0.62, 0.42]), 2);
+        her.look('fisherman');
+        // the two of them: he in the boat on the left, holding the net's edge; she in it, her face to us
+        P.frame(s, HOLD, 2);
         await P.tell(s, 'in_net:hold', 4);
       },
     },
     go_word: {
       after: 'in_net',
-      from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', ...pose('boat', 'net'), ...DO0, fisherman_reach: { r: 'net_over#knot' }, knot: 1,
+      from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', ...pose('boat', 'net'), ...DO0, ...IN_NET, fisherman_reach: { r: 'net_over#knot' }, knot: 1,
         ...P.shot('mermaid', 'medium', [0.5, 0.45]) }),
       run: async s => {
         P.open(s, film.go_word.from());
@@ -158,7 +164,7 @@ function film(scene) {
     },
     go_free: {
       after: 'in_net',
-      from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', ...pose('boat', 'net'), ...DO0, fisherman_reach: { r: 'net_over#knot' }, knot: 1,
+      from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', ...pose('boat', 'net'), ...DO0, ...IN_NET, fisherman_reach: { r: 'net_over#knot' }, knot: 1,
         ...P.shot('mermaid', 'medium', [0.5, 0.45]) }),
       run: async s => {
         P.open(s, film.go_free.from());

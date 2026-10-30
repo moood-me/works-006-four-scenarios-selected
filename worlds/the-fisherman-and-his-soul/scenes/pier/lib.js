@@ -46,8 +46,8 @@ const PLACES = {
     sand: { at: [1.0, 1.0, 0], turn: 90 },
   },
   girl: { feast: { at: [-2.95, 2.45], turn: 95 } },
-  woman_a: { feast: { at: [-3.2, 1.9], turn: 70 }, shore: { at: [2.0, -0.6], turn: 260 } },
-  woman_b: { feast: { at: [-3.6, 1.4], turn: 60 }, shore: { at: [2.4, -0.2], turn: 250 } },
+  woman_a: { feast: { at: [-3.9, 1.1], turn: 60 }, shore: { at: [2.0, -0.6], turn: 260 } },
+  woman_b: { feast: { at: [-4.4, 0.7], turn: 50 }, shore: { at: [2.4, -0.2], turn: 250 } },
   widow: { boat: { at: [-0.6, -3.3], turn: 70 }, sand: { at: [1.9, -0.3], turn: 250 }, away: { at: [8.5, 1.0], turn: 80 } },
   widow_girl: { boat: { at: [-0.2, -3.8], turn: 70 }, field: { at: [-3.6, -10.9], turn: 60 } },
   widow_boy: { boat: { at: [0.25, -3.1], turn: 70 }, end: { at: [-0.55, 4.45], turn: 150, on: [-0.55, 4.45, 2.55] }, field: { at: [-3.2, -11.2], turn: 60 } },
@@ -115,12 +115,13 @@ function film(scene) {
   // boards toward us; the Soul rises out of it a step before him, on his left, turned to him (its face seen from the
   // water's side: CAM_BACK; his from ours); the two of them as he chooses — his face, the Soul's turned to him
   const BACK_TO_MOON = 205;
-  const SOUL_RISE = { soul_at: 'end', soul_placed: 'end', soul_a: -0.65, soul_d: 4.15, soul_e: 0, soul_turn: 45, soul_on: null };
+  const SOUL_RISE = { soul_at: 'end', soul_placed: 'end', soul_a: -1.0, soul_d: 4.6, soul_e: 0, soul_turn: 50, soul_on: null };
   const TWO = P.shot('fisherman', 'full', [0.62, 0.5]);
   // the feast: he comes level with the dancing girl — both in the frame, she on the left
   const LEVEL = P.shot('fisherman', 'full', [0.64, 0.52]);
-  // the Soul on the boards at the end speaking to him in the water (2.6, 3С.3): the Soul on the left, he on the right
-  const SPEAKS = P.shot('soul', 'full', [0.3, 0.5]);
+  // the Soul on the boards at the end speaking to him in the water (2.6, 3С.3): its face, seen from the water's side
+  // (from ours the lantern's post stands between them)
+  const SPEAKS = CAM_BACK;
   // crouched at his heels with the knife (М3, М6): a frame 1.6 m tall round him, his head high in it — the boards at his
   // feet, his shadow's edge, the knife in his hand below
   const KNEEL = P.shot('fisherman', 1.6, [0.5, 0.3]);
@@ -414,7 +415,7 @@ function film(scene) {
         await P.go(s, 'soul', [PLACES.soul.end.at], 120);
         s.person('soul').look('fisherman');
         s.person('fisherman').look('soul');
-        P.frame(s, SPEAKS, 2);
+        await P.cut(s, SPEAKS);
         await P.tell(s, 'third_year:near', 2);
       },
     },
@@ -425,7 +426,7 @@ function film(scene) {
       run: async s => {
         P.open(s, SPEAKS);
         // the camera to the stone: under the water her faint light (her song), or the stone empty
-        P.frame(s, P.shot('rock', 'wide', [0.5, 0.5]), 2.5);
+        await P.cut(s, P.CAM0);
         if (s.get('song')) s.move('under_light', 0.6, { over: 2 });
         await P.tell(s, 'third_stone:stone', 3);
         // and back to him in the water: his face as he chooses
@@ -501,7 +502,7 @@ function film(scene) {
         // the cup in the Soul's hands; then the two of them as it speaks
         P.frame(s, P.shot('soul#cup', 'close', [0.5, 0.5]), 2);
         await s.wait(2.5);
-        P.frame(s, SPEAKS, 2);
+        await P.cut(s, SPEAKS);
         await P.tell(s, 'fourth_year:up', 2);
       },
     },
@@ -512,7 +513,7 @@ function film(scene) {
       run: async s => {
         P.open(s, SPEAKS);
         // the stone: her light under the water (her song from below), or the silence
-        P.frame(s, P.shot('rock', 'wide', [0.5, 0.5]), 2.5);
+        await P.cut(s, P.CAM0);
         if (s.get('song')) s.move('under_light', 0.6, { over: 2 });
         await P.tell(s, 'fourth_stone:stone', 3);
         // and back to him: his face as he chooses

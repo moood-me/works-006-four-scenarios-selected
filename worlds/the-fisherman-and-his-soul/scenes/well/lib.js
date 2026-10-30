@@ -52,7 +52,12 @@ function film(scene) {
   // black by his fir; their looks
   const SITE = { round: false, stumble: 0, knife_ground: false, witch_on: RIM, witch_do: 'seated', witch_turn: 250, witch_a: 0.34, witch_d: 7.29,
     fisherman_a: -0.98, fisherman_d: 6.81, fisherman_turn: 110, fisherman_with: ['lantern'], fisherman_look: 'witch', witch_look: 'fisherman',
-    velvet_a: 3.5, velvet_d: 10.4, velvet_turn: 235, velvet_look: 'fisherman', velvet_do: 'hands_behind' };
+    velvet_a: -2.4, velvet_d: 5.6, velvet_turn: 60, velvet_look: 'fisherman', velvet_do: 'hands_behind' };
+  // the man in black: out from behind the last firs on the glade's near left edge (where the camera's side sees his
+  // face, and the Fisherman's as he turns to him), and back into the wood there
+  const VELVET = [-2.4, 5.6], FROM_WOOD = [-3.6, 4.4], INTO_WOOD = [[-3.6, 4.4], [-5.6, 3.4]];
+  // where the Witch pulls him to, before the man: he turned to him (his face, his hand at his brow seen), she beside him
+  const PULLED = { fisherman_a: -0.9, fisherman_d: 6.6, fisherman_turn: 236, witch_a: -0.25, witch_d: 7.0, witch_turn: 240 };
   const HIS = [-0.98, 6.81];
   // where the Witch goes back to after the dance falls apart: by the rim, on her feet; where he stands then, before her
   // on her left, turned to her (the two of them in one shot: the choice is his — his face must be in the frame)
@@ -63,6 +68,8 @@ function film(scene) {
   const ROUND_SHOT = P.shot('well', 0.23, [0.5, 0.6]);
   // the two after the dance: the Witch a little right of the middle, he on her left, both whole
   const TWO = P.shot('witch', 'full', [0.64, 0.45]);
+  // the sign before the man in black: on him, waist up — his face and his hand
+  const SIGN = P.shot('fisherman', 'medium', [0.55, 0.42]);
   const film = {
     well_evening: {
       from: () => ({ ...TIME.evening, time: 'evening', ...SITE, ...DO0, witch_do: 'swing_feet', witch_on: RIM, fisherman_with: ['lantern'],
@@ -102,15 +109,19 @@ function film(scene) {
         witch_do: 'dance_tambourine', fisherman_do: 'dance_round', round: true, ...ROUND_SHOT }),
       run: async s => {
         P.open(s, { round: true, ...ROUND_SHOT });
-        // the man in black steps out by the last fir; the dance stops; she pulls him toward the man
+        // the man in black steps out by the last fir — the camera on him, pale, watching
         s.set('velvet_here', true);
-        s.set('velvet_a', 4.4);
-        s.set('velvet_d', 11.8);
-        await P.go(s, 'velvet', [[3.5, 10.4]], 235);
+        s.set('velvet_a', FROM_WOOD[0]);
+        s.set('velvet_d', FROM_WOOD[1]);
+        P.frame(s, P.shot('velvet', 'full', [0.4, 0.5]), 1.5);
+        await P.go(s, 'velvet', [VELVET], 60);
+        await s.wait(1);
+        // the dance stops; she pulls him before the man
         s.set('round', false);
+        await P.cut(s, { ...PULLED, ...P.shot('witch', 'medium', [0.4, 0.42]) });
         s.person('witch').look('velvet');
+        s.person('fisherman').look('velvet');
         if (s.get('stumbled')) s.person('witch').mood('laugh');
-        P.frame(s, P.shot('witch', 'medium', [0.4, 0.42]), 1.5);
         await s.person('witch').do('pull_hands');
         await P.tell(s, 'velvet:bow', 0.5);
         P.frame(s, P.shot('velvet', 'close', [0.5, 0.4]), 2);
@@ -120,14 +131,15 @@ function film(scene) {
     sign_velvet: {
       after: 'velvet',
       from: () => ({ ...TIME.midnight, time: 'midnight', ...SITE, ...DO0, witch_on: null, witch_with: ['tambourine_hand'], fisherman_with: null,
-        velvet_here: true, ...P.shot('fisherman#hand_r', 'close', [0.5, 0.45]) }),
+        velvet_here: true, ...PULLED, ...SIGN }),
       run: async s => {
-        P.open(s, P.shot('fisherman#hand_r', 'close', [0.5, 0.45]));
-        // he makes the sign; the man in black turns and walks into the wood
+        P.open(s, { ...PULLED, ...SIGN });
+        // he makes the sign (his face and his hand, turned to the man); the man in black turns and walks into the wood
+        s.person('fisherman').look('velvet');
         await s.person('fisherman').do('sign');
         await P.tell(s, 'sign_velvet:sign', 0.5);
-        P.frame(s, P.CAM0, 2);
-        await P.go(s, 'velvet', [[4.6, 12.6], [5.6, 16]]);
+        P.frame(s, P.shot('velvet', 'full', [0.35, 0.5]), 1.2);
+        await P.go(s, 'velvet', INTO_WOOD);
         s.set('velvet_here', false);
         await P.tell(s, 'sign_velvet:gone', 0.3);
         // she cries out; the dance is broken; she goes back to the rim, breathing hard
