@@ -116,3 +116,8 @@ in the hull).
 - (second round) The prologue's night: the bay from the pier's end with the boat whole and broadside (`SEA_WIDE`), then
   in to its bow (`AT_BOW`, the camera's own keys): his hands, the rope, the net over the bow in the water — М1 is played
   there (the medium on him showed hands pulling at nothing).
+- (third round, from a play in the browser) The boat did not hold together: its hull's skin was seen from outside only
+  (a form is seen from its face's side) and lay across the boat. Now `hull_in` — the same skin with its face inward, the
+  boat's inside (tarred wood, the ribs) — and both turned along the boat (`facing` 90): from the pier one sees a boat,
+  him standing in it. Not yet: the bow lantern still stands a little beyond the stem, in the water; moving the hull
+  along the boat (`distance`, `across`) turned out not to go where expected in two tries — left as it is.
