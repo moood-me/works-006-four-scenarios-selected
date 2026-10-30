@@ -55,12 +55,13 @@ const FLUKE = [0.47, 0.64, 0.62, 1];
 function tail(F) {
   const { add, sub, mul, mix, cross, unit } = V();
   const m = F.fit.h;
-  const ankles = mix(F.P('LeftFoot'), F.P('RightFoot'), 0.5);
-  F.tube([mix(F.P('LeftLeg'), F.P('RightLeg'), 0.5), mix(F.P('LeftShin'), F.P('RightShin'), 0.5), ankles],
-    [[0, 0.19 * m], [1, 0.17 * m], [2, 0.1 * m]], [[0, TAIL]], 12, F.fwd('Hips'));
-  const along = unit(sub(mix(F.P('LeftToeEnd'), F.P('RightToeEnd'), 0.5), ankles));
+  const ankles = mix(F.P('LeftFoot'), F.P('RightFoot'), 0.5), toes = mix(F.P('LeftToeEnd'), F.P('RightToeEnd'), 0.5);
+  // (down over the feet to the toes' ends, wide enough at the ankles: no foot shows out of it — she has none)
+  F.tube([mix(F.P('LeftLeg'), F.P('RightLeg'), 0.5), mix(F.P('LeftShin'), F.P('RightShin'), 0.5), ankles, toes],
+    [[0, 0.2 * m], [1, 0.18 * m], [2, 0.13 * m], [3, 0.09 * m]], [[0, TAIL]], 12, F.fwd('Hips'));
+  const along = unit(sub(toes, ankles));
   const across = unit(sub(F.P('LeftFoot'), F.P('RightFoot')));
-  F.ball(add(ankles, mul(along, 0.1 * m)), [across, unit(cross(across, along)), along], [0.24 * m, 0.03 * m, 0.15 * m], FLUKE, 12);
+  F.ball(add(toes, mul(along, 0.1 * m)), [across, unit(cross(across, along)), along], [0.3 * m, 0.035 * m, 0.19 * m], FLUKE, 12);
 }
 // ── the things of chapter 1 on (stage 5): what the people hold, carry, wear ──
 const SNAKE = [0.3, 0.46, 0.27, 1];
