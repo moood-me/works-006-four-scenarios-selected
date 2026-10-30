@@ -105,7 +105,7 @@ export default {
       if (off(g)) return;
       const f = facts(g.state);
       if (f.widow === 'out') {
-        on(g, 'keel_light:light', () => g.sound.notes({ how: 'under', level: 0.1 }));
+        on(g, 'keel_light:light', () => g.sound.notes({ how: 'under', level: 0.75 }));
         await g.scene('stone', { beat: 'keel_light', here: ['fisherman'], moods: { fisherman: 'tired' }, keys: { fish: g.state.marks.half ? 0.5 : 1 } });
         await g.beat('keel_light');
       } else {

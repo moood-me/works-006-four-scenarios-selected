@@ -23,7 +23,7 @@
 //   song_under — her song round and round: near (in the deep, on the stone by him), far over the water (from the
 //   stone, seen from the pier), heard through the water (from under it, by the stone)
 // Played once:
-//   notes({count, broken, how, level}) — her four notes, once (count 3: the three that hang; broken: two and the third
+//   notes({count, broken, how, level}) — her four notes, once, in her voice (a woman humming: a recording) (count 3: the three that hang; broken: two and the third
 //   cut off — the oath that broke; how: near | far | under) · hush(name, seconds) — a bed broken off now (her song
 //   stopping in the middle): it does not come back unless declared again · again(name, seconds) — her song stopped
 //   and begun again `seconds` later (М4: she laughs, and begins again) · splash(level) (her tail on the water) · dive
@@ -67,6 +67,7 @@ function audio() {
     still = ctx.createGain();
     still.gain.value = 0;
     still.connect(master);
+    queueMicrotask(() => { for (const file of [...Object.values(SHOTS), HUM]) recording(file); });
   }
   return ctx;
 }
@@ -178,8 +179,26 @@ function swell(t, dest, { kind = 'pink', f, Q = 1, type = 'bandpass', points, sw
 // recordings (sounds/ — CC0, from Freesound: sounds/README.md): fetched and decoded once each; a bed plays one of its own
 // round and round from a random point, `gain` bringing it to as loud as the bed it took the place of
 const recordings = {};
+const decoded = {}; // the recordings already here, by file
 function recording(file) {
-  return (recordings[file] ??= fetch(new URL(`sounds/${file}`, import.meta.url)).then(r => r.arrayBuffer()).then(b => audio().decodeAudioData(b)));
+  return (recordings[file] ??= fetch(new URL(`sounds/${file}`, import.meta.url)).then(r => r.arrayBuffer()).then(b => audio().decodeAudioData(b))
+    .then(buf => (decoded[file] = buf)));
+}
+// the recordings of what is played once (sounds/README.md), fetched as soon as there is sound at all
+const SHOTS = { clap: 'clap-151219.mp3', tambourine: 'tambourine-171658.mp3', splash: 'splash-583348.mp3', drop: 'splash-321490.mp3',
+  wave: 'wave-659001.mp3', coins: 'coins-336571.mp3' };
+// a recording played once at t (as soon as it is here, the first time), `gain` loud, `rate` its speed
+function shot(name, t, dest, gain = 1, rate = 1) {
+  const file = SHOTS[name], go = (buf, at) => {
+    const a = audio(), src = a.createBufferSource(), g = a.createGain();
+    src.buffer = buf;
+    src.playbackRate.value = rate;
+    g.gain.value = gain;
+    src.connect(g).connect(dest);
+    src.start(at);
+  };
+  if (decoded[file]) go(decoded[file], t);
+  else recording(file).then(buf => go(buf, audio().currentTime + 0.02));
 }
 function recorded(files, gain) {
   return ({ a, out, keep }) => {
@@ -245,69 +264,69 @@ function schedule(a, first, fn) {
 // Four notes in the world's key (B♭ minor, the scenes' D♭ major / B♭ minor): F, D♭, E♭ — and down to B♭. Three of them
 // hang on the E♭, unresolved (the old Fisherman's «three notes»); the fourth comes home. [midi, beats]
 const BEAT = 0.6; // s
-const NOTES = [[77, 1], [73, 0.75], [75, 1.25], [70, 2]];
+const NOTES = [[65, 1], [61, 0.75], [63, 1.25], [58, 2]];
 // what she sings round and round: the four notes, and the same four turned about — rising like a call, a turn on the
-// way down, once a little higher
+// way down, once from a little higher
 const PHRASES = [
   NOTES,
-  [[70, 1], [73, 0.75], [75, 1], [77, 2]],
-  [[77, 1], [73, 0.5], [75, 0.75], [73, 0.75], [70, 2]],
+  [[58, 1], [61, 0.75], [63, 1], [65, 2]],
+  [[65, 1], [61, 0.5], [63, 0.75], [61, 0.75], [58, 2]],
   NOTES,
-  [[80, 1], [77, 0.75], [75, 1], [77, 0.5], [73, 2]],
+  [[66, 1], [65, 0.75], [63, 1], [65, 0.5], [61, 2]],
 ];
-// her voice's colour: a wordless “oo” — the first partial strong, the next few falling fast
-let timbre = null;
-const oo = a => (timbre ??= a.createPeriodicWave(new Float32Array(7), new Float32Array([0, 1, 0.3, 0.1, 0.045, 0.02, 0.01])));
+// Her voice is a real one: a woman humming, wordless (sounds/hum-439504.mp3 — three held notes, C4, D4 and A3, each
+// with its own breath in, cut from a CC0 recording: sounds/README.md). A note of the song is the nearest of them, played
+// a little higher or lower (a semitone or three: the voice stays hers). `at` — where each begins in the file, `len` its
+// seconds.
+const HUM = 'hum-439504.mp3';
+const HELD = [{ midi: 60, at: 0.13, len: 5.3 }, { midi: 62, at: 5.88, len: 5.0 }, { midi: 57, at: 11.33, len: 3.4 }];
+let hum = null; // the decoded recording, once it is here
+const humming = () => recording(HUM).then(b => (hum = b));
 // how far she is: near (beside him), far (over the water from the stone), under (through the water)
-const AIRS = { near: { lp: 4200, wet: 0.45, level: 1 }, far: { lp: 1700, wet: 0.85, level: 0.7 }, under: { lp: 650, wet: 0.7, level: 0.85 } };
-// a phrase sung in one breath from t into `out`: the pitch gliding from note to note, the vibrato coming in on the held
-// ones, each note leaned into a little. `cut` — the last note broken off after that many seconds. → {end, stop(at, s)}
-function voice(t, notes, { out, how = 'near', level = 0.12, cut = null }) {
-  const a = audio(), place = AIRS[how], lev = level * place.level;
-  const e = a.createGain(), lp = filter({ type: 'lowpass', frequency: place.lp, Q: 0.5 }), oscs = [];
-  e.gain.setValueAtTime(0, t);
-  e.connect(lp).connect(out);
-  const vib = a.createOscillator(), depth = a.createGain();
-  vib.frequency.value = 5.1;
-  depth.gain.setValueAtTime(0, t);
-  vib.connect(depth);
-  for (const [detune, v] of [[0, 1], [7, 0.28]]) {
-    const o = a.createOscillator(), g = a.createGain();
-    o.setPeriodicWave(oo(a));
-    o.detune.value = detune;
-    g.gain.value = v;
-    depth.connect(o.frequency);
-    o.connect(g).connect(e);
-    oscs.push(o);
-  }
-  let at = t, prev = null;
+const VOICE = 0.6; // her voice's loudness, as loud as the beds round her
+const AIRS = { near: { lp: 6000, wet: 0.45, level: 1 }, far: { lp: 2200, wet: 0.85, level: 0.7 }, under: { lp: 800, wet: 0.7, level: 0.85 } };
+// a phrase sung from t into `out`: each note the nearest held note of her voice, moved to its pitch, the next coming in
+// over the end of the one before (legato), the first with its breath in, the last dying away. `cut` — the last note
+// broken off after that many seconds. → {end, stop(at, s)} (none while the recording is not here yet: → null)
+function voice(t, notes, { out, how = 'near', level = 1.0, cut = null }) {
+  if (!hum) { humming(); return null; }
+  const a = audio(), place = AIRS[how], lev = VOICE * level * place.level;
+  const bus = a.createGain(), lp = filter({ type: 'lowpass', frequency: place.lp, Q: 0.5 });
+  bus.gain.value = lev;
+  bus.connect(lp).connect(out);
+  const srcs = [], gains = [];
+  const X = 0.12; // the overlap of one note into the next
+  let at = t;
   notes.forEach(([m, beats], i) => {
-    const f = hz(m), len = i === notes.length - 1 && cut != null ? cut : beats * BEAT;
-    for (const o of oscs) {
-      o.frequency.setValueAtTime(prev ?? f * 0.985, at);
-      o.frequency.exponentialRampToValueAtTime(f, at + (prev == null ? 0.09 : 0.07));
-    }
-    depth.gain.setValueAtTime(0, at);
-    depth.gain.linearRampToValueAtTime(0, at + 0.14);
-    depth.gain.linearRampToValueAtTime(f * 0.0065, at + 0.55);
-    if (i === 0) e.gain.linearRampToValueAtTime(lev, at + 0.16);
-    else { e.gain.linearRampToValueAtTime(lev * 0.8, at + 0.03); e.gain.linearRampToValueAtTime(lev, at + 0.18); }
-    prev = f;
+    const last = i === notes.length - 1, len = last && cut != null ? cut : beats * BEAT;
+    const held = HELD.reduce((p, q) => (Math.abs(q.midi - m) < Math.abs(p.midi - m) ? q : p));
+    const rate = 2 ** ((m - held.midi) / 12);
+    const s = a.createBufferSource(), g = a.createGain();
+    s.buffer = hum;
+    s.playbackRate.value = rate;
+    // the first from its breath in; the others from inside the held note, so that they join
+    const from = held.at + (i === 0 ? 0 : 0.45), tail = last ? (cut != null ? 0.06 : 0.7) : X;
+    const real = Math.min(len + tail, (held.len - (from - held.at) - 0.05) / rate);
+    g.gain.setValueAtTime(0, at);
+    g.gain.linearRampToValueAtTime(1, at + (i === 0 ? 0.05 : X));
+    if (last && cut == null) { g.gain.setValueAtTime(1, at + len - 0.15); g.gain.linearRampToValueAtTime(0, at + real); }
+    else { g.gain.setValueAtTime(1, at + Math.max(0.05, real - tail)); g.gain.linearRampToValueAtTime(0, at + real); }
+    s.connect(g).connect(bus);
+    s.start(at, from, real * rate);
+    srcs.push(s);
+    gains.push(g);
     at += len;
   });
-  const end = cut != null ? at + 0.08 : at + 0.9;
-  if (cut != null) e.gain.linearRampToValueAtTime(0, at + 0.06);
-  else { e.gain.linearRampToValueAtTime(lev * 0.75, at - 0.2); e.gain.setTargetAtTime(0, at - 0.2, 0.22); }
-  for (const o of [...oscs, vib]) { o.start(t); o.stop(end + 0.1); }
+  const end = at + (cut != null ? 0.08 : 0.7);
   let over = false;
   return {
     end,
     stop(when, seconds = 0.12) {
       if (over || when >= end) return;
       over = true;
-      e.gain.cancelScheduledValues(when);
-      e.gain.setTargetAtTime(0, when, seconds / 3);
-      for (const o of [...oscs, vib]) { try { o.stop(when + seconds + 0.1); } catch { /* stopped already */ } }
+      bus.gain.cancelScheduledValues(when);
+      bus.gain.setTargetAtTime(0, when, seconds / 3);
+      for (const s of srcs) { try { s.stop(when + seconds + 0.1); } catch { /* ended already */ } }
     },
   };
 }
@@ -321,8 +340,11 @@ function sung(name, how) {
       const t = a.currentTime;
       if (s.next < t) s.next = t + 0.05;
       while (s.next < t + 0.4) {
-        s.voice = voice(s.next, PHRASES[s.k++ % PHRASES.length], { out, how });
-        s.next = s.voice.end + rnd(1.6, 3.2);
+        const v = voice(s.next, PHRASES[s.k % PHRASES.length], { out, how });
+        if (!v) { s.next = t + 0.5; break; } // (her voice still on its way)
+        s.k++;
+        s.voice = v;
+        s.next = v.end + rnd(1.6, 3.2);
       }
     });
   };
@@ -331,10 +353,11 @@ export function song(level = 1, seconds = 2) { bed('song', 0.45, 'open', sung('s
 export function song_far(level = 1, seconds = 2) { bed('song_far', 0.85, 'open', sung('song_far', 'far'), level, seconds); }
 export function song_under(level = 1, seconds = 2) { bed('song_under', 0.7, 'open', sung('song_under', 'under'), level, seconds); }
 // her four notes, once (count 3: the three that hang, the third held; broken: the third cut short)
-export function notes({ count = 4, broken = false, how = 'far', level = 0.13 } = {}) {
+export function notes({ count = 4, broken = false, how = 'far', level = 1.0 } = {}) {
   const ns = NOTES.slice(0, broken ? 3 : count);
   const held = !broken && count === 3 ? [...ns.slice(0, 2), [ns[2][0], 2.5]] : ns;
-  voice(now(0.05), held, { out: air(AIRS[how].wet), how, level, cut: broken ? 0.3 : null });
+  const sing = () => voice(now(0.05), held, { out: air(AIRS[how].wet), how, level, cut: broken ? 0.3 : null });
+  if (hum) sing(); else humming().then(sing);
 }
 // a bed broken off now: its sound gone in `seconds`, taken down (declared again — it comes back)
 export function hush(name, seconds = 0.15) {
@@ -374,17 +397,8 @@ export function sea_in(level = 1, seconds = 2) {
 // low wind in random gusts (ambience.js): in the firs round the well; on the winter shore, cold
 export function wind(level = 1, seconds = 2) { bed('wind', 0.2, 'open', ({ a, out, keep, every }) => built.wind(kit(a, keep, every), out, 1.3), level, seconds); }
 export function wind_cold(level = 1, seconds = 2) { bed('wind_cold', 0.2, 'open', ({ a, out, keep, every }) => built.wind_cold(kit(a, keep, every), out, 1.53), level, seconds); }
-// the summer night's crickets: each a thin chirp of three pulses at its own pitch and pace, far and near
-export function crickets(level = 1, seconds = 2) {
-  bed('crickets', 0.5, 'open', ({ a, t, out, every }) => {
-    for (const [f, gap, loud] of [[4350, 0.62, 0.1], [4720, 0.81, 0.06], [3980, 1.07, 0.04]]) {
-      every(schedule(a, t + rnd(0.1, 0.8), at => {
-        for (let i = 0; i < 3; i++) ring(at + i * 0.045, out, [[f, 0.03, loud]], 0.004);
-        return at + gap * rnd(0.9, 1.1);
-      }));
-    }
-  }, level, seconds);
-}
+// the summer night's crickets: a recording (a back porch at night)
+export function crickets(level = 1, seconds = 2) { bed('crickets', 0.2, 'open', recorded(['crickets-333221.mp3'], 0.7), level, seconds); }
 // the square at night: far voices, steps — a recording
 export function town(level = 1, seconds = 2) { bed('town', 0.05, 'open', recorded(['square-414453.mp3'], 1.5), level, seconds); }
 // the morning market: a crowd talking, near — a recording
@@ -446,42 +460,30 @@ function bubble(t, dest, f0, len, loud) {
   o.start(t);
   o.stop(t + len + 0.02);
 }
-// a clap of hands: the slap of the palms and the hollow between them
-function clap(t, dest, f, loud) {
-  burst(t, dest, { f, Q: 1.1, len: 0.05, loud, attack: 0.001 });
-  burst(t + 0.004, dest, { f: f * 2.1, Q: 1.6, len: 0.025, loud: loud * 0.5, attack: 0.001 });
-}
-// one beat of the tambourine: the skin struck, the jingles shaken after it
-function jingles(t, dest, strong) {
-  const loud = strong ? 3 : 2.1;
-  burst(t, dest, { kind: 'brown', f: 260, Q: 1.2, len: 0.09, loud: 0.5 * loud, attack: 0.002 });
-  for (let i = 0; i < 5; i++) {
-    const at = t + 0.004 + i * rnd(0.012, 0.03), f = rnd(5200, 7400);
-    ring(at, dest, [[f, 0.22, 0.035 * loud * rnd(0.6, 1)], [f * 1.41, 0.12, 0.015 * loud]], 0.001);
-  }
-  burst(t + 0.01, dest, { f: 8000, Q: 0.7, len: 0.16, loud: 0.12 * loud, attack: 0.004 });
-}
+// a clap of hands: a recording, each a little its own (its speed, how loud)
+function clap(t, dest, f, loud) { shot('clap', t, dest, 0.5 * loud, (f / 1500) * rnd(0.96, 1.04)); }
+// one beat of the tambourine: a recording, the first of four the strongest
+function jingles(t, dest, strong) { shot('tambourine', t, dest, strong ? 0.75 : 0.5, rnd(0.98, 1.02)); }
 
 // ── once ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-// her tail on the water (level 1), or something small into it (0.3)
+// her tail on the water (level 1), or something small into it (0.3): recordings — a big splash, a small one
 export function splash(level = 1) {
-  const t = now(), out = air(0.4, 'open');
-  burst(t, out, { kind: 'pink', f: 600 + 700 * (1 - level), Q: 0.8, len: 0.15 + 0.25 * level, loud: 0.8 * level, attack: 0.01 });
-  swell(t + 0.07, out, { kind: 'white', f: 3500, Q: 0.7, type: 'highpass', points: [[0.15, 0.16 * level], [0.9, 0.06 * level], [1.4, 0]] });
+  const t = now(), out = air(0.35, 'open');
+  if (level >= 0.6) shot('splash', t, out, 0.55 * level, rnd(0.95, 1.05));
+  else shot('drop', t, out, 0.9 * level + 0.2, rnd(0.95, 1.05));
 }
-// someone going under: the water closing over, a gulp, bubbles after
+// someone going under: the water closing over (a recording, slowed), bubbles after
 export function dive() {
   const t = now(), out = air(0.45, 'open');
-  burst(t, out, { kind: 'brown', f: 300, Q: 0.9, len: 0.35, loud: 0.6, attack: 0.02 });
-  swell(t + 0.05, out, { kind: 'pink', f: 1400, Q: 0.7, points: [[0.12, 0.12], [0.6, 0.03], [0.9, 0]] });
+  shot('drop', t, out, 0.6, 0.8);
   for (let i = 0; i < 6; i++) bubble(t + 0.35 + i * rnd(0.07, 0.18), out, rnd(420, 900), rnd(0.04, 0.07), 0.04);
 }
-// the black wave breaking: a low surge with no tune, its spray after
+// the black wave breaking: a recording of a wave on the shore; a low surge under it
 export function wave(level = 1) {
-  const t = now(), out = air(0.5, 'open');
-  swell(t, out, { kind: 'brown', f: 200, Q: 0.5, type: 'lowpass', points: [[0.9, 1.0 * level], [1.6, 0.7 * level], [3.2, 0]] });
-  swell(t + 0.7, out, { kind: 'pink', f: 2400, Q: 0.6, type: 'highpass', points: [[0.3, 0.22 * level], [1.8, 0]] });
+  const t = now(), out = air(0.4, 'open');
+  shot('wave', t, out, 0.7 * level, 0.92);
+  swell(t, out, { kind: 'brown', f: 160, Q: 0.5, type: 'lowpass', points: [[0.9, 0.5 * level], [1.6, 0.35 * level], [3.2, 0]] });
 }
 // the net's rope through the hands, a length drawn in: the wet rope's creak on the gunwale, water off it
 export function rope() {
@@ -526,14 +528,8 @@ export function bench() {
   burst(t + 0.02, out, { f: 900, Q: 1.4, len: 0.06, loud: 0.3 });
   for (const [at, loud] of [[0.16, 0.45], [0.27, 0.25], [0.34, 0.12]]) burst(t + at, out, { kind: 'brown', f: 220, Q: 1.2, len: 0.08, loud, attack: 0.002 });
 }
-// coppers: on the stall, in the palm
-export function coins() {
-  const t = now(), out = air(0.3, 'open');
-  for (let i = 0; i < 4; i++) {
-    const f = rnd(2600, 4200);
-    ring(t + i * rnd(0.05, 0.11), out, [[f, 0.3, 0.04], [f * 1.51, 0.18, 0.022], [f * 2.27, 0.09, 0.011]], 0.001);
-  }
-}
+// coppers: on the stall, in the palm — a recording
+export function coins() { shot('coins', now(), air(0.3, 'open'), 0.45, rnd(0.97, 1.05)); }
 // one copper off the bowl's edge into the river: its ring on the stone, then the little plop far below
 export function copper() {
   const t = now(), out = air(0.4, 'open'), f = rnd(3000, 3800);

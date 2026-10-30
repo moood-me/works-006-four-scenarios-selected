@@ -91,7 +91,7 @@ export default {
         await g.scene('pier', { beat: 'hook_empty', here: ['priest'], moods: { priest: 'neutral' } }, { beds: { sea: 0.35 } });
         await g.beat('hook_empty');
         if (f.widow === 'stayed' && f.sounds) {
-          g.sound.notes({ how: 'far', level: 0.07 });
+          g.sound.notes({ how: 'far', level: 0.5 });
           await g.wait(1500);
           await g.say('narrator', 'Far off, at the edge of hearing, four notes, going away out of the bay');
         }
@@ -106,7 +106,7 @@ export default {
           keys: { boy: f.widow === 'out' }, where: tr('Many years later.') }, { beds: { sea: 0.4, crickets: 0.12 } });
         await g.beat('old_lantern');
         if (f.widow === 'stayed' && f.sounds) {
-          g.sound.notes({ count: 3, how: 'far', level: 0.07 });
+          g.sound.notes({ count: 3, how: 'far', level: 0.5 });
           await g.wait(1500);
           await g.say('narrator', 'Sometimes he seems to hear three notes');
         }
