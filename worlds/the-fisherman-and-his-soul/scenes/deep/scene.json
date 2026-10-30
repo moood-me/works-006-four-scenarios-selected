@@ -636,7 +636,7 @@
       },
       {
         "text": "a wordless female voice singing far out over the water, a sea-girl's song, tender and strange",
-        "weight": 0.7
+        "weight": 0
       },
       {
         "text": "solo cello, long low phrases, a young fisherman's longing, restrained and warm",
@@ -644,7 +644,7 @@
       },
       {
         "text": "glassy celesta and glass harmonica, the moon's path on a dark bay, fragile and luminous",
-        "weight": 0.6
+        "weight": 0.9
       },
       {
         "text": "slow sea swell under a soft string pad, waves against a wooden pier at night",
