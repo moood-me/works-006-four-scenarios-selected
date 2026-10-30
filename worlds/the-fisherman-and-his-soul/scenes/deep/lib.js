@@ -92,7 +92,8 @@ function film(scene) {
         P.loop(s, 'mermaid', 'sing');
         // the camera comes down from the light of the surface to the two
         await s.all(s.move('camera_pitch', 0, { over: 5 }), s.move('camera_z', 0, { over: 5 }));
-        P.frame(s, P.shot('mermaid', 'medium', [0.62, 0.45]), 2.5);
+        // the two of them on the sand, both whole: she sings, he listens (М4 is played on this, hands off)
+        P.frame(s, P.shot('mermaid', 'full', [0.66, 0.5]), 2.5);
         await P.tell(s, 'deep_song:sing', 3);
       },
     },
