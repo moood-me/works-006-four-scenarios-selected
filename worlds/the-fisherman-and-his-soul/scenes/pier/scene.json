@@ -37,13 +37,14 @@
     ],
     "looks": {
       "dusk": {
-        "ambient": 0.6,
+        "ambient": 0.45,
         "ambientColor": "#c4a8b8",
         "haze": 0.14,
         "hazeColor": "#6e5a7c",
         "shafts": 0.3,
         "lights": {
-          "moon": 0
+          "moon": 0,
+          "lantern": 0.3
         }
       },
       "dawn": {
@@ -142,7 +143,7 @@
       "id": "moon_low",
       "from": "sky#low",
       "color": "#f6d8b0",
-      "strength": 1.35,
+      "strength": 1.8,
       "on": "dusk"
     },
     {
@@ -783,6 +784,7 @@
     {
       "id": "fisherman",
       "name": "The Fisherman",
+      "shadow": {"strength": 0.9},
       "person": {
         "cast": "cast",
         "who": "fisherman",
