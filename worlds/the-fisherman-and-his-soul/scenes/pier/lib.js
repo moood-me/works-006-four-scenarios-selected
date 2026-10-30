@@ -118,7 +118,7 @@ function film(scene) {
   // him in the water by the pier's end, from the right, over the water: the camera's own keys (on our line the Soul on
   // the boards stood at the lens — a person between is drawn faint: pale bands across the frame's left; and an operator
   // on one standing in the water puts its eye at the water's face)
-  const IN_WATER = { ...P.CAM0, camera_x: 1.5, camera_z: 3.0, camera_yaw: -13, camera_look: 0.12 };
+  const IN_WATER = { ...P.CAM0, camera_x: 1.5, camera_z: 3.6, camera_yaw: -16, camera_look: 0.24 };
   // moonrise (1.7–1.10): his back to the moon low behind the pier's end — he faces the shore, his shadow long down the
   // boards toward us; the Soul rises out of it a step before him, on his left, turned to him (its face seen from the
   // water's side: CAM_BACK; his from ours); the two of them as he chooses — his face, the Soul's turned to him
