@@ -90,7 +90,7 @@ in the hull).
 ```json
 {"beats": {
  "night": {"after":[],"tells":["night:cast","night:rope"],"seconds":15,"show":false},
- "in_net": {"after":["night"],"tells":["in_net:wake","in_net:hold"],"seconds":12,"show":false},
+ "in_net": {"after":["night"],"tells":["in_net:wake","in_net:hold"],"seconds":15,"show":false},
  "go_word": {"after":["in_net"],"tells":["go_word:under"],"seconds":6,"show":false},
  "go_free": {"after":["in_net"],"tells":["go_free:linger","go_free:turn","go_free:under"],"seconds":12,"show":false},
  "evenings": {"after":[],"tells":["evenings:sing","evenings:empty","evenings:end"],"seconds":18,"show":false},

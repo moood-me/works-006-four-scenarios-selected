@@ -10,6 +10,8 @@
 const PLACES = {
   fisherman: {
     boat: { at: [-1.88, 5.59, 0], turn: 130 },
+    // (at the bow, kneeling over the net in the water: his hand on its edge by hers — П.3–П.4)
+    bow: { at: [-1.5, 5.7, 0], turn: 100 },
     shallows: { at: [2.4, 5.8, 0], turn: 225 },
     water: { at: [0.2, 4.9, 0.6], turn: 150 },
   },
@@ -108,6 +110,8 @@ function film(scene) {
   // in the water stands its eye over the bay's floor, at the water's face, under the net
   const IN_NET = { mermaid_turn: 195 };
   const HOLD = { ...P.CAM0, camera_x: -1.2, camera_z: 3.4, camera_yaw: -2, camera_look: 0.3 };
+  // nearer her as she wakes in the net (her face afraid): the same line, a step out from the pier's end
+  const WAKE = { ...P.CAM0, camera_x: -0.7, camera_z: 4.0, camera_yaw: -2, camera_look: 0.38 };
   const film = {
     // ── Prologue «Сеть» ──
     night: {
@@ -139,12 +143,18 @@ function film(scene) {
         // she opens her eyes, afraid, and struggles in the net
         her.mood('afraid');
         P.loop(s, 'mermaid', 'struggle');
+        P.frame(s, WAKE, 1.2);
         await P.tell(s, 'in_net:wake', 3);
-        // he holds the net's edge by her hand, and looks at her
-        him.do('stand', { loop: true });
+        // he goes to the bow and kneels over the net, his hand on its edge by hers, and looks at her (2026-10-30: standing
+        // in the boat, his hands could not reach the net in the water — they hung at his back)
         s.move('heel', 0, { over: 1.5 });
-        him.reach({ r: 'net_over#knot' });
         him.look('mermaid');
+        await P.go(s, 'fisherman', [PLACES.fisherman.bow.at], PLACES.fisherman.bow.turn);
+        s.set('fisherman_at', 'bow');
+        s.set('fisherman_placed', 'bow');
+        await him.do('kneel');
+        P.loop(s, 'fisherman', 'kneel');
+        him.reach({ r: 'net_over#knot' });
         her.look('fisherman');
         // the two of them: he in the boat on the left, holding the net's edge; she in it, her face to us
         P.frame(s, HOLD, 2);
@@ -153,7 +163,7 @@ function film(scene) {
     },
     go_word: {
       after: 'in_net',
-      from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', ...pose('boat', 'net'), ...DO0, ...IN_NET, fisherman_reach: { r: 'net_over#knot' }, knot: 1,
+      from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', ...pose('bow', 'net'), ...DO0, fisherman_do: 'kneel', ...IN_NET, fisherman_reach: { r: 'net_over#knot' }, knot: 1,
         ...HOLD }),
       run: async s => {
         P.open(s, film.go_word.from());
@@ -171,7 +181,7 @@ function film(scene) {
     },
     go_free: {
       after: 'in_net',
-      from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', ...pose('boat', 'net'), ...DO0, ...IN_NET, fisherman_reach: { r: 'net_over#knot' }, knot: 1,
+      from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', ...pose('bow', 'net'), ...DO0, fisherman_do: 'kneel', ...IN_NET, fisherman_reach: { r: 'net_over#knot' }, knot: 1,
         ...HOLD }),
       run: async s => {
         P.open(s, film.go_free.from());
