@@ -113,7 +113,7 @@ Variants: `smell`, `hard`, `song`, `looked`, `thrown`, `boy`, `thief`, `children
 The cameras: the operator films from the shore's side (a face turned to the sea is its back), so the Soul's face as it
 turns to him is filmed from the camera's own place behind the pier's end (`CAM_BACK`), the cut by the post from nearer
 the boards (`CAM_NEAR`); on the shore the operator would film from the land through walls and the bank — the shore's
-pieces use the shore's own cameras (`SHORE_HUT`, `SHORE_WIDOW`, `SHORE_SAND`, `SHORE_FIELD`) and its wide view.
+pieces use the shore's own cameras (`SHORE_HUT`, `SHORE_SAND`, `SHORE_FIELD`, `WIDOW_TALK`) and its wide view.
 Sheets (2026-10-29): the sea's — as meant after the fixes above (the feast's whisper before he walks; the knife and the
 cut framed wider); the shore's — as meant with its own cameras. The thin vertical line in the shore's view was the
 sky's seam (its painting ended there): the sky is now painted from 3.28 left of the stage to 3.0 right of it — its seam
