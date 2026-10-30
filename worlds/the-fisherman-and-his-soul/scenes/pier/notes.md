@@ -210,3 +210,7 @@ After a reviewer's renders: what the player must see was not in the frame. Rende
   evening's low moon is stronger (1.8), the dusk's air darker (0.45), the lantern at dusk 0.3 (it washed out the boards
   by him), his shadow 0.9 (the engine's author's advice): his long shadow on the boards at moonrise. A person's shadow
   lies only on what people stand on: off the pier's end it does not reach the water.
+- (third round) The kiss: the widow and her children step aside up the sand (they hid her); as the sea comes the
+  morning goes out of the sky (`dawn` → 0.35, `day` → 0) and the `wave` look is darker (ambient 0.32, haze 0.45, tint
+  0.3). `soul_leaves`: the camera goes with the Soul up the pier, then back to the bay for its lantern far off; the far
+  lantern's glow larger (24 m). The feast opens wide on the girl and the women.
