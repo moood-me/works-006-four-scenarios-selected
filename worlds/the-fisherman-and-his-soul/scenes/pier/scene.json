@@ -53,7 +53,7 @@
         "haze": 0.22,
         "hazeColor": "#b0b8c8",
         "hazeGlow": 0.6,
-        "shafts": 0.25,
+        "shafts": 0.08,
         "lights": {
           "moon": 0.15
         }
@@ -74,7 +74,7 @@
         "haze": 0.55,
         "hazeColor": "#c4ccd8",
         "hazeGlow": 1.0,
-        "shafts": 0.4
+        "shafts": 0.08
       },
       "wave": {
         "ambient": 0.32,
