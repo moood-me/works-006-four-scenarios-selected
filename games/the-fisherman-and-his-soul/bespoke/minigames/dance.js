@@ -2,7 +2,8 @@
 // facing her, going round the well — `round`): rhythm — the beats of her tambourine (`witch#tambourine`, BPM), SECONDS of
 // them; a tap on the beat is his step in time with her; off the beat — he stumbles (`stumble`, a pulse; a mistake), and
 // she pulls him by the hands harder and laughs. The count out — the end (clean if he kept her beat most of the time;
-// flawed — stumbled: fewer than half the beats kept, or none).
+// flawed — stumbled: fewer than half the beats kept, or none). The tambourine is heard on every beat (sound.js strike —
+// the piece's own tambourine hushed: the beat is the mini-game's now).
 //   What he does: the Fisherman dances the Witch's dance — her price for the secret.
 //   What he wants: to pay it and be done.
 //   How it is for him: someone else's dance, the full moon, her eyes on him.
@@ -25,6 +26,8 @@ export default {
     g.set('round', true);
     const mark = mg.mark({ at: 'witch#tambourine' });
     const beat = mg.rhythm({ on: mark, bpm: BPM });
+    g.sound.hush('tambourine', 0.1);
+    const struck = beat.on('beat', ({ strong }) => g.sound.strike(strong));
     const taught = teach(b, mg, [beat]);
     const kept = new Set();
     let offs = 0;
@@ -42,6 +45,7 @@ export default {
       return t - t0 >= SECONDS;
     });
     off();
+    struck();
     taught.remove();
     if (!done) return this.skipped;
     const beats = Math.max(1, Math.floor(SECONDS * BPM / 60) - 1);

@@ -7,7 +7,7 @@
 // well_evening, long_look, dance, velvet, sign_velvet, broken, demand / dance_dawn.
 // Reads: marks.net. Leaves: choices.stop, witch, heart; marks.danced, witch, come; scales.soul, song; the traces of М2
 // (he stumbled in the dance: `stumbled`) and М3 (marks.rough: the Soul's left hand like smoke — TRACES).
-import { piece } from '../story.js';
+import { on, piece } from '../story.js';
 import { dance, knife } from '../minigames/all.js';
 
 export default {
@@ -29,10 +29,12 @@ export default {
         },
       }, () => g.scene('stone', { beat: 'ask_wife', here: ['fisherman', 'mermaid'], moods: { fisherman: 'thinking', mermaid: 'smile' } }));
       g.mood('mermaid', 'laugh');
+      on(g, 'laugh_tail:splash', () => g.sound.splash(1));
       await g.beat('laugh_tail');
       await g.say('mermaid', 'Send it away — and come');
       await g.say('fisherman', 'I will come tomorrow');
       await g.say('mermaid', 'What is “tomorrow”?');
+      on(g, 'dive:under', () => g.sound.dive());
       await g.beat('dive');
     },
     // 1.2: the Priest
@@ -44,6 +46,7 @@ export default {
       await g.say('priest', 'The soul is worth more than all the gold in the world. The sea-folk are accursed. Keep away from them');
       g.mood('priest', 'angry');
       g.mood('fisherman', 'angry');
+      on(g, 'bench_falls:fall', () => g.sound.bench());
       await g.beat('bench_falls');
       await g.say('fisherman', 'If it is worth so much — I do not need it');
       await piece(g, 'begone', {
@@ -56,8 +59,8 @@ export default {
       await piece(g, 'feast', {
         whisper: () => g.say('women', 'By the well in the fir wood lives one who knows', 'woman_a'),
       }, () => g.scene('pier', { beat: 'feast', here: ['fisherman', 'girl', 'woman_a', 'woman_b'],
-        moods: { fisherman: 'neutral', girl: 'laugh', woman_a: 'smile', woman_b: 'smile' } }));
-      const stop = await g.interrupt('stop', { fisherman: [{ id: 'danced', label: tr('Stop') }] }, { id: 'passed' }, 3000,
+        moods: { fisherman: 'neutral', girl: 'laugh', woman_a: 'smile', woman_b: 'smile' } }, { beds: { sea: 0.3, claps: 0.55 } }));
+      const stop = await g.interrupt('stop', { fisherman: [{ id: 'danced', label: tr('Stop') }] }, { id: 'passed' }, 5000,
         tr('A girl dancing barefoot on the boards.'));
       if (stop === 'danced') await piece(g, 'danced', { pull: () => g.say('girl', 'Dance, fisherman!') });
       else await g.beat('passed');
@@ -75,12 +78,14 @@ export default {
           await g.say('witch', 'Only');
           g.mood('witch', 'smile');
         },
-      }, () => g.scene('well', { beat: 'well_evening', here: ['fisherman', 'witch'], moods: { fisherman: 'neutral', witch: 'smile' } }));
+      }, () => g.scene('well', { beat: 'well_evening', here: ['fisherman', 'witch'], moods: { fisherman: 'neutral', witch: 'smile' } },
+        { beds: { wind: 0.2, crickets: 0.35 } }));
       await g.beat('long_look');
     },
     // 1.5: the dance; the man in black velvet
     async g => {
-      await g.scene('well', { beat: 'dance', here: ['fisherman', 'witch'], moods: { fisherman: 'neutral', witch: 'laugh' } });
+      await g.scene('well', { beat: 'dance', here: ['fisherman', 'witch'], moods: { fisherman: 'neutral', witch: 'laugh' } },
+        { beds: { wind: 0.15, crickets: 0.2, tambourine: 0.6 } });
       await g.beat('dance');
       const { stumbled } = await g.play(dance);
       g.set('stumbled', stumbled);
@@ -90,7 +95,8 @@ export default {
     },
     // 1.6: the choice with the Witch
     async g => {
-      await g.scene('well', { beat: 'broken', here: ['fisherman', 'witch'], moods: { fisherman: 'neutral', witch: 'angry' } }, { cut: true });
+      await g.scene('well', { beat: 'broken', here: ['fisherman', 'witch'], moods: { fisherman: 'neutral', witch: 'angry' } },
+        { cut: true, beds: { wind: 0.2, crickets: 0.3 } });
       await g.beat('broken');
       await g.say('witch', 'You broke the dance. The bargain is not kept');
       const w = await g.choose('witch', { fisherman: [
@@ -122,7 +128,7 @@ export default {
           await g.say('mermaid', 'You smell of the wood');
         },
       }, () => g.scene('pier', { beat: 'moonrise', here: ['fisherman', 'mermaid'], moods: { fisherman: 'neutral', mermaid: 'neutral' },
-        keys: { smell: witch === 'dance' } }));
+        keys: { smell: witch === 'dance' } }, { beds: { sea: 0.45, crickets: 0.15 } }));
     },
     // 1.8–1.9: the shadow rises; the choice of the heart
     async g => {
@@ -131,7 +137,8 @@ export default {
           g.mood('soul', 'afraid');
           await g.say('soul', 'I have been with you all your life. Do not drive me away. And if you do — do not send me without a heart. The world is cruel. Give me your heart; with it I shall not be lost');
         },
-      }, () => g.scene('pier', { beat: 'shadow_rises', here: ['fisherman', 'soul', 'mermaid'], moods: { fisherman: 'thinking', soul: 'afraid', mermaid: 'neutral' } }));
+      }, () => g.scene('pier', { beat: 'shadow_rises', here: ['fisherman', 'soul', 'mermaid'], moods: { fisherman: 'thinking', soul: 'afraid', mermaid: 'neutral' } },
+        { cut: true, beds: { sea: 0.45, crickets: 0.15 } }));
       const h = await g.choose('heart', { fisherman: [
         { id: 'ask', label: tr('“And what would I love her with?”') },
         { id: 'cut', label: tr('Not look at it. Cut.') },
@@ -147,6 +154,7 @@ export default {
         await g.say('fisherman', 'My heart is hers. But come here once a year. I will come out to you');
         g.mood('soul', 'neutral');
         await g.say('soul', 'I will come. You promised');
+        on(g, 'heart_come:under', () => g.sound.splash(0.35));
         await g.beat('heart_come');
       }
       g.gauge('soul');
@@ -154,14 +162,17 @@ export default {
     },
     // 1.10–1.11: the knife; the sea takes him
     async g => {
-      await g.scene('pier', { beat: 'knife_ready', here: ['fisherman', 'soul', 'mermaid'], moods: { fisherman: 'neutral', soul: 'neutral', mermaid: 'neutral' } }, { cut: true });
+      await g.scene('pier', { beat: 'knife_ready', here: ['fisherman', 'soul', 'mermaid'], moods: { fisherman: 'neutral', soul: 'neutral', mermaid: 'neutral' } },
+        { cut: true, beds: { sea: 0.45, crickets: 0.15 } });
       await g.beat('knife_ready');
       const { rough } = await g.play(knife);
       if (rough) {
         g.mark('rough', true, null);
         g.set('soul_smoke', 1);
       }
+      on(g, 'cut:post', () => g.sound.thud());
       await g.beat('cut');
+      on(g, 'into_sea:under', () => g.sound.dive());
       await piece(g, 'into_sea', {
         soul: async () => {
           g.mood('soul', 'sad');

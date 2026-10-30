@@ -41,6 +41,7 @@ const PEOPLE = JSON.parse(readFileSync(join(game, 'people.json'), 'utf8'));
 const { ENDINGS, SCALES, PLACES, SILENT, facts, context } = await load('story.js');
 const { jump } = await load('jump.js');
 const { CHAPTERS, PLAYS, fresh } = await load('game.js');
+const { BED_NAMES, ONCE } = await load('sound.js');
 const named = id => (PEOPLE[id] && id !== 'narrator') || SILENT.includes(id);
 
 // --- what does not match: text → the number of paths it was met on; what is waited for, the same
@@ -108,7 +109,15 @@ async function step(c, s, state, where, result = null) {
   const g = context(b, view, hub, structuredClone(state), j);
   let folder = null, present = new Set();
   const made = [], titles = [], scenes = [];
-  const { scene, say: speak, choose, interrupt, play, title, here, set, beat, told } = g;
+  const { scene, say: speak, choose, interrupt, play, title, here, set, beat, told, beds } = g;
+  // a background declared: beds sound.js has, at levels 0…1 (the page times it: no seconds)
+  const background = (levels, at) => {
+    for (const [name, v] of Object.entries(levels ?? {})) {
+      if (!BED_NAMES.includes(name)) miss(`${where}: ${at}: no bed “${name}” in sound.js`);
+      else if (!(v >= 0 && v <= 1)) miss(`${where}: ${at}: the bed “${name}” at ${v}`);
+    }
+  };
+  g.beds = (levels, ...more) => { background(levels, 'g.beds'); if (more.length) miss(`${where}: g.beds: seconds — the page times the background`); return beds(levels); };
   // a piece of the shown scene, and a moment of it: in its contract — or waited for while the scene has none
   const piece = name => {
     const beats = SCENES.get(folder)?.beats;
@@ -138,6 +147,7 @@ async function step(c, s, state, where, result = null) {
     for (const id of Object.keys(o.moods ?? {})) if (!(o.here ?? []).includes(id)) miss(`${where}: a face for “${id}”, who is not here`);
     present = new Set((o.here ?? []).filter(id => people.get(id)?.person));
     for (const [k, v] of Object.entries({ ...(at?.keys ?? {}), ...(o.keys ?? {}) })) key(folder, k, v, where);
+    background(x?.beds ?? at?.beds, `the scene “${place}”`);
     return scene(place, o, x);
   };
   g.here = (id, on) => {
@@ -240,6 +250,11 @@ for (const p of PLAYS) {
   let missed = fresh();
   for (const [c, s] of STEPS) missed = (await step(c, s, { ...missed, choices: { ...p.choices, ...missed.choices } }, `${p.label} (missed)`, m => m.missed)).state;
   if (facts(missed).ending !== f.ending) miss(`PLAYS “${p.label}”: with the mini-games missed it ends in “${facts(missed).ending}”`);
+}
+// the sounds the steps and the mini-games play are sound.js's (each a function there)
+const SOUND = await load('sound.js');
+for (const f of CHAPTERS.flatMap(ch => ch.steps.map(String)).concat(Object.values(await load('minigames/all.js')).map(m => String(m.run)))) {
+  for (const [, name] of f.matchAll(/g\.sound\.(\w+)/g)) if (typeof SOUND[name] !== 'function' || !(BED_NAMES.includes(name) || ONCE.includes(name))) miss(`g.sound.${name} — not one of sound.js`);
 }
 // every mini-game has the trace of a miss, and says where its marks stand and what it moves
 for (const [name, m] of Object.entries(await load('minigames/all.js'))) {

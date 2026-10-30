@@ -3,7 +3,7 @@
 // Pieces: the stone's night, in_net, go_word / go_free, evenings; the bridge's market.
 // Reads: nothing. Leaves: choices.net, marks.net, scales.song; the traces of М1 (marks.torn: the net torn at the edge)
 // and М1б (she slipped out not looking at him: the pieces' `looks`).
-import { piece } from '../story.js';
+import { on, piece } from '../story.js';
 import { net, release } from '../minigames/all.js';
 
 export default {
@@ -18,6 +18,7 @@ export default {
       await piece(g, 'night', {
         cast: () => g.say('narrator', 'Every evening the young Fisherman went out upon the sea, and threw his nets into the water'),
       }, async () => {
+        on(g, 'night:cast', () => g.sound.splash(0.5));
         await g.scene('stone', { beat: 'night', here: ['fisherman'], moods: { fisherman: 'neutral' } });
         g.title(tr('The Fisherman and his Soul'));
       });
@@ -33,6 +34,8 @@ export default {
           await g.say('mermaid', 'Let me go! I am the only daughter of an old father. He is alone');
         },
       }, async () => {
+        // (her struggling in the net: the water thrashed)
+        on(g, 'in_net:wake', () => { g.sound.splash(0.7); setTimeout(() => g.sound.splash(0.45), 700); });
         await g.scene('stone', { beat: 'in_net', here: ['fisherman', 'mermaid'], moods: { fisherman: 'neutral', mermaid: 'eyes_closed' } });
         await g.say('narrator', 'And in the net, asleep, lay a little Mermaid. Her hair was like wet gold, and her tail was silver');
       });
@@ -46,25 +49,34 @@ export default {
         await g.say('mermaid', 'I will come. I swear it by the sea');
         const { long } = await g.play(release);
         g.set('looks', !long);
+        on(g, 'go_word:under', () => g.sound.dive());
         await g.beat('go_word');
       } else {
         await g.say('fisherman', 'Swim');
         const { long } = await g.play(release);
         g.set('looks', !long);
         g.mood('mermaid', long ? 'neutral' : 'surprised');
+        on(g, 'go_free:under', () => g.sound.dive());
         await piece(g, 'go_free', { linger: () => g.say('mermaid', 'Do you want nothing?') });
       }
       g.apply('net');
       g.gauge('song');
     },
-    // П.5: the evenings; the market in the morning
+    // П.5: the evenings; the market in the morning. Her song on the stone as she sings (for her word — every evening; for
+    // nothing — after the empty nights, and gone again on the evening the stone is empty)
     async g => {
       const { net: how } = g.state.choices;
+      on(g, 'evenings:sing', () => g.beds({ sea: 0.35, song: 0.75 }));
+      on(g, 'evenings:empty', () => { g.sound.hush('song', 1.5); g.beds({ sea: 0.4 }); });
       await g.scene('stone', { beat: 'evenings', here: ['fisherman', 'mermaid'], moods: { fisherman: 'smile', mermaid: 'smile' }, keys: { net_way: how } });
       await g.beat('evenings');
       await piece(g, 'market', {
         end: () => g.say('narrator', 'And he had more fish than all the fishermen of the bay; but he looked only at the stone'),
-      }, () => g.scene('bridge', { beat: 'market', here: ['fisherman', 'potter', 'daughter'], moods: { fisherman: 'neutral', potter: 'smile' } }));
+      }, () => {
+        on(g, 'market:give', () => g.sound.coins());
+        return g.scene('bridge', { beat: 'market', here: ['fisherman', 'potter', 'daughter'], moods: { fisherman: 'neutral', potter: 'smile' } },
+          { beds: { market: 0.35, sea: 0.12 } });
+      });
     },
   ],
 };

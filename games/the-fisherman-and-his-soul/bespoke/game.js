@@ -30,6 +30,7 @@ import { ENDINGS, PLACES, SCALES, context, facts, listen } from './story.js';
 import { ui } from './ui.js';
 import { trees } from './map.js';
 import { jump as unseen } from './jump.js';
+import { background } from './sound.js';
 import prologue from './chapters/prologue.js';
 import one from './chapters/1.js';
 import two from './chapters/2.js';
@@ -67,7 +68,11 @@ export default async function (b) {
   b.minigame.style({
     font: 'Georgia, "Times New Roman", serif',
     colors: { mark: '#eef3f6', fill: '#eef3f6', good: '#f2c66d', danger: '#c8553d', fork: '#b9cbe0', ghost: '#eef3f6' },
+    // (the world's key, its scenes' music's: the language's tonal sounds on its tonic)
+    key: 'D_FLAT_MAJOR_B_FLAT_MINOR',
   });
+  // (the game's background — its beds of sound — as the page sounds it: at a scene's cut with its music, or at once)
+  b.onBackground(background);
   const hub = listen(b);
   const view = ui(b.layer);
   // PLAYS[as] played unseen: its n-th step of all (STEPS) from where the steps before leave it → {state: the play
@@ -181,7 +186,7 @@ export default async function (b) {
     b.hush();
     view.quiet();
     view.gauge(null);
-    await b.show(PLACES.pier.folder, { state: { fisherman_here: false, soul_here: false, mermaid_here: false }, captions: false });
+    await b.show(PLACES.pier.folder, { state: { fisherman_here: false, soul_here: false, mermaid_here: false }, captions: false, background: { sea: 0.3 } });
     const drawn = trees(b, sky(), { grow: reveal, author: !!author });
     const notice = replay?.done && anew() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};
     let asked = null; // (an option that would leave the replay: asked again)

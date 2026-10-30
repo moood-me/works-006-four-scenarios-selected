@@ -33,6 +33,7 @@ export default {
       slip: () => {
         if (rang) return;
         rang = true;
+        g.sound.cup();
         g.set('potter_look', 'fisherman#cup');
         mg.plate.set({ phrase: tr('The cup rings against the shelf.') });
       } });

@@ -22,7 +22,11 @@ export default {
     const send = keys(g);
     const over = settle(signal, () => g.set('cut', 0));
     g.set('cut', 0);
-    const r = await line(g, b, mg, { from: 'cutline#heel', to: 'cutline#toe', progress: u => send('cut', u) });
+    let scraped = -1;
+    const r = await line(g, b, mg, { from: 'cutline#heel', to: 'cutline#toe', progress: u => {
+        if (u - scraped > 0.3) { scraped = u; g.sound.scrape(); }
+        send('cut', u);
+      } });
     if (!r) return this.skipped;
     mg.plate.set({ phrase: tr('The blade goes through the shadow as through water.') });
     g.set('cut', 0, 1.2);

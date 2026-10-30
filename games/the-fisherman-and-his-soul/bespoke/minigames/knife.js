@@ -23,7 +23,11 @@ export default {
     const over = settle(signal, () => g.set('cut', 1));
     g.set('cut', 0);
     g.set('cut_rough', false);
-    const r = await line(g, b, mg, { from: 'cutline#heel', to: 'cutline#toe', progress: u => send('cut', u),
+    let scraped = -1;
+    const r = await line(g, b, mg, { from: 'cutline#heel', to: 'cutline#toe', progress: u => {
+        if (u - scraped > 0.3) { scraped = u; g.sound.scrape(); }
+        send('cut', u);
+      },
       off: () => g.set('cut_rough', true) });
     if (!r) return this.skipped;
     const rough = r.offs > 0;

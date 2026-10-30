@@ -24,8 +24,11 @@ export default {
     send('haul', 0);
     send('fish', 0);
     let half = false;
+    let drawn = 0;
     const r = await slowly(g, b, mg, { at: 'net_over#rope', pulls: 4,
-      frame: u => { send('haul', u); send('fish', half ? Math.min(0.5, u) : u); },
+      frame: u => {
+        if (u - drawn > 0.12) { drawn = u; g.sound.rope(); }
+        send('haul', u); send('fish', half ? Math.min(0.5, u) : u); },
       jerk: () => { if (!half) { half = true; mg.plate.set({ phrase: tr('The net jerks, and half the catch slips back into the sea.') }); } } });
     if (!r) return this.skipped;
     if (!(await count(mg, 0.6))) return this.skipped;

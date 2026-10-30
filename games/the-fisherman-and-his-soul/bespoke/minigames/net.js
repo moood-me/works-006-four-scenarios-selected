@@ -23,8 +23,11 @@ export default {
     const over = settle(signal, () => { g.set('haul', 1); g.set('heel', 0, 0.8); });
     send('haul', 0);
     let torn = false;
+    let drawn = 0;
     const r = await slowly(g, b, mg, { at: 'net_over#rope', pulls: 4,
-      frame: u => { send('haul', u); send('heel', 0.3 + 0.7 * Math.sin(Math.PI * Math.min(1, u))); },
+      frame: u => {
+        if (u - drawn > 0.12) { drawn = u; g.sound.rope(); }
+        send('haul', u); send('heel', 0.3 + 0.7 * Math.sin(Math.PI * Math.min(1, u))); },
       jerk: () => { if (!torn) { torn = true; g.set('net_hole', 1); mg.plate.set({ phrase: tr('A thread snaps at the edge of the net.') }); } } });
     if (!r) return this.skipped;
     g.set('heel', 0, 0.8);

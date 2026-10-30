@@ -29,6 +29,7 @@ export default {
       g.failed();
       mg.error('early', { chip: true });
       g.set('mermaid_mood', 'laugh');
+      g.sound.again('song', 1.4);
       laughed = mg.t;
       if (touches === 1) { g.set('mermaid_near', 1, 1.5); t0 = mg.t + 1.2; }
       else g.set('hands', true);

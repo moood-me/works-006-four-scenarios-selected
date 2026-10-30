@@ -25,8 +25,12 @@ export default {
     const over = settle(signal, () => { g.set('drag', 1); g.set('wave', 0.3, 1); });
     send('drag', 0);
     let torn = false;
+    let drawn = 0;
     const r = await slowly(g, b, mg, { at: 'bundle#rope', pulls: 4,
-      frame: u => send('drag', u),
+      frame: u => {
+        if (u - drawn > 0.12) { drawn = u; g.sound.rope(); }
+        send('drag', u);
+      },
       jerk: () => {
         g.set('wave', KNEES, 0.6);
         if (!torn) { torn = true; g.set('net_hole', 2); mg.plate.set({ phrase: tr('The net tears wider; the wave is at his knees.') }); }

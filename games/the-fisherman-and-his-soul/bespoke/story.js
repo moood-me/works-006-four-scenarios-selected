@@ -7,13 +7,18 @@
 // mini-games (minigames/) in the poses the pieces end in.
 //   g.state — what the play carries: {scales, shown, marks, choices} (game.js); what follows from it: facts(g.state)
 //   g.signal — aborts when the step is left
-//   g.scene(place, {beat, here, moods, keys, where}, {cut}) — that place of the game (PLACES: the world's scene it is
+//   g.sound — the game's sounds (sound.js); g.beds(levels) — the background from now on (bespoke.background): the beds
+//     of sound named at their levels, every other one silent — the page changes it at once, over the music's crossfade.
+//     A scene's own goes with it (g.scene's beds, else its place's: PLACES): changed at its cut, with its music.
+//     Unseen (a jump): kept for the scene the jump shows (j.background)
+//   g.scene(place, {beat, here, moods, keys, where}, {cut, beds}) — that place of the game (PLACES: the world's scene it is
 //     played on, and where it really is when that scene stands in for it), full-screen: of the game's people only `here`
 //     are there — those of them the scene has (`<id>_here`, the engine's key; whom it has not are not seen: voices
 //     only) —, their faces as `moods` say ({id: mood}); `keys` — values of the scene's own keys (its scene.json's
 //     states) or a person's (`<id>_with`…); `where` — a label of the step's own, what the scene cannot show yet (the
 //     year) — over the place's. The traces the play carries (TRACES) are given to every scene that has their keys.
-//     Always opened anew; `cut` — in one cut, else through black
+//     Always opened anew; `cut` — in one cut, else through black; `beds` — its background of sound (else its place's)
+//   on(g, moment, fn) — fn as the scene tells the moment (a sound of the game's on it; not waited for)
 //   g.beat(name, {wait}) — a piece of the shown scene (its key `beat`; world module `beats`); → once it has ended (the
 //     scene tells `beat:<name>`), or at once with wait: false; g.scene(place, {beat}) opens the scene on it.
 //     g.told(text, ms) — till the scene tells `text` (→ true) or ms pass (→ false). piece(g, name, {moment: fn}) — the
@@ -29,9 +34,10 @@
 //   g.choose(choice, {ref: options}) — the player presses one of the points ('id#point' | 'id'), then one of its
 //     options ([{id, label}]: petals, one too — the language of mini-games, hub.offer); → the option's id, kept in
 //     state.choices[choice] (choice null: not a choice of the chapter's map)
-//   g.interrupt(choice, {ref: [option]}, otherwise, ms, phrase) — a sign (the scenario's interruptions): one touch on
-//     the one point within ms, its arc of time running down (a press with no petals; phrase — the plate's line) — or
-//     it passes, and the play goes on as `otherwise` ({id}); → the id, kept in state.choices[choice] like a choice's
+//   g.interrupt(choice, {ref: [option]}, otherwise, ms, phrase) — a sign (the scenario's interruptions): the one
+//     option on the one point within ms, its arc of time running down (its one petal saying in words what a touch does;
+//     the arc stands while it is open; phrase — the plate's line) — or it passes, and the play goes on as `otherwise`
+//     ({id}); → the id, kept in state.choices[choice] like a choice's
 //   g.play(minigame, opts) — a mini-game (a module of minigames/: {title, about, skipped, missed, points, keys,
 //     run(g, b, opts, signal)}); the signal aborts when it is skipped (the page's ⏭, where it may be skipped) or the
 //     step is left; → its result
@@ -51,18 +57,24 @@
 // (a dry run: game.js, check/run.mjs): then nothing of it is said, shown or heard, a piece ends as soon as it is begun, and a
 // minigame gives its `skipped` (or what the dry run asks: j.result — check/run.mjs plays the misses too).
 
+import * as sounds from './sound.js';
+import { unheard } from './sound.js';
+
 // The game's places (scenario §4) and the world's scene each is played on — the one map of them (a place may also be a
 // scene seen its own way: `keys`; a place whose scene is not made yet would stand in a ready one, `where` saying where
-// it really is). The steps name places, never folders. (The pier is also the map's background, game.js.)
+// it really is). The steps name places, never folders. (The pier is also the map's background, game.js.) `beds` — the
+// place's own sound (sound.js), its background when a step says no other: the water at the pier's posts and the boat's
+// side, the sea on the sand, the sea far below the white room, the wind in the firs and the crickets, the river under
+// the bridge and the town's hum, the hearth, the deep's weight.
 export const PLACES = {
-  pier: { folder: 'pier' }, // С1 the pier
-  shore: { folder: 'pier', keys: { view: 'shore' } }, // С1 seen toward the land: the sand, the hut, the field
-  stone: { folder: 'stone' }, // С2 the stone (and the boat by it, at sea)
-  priest: { folder: 'priest-house' }, // С3 the Priest's house
-  well: { folder: 'well' }, // С4 the well
-  bridge: { folder: 'bridge' }, // С5 the bridge and the town
-  room: { folder: 'potter-room' }, // С5 inside: the potter's room
-  deep: { folder: 'deep' }, // С6 the deep
+  pier: { folder: 'pier', beds: { sea: 0.45 } }, // С1 the pier
+  shore: { folder: 'pier', keys: { view: 'shore' }, beds: { shore: 0.45 } }, // С1 seen toward the land: the sand, the hut, the field
+  stone: { folder: 'stone', beds: { sea: 0.4 } }, // С2 the stone (and the boat by it, at sea)
+  priest: { folder: 'priest-house', beds: { sea_in: 0.25 } }, // С3 the Priest's house
+  well: { folder: 'well', beds: { wind: 0.2, crickets: 0.3 } }, // С4 the well
+  bridge: { folder: 'bridge', beds: { sea: 0.2, town: 0.3 } }, // С5 the bridge and the town
+  room: { folder: 'potter-room', beds: { fire: 0.4 } }, // С5 inside: the potter's room
+  deep: { folder: 'deep', beds: { deep: 0.6 } }, // С6 the deep
 };
 // The traces the play carries (scenario §7: what a missed mini-game leaves), by the scenes' keys: the net torn on the
 // night he caught her (marks.torn: 1 at the edge, 2 wider — М1, М8б) wherever his net is seen; the Soul's left hand like
@@ -145,6 +157,11 @@ export async function piece(g, name, at = {}, open = null) {
   await ended;
 }
 
+// on(g, moment, fn) — fn as the scene tells the moment (a sound of the game's on it): listened for from now, not waited
+// for
+export const on = (g, moment, fn) => { g.told(moment).then(ok => { if (ok) fn(); }); };
+
+const QUIET = unheard().sounds; // a step played unseen hears nothing
 const BEAT = 180000; // a piece longer than this has not ended: the scene lacks it
 const SKIPPABLE = 20000; // ms in a minigame of a step not seen yet before the ⏭ may skip it
 
@@ -194,7 +211,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
     for (const h of j.seen()) hub.told(h.text, h.ms).then(h.ok);
     view.gauge(state);
     if (shown) {
-      await alive(b.show(shown.folder, { state: shown.state, captions: false, then }));
+      await alive(b.show(shown.folder, { state: shown.state, captions: false, then, background: j.background }));
       view.where(shown.where);
     }
     ahead();
@@ -210,11 +227,16 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
   const g = {
     state,
     signal: left.signal,
-    async scene(place, { beat = null, here = [], moods = {}, keys = {}, where = null } = {}, { cut = false } = {}) {
+    get sound() { return unseen() ? QUIET : sounds; },
+    beds(levels) {
+      if (gone()) return;
+      if (unseen()) j.background = levels; else b.background(levels);
+    },
+    async scene(place, { beat = null, here = [], moods = {}, keys = {}, where = null } = {}, { cut = false, beds = null } = {}) {
       if (gone()) return never;
       const at = PLACES[place];
       if (!at) throw new Error(`no place “${place}”`);
-      const { folder } = at, label = where ?? at.where ?? null;
+      const { folder } = at, label = where ?? at.where ?? null, background = beds ?? at.beds ?? {};
       const spec = await alive(unseen() ? j.real(b.specOf(folder)) : b.specOf(folder));
       people = new Set((spec.objects ?? []).filter(o => o.person).map(o => o.id));
       // (of the game's people the scene has: those here; the others are voices only)
@@ -227,6 +249,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       if (beat) st.beat = beat;
       if (unseen()) {
         opening = beat ? { name: beat, ended: g.told(`beat:${beat}`, BEAT) } : null;
+        j.background = background;
         j.scene(folder, st, label);
         return;
       }
@@ -236,7 +259,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
         opening = beat ? { name: beat, ended: g.told(`beat:${beat}`, BEAT) } : null;
         hub.withdraw();
         view.where(null);
-        await alive(b.show(folder, { state: st, captions: false, fade: !cut }));
+        await alive(b.show(folder, { state: st, captions: false, fade: !cut, background }));
         view.where(label);
       } finally { showing = false; }
     },
@@ -396,8 +419,9 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
 //   hub.offer({ref: options}) → the action once the player has chosen it: a plain choice of the language of
 //     mini-games — a mark on each point; a touch opens its options as petals, one too; one who touches no mark for
 //     SHOW s is shown how: the ghost finger on each in turn. hub.offer({ref: [action]}, within, otherwise, phrase) —
-//     a sign: one touch on the one mark within `within` ms, its arc of time running down, no petals; not touched —
-//     {id: otherwise}
+//     a sign: the one option on the one mark within `within` ms, its arc of time running down (standing while its
+//     petal is open); not chosen in time — {id: otherwise}. A person's mark stands on their chest (a choice's mark is
+//     never over a face: wishes), an element's where it is pressed
 //   hub.told(text, ms) → true once the scene tells `text` (bespoke.on('tell')), false if ms pass first
 //   hub.ask(at, options) → the action chosen, or null: a mark born open where the game's own drawing was pressed (at:
 //     fn → {x, y} page px — map.js), its options out as petals at once; a touch off them folds it — null
@@ -420,26 +444,33 @@ export function listen(b) {
   // behind the eye) at the frame's edge nearest to them, else in its middle — a person off the frame never leaves the
   // play waiting on a mark nobody sees (the language hides a mark whose point is out of the frame)
   const toward = ref => {
-    const at = ref.includes('#') ? ref : `${ref}@`;
+    const person = !ref.includes('#') && (b.spec?.objects ?? []).some(o => o.id === ref && o.person);
+    const at = ref.includes('#') ? ref : person ? `${ref}#chest` : `${ref}@`;
     return () => {
       const f = b.frame(), p = b.where(at), m = 0.12 * f.h;
       if (!p) return { x: f.x + f.w / 2, y: f.y + f.h / 2 };
       return { x: Math.min(f.x + f.w - m, Math.max(f.x + m, p.x)), y: Math.min(f.y + f.h - m, Math.max(f.y + m, p.y)) };
     };
   };
-  // a sign: one mark, a touch is the action (a mini-game's press, no petals), its arc of time running down; not
-  // touched in time — `otherwise`
+  // a sign: one mark with its one petal (what a touch does, in words), its arc of time running down — standing while
+  // the petal is open; not chosen in time — `otherwise`
   function chance(offers, within, otherwise, phrase) {
     const mg = offered = b.minigame.start({ phrase }), [ref] = Object.keys(offers), [action] = offers[ref];
     return new Promise(ok => {
       const mark = mg.mark({ at: toward(ref), time: 1 });
-      const press = mg.press({ on: mark });
-      const t0 = mg.t;
-      let over = false;
+      const press = mg.press({ on: mark, petals: [action] });
+      let used = 0, open = false, over = false;
       const end = (as, what) => { if (over) return; over = true; offs.forEach(f => f()); mg.end({ as }).then(() => { if (offered === mg) offered = null; }); ok(what); };
       const offs = [
-        press.on('press', () => { mg.snap({ at: mark }); end('clean', action); }),
-        mg.on('frame', ({ t }) => { const left = 1 - (t - t0) / (within / 1000); mark.set({ time: Math.max(0, left) }); if (left <= 0) end('neutral', { id: otherwise }); }),
+        press.on('down', () => { open = true; }),
+        press.on('fold', () => { open = false; }),
+        press.on('choose', () => { mg.snap({ at: mark }); end('clean', action); }),
+        mg.on('frame', ({ dt }) => {
+          if (!open) used += dt;
+          const left = 1 - used / (within / 1000);
+          mark.set({ time: Math.max(0, left) });
+          if (left <= 0) end('neutral', { id: otherwise });
+        }),
       ];
     });
   }
