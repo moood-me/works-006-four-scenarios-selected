@@ -52,7 +52,7 @@ const PLACES = {
   widow_girl: { boat: { at: [-0.2, -3.8], turn: 70 }, field: { at: [-3.6, -10.9], turn: 60 } },
   widow_boy: { boat: { at: [0.25, -3.1], turn: 70 }, end: { at: [-0.55, 4.45], turn: 150, on: [-0.55, 4.45, 2.55] }, field: { at: [-3.2, -11.2], turn: 60 } },
   witch: { shore: { at: [2.6, 0.1], turn: 270 }, end: { at: [-0.25, 4.55], turn: 150 } },
-  priest: { shore: { at: [0.2, -0.6], turn: 80 }, end: { at: [-0.1, 4.65], turn: 150 }, post: { at: [0.45, 4.3], turn: 60 }, mound: { at: [-2.0, -10.5], turn: 250 } },
+  priest: { shore: { at: [0.2, -0.6], turn: 80 }, end: { at: [-0.1, 4.65], turn: 150 }, post: { at: [0.3, 4.6], turn: 100 }, mound: { at: [-2.0, -10.5], turn: 250 } },
 };
 // those of the pier's people who may stand in the water: their height over the bay's floor is `<id>_e`
 const ELEVATED = ['fisherman', 'soul', 'mermaid'];
@@ -956,8 +956,9 @@ function film(scene) {
         soul_here: false, ...WIDE_SHORE }),
       run: async s => {
         P.open(s, WIDE_SHORE);
-        // the sea darkens and comes (the morning's light going out of the sky with it)
-        await s.all(s.move('wave', 0.3, { over: 4 }), s.move('dawn', 0.6, { over: 4 }), s.move('day', 0, { over: 4 }));
+        // the sea darkens and comes (the morning's light going out of the sky with it; at night — after the wave that
+        // laid her here — it stays night: nothing is lit by it)
+        await s.all(s.move('wave', 0.3, { over: 4 }), s.move('dawn', Math.min(s.get('dawn'), 0.6), { over: 4 }), s.move('day', 0, { over: 4 }));
         await P.tell(s, 'sea_comes:dark', 1);
         // (the children run up the shore, if they are there)
         if (s.get('children')) {
@@ -1023,6 +1024,9 @@ function film(scene) {
     morning_two: {
       from: () => ({ ...SHORE('morning'), ...NONE, mist: 1, lantern_at: 'post', hut: 'gone', ...at('fisherman', 'sand'), fisherman_a: 0.9, fisherman_d: 0.55,
         fisherman_do: 'lie_still', ...at('mermaid', 'sand'), mermaid_do: 'lie_still', mermaid_mood: 'eyes_closed', ...at('priest', 'shore'), priest_a: -4,
+        // (found together: she lies along him, at his side, as he holds her — unless М8 let her slip: then a little apart,
+        // across, where the wave left her)
+        ...(scene.get('apart') ? {} : { mermaid_a: 1.3, mermaid_d: 0.42, mermaid_turn: 20 }),
         priest_d: -3, soul_here: false, ...WIDE_SHORE }),
       run: async s => {
         P.loop(s, 'fisherman', 'lie_still');

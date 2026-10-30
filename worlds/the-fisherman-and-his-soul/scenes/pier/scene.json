@@ -703,10 +703,10 @@
     },
     {
       "id": "cutline",
-      "name": "The line of his shadow at his soles",
+      "name": "The line of his shadow before his knees",
       "plane": true,
       "across": -0.15,
-      "distance": 4.3,
+      "distance": 4.15,
       "elevation": 0.156,
       "width": 0.6,
       "depth": 0.6

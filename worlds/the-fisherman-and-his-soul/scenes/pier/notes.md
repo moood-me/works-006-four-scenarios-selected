@@ -17,7 +17,7 @@ glowing in the water beyond.
   `lantern_at` is post (its flame the light `lantern`); the knife driven into it at chest height (`knife` post, `rust`;
   point `lantern_post#knife`); point `lantern_post#grip` — where a hand holds it from the water (М9).
 - `lantern_boards` (0.42, 4.3) — the lantern set down on the boards (`lantern_at` boards; light `lantern_low`);
-  `knife_boards` — the knife lying on the boards (`knife` boards; point `knife_boards#knife`); `cutline` (−0.15, 4.3) — where
+  `knife_boards` — the knife lying on the boards (`knife` boards; point `knife_boards#knife`); `cutline` (−0.15, 4.15) — where
   his shadow leaves him, on the boards just before his knees as he kneels at the end, across (open to the viewer) (М3, М6: points `cutline#heel`, `cutline#toe`; `cut` draws a thin
   line of light from the heel, `cut_rough` makes it ragged).
 - `rock` — the stone (2.9, 6.2), `water` glowing teal round it; `under` — a pale light lying under the water by it
