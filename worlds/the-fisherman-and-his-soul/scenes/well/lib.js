@@ -140,7 +140,9 @@ function film(scene) {
         s.person('fisherman').look('velvet');
         await s.person('fisherman').do('sign');
         await P.tell(s, 'sign_velvet:sign', 0.5);
-        P.frame(s, P.shot('velvet', 'full', [0.35, 0.5]), 1.2);
+        // the man turns away into the wood, on the left, as the two of them are seen whole (the Witch's cry is theirs;
+        // following him, the firs filled the frame)
+        P.frame(s, P.shot('fisherman', 'full', [0.6, 0.5]), 1.2);
         await P.go(s, 'velvet', INTO_WOOD);
         s.set('velvet_here', false);
         await P.tell(s, 'sign_velvet:gone', 0.3);

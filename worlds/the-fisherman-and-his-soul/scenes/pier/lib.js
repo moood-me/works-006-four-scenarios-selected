@@ -898,6 +898,9 @@ function film(scene) {
         const him = s.person('fisherman');
         him.look('mermaid');
         await him.do('kneel');
+        // near the two of them as he bends to her and kisses her, and says what he says (the game's, after): his face,
+        // hers (2026-10-30: it was said on a side shot from afar)
+        await P.cut(s, SHORE_NEAR);
         await him.do('bend_over');
         await P.tell(s, 'kneel_kiss:kiss', 2);
       },

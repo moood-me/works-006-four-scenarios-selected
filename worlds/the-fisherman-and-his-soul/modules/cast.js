@@ -259,10 +259,11 @@ return {
     fisherman: { kind: 'shapes', style: 'bay', who: 'man', garment: 'tunic', hair: 'short', barefoot: 'both',
       body: FISHER_BODY,
       colors: { skin: '#c99872', hair: '#33251c', top: '#e2d8c4', bottom: '#4f6372' } },
-    // his Soul — his shadow standing up: the same man, the same face, all in the slate and ink of a shadow at night
+    // his Soul — his shadow standing up: the same man, the same face, in the slate and ink of a shadow at night; the face
+    // a cold pale grey-blue, light enough that what is in it reads (2026-10-30: it was as dark as the clothes)
     soul: { kind: 'shapes', style: 'bay', who: 'man', garment: 'tunic', hair: 'short', barefoot: 'both',
       body: FISHER_BODY,
-      colors: { skin: '#5d6884', hair: '#141824', top: '#2e3548', bottom: '#1f2433' } },
+      colors: { skin: '#9ba4ba', hair: '#171c28', top: '#2e3548', bottom: '#1f2433' } },
     // the Mermaid: small and slight, pearl-pale, her hair wet gold to the waist; in the water to the shoulders or the
     // waist, never ashore (below the water nothing of her is seen)
     mermaid: { kind: 'shapes', style: 'bay', who: 'woman', garment: 'none', hair: 'long',
@@ -300,9 +301,10 @@ return {
       colors: { skin: '#d9a985', hair: '#6a5240', top: '#8a6448', garment: '#8a6448', bottom: '#8a6448', shoes: '#3a2e26', accent: '#e2d6bc' } },
     // the Fisherman years on, under the water (the ending «Два огня»): the same man, his hair gone white — a scene gives
     // it as his `fisherman_wear` (the look's object, scene.kit.cast.characters.fisherman_old)
-    fisherman_old: { kind: 'shapes', style: 'bay', who: 'man', garment: 'tunic', hair: 'short', barefoot: 'both',
+    // (white hair and a white beard: his years seen at once, not a white cap)
+    fisherman_old: { kind: 'shapes', style: 'bay', who: 'man', garment: 'tunic', hair: 'short', barefoot: 'both', parts: ['beard'],
       body: FISHER_BODY,
-      colors: { skin: '#c4977a', hair: '#ebe8e1', top: '#e2d8c4', bottom: '#4f6372' } },
+      colors: { skin: '#c4977a', hair: '#e6e3dc', top: '#e2d8c4', bottom: '#4f6372' } },
     // the girl who dances barefoot on the pier at the feast (1.3): fifteen or so, slight, a light linen dress, brown hair
     // long and loose, a red ribbon in it
     girl: { kind: 'shapes', style: 'bay', who: 'woman', garment: 'dress', hair: 'long', barefoot: 'both', parts: ['ribbon'],
