@@ -105,7 +105,7 @@ function film(scene) {
   const SHORE_SAND = { ...P.CAM0, camera_x: 3.3, camera_z: 1.3, camera_yaw: 262, camera_look: 0.14 };
   // the widow and him at the hut, across the view from each other, both half turned to it (4.4): from the sand before
   // them (an operator's shot here would film from the sea's side, the scene's own view)
-  const WIDOW_TALK = { ...P.CAM0, camera_x: 6.5, camera_z: -0.7, camera_yaw: 250, camera_look: 0.03 };
+  const WIDOW_TALK = { ...P.CAM0, camera_x: 7.0, camera_z: 0.0, camera_yaw: 250, camera_look: 0.03 };
   const SHORE_FIELD = { ...P.CAM0, camera_x: 0.6, camera_z: -7.8, camera_yaw: 222, camera_look: 0.06 };
   // near the two on the sand by the water, on the wide view's own line (the water and the wave on the right): his
   // face, her hand in his, the sea coming — the choice and «Holding Her» (М8) are played here
