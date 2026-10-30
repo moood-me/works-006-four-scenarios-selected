@@ -122,9 +122,9 @@ function film(scene) {
   // the Soul on the boards at the end speaking to him in the water (2.6, 3С.3): its face, seen from the water's side
   // (from ours the lantern's post stands between them)
   const SPEAKS = CAM_BACK;
-  // crouched at his heels with the knife (М3, М6): a frame 1.6 m tall round him, his head high in it — the boards at his
-  // feet, his shadow's edge, the knife in his hand below
-  const KNEEL = P.shot('fisherman', 1.6, [0.6, 0.3]);
+  // crouched at his heels with the knife (М3, М6): all of him, the boards at his feet, his shadow's edge, the knife in
+  // his hand (nearer, the Soul pleading beside him would fill the frame)
+  const KNEEL = P.shot('fisherman', 'full', [0.62, 0.55]);
   const film = {
     // ── Chapter I ──
     feast: {

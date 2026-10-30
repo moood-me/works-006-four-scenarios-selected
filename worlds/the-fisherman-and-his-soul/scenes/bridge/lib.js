@@ -67,14 +67,14 @@ const UNDER = { at: [-2.3, 11.6], turn: 250 };
 const HEAD = { at: [-0.8, 12.2], turn: 270 };
 const MID = { at: [-11.6, 12.0], turn: 270 };
 const STALL = { at: [1.0, 9.6], turn: 60 };
-// the Fisherman at the stall: by its left end, where the coppers lie, turned half to us and half to the potter behind
-// the stall — his face and his hands seen (the operator films from our side: before the stall he would be his back)
-const AT_STALL = { at: [0.55, 10.05], turn: 110 };
+// the Fisherman at the stall: by its left end, where the coppers lie, turned half to us and half to the potter, who stands
+// before its right end — his face and his hands seen (the operator films from our side: before the stall he would be his back)
+const AT_STALL = { at: [0.55, 10.05], turn: 140 };
 const DOOR = { at: [1.75, 7.4], turn: 90 };
 const PLACES = {
   fisherman: { lane: LANE, under: UNDER, head: HEAD, mid: MID, stall: AT_STALL, door: DOOR },
   soul: { lane: LANE, under: UNDER, head: HEAD, mid: MID, stall: STALL, door: DOOR },
-  potter: { door: { at: [1.8, 7.6], turn: 235 }, stall: { at: [2.1, 10.75], turn: 240 }, doorway: { at: [2.35, 7.4], turn: 270 } },
+  potter: { door: { at: [1.8, 7.6], turn: 235 }, stall: { at: [2.0, 9.7], turn: 280 }, doorway: { at: [2.35, 7.4], turn: 270 } },
   beggar: { parapet: { at: [-9.2, 13.55], turn: 180, on: [-9.2, 13.5, 3.82] } },
 };
 // The bridge's pieces (the game's contract, game.md «Stage 5 — pieces»; notes.md «Pieces»): played by the world's
