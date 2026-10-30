@@ -228,3 +228,6 @@ After a reviewer's renders: what the player must see was not in the frame. Rende
   in the Epilogue's morning (a place's keys set after its name in a `from` are put back by the place: give it a place).
   At night (after `wave_lays`) `sea_comes` keeps the night. `come_out` (the first year) talks on `SPEAKS` / `listening`
   as the later years (from our side he was behind the post). The widow talks to him at `talk` on `WIDOW_TALK`.
+- (seventh round) `sea_comes`: the widow and the children run off along the shore toward the pier's root and are gone
+  (they ran toward the field where he falls, and the widow stayed). `post_knife` holds under the ending's title
+  first, then the pull, and he steps back from the post toward the shore with the knife.
