@@ -102,7 +102,7 @@ function film(scene) {
   // framed together as he holds the net and chooses — from the pier's end, the camera's own keys: an operator on someone
   // in the water stands its eye over the bay's floor, at the water's face, under the net
   const IN_NET = { mermaid_turn: 195 };
-  const HOLD = { ...P.CAM0, camera_x: -0.9, camera_z: 3.6, camera_yaw: -8, camera_look: 0.1 };
+  const HOLD = { ...P.CAM0, camera_x: -1.2, camera_z: 3.4, camera_yaw: -2, camera_look: 0.3 };
   const film = {
     // ── Prologue «Сеть» ──
     night: {

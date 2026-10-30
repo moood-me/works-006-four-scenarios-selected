@@ -166,8 +166,9 @@ function film(scene) {
         him.reach(null);
         await him.do('wrist_behind');
         await P.tell(s, 'hand_itself:caught', 0.5);
+        // his face as he holds himself: looking down before him, not at the potter
         P.frame(s, P.shot('fisherman', 'close', [0.5, 0.4]), 1.5);
-        him.look('potter');
+        him.look([0.7, 8.9, 0]);
         await s.wait(2);
       },
     },
