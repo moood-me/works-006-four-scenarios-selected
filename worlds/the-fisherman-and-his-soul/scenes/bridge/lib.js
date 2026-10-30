@@ -92,8 +92,13 @@ function film(scene) {
   // along the road toward the far bank, the middle ahead; and down at the bowl. Heights over the road (the `deck` walk
   // plane is the floor under the eye)
   const ON_ROAD = { ...P.CAM0, camera_x: -5.2, camera_z: 12.0, camera_yaw: 270, camera_h: -0.1 };
-  // his hand reaching for the coppers on the stall: the coppers and the hand, near
-  const COPPERS = P.shot('stall#coppers', 1.8, [0.42, 0.62]);
+  // his hand reaching for the coppers on the stall: the coppers, his hand and his face over them, the potter beyond
+  // (the stall 1.1 m tall a little over half the frame: about two metres of it seen — 2026-10-30: at 1.8 the lens was among
+  // the pots, the coppers blots of light and no one there)
+  const COPPERS = P.shot('stall#coppers', 0.55, [0.42, 0.6]);
+  // the two at the stall, the Fisherman by its left end and the potter by its right, whole (the stall a third of the
+  // frame's height): who speaks is seen
+  const AT_STALL_TWO = P.shot('stall', 0.33, [0.5, 0.66]);
   const AT_BOWL = { ...P.CAM0, camera_x: -7.4, camera_z: 12.7, camera_yaw: 268, camera_h: -0.5, camera_look: 0.18 };
   const film = {
     // ── Prologue: the morning market ──
@@ -145,7 +150,7 @@ function film(scene) {
         P.loop(s, 'musician_b', 'play_pipe');
         await P.go(s, 'fisherman', [PLACES.fisherman.stall.at], AT_STALL.turn);
         s.person('fisherman').look('potter');
-        P.frame(s, P.shot('fisherman', 'medium', [0.4, 0.42]), 2);
+        P.frame(s, AT_STALL_TWO, 2);
         await P.tell(s, 'square:met', 2);
       },
     },
