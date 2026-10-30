@@ -108,6 +108,7 @@ export default async function (b) {
   }) : null;
   const away = () => new Promise(ok => b.menu(() => ok('away')));
   const ended = () => b.ended({ ending: facts(kept).ending });
+  let closed = false; // (the play just played through: the map comes out of the black)
 
   for (let after = {}; ;) {
     const to = await map(after);
@@ -119,13 +120,27 @@ export default async function (b) {
     if ((await play()) === 'away') continue;
     if (replay) {
       replay.done = true;
+      if (replay.run.chapter === EPILOGUE) await closing(replay.run);
       after = { reveal: replay.run.chapter };
       continue;
     }
     const done = kept.chapter;
     await onward();
-    if (kept.chapter === END) ended();
+    if (kept.chapter === END) {
+      ended();
+      await closing(kept);
+    }
     after = { reveal: done };
+  }
+
+  // the play played through (the main run, or a replay of the epilogue: its run): the last shot goes to black, the
+  // ending's name over it; the map comes out of the black (as «Canterville»: 2026-10-30 — the map came straight after
+  // the last shot, and nothing said the play was over)
+  async function closing(r) {
+    b.menu(null);
+    await b.fade(1, 2);
+    await view.title(ENDINGS.find(e => e.id === facts(r).ending).label);
+    closed = true;
   }
 
   // the run being played (the replay, else the main run), step by step to its chapter's end → 'done'; or till ☰ →
@@ -188,6 +203,7 @@ export default async function (b) {
     // (the scales as the run stands, on the map too: scenario §8)
     view.gauge(replay?.run ?? kept);
     await b.show(PLACES.pier.folder, { state: { fisherman_here: false, soul_here: false, mermaid_here: false }, captions: false, background: { sea: 0.3 } });
+    if (closed) { closed = false; b.fade(0, 1.5); }
     const drawn = trees(b, sky(), { grow: reveal, author: !!author });
     const notice = replay?.done && anew() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};
     let asked = null; // (an option that would leave the replay: asked again)

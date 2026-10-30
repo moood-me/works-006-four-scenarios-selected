@@ -133,6 +133,9 @@ function film(scene) {
   const TWO = P.shot('fisherman', 'full', [0.62, 0.5]);
   // the feast: he comes level with the dancing girl — both in the frame, she on the left
   const LEVEL = P.shot('fisherman', 'full', [0.64, 0.52]);
+  // his dance with her: the camera's own keys, left of the start, on the two of them (the operator on him went round
+  // the girl before him, through the women)
+  const DANCE = { ...P.CAM0, camera_x: -1.2, camera_z: 0, camera_yaw: -22, camera_look: 0.05 };
   // the Soul on the boards at the end speaking to him in the water (2.6, 3С.3): its face, seen from the water's side
   // (from ours the lantern's post stands between them)
   const SPEAKS = CAM_BACK;
@@ -186,8 +189,9 @@ function film(scene) {
         s.set('girl_reach', { r: 'fisherman#hand_l' });
         await P.tell(s, 'danced:pull', 1.5);
         s.set('girl_reach', null);
-        // he dances, clumsily, and laughs; his shadow on the boards dances with him — on the same two-shot, she beside him
+        // he dances, clumsily, and laughs; his shadow on the boards dances with him — the two of them in the frame
         // (2026-10-30: the scene's own view left her words over empty boards and him at the frame's edge)
+        P.frame(s, DANCE, 1.5);
         him.mood('laugh');
         await him.do('clumsy_dance');
         await P.tell(s, 'danced:laugh', 2);
