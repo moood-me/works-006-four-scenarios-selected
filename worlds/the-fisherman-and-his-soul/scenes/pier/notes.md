@@ -155,7 +155,7 @@ behind the viewer's right shoulder, seen from neither view (checked in the shore
  "knife_sea": {"after":[],"tells":["knife_sea:out","knife_sea:thrown"],"seconds":8,"show":false},
  "bless_sea": {"after":[],"tells":["bless_sea:bless"],"seconds":8,"show":false},
  "hook_empty": {"after":[],"tells":["hook_empty:end"],"seconds":10,"show":false},
- "post_knife": {"after":[],"tells":["post_knife:out"],"seconds":5,"show":false},
+ "post_knife": {"after":[],"tells":["post_knife:out"],"seconds":13,"show":false},
  "old_lantern": {"after":[],"tells":["old_lantern:end"],"seconds":14,"show":false},
  "soul_leaves": {"after":[],"tells":["soul_leaves:turn","soul_leaves:gone"],"seconds":14,"show":false},
  "witch_knife": {"after":[],"tells":["witch_knife:out","witch_knife:gone"],"seconds":10,"show":false},

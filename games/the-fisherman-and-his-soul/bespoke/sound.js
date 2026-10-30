@@ -283,8 +283,10 @@ const HELD = [{ midi: 60, at: 0.13, len: 5.3 }, { midi: 62, at: 5.88, len: 5.0 }
 let hum = null; // the decoded recording, once it is here
 const humming = () => recording(HUM).then(b => (hum = b));
 // how far she is: near (beside him), far (over the water from the stone), under (through the water)
-const VOICE = 0.6; // her voice's loudness, as loud as the beds round her
-const AIRS = { near: { lp: 6000, wet: 0.45, level: 1 }, far: { lp: 2200, wet: 0.85, level: 0.7 }, under: { lp: 800, wet: 0.7, level: 0.85 } };
+// her voice's loudness: over the beds round her and up to the scene's music — the player is asked to listen to her
+// (2026-10-30: at 0.6 the song was measured ~10 dB under the music, ~20 under the lines)
+const VOICE = 1.6;
+const AIRS = { near: { lp: 6000, wet: 0.45, level: 1 }, far: { lp: 2200, wet: 0.85, level: 0.7 }, under: { lp: 1300, wet: 0.7, level: 0.85 } };
 // a phrase sung from t into `out`: each note the nearest held note of her voice, moved to its pitch, the next coming in
 // over the end of the one before (legato), the first with its breath in, the last dying away. `cut` — the last note
 // broken off after that many seconds. → {end, stop(at, s)} (none while the recording is not here yet: → null)

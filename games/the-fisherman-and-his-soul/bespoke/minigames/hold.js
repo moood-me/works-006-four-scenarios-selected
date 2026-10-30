@@ -41,6 +41,8 @@ export default {
       } });
     if (!r) return this.skipped;
     if (!r.slips) g.set('fisherman_reach', HERS);
+    // (her hand never taken: his is not on it)
+    if (r.idle) g.set('fisherman_reach', null);
     g.set('wave', 1, 0.6);
     over();
     await mg.end({ as: r.slips ? 'flawed' : 'clean' });

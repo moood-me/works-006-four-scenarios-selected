@@ -51,7 +51,7 @@ export default {
       await g.say('soul', 'Then sit with me till sunrise. Only sit. For a year I have talked to myself');
       // (a choice of whom to be with: on the Soul — and on her by the stone)
       const s = await g.choose('sit', {
-        soul: [{ id: 'sit', label: tr('Sit on the edge of the pier, beside her') }],
+        soul: [{ id: 'sit', label: tr('Sit on the edge of the pier, beside the Soul') }],
         mermaid: [{ id: 'song', label: tr('Go to her song') }],
       });
       if (s === 'sit') {

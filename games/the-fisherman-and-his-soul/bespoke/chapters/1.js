@@ -16,7 +16,7 @@ export default {
   choices: [
     { id: 'stop', title: tr('The girl dancing on the pier'), options: [{ id: 'danced', label: tr('Stopped, and danced'), came: tr('Your shadow on the boards danced with you.') }, { id: 'passed', label: tr('Passed by, looked back once'), came: tr('You looked back once.') }] },
     { id: 'witch', title: tr('The Witch'), options: [{ id: 'demand', label: tr('“You promised.”'), came: tr('She threw the knife at your feet and turned away to the well.') }, { id: 'dance', label: tr('“Again. Without him. Till dawn.”'), came: tr('Her hand stayed on yours on the knife. The Mermaid smelled the wood on you.') }] },
-    { id: 'heart', title: tr('The heart'), options: [{ id: 'ask', label: tr('“And what would I love her with?”'), came: tr('“Then I shall be cruel. You chose it yourself.”') }, { id: 'cut', label: tr('Not to look. To cut.'), came: tr('The Soul fell silent in the middle of a word.') }, { id: 'come', label: tr('“Come here once a year”'), came: tr('The Mermaid heard that you would go out to another.') }] },
+    { id: 'heart', title: tr('The heart'), options: [{ id: 'ask', label: tr('“And what would I love her with?”'), came: tr('“Then I shall be cruel. You chose it yourself.”') }, { id: 'cut', label: tr('Not look at it. Cut.'), came: tr('The Soul fell silent in the middle of a word.') }, { id: 'come', label: tr('“Come here once a year”'), came: tr('The Mermaid heard that you would go out to another.') }] },
   ],
   steps: [
     // 1.1: the stone

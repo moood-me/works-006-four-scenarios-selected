@@ -26,16 +26,16 @@
 //     up — the same as held long (the scenario's way out by time). → 'let' | 'long' | null (the mini-game ended first)
 //   keep(g, b, mg, {at, seconds, take, frame, slip}) — “hold” that ends by its count (scenario §7: “hold and balance
 //     end by their count; dropped — it colours”): a groove at `at`; the count (`seconds`) begins as the groove is first
-//     pressed (never pressed for ALONE s — over, as if held); frame({fill, taken, held, t, dt, on}) each frame (fill —
+//     pressed (never pressed for ALONE s — over, not kept: a slip, `idle`); frame({fill, taken, held, t, dt, on}) each frame (fill —
 //     the hold's, `take` s to full; taken — it has been full once, or slipped: till then the thing stays as it was, the
 //     touch never takes it away; on — pressed yet); let go after it had nearly filled — slip() (a mistake: the fill
-//     ebbs, the ghost shows the holding again; hold again and it fills again). The bar — the time held. → {slips} | null
+//     ebbs, the ghost shows the holding again; hold again and it fills again). The bar — the time held. → {slips, idle?} | null
 //   slowly(g, b, mg, {at, pulls, frame, jerk}) — “pull slowly” (scenario §7: carefully, making up one's mind): a dashed
 //     ring at `at`; each slow pull (a tear of TEAR of the frame's height) draws a length out (frame(u) — how far all of
 //     it has come, 0…1, moving with the finger, kept when it lets go). Too fast (faster than FAST a second) — it jerks
 //     (a mistake; jerk(n): what it does in the scene), that length falls back by BACK and that pull is spent: let go,
-//     and draw again. All `pulls` out — done. The way out by time (scenario §7): never touched for ALONE s — done; not
-//     done LIMIT s after the first touch — the rest comes by itself (SELF s). → {jerks, self: it came by itself} | null
+//     and draw again. All `pulls` out — done. The way out by time (scenario §7): never touched for ALONE s, or not
+//     done LIMIT s after the first touch — the rest comes by itself (SELF s; neutral, not the player's). → {jerks, self: it came by itself} | null
 //   balance(g, b, mg, {at, seconds, keep, width, push, frame, slip}) — “balance” (lead anywhere, steered: the arrow is
 //     what tilts — a lantern, a cup, a horizon, a body — and `push(t)` what tilts it, from the first touch on): a
 //     quiet ring on the thing (`at`), its arc of danger how far the arrow is off; frame({arrow, in, held, t, dt, on, shown}) each
@@ -191,7 +191,8 @@ export async function keep(g, b, mg, { at, seconds, take = 1, frame = () => {}, 
   if (!done) return null;
   mg.snap({ at: mark });
   mark.remove();
-  return { slips };
+  // (never taken hold of: not kept — as a slip; `idle`)
+  return begun == null ? { slips: Math.max(1, slips), idle: true } : { slips };
 }
 
 const TEAR = 0.1, FAST = 6, BACK = 0.12, LIMIT = 15, SELF = 1.5;
@@ -205,14 +206,13 @@ export async function slowly(g, b, mg, { at, pulls = 3, frame = () => {}, jerk =
   const speed = pace();
   pull.on('tear', () => { if (!spent) { drawn += 1 / pulls; spent = true; } });
   pull.on('up', () => { spent = false; speed.reset(); });
-  // (the way out by time: never touched for ALONE s — done; not done LIMIT s after the first touch — the rest comes by
-  // itself, over SELF s)
+  // (the way out by time: never touched for ALONE s, or not done LIMIT s after the first touch — the rest comes by
+  // itself, over SELF s: not the player's — neutral, never clean)
   let begun = null, self = null;
   const touch = mg.on('down', () => { begun ??= mg.t; });
   const t00 = mg.t;
   const done = await until(mg, ({ t, dt }) => {
-    if (begun == null && t - t00 >= ALONE) return true;
-    if (self == null && begun != null && t - begun >= LIMIT) { self = t; end.remove(); }
+    if (self == null && ((begun == null && t - t00 >= ALONE) || (begun != null && t - begun >= LIMIT))) { self = t; end.remove(); }
     if (self != null) {
       const u = clamp(drawn + (1 - drawn) * (t - self) / SELF);
       frame(u);

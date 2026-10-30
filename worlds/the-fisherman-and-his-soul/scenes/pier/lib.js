@@ -742,10 +742,16 @@ function film(scene) {
       from: () => ({ ...SEA('morning'), ...NONE, knife: 'post', rust: true, lantern_at: 'post', ...at('fisherman', 'end'), fisherman_a: BY_POST[0],
         fisherman_d: BY_POST[1], fisherman_turn: 100, mermaid_here: false, soul_here: false, ...P.shot('lantern_post#knife', 'close', [0.5, 0.5]) }),
       run: async s => {
+        // (the ending's title stands over the knife in the post first: the gesture comes after it, seen — 2026-10-30: it
+        // was pulled under the title as the scene came)
+        await s.wait(7);
         await s.person('fisherman').do('pull_knife');
         s.set('knife', 'none');
         s.set('fisherman_with', ['knife_rusty']);
-        await P.tell(s, 'post_knife:out', 1.5);
+        await P.tell(s, 'post_knife:out', 0.5);
+        // the post stood; he holds the knife — to take it to her mound
+        P.frame(s, P.shot('fisherman', 'medium', [0.45, 0.45]), 1.5);
+        await s.wait(2.5);
       },
     },
     old_lantern: {
@@ -969,13 +975,17 @@ function film(scene) {
         // laid her here — it stays night: nothing is lit by it)
         await s.all(s.move('wave', 0.3, { over: 4 }), s.move('dawn', Math.min(s.get('dawn'), 0.6), { over: 4 }), s.move('day', 0, { over: 4 }));
         await P.tell(s, 'sea_comes:dark', 1);
-        // (the children run up the shore, if they are there)
+        // (the widow and the children, if they are there, run off along the shore toward the pier's root and home — out
+        // of the shore's view, never toward the field where he will fall: what follows is his and hers alone)
+        const fled = [];
         if (s.get('children')) {
           for (const id of ['widow_girl', 'widow_boy']) s.set(`${id}_here`, true);
-          P.go(s, 'widow_girl', [[-1, -8]], null, 'run');
-          P.go(s, 'widow_boy', [[-1.6, -8.4]], null, 'run');
+          fled.push(P.go(s, 'widow_girl', [[-3, -3.6], [-9, -4.6]], null, 'run'), P.go(s, 'widow_boy', [[-3.4, -3.2], [-9.4, -4.2]], null, 'run'));
+          if (s.get('widow_here')) fled.push(P.go(s, 'widow', [[-2.6, -4.0], [-8.6, -5.0]], null, 'run'));
         }
         await P.tell(s, 'sea_comes:run', 3);
+        await s.all(...fled);
+        for (const id of ['widow', 'widow_girl', 'widow_boy']) s.set(`${id}_here`, false);
         // near them: what follows is his (the choice, her hand)
         await P.cut(s, SHORE_NEAR);
       },
