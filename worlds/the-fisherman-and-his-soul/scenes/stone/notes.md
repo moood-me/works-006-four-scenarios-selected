@@ -123,3 +123,5 @@ in the hull).
   answer: a child's across/distance are the anchor's, its own `facing` only turns it in place).
 - (2026-10-30, sixth round) `go_free`: the camera on her as she lingers (her place in the water is past the edge of the
   net's shot) — «Do you want nothing?» is said in the frame.
+- (sixth round) `net_over#knot` — by her left hand at the floats (it was over her face, where М1б's sign is her face
+  growing quiet); `laugh_tail` on a medium shot.

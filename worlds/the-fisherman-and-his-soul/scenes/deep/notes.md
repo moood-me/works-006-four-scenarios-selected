@@ -98,3 +98,5 @@ The pieces (`lib.film`, the world's `beats` from `script.js`): `deep_song` (2.1,
   song is the game's (the music's voice weight 0).
 - (second round) «Два огня», `white_hair` / `hands_years`: the two of them near (`TWO_NEAR`, on her, him on the left) —
   his old face and white beard, her hand at his hair; it was seven seconds of the back of his head.
+- (2026-10-30, sixth round) `white_hair` on `TWO_SEATED` (the two sitting whole, a little further: the old man's beard
+  and hair read so; nearer, the beard was a mask). The beard itself (cast.js) hangs below his mouth now.
