@@ -96,21 +96,19 @@ export default {
     // 2.6–2.7: the third year; ⚑ the first hinge “One Day”
     async g => {
       const f = facts(g.state);
-      await piece(g, 'third_year', {
-        near: async () => {
-          await g.say('soul', 'On the square beyond the bridge, where you sold your fish, a girl dances at night. You were never there at night. Her feet are like little white doves. Come. One day');
-          if (f.hard) await g.say('soul', 'You want to see feet, don’t you? Hers has none');
-          else await g.say('soul', 'I am tired of walking alone. You will look — and come back');
-          if (f.danced) await g.say('soul', 'You stopped that time on the pier. I remember — I danced with you');
-          else await g.say('soul', 'You looked back that time on the pier. I remember');
-          await g.say('soul', 'To walk on the earth, let me in. On the shore I will come out again');
-        },
-      }, () => {
-        // (Song 2–3: from under the water by the stone her song, calling him down; 0–1: the stone quiet)
-        if (f.sounds) on(g, 'third_year:stone', () => g.beds({ sea: 0.4, song_under: 0.8 }));
-        return g.scene('pier', { beat: 'third_year', here: ['fisherman', 'soul'], moods: { fisherman: 'neutral', soul: f.hard ? 'smile' : 'sad' },
-          keys: { song: f.sounds }, where: tr('The third year.') });
-      });
+      // (the Soul speaks in the pose its piece ends in — the two of them —; then the stone, and back to him)
+      await g.scene('pier', { beat: 'third_year', here: ['fisherman', 'soul'], moods: { fisherman: 'neutral', soul: f.hard ? 'smile' : 'sad' },
+        keys: { song: f.sounds }, where: tr('The third year.') });
+      await g.beat('third_year');
+      await g.say('soul', 'On the square beyond the bridge, where you sold your fish, a girl dances at night. You were never there at night. Her feet are like little white doves. Come. One day');
+      if (f.hard) await g.say('soul', 'You want to see feet, don’t you? Hers has none');
+      else await g.say('soul', 'I am tired of walking alone. You will look — and come back');
+      if (f.danced) await g.say('soul', 'You stopped that time on the pier. I remember — I danced with you');
+      else await g.say('soul', 'You looked back that time on the pier. I remember');
+      await g.say('soul', 'To walk on the earth, let me in. On the shore I will come out again');
+      // (Song 2–3: from under the water by the stone her song, calling him down; 0–1: the stone quiet)
+      if (f.sounds) on(g, 'third_stone:stone', () => g.beds({ sea: 0.4, song_under: 0.8 }));
+      await g.beat('third_stone');
       const d = await g.choose('day', { fisherman: [
         { id: 'go', label: tr('“I’ll go. One day.”') },
         { id: 'stay', label: tr('“No. I stay.”') },

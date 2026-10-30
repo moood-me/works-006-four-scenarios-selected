@@ -198,12 +198,11 @@ export default {
           await g.wait(1500);
           await g.say('soul', 'I call for the last time. Next year I shall forget the way');
         },
-      }, () => {
-        // (Song 2–3: her song from below, calling him down; 0–1: silence)
-        if (f.sounds) on(g, 'fourth_year:stone', () => g.beds({ sea: 0.4, song_under: 0.8 }));
-        return g.scene('pier', { beat: 'fourth_year', here: ['fisherman', 'soul'], moods: { fisherman: 'neutral', soul: f.hard ? 'smile' : 'sad' },
-          keys: { song: f.sounds }, where: tr('The fourth year.') });
-      });
+      }, () => g.scene('pier', { beat: 'fourth_year', here: ['fisherman', 'soul'], moods: { fisherman: 'neutral', soul: f.hard ? 'smile' : 'sad' },
+        keys: { song: f.sounds }, where: tr('The fourth year.') }));
+      // (then the stone — Song 2–3: her song from below, calling him down; 0–1: silence —, and back to him)
+      if (f.sounds) on(g, 'fourth_stone:stone', () => g.beds({ sea: 0.4, song_under: 0.8 }));
+      await g.beat('fourth_stone');
       const l = await g.choose('last', { fisherman: [
         { id: 'go', label: tr('“I’ll go. I’ll give the cup back.”') },
         { id: 'no', label: tr('“No.”') },

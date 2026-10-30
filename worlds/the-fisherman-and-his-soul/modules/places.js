@@ -10,7 +10,8 @@ return {
       if (!p) return;
       scene.set(`${id}_a`, p.at[0]);
       scene.set(`${id}_d`, p.at[1]);
-      if (p.at.length > 2) scene.set(`${id}_e`, p.at[2]);
+      // (a place on the boards or the land stands at 0: one come up out of the water stands on them, not over them)
+      if (scene.get(`${id}_e`) !== undefined || p.at.length > 2) scene.set(`${id}_e`, p.at[2] ?? 0);
       if (p.turn != null) scene.set(`${id}_turn`, p.turn);
       scene.set(`${id}_on`, p.on ?? null);
       scene.set(`${id}_placed`, name);

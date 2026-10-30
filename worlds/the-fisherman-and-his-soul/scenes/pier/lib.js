@@ -45,7 +45,7 @@ const PLACES = {
     stone: { at: [1.8, 5.6, 0.85], turn: 220 },
     sand: { at: [1.0, 1.0, 0], turn: 90 },
   },
-  girl: { feast: { at: [-2.3, 2.7], turn: 120 } },
+  girl: { feast: { at: [-2.95, 2.45], turn: 95 } },
   woman_a: { feast: { at: [-3.2, 1.9], turn: 70 }, shore: { at: [2.0, -0.6], turn: 260 } },
   woman_b: { feast: { at: [-3.6, 1.4], turn: 60 }, shore: { at: [2.4, -0.2], turn: 250 } },
   widow: { boat: { at: [-0.6, -3.3], turn: 70 }, sand: { at: [1.9, -0.3], turn: 250 }, away: { at: [8.5, 1.0], turn: 80 } },
@@ -54,6 +54,8 @@ const PLACES = {
   witch: { shore: { at: [2.6, 0.1], turn: 270 }, end: { at: [-0.25, 4.55], turn: 150 } },
   priest: { shore: { at: [0.2, -0.6], turn: 80 }, end: { at: [-0.1, 4.65], turn: 150 }, post: { at: [0.45, 4.3], turn: 60 }, mound: { at: [-2.0, -10.5], turn: 250 } },
 };
+// those of the pier's people who may stand in the water: their height over the bay's floor is `<id>_e`
+const ELEVATED = ['fisherman', 'soul', 'mermaid'];
 // The wave (`wave` 0…1): the sheet of sea coming over the sand — its middle ahead (surge_d) and its height (surge_e);
 // under the water till 0.3 (the sea only darkens), over the edge, up the sand to the hut at 1, raised a little there
 function surge(w) {
@@ -71,7 +73,9 @@ function dragged(u) {
 // there are the operator's on its own way (from the land toward the sea: the sea behind the people).
 function film(scene) {
   const P = kit.pieces;
-  const at = (id, name) => P.at(PLACES, id, name);
+  // (one of those who stand in the water — `<id>_e` — put on the boards or the sand stands on them at 0, never left over
+  // them at the height the water had)
+  const at = (id, name) => ({ ...(ELEVATED.includes(id) && PLACES[id]?.[name] ? { [`${id}_e`]: 0 } : {}), ...P.at(PLACES, id, name) });
   // what every piece begins with unless it says otherwise: nothing in hands, nothing done, nothing reached for
   const NONE = { fisherman_do: null, soul_do: null, mermaid_do: null, girl_do: null, woman_a_do: null, woman_b_do: null, widow_do: null,
     widow_girl_do: null, widow_boy_do: null, witch_do: null, priest_do: null, fisherman_reach: null, soul_reach: null, mermaid_reach: null,
@@ -107,33 +111,49 @@ function film(scene) {
   // nearer the boards, the scene's own view
   const CAM_BACK = { ...P.CAM0, camera_x: -0.4, camera_z: 5.7, camera_yaw: 195, camera_h: 0.45 };
   const CAM_NEAR = { ...P.CAM0, camera_x: 0.2, camera_z: 1.6 };
+  // moonrise (1.7–1.10): his back to the moon low behind the pier's end — he faces the shore, his shadow long down the
+  // boards toward us; the Soul rises out of it a step before him, on his left, turned to him (its face seen from the
+  // water's side: CAM_BACK; his from ours); the two of them as he chooses — his face, the Soul's turned to him
+  const BACK_TO_MOON = 205;
+  const SOUL_RISE = { soul_at: 'end', soul_placed: 'end', soul_a: -0.65, soul_d: 4.15, soul_e: 0, soul_turn: 45, soul_on: null };
+  const TWO = P.shot('fisherman', 'full', [0.62, 0.5]);
+  // the feast: he comes level with the dancing girl — both in the frame, she on the left
+  const LEVEL = P.shot('fisherman', 'full', [0.64, 0.52]);
+  // the Soul on the boards at the end speaking to him in the water (2.6, 3С.3): the Soul on the left, he on the right
+  const SPEAKS = P.shot('soul', 'full', [0.3, 0.5]);
+  // crouched at his heels with the knife (М3, М6): a frame 1.6 m tall round him, his head high in it — the boards at his
+  // feet, his shadow's edge, the knife in his hand below
+  const KNEEL = P.shot('fisherman', 1.6, [0.5, 0.3]);
   const film = {
     // ── Chapter I ──
     feast: {
       from: () => ({ ...SEA('noon'), ...NONE, knife: 'none', ...at('fisherman', 'end'), ...at('girl', 'feast'), ...at('woman_a', 'feast'),
-        ...at('woman_b', 'feast'), girl_do: 'dance_light', woman_a_do: 'clap', woman_b_do: 'clap', ...P.CAM0 }),
+        ...at('woman_b', 'feast'), girl_do: 'dance_light', woman_a_do: 'clap', woman_b_do: 'clap', ...P.shot('girl', 'full', [0.45, 0.55]) }),
       run: async s => {
         P.loop(s, 'girl', 'dance_light');
         P.loop(s, 'woman_a', 'clap');
         P.loop(s, 'woman_b', 'clap');
         await s.wait(3);
+        // the women lean together and whisper
+        P.frame(s, P.shot('woman_a', 'medium', [0.55, 0.45]), 1.5);
         P.loop(s, 'woman_a', 'whisper');
         P.loop(s, 'woman_b', 'whisper');
-        await P.tell(s, 'feast:whisper', 2);
+        await P.tell(s, 'feast:whisper', 2.5);
         // he walks in from the pier's end toward the shore
+        P.frame(s, P.shot('girl', 'full', [0.35, 0.55]), 2);
         await P.go(s, 'fisherman', [PLACES.fisherman.level.at]);
         put(s, at('fisherman', 'level'));
         s.person('fisherman').look('girl');
-        P.frame(s, P.shot('fisherman', 'medium', [0.55, 0.42]), 2);
+        P.frame(s, LEVEL, 2);
         await P.tell(s, 'feast:level', 1.5);
       },
     },
     danced: {
       after: 'feast',
       from: () => ({ ...SEA('noon'), ...NONE, ...at('fisherman', 'level'), ...at('girl', 'feast'), ...at('woman_a', 'feast'), ...at('woman_b', 'feast'),
-        girl_do: 'dance_light', woman_a_do: 'clap', woman_b_do: 'clap', ...P.shot('fisherman', 'medium', [0.55, 0.42]) }),
+        girl_do: 'dance_light', woman_a_do: 'clap', woman_b_do: 'clap', ...LEVEL }),
       run: async s => {
-        P.open(s, { ...at('fisherman', 'level'), ...P.shot('fisherman', 'medium', [0.55, 0.42]) });
+        P.open(s, { ...at('fisherman', 'level'), ...LEVEL });
         const him = s.person('fisherman');
         // he stops, looks at her bare feet; she pulls his sleeve
         him.look('girl#feet');
@@ -151,9 +171,9 @@ function film(scene) {
     passed: {
       after: 'feast',
       from: () => ({ ...SEA('noon'), ...NONE, ...at('fisherman', 'level'), ...at('girl', 'feast'), ...at('woman_a', 'feast'), ...at('woman_b', 'feast'),
-        girl_do: 'dance_light', woman_a_do: 'clap', woman_b_do: 'clap', ...P.shot('fisherman', 'medium', [0.5, 0.42]) }),
+        girl_do: 'dance_light', woman_a_do: 'clap', woman_b_do: 'clap', ...LEVEL }),
       run: async s => {
-        P.open(s, { ...at('fisherman', 'level'), ...P.shot('fisherman', 'medium', [0.5, 0.42]) });
+        P.open(s, { ...at('fisherman', 'level'), ...LEVEL });
         // he walks on toward the shore; looks back once
         const walking = P.go(s, 'fisherman', [ROOT]);
         await s.wait(2);
@@ -163,11 +183,11 @@ function film(scene) {
       },
     },
     moonrise: {
-      from: () => ({ ...SEA('evening'), ...NONE, knife: 'none', lantern_at: 'post', ...at('fisherman', 'end'), fisherman_turn: 20,
+      from: () => ({ ...SEA('evening'), ...NONE, knife: 'none', lantern_at: 'post', ...at('fisherman', 'end'), fisherman_turn: BACK_TO_MOON,
         ...at('mermaid', 'stone'), mermaid_look: 'fisherman', soul_here: false, ...P.CAM0 }),
       run: async s => {
         s.set('soul_here', false);
-        // his back to the moon rising behind the pier's end: his shadow long down the boards toward the water
+        // his back to the moon rising behind the pier's end: his shadow long down the boards toward us
         await P.tell(s, 'moonrise:shadow', 5);
         if (s.get('smell')) P.frame(s, P.shot('mermaid', 'close', [0.5, 0.42]), 2);
         await P.tell(s, 'moonrise:her', 3);
@@ -175,25 +195,29 @@ function film(scene) {
     },
     shadow_rises: {
       after: 'moonrise',
-      from: () => ({ ...SEA('evening'), ...NONE, knife: 'none', ...at('fisherman', 'end'), fisherman_turn: 20, ...at('mermaid', 'stone'),
-        ...at('soul', 'end'), soul_turn: 200, ...P.shot('soul', 'medium', [0.5, 0.45]) }),
+      from: () => ({ ...SEA('evening'), ...NONE, knife: 'none', ...at('fisherman', 'end'), fisherman_turn: BACK_TO_MOON, ...at('mermaid', 'stone'),
+        ...SOUL_RISE, soul_here: false, ...TWO }),
       run: async s => {
-        P.open(s, { ...at('soul', 'end'), soul_turn: 200, ...P.shot('soul', 'medium', [0.5, 0.45]) });
-        // the shadow rises from the boards: his own face
+        P.open(s, { ...SOUL_RISE, fisherman_turn: BACK_TO_MOON, ...TWO });
+        // the shadow rises from the boards before him: his own face
         s.set('soul_here', true);
-        const soul = s.person('soul');
+        const soul = s.person('soul'), him = s.person('fisherman');
+        him.look('soul');
         await soul.do('rise_ground');
         await P.tell(s, 'shadow_rises:up', 0.5);
         soul.look('fisherman');
         await P.cut(s, CAM_BACK);
         await P.tell(s, 'shadow_rises:face', 2);
+        // it pleads (its words are the game's: the scene stays on its face a while), then the two as he chooses
         P.loop(s, 'soul', 'plead');
-        await s.wait(2);
+        await s.wait(8);
+        await P.cut(s, TWO);
+        await s.wait(1);
       },
     },
     heart_cut: {
       after: 'shadow_rises',
-      from: () => ({ ...SEA('evening'), ...NONE, ...at('fisherman', 'end'), fisherman_turn: 20, ...at('mermaid', 'stone'), ...at('soul', 'end'), soul_turn: 200,
+      from: () => ({ ...SEA('evening'), ...NONE, ...at('fisherman', 'end'), fisherman_turn: BACK_TO_MOON, ...at('mermaid', 'stone'), ...SOUL_RISE,
         soul_do: 'plead', soul_look: 'fisherman', ...CAM_BACK }),
       run: async s => {
         P.open(s, { soul_here: true, ...CAM_BACK });
@@ -208,7 +232,7 @@ function film(scene) {
     },
     heart_come: {
       after: 'shadow_rises',
-      from: () => ({ ...SEA('evening'), ...NONE, ...at('fisherman', 'end'), ...at('mermaid', 'stone'), ...at('soul', 'end'), soul_do: 'plead',
+      from: () => ({ ...SEA('evening'), ...NONE, ...at('fisherman', 'end'), fisherman_turn: BACK_TO_MOON, ...at('mermaid', 'stone'), ...SOUL_RISE, soul_do: 'plead',
         ...P.shot('rock', 'wide', [0.5, 0.5]) }),
       run: async s => {
         P.open(s, P.shot('rock', 'wide', [0.5, 0.5]));
@@ -223,11 +247,12 @@ function film(scene) {
     },
     knife_ready: {
       after: ['shadow_rises', 'heart_cut', 'heart_come'],
-      from: () => ({ ...SEA('evening'), ...NONE, ...at('fisherman', 'end'), ...at('mermaid', 'stone'), ...at('soul', 'end'), soul_do: 'plead',
-        ...P.shot('fisherman', 'full', [0.5, 0.55]) }),
+      from: () => ({ ...SEA('evening'), ...NONE, ...at('fisherman', 'end'), fisherman_turn: BACK_TO_MOON, ...at('mermaid', 'stone'), ...SOUL_RISE, soul_do: 'plead',
+        ...KNEEL }),
       run: async s => {
-        P.open(s, { ...at('fisherman', 'end'), ...P.shot('fisherman', 'full', [0.5, 0.55]) });
-        // he takes the knife and crouches at his heels, over the edge of his shadow
+        P.open(s, { ...at('fisherman', 'end'), fisherman_turn: BACK_TO_MOON, ...KNEEL });
+        // he takes the knife and crouches at his heels, over the edge of his shadow: the knife, his hands, his feet and
+        // the shadow at them in the frame
         s.set('fisherman_with', ['knife']);
         s.person('fisherman').look('cutline#heel');
         await s.person('fisherman').do('kneel');
@@ -237,8 +262,8 @@ function film(scene) {
     },
     cut: {
       after: 'knife_ready',
-      from: () => ({ ...SEA('evening'), ...NONE, cut: 1, ...at('fisherman', 'end'), fisherman_with: ['knife'], fisherman_do: 'kneel', ...at('mermaid', 'stone'),
-        ...at('soul', 'end'), soul_here: true, ...CAM_NEAR }),
+      from: () => ({ ...SEA('evening'), ...NONE, cut: 1, ...at('fisherman', 'end'), fisherman_turn: BACK_TO_MOON, fisherman_with: ['knife'], fisherman_do: 'kneel',
+        ...at('mermaid', 'stone'), ...SOUL_RISE, soul_here: true, ...CAM_NEAR }),
       run: async s => {
         P.open(s, { ...at('fisherman', 'end'), fisherman_with: ['knife'], ...CAM_NEAR });
         const him = s.person('fisherman');
@@ -385,18 +410,31 @@ function film(scene) {
         ...at('fisherman', 'shallows'), mermaid_here: false, ...P.shot('soul', 'medium', [0.45, 0.45]) }),
       run: async s => {
         s.set('mermaid_here', false);
-        // the Soul walks to the pier's end, nearer him
+        // the Soul walks to the pier's end, nearer him, and speaks to him: the two in the frame
         await P.go(s, 'soul', [PLACES.soul.end.at], 120);
         s.person('soul').look('fisherman');
-        await P.tell(s, 'third_year:near', 3);
+        s.person('fisherman').look('soul');
+        P.frame(s, SPEAKS, 2);
+        await P.tell(s, 'third_year:near', 2);
+      },
+    },
+    third_stone: {
+      after: 'third_year',
+      from: () => ({ ...SEA('dawn'), ...NONE, knife: 'post', lantern_at: 'none', ...at('soul', 'end'), soul_with: ['lantern'], ...at('fisherman', 'shallows'),
+        mermaid_here: false, ...SPEAKS }),
+      run: async s => {
+        P.open(s, SPEAKS);
         // the camera to the stone: under the water her faint light (her song), or the stone empty
         P.frame(s, P.shot('rock', 'wide', [0.5, 0.5]), 2.5);
         if (s.get('song')) s.move('under_light', 0.6, { over: 2 });
-        await P.tell(s, 'third_year:stone', 3);
+        await P.tell(s, 'third_stone:stone', 3);
+        // and back to him in the water: his face as he chooses
+        P.frame(s, P.shot('fisherman', 'medium', [0.5, 0.45]), 2.5);
+        await s.wait(2.5);
       },
     },
     go_day: {
-      after: 'third_year',
+      after: 'third_stone',
       from: () => ({ ...SEA('dawn'), ...NONE, knife: 'post', lantern_at: 'none', ...at('soul', 'end'), soul_with: ['lantern'], ...at('fisherman', 'shallows'),
         ...at('mermaid', 'stone'), mermaid_here: false, ...P.CAM0 }),
       run: async s => {
@@ -404,8 +442,10 @@ function film(scene) {
         const him = s.person('fisherman');
         him.mood('laugh');
         await him.do('laugh');
-        // three strides through the shallows up onto the boards, wet
-        put(s, at('fisherman', 'end'));
+        // three strides through the shallows to the pier's end, and up onto the boards, wet
+        await P.go(s, 'fisherman', [[0.7, 5.05]], null, 'wade');
+        put(s, { ...at('fisherman', 'end'), fisherman_a: 0.45, fisherman_d: 5.0 });
+        await P.go(s, 'fisherman', [PLACES.fisherman.end.at], 200);
         await P.tell(s, 'go_day:up', 1);
         // the Soul gives him the lantern and steps into his shadow
         P.frame(s, P.shot('fisherman', 'medium', [0.5, 0.45]), 1.5);
@@ -433,7 +473,7 @@ function film(scene) {
       },
     },
     stay_day: {
-      after: 'third_year',
+      after: 'third_stone',
       from: () => ({ ...SEA('dawn'), ...NONE, knife: 'post', lantern_at: 'none', ...at('soul', 'end'), soul_with: ['lantern'], ...at('fisherman', 'shallows'),
         mermaid_here: false, ...P.shot('fisherman', 'medium', [0.5, 0.45]) }),
       run: async s => {
@@ -455,17 +495,33 @@ function film(scene) {
       run: async s => {
         s.set('mermaid_here', false);
         s.set('fisherman_here', true);
+        s.person('soul').look('fisherman');
         await s.move('fisherman_e', PLACES.fisherman.shallows.at[2], { over: 2.5, ease: 'out' });
-        await P.tell(s, 'fourth_year:up', 2);
+        s.person('fisherman').look('soul');
+        // the cup in the Soul's hands; then the two of them as it speaks
         P.frame(s, P.shot('soul#cup', 'close', [0.5, 0.5]), 2);
         await s.wait(2.5);
+        P.frame(s, SPEAKS, 2);
+        await P.tell(s, 'fourth_year:up', 2);
+      },
+    },
+    fourth_stone: {
+      after: 'fourth_year',
+      from: () => ({ ...SEA('dawn'), ...NONE, knife: 'post', lantern_at: 'none', ...at('soul', 'end'), soul_with: ['lantern', 'cup'],
+        ...at('fisherman', 'shallows'), mermaid_here: false, ...SPEAKS }),
+      run: async s => {
+        P.open(s, SPEAKS);
+        // the stone: her light under the water (her song from below), or the silence
         P.frame(s, P.shot('rock', 'wide', [0.5, 0.5]), 2.5);
         if (s.get('song')) s.move('under_light', 0.6, { over: 2 });
-        await P.tell(s, 'fourth_year:stone', 3);
+        await P.tell(s, 'fourth_stone:stone', 3);
+        // and back to him: his face as he chooses
+        P.frame(s, P.shot('fisherman', 'medium', [0.5, 0.45]), 2.5);
+        await s.wait(2.5);
       },
     },
     late_go: {
-      after: 'fourth_year',
+      after: 'fourth_stone',
       from: () => ({ ...SEA('dawn'), ...NONE, knife: 'post', lantern_at: 'none', ...at('soul', 'end'), soul_with: ['lantern', 'cup'],
         ...at('fisherman', 'shallows'), mermaid_here: false, ...P.shot('lantern_post#knife', 'close', [0.5, 0.5]) }),
       run: async s => {
@@ -496,7 +552,7 @@ function film(scene) {
       },
     },
     turn_away: {
-      after: 'fourth_year',
+      after: 'fourth_stone',
       from: () => ({ ...SEA('dawn'), ...NONE, knife: 'post', lantern_at: 'none', ...at('soul', 'end'), soul_with: ['lantern', 'cup'],
         ...at('fisherman', 'shallows'), mermaid_here: false, ...P.shot('fisherman', 'medium', [0.5, 0.45]) }),
       run: async s => {
