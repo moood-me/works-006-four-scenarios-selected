@@ -117,7 +117,7 @@ function film(scene) {
   const CAM_NEAR = { ...P.CAM0, camera_x: 0.2, camera_z: 1.6 };
   // him in the water by the pier's end, waist up, from a little right of our line: on our line the lantern's post stood
   // between, at the lens (two pale bands across the frame's left)
-  const IN_WATER = P.shot('fisherman', 'medium', [0.5, 0.45], { ...P.CAM0, camera_x: 0.9 });
+  const IN_WATER = P.shot('fisherman', 'medium', [0.85, 0.45], { ...P.CAM0, camera_x: 0.6 });
   // moonrise (1.7–1.10): his back to the moon low behind the pier's end — he faces the shore, his shadow long down the
   // boards toward us; the Soul rises out of it a step before him, on his left, turned to him (its face seen from the
   // water's side: CAM_BACK; his from ours); the two of them as he chooses — his face, the Soul's turned to him
