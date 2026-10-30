@@ -98,10 +98,9 @@ function film(scene) {
     linen: false, shells: false });
   const WIDE_SHORE = { ...P.CAM0, ...VIEW.shore };
   // the shore's nearer cameras, each its own place on the sand or the bank (the operator would film them from the land,
-  // the bank in its way): by the hut and the water's edge; by the widow's boat; low over her on the sand; up on the
+  // the bank in its way): by the hut and the water's edge; low over her on the sand; up on the
   // bank by the field's edge
   const SHORE_HUT = { ...P.CAM0, camera_x: 5.0, camera_z: 0.6, camera_yaw: 255 };
-  const SHORE_WIDOW = { ...P.CAM0, camera_x: 4.8, camera_z: 0.4, camera_yaw: 240, camera_look: 0.03 };
   const SHORE_SAND = { ...P.CAM0, camera_x: 3.3, camera_z: 1.3, camera_yaw: 262, camera_look: 0.14 };
   // the widow and him at the hut, across the view from each other, both half turned to it (4.4): from the sand before
   // them (an operator's shot here would film from the sea's side, the scene's own view)
