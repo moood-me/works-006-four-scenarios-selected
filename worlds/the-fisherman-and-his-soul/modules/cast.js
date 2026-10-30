@@ -174,10 +174,11 @@ function bundles(F) {
   F.ball(hang, [F.side('Hips'), [0, 1, 0], fc], [0.13 * m, 0.12 * m, 0.1 * m], CLOTH, 10, 2.4);
   F.ball(add(F.P('Spine2'), mul(fc, -0.17 * m)), [F.side('Chest'), F.up('Chest'), fc], [0.19 * m, 0.17 * m, 0.1 * m], CANVAS, 10, 2.6);
 }
-// an old man's grey beard: full and rounded under the chin, of his hair's colour
+// an old man's grey beard: hanging from under the mouth down over the chin, of his hair's colour — the mouth above it
+// (2026-10-30: one ball over the lower face read as a mask)
 function beard(F) {
   const h = F.head;
-  F.ball(h.on([0, -0.62, 0.62], 1.0), h.axes, [h.r * 0.58, h.r * 0.62, h.r * 0.42], F.colors.hair, h.sides);
+  F.ball(h.on([0, -1.0, 0.5], 1.0), h.axes, [h.r * 0.5, h.r * 0.5, h.r * 0.36], F.colors.hair, h.sides);
 }
 // a girl's ribbon: a bow at the back of her head in the accent's colour, an end of it hanging
 function ribbon(F) {
@@ -306,7 +307,7 @@ return {
     // (white hair and a white beard: his years seen at once, not a white cap)
     fisherman_old: { kind: 'shapes', style: 'bay', who: 'man', garment: 'tunic', hair: 'short', barefoot: 'both', parts: ['beard'],
       body: FISHER_BODY,
-      colors: { skin: '#c4977a', hair: '#e6e3dc', top: '#e2d8c4', bottom: '#4f6372' } },
+      colors: { skin: '#c4977a', hair: '#d2cec4', top: '#e2d8c4', bottom: '#4f6372' } },
     // the girl who dances barefoot on the pier at the feast (1.3): fifteen or so, slight, a light linen dress, brown hair
     // long and loose, a red ribbon in it
     girl: { kind: 'shapes', style: 'bay', who: 'woman', garment: 'dress', hair: 'long', barefoot: 'both', parts: ['ribbon'],
