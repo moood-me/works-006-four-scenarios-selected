@@ -115,6 +115,9 @@ function film(scene) {
   // nearer the boards, the scene's own view
   const CAM_BACK = { ...P.CAM0, camera_x: -0.4, camera_z: 5.7, camera_yaw: 195, camera_h: 0.45 };
   const CAM_NEAR = { ...P.CAM0, camera_x: 0.2, camera_z: 1.6 };
+  // him in the water by the pier's end, waist up, from a little right of our line: on our line the lantern's post stood
+  // between, at the lens (two pale bands across the frame's left)
+  const IN_WATER = P.shot('fisherman', 'medium', [0.5, 0.45], { ...P.CAM0, camera_x: 0.9 });
   // moonrise (1.7–1.10): his back to the moon low behind the pier's end — he faces the shore, his shadow long down the
   // boards toward us; the Soul rises out of it a step before him, on his left, turned to him (its face seen from the
   // water's side: CAM_BACK; his from ours); the two of them as he chooses — his face, the Soul's turned to him
@@ -129,11 +132,11 @@ function film(scene) {
   // while the Soul speaks long (its words are the game's, said meanwhile): his face in the water as he listens, then its
   // again, then his
   const listening = async s => {
-    await P.cut(s, P.shot('fisherman', 'medium', [0.5, 0.45]));
+    await P.cut(s, IN_WATER);
     await s.wait(6);
     await P.cut(s, SPEAKS);
     await s.wait(7);
-    await P.cut(s, P.shot('fisherman', 'medium', [0.5, 0.45]));
+    await P.cut(s, IN_WATER);
     await s.wait(4);
   };
   // crouched at his heels with the knife (М3, М6): all of him, the boards at his feet, his shadow's edge, the knife in
@@ -445,7 +448,7 @@ function film(scene) {
         if (s.get('song')) s.move('under_light', 0.6, { over: 2 });
         await P.tell(s, 'third_stone:stone', 3);
         // and back to him in the water: his face as he chooses
-        P.frame(s, P.shot('fisherman', 'medium', [0.5, 0.45]), 2.5);
+        P.frame(s, IN_WATER, 2.5);
         await s.wait(2.5);
       },
     },
@@ -464,7 +467,7 @@ function film(scene) {
         await P.go(s, 'fisherman', [PLACES.fisherman.end.at], 200);
         await P.tell(s, 'go_day:up', 1);
         // the Soul gives him the lantern and steps into his shadow
-        P.frame(s, P.shot('fisherman', 'medium', [0.5, 0.45]), 1.5);
+        P.frame(s, IN_WATER, 1.5);
         s.set('soul_with', null);
         s.set('fisherman_with', ['lantern']);
         await P.go(s, 'soul', [PLACES.fisherman.end.at]);
@@ -479,7 +482,7 @@ function film(scene) {
         s.set('mermaid_here', false);
         await P.tell(s, 'go_day:her', 0.5);
         // he turns to the water; then goes off up the pier, almost running
-        await P.cut(s, P.shot('fisherman', 'medium', [0.5, 0.45]));
+        await P.cut(s, IN_WATER);
         await him.turn(40);
         await P.tell(s, 'go_day:turn', 2);
         P.frame(s, P.CAM0, 2);
@@ -491,9 +494,9 @@ function film(scene) {
     stay_day: {
       after: 'third_stone',
       from: () => ({ ...SEA('dawn'), ...NONE, knife: 'post', lantern_at: 'none', ...at('soul', 'end'), soul_with: ['lantern'], ...at('fisherman', 'shallows'),
-        mermaid_here: false, ...P.shot('fisherman', 'medium', [0.5, 0.45]) }),
+        mermaid_here: false, ...IN_WATER }),
       run: async s => {
-        P.open(s, P.shot('fisherman', 'medium', [0.5, 0.45]));
+        P.open(s, IN_WATER);
         // he turns to the water; the Soul answers (its words on its face)
         await s.person('fisherman').turn(40);
         await P.cut(s, SPEAKS);
@@ -534,16 +537,16 @@ function film(scene) {
         if (s.get('song')) s.move('under_light', 0.6, { over: 2 });
         await P.tell(s, 'fourth_stone:stone', 3);
         // and back to him: his face as he chooses
-        P.frame(s, P.shot('fisherman', 'medium', [0.5, 0.45]), 2.5);
+        P.frame(s, IN_WATER, 2.5);
         await s.wait(2.5);
       },
     },
     late_go: {
       after: 'fourth_stone',
       from: () => ({ ...SEA('dawn'), ...NONE, knife: 'post', lantern_at: 'none', ...at('soul', 'end'), soul_with: ['lantern', 'cup'],
-        ...at('fisherman', 'shallows'), mermaid_here: false, ...P.shot('fisherman', 'medium', [0.5, 0.45]) }),
+        ...at('fisherman', 'shallows'), mermaid_here: false, ...IN_WATER }),
       run: async s => {
-        P.open(s, P.shot('fisherman', 'medium', [0.5, 0.45]));
+        P.open(s, IN_WATER);
         const him = s.person('fisherman'), soul = s.person('soul');
         // up out of the water onto the boards, wet, to the post
         P.frame(s, P.CAM0, 2);
@@ -575,7 +578,7 @@ function film(scene) {
         s.set('mermaid_here', false);
         await P.tell(s, 'late_go:her', 0.5);
         // he speaks to the water
-        await P.cut(s, P.shot('fisherman', 'medium', [0.5, 0.45]));
+        await P.cut(s, IN_WATER);
         him.look(STONE_IN.concat([0]));
         await P.tell(s, 'late_go:water', 3);
       },
@@ -583,9 +586,9 @@ function film(scene) {
     turn_away: {
       after: 'fourth_stone',
       from: () => ({ ...SEA('dawn'), ...NONE, knife: 'post', lantern_at: 'none', ...at('soul', 'end'), soul_with: ['lantern', 'cup'],
-        ...at('fisherman', 'shallows'), mermaid_here: false, ...P.shot('fisherman', 'medium', [0.5, 0.45]) }),
+        ...at('fisherman', 'shallows'), mermaid_here: false, ...IN_WATER }),
       run: async s => {
-        P.open(s, P.shot('fisherman', 'medium', [0.5, 0.45]));
+        P.open(s, IN_WATER);
         // he turns his back to the pier, his hand on its post
         put(s, at('fisherman', 'post'));
         s.set('fisherman_turn', 45);
@@ -596,9 +599,9 @@ function film(scene) {
     sink: {
       after: 'turn_away',
       from: () => ({ ...SEA('dawn'), ...NONE, knife: 'post', lantern_at: 'none', ...at('soul', 'end'), soul_with: ['lantern', 'cup'],
-        ...at('fisherman', 'post'), fisherman_turn: 45, mermaid_here: false, ...P.shot('fisherman', 'medium', [0.5, 0.45]) }),
+        ...at('fisherman', 'post'), fisherman_turn: 45, mermaid_here: false, ...IN_WATER }),
       run: async s => {
-        P.open(s, { ...at('fisherman', 'post'), fisherman_turn: 45, ...P.shot('fisherman', 'medium', [0.5, 0.45]) });
+        P.open(s, { ...at('fisherman', 'post'), fisherman_turn: 45, ...IN_WATER });
         s.set('fisherman_reach', null);
         // he looks once at the pier (unless his fingers slipped), and goes under
         if (s.get('looked') !== false) {
