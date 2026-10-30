@@ -119,5 +119,5 @@ in the hull).
 - (third round, from a play in the browser) The boat did not hold together: its hull's skin was seen from outside only
   (a form is seen from its face's side) and lay across the boat. Now `hull_in` — the same skin with its face inward, the
   boat's inside (tarred wood, the ribs) — and both turned along the boat (`facing` 90): from the pier one sees a boat,
-  him standing in it. Not yet: the bow lantern still stands a little beyond the stem, in the water; moving the hull
-  along the boat (`distance`, `across`) turned out not to go where expected in two tries — left as it is.
+  him standing in it; the bow lantern brought onto the stem (`distance` −0.95: it stood in the water beyond it). The
+  floorboards still show a little past the stem.
