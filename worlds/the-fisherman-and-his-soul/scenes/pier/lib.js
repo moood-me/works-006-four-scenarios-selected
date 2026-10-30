@@ -51,7 +51,8 @@ const PLACES = {
   girl: { feast: { at: [-2.6, 2.2], turn: 60 } },
   woman_a: { feast: { at: [-3.05, 1.3], turn: 40 }, shore: { at: [2.0, -0.6], turn: 260 } },
   woman_b: { feast: { at: [-3.5, 1.15], turn: 50 }, shore: { at: [2.4, -0.2], turn: 250 } },
-  widow: { boat: { at: [-0.6, -3.3], turn: 70 }, sand: { at: [1.9, -0.3], turn: 250 }, away: { at: [8.5, 1.0], turn: 80 } },
+  // (talk: before him at the hut, on the hut's left as the shore is seen — across the view from him, both faces to it)
+  widow: { boat: { at: [-0.6, -3.3], turn: 70 }, sand: { at: [1.9, -0.3], turn: 250 }, talk: { at: [1.95, -4.1], turn: 340 }, away: { at: [8.5, 1.0], turn: 80 } },
   widow_girl: { boat: { at: [-0.2, -3.8], turn: 70 }, field: { at: [-3.6, -10.9], turn: 60 } },
   widow_boy: { boat: { at: [0.25, -3.1], turn: 70 }, end: { at: [-0.55, 4.45], turn: 150, on: [-0.55, 4.45, 2.55] }, field: { at: [-3.2, -11.2], turn: 60 } },
   witch: { shore: { at: [2.6, 0.1], turn: 270 }, end: { at: [-0.25, 4.55], turn: 150 } },
@@ -872,11 +873,13 @@ function film(scene) {
           await s.wait(2);
           await s.person('widow').do('shield');
         }
-        await P.go(s, 'widow', [PLACES.widow.sand.at], 300);
+        await P.go(s, 'widow', [PLACES.widow.talk.at], PLACES.widow.talk.turn);
         s.person('widow').look('fisherman');
         s.person('fisherman').look('widow');
-        // (the shore wide: the two of them, the children by the boat behind — near, she stood at the frame's edge)
-        P.frame(s, WIDE_SHORE, 2);
+        // (the two of them near, his face and hers: she stands across the view from him — 2026-10-30: from the sand she
+        // stood at the frame's edge, then far in the wide shore)
+        P.frame(s, P.shot('fisherman', 'full', [0.62, 0.5], WIDE_SHORE), 2);
+        await s.person('fisherman').turn(160);
         await P.tell(s, 'widow:say', 3);
         await P.tell(s, 'widow:boat', 3);
         // the children look at the net on the rail

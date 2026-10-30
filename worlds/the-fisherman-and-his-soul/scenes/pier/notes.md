@@ -68,7 +68,7 @@ what lies there).
 | `mermaid` | `pier` (by the pier's end, default), `stone` (to the shoulders by the stone), `sand` (on the sand — lying is a motion of the pieces), `found` (along him at his side, the Epilogue's morning) |
 | `girl` | `feast` |
 | `woman_a`, `woman_b` | `feast`, `shore` |
-| `widow` | `boat`, `sand`, `away` (gone along the shore toward the bridge, past the shore's view) |
+| `widow` | `boat`, `sand`, `talk` (before him at the hut, across the view from him: 4.4), `away` (gone along the shore toward the bridge, past the shore's view) |
 | `widow_girl`, `widow_boy` | `boat`, `field`; the boy also `end` (sat on the boards by the old Fisherman) |
 | `witch` | `shore`, `end` |
 | `priest` | `shore`, `end`, `post`, `mound` |
