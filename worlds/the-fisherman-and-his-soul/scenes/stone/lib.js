@@ -308,7 +308,9 @@ function film(scene) {
         s.set('haul', 0);
         s.set('net', 'over');
         await P.tell(s, 'boat_out:cast', 2);
-        P.frame(s, P.shot('fisherman', 'medium', [0.45, 0.42]), 2);
+        // in to the bow, as in the prologue: his hands, the rope and the net in the water — М7 is played there (2026-10-30:
+        // on him alone the rope was out of the frame and the player did not see what to pull)
+        P.frame(s, AT_BOW, 2);
         P.loop(s, 'fisherman', 'haul_net');
         await s.wait(2.5);
       },
