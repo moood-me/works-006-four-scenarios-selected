@@ -111,7 +111,7 @@ function film(scene) {
   const IN_NET = { mermaid_turn: 195 };
   const HOLD = { ...P.CAM0, camera_x: -1.2, camera_z: 3.4, camera_yaw: -2, camera_look: 0.3 };
   // nearer her as she wakes in the net (her face afraid): the same line, a step out from the pier's end
-  const WAKE = { ...P.CAM0, camera_x: -0.7, camera_z: 4.0, camera_yaw: -2, camera_look: 0.38 };
+  const WAKE = { ...P.CAM0, camera_x: -0.7, camera_z: 4.0, camera_yaw: -2, camera_look: 0.6 };
   const film = {
     // ── Prologue «Сеть» ──
     night: {
@@ -149,9 +149,8 @@ function film(scene) {
         // in the boat, his hands could not reach the net in the water — they hung at his back)
         s.move('heel', 0, { over: 1.5 });
         him.look('mermaid');
-        await P.go(s, 'fisherman', [PLACES.fisherman.bow.at], PLACES.fisherman.bow.turn);
-        s.set('fisherman_at', 'bow');
-        s.set('fisherman_placed', 'bow');
+        // (put there at once while the frame is on her: a walk in the boat leaves its floor)
+        for (const [k, v] of Object.entries(pose('bow', 'net'))) if (!k.startsWith('mermaid')) s.set(k, v);
         await him.do('kneel');
         P.loop(s, 'fisherman', 'kneel');
         him.reach({ r: 'net_over#knot' });

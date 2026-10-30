@@ -186,8 +186,8 @@ function film(scene) {
         s.set('girl_reach', { r: 'fisherman#hand_l' });
         await P.tell(s, 'danced:pull', 1.5);
         s.set('girl_reach', null);
-        // he dances, clumsily, and laughs; his shadow on the boards dances with him
-        P.frame(s, P.CAM0, 2);
+        // he dances, clumsily, and laughs; his shadow on the boards dances with him — on the same two-shot, she beside him
+        // (2026-10-30: the scene's own view left her words over empty boards and him at the frame's edge)
         him.mood('laugh');
         await him.do('clumsy_dance');
         await P.tell(s, 'danced:laugh', 2);
