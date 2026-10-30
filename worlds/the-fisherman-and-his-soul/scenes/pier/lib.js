@@ -343,8 +343,10 @@ function film(scene) {
         s.set('fisherman_here', true);
         s.person('fisherman').look('soul');
         await s.move('fisherman_e', PLACES.fisherman.shallows.at[2], { over: 2.5, ease: 'out' });
-        P.frame(s, P.shot('soul', 'medium', [0.35, 0.45]), 2);
-        await P.tell(s, 'come_out:up', 2);
+        // (from our side he is behind the lantern's post: the two of them as in the years after — the Soul's face, his)
+        await P.cut(s, SPEAKS);
+        await P.tell(s, 'come_out:up', 4);
+        await listening(s);
       },
     },
     law: {

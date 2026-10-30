@@ -133,7 +133,7 @@ behind the viewer's right shoulder, seen from neither view (checked in the shore
  "knife_ready": {"after":["shadow_rises","heart_cut","heart_come"],"tells":["knife_ready:end"],"seconds":4,"show":false},
  "cut": {"after":["knife_ready"],"tells":["cut:apart","cut:post"],"seconds":10,"show":false},
  "into_sea": {"after":["cut"],"tells":["into_sea:far","into_sea:under","into_sea:soul"],"seconds":18,"show":false},
- "come_out": {"after":[],"tells":["come_out:call","come_out:up"],"seconds":10,"show":false},
+ "come_out": {"after":[],"tells":["come_out:call","come_out:up"],"seconds":26,"show":false},
  "law": {"after":["come_out"],"tells":["law:up"],"seconds":4,"show":false},
  "sit_edge": {"after":["law"],"tells":["sit_edge:sat","sit_edge:laugh","sit_edge:back"],"seconds":16,"show":false},
  "to_song": {"after":["law"],"tells":["to_song:under","to_song:out"],"seconds":12,"show":false},
