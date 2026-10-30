@@ -103,6 +103,9 @@ function film(scene) {
   // near the two on the sand by the water, on the wide view's own line (the water and the wave on the right): his
   // face, her hand in his, the sea coming — the choice and «Holding Her» (М8) are played here
   const SHORE_NEAR = { ...P.CAM0, camera_x: 3.8, camera_z: 1.1, camera_yaw: 254, camera_look: 0.3 };
+  // the kiss: on her, near, from the land's side — her face and his bent over it (from the sea's side her tail filled
+  // the frame and her face was the top of her head)
+  const KISS = P.shot('mermaid', 'medium', [0.5, 0.55], WIDE_SHORE);
   const put = (s, o) => { for (const [k, v] of Object.entries(o)) s.set(k, v); };
   // an object without some of its keys (a piece's `from` that leaves a key to the game)
   const without = (o, ...ks) => Object.fromEntries(Object.entries(o).filter(([k]) => !ks.includes(k)));
@@ -942,7 +945,7 @@ function film(scene) {
         await him.do('kneel');
         // near the two of them as he bends to her and kisses her, and says what he says (the game's, after): his face,
         // hers (2026-10-30: it was said on a side shot from afar)
-        await P.cut(s, SHORE_NEAR);
+        await P.cut(s, KISS);
         await him.do('bend_over');
         await P.tell(s, 'kneel_kiss:kiss', 2);
       },
