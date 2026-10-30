@@ -229,7 +229,8 @@ function film(scene) {
       run: async s => {
         s.set('fisherman_here', false);
         // the Soul comes off the bridge to the potter at his door
-        await P.go(s, 'soul', [[-0.8, 12.2], PLACES.soul.door.at], 90);
+        // (it stops a step short of the door, to the potter's left: between us and him it hid his face)
+        await P.go(s, 'soul', [[-0.8, 12.2], [0.95, 7.15]], 60);
         s.person('soul').look('potter');
         s.set('potter_look', 'soul');
         P.frame(s, P.shot('potter', 'medium', [0.6, 0.42]), 2);
