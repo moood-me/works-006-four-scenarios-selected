@@ -98,6 +98,11 @@ function film(scene) {
   // his seat on the thwart (in the boat's frame, as the hull is laid: the thwart 0.55 m sternward, 0.3 over the water —
   // 0.2 behind its middle: the cast's `seated` puts the hips that far before the point)
   const THWART = { on: 'boat', at: [0, 0.75, 0.3] };
+  // the prologue's night (П.1–П.2): the bay from the pier's end, the boat whole across the moon's path; then the bow near
+  // — his hands on the rope, the net over the bow in the water — the camera's own keys (an operator on one standing in
+  // the boat comes too near, to his knees)
+  const SEA_WIDE = { ...P.CAM0, camera_x: 0.5, camera_z: 0.4, camera_yaw: -28, camera_look: 0.04 };
+  const AT_BOW = { ...P.CAM0, camera_x: -0.9, camera_z: 3.0, camera_yaw: -22, camera_look: 0.26 };
   // in his net (П.3–П.4): she turned to us, more than to him (her face seen from our side, not her hair); the two
   // framed together as he holds the net and chooses — from the pier's end, the camera's own keys: an operator on someone
   // in the water stands its eye over the bay's floor, at the water's face, under the net
@@ -106,15 +111,16 @@ function film(scene) {
   const film = {
     // ── Prologue «Сеть» ──
     night: {
-      from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, ...pose('boat', 'stone', false), ...DO0, ...P.CAM0, camera_x: 0.6, camera_z: -1.2, camera_look: -0.04 }),
+      from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, ...pose('boat', 'stone', false), ...DO0, ...SEA_WIDE }),
       run: async s => {
+        // from the pier's end across the moon's path to the boat, whole, broadside; then in to the bow, where his hands
+        // and the rope and the net in the water are (М1 is played there)
         await s.wait(1);
-        await s.all(s.move('camera_z', 1.2, { over: 6 }), s.move('camera_x', -0.6, { over: 6 }));
+        await s.all(...['camera_x', 'camera_z', 'camera_yaw', 'camera_look'].map(k => s.move(k, AT_BOW[k], { over: 6 })));
         // he casts the net: over the bow, a length out on the water
         s.set('haul', 0);
         s.set('net', 'over');
         await P.tell(s, 'night:cast', 3);
-        P.frame(s, P.shot('fisherman', 'medium', [0.45, 0.42]), 2);
         P.loop(s, 'fisherman', 'haul_net');
         s.move('heel', 0.4, { over: 2 });
         await P.tell(s, 'night:rope', 3);
