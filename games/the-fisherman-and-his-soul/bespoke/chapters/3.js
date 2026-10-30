@@ -24,7 +24,7 @@ export default {
     'Without Him: The House by the Bridge'],
   choices: [
     { id: 'wait', title: tr('Wait for the dancer'), options: [{ id: 'wait', label: tr('“I’ll wait till tomorrow.”'), came: tr('In the night your hands took the cup.') }, { id: 'back', label: tr('“No. Back, now.”'), came: tr('You never learned whether there was a dancer.') }] },
-    { id: 'cup', title: tr('The cup'), options: [{ id: 'confess', label: tr('“It was I who took it.”'), came: tr('The little girl hid behind her father.') }, { id: 'quiet', label: tr('Put it back quietly'), came: tr('Nobody knows. Only the little girl.') }] },
+    { id: 'cup', title: tr('The cup'), options: [{ id: 'confess', label: tr('“It was I who took it.”'), came: tr('The little girl hid behind her father.') }, { id: 'quiet', label: tr('Put it back quietly'), came: tr('The cup was back on the shelf. The little girl was watching.') }] },
     { id: 'rise', title: tr('His lantern over the bridge'), options: [{ id: 'rose', label: tr('Rose to look'), came: tr('That evening she sang no more.') }, { id: 'stayed', label: tr('Did not lift his head'), came: tr('She laid her palm over your eyes and sang on.') }] },
     { id: 'last', title: tr('The last call'), weight: '⚑', options: [{ id: 'go', label: tr('“I’ll go. I’ll give the cup back.”'), came: tr('She saw, and went under.') }, { id: 'no', label: tr('“No.”'), came: tr('The Soul will not come again.') }] },
     { id: 'giveback', title: tr('The cup, at the potter’s door'), options: [{ id: 'confess', label: tr('“It was I who took it.”'), came: tr('“A thief — and came.” He was slow to shut the door.') }, { id: 'found', label: tr('“I found it by the bridge.”'), came: tr('“Found it, then.” The door shut at once.') }] },
@@ -230,7 +230,7 @@ export default {
       await piece(g, 'door_potter', { open: () => g.say('potter', 'You!..') }, () => {
         on(g, 'door_potter:open', () => g.sound.door({ open: true }));
         return g.scene('bridge', { beat: 'door_potter', here: ['fisherman', 'potter', 'daughter'], moods: { fisherman: 'neutral', potter: 'angry', daughter: 'afraid' },
-          where: tr('A day’s walk from the bay; the Soul is in him.') }, { beds: { market: 0.2, sea: 0.12 } });
+          where: tr('The town by the bridge, the same day; the Soul is in him.') }, { beds: { market: 0.2, sea: 0.12 } });
       });
       const b = await g.choose('giveback', { fisherman: [
         { id: 'confess', label: tr('“It was I who took it.”') },

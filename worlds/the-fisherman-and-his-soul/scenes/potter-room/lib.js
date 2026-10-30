@@ -33,6 +33,8 @@ function wall(g, seed, left, right, top) {
 // the door, by the hearth, by the bed, kneeling by the daughter's pallet; the daughter on her pallet, behind her father
 // (the seat point 0.2 m behind the seat's middle: the cast's `seated` puts the hips that far before it)
 const SEAT = [-0.5, 4.37, 0.45];
+// where he stands, asleep, to take the cup (3.4): by the shelf's near end, turned half to it and half to us
+const AT_CUP = [0.15, 4.45];
 const PLACES = {
   fisherman: {
     bench: { at: [-0.5, 4.17], turn: 180, on: SEAT },
@@ -94,7 +96,7 @@ function film(scene) {
       },
     },
     sleepwalk: {
-      from: () => ({ fire: 0.25, morning: 0, cup_at: 'shelf', ...DO0, ...ASLEEP, fisherman_with: ['bag'], ...P.shot('fisherman', 'medium', [0.5, 0.5]) }),
+      from: () => ({ fire: 0.25, morning: 0, cup_at: 'shelf', ...DO0, ...ASLEEP, fisherman_with: ['bag'], ...P.CAM0 }),
       run: async s => {
         const him = s.person('fisherman');
         await s.wait(2);
@@ -102,8 +104,9 @@ function film(scene) {
         s.set('fisherman_on', null);
         him.do('stand', { loop: true });
         await P.tell(s, 'sleepwalk:up', 1);
-        P.frame(s, P.CAM0, 2);
-        await P.go(s, 'fisherman', [PLACES.fisherman.shelf.at], 0);
+        // (the room whole: he goes to the shelf's near end, half turned to us, and his hand takes the cup — seen)
+        await P.go(s, 'fisherman', [AT_CUP], 35);
+        P.frame(s, P.shot('fisherman', 'medium', [0.42, 0.45]), 1.5);
         him.reach({ r: 'shelf#cup' });
         await s.wait(1.2);
         s.set('cup_at', 'hand');
@@ -120,7 +123,8 @@ function film(scene) {
         P.loop(s, 'fisherman', 'lie_bench');
         await P.tell(s, 'sleepwalk:down', 1);
         // the daughter half opens her eyes, and shuts them
-        await P.cut(s, P.shot('daughter', 'close', [0.5, 0.45]));
+        // (from above her, as one bends to a sleeping child: at her level the lens lay along the pallet's edge)
+        await P.cut(s, { ...P.shot('daughter', 'medium', [0.5, 0.55]), camera_h: 0.9 });
         s.person('daughter').mood('tired');
         await P.tell(s, 'sleepwalk:girl', 2);
         s.person('daughter').mood('eyes_closed');

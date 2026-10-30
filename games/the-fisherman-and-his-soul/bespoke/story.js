@@ -94,10 +94,10 @@ export const SILENT = ['velvet', 'daughter', 'woman_a', 'woman_b', 'widow_girl',
 // moved by as much as that choice sets. They are read by one threshold everywhere: the Soul 0–2 longs, 3–4 has
 // hardened; the Song 2–3 sounds, 0–1 is silent.
 export const SCALES = {
-  soul: { start: 0, min: 0, max: 4, at: 3, name: tr('The Soul'), up: tr('The Soul grows harder'), down: tr('The Soul longs'),
+  soul: { start: 0, min: 0, max: 4, at: 3, name: tr('The Soul'), up: tr('The Soul has grown a little harder'), down: tr('The Soul has grown a little softer'),
     sides: [tr('longs for him'), tr('has grown hard')],
     rule: tr('The Soul — what the world without a heart has taught her: whether she still longs for him, or has grown hard.') },
-  song: { start: 0, min: 0, max: 3, at: 2, name: tr('Her song'), up: tr('Her song sounds'), down: tr('Her song grows quiet'),
+  song: { start: 0, min: 0, max: 3, at: 2, name: tr('Her song'), up: tr('Her song has come a little nearer to him'), down: tr('Her song has grown a little quieter'),
     sides: [tr('silent'), tr('sounds')],
     rule: tr('Her song — the song she sings to him: whether it sounds, or has fallen silent. Listen for it.') },
 };
@@ -375,9 +375,10 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       if (gone() || !delta) return;
       const S = SCALES[name], was = state.scales[name];
       state.scales[name] = Math.min(S.max, Math.max(S.min, was + delta));
-      const moved = state.scales[name] - was;
+      const moved = state.scales[name] - was, first = state.shown[name] !== true;
       g.gauge(name);
-      if (unseen() || !moved) return;
+      // (its first setting is no move: the gauge and its rule say where it stands)
+      if (unseen() || !moved || first) return;
       view.toast(moved > 0 ? S.up : S.down, 'scale');
       view.gauge(state);
     },
