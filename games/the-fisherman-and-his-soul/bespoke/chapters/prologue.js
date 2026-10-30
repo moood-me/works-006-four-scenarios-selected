@@ -69,10 +69,9 @@ export default {
       on(g, 'evenings:sing', () => g.beds({ sea: 0.35, song: 0.75 }));
       on(g, 'evenings:empty', () => { g.sound.hush('song', 1.5); g.beds({ sea: 0.4 }); });
       await g.scene('stone', { beat: 'evenings', here: ['fisherman', 'mermaid'], moods: { fisherman: 'smile', mermaid: 'smile' }, keys: { net_way: how } });
-      await g.beat('evenings');
-      await piece(g, 'market', {
-        end: () => g.say('narrator', 'And he had more fish than all the fishermen of the bay; but he looked only at the stone'),
-      }, () => {
+      // (said over the stone and its evenings: «he looked only at the stone» — over the market it had no stone to look at)
+      await piece(g, 'evenings', { end: () => g.say('narrator', 'And he had more fish than all the fishermen of the bay; but he looked only at the stone') });
+      await piece(g, 'market', {}, () => {
         on(g, 'market:give', () => g.sound.coins());
         return g.scene('bridge', { beat: 'market', here: ['fisherman', 'potter', 'daughter'], moods: { fisherman: 'neutral', potter: 'smile' } },
           { beds: { market: 0.35, sea: 0.12 } });
