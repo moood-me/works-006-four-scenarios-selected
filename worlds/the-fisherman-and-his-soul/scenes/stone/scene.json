@@ -551,7 +551,8 @@
       "name": "The boat's hull",
       "on": "boat",
       "across": 0,
-      "distance": -1.2,
+      "distance": 0,
+      "facing": 90,
       "elevation": 0,
       "shadow": true,
       "box": [
@@ -566,7 +567,8 @@
       "name": "The boat's hull, inside",
       "on": "boat",
       "across": 0,
-      "distance": -1.2,
+      "distance": 0,
+      "facing": 90,
       "elevation": 0,
       "box": [
         -1.1,
@@ -580,7 +582,7 @@
       "name": "The boat's stern board",
       "on": "boat",
       "across": 0,
-      "distance": 0.4,
+      "distance": 1.6,
       "elevation": 0,
       "facing": 0,
       "box": [
