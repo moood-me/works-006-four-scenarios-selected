@@ -267,7 +267,7 @@ return {
       colors: { skin: '#9ba4ba', hair: '#171c28', top: '#2e3548', bottom: '#1f2433' } },
     // the Mermaid: small and slight, pearl-pale, her hair wet gold to the waist; in the water to the shoulders or the
     // waist, never ashore (below the water nothing of her is seen)
-    mermaid: { kind: 'shapes', style: 'bay', who: 'woman', garment: 'none', hair: 'long',
+    mermaid: { kind: 'shapes', style: 'bay_tail', who: 'woman', garment: 'none', hair: 'long',
       body: { height: 0.88, thick: 0.78, shoulders: 0.84, neck: 1.08 },
       colors: { skin: '#ecd9c9', hair: '#d6a94a', top: '#ecd9c9', bottom: '#8fb7b0' } },
     // the Witch of the well in the fir wood: tall, a long loose fall of red hair, a plain moss-green dress, barefoot
@@ -338,7 +338,11 @@ return {
   shapes: {
     // the world's style: the engine's flat geometry — straight edges, clean colours under the scene's light — with a
     // simple face (eyes, brows, a mouth) so that faces read
-    styles: { bay: { from: 'flat', name: 'The Bay', line: 0.8, face: 'simple' } },
+    styles: { bay: { from: 'flat', name: 'The Bay', line: 0.8, face: 'simple' },
+      // the Mermaid's: the same, her legs thin to nothing below the hips — her tail (the part `tail`) is all there is of
+      // them, and no leg shows through it as she sits on the stone, her knees bent
+      bay_tail: { from: 'bay', name: 'The Bay, a tail', feet: 'tail' } },
+    legs: { tail: [[0, 0.07], [1, 0.02], [2, 0.004], [3, 0.004]] },
     // a frock coat: fitted, its skirts to the knees, the sleeves of its cloth
     // a cassock: plain, close at the shoulders, its skirts straight down to the ankles, the sleeves of its cloth
     garments: {

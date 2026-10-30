@@ -142,7 +142,7 @@ function film(scene) {
   };
   // crouched at his heels with the knife (М3, М6): all of him, the boards at his feet, his shadow's edge, the knife in
   // his hand (nearer, the Soul pleading beside him would fill the frame)
-  const KNEEL = P.shot('fisherman', 'full', [0.62, 0.55]);
+  const KNEEL = P.shot('fisherman', 'full', [0.6, 0.34]);
   const film = {
     // ── Chapter I ──
     feast: {
