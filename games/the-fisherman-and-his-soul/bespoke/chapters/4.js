@@ -49,10 +49,11 @@ export default {
     // 4.2: the knife
     async g => {
       if (off(g)) return;
-      const f = facts(g.state);
+      const f = facts(g.state), light = back(f);
       await piece(g, 'knife_rust', { out: () => g.say('fisherman', 'I’ll cut you off again') }, async () => {
         on(g, 'knife_rust:out', () => g.sound.wrench());
-        await g.scene('pier', { beat: 'knife_rust', here: ['fisherman'], moods: { fisherman: 'angry' } });
+        // (the hour of the call goes on)
+        await g.scene('pier', { beat: 'knife_rust', here: ['fisherman'], moods: { fisherman: 'angry' }, keys: { light, mist: light === 'morning' ? 1 : 0 } });
         if (f.road === 'went') {
           await g.say('fisherman', 'Come out. You promised to come out on the shore');
           await g.say('soul', 'I promised. I lied');

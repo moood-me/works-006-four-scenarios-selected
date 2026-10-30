@@ -19,6 +19,8 @@ g.fill();
 g.beginPath();
 g.ellipse(d + 0.28, -1.4, 0.08, 0.08, 0, 0, Math.PI * 2);
 g.fill();
+// (gone from it while it is away: `cup_away`)
+if (!e.state.cup_away) {
 g.fillStyle = '#e4e6ea';
 g.beginPath();
 g.moveTo(d - 0.06, -1.5);
@@ -32,6 +34,7 @@ g.lineTo(d - 0.012, -1.39);
 g.quadraticCurveTo(d - 0.05, -1.4, d - 0.06, -1.5);
 g.closePath();
 g.fill();
+}
 e.at(d, -1.42, 'cup');
 // the floor's darker boards; the hearth's glow low in the room
 g.fillStyle = 'rgba(90, 50, 30, 0.6)';

@@ -240,7 +240,7 @@ function film(scene) {
         soul.reach(null);
         await P.tell(s, 'soul_theft:cup', 1);
         // the potter wakes in the lantern's light, sits up, sees the face
-        P.frame(s, P.shot('potter', 'close', [0.5, 0.42]), 1.5);
+        P.frame(s, { ...P.CAM0, camera_z: 0.8 }, 1.5);
         s.set('potter_on', [1.95, 3.6, 0.45]);
         s.set('potter_turn', 270);
         P.loop(s, 'potter', 'seated');

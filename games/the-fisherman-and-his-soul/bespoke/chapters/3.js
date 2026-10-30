@@ -183,7 +183,7 @@ export default {
       }, () => g.scene('room', { beat: 'soul_theft', here: ['soul', 'potter', 'daughter'], moods: { soul: f.hard ? 'angry' : 'sad', potter: 'eyes_closed', daughter: 'eyes_closed' },
         keys: { hard: f.hard } }, { beds: { fire: 0.2 } }));
       await piece(g, 'rumour', { say: () => g.say('women', 'The fisherman from the bay is a thief', 'woman_a') },
-        () => g.scene('bridge', { beat: 'rumour', here: ['potter', 'woman_a', 'woman_b'], moods: { potter: 'sad' } }, { beds: { market: 0.35, sea: 0.1 } }));
+        () => g.scene('bridge', { beat: 'rumour', here: ['potter', 'woman_a', 'woman_b'], moods: { potter: 'sad' }, keys: { cup_away: true } }, { beds: { market: 0.35, sea: 0.1 } }));
       g.mark('thief', true, tr('By morning the whole market knows: the fisherman from the bay is a thief.'));
     },
     // 3С.3–3С.4: the fourth year; ⚑ the last call
@@ -229,7 +229,7 @@ export default {
       if (went(g) || g.state.choices.last !== 'go') return;
       await piece(g, 'door_potter', { open: () => g.say('potter', 'You!..') }, () => {
         on(g, 'door_potter:open', () => g.sound.door({ open: true }));
-        return g.scene('bridge', { beat: 'door_potter', here: ['fisherman', 'potter', 'daughter'], moods: { fisherman: 'neutral', potter: 'angry', daughter: 'afraid' },
+        return g.scene('bridge', { beat: 'door_potter', here: ['fisherman', 'potter', 'daughter'], moods: { fisherman: 'neutral', potter: 'angry', daughter: 'afraid' }, keys: { cup_away: true },
           where: tr('The town by the bridge, the same day; the Soul is in him.') }, { beds: { market: 0.2, sea: 0.12 } });
       });
       const b = await g.choose('giveback', { fisherman: [

@@ -1119,6 +1119,7 @@
     }
   ],
   "states": {
+    "cup_away": { "type": "boolean", "means": "the game's: the silver cup is away from the potter's shelf (stolen; not yet given back) — not seen in his window" },
     "time": {
       "values": [
         "night",
