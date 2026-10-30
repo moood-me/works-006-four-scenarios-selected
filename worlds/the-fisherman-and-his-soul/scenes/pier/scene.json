@@ -1456,5 +1456,85 @@
       ],
       "means": "a piece's variant (dawn_shore): the catch he carries up (1 full, 0.5 half — М7's miss); the sack on his shoulder is the cast's net_catch"
     }
+  },
+  "music": {
+    "bpm": 64,
+    "density": 0.25,
+    "brightness": 0.4,
+    "scale": "D_FLAT_MAJOR_B_FLAT_MINOR",
+    "prompts": [
+      {
+        "text": "slow harp arpeggios over the night sea, a fairy tale told evenly, moonlight on the water",
+        "weight": 1.2
+      },
+      {
+        "text": "a wordless female voice singing far out over the water, a sea-girl's song, tender and strange",
+        "weight": 0.6
+      },
+      {
+        "text": "solo cello, long low phrases, a young fisherman's longing, restrained and warm",
+        "weight": 0.5
+      },
+      {
+        "text": "glassy celesta and glass harmonica, the moon's path on a dark bay, fragile and luminous",
+        "weight": 0
+      },
+      {
+        "text": "slow sea swell under a soft string pad, waves against a wooden pier at night",
+        "weight": 0.8
+      },
+      {
+        "text": "deep underwater ambient, muffled and slow, light falling through green water, sand and weed swaying",
+        "weight": 0
+      },
+      {
+        "text": "low wordless male choir humming slow plainchant in a stone church, candlelight and stern grace",
+        "weight": 0
+      },
+      {
+        "text": "a small harmonium holding plain hymn chords in a white room on a hill, a door open on the night",
+        "weight": 0
+      },
+      {
+        "text": "dark frame drum and a low drone under a full moon in a fir wood, a witch's slow circle dance",
+        "weight": 0
+      },
+      {
+        "text": "a fiddle and a wooden pipe playing a folk dance far off on a town square, lanterns, festive and hollow",
+        "weight": 0
+      },
+      {
+        "text": "the crackle of a hearth in a low room under a sparse plucked lute, quiet and close",
+        "weight": 0
+      },
+      {
+        "text": "high thin violin harmonics like a soul without a heart, cold and searching",
+        "weight": 0
+      },
+      {
+        "text": "a slow tambourine shimmer and a sinuous reed melody, a dancer's bare feet, seductive and dangerous",
+        "weight": 0
+      },
+      {
+        "text": "sparse felt piano, single notes with long silences, a parable spoken evenly",
+        "weight": 0
+      },
+      {
+        "text": "soft ambient pads and a faint bell, the lights of a town over a dark river at night",
+        "weight": 0
+      },
+      {
+        "text": "low brass chorale, very slow, a sea that blesses no one, grave and bright sadness",
+        "weight": 0
+      },
+      {
+        "text": "wind through firs at midnight, creaking branches, sparse and cold",
+        "weight": 0
+      },
+      {
+        "text": "a slow lullaby on a music box sinking under water, half heard",
+        "weight": 0
+      }
+    ]
   }
 }
