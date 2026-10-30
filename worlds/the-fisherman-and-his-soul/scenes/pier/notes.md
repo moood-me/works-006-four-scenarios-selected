@@ -231,3 +231,4 @@ After a reviewer's renders: what the player must see was not in the frame. Rende
 - (seventh round) `sea_comes`: the widow and the children run off along the shore toward the pier's root and are gone
   (they ran toward the field where he falls, and the widow stayed). `post_knife` holds under the ending's title
   first, then the pull, and he steps back from the post toward the shore with the knife.
+- (seventh round) `danced`: the girl's words and his dance on `DANCE` (the camera's own keys left of the start).

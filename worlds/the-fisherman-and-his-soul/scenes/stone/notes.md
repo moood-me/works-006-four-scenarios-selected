@@ -125,3 +125,5 @@ in the hull).
   net's shot) — «Do you want nothing?» is said in the frame.
 - (sixth round) `net_over#knot` — by her left hand at the floats (it was over her face, where М1б's sign is her face
   growing quiet); `laugh_tail` on a medium shot.
+- (seventh round) `in_net`: `WAKE` — nearer her as she wakes; then he kneels where he stands in the boat, bent over
+  the net, his hand on its edge by hers (`go_word`, `go_free` begin kneeling). Moved toward the bow he was not seen.
