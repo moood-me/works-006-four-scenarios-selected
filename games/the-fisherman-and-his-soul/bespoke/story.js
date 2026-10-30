@@ -98,8 +98,8 @@ export const SCALES = {
     sides: [tr('longs for him'), tr('has grown hard')],
     rule: tr('The Soul — what the world without a heart has taught her: whether she still longs for him, or has grown hard.') },
   song: { start: 0, min: 0, max: 3, at: 2, name: tr('Her song'), up: tr('Her song has come a little nearer to him'), down: tr('Her song has grown a little quieter'),
-    sides: [tr('silent'), tr('sounds')],
-    rule: tr('Her song — the song she sings to him: whether it sounds, or has fallen silent. Listen for it.') },
+    sides: [tr('not to him'), tr('to him')],
+    rule: tr('Her song — the one she sings to him, not to the fish: whether it is his, or not. Listen for it.') },
 };
 export const ORDER = ['soul', 'song'];
 

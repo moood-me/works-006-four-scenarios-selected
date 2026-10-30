@@ -87,9 +87,11 @@ function film(scene) {
       run: async s => {
         P.loop(s, 'priest', 'preach');
         await s.wait(3);
+        // the flowers held while the story of them is told (the narrator's three years, the Priest's question)
+        await P.tell(s, 'feast_flowers:ask', 0.5);
         P.frame(s, P.shot('flowers_altar', 'close', [0.5, 0.5]), 2);
-        await P.tell(s, 'feast_flowers:ask', 4);
-        P.frame(s, P.shot('priest', 'close', [0.45, 0.4]), 2);
+        await s.wait(10);
+        P.frame(s, P.shot('priest', 'medium', [0.45, 0.42]), 2);
         await s.wait(3);
       },
     },

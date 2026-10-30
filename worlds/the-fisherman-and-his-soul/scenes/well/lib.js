@@ -182,7 +182,8 @@ function film(scene) {
         await P.tell(s, 'demand:promise', 3);
         // she leans to him and whispers
         await P.go(s, 'witch', [[-0.4, 6.75]], 255);
-        P.frame(s, P.shot('fisherman', 'medium', [0.6, 0.42]), 1.5);
+        // (the two of them, and the knife at his feet, seen)
+        P.frame(s, TWO, 1.5);
         await her.do('whisper');
         await P.tell(s, 'demand:whisper', 0.5);
         // throws the knife down at his feet

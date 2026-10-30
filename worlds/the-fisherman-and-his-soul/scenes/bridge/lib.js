@@ -93,7 +93,7 @@ function film(scene) {
   // plane is the floor under the eye)
   const ON_ROAD = { ...P.CAM0, camera_x: -5.2, camera_z: 12.0, camera_yaw: 270, camera_h: -0.1 };
   // his hand reaching for the coppers on the stall: the coppers and the hand, near
-  const COPPERS = P.shot('stall#coppers', 0.9, [0.45, 0.55]);
+  const COPPERS = P.shot('stall#coppers', 1.8, [0.42, 0.62]);
   const AT_BOWL = { ...P.CAM0, camera_x: -7.4, camera_z: 12.7, camera_yaw: 268, camera_h: -0.5, camera_look: 0.18 };
   const film = {
     // ── Prologue: the morning market ──
@@ -194,7 +194,8 @@ function film(scene) {
         s.set('fisherman_at', 'mid');
         s.set('fisherman_placed', 'mid');
         P.frame(s, P.shot('fisherman', 'medium', [0.5, 0.42]), 2);
-        await P.tell(s, 'bridge_dawn:stop', 3);
+        // (held while the Soul and he speak: «There is no dancer. There never was»)
+        await P.tell(s, 'bridge_dawn:stop', 11);
         P.frame(s, P.CAM0, 2);
         await P.go(s, 'fisherman', [ROAD_FAR]);
         await P.tell(s, 'bridge_dawn:on', 0.5);

@@ -45,9 +45,9 @@ const PLACES = {
     stone: { at: [1.8, 5.6, 0.85], turn: 220 },
     sand: { at: [1.0, 1.0, 0], turn: 90 },
   },
-  girl: { feast: { at: [-2.95, 2.45], turn: 95 } },
-  woman_a: { feast: { at: [-3.9, 1.1], turn: 60 }, shore: { at: [2.0, -0.6], turn: 260 } },
-  woman_b: { feast: { at: [-4.4, 0.7], turn: 50 }, shore: { at: [2.4, -0.2], turn: 250 } },
+  girl: { feast: { at: [-2.6, 2.2], turn: 60 } },
+  woman_a: { feast: { at: [-3.05, 1.3], turn: 40 }, shore: { at: [2.0, -0.6], turn: 260 } },
+  woman_b: { feast: { at: [-3.5, 1.15], turn: 50 }, shore: { at: [2.4, -0.2], turn: 250 } },
   widow: { boat: { at: [-0.6, -3.3], turn: 70 }, sand: { at: [1.9, -0.3], turn: 250 }, away: { at: [8.5, 1.0], turn: 80 } },
   widow_girl: { boat: { at: [-0.2, -3.8], turn: 70 }, field: { at: [-3.6, -10.9], turn: 60 } },
   widow_boy: { boat: { at: [0.25, -3.1], turn: 70 }, end: { at: [-0.55, 4.45], turn: 150, on: [-0.55, 4.45, 2.55] }, field: { at: [-3.2, -11.2], turn: 60 } },
@@ -202,8 +202,7 @@ function film(scene) {
         P.open(s, { ...SOUL_RISE, fisherman_turn: BACK_TO_MOON, ...TWO });
         // the shadow rises from the boards before him: his own face
         s.set('soul_here', true);
-        const soul = s.person('soul'), him = s.person('fisherman');
-        him.look('soul');
+        const soul = s.person('soul');
         await soul.do('rise_ground');
         await P.tell(s, 'shadow_rises:up', 0.5);
         soul.look('fisherman');
@@ -212,7 +211,7 @@ function film(scene) {
         // it pleads (its words are the game's: the scene stays on its face a while), then the two as he chooses
         P.loop(s, 'soul', 'plead');
         await s.wait(8);
-        await P.cut(s, TWO);
+        await P.cut(s, { ...TWO, fisherman_turn: BACK_TO_MOON });
         await s.wait(1);
       },
     },
@@ -897,6 +896,8 @@ function film(scene) {
         P.open(s, { ...at('fisherman', 'sand'), fisherman_with: null, ...SHORE_SAND });
         const him = s.person('fisherman');
         him.look('mermaid');
+        // (the widow's children, if they are there, step back up the sand: she is seen)
+        for (const [id, to] of [['widow_girl', [2.4, -1.2]], ['widow_boy', [2.0, -1.6]]]) if (s.get(`${id}_here`)) P.go(s, id, [to], 250);
         await him.do('kneel');
         // near the two of them as he bends to her and kisses her, and says what he says (the game's, after): his face,
         // hers (2026-10-30: it was said on a side shot from afar)
