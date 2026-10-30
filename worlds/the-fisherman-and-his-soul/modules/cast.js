@@ -285,7 +285,8 @@ return {
       colors: { skin: '#d6a882', hair: '#6b5a4a', top: '#cfc2a4', garment: '#8c6648', bottom: '#4b4038', shoes: '#2e2622' } },
     // his little daughter, six or so: a plain madder-red dress, brown hair loose to the shoulders
     daughter: { kind: 'shapes', style: 'bay', who: 'child', garment: 'dress', hair: 'long',
-      body: { height: 0.66, head: 1.18, legs: 0.94, arms: 0.95, shoulders: 0.86, thick: 0.8 },
+      // (six: a child's head and short legs, not a slim small woman — 2026-10-30)
+      body: { height: 0.6, head: 1.3, legs: 0.88, arms: 0.92, shoulders: 0.84, neck: 0.7, thick: 0.9 },
       colors: { skin: '#efd3b9', hair: '#7a5534', top: '#a5524a', garment: '#a5524a', bottom: '#a5524a', shoes: '#3a2a24' } },
     // the Priest of the bay, in his white house on the hill: an ageing man, upright, grey hair cut short, a weathered
     // face, a black cassock to the ankles (the cast's garment `cassock`) — the darkest thing in his white room

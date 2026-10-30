@@ -878,7 +878,7 @@ function film(scene) {
         s.person('fisherman').look('widow');
         // (the two of them near, his face and hers: she stands across the view from him — 2026-10-30: from the sand she
         // stood at the frame's edge, then far in the wide shore)
-        P.frame(s, P.shot('fisherman', 'full', [0.62, 0.5], WIDE_SHORE), 2);
+        P.frame(s, P.shot('widow', 'full', [0.42, 0.5], WIDE_SHORE), 2);
         await s.person('fisherman').turn(160);
         await P.tell(s, 'widow:say', 3);
         await P.tell(s, 'widow:boat', 3);
