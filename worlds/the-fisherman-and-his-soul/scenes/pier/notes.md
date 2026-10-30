@@ -218,3 +218,7 @@ After a reviewer's renders: what the player must see was not in the frame. Rende
   into him, her going under close. `dragged(u)` puts him a metre up the sand from the bundle, facing it (`drag_back`):
   he backs up drawing her; the drawing and the widow's talk on the shore wide. `knife_rust`/`knife_back` keep the
   call's hour (the game gives it). The wave darkens the morning to `dawn` 0.6, not to night.
+- (fifth round) `IN_WATER` — him in the water by the pier's end, the camera's own keys from the right over the water
+  (on our line the Soul on the boards stood at the lens and was drawn faint: two pale bands; an operator's eye on one in
+  the water sits at the water's face). The kiss: she is turned to lie with her head toward us (`mermaid_turn` 270 at the
+  cut) — her face seen.
