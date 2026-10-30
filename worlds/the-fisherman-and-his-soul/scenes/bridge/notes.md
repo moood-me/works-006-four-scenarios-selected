@@ -94,3 +94,5 @@ framed on `bowl#coins` (0.15 m tall) puts the lens 0.6 m from it, inside the Fis
   before its right end (`stall` 2.0, 9.7, 280); the coppers moved to the stall's left end, by his hand (the pots to the
   right): before the stall he was his back, and the close shot of his face was the back of his head. `hand_itself`
   opens near on the coppers (`COPPERS`) and ends on his face looking down before him.
+- (fifth round) `cup_away` (the game's, bool): the silver cup not seen on the shelf in the potter's window while it is
+  away (the rumour's morning, the late road's door).

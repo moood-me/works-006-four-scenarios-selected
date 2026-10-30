@@ -214,3 +214,7 @@ After a reviewer's renders: what the player must see was not in the frame. Rende
   morning goes out of the sky (`dawn` → 0.35, `day` → 0) and the `wave` look is darker (ambient 0.32, haze 0.45, tint
   0.3). `soul_leaves`: the camera goes with the Soul up the pier, then back to the bay for its lantern far off; the far
   lantern's glow larger (24 m). The feast opens wide on the girl and the women.
+- (fifth round) `late_go`: he wades up onto the boards, the Soul gives him the lantern and the cup on CAM_BACK and goes
+  into him, her going under close. `dragged(u)` puts him a metre up the sand from the bundle, facing it (`drag_back`):
+  he backs up drawing her; the drawing and the widow's talk on the shore wide. `knife_rust`/`knife_back` keep the
+  call's hour (the game gives it). The wave darkens the morning to `dawn` 0.6, not to night.
