@@ -1,16 +1,17 @@
-// The line the knife is drawn along (М3, М6): the edge of his shadow along his soles on the boards, from the heel to
-// the toe as he stands at the pier's end (turned 150) — a dark sole of shadow; the cut a thin line of light along it
-// (layer `cut`, drawn out from the heel by `cut` — its animate), ragged when `cut_rough`. Seen from above (x across, y
-// toward the viewer), metres from his feet. Points `heel`, `toe`
-const HEEL = [-0.07, -0.12];
-const TOE = [0.08, 0.14];
+// The line the knife is drawn along (М3, М6): where his shadow, falling from his feet toward the viewer (his back to
+// the moon), leaves him — on the boards just before his knees as he kneels at the pier's end, across, so that it lies
+// open to the viewer and is not hidden under him; a dark band of shadow; the cut a thin line of light along it (layer
+// `cut`, drawn out from the heel by `cut` — its animate), ragged when `cut_rough`. Seen from above (x across, y toward
+// the viewer), metres from the element's place. Points `heel`, `toe` (the line's two ends, left and right)
+const HEEL = [-0.2, 0];
+const TOE = [0.2, 0.02];
 const rough = !!e.state.cut_rough;
 g.fillStyle = 'rgba(20, 22, 34, 0.55)';
 g.save();
 g.translate((HEEL[0] + TOE[0]) / 2, (HEEL[1] + TOE[1]) / 2);
 g.rotate(Math.atan2(TOE[1] - HEEL[1], TOE[0] - HEEL[0]));
 g.beginPath();
-g.ellipse(0, 0, 0.17, 0.06, 0, 0, Math.PI * 2);
+g.ellipse(0, 0, 0.26, 0.07, 0, 0, Math.PI * 2);
 g.fill();
 g.restore();
 e.layer('cut', { pivot: HEEL }, g => {

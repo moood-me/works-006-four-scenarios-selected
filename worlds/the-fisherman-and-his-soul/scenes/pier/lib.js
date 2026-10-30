@@ -651,9 +651,12 @@ function film(scene) {
         s.set('knife', 'none');
         s.set('fisherman_with', ['knife_rusty']);
         await P.tell(s, 'knife_rust:out', 0.5);
-        // back to where he stands at the pier's end (the edge of his shadow at his soles: М6)
+        // back to where he stands at the pier's end, his back to the moon; he kneels over his shadow (М6: the line before
+        // his knees, his hands and the knife in the frame, as at moonrise)
         P.frame(s, P.shot('fisherman', 'medium', [0.45, 0.45]), 2);
-        await P.go(s, 'fisherman', [PLACES.fisherman.end.at], PLACES.fisherman.end.turn);
+        await P.go(s, 'fisherman', [PLACES.fisherman.end.at], BACK_TO_MOON);
+        P.frame(s, KNEEL, 1.5);
+        s.person('fisherman').look('cutline#heel');
         await s.person('fisherman').do('kneel');
         P.loop(s, 'fisherman', 'kneel');
       },
