@@ -1,5 +1,5 @@
 // none while she is not in the water (on the sand, gone)
-const inWater = e.state.mermaid_here !== false && e.state.mermaid_at !== 'sand';
+const inWater = e.state.mermaid_here !== false && !['sand', 'found'].includes(e.state.mermaid_at);
 // each ring widens from her and fades, a third of the way behind the one before; slowly
 for (let k = 0; k < 3; k++) {
   const u = (e.t / 4.5 + k / 3) % 1;
