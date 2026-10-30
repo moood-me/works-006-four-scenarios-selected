@@ -17,7 +17,9 @@
 // the scenario (§12: stayed on both calls — Two Lights; else the wave — stayed with her: White Flowers, drew her away:
 // A Lantern on the Pier); the choices made are those of its road; the scales are whole numbers within their bounds; the
 // rumour of a thief where it is made; the game's PLAYS end as their labels say — played once more with every mini-game
-// missed (its `missed`: the trace a miss leaves, scenario §7).
+// missed (its `missed`: the trace a miss leaves, scenario §7). The sound: a background a step declares (g.scene's beds,
+// its place's, g.beds) names beds sound.js has, at levels 0…1, never timed; every g.sound.<name> of the chapters and the
+// mini-games is one of sound.js.
 // Said apart, as waited for, not as wrong: what the pieces' contract (docs/new-games/rybak-i-dusha/game.md «Stage 5 —
 // pieces») asks of the scenes that they have not got yet — a mini-game's points and keys, a scene's contract of pieces.
 // Printed: what does not match (with how many paths it was met on); what is waited for; how many paths end in each
