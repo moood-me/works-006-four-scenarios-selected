@@ -117,7 +117,7 @@ in the hull).
   in to its bow (`AT_BOW`, the camera's own keys): his hands, the rope, the net over the bow in the water — М1 is played
   there (the medium on him showed hands pulling at nothing).
 - (third round, from a play in the browser) The boat did not hold together: its hull's skin was seen from outside only
-  (a form is seen from its face's side) and lay across the boat. Now `hull_in` — the same skin with its face inward, the
-  boat's inside (tarred wood, the ribs) — and both turned along the boat (`facing` 90): from the pier one sees a boat,
-  him standing in it; the bow lantern brought onto the stem (`distance` −0.95: it stood in the water beyond it). The
-  floorboards still show a little past the stem.
+  (a form is seen from its face's side) and lay across the boat (without `facing` a form faces the eye). Now `hull_in` —
+  the same skin with its face inward, the boat's inside (tarred wood, the ribs) — and both `facing` 180, as the anchor
+  lies (the loft's z = −distance: the stem on the bow lantern, the stern on the transom; the engine's author's
+  answer: a child's across/distance are the anchor's, its own `facing` only turns it in place).
