@@ -179,8 +179,10 @@ function film(scene) {
         her.do('stand', { loop: true });
         s.set('fisherman_reach', null);
         s.set('mermaid_at', 'water');
-        // she lingers by the bow — looking at him (with `looks` false: not at him)
+        // she lingers by the bow — looking at him (with `looks` false: not at him); the camera on her as she asks (her place
+        // in the water is past the frame's edge of the net's shot)
         her.look(s.get('looks') === false ? [1.6, 7.4, -0.3] : 'fisherman');
+        P.frame(s, P.shot('mermaid', 'medium', [0.6, 0.45]), 1.2);
         await P.tell(s, 'go_free:linger', 4);
         // she goes; turns once
         her.look(null);

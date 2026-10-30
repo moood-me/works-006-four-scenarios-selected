@@ -43,11 +43,13 @@ function film(scene) {
   const THRESHOLD = [0.45, 5.75];
   const film = {
     priest_sign: {
-      from: () => ({ ...ROW, ...DO0, fisherman_do: 'seated', ...P.shot('priest', 'medium', [0.4, 0.42]) }),
+      // (the room, both of them: the Fisherman asks — then the Priest near for his answer)
+      from: () => ({ ...ROW, ...DO0, fisherman_do: 'seated', ...P.CAM0 }),
       run: async s => {
         await s.wait(0.6);
         await s.person('priest').do('sign');
         await P.tell(s, 'priest_sign:sign', 1);
+        P.frame(s, P.shot('priest', 'medium', [0.4, 0.42]), 1.5);
       },
     },
     bench_falls: {
@@ -73,7 +75,7 @@ function film(scene) {
         // he walks to the threshold, turns to the room, and makes the sign — and drops his hand halfway
         him.look(null);
         await P.go(s, 'fisherman', [THRESHOLD], 180);
-        await P.cut(s, P.shot('fisherman', 'close', [0.5, 0.4]));
+        await P.cut(s, P.shot('fisherman', 'medium', [0.5, 0.4]));
         him.look('priest');
         const sign = him.do('sign');
         await s.wait(1.3);
