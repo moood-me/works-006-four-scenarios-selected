@@ -749,9 +749,11 @@ function film(scene) {
         s.set('knife', 'none');
         s.set('fisherman_with', ['knife_rusty']);
         await P.tell(s, 'post_knife:out', 0.5);
-        // the post stood; he holds the knife — to take it to her mound
+        // the post stood; he steps back from it with the knife, turned to the shore — to take it to her mound (his face
+        // out from under the lantern)
         P.frame(s, P.shot('fisherman', 'medium', [0.45, 0.45]), 1.5);
-        await s.wait(2.5);
+        await P.go(s, 'fisherman', [[-0.1, 4.2]], 190);
+        await s.wait(1.5);
       },
     },
     old_lantern: {
