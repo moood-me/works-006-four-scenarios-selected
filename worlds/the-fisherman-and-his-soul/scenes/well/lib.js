@@ -52,7 +52,7 @@ function film(scene) {
   // black by his fir; their looks
   const SITE = { round: false, stumble: 0, knife_ground: false, witch_on: RIM, witch_do: 'seated', witch_turn: 250, witch_a: 0.34, witch_d: 7.29,
     fisherman_a: -0.98, fisherman_d: 6.81, fisherman_turn: 110, fisherman_with: ['lantern'], fisherman_look: 'witch', witch_look: 'fisherman',
-    velvet_a: -2.4, velvet_d: 5.6, velvet_turn: 60, velvet_look: 'fisherman', velvet_do: 'hands_behind' };
+    velvet_a: -2.4, velvet_d: 5.6, velvet_turn: 120, velvet_look: 'fisherman', velvet_do: 'hands_behind' };
   // the man in black: out from behind the last firs on the glade's near left edge (where the camera's side sees his
   // face, and the Fisherman's as he turns to him), and back into the wood there
   const VELVET = [-2.4, 5.6], FROM_WOOD = [-3.6, 4.4], INTO_WOOD = [[-3.6, 4.4], [-5.6, 3.4]];
@@ -114,7 +114,7 @@ function film(scene) {
         s.set('velvet_a', FROM_WOOD[0]);
         s.set('velvet_d', FROM_WOOD[1]);
         P.frame(s, P.shot('velvet', 'full', [0.4, 0.5]), 1.5);
-        await P.go(s, 'velvet', [VELVET], 60);
+        await P.go(s, 'velvet', [VELVET], 120);
         await s.wait(1);
         // the dance stops; she pulls him before the man
         s.set('round', false);

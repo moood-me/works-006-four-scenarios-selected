@@ -124,7 +124,7 @@ function film(scene) {
   const SPEAKS = CAM_BACK;
   // crouched at his heels with the knife (М3, М6): a frame 1.6 m tall round him, his head high in it — the boards at his
   // feet, his shadow's edge, the knife in his hand below
-  const KNEEL = P.shot('fisherman', 1.6, [0.5, 0.3]);
+  const KNEEL = P.shot('fisherman', 1.6, [0.6, 0.3]);
   const film = {
     // ── Chapter I ──
     feast: {
@@ -136,7 +136,7 @@ function film(scene) {
         P.loop(s, 'woman_b', 'clap');
         await s.wait(3);
         // the women lean together and whisper
-        P.frame(s, P.shot('woman_a', 'medium', [0.55, 0.45]), 1.5);
+        P.frame(s, P.shot('woman_a', 'wide', [0.4, 0.6]), 1.5);
         P.loop(s, 'woman_a', 'whisper');
         P.loop(s, 'woman_b', 'whisper');
         await P.tell(s, 'feast:whisper', 2.5);
@@ -252,8 +252,9 @@ function film(scene) {
         ...KNEEL }),
       run: async s => {
         P.open(s, { ...at('fisherman', 'end'), fisherman_turn: BACK_TO_MOON, ...KNEEL });
-        // he takes the knife and crouches at his heels, over the edge of his shadow: the knife, his hands, his feet and
-        // the shadow at them in the frame
+        // the Soul steps back a little, pleading on; he takes the knife and crouches at his heels, over the edge of his
+        // shadow: the knife, his hands, his feet and the shadow at them in the frame
+        P.go(s, 'soul', [[-1.45, 4.3]], 60).then(() => P.loop(s, 'soul', 'plead'));
         s.set('fisherman_with', ['knife']);
         s.person('fisherman').look('cutline#heel');
         await s.person('fisherman').do('kneel');

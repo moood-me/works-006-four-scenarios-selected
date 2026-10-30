@@ -12,8 +12,8 @@ export default {
   number: 'II', title: tr('Three Years'),
   titles: ['The Deep', 'The First Year', 'Till Sunrise', 'The Second Year', 'Dancing Under Water', 'One Day'],
   choices: [
-    { id: 'sit', title: tr('Till sunrise'), options: [{ id: 'sit', label: tr('Sat beside the Soul') }, { id: 'song', label: tr('Went to her song') }] },
-    { id: 'day', title: tr('One day'), weight: '⚑', options: [{ id: 'go', label: tr('“I’ll go. One day.”') }, { id: 'stay', label: tr('“No. I stay.”') }] },
+    { id: 'sit', title: tr('Till sunrise'), options: [{ id: 'sit', label: tr('Sat beside the Soul'), came: tr('Her song broke off; all that day she sat with her back to you.') }, { id: 'song', label: tr('Went to her song'), came: tr('The Soul put out the lantern.') }] },
+    { id: 'day', title: tr('One day'), weight: '⚑', options: [{ id: 'go', label: tr('“I’ll go. One day.”'), came: tr('The water closed over the stone.') }, { id: 'stay', label: tr('“No. I stay.”'), came: tr('The Soul went into the world alone, with your face.') }] },
   ],
   steps: [
     // 2.1: the deep

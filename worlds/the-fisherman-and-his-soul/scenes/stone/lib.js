@@ -98,10 +98,11 @@ function film(scene) {
   // his seat on the thwart (in the boat's frame, as the hull is laid: the thwart 0.55 m sternward, 0.3 over the water —
   // 0.2 behind its middle: the cast's `seated` puts the hips that far before the point)
   const THWART = { on: 'boat', at: [0, 0.75, 0.3] };
-  // in his net (П.3–П.4): she turned to us, more than to him (her face seen from our side, not her hair — the operator
-  // films from the viewer's side); the two framed together as he holds the net and chooses
+  // in his net (П.3–П.4): she turned to us, more than to him (her face seen from our side, not her hair); the two
+  // framed together as he holds the net and chooses — from the pier's end, the camera's own keys: an operator on someone
+  // in the water stands its eye over the bay's floor, at the water's face, under the net
   const IN_NET = { mermaid_turn: 195 };
-  const HOLD = P.shot('mermaid', 'full', [0.62, 0.5]);
+  const HOLD = { ...P.CAM0, camera_x: -0.7, camera_z: 2.6, camera_yaw: -6, camera_look: 0.06 };
   const film = {
     // ── Prologue «Сеть» ──
     night: {
@@ -122,7 +123,7 @@ function film(scene) {
     in_net: {
       after: 'night',
       from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', haul: 1, heel: 0.3, ...pose('boat', 'net'), ...DO0, fisherman_do: 'haul_net',
-        ...IN_NET, ...P.shot('mermaid', 'medium', [0.5, 0.45]) }),
+        ...IN_NET, ...HOLD }),
       run: async s => {
         P.open(s, film.in_net.from());
         const her = s.person('mermaid'), him = s.person('fisherman');
@@ -147,7 +148,7 @@ function film(scene) {
     go_word: {
       after: 'in_net',
       from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', ...pose('boat', 'net'), ...DO0, ...IN_NET, fisherman_reach: { r: 'net_over#knot' }, knot: 1,
-        ...P.shot('mermaid', 'medium', [0.5, 0.45]) }),
+        ...HOLD }),
       run: async s => {
         P.open(s, film.go_word.from());
         const her = s.person('mermaid');
@@ -165,7 +166,7 @@ function film(scene) {
     go_free: {
       after: 'in_net',
       from: () => ({ ...LIGHT.night, light: 'night', ...BOAT, net: 'over', ...pose('boat', 'net'), ...DO0, ...IN_NET, fisherman_reach: { r: 'net_over#knot' }, knot: 1,
-        ...P.shot('mermaid', 'medium', [0.5, 0.45]) }),
+        ...HOLD }),
       run: async s => {
         P.open(s, film.go_free.from());
         const her = s.person('mermaid');

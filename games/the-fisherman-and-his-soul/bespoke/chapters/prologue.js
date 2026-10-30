@@ -10,7 +10,7 @@ export default {
   number: '', title: tr('The Net'),
   titles: ['Night', 'Let Her Go', 'Evenings'],
   choices: [
-    { id: 'net', title: tr('The net'), options: [{ id: 'word', label: tr('For her word') }, { id: 'free', label: tr('For nothing') }] },
+    { id: 'net', title: tr('The net'), options: [{ id: 'word', label: tr('For her word'), came: tr('She came whenever you called, and sang looking at the fish.') }, { id: 'free', label: tr('For nothing'), came: tr('She came by herself, when she wished — and some evenings the stone was empty.') }] },
   ],
   steps: [
     // П.1–П.2: night, the heavy net

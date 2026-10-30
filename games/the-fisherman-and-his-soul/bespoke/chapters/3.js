@@ -23,11 +23,11 @@ export default {
     'Town: The Bridge at Night', 'Without Him: The Deep', 'Without Him: The Town', 'Without Him: The Last Call',
     'Without Him: The House by the Bridge'],
   choices: [
-    { id: 'wait', title: tr('Wait for the dancer'), options: [{ id: 'wait', label: tr('“I’ll wait till tomorrow.”') }, { id: 'back', label: tr('“No. Back, now.”') }] },
-    { id: 'cup', title: tr('The cup'), options: [{ id: 'confess', label: tr('“It was I who took it.”') }, { id: 'quiet', label: tr('Put it back quietly') }] },
-    { id: 'rise', title: tr('His lantern over the bridge'), options: [{ id: 'rose', label: tr('Rose to look') }, { id: 'stayed', label: tr('Did not lift his head') }] },
-    { id: 'last', title: tr('The last call'), weight: '⚑', options: [{ id: 'go', label: tr('“I’ll go. I’ll give the cup back.”') }, { id: 'no', label: tr('“No.”') }] },
-    { id: 'giveback', title: tr('The cup, at the potter’s door'), options: [{ id: 'confess', label: tr('“It was I who took it.”') }, { id: 'found', label: tr('“I found it by the bridge.”') }] },
+    { id: 'wait', title: tr('Wait for the dancer'), options: [{ id: 'wait', label: tr('“I’ll wait till tomorrow.”'), came: tr('In the night your hands took the cup.') }, { id: 'back', label: tr('“No. Back, now.”'), came: tr('You never learned whether there was a dancer.') }] },
+    { id: 'cup', title: tr('The cup'), options: [{ id: 'confess', label: tr('“It was I who took it.”'), came: tr('The little girl hid behind her father.') }, { id: 'quiet', label: tr('Put it back quietly'), came: tr('Nobody knows. Only the little girl.') }] },
+    { id: 'rise', title: tr('His lantern over the bridge'), options: [{ id: 'rose', label: tr('Rose to look'), came: tr('That evening she sang no more.') }, { id: 'stayed', label: tr('Did not lift his head'), came: tr('She laid her palm over your eyes and sang on.') }] },
+    { id: 'last', title: tr('The last call'), weight: '⚑', options: [{ id: 'go', label: tr('“I’ll go. I’ll give the cup back.”'), came: tr('She saw, and went under.') }, { id: 'no', label: tr('“No.”'), came: tr('The Soul will not come again.') }] },
+    { id: 'giveback', title: tr('The cup, at the potter’s door'), options: [{ id: 'confess', label: tr('“It was I who took it.”'), came: tr('“A thief — and came.” He was slow to shut the door.') }, { id: 'found', label: tr('“I found it by the bridge.”'), came: tr('“Found it, then.” The door shut at once.') }] },
   ],
   steps: [
     // 3.1: the bridge at evening

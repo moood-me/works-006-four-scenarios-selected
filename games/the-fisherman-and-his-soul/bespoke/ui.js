@@ -1,8 +1,8 @@
 // What the game shows over the scene (bespoke.layer), in the bay's night: pale slips, sea-dark ink, the lantern's warm
 // yellow for what is the player's to press.
 //   view.gauge({scales, shown} | null) — the scales low on the left (story.js SCALES, ORDER): each one the player has
-//     met — its name, its pips, the side it leans to; null — none (the map, the epilogue)
-//   view.toast(text, kind, arrows) — a slip in the corner: 'scale' (a scale moved: its side and arrows), 'rule' (what
+//     met — its name, its pips, the side it leans to (a word); null — none (the map, the epilogue)
+//   view.toast(text, kind, arrows) — a slip in the corner: 'scale' (a scale moved: the side it moved to), 'rule' (what
 //     a scale means, the first time), 'mark' (remembered); three at most
 //   view.where(text | null) — the label high on the left: where this really happens (a stand-in scene)
 //   view.hint(text) — one line low in the middle; → a function that takes it away
@@ -39,7 +39,7 @@ export function ui(layer) {
         el('span', 'name', row).textContent = S.name;
         const pips = el('span', 'pips', row);
         for (let i = S.min + 1; i <= S.max; i++) el('i', i <= v ? 'on' : '', pips);
-        el('span', 'value', row).textContent = String(v);
+        el('span', 'value', row).textContent = S.sides[v >= S.at ? 1 : 0];
       }
     },
     toast(text, kind, arrows = '') {

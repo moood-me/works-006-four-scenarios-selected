@@ -88,14 +88,18 @@ export const TRACES = {
 export const SILENT = ['velvet', 'daughter', 'woman_a', 'woman_b', 'widow_girl', 'widow_boy', 'beggar', 'musician_a', 'musician_b'];
 
 // The scales (scenario §8), each with two sides: where they start, their bounds, its name in the gauge, the side the
-// player reads when they move (up: delta > 0, down: delta < 0), and the one line that says what they mean. Both start
-// at 0 and are set by their first choice (the Song in П.4, the Soul in 1.9) — moved by as much as that choice sets.
-// They are read by one threshold everywhere: the Soul 0–2 longs, 3–4 has hardened; the Song 2–3 sounds, 0–1 is silent.
+// player reads when they move (up: delta > 0, down: delta < 0), and the one line that says what they mean — in words, as
+// a parable says it, no numbers (the gauge's pips show how far); `at` — the threshold, `sides` — the word the gauge
+// says below it and from it on. Both start at 0 and are set by their first choice (the Song in П.4, the Soul in 1.9) —
+// moved by as much as that choice sets. They are read by one threshold everywhere: the Soul 0–2 longs, 3–4 has
+// hardened; the Song 2–3 sounds, 0–1 is silent.
 export const SCALES = {
-  soul: { start: 0, min: 0, max: 4, name: tr('The Soul'), up: tr('The Soul grows harder'), down: tr('The Soul longs'),
-    rule: tr('The Soul — how much the world without a heart has taught her. 0–2: she longs for him; 3–4: she has grown hard.') },
-  song: { start: 0, min: 0, max: 3, name: tr('Her song'), up: tr('Her song sounds'), down: tr('Her song grows quiet'),
-    rule: tr('Her song — the song she sings to him. 2–3: it sounds; 0–1: it has fallen silent.') },
+  soul: { start: 0, min: 0, max: 4, at: 3, name: tr('The Soul'), up: tr('The Soul grows harder'), down: tr('The Soul longs'),
+    sides: [tr('longs for him'), tr('has grown hard')],
+    rule: tr('The Soul — what the world without a heart has taught her: whether she still longs for him, or has grown hard.') },
+  song: { start: 0, min: 0, max: 3, at: 2, name: tr('Her song'), up: tr('Her song sounds'), down: tr('Her song grows quiet'),
+    sides: [tr('silent'), tr('sounds')],
+    rule: tr('Her song — the song she sings to him: whether it sounds, or has fallen silent. Listen for it.') },
 };
 export const ORDER = ['soul', 'song'];
 
@@ -374,7 +378,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       const moved = state.scales[name] - was;
       g.gauge(name);
       if (unseen() || !moved) return;
-      view.toast(moved > 0 ? S.up : S.down, 'scale', (moved > 0 ? '↑' : '↓').repeat(Math.abs(moved)));
+      view.toast(moved > 0 ? S.up : S.down, 'scale');
       view.gauge(state);
     },
     gauge(name) {

@@ -10,7 +10,8 @@
 //     knot:<i>, fork:<i>:<k>, go:<i>, goreplay:<i>, badge:<i>, author); offer(refs, fn) — those take a press, fn(ref)
 //     told; remove() }
 //   chapters — as game.js sky() gives them: [{number, title, kind: here | played | next | future | end, rows: [{title,
-//     weight, options: [{label, state: chosen | tried | both | open | unseen}]}], go, replay, badge, away}]; grow — the
+//     weight, options: [{label, came, state: chosen | tried | both | open | unseen}]}], go, replay, badge, away}] (came —
+//     what came of the one chosen: written under it, as the scenario's map has it, §11); grow — the
 //     chapter whose rows come one after another; author — the author's sign shown
 const el = (tag, cls, text) => Object.assign(document.createElement(tag), cls ? { className: cls } : {}, text != null ? { textContent: text } : {});
 
@@ -54,7 +55,10 @@ export function trees(b, chapters, { grow = null, author = false } = {}) {
       q.append(el('span', 'dot'), el('span', 'name', r.weight ? `${r.weight} ${r.title}` : r.title));
       li.append(q);
       const opts = el('ul', 'opts');
-      for (const o of r.options) opts.append(el('li', `opt ${o.state}`, o.state === 'unseen' ? '' : o.label));
+      for (const o of r.options) {
+        opts.append(el('li', `opt ${o.state}`, o.state === 'unseen' ? '' : o.label));
+        if (o.came) opts.append(el('li', 'came', o.came));
+      }
       li.append(opts);
       rows.append(li);
     });

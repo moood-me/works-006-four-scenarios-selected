@@ -185,7 +185,8 @@ export default async function (b) {
     b.menu(null);
     b.hush();
     view.quiet();
-    view.gauge(null);
+    // (the scales as the run stands, on the map too: scenario §8)
+    view.gauge(replay?.run ?? kept);
     await b.show(PLACES.pier.folder, { state: { fisherman_here: false, soul_here: false, mermaid_here: false }, captions: false, background: { sea: 0.3 } });
     const drawn = trees(b, sky(), { grow: reveal, author: !!author });
     const notice = replay?.done && anew() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};
@@ -298,11 +299,12 @@ const named = (ch, r) => ch.titleOf?.(r) ?? ch.title;
 // a run's own fields, apart from what the play keeps of its chapters (a minigame gone to by the author's map: `play`)
 const run = p => structuredClone({ chapter: p.chapter, step: p.step, scales: p.scales, shown: p.shown, marks: p.marks, choices: p.choices });
 const pick = (o, keep) => Object.fromEntries(Object.entries(o).filter(([j]) => keep(Number(j))));
-// a chapter's choices as rows: the main run's chosen, a replay's tried (both — the same), could have been, never reached
+// a chapter's choices as rows: the main run's chosen, a replay's tried (both — the same), could have been, never reached;
+// under the one chosen (or tried), what came of it (scenario §11)
 function rows(ch, mainChoices, triedChoices) {
   return ch.choices.map(c => {
     const m = mainChoices[c.id], t = triedChoices[c.id];
-    return { title: c.title, weight: c.weight, options: c.options.map(o => ({ label: o.label,
+    return { title: c.title, weight: c.weight, options: c.options.map(o => ({ label: o.label, came: m === o.id || t === o.id ? o.came ?? null : null,
       state: m === o.id && t === o.id ? 'both' : m === o.id ? 'chosen' : t === o.id ? 'tried' : m || t ? 'open' : 'unseen' })) };
   });
 }

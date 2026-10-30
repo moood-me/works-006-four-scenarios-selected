@@ -17,7 +17,7 @@
 #layer .gauge .pips { display: flex; gap: 4px; }
 #layer .gauge .pips i { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--sea); }
 #layer .gauge .pips i.on { background: var(--sea); }
-#layer .gauge .value { font-weight: 700; min-width: 1ch; }
+#layer .gauge .value { font-style: italic; opacity: 0.85; }
 
 /* the slips, high on the right */
 #layer .toasts { position: absolute; top: 64px; right: 14px; display: flex; flex-direction: column;
@@ -64,7 +64,7 @@
 /* the map (map.js): a row of paper leaves over the empty pier, scrolled sideways */
 #underlay .map { --paper: #eef2f3; --paper-edge: #c3cfd6; --ink: #1d2c3d; --ink-soft: #52657a; --pencil: #8d99a6; --lantern: #e6b35a;
   position: absolute; inset: 0; font-family: Georgia, "Times New Roman", serif; }
-#underlay .map .strip { position: absolute; left: 0; right: 0; top: 70px; bottom: 24px; display: flex;
+#underlay .map .strip { position: absolute; left: 0; right: 0; top: 70px; bottom: 112px; display: flex;
   align-items: flex-start; gap: 18px; padding: 0 24px; overflow-x: auto; overflow-y: hidden; pointer-events: auto; scrollbar-width: thin; }
 #underlay .map .leaf { position: relative; flex: 0 0 auto; box-sizing: border-box; width: min(300px, 78vw); max-height: 100%; overflow-y: auto;
   padding: 14px 16px 16px; color: var(--ink); background: var(--paper); border: 1px solid var(--paper-edge); border-radius: 4px;
@@ -88,6 +88,8 @@
 #underlay .map .opt.tried { color: #3a6ea5; font-style: italic; }
 #underlay .map .opt.open { color: var(--pencil); }
 #underlay .map .opt.unseen { height: 0.9em; border-bottom: 1px dotted var(--paper-edge); width: 60%; }
+#underlay .map .came { margin: 1px 0 3px 10px; color: var(--ink-soft); font-style: italic; font-size: 14px; }
+#underlay .map .came::before { content: "— "; }
 #underlay .map .go { display: block; margin-top: 14px; min-height: 44px; padding: 8px 14px; border-radius: 22px; background: var(--ink); color: var(--paper);
   white-space: pre-line; text-align: center; width: 100%; }
 #underlay .map .go.replay { background: #3a6ea5; }

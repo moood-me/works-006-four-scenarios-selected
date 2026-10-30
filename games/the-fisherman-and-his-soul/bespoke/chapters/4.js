@@ -24,8 +24,8 @@ export default {
   skip: r => facts(r).road === 'deep',
   titles: ['The Call', 'The Knife', 'Winter', 'A Night at Sea', 'The Heart', 'The Wave'],
   choices: [
-    { id: 'widow', title: tr('A night at sea'), options: [{ id: 'out', label: tr('Went out for the night') }, { id: 'stayed', label: tr('Stayed by the water') }] },
-    { id: 'wave', title: tr('The wave'), weight: '⚑', options: [{ id: 'stay', label: tr('Stayed with her') }, { id: 'pull', label: tr('Drew her away from the water') }] },
+    { id: 'widow', title: tr('A night at sea'), options: [{ id: 'out', label: tr('Went out for the night'), came: tr('The widow’s children saw her first.') }, { id: 'stayed', label: tr('Stayed by the water'), came: tr('The children went away over the bridge, nowhere.') }] },
+    { id: 'wave', title: tr('The wave'), weight: '⚑', options: [{ id: 'stay', label: tr('Stayed with her'), came: tr('The wave covered the two of you.') }, { id: 'pull', label: tr('Drew her away from the water'), came: tr('You laid her in the earth, not in the sea.') }] },
   ],
   steps: [
     // 4.1: the call
