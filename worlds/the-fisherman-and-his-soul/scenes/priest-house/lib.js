@@ -120,8 +120,11 @@ function film(scene) {
         await P.go(s, 'priest', [[-1.5, 4.2]], 250);
         s.set('priest_with', null);
         s.set('flowers', 'altar');
-        await P.tell(s, 'threshold_flowers:altar', 0.5);
+        // the flowers on the altar, held while the story of them is told; then he speaks of love
+        P.frame(s, P.shot('flowers_altar', 'close', [0.5, 0.5]), 2);
+        await P.tell(s, 'threshold_flowers:altar', 8);
         await s.person('priest').turn(150);
+        P.frame(s, P.shot('priest', 'medium', [0.45, 0.42]), 2);
         P.loop(s, 'priest', 'preach');
         await s.wait(2);
       },

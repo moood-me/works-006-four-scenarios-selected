@@ -863,7 +863,8 @@ function film(scene) {
         await P.go(s, 'widow', [PLACES.widow.sand.at], 300);
         s.person('widow').look('fisherman');
         s.person('fisherman').look('widow');
-        P.frame(s, SHORE_WIDOW, 2);
+        // (the two of them, she turned to him: her face, his; the children by the boat behind)
+        P.frame(s, P.shot('widow', 'full', [0.36, 0.55], WIDE_SHORE), 2);
         await P.tell(s, 'widow:say', 3);
         await P.tell(s, 'widow:boat', 3);
         // the children look at the net on the rail
@@ -987,6 +988,8 @@ function film(scene) {
         // he stands up the sand from it, his hands on the rope, ready to draw it, backing (М8б)
         put(s, dragged(0));
         P.loop(s, 'fisherman', 'drag_back');
+        // (the camera keeps him as he backs up toward the field's edge)
+        P.frame(s, P.shot('fisherman', 'wide', [0.5, 0.55], WIDE_SHORE), 1.5);
         s.set('fisherman_reach', { r: 'bundle#rope', l: 'bundle#rope' });
       },
     },
