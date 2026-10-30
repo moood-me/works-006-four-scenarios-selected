@@ -125,7 +125,7 @@ function film(scene) {
         await P.tell(s, 'sleepwalk:down', 1);
         // the daughter half opens her eyes, and shuts them
         // (from above her, as one bends to a sleeping child: at her level the lens lay along the pallet's edge)
-        await P.cut(s, { ...P.CAM0, camera_x: -1.1, camera_z: 1.7, camera_yaw: -28, camera_look: 0.38 });
+        await P.cut(s, { ...P.CAM0, camera_x: -1.1, camera_z: 1.3, camera_yaw: -24, camera_look: 0.6 });
         s.person('daughter').mood('tired');
         await P.tell(s, 'sleepwalk:girl', 2);
         s.person('daughter').mood('eyes_closed');
