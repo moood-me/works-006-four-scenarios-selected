@@ -37,7 +37,7 @@
     ],
     "looks": {
       "dusk": {
-        "ambient": 0.74,
+        "ambient": 0.6,
         "ambientColor": "#c4a8b8",
         "haze": 0.14,
         "hazeColor": "#6e5a7c",
@@ -142,7 +142,7 @@
       "id": "moon_low",
       "from": "sky#low",
       "color": "#f6d8b0",
-      "strength": 0.8,
+      "strength": 1.35,
       "on": "dusk"
     },
     {
