@@ -121,3 +121,5 @@ in the hull).
   the same skin with its face inward, the boat's inside (tarred wood, the ribs) — and both `facing` 180, as the anchor
   lies (the loft's z = −distance: the stem on the bow lantern, the stern on the transom; the engine's author's
   answer: a child's across/distance are the anchor's, its own `facing` only turns it in place).
+- (2026-10-30, sixth round) `go_free`: the camera on her as she lingers (her place in the water is past the edge of the
+  net's shot) — «Do you want nothing?» is said in the frame.

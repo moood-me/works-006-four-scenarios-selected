@@ -222,3 +222,9 @@ After a reviewer's renders: what the player must see was not in the frame. Rende
   (on our line the Soul on the boards stood at the lens and was drawn faint: two pale bands; an operator's eye on one in
   the water sits at the water's face). The kiss: she is turned to lie with her head toward us (`mermaid_turn` 270 at the
   cut) — her face seen.
+- (sixth round) `cutline` before his knees, across (М3, М6 — under him it was hidden and the dashed line ran over his
+  knees); `knife_rust` ends kneeling back to the moon on `KNEEL` (framed higher: the boards before him in the frame).
+  The Priest's `post` place is on the boards by the post (it was in the water). `found` — the two lying side by side
+  in the Epilogue's morning (a place's keys set after its name in a `from` are put back by the place: give it a place).
+  At night (after `wave_lays`) `sea_comes` keeps the night. `come_out` (the first year) talks on `SPEAKS` / `listening`
+  as the later years (from our side he was behind the post). The widow talks to him at `talk` on `WIDOW_TALK`.

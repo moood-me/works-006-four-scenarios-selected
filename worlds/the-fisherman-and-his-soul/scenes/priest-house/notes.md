@@ -84,3 +84,5 @@ rendered at this stage (its motions were coming in as it was written).
  "sermon": {"after":[],"tells":["sermon:preach","sermon:sign","sermon:laugh"],"seconds":14,"show":false}
 }}
 ```
+- (2026-10-30, sixth round) `priest_sign` opens on the room (the Fisherman asks, both seen) and goes near the Priest
+  for his answer; the broken sign at the threshold on a medium shot (close, the arm filled the frame).

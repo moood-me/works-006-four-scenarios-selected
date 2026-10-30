@@ -96,3 +96,5 @@ framed on `bowl#coins` (0.15 m tall) puts the lens 0.6 m from it, inside the Fis
   opens near on the coppers (`COPPERS`) and ends on his face looking down before him.
 - (fifth round) `cup_away` (the game's, bool): the silver cup not seen on the shelf in the potter's window while it is
   away (the rumour's morning, the late road's door).
+- (2026-10-30, sixth round) The square's talk on `AT_STALL_TWO` (the stall a third of the frame: the two whole, who
+  speaks seen); `COPPERS` at 0.55 of the frame (at 1.8 the lens was among the pots and no one was in the frame).
