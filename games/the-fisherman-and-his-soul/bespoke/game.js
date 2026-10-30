@@ -260,7 +260,8 @@ export default async function (b) {
       const kind = i === (re ? re.chapter : kept.chapter) ? 'here' : i < kept.chapter ? 'played' : i === kept.chapter ? 'next' : 'future';
       const all = rows(c, reached ? kept.choices : {}, tried ? re.choices : {});
       if (i < kept.chapter && !tried && c.skip?.(kept)) return { number: c.number, title: named(c, kept), kind: 'played', rows: [], go: null, replay: false, badge: false, away: tr('not on this road') };
-      return { number: c.number, title: named(c, re ?? kept), kind, rows: i < kept.chapter && !tried ? all : all.filter(r => r.options.some(o => o.state !== 'unseen')),
+      return { number: c.number, title: named(c, re ?? kept), kind, rows: all.filter((r, k) => r.options.some(o => o.state !== 'unseen') || (i < kept.chapter && !tried && (c.choices[k].road?.(kept) ?? true))),
+        note: i === END - 1 && kept.chapter === END ? ENDINGS.find(e => e.id === facts(kept).ending)?.label : null,
         go: i === kept.chapter ? (kept.step || kept.chapter ? tr('continue\nthe game') : tr('start\nthe game')) : null, replay: tried && !replay.done, badge: tried };
     }).concat(finale());
   }

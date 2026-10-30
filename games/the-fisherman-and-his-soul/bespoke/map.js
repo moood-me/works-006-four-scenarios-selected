@@ -10,8 +10,9 @@
 //     knot:<i>, fork:<i>:<k>, go:<i>, goreplay:<i>, badge:<i>, author); offer(refs, fn) — those take a press, fn(ref)
 //     told; remove() }
 //   chapters — as game.js sky() gives them: [{number, title, kind: here | played | next | future | end, rows: [{title,
-//     weight, options: [{label, came, state: chosen | tried | both | open | unseen}]}], go, replay, badge, away}] (came —
-//     what came of the one chosen: written under it, as the scenario's map has it, §11); grow — the
+//     weight, options: [{label, came, state: chosen | tried | both | open | unseen}]}], go, replay, badge, away, note}] (came —
+//     what came of the one chosen: written under it, as the scenario's map has it, §11; note — a chapter without choices:
+//     what it came to); grow — the
 //     chapter whose rows come one after another; author — the author's sign shown
 const el = (tag, cls, text) => Object.assign(document.createElement(tag), cls ? { className: cls } : {}, text != null ? { textContent: text } : {});
 
@@ -46,6 +47,7 @@ export function trees(b, chapters, { grow = null, author = false } = {}) {
     leaf.append(head);
     if (c.kind === 'future') return;
     if (c.away) leaf.append(el('p', 'away', c.away));
+    if (c.note) leaf.append(el('p', 'away', c.note));
     const rows = el('ol', 'rows');
     leaf.append(rows);
     c.rows.forEach((r, k) => {

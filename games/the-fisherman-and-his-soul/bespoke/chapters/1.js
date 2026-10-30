@@ -157,7 +157,6 @@ export default {
         on(g, 'heart_come:under', () => g.sound.splash(0.35));
         await g.beat('heart_come');
       }
-      g.gauge('soul');
       g.apply('heart');
     },
     // 1.10–1.11: the knife; the sea takes him
