@@ -52,7 +52,7 @@ const PLACES = {
   woman_a: { feast: { at: [-3.05, 1.3], turn: 40 }, shore: { at: [2.0, -0.6], turn: 260 } },
   woman_b: { feast: { at: [-3.5, 1.15], turn: 50 }, shore: { at: [2.4, -0.2], turn: 250 } },
   // (talk: before him at the hut, on the hut's left as the shore is seen — across the view from him, both faces to it)
-  widow: { boat: { at: [-0.6, -3.3], turn: 70 }, sand: { at: [1.9, -0.3], turn: 250 }, talk: { at: [1.95, -4.1], turn: 340 }, away: { at: [8.5, 1.0], turn: 80 } },
+  widow: { boat: { at: [-0.6, -3.3], turn: 70 }, sand: { at: [1.9, -0.3], turn: 250 }, talk: { at: [1.95, -4.1], turn: 15 }, away: { at: [8.5, 1.0], turn: 80 } },
   widow_girl: { boat: { at: [-0.2, -3.8], turn: 70 }, field: { at: [-3.6, -10.9], turn: 60 } },
   widow_boy: { boat: { at: [0.25, -3.1], turn: 70 }, end: { at: [-0.55, 4.45], turn: 150, on: [-0.55, 4.45, 2.55] }, field: { at: [-3.2, -11.2], turn: 60 } },
   witch: { shore: { at: [2.6, 0.1], turn: 270 }, end: { at: [-0.25, 4.55], turn: 150 } },
@@ -103,6 +103,9 @@ function film(scene) {
   const SHORE_HUT = { ...P.CAM0, camera_x: 5.0, camera_z: 0.6, camera_yaw: 255 };
   const SHORE_WIDOW = { ...P.CAM0, camera_x: 4.8, camera_z: 0.4, camera_yaw: 240, camera_look: 0.03 };
   const SHORE_SAND = { ...P.CAM0, camera_x: 3.3, camera_z: 1.3, camera_yaw: 262, camera_look: 0.14 };
+  // the widow and him at the hut, across the view from each other, both half turned to it (4.4): from the sand before
+  // them (an operator's shot here would film from the sea's side, the scene's own view)
+  const WIDOW_TALK = { ...P.CAM0, camera_x: 5.9, camera_z: -1.8, camera_yaw: 250, camera_look: 0.03 };
   const SHORE_FIELD = { ...P.CAM0, camera_x: 0.6, camera_z: -7.8, camera_yaw: 222, camera_look: 0.06 };
   // near the two on the sand by the water, on the wide view's own line (the water and the wave on the right): his
   // face, her hand in his, the sea coming — the choice and «Holding Her» (М8) are played here
@@ -878,8 +881,8 @@ function film(scene) {
         s.person('fisherman').look('widow');
         // (the two of them near, his face and hers: she stands across the view from him — 2026-10-30: from the sand she
         // stood at the frame's edge, then far in the wide shore)
-        P.frame(s, P.shot('widow', 'full', [0.42, 0.5], WIDE_SHORE), 2);
-        await s.person('fisherman').turn(160);
+        P.frame(s, WIDOW_TALK, 2);
+        await s.person('fisherman').turn(130);
         await P.tell(s, 'widow:say', 3);
         await P.tell(s, 'widow:boat', 3);
         // the children look at the net on the rail
