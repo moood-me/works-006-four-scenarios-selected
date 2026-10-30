@@ -206,3 +206,5 @@ After a reviewer's renders: what the player must see was not in the frame. Rende
   on the boards. Anyone put on the boards from the water stands at 0 (`at()` sets `<id>_e` 0 for the three who stand in
   the water; the places module likewise): he hung over the boards at the water's height.
 - Her song is the game's now (the music has no voice: its prompt's weight 0).
+- (second round) `kneel_kiss` cuts near (`SHORE_NEAR`) as he bends to her: his words to her are said there. The
+  evening's low moon is stronger (1.35) and the dusk's air darker (0.6): his long shadow on the boards at moonrise.

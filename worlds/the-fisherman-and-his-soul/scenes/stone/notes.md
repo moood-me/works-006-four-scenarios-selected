@@ -113,3 +113,6 @@ in the hull).
   (the back of her head behind the net's ropes, then his legs). `go_word`/`go_free` keep that shot.
 - «Два огня»: the two lights under the water larger and brighter, the far lantern going over the hill brighter (its
   glow 14 m) — they were points.
+- (second round) The prologue's night: the bay from the pier's end with the boat whole and broadside (`SEA_WIDE`), then
+  in to its bow (`AT_BOW`, the camera's own keys): his hands, the rope, the net over the bow in the water — М1 is played
+  there (the medium on him showed hands pulling at nothing).

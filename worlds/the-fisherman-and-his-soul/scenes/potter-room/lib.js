@@ -116,7 +116,8 @@ function film(scene) {
         s.set('cup_at', 'bag');
         s.set('fisherman_with', ['bag']);
         await s.wait(0.6);
-        // and lies down again
+        // and lies down again (the room whole)
+        P.frame(s, P.CAM0, 1.5);
         await P.go(s, 'fisherman', [PLACES.fisherman.stand.at], 180);
         for (const [k, v] of Object.entries(at('fisherman', 'bench'))) s.set(k, v);
         s.set('fisherman_on', SEAT);
@@ -124,7 +125,7 @@ function film(scene) {
         await P.tell(s, 'sleepwalk:down', 1);
         // the daughter half opens her eyes, and shuts them
         // (from above her, as one bends to a sleeping child: at her level the lens lay along the pallet's edge)
-        await P.cut(s, { ...P.shot('daughter', 'medium', [0.5, 0.55]), camera_h: 0.9 });
+        await P.cut(s, { ...P.shot('daughter', 'close', [0.5, 0.45]), camera_h: 0.3 });
         s.person('daughter').mood('tired');
         await P.tell(s, 'sleepwalk:girl', 2);
         s.person('daughter').mood('eyes_closed');

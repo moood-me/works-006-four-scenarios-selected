@@ -84,3 +84,5 @@ this stage.
   close shot was the back of his head. The camera goes to him as he steps out; the Witch pulls the Fisherman before him
   (`PULLED`, a cut); the sign is on the Fisherman waist up (`SIGN`: his face and his hand at his brow, turned to the
   man) — it was a close shot of his shoulder. Rendered: the man's face, the sign, the man going.
+- (second round) As the man in black goes into the wood, the two of them are seen whole (following him, the firs
+  filled the frame).

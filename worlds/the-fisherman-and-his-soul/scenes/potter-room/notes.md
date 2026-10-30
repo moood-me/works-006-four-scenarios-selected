@@ -84,3 +84,9 @@ stage.
 
 - The walls' plaster (`lib.wall`): the big soft translucent blots (up to a metre) read as haze in the air before the
   faces — now small faint flecks, a few centimetres.
+
+## Polish (2026-10-30, r3/polish-rybak)
+
+- `sleepwalk`: opens on the room (not near on him lying on the bench); he takes the cup from the shelf's near end, half
+  turned to us (`AT_CUP`), seen waist up; the girl is seen a little from above (close, `camera_h` 0.3) — at her level the lens lay
+  along the pallet's edge, a red line across her face.

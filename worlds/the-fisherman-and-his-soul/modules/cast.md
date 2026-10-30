@@ -125,3 +125,6 @@ Stage 5's motions (Kimodo, made and looked at 2026-10-29: `docs/history/2026-10-
 - `play_fiddle` — the left hand up by the left of the head, the right arm bowing (made on musician_a's look).
 - `play_pipe` — both hands together at the mouth.
 - `wade` — bent forward, the arms pushing ahead, wide heavy strides (Kimodo has no water; the water hides the legs).
+
+- (2026-10-30) The Soul's face is a cold pale grey-blue (it was as dark as its clothes: what was in it did not read);
+  the old Fisherman (`fisherman_old`) has a white beard (the cast's `beard`) — white hair alone read as a white cap.
