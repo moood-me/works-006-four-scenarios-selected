@@ -124,8 +124,9 @@ function film(scene) {
         P.loop(s, 'fisherman', 'lie_bench');
         await P.tell(s, 'sleepwalk:down', 1);
         // the daughter half opens her eyes, and shuts them
-        // (from above her, as one bends to a sleeping child: at her level the lens lay along the pallet's edge)
-        await P.cut(s, { ...P.CAM0, camera_x: -1.1, camera_z: 1.3, camera_yaw: -24, camera_look: 0.6 });
+        // (the room whole — the guest back on his bench, the girl on her pallet by the fire: curled up, an arm over her
+        // face, she was unreadable near, and at her level the lens lay along the pallet's edge)
+        P.frame(s, P.CAM0, 0);
         s.person('daughter').mood('tired');
         await P.tell(s, 'sleepwalk:girl', 2);
         s.person('daughter').mood('eyes_closed');

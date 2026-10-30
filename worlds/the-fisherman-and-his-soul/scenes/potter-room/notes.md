@@ -88,5 +88,5 @@ stage.
 ## Polish (2026-10-30, r3/polish-rybak)
 
 - `sleepwalk`: opens on the room (not near on him lying on the bench); he takes the cup from the shelf's near end, half
-  turned to us (`AT_CUP`), seen waist up; the girl is seen from where one stands in the room, looking down at her (the camera's own keys: curled up asleep, an arm over her face, a close shot showed only her red dress) — at her level the lens lay
-  along the pallet's edge, a red line across her face.
+  turned to us (`AT_CUP`), seen waist up; the girl's waking is seen on the room whole
+  (near, curled up with an arm over her face, she did not read; at her level the lens lay along the pallet's edge).
