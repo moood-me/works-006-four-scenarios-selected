@@ -135,6 +135,7 @@ function film(scene) {
         await s.wait(0.4);
         s.person('woman_b').do('sign');
         await P.tell(s, 'sermon:sign', 3);
+        await s.person('witch').turn(170);
         P.frame(s, P.shot('witch', 'medium', [0.5, 0.42]), 2);
         s.person('witch').mood('laugh');
         P.loop(s, 'witch', 'laugh');

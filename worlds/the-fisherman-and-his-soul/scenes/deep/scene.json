@@ -605,7 +605,7 @@
         "who": "fisherman",
         "turn": 135
       },
-      "across": -0.62,
+      "across": -0.3,
       "distance": 4.22,
       "place": {
         "across": "fisherman_a",
@@ -620,7 +620,7 @@
         "who": "mermaid",
         "turn": 225
       },
-      "across": 0.58,
+      "across": 0.28,
       "distance": 4.22
     }
   ],

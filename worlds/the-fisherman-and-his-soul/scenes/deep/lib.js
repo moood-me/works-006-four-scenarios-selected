@@ -3,16 +3,16 @@
 // The places of its people (metres; the viewer at 0 on the sand, the slab they sit on 4.2 m ahead): `at` — [across,
 // distance]; `on` — a seat (on the low slab, its top 0.4 over the sand); `do` — what they do there; `turn` — where they
 // face when the other is not here (with the other here, `turnOf`: half toward the other, half toward the viewer).
-//   fisherman: sand — sitting on the slab's left, beside her (2.1, 3С.1, «Два огня»); standing — on his feet on the
+//   fisherman: sand — sitting on the slab's left, close beside her (shoulder to shoulder: her hand reaches his face) (2.1, 3С.1, «Два огня»); standing — on his feet on the
 //     sand before her, a little left (2.5, the dance under the water: he stands, she looks at his feet);
 //   mermaid: sand — sitting on the slab's right, her tail hanging down its front (always: she never stands).
 const PLACES = {
   fisherman: {
-    sand: { at: [-0.62, 4.22], on: [-0.62, 4.22, 0.4], do: 'seated', turn: 160 },
+    sand: { at: [-0.3, 4.22], on: [-0.3, 4.22, 0.4], do: 'seated', turn: 160 },
     standing: { at: [-0.75, 3.25], turn: 150 },
   },
   mermaid: {
-    sand: { at: [0.58, 4.22], on: [0.58, 4.22, 0.4], do: 'seated', turn: 200 },
+    sand: { at: [0.28, 4.22], on: [0.28, 4.22, 0.4], do: 'seated', turn: 200 },
   },
 };
 const OTHER = { fisherman: 'mermaid', mermaid: 'fisherman' };
@@ -87,7 +87,7 @@ function film(scene) {
   const BASE = { hands: false, years: false, dusk: 0, far_light: 0, mermaid_near: 0, fisherman_reach: null, mermaid_reach: null, mermaid_do: 'seated' };
   // the two of them near, side by side on the sand, both faces (his white hair, her hand at it) — the operator on her
   // with him on the left (a close shot of him alone was the back of his head: he is turned to her)
-  const TWO_NEAR = P.shot('mermaid', 1.4, [0.68, 0.42]);
+  const TWO_NEAR = P.shot('mermaid', 1.5, [0.62, 0.42]);
   const film = {
     deep_song: {
       from: () => ({ ...BASE, ...pose('sand'), ...P.CAM0, camera_pitch: 35, camera_z: -0.3 }),
@@ -126,16 +126,16 @@ function film(scene) {
         s.set('hands', !s.get('sing'));
         await P.tell(s, 'deep_dusk:begin', 3);
         // the camera looks up: the warm light far above going along
-        s.move('camera_pitch', 32, { over: 4 });
+        s.move('camera_pitch', 14, { over: 4 });
         await s.move('far_light', 0.6, { over: 6, ease: 'linear' });
         await P.tell(s, 'deep_dusk:light', 2);
       },
     },
     palm_eyes: {
       after: 'deep_dusk',
-      from: () => ({ ...BASE, dusk: 1, far_light: 0.6, ...pose('sand'), ...P.shot('mermaid', 'close', [0.6, 0.45]) }),
+      from: () => ({ ...BASE, dusk: 1, far_light: 0.6, ...pose('sand'), ...TWO_NEAR }),
       run: async s => {
-        P.open(s, P.shot('mermaid', 'close', [0.6, 0.45]));
+        P.open(s, TWO_NEAR);
         s.move('far_light', 1, { over: 3, ease: 'linear' });
         P.loop(s, 'mermaid', 'sing');
         await s.wait(2);

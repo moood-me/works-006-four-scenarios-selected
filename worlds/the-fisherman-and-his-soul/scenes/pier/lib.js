@@ -122,6 +122,16 @@ function film(scene) {
   // the Soul on the boards at the end speaking to him in the water (2.6, 3С.3): its face, seen from the water's side
   // (from ours the lantern's post stands between them)
   const SPEAKS = CAM_BACK;
+  // while the Soul speaks long (its words are the game's, said meanwhile): his face in the water as he listens, then its
+  // again, then his
+  const listening = async s => {
+    await P.cut(s, P.shot('fisherman', 'medium', [0.5, 0.45]));
+    await s.wait(6);
+    await P.cut(s, SPEAKS);
+    await s.wait(7);
+    await P.cut(s, P.shot('fisherman', 'medium', [0.5, 0.45]));
+    await s.wait(4);
+  };
   // crouched at his heels with the knife (М3, М6): all of him, the boards at his feet, his shadow's edge, the knife in
   // his hand (nearer, the Soul pleading beside him would fill the frame)
   const KNEEL = P.shot('fisherman', 'full', [0.62, 0.55]);
@@ -416,7 +426,8 @@ function film(scene) {
         s.person('soul').look('fisherman');
         s.person('fisherman').look('soul');
         await P.cut(s, SPEAKS);
-        await P.tell(s, 'third_year:near', 2);
+        await P.tell(s, 'third_year:near', 7);
+        await listening(s);
       },
     },
     third_stone: {
@@ -479,11 +490,14 @@ function film(scene) {
         mermaid_here: false, ...P.shot('fisherman', 'medium', [0.5, 0.45]) }),
       run: async s => {
         P.open(s, P.shot('fisherman', 'medium', [0.5, 0.45]));
-        // he turns to the water
+        // he turns to the water; the Soul answers (its words on its face)
         await s.person('fisherman').turn(40);
-        await P.tell(s, 'stay_day:turn', 2);
+        await P.cut(s, SPEAKS);
+        await P.tell(s, 'stay_day:turn', 5);
         // the Soul walks off up the pier with the lantern, and over the hill — its light seen a long while
-        P.frame(s, P.CAM0, 2);
+        await P.cut(s, P.shot('soul', 'full', [0.45, 0.5]));
+        await P.go(s, 'soul', [[-2.6, 1.8]]);
+        P.frame(s, P.CAM0, 2.5);
         await P.go(s, 'soul', [ROOT]);
         s.set('soul_here', false);
         await s.move('far_lantern', 1, { over: 8, ease: 'linear' });
@@ -503,7 +517,8 @@ function film(scene) {
         P.frame(s, P.shot('soul#cup', 'close', [0.5, 0.5]), 2);
         await s.wait(2.5);
         await P.cut(s, SPEAKS);
-        await P.tell(s, 'fourth_year:up', 2);
+        await P.tell(s, 'fourth_year:up', 6);
+        await listening(s);
       },
     },
     fourth_stone: {
@@ -725,6 +740,8 @@ function film(scene) {
         soul_with: ['cup', 'lantern'], ...P.shot('soul', 'medium', [0.5, 0.45]) }),
       run: async s => {
         const hard = s.get('hard');
+        // (it stands a moment first: the scene seen before it goes)
+        await s.wait(2.5);
         // the lantern dark and no turn (hard), or burning, and once it turns to the water
         if (hard) {
           s.set('soul_with', ['cup', 'lantern_out']);
@@ -740,8 +757,11 @@ function film(scene) {
         P.frame(s, P.CAM0, 2.5);
         await P.go(s, 'soul', [ROOT]);
         s.set('soul_here', false);
-        s.set('far_lantern', 0.01);
-        await s.move('far_lantern', 1, { over: 6, ease: 'linear' });
+        // (its lantern far off on the road — burning; a hardened Soul's is dark: nothing goes over the hill)
+        if (!hard) {
+          s.set('far_lantern', 0.01);
+          await s.move('far_lantern', 1, { over: 6, ease: 'linear' });
+        } else await s.wait(3);
         await P.tell(s, 'soul_leaves:gone', 1);
       },
     },
@@ -760,7 +780,7 @@ function film(scene) {
       },
     },
     witch_dance: {
-      from: () => ({ ...SEA('night'), ...NONE, knife: 'none', lantern_at: 'none', fisherman_here: false, soul_here: false, mermaid_here: false,
+      from: () => ({ ...SEA('night'), ...NONE, knife: 'post', rust: true, lantern_at: 'none', fisherman_here: false, soul_here: false, mermaid_here: false,
         ...at('witch', 'end'), witch_with: ['tambourine_hand'], witch_do: 'dance_tambourine', ...P.CAM0 }),
       run: async s => {
         P.loop(s, 'witch', 'dance_tambourine');

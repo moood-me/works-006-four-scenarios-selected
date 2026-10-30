@@ -232,7 +232,7 @@ function film(scene) {
         await P.go(s, 'soul', [[-0.8, 12.2], PLACES.soul.door.at], 90);
         s.person('soul').look('potter');
         s.set('potter_look', 'soul');
-        P.frame(s, P.shot('soul', 'medium', [0.4, 0.42]), 2);
+        P.frame(s, P.shot('potter', 'medium', [0.6, 0.42]), 2);
         await P.tell(s, 'soul_town:met', 2);
       },
     },
