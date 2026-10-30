@@ -734,7 +734,10 @@ function film(scene) {
           await s.person('soul').turn(40);
           await P.tell(s, 'soul_leaves:turn', 2);
         }
-        P.frame(s, P.CAM0, 2);
+        // the camera goes with it up the pier, then back to the bay: its light far off on the road to the town
+        P.frame(s, P.shot('soul', 'full', [0.45, 0.5]), 1.5);
+        await P.go(s, 'soul', [[-2.6, 1.8]]);
+        P.frame(s, P.CAM0, 2.5);
         await P.go(s, 'soul', [ROOT]);
         s.set('soul_here', false);
         s.set('far_lantern', 0.01);

@@ -77,13 +77,13 @@
         "shafts": 0.4
       },
       "wave": {
-        "ambient": 0.68,
+        "ambient": 0.32,
         "ambientColor": "#9aa6ae",
-        "haze": 0.3,
+        "haze": 0.45,
         "hazeColor": "#3c4a50",
-        "saturation": 0.8,
+        "saturation": 0.6,
         "tint": "#3a5050",
-        "tintStrength": 0.12,
+        "tintStrength": 0.3,
         "wind": [
           1,
           0.3,
